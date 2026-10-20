@@ -680,64 +680,46 @@
     <a href="book/">Book a Consultation</a>
   </nav>
 
+  <!-- =====================================================================
+       RIYA AI RECEPTIONIST (n8n Chat Trigger webhook).
+       Only the launcher is drawn on load; assets/js/riya.js (the chat window) loads on the
+       first click. Opening the chat sends nothing; only a sent message calls the webhook.
+       Set RIYA_ENABLED = false to switch it off.
+       ===================================================================== -->
   <script type="module">
     const RIYA_ENABLED = true;
-    const RIYA_WEBHOOK_URL = 'https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat';
-    const N8N_CHAT = 'https://cdn.jsdelivr.net/npm/@n8n/chat@1.42.6/dist/';
+    const RIYA_WEBHOOK_URL = 'https://viraaj19.app.n8n.cloud/webhook/04326dff-b256-4b8b-b730-6cabc1553aa3/chat';
 
     if (RIYA_ENABLED) {
+      const base = document.querySelector('link[href$="site.css"]').href.replace(/css\/site\.css$/, '');
       const launcher = document.createElement('button');
       launcher.type = 'button';
       launcher.className = 'riya-launcher';
       launcher.setAttribute('aria-label', 'Chat with Riya, our receptionist');
-      launcher.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>';
+      launcher.setAttribute('aria-expanded', 'false');
+      launcher.innerHTML = '<svg viewBox="0 0 919.25 902.15" aria-hidden="true" focusable="false"><use href="#arha-icon"/></svg><span class="riya-hint" aria-hidden="true">Ask Riya</span>';
       document.body.append(launcher);
 
-      let loading = null;
-      const open = () => {
-        if (loading) return loading;
-        launcher.setAttribute('aria-busy', 'true');
-        const css = document.createElement('link');
-        css.rel = 'stylesheet';
-        css.href = `${N8N_CHAT}style.css`;
-        document.head.append(css);
-        loading = import(`${N8N_CHAT}chat.bundle.es.js`).then(({ createChat }) => {
-          createChat({
-            webhookUrl: RIYA_WEBHOOK_URL,
-            mode: 'window',
-            loadPreviousSession: false,
-            showWelcomeScreen: false,
-            defaultLanguage: 'en',
-            initialMessages: ['Hello, I’m Riya. I can answer questions about Arha Dental Care or take an appointment request for you.'],
-            i18n: {
-              en: {
-                title: 'Riya · Arha Dental Care',
-                subtitle: '',
-                footer: '',
-                getStarted: 'New conversation',
-                inputPlaceholder: 'Type your question…',
-                closeButtonTooltip: 'Close',
-              },
-            },
-          });
-          // n8n draws its own toggle in the same spot: open it, then retire the launcher
-          const waitForToggle = (tries = 0) => {
-            const toggle = document.querySelector('.chat-window-toggle');
-            if (toggle) {
-              toggle.click();
-              launcher.hidden = true;
-            } else if (tries < 100) {
-              requestAnimationFrame(() => waitForToggle(tries + 1));
-            }
-          };
-          waitForToggle();
-        }).catch(() => {
-          loading = null;
-          launcher.removeAttribute('aria-busy');
-        });
-        return loading;
-      };
-      launcher.addEventListener('click', open);
+      let chat = null;
+      launcher.addEventListener('click', async () => {
+        if (!chat) {
+          const { mountRiya } = await import(`${base}js/riya.js`);
+          chat = mountRiya({ webhookUrl: RIYA_WEBHOOK_URL, launcher });
+        }
+        chat.toggle();
+      });
+
+      // Desktop, once per session: "Ask Riya" fades in beside the launcher after 6s, out after 6s
+      try {
+        if (matchMedia('(min-width: 768px) and (hover: hover)').matches && !sessionStorage.getItem('riya-hint')) {
+          sessionStorage.setItem('riya-hint', '1');
+          setTimeout(() => {
+            if (chat) return;
+            launcher.classList.add('show-hint');
+            setTimeout(() => launcher.classList.remove('show-hint'), 6000);
+          }, 6000);
+        }
+      } catch (e) { /* storage blocked: no hint */ }
     }
   </script>
 </body>
