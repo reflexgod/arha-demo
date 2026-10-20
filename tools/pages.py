@@ -2,8 +2,7 @@
 
 Usage: .venv/Scripts/python -I tools/pages.py && .venv/Scripts/python -I tools/cases_markup.py
 Each page's <main> lives in tools/pages/<slug>.html and is written relative to the site root;
-paths are moved one folder down here. Markers: {{mark}} (bronze emblem divider), {{watermark}}
-(band emblem), {{visit}} (the homepage's Visit section) and {{pic name | sizes | alt | pos=.. | eager}}.
+paths are moved one folder down here. Markers: {{visit}} (the homepage's Visit section) {{planner}} and {{pic name | sizes | alt | pos=.. | eager}}.
 Re-run after changing the header, menus or footer on the homepage so every page stays identical.
 """
 import re
@@ -83,7 +82,6 @@ def expand_pics(html):
 def main():
     import json
     home = (ROOT / "index.html").read_text(encoding="utf-8")
-    watermark = re.search(r'<svg class="band__mark".*?</svg>', home).group(0)
     visit = re.search(r"    <!-- =+ 10\. VISIT US -->\n.*?</section>\n", home, flags=re.S).group(0)
     planner = (ROOT / "tools" / "pages" / "_planner.html").read_text(encoding="utf-8")
     head = home[:home.index("<body>")]
@@ -100,7 +98,7 @@ def main():
         if "jsonld" in meta:
             h = h.replace("</head>", '  <script type="application/ld+json">\n  ' + json.dumps(meta["jsonld"], indent=2).replace("\n", "\n  ") + "\n  </script>\n</head>")
         main_html = (ROOT / "tools" / "pages" / f"{slug}.html").read_text(encoding="utf-8")
-        main_html = expand_pics(main_html.replace("{{watermark}}", watermark).replace("{{visit}}", visit).replace("{{planner}}", planner))
+        main_html = expand_pics(main_html.replace("{{visit}}", visit).replace("{{planner}}", planner))
         page = relocate(h + top + main_html + bottom, slug)
         out = ROOT / slug
         out.mkdir(exist_ok=True)
