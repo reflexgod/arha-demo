@@ -841,13 +841,17 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   margin-top: 28px;
 }
 
-/* Since 1980: the door sign, cropped from the bottom so the doctors' names sit above the text.
-   Phones show the full height of the photo, so the band is taller there. */
-@media (max-width: 767px) {
-  .statement--since {
-    height: 760px;
-    max-height: none;
-  }
+/* Since 1980: the door sign shown whole, at its own proportions, slightly desaturated */
+.since__media {
+  aspect-ratio: 1280 / 976;
+}
+
+.since__media img {
+  filter: saturate(.55);
+}
+
+.since__media:hover img {
+  filter: none;
 }
 
 /* Before & After grid (home + Results page) ------------------------------- */
