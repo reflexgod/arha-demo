@@ -970,7 +970,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   inset: auto 12px 12px;
   z-index: 1;
   padding: 18px 20px 20px;
-  background: var(--ink);
+  background: var(--charcoal);
   color: var(--paper);
   opacity: 0;
   transition: opacity var(--t-image);
@@ -1098,7 +1098,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   left: 12px;
   z-index: 2;
   padding: 6px 9px 5px;
-  background: rgba(37, 36, 36, .78);
+  background: rgba(var(--shade), .78);
   font: 600 11px/1 var(--font-body);
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -1310,7 +1310,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   height: 30px;
   border: 1px solid var(--bronze);
   border-radius: 50%;
-  background: rgba(37, 36, 36, .55);
+  background: rgba(var(--shade), .55);
   transform: translate(-50%, -50%);
 }
 
@@ -1336,7 +1336,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   top: 14px;
   z-index: 2;
   padding: 6px 9px 5px;
-  background: rgba(37, 36, 36, .78);
+  background: rgba(var(--shade), .78);
   font: 600 11px/1 var(--font-body);
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -1349,7 +1349,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 /* Statement band: plain solid colour, compact; heading, short text, CTA */
 .band {
   padding-block: 64px;
-  background: var(--ink);
+  background: var(--charcoal);
   color: var(--paper);
   text-align: center;
 }
@@ -1406,13 +1406,13 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(37, 36, 36, .2);
+  background: rgba(var(--shade), .2);
   pointer-events: none;
   transition: background-color var(--t-image);
 }
 
 .journey__step:hover::after {
-  background: rgba(37, 36, 36, .65);
+  background: rgba(var(--shade), .65);
 }
 
 .journey__body {
@@ -1452,7 +1452,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   align-items: flex-end;
   min-height: 640px;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--charcoal);
   color: var(--paper);
 }
 
@@ -1468,7 +1468,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(37, 36, 36, .74) 0%, rgba(37, 36, 36, .46) 45%, rgba(37, 36, 36, .2) 100%);
+  background: linear-gradient(to top, rgba(var(--shade), .74) 0%, rgba(var(--shade), .46) 45%, rgba(var(--shade), .2) 100%);
   pointer-events: none;
 }
 
@@ -1507,7 +1507,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
     max-height: 900px;
   }
   .doctor::after {
-    background: linear-gradient(to left, rgba(37, 36, 36, .72) 0%, rgba(37, 36, 36, .5) 45%, rgba(37, 36, 36, .15) 75%);
+    background: linear-gradient(to left, rgba(var(--shade), .72) 0%, rgba(var(--shade), .5) 45%, rgba(var(--shade), .15) 75%);
   }
   /* Text centred in the right half, over the darker side of the photograph */
   .doctor__content {
@@ -1519,11 +1519,11 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   .doctor__quote p { margin-inline: auto; }
 }
 
-/* Phones and tablets: the photograph fills the top, the words sit on black below it */
+/* Phones and tablets: the photograph fills the top, the words sit on charcoal below it */
 @media (max-width: 899px) {
   .doctor picture.fill { bottom: auto; height: 62%; }
   .doctor::after {
-    background: linear-gradient(to bottom, rgba(37, 36, 36, .1) 0%, rgba(37, 36, 36, .25) 35%, var(--ink) 62%);
+    background: linear-gradient(to bottom, rgba(var(--shade), .1) 0%, rgba(var(--shade), .25) 35%, var(--charcoal) 62%);
   }
   .doctor__content { padding-top: 260px; }
 }
@@ -2056,9 +2056,10 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   transition: background-color var(--t-link);
 }
 
-.riya-launcher:hover { background: var(--ink); }
+.riya-launcher:hover > svg { fill: var(--paper); }
 
 .riya-launcher > svg {
+  transition: fill var(--t-link);
   width: 26px;
   height: auto;
   fill: var(--bronze);
