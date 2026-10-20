@@ -693,27 +693,70 @@
   </nav>
 
   <!-- =====================================================================
-       RIYA AI RECEPTIONIST: n8n embedded chat (@n8n/chat). Disabled for the demo.
-       To switch on: paste the n8n webhook URL and set RIYA_ENABLED = true. Nothing is
-       loaded from the network while it is false. Theme lives in site.css ("Riya").
+       RIYA AI RECEPTIONIST: n8n embedded chat (@n8n/chat 1.42.6).
+       Only a small launcher is drawn on load; the n8n script and styles (~1.7 MB)
+       are fetched on the first click, so page speed is unaffected. Opening the chat
+       does not call the webhook (no previous-session lookup); only sent messages do.
+       Theme: site.css, "Riya". Set RIYA_ENABLED = false to switch it off.
        ===================================================================== -->
   <script type="module">
-    const RIYA_ENABLED = false;
-    const RIYA_WEBHOOK_URL = 'RIYA_WEBHOOK_URL_HERE';
+    const RIYA_ENABLED = true;
+    const RIYA_WEBHOOK_URL = 'https://viraaj19.app.n8n.cloud/webhook/04326dff-b256-4b8b-b730-6cabc1553aa3/chat';
+    const N8N_CHAT = 'https://cdn.jsdelivr.net/npm/@n8n/chat@1.42.6/dist/';
+
     if (RIYA_ENABLED) {
-      const base = 'https://cdn.jsdelivr.net/npm/@n8n/chat@1.42.6/dist/';
-      const css = document.createElement('link');
-      css.rel = 'stylesheet';
-      css.href = `${base}style.css`;
-      document.head.append(css);
-      const { createChat } = await import(`${base}chat.bundle.es.js`);
-      createChat({
-        webhookUrl: RIYA_WEBHOOK_URL,
-        mode: 'window',
-        showWelcomeScreen: false,
-        initialMessages: ['Hello, I’m Riya at Arha Dental Care. How can I help you today?'],
-        i18n: { en: { title: 'Arha Dental Care', subtitle: 'Riya, our receptionist', inputPlaceholder: 'Type your question…', getStarted: 'Start', footer: '', closeButtonTooltip: 'Close' } },
-      });
+      const launcher = document.createElement('button');
+      launcher.type = 'button';
+      launcher.className = 'riya-launcher';
+      launcher.setAttribute('aria-label', 'Chat with Riya, our receptionist');
+      launcher.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>';
+      document.body.append(launcher);
+
+      let loading = null;
+      const open = () => {
+        if (loading) return loading;
+        launcher.setAttribute('aria-busy', 'true');
+        const css = document.createElement('link');
+        css.rel = 'stylesheet';
+        css.href = `${N8N_CHAT}style.css`;
+        document.head.append(css);
+        loading = import(`${N8N_CHAT}chat.bundle.es.js`).then(({ createChat }) => {
+          createChat({
+            webhookUrl: RIYA_WEBHOOK_URL,
+            mode: 'window',
+            loadPreviousSession: false,
+            showWelcomeScreen: false,
+            defaultLanguage: 'en',
+            initialMessages: ['Hello, I’m Riya. I can answer questions about Arha Dental Care or take an appointment request for you.'],
+            i18n: {
+              en: {
+                title: 'Riya · Arha Dental Care',
+                subtitle: '',
+                footer: '',
+                getStarted: 'New conversation',
+                inputPlaceholder: 'Type your question…',
+                closeButtonTooltip: 'Close',
+              },
+            },
+          });
+          // n8n draws its own toggle in the same spot: open it, then retire the launcher
+          const waitForToggle = (tries = 0) => {
+            const toggle = document.querySelector('.chat-window-toggle');
+            if (toggle) {
+              toggle.click();
+              launcher.hidden = true;
+            } else if (tries < 100) {
+              requestAnimationFrame(() => waitForToggle(tries + 1));
+            }
+          };
+          waitForToggle();
+        }).catch(() => {
+          loading = null;
+          launcher.removeAttribute('aria-busy');
+        });
+        return loading;
+      };
+      launcher.addEventListener('click', open);
     }
   </script>
 </body>

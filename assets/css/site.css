@@ -223,12 +223,13 @@ address {
   transform: none;
 }
 
-main {
+/* The page's own <main> only (the chat widget renders a <main> of its own) */
+#main {
   display: block;
   padding-top: var(--header-h);
 }
 
-main:focus {
+#main:focus {
   outline: none;
 }
 
@@ -2214,29 +2215,124 @@ html:not(.js) .h-rule::after {
   .paths { grid-template-columns: 1fr 1fr; gap: 40px; }
 }
 
-/* Riya (n8n chat), used only when RIYA_ENABLED is true: Arha colours, Jost, near-square
-   corners, lifted above the phone action bar. Class names: verify when switching it on. */
-:root {
-  --chat--color-primary: #302F2F;
-  --chat--color-primary-shade-50: #252424;
-  --chat--color-primary-shade-100: #252424;
-  --chat--color-secondary: #B08154;
-  --chat--color-secondary-shade-50: #B08154;
-  --chat--color-dark: #252424;
-  --chat--color-light: #FAFAF6;
-  --chat--color-light-shade-50: #E7E3DC;
+/* Riya, the AI receptionist (n8n chat @1.42.6). n8n declares its defaults on :root in a
+   stylesheet that loads later, so the Arha theme sits on <body> and wins by inheritance.
+   Only palette colours; Jost; 4px radius; lifted above the phone action bar. */
+body {
+  --chat--color--primary: var(--charcoal);
+  --chat--color--primary-shade-50: var(--ink);
+  --chat--color--primary--shade-100: var(--ink);
+  --chat--color--secondary: var(--bronze);
+  --chat--color-secondary-shade-50: var(--bronze);
+  --chat--color-dark: var(--ink);
+  --chat--color-light: var(--paper);
+  --chat--color-light-shade-50: var(--stone);
+  --chat--color-light-shade-100: var(--stone);
+  --chat--color-medium: var(--muted);
+  --chat--color-white: var(--paper);
+  --chat--color-typing: var(--muted);
+  --chat--color-disabled: var(--muted);
   --chat--font-family: var(--font-body);
   --chat--border-radius: 4px;
-  --chat--header--background: #302F2F;
-  --chat--header--color: #FAFAF6;
-  --chat--toggle--background: #302F2F;
-  --chat--toggle--hover--background: #252424;
-  --chat--toggle--active--background: #252424;
-  --chat--toggle--color: #B08154;
+  --chat--window--border-radius: 4px;
+  --chat--window--border: 1px solid var(--stone);
+  --chat--window--width: 380px;
+  --chat--window--height: 560px;
+  --chat--window--bottom: 20px;
+  --chat--window--right: 20px;
+  --chat--window--z-index: 55; /* above the header, below the side menu and case view */
+  --chat--header--background: var(--charcoal);
+  --chat--header--color: var(--paper);
+  --chat--header--border-bottom: 0;
+  --chat--heading--font-size: 15px;
+  --chat--subtitle--font-size: 13px;
+  --chat--body--background: var(--paper);
+  --chat--footer--background: var(--paper);
+  --chat--footer--color: var(--muted);
+  --chat--message--border-radius: 4px;
+  --chat--message--font-size: 15px;
+  --chat--message--bot--background: var(--stone);
+  --chat--message--bot--color: var(--ink);
+  --chat--message--bot--border: none;
+  --chat--message--user--background: var(--charcoal);
+  --chat--message--user--color: var(--paper);
+  --chat--message--user--border: none;
+  --chat--input--background: var(--paper);
+  --chat--input--text-color: var(--ink);
+  --chat--input--border: 0;
+  --chat--input--border-active: 0;
+  --chat--input--border-radius: 0;
+  --chat--input--container--border: 1px solid var(--stone);
+  --chat--input--container--background: var(--paper);
+  --chat--input--send--button--background: transparent;
+  --chat--input--send--button--color: var(--bronze);
+  --chat--input--send--button--background-hover: transparent;
+  --chat--input--send--button--color-hover: var(--ink);
+  --chat--button--background--primary: var(--charcoal);
+  --chat--button--background--primary--hover: var(--ink);
+  --chat--button--color--primary: var(--paper);
+  --chat--button--border-radius: 4px;
+  --chat--close--button--color-hover: var(--bronze);
+  --chat--toggle--size: 56px;
+  --chat--toggle--width: 56px;
+  --chat--toggle--height: 56px;
+  --chat--toggle--border-radius: 4px;
+  --chat--toggle--background: var(--charcoal);
+  --chat--toggle--hover--background: var(--ink);
+  --chat--toggle--active--background: var(--ink);
+  --chat--toggle--color: var(--bronze);
 }
 
 @media (max-width: 767px) {
-  .chat-window-wrapper { bottom: 72px !important; }
+  body {
+    /* Clear of the 56px Call / Book bar */
+    --chat--window--bottom: calc(72px + env(safe-area-inset-bottom));
+    --chat--window--right: 12px;
+  }
+}
+
+.chat-header h1 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.chat-header p:empty {
+  display: none;
+}
+
+.chat-window .chat-inputs {
+  background: var(--paper);
+}
+
+/* Lightweight launcher shown until the chat is first opened (n8n loads on that click) */
+.riya-launcher {
+  position: fixed;
+  right: var(--chat--window--right);
+  bottom: var(--chat--window--bottom);
+  z-index: 55;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 4px;
+  background: var(--charcoal);
+  color: var(--bronze);
+  transition: background-color var(--t-link);
+}
+
+.riya-launcher:hover {
+  background: var(--ink);
+}
+
+.riya-launcher svg {
+  width: 26px;
+  height: 26px;
+}
+
+.riya-launcher[hidden] {
+  display: none;
 }
 
 /* 11. Footer */
