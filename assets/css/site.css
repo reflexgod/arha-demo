@@ -2360,6 +2360,264 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   .riya__typing span { animation: none; opacity: .8; }
 }
 
+/* Live open status: plain small uppercase text; a bronze dot only when open */
+.open-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: none;
+  color: var(--muted);
+  font: 600 12px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.open-status:empty {
+  display: none;
+}
+
+.open-status.is-open {
+  color: var(--ink);
+}
+
+.open-status.is-open::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--bronze);
+}
+
+.visit .open-status {
+  margin-top: 28px;
+}
+
+.visit .open-status + .visit__details {
+  margin-top: 14px;
+}
+
+.side-menu__foot .open-status {
+  margin: 2px 0 4px;
+  color: var(--paper-66);
+}
+
+.side-menu__foot .open-status.is-open {
+  color: var(--paper);
+}
+
+/* Plan your treatment: photo on one half, one question at a time on the other */
+.planner {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--paper);
+}
+
+.planner__media {
+  aspect-ratio: 16 / 10;
+}
+
+.planner__media img {
+  filter: saturate(0);
+}
+
+.planner__media:hover img {
+  filter: none;
+}
+
+.planner__body {
+  padding: 56px var(--gutter) var(--section-y);
+}
+
+.planner__intro {
+  margin-top: 14px;
+}
+
+/* All steps share one grid cell, so the block never changes height between steps */
+.planner__stage {
+  display: grid;
+  margin-top: 40px;
+}
+
+.planner__step {
+  grid-area: 1 / 1;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 400ms ease, visibility 0s linear 400ms;
+}
+
+.planner__step.is-active {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 400ms ease, visibility 0s;
+}
+
+.planner__count {
+  color: var(--muted);
+  font: 600 12px/1 var(--font-body);
+  letter-spacing: .16em;
+}
+
+.planner__q {
+  display: block;
+  margin-top: 14px;
+  font: 400 20px/1.4 var(--font-body);
+}
+
+.planner__q:focus {
+  outline: none;
+}
+
+.planner__options {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+.planner__options button {
+  padding: 2px 0 4px;
+  border-bottom: 2px solid transparent;
+  font: 700 18px/1.2 var(--font-head);
+  letter-spacing: .12em;
+  text-align: left;
+  text-transform: uppercase;
+  transition: color var(--t-link), border-color var(--t-link);
+}
+
+.planner__options button:hover,
+.planner__options button:focus-visible {
+  border-color: currentColor;
+}
+
+.planner__options button[aria-pressed="true"] {
+  border-color: var(--bronze);
+  color: var(--bronze);
+}
+
+/* Borderless input: only a thin bottom line */
+.planner__input {
+  display: block;
+  width: min(100%, 360px);
+  margin: 24px 0 28px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--hairline-strong);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 400 20px/1.4 var(--font-body);
+  transition: border-color var(--t-link);
+}
+
+.planner__input::placeholder {
+  color: var(--muted);
+}
+
+.planner__input:focus {
+  border-bottom-color: var(--bronze);
+  outline: none;
+}
+
+/* "−  7 DAYS  +" in text, no boxes */
+.planner__stepper {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 24px 0 28px;
+}
+
+.planner__stepper button {
+  width: 36px;
+  height: 36px;
+  font: 400 26px/1 var(--font-body);
+  transition: color var(--t-link);
+}
+
+.planner__stepper button:hover {
+  color: var(--bronze);
+}
+
+.planner__stepper output {
+  min-width: 7.5em;
+  font: 700 22px/1 var(--font-head);
+  letter-spacing: .12em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* The result: an editorial sentence, not a card */
+.planner__summary {
+  max-width: 18em;
+  font: 700 clamp(24px, 2.6vw, 32px)/1.25 var(--font-head);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.planner__summary:focus {
+  outline: none;
+}
+
+.planner__detail {
+  margin-top: 18px;
+}
+
+.planner__sample {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.planner__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 16px 28px;
+  margin-top: 28px;
+}
+
+.planner__link {
+  border-bottom: 1px solid var(--hairline-strong);
+  font-size: 16px;
+  transition: color var(--t-link), border-color var(--t-link);
+}
+
+.planner__link:hover {
+  color: var(--bronze);
+  border-color: var(--bronze);
+}
+
+.planner__restart {
+  margin-top: 22px;
+  color: var(--muted);
+  font-size: 15px;
+  transition: color var(--t-link);
+}
+
+.planner__restart:hover {
+  color: var(--bronze);
+}
+
+@media (min-width: 900px) {
+  .planner {
+    grid-template-columns: 1fr 1fr;
+    min-height: 680px;
+  }
+  .planner__media {
+    aspect-ratio: auto;
+  }
+  .planner__body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 96px clamp(40px, 6vw, 112px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .planner__step { transition: none; }
+}
+
 /* 11. Footer */
 .site-footer {
   padding: clamp(72px, 9vw, 112px) 0 40px;

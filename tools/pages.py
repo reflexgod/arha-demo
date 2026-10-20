@@ -85,6 +85,7 @@ def main():
     home = (ROOT / "index.html").read_text(encoding="utf-8")
     watermark = re.search(r'<svg class="band__mark".*?</svg>', home).group(0)
     visit = re.search(r"    <!-- =+ 10\. VISIT US -->\n.*?</section>\n", home, flags=re.S).group(0)
+    planner = (ROOT / "tools" / "pages" / "_planner.html").read_text(encoding="utf-8")
     head = home[:home.index("<body>")]
     head = re.sub(r"\s*<!-- Hero poster is the LCP image.*?fetchpriority=\"high\">\n", "\n", head, flags=re.S)
     top = home[home.index("<body>"):home.index('  <main id="main"')]
@@ -99,7 +100,7 @@ def main():
         if "jsonld" in meta:
             h = h.replace("</head>", '  <script type="application/ld+json">\n  ' + json.dumps(meta["jsonld"], indent=2).replace("\n", "\n  ") + "\n  </script>\n</head>")
         main_html = (ROOT / "tools" / "pages" / f"{slug}.html").read_text(encoding="utf-8")
-        main_html = expand_pics(main_html.replace("{{watermark}}", watermark).replace("{{visit}}", visit))
+        main_html = expand_pics(main_html.replace("{{watermark}}", watermark).replace("{{visit}}", visit).replace("{{planner}}", planner))
         page = relocate(h + top + main_html + bottom, slug)
         out = ROOT / slug
         out.mkdir(exist_ok=True)

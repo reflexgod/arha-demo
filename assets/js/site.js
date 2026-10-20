@@ -7,6 +7,8 @@
    4. Reveal on scroll      9. Reviews: crossfading quote
    5. Hero video           10. Before & After: filter, case view, slider
                            11. Accordions (FAQ)
+                           12. Live open status
+                           13. Plan your treatment
    ========================================================================== */
 (() => {
   'use strict';
@@ -448,6 +450,134 @@
       trigger.setAttribute('aria-expanded', String(open));
       item.classList.toggle('is-open', open);
       panel.inert = !open;
+    });
+  });
+
+  /* 12. Live open status (India time). Hours live in this one config. ------- */
+  const CLINIC_HOURS = {
+    timeZone: 'Asia/Kolkata',
+    // 0 = Sunday ... 6 = Saturday; null = closed. Confirm with the clinic (Google shows 9:00 AM).
+    days: [null, ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30']],
+  };
+  const statusEls = document.querySelectorAll('[data-open-status]');
+  if (statusEls.length) {
+    const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const toMinutes = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
+    const label = (hhmm) => {
+      const [h, m] = hhmm.split(':').map(Number);
+      return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
+    };
+    const nowInClinic = () => {
+      const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
+        timeZone: CLINIC_HOURS.timeZone, weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
+      }).formatToParts(new Date()).map((p) => [p.type, p.value]));
+      return { day: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(parts.weekday), minutes: Number(parts.hour) * 60 + Number(parts.minute) };
+    };
+    const describe = () => {
+      const { day, minutes } = nowInClinic();
+      const today = CLINIC_HOURS.days[day];
+      if (today && minutes >= toMinutes(today[0]) && minutes < toMinutes(today[1])) {
+        return { open: true, text: `Open now · until ${label(today[1])}` };
+      }
+      if (today && minutes < toMinutes(today[0])) return { open: false, text: `Closed · Opens today at ${label(today[0])}` };
+      for (let i = 1; i <= 7; i += 1) {
+        const next = CLINIC_HOURS.days[(day + i) % 7];
+        if (next) return { open: false, text: `Closed · Opens ${i === 1 ? 'tomorrow' : DAY_NAMES[(day + i) % 7]} at ${label(next[0])}` };
+      }
+      return { open: false, text: 'Closed' };
+    };
+    const render = () => {
+      const s = describe();
+      statusEls.forEach((el) => { el.textContent = s.text; el.classList.toggle('is-open', s.open); });
+    };
+    render();
+    setInterval(render, 60000);
+  }
+
+  /* 13. Plan your treatment (visiting patients): one question at a time, nothing
+         stored or submitted; the result opens WhatsApp with the plan written in. */
+  const PLANNER = {
+    whatsapp: '919975507714',
+    // SAMPLE timings until Dr. Nikhil confirms real ones (see notes/NEXT-SESSION.md)
+    treatments: {
+      implants: { name: 'Dental implants', detail: 'Typically 2 visits, about 5–7 days each.' },
+      'full-mouth': { name: 'Full mouth rehabilitation', detail: 'Typically 3 visits, about 7–10 days each.' },
+      veneers: { name: 'Smile design & veneers', detail: 'Typically 2 visits, about 7–10 days in all.' },
+      aligners: { name: 'Aligners', detail: 'Typically 1 visit of about 3–5 days, then remote reviews.' },
+      unsure: { name: 'A consultation', detail: 'We will recommend the right treatment and timeline after a virtual consultation.' },
+    },
+    minDays: 1,
+    maxDays: 30,
+    startDays: 7,
+  };
+  document.querySelectorAll('[data-planner]').forEach((planner) => {
+    const NUMBER_WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve',
+      'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
+    const steps = [...planner.querySelectorAll('.planner__step')];
+    const city = planner.querySelector('#planner-city');
+    const daysValue = planner.querySelector('[data-days-value]');
+    const state = { treatment: null, city: '', days: PLANNER.startDays };
+
+    const show = (name) => {
+      steps.forEach((step) => {
+        const on = step.dataset.step === String(name);
+        step.classList.toggle('is-active', on);
+        step.inert = !on;
+      });
+      const active = steps.find((s) => s.dataset.step === String(name));
+      const target = active.querySelector('[tabindex="-1"], .planner__q');
+      setTimeout(() => (name === 2 ? city : target).focus({ preventScroll: true }), reduceMotion ? 0 : 400);
+    };
+
+    const result = () => {
+      const t = PLANNER.treatments[state.treatment];
+      const words = state.days <= 20 ? NUMBER_WORDS[state.days] : String(state.days);
+      const dayWord = state.days === 1 ? 'day' : 'days';
+      planner.querySelector('[data-summary]').textContent =
+        `${t.name}. ${state.city ? `From ${state.city}. ` : ''}${words} ${dayWord} in Mumbai.`;
+      planner.querySelector('[data-detail]').textContent = t.detail;
+      const msg = `Hello Arha Dental Care, I'm planning a visit for ${state.treatment === 'unsure' ? 'a consultation' : t.name.toLowerCase()}.`
+        + `${state.city ? ` I'm travelling from ${state.city}` : " I'm travelling"} and can be in Mumbai for ${state.days} ${dayWord}.`
+        + ' Could we arrange a virtual consultation?';
+      planner.querySelector('[data-whatsapp]').href = `https://wa.me/${PLANNER.whatsapp}?text=${encodeURIComponent(msg)}`;
+      show('result');
+    };
+
+    planner.querySelectorAll('[data-treatment]').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.treatment = button.dataset.treatment;
+        planner.querySelectorAll('[data-treatment]').forEach((b) => b.setAttribute('aria-pressed', String(b === button)));
+        setTimeout(() => show(2), reduceMotion ? 0 : 250); // let the selection register before moving on
+      });
+    });
+    planner.querySelectorAll('[data-planner-next]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (button.closest('[data-step="2"]')) {
+          state.city = city.value.trim().replace(/\s+/g, ' ');
+          show(3);
+        } else {
+          result();
+        }
+      });
+    });
+    city.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        planner.querySelector('[data-step="2"] [data-planner-next]').click();
+      }
+    });
+    planner.querySelectorAll('[data-days]').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.days = Math.min(PLANNER.maxDays, Math.max(PLANNER.minDays, state.days + Number(button.dataset.days)));
+        daysValue.textContent = state.days;
+      });
+    });
+    planner.querySelector('[data-planner-restart]').addEventListener('click', () => {
+      Object.assign(state, { treatment: null, city: '', days: PLANNER.startDays });
+      city.value = '';
+      daysValue.textContent = state.days;
+      planner.querySelectorAll('[data-treatment]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+      show(1);
     });
   });
 })();
