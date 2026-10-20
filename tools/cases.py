@@ -23,14 +23,16 @@ MOUTH_FRACTION, LIPS_AT = 0.66, 0.45
 CASES = {
     1: ("cand/c9.jpg", "c9", (0.70, 0.42, 0.44)),   # featured on the homepage
     2: ("cand/c5.jpg", "c5", (0.62, 0.37, 0.37)),
-    3: ("cand/c8.jpg", "c8", (0.52, 0.48, 0.65)),
+    3: ("cand/c3.jpg", "c3", (0.48, 0.26, 0.60)),  # colour; lips sit high in the frame, tighter crop below
     4: ("cand/c4.jpg", "c4", (0.72, 0.47, 0.37)),
     5: ("cand/c2.jpg", "c2", (0.52, 0.51, 0.85)),  # mouth wider than 66%: source cannot zoom out further
     6: ("cand/c6.jpg", "c6", (0.49, 0.595, 0.17)),
 }
 
 # Cases whose photograph also shows the whole face (case 5 is a lower-face shot only)
-FACES = {1, 2, 3, 4, 6}
+FACES = {1, 2, 4, 6}  # case 3 (c3) is a lower-face shot
+# Per-case framing overrides: (mouth fraction of width, lips height)
+FRAMING = {3: (0.77, 0.40)}
 
 
 def crop(im, cx, cy, w, mouth=MOUTH_FRACTION, lips_at=LIPS_AT):
@@ -49,7 +51,7 @@ def main():
         b = p.chromium.launch(channel="chrome", headless=True, args=["--disable-blink-features=AutomationControlled"])
         pg = b.new_context(user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36").new_page()
         for n, (src, key, box) in CASES.items():
-            im = crop(Image.open(ROOT / "src-assets" / "stock" / src).convert("RGB"), *box)
+            im = crop(Image.open(ROOT / "src-assets" / "stock" / src).convert("RGB"), *box, *FRAMING.get(n, ()))
             if im.width < 800:  # small source mouth: gentle upscale so every case has a 640w file
                 im = im.resize((800, 1000), Image.LANCZOS)
             files, size = export(im, f"stock-case-{n}")
