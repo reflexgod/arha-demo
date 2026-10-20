@@ -454,7 +454,7 @@
   });
 
   /* 11b. Google reviews link: Arha's Google Business Profile. Leave empty to keep the link as "#". */
-  const GOOGLE_REVIEWS_URL = '';
+  const GOOGLE_REVIEWS_URL = 'https://share.google/PzhwgJ9QJMErZnk9R';
   if (GOOGLE_REVIEWS_URL) {
     document.querySelectorAll('[data-google-reviews]').forEach((link) => {
       link.href = GOOGLE_REVIEWS_URL;
