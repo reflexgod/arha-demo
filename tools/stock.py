@@ -1,4 +1,4 @@
-"""Demo stock imagery (Unsplash, free licence): download, export responsive sets, write credits.md.
+"""Demo stock imagery (Unsplash, free licence): download, export responsive sets, write notes/credits.md.
 
 Usage: .venv/Scripts/python -I tools/stock.py <results.json from the Unsplash search>
 Originals go to src-assets/stock/, outputs to assets/img/stock-<name>-<w>.{avif,webp,jpg}.
@@ -75,7 +75,7 @@ def main():
             print(f"{name:<16} {size[0]}x{size[1]}  {author:<24} 1280: {files.get(1280)}")
         b.close()
     if extra:
-        credits_md = ROOT / "credits.md"
+        credits_md = ROOT / "notes" / "credits.md"
         text = credits_md.read_text(encoding="utf-8")
         rows = "".join(f"| `assets/img/stock-{n}-*` | {u} | {a} | {pg_url} |\n" for n, u, a, pg_url in credits if f"stock-{n}-*" not in text)
         credits_md.write_text(text.replace("\n## Video:", "\n" + rows + "\n## Video:", 1) if rows else text, encoding="utf-8")
@@ -92,7 +92,7 @@ def main():
               "", "## Arha's own assets (kept)", "",
               "Clinic photos supplied by the clinic: \"A clinic built around calm\" (reception), \"Visiting Mumbai\" (door sign), Visit section.",
               "Fonts: D-DIN (Datto, SIL OFL 1.1), Jost (indestructible type*, SIL OFL 1.1).", ""]
-    (ROOT / "credits.md").write_text("\n".join(lines), encoding="utf-8")
+    (ROOT / "notes" / "credits.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 if __name__ == "__main__":

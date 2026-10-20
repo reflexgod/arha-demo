@@ -36,3 +36,6 @@ __pycache__/
 # Review screenshots and contact sheets (not part of the site)
 review/
 .idea/
+
+# Internal notes, credits and client to-dos (kept local, never published)
+notes/

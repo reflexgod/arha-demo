@@ -3,7 +3,7 @@
 Usage: .venv/Scripts/python -I tools/cases.py <unsplash results.json for the c* candidates>
 Framing: 4:5, lips centred horizontally at 45% of the height, mouth = 66% of the crop width.
 Mouth boxes (centre x, centre y, width; fractions of the source) were measured by eye.
-Outputs assets/img/stock-case-<n>-<w>.* and the "Before & After samples" rows of credits.md.
+Outputs assets/img/stock-case-<n>-<w>.* and the "Before & After samples" rows of notes/credits.md.
 """
 import json
 import re
@@ -74,7 +74,7 @@ def main():
             rows.append(f"| `assets/img/stock-case-{n}-*` | Before & After sample tile | {author} | {page_url} |")
             print(n, size, author)
         b.close()
-    credits = ROOT / "credits.md"
+    credits = ROOT / "notes" / "credits.md"
     text = credits.read_text(encoding="utf-8")
     text = re.sub(r"\| `assets/img/stock-smile-[1-46]-\*` \|[^\n]*\n", "", text)  # retired sample tiles
     text = text.replace("| `assets/img/stock-smile-5-*` | Before & After sample tile |", "| `src-assets/stock/smile-5.jpg` (source of case 5) | Before & After sample tile |")

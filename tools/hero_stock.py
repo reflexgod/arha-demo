@@ -1,4 +1,4 @@
-"""Build the demo hero loop from Pexels stock (Mumbai skyline + Marine Drive). See credits.md.
+"""Build the demo hero loop from Pexels stock (Mumbai skyline + Marine Drive). See notes/credits.md (local only).
 
 Usage: .venv/Scripts/python -I tools/hero_stock.py
 Sources in src-assets/stock/video/. Output in assets/video/:

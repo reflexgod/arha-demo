@@ -57,7 +57,7 @@ SAMPLE_COPY = {
 NAMES = {"implants": "Dental implants", "full-mouth": "Full mouth rehabilitation",
          "veneers": "Smile design & veneers", "aligners": "Invisalign & aligners"}
 
-# Sample cases: stock images (credits.md), clearly marked SAMPLE everywhere they appear.
+# Sample cases: stock images (notes/credits.md, local only), clearly marked SAMPLE everywhere they appear.
 DOCTOR = "Dr. Nikhil V. Jain"
 CASES = [
     {"img": "stock-case-1", "face": "stock-case-1-face", "cat": "implants", "meta": "Sample case · 3 visits · 4 months", "sample": True, "doctor": DOCTOR},
