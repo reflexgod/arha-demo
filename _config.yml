@@ -1,0 +1,13 @@
+# GitHub Pages (Jekyll) build settings: publish the website only.
+# Internal notes, credits, tooling and source assets stay in the repo but are never served.
+exclude:
+  - README.md
+  - NEXT-SESSION.md
+  - design-notes.md
+  - credits.md
+  - tools/
+  - review/
+  - src-assets/
+  - .venv/
+  - .editorconfig
+  - .gitignore

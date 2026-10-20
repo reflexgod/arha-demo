@@ -1,0 +1,317 @@
+{
+ "arha-dental-care-exterior-dental-clinic-peddar-road": {
+  "size": [
+   4757,
+   3629
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 13,
+    "webp": 16,
+    "jpg": 33
+   },
+   "1280": {
+    "avif": 90,
+    "webp": 143,
+    "jpg": 172
+   },
+   "1920": {
+    "avif": 265,
+    "webp": 363,
+    "jpg": 442
+   }
+  },
+  "upright": "pitch -1.6 deg, roll -0.61 deg, 19/21 edges, kept 96%",
+  "tone": "wb gains [0.9649999737739563, 0.9829999804496765, 1.0570000410079956], levels black 3.0 white 255"
+ },
+ "arha-dental-care-logo-dental-clinic-peddar-road": {
+  "size": [
+   1160,
+   770
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 16,
+    "webp": 16,
+    "jpg": 33
+   },
+   "1160": {
+    "avif": 36,
+    "webp": 33,
+    "jpg": 82
+   }
+  },
+  "upright": "upright off",
+  "tone": "wb gains [1.0, 1.0, 1.0], levels black 3.0 white 230"
+ },
+ "arha-dental-care-reception-south-mumbai-dental-clinic-01": {
+  "size": [
+   5319,
+   4163
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 25,
+    "webp": 30,
+    "jpg": 49
+   },
+   "1280": {
+    "avif": 73,
+    "webp": 88,
+    "jpg": 152
+   },
+   "1920": {
+    "avif": 145,
+    "webp": 169,
+    "jpg": 310
+   }
+  },
+  "upright": "pitch -5.0 deg, roll -0.24 deg, 44/85 edges, kept 97%",
+  "tone": "wb gains [1.0169999599456787, 0.9940000176429749, 0.9900000095367432], levels black 0.0 white 255"
+ },
+ "arha-dental-care-reception-south-mumbai-dental-clinic-02": {
+  "size": [
+   5288,
+   4421
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 25,
+    "webp": 27,
+    "jpg": 48
+   },
+   "1280": {
+    "avif": 66,
+    "webp": 64,
+    "jpg": 142
+   },
+   "1920": {
+    "avif": 118,
+    "webp": 110,
+    "jpg": 279
+   }
+  },
+  "upright": "pitch -9.6 deg, roll -0.25 deg, 21/50 edges, kept 96%",
+  "tone": "wb gains [0.9869999885559082, 0.9940000176429749, 1.0199999809265137], levels black 1.2 white 237"
+ },
+ "autoclave-pantry-equipment-arha-dental-care-mumbai": {
+  "size": [
+   3693,
+   5879
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 26,
+    "webp": 29,
+    "jpg": 61
+   },
+   "1280": {
+    "avif": 73,
+    "webp": 81,
+    "jpg": 191
+   },
+   "1920": {
+    "avif": 150,
+    "webp": 148,
+    "jpg": 409
+   }
+  },
+  "upright": "pitch -7.9 deg, roll -1.43 deg, 46/60 edges, kept 89%",
+  "tone": "wb gains [0.996999979019165, 0.9959999918937683, 1.0069999694824219], levels black 0.0 white 242"
+ },
+ "dental-dentistry-equipment-arha-dental-care-mumbai": {
+  "size": [
+   4032,
+   3024
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 12,
+    "webp": 14,
+    "jpg": 29
+   },
+   "1280": {
+    "avif": 30,
+    "webp": 34,
+    "jpg": 82
+   },
+   "1920": {
+    "avif": 56,
+    "webp": 60,
+    "jpg": 153
+   }
+  },
+  "upright": "upright off",
+  "tone": "wb gains [1.0049999952316284, 1.0, 0.9950000047683716], levels black 0.1 white 242"
+ },
+ "dental-implant-equipment-arha-dental-care-mumbai": {
+  "size": [
+   3733,
+   5753
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 34,
+    "webp": 36,
+    "jpg": 70
+   },
+   "1280": {
+    "avif": 97,
+    "webp": 105,
+    "jpg": 228
+   },
+   "1920": {
+    "avif": 170,
+    "webp": 180,
+    "jpg": 440
+   }
+  },
+  "upright": "pitch -10.2 deg, roll -0.25 deg, 36/82 edges, kept 97%",
+  "tone": "wb gains [0.9850000143051147, 0.9950000047683716, 1.0219999551773071], levels black 0.1 white 230"
+ },
+ "dental-operatory-arha-dental-care-peddar-road-01": {
+  "size": [
+   5692,
+   4258
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 22,
+    "webp": 26,
+    "jpg": 43
+   },
+   "1280": {
+    "avif": 63,
+    "webp": 72,
+    "jpg": 132
+   },
+   "1920": {
+    "avif": 115,
+    "webp": 124,
+    "jpg": 258
+   }
+  },
+  "upright": "pitch -0.2 deg, roll -0.26 deg, 46/69 edges, kept 99%",
+  "tone": "wb gains [0.9980000257492065, 0.996999979019165, 1.0049999952316284], levels black 1.8 white 247"
+ },
+ "dental-operatory-arha-dental-care-peddar-road-02": {
+  "size": [
+   4729,
+   4594
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 36,
+    "webp": 40,
+    "jpg": 64
+   },
+   "1280": {
+    "avif": 104,
+    "webp": 112,
+    "jpg": 202
+   },
+   "1920": {
+    "avif": 197,
+    "webp": 203,
+    "jpg": 402
+   }
+  },
+  "upright": "pitch -15.1 deg, roll -2.58 deg, 37/56 edges, kept 89%",
+  "tone": "wb gains [1.0010000467300415, 0.9980000257492065, 1.0010000467300415], levels black 0.4 white 247"
+ },
+ "dental-operatory-arha-dental-care-peddar-road-04": {
+  "size": [
+   5712,
+   4284
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 17,
+    "webp": 20,
+    "jpg": 36
+   },
+   "1280": {
+    "avif": 46,
+    "webp": 55,
+    "jpg": 107
+   },
+   "1920": {
+    "avif": 86,
+    "webp": 103,
+    "jpg": 208
+   }
+  },
+  "upright": "skipped (pitch -27.6, roll -0.8)",
+  "tone": "wb gains [0.9879999756813049, 0.9980000257492065, 1.0149999856948853], levels black 0.5 white 244"
+ },
+ "dental-operatory-arha-dental-care-peddar-road-06": {
+  "size": [
+   4912,
+   4597
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 35,
+    "webp": 40,
+    "jpg": 61
+   },
+   "1280": {
+    "avif": 101,
+    "webp": 109,
+    "jpg": 191
+   },
+   "1920": {
+    "avif": 185,
+    "webp": 189,
+    "jpg": 370
+   }
+  },
+  "upright": "pitch -11.3 deg, roll -0.16 deg, 29/40 edges, kept 92%",
+  "tone": "wb gains [1.0019999742507935, 1.0019999742507935, 0.9959999918937683], levels black 0.1 white 249"
+ },
+ "arha-dental-care-lounge-peddar-road": {
+  "size": [
+   1080,
+   1920
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 29,
+    "webp": 31,
+    "jpg": 62
+   },
+   "1080": {
+    "avif": 54,
+    "webp": 58,
+    "jpg": 130
+   }
+  },
+  "upright": "upright off",
+  "tone": "wb gains [0.9959999918937683, 0.9850000143051147, 1.0199999809265137], levels black 3.0 white 235"
+ },
+ "arha-dental-care-reception-south-mumbai-dental-clinic-01-lower": {
+  "size": [
+   5319,
+   2664
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 16,
+    "webp": 19,
+    "jpg": 31
+   },
+   "1280": {
+    "avif": 50,
+    "webp": 58,
+    "jpg": 98
+   },
+   "1920": {
+    "avif": 100,
+    "webp": 118,
+    "jpg": 203
+   }
+  },
+  "upright": "pitch -5.0 deg, roll -0.24 deg, 44/85 edges, kept 97%",
+  "tone": "wb gains [0.9980000257492065, 0.984000027179718, 1.0190000534057617], levels black 3.0 white 255"
+ }
+}

@@ -1,0 +1,8 @@
+pillow>=12
+pillow-heif>=1.1
+pymupdf>=1.26
+fonttools>=4.60
+brotli>=1.1
+opencv-python-headless>=4.10
+numpy>=2
+playwright>=1.50
