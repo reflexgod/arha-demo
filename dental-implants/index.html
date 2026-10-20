@@ -445,7 +445,7 @@
     </section>
 
     <!-- =================================================================== PLAN YOUR TREATMENT (visiting patients) -->
-    <section class="planner" aria-labelledby="planner-title" data-planner>
+    <section class="planner" id="plan" aria-labelledby="planner-title" data-planner>
       <div class="planner__media media">
         <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAgUGBAf/xAAhEAABBAIDAQADAAAAAAAAAAABAAIDBBEhBRIxEyMyUf/EABYBAQEBAAAAAAAAAAAAAAAAAAMCBP/EABkRAAMBAQEAAAAAAAAAAAAAAAABERIiIf/aAAwDAQACEQMRAD8Af3D89o6N9oOCVn5iVrW+qclvGLJaUaLZ0BtuJw/YIxOx3hXN4OblL8dinVPk3EDLk+HKBtWFh9B/UEkmPEqrWjKRtMA8ddo16K1CQuyutaBSa9WdHGSUyil2snLT5iIRq0tyE/HJ1lTyjN3A2pku/KU1oylmFo3zDNjqlnQl642mDrWB6p7jpi5bJ5iEaGZ//9k=); background-position: 45% 50%">
           <source type="image/avif" srcset="../assets/img/stock-arrival-640.avif 640w, ../assets/img/stock-arrival-1280.avif 1280w, ../assets/img/stock-arrival-1920.avif 1920w" sizes="(min-width: 900px) 50vw, 100vw">
@@ -604,37 +604,121 @@
   <script type="module">
     const RIYA_ENABLED = true;
     const RIYA_WEBHOOK_URL = 'https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat';
+    // Proactive bubble: once per session, after 6s or 30% of the page (whichever first), never after the chat was opened
+    const RIYA_BUBBLE = {
+      text: 'Have a question or planning a visit? I’m Riya, Arha’s assistant.',
+      options: ['Request an appointment', 'Ask a question'],
+      delay: 6000,
+      scroll: 30,
+    };
 
     if (RIYA_ENABLED) {
       const base = document.querySelector('link[href$="site.css"]').href.replace(/css\/site\.css$/, '');
+      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const icon = '<svg viewBox="0 0 919.25 902.15" aria-hidden="true" focusable="false"><use href="#arha-icon"/></svg>';
+      const track = (name, props = {}) => {
+        if (window.plausible) window.plausible(name, { props });
+        else if (window.gtag) window.gtag('event', name, props);
+      };
+      const seen = (key) => { try { return Boolean(sessionStorage.getItem(key)); } catch (e) { return true; } };
+      const remember = (key) => { try { sessionStorage.setItem(key, '1'); } catch (e) { /* storage blocked */ } };
+
       const launcher = document.createElement('button');
       launcher.type = 'button';
       launcher.className = 'riya-launcher';
-      launcher.setAttribute('aria-label', 'Chat with Riya, our receptionist');
+      launcher.setAttribute('aria-label', 'Ask Riya, Arha’s receptionist');
       launcher.setAttribute('aria-expanded', 'false');
-      launcher.innerHTML = '<svg viewBox="0 0 919.25 902.15" aria-hidden="true" focusable="false"><use href="#arha-icon"/></svg><span class="riya-hint" aria-hidden="true">Ask Riya</span>';
+      launcher.innerHTML = icon;
       document.body.append(launcher);
 
+      // One load and one chat window, however many clicks arrive. The first click shows the window at
+      // once ("Connecting…") and riya.js fills it when it has loaded; clicks during loading are ignored.
       let chat = null;
-      launcher.addEventListener('click', async () => {
-        if (!chat) {
-          const { mountRiya } = await import(`${base}js/riya.js`);
-          chat = mountRiya({ webhookUrl: RIYA_WEBHOOK_URL, launcher });
+      let chatPromise = null;
+      const getChat = () => {
+        if (!chatPromise) {
+          const panel = document.createElement('section');
+          panel.className = 'riya';
+          panel.id = 'riya';
+          panel.setAttribute('role', 'dialog');
+          panel.setAttribute('aria-label', 'Riya');
+          panel.innerHTML = '<p class="riya__loading">Connecting…</p>';
+          document.body.append(panel);
+          requestAnimationFrame(() => panel.classList.add('is-open'));
+          launcher.classList.add('is-loading');
+          launcher.setAttribute('aria-expanded', 'true');
+          chatPromise = import(`${base}js/riya.js`)
+            .then(({ mountRiya }) => { chat = mountRiya({ webhookUrl: RIYA_WEBHOOK_URL, launcher, panel }); return chat; })
+            .catch((err) => { chatPromise = null; panel.remove(); launcher.setAttribute('aria-expanded', 'false'); throw err; })
+            .finally(() => launcher.classList.remove('is-loading'));
         }
-        chat.toggle();
+        return chatPromise;
+      };
+
+      let bubble = null;
+      const hideBubble = () => {
+        if (!bubble) return;
+        const el = bubble;
+        bubble = null;
+        el.classList.remove('is-visible');
+        setTimeout(() => el.remove(), reduceMotion ? 0 : 300);
+      };
+
+      launcher.addEventListener('click', async () => {
+        hideBubble();
+        remember('riya-opened');
+        if (launcher.classList.contains('is-loading')) return;
+        const first = !chat;
+        const c = await getChat();
+        if (first) c.open();
+        else c.toggle();
       });
 
-      // Desktop, once per session: "Ask Riya" fades in beside the launcher after 6s, out after 6s
-      try {
-        if (matchMedia('(min-width: 768px) and (hover: hover)').matches && !sessionStorage.getItem('riya-hint')) {
-          sessionStorage.setItem('riya-hint', '1');
-          setTimeout(() => {
-            if (chat) return;
-            launcher.classList.add('show-hint');
-            setTimeout(() => launcher.classList.remove('show-hint'), 6000);
-          }, 6000);
+      if (!seen('riya-bubble') && !seen('riya-opened')) {
+        let timer = 0;
+        const onScroll = () => {
+          if ((scrollY + innerHeight) / document.documentElement.scrollHeight * 100 >= RIYA_BUBBLE.scroll) showBubble();
+        };
+        function showBubble() {
+          clearTimeout(timer);
+          removeEventListener('scroll', onScroll);
+          if (chat || chatPromise || bubble || seen('riya-opened') || document.documentElement.classList.contains('is-locked')) return;
+          remember('riya-bubble');
+          bubble = document.createElement('div');
+          bubble.className = 'riya-bubble';
+          bubble.setAttribute('role', 'dialog');
+          bubble.setAttribute('aria-label', 'Message from Riya');
+          bubble.innerHTML = `<span class="riya-bubble__mark">${icon}</span><p class="riya-bubble__text"></p>
+            <p class="riya-bubble__options"></p><button class="riya-bubble__close" type="button" aria-label="Dismiss"></button>`;
+          bubble.querySelector('.riya-bubble__text').textContent = RIYA_BUBBLE.text;
+          RIYA_BUBBLE.options.forEach((label) => {
+            const option = document.createElement('button');
+            option.type = 'button';
+            option.textContent = label;
+            option.addEventListener('click', async () => {
+              track('riya_bubble_clicked', { option: label });
+              hideBubble();
+              remember('riya-opened');
+              const c = await getChat(); // the message waits until the chat is ready
+              c.open();
+              c.ask(label);
+            });
+            bubble.querySelector('.riya-bubble__options').append(option);
+          });
+          bubble.querySelector('.riya-bubble__close').addEventListener('click', hideBubble);
+          document.body.append(bubble);
+          requestAnimationFrame(() => bubble && bubble.classList.add('is-visible'));
+          track('riya_bubble_shown');
         }
-      } catch (e) { /* storage blocked: no hint */ }
+        timer = setTimeout(showBubble, RIYA_BUBBLE.delay);
+        addEventListener('scroll', onScroll, { passive: true });
+      }
+
+      // ?riya=open opens the chat straight away (for showing the demo)
+      if (new URLSearchParams(location.search).get('riya') === 'open') {
+        remember('riya-opened');
+        getChat().then((c) => c.open());
+      }
     }
   </script>
 </body>

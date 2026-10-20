@@ -8,7 +8,7 @@ const WELCOME = 'Hello, I’m Riya. I can answer questions about Arha Dental Car
 const QUICK = ['Clinic timings', 'Dental implants', 'Request an appointment', 'Visiting from abroad'];
 const ICON = '<svg viewBox="0 0 919.25 902.15" aria-hidden="true" focusable="false"><use href="#arha-icon"/></svg>';
 
-export function mountRiya({ webhookUrl, launcher }) {
+export function mountRiya({ webhookUrl, launcher, panel: shell = null }) {
   const root = document.documentElement;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isPhone = () => window.matchMedia('(max-width: 767px)').matches;
@@ -19,12 +19,14 @@ export function mountRiya({ webhookUrl, launcher }) {
     try { sessionStorage.setItem('riya-session', sessionId); } catch (e) { /* storage blocked */ }
   }
 
-  const panel = document.createElement('section');
-  panel.className = 'riya';
+  // site's launcher script may already be showing a loading window: fill that one
+  const panel = shell || document.createElement('section');
+  panel.className = shell ? 'riya is-open' : 'riya';
   panel.id = 'riya';
   panel.setAttribute('role', 'dialog');
+  panel.removeAttribute('aria-label');
   panel.setAttribute('aria-labelledby', 'riya-title');
-  panel.hidden = true;
+  panel.hidden = !shell;
   panel.innerHTML = `
     <header class="riya__head">
       <span class="riya__mark">${ICON}</span>
@@ -53,7 +55,7 @@ export function mountRiya({ webhookUrl, launcher }) {
       </button>
     </form>
     <p class="riya__note">Riya passes your request to the clinic team. Appointments are confirmed by phone.</p>`;
-  document.body.append(panel);
+  if (!shell) document.body.append(panel);
 
   const log = panel.querySelector('.riya__log');
   const quick = panel.querySelector('.riya__quick');
@@ -137,7 +139,10 @@ export function mountRiya({ webhookUrl, launcher }) {
 
   let closeTimer = 0;
   const onKey = (e) => { if (e.key === 'Escape') close(); };
+  let isOpen = false;
   function open() {
+    if (isOpen) return;
+    isOpen = true;
     clearTimeout(closeTimer);
     fit();
     panel.hidden = false;
@@ -150,6 +155,8 @@ export function mountRiya({ webhookUrl, launcher }) {
     document.addEventListener('keydown', onKey);
   }
   function close() {
+    if (!isOpen) return;
+    isOpen = false;
     panel.classList.remove('is-open');
     launcher.setAttribute('aria-expanded', 'false');
     root.classList.remove('is-locked');
@@ -159,5 +166,5 @@ export function mountRiya({ webhookUrl, launcher }) {
   }
   panel.querySelector('.riya__close').addEventListener('click', close);
   launcher.setAttribute('aria-controls', 'riya');
-  return { open, close, toggle: () => (panel.classList.contains('is-open') ? close() : open()) };
+  return { open, close, ask, isOpen: () => isOpen, toggle: () => (isOpen ? close() : open()) };
 }

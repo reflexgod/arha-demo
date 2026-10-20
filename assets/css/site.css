@@ -1706,80 +1706,54 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   pointer-events: none;
 }
 
-/* Editorial quotes: Cormorant Garamond italic, used only for quotes --------- */
+/* Visiting Mumbai: the photo rests in grayscale and turns to colour on hover */
+.travel .split { align-items: center; }
+.travel__media { aspect-ratio: 4 / 3; }
+.travel__media img { filter: grayscale(1); }
+.travel__media:hover img { filter: none; }
+
+/* Google reviews: three short excerpts side by side, Cormorant italic (quotes only) ---------- */
 .reviews {
   background: var(--stone);
 }
 
-.quotes {
-  max-width: 880px;
-  margin-inline: auto;
+.reviews .section-head { margin-bottom: 40px; }
+
+.stars {
+  margin: 10px auto 0;
+  color: var(--bronze);
+  font-size: 15px;
+  letter-spacing: .3em;
+}
+
+.review-list {
+  display: grid;
+  gap: 32px;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
   text-align: center;
 }
 
-.quotes__stage {
-  display: grid;
-}
+.review-list blockquote { margin: 0; }
 
-.quote {
-  display: grid;
-  place-items: center;
-  grid-area: 1 / 1;
-  opacity: 0;
-  transition: opacity 1.2s ease;
-}
-
-.quote.is-active {
-  opacity: 1;
-}
-
-.quote p {
-  max-width: none;
-  font: italic 400 40px/1.3 var(--font-quote);
+.review-list blockquote p {
+  max-width: 24ch;
+  margin-inline: auto;
+  font: italic 400 24px/1.35 var(--font-quote);
   text-wrap: balance;
 }
 
-.quotes__source {
-  max-width: none;
-  margin-top: 30px;
-  font: 600 12px/1 var(--font-body);
+.review-list__source {
+  margin: 14px auto 0;
+  font: 600 11.5px/1 var(--font-body);
   letter-spacing: .16em;
   text-transform: uppercase;
 }
 
-.quotes__dots {
-  display: flex;
-  justify-content: center;
-  gap: 2px;
-  margin-top: 20px;
-}
-
-.quotes__dots button {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-}
-
-.quotes__dots button::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--hairline-strong);
-  transition: background-color var(--t-link);
-}
-
-.quotes__dots button:hover::before {
-  background: var(--muted);
-}
-
-.quotes__dots button[aria-current="true"]::before {
-  background: var(--bronze);
-}
-
-@media (max-width: 767px) {
-  .quote p { font-size: 29px; }
+@media (min-width: 768px) {
+  .review-list { grid-template-columns: repeat(3, 1fr); gap: 40px; }
 }
 
 /* Inner pages --------------------------------------------------------------- */
@@ -2042,11 +2016,13 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 }
 
 /* Riya, the AI receptionist ------------------------------------------------- */
+/* Floating UI order: launcher (58) > bubble (57) > chat window (56) > mobile bar (40). Modals (side menu,
+   case view) sit above all of it, and the launcher hides while one locks the page. */
 .riya-launcher {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  z-index: 55;
+  z-index: 58;
   display: grid;
   place-items: center;
   width: 56px;
@@ -2057,6 +2033,67 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 }
 
 .riya-launcher:hover > svg { fill: var(--paper); }
+html.is-locked .riya-launcher { visibility: hidden; }
+.riya-launcher.is-loading { cursor: progress; }
+
+/* Proactive bubble: charcoal, bronze emblem, underline options */
+.riya-bubble {
+  position: fixed;
+  right: 88px;
+  bottom: 20px;
+  z-index: 57;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 12px;
+  width: min(330px, calc(100vw - 108px));
+  padding: 16px 40px 14px 16px;
+  border-radius: 2px;
+  background: var(--charcoal);
+  color: var(--paper);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity 300ms ease, transform 300ms ease, visibility 0s 300ms;
+}
+.riya-bubble.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition: opacity 300ms ease, transform 300ms ease;
+}
+.riya-bubble__mark { grid-row: 1 / 3; padding-top: 3px; }
+.riya-bubble__mark svg { display: block; width: 20px; height: auto; fill: var(--bronze); }
+.riya-bubble__text { max-width: none; margin: 0; font: 400 15px/1.45 var(--font-body); }
+.riya-bubble__options { display: flex; flex-wrap: wrap; gap: 0 18px; max-width: none; margin: 0; }
+.riya-bubble__options button {
+  padding: 6px 0;
+  color: var(--paper);
+  font: 600 11.5px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+  transition: color var(--t-link);
+}
+.riya-bubble__options button:hover,
+.riya-bubble__options button:focus-visible { color: var(--bronze); }
+.riya-bubble__close { position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; color: var(--paper); }
+.riya-bubble__close::before,
+.riya-bubble__close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  width: 14px;
+  height: 1px;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+.riya-bubble__close::after { transform: rotate(-45deg); }
+.riya-bubble__close:hover { color: var(--bronze); }
 
 .riya-launcher > svg {
   transition: fill var(--t-link);
@@ -2064,25 +2101,6 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   height: auto;
   fill: var(--bronze);
 }
-
-.riya-hint {
-  position: absolute;
-  top: 50%;
-  right: calc(100% + 12px);
-  padding: 9px 12px 8px;
-  background: var(--paper);
-  color: var(--ink);
-  font: 600 12px/1 var(--font-body);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  opacity: 0;
-  transform: translateY(-50%);
-  transition: opacity 400ms ease;
-  pointer-events: none;
-}
-
-.riya-launcher.show-hint .riya-hint { opacity: 1; }
 
 .riya {
   position: fixed;
@@ -2098,11 +2116,17 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   background: var(--paper);
   color: var(--ink);
   opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
   transform: translateY(8px);
-  transition: opacity 300ms ease, transform 300ms ease;
+  transition: opacity 300ms ease, transform 300ms ease, visibility 0s 300ms;
 }
 
-.riya.is-open { opacity: 1; transform: none; }
+/* .riya sets display: flex, which would override the hidden attribute and leave an invisible layer
+   over the launcher (and over the whole page on phones, where the chat is full-screen) */
+.riya[hidden] { display: none !important; }
+.riya.is-open { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition: opacity 300ms ease, transform 300ms ease; }
+.riya__loading { margin: 0; padding: 18px; color: var(--muted); font-size: 14px; }
 
 .riya__head {
   display: flex;
@@ -2334,6 +2358,13 @@ html:not(.js) .nav__item:focus-within > .dropdown {
     right: 12px;
     bottom: calc(72px + env(safe-area-inset-bottom)); /* clear of the Call / Book bar */
   }
+  /* Compact bubble above the launcher, clear of the Call / Book bar */
+  .riya-bubble {
+    right: 12px;
+    bottom: calc(140px + env(safe-area-inset-bottom));
+    width: min(300px, calc(100vw - 24px));
+    padding: 14px 36px 12px 14px;
+  }
   /* Full-height sheet: header pinned, input kept above the keyboard (JS follows visualViewport) */
   .riya {
     inset: 0;
@@ -2352,7 +2383,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 
 @media (prefers-reduced-motion: reduce) {
   .riya,
-  .riya-hint { transition: none; }
+  .riya-bubble { transition: none; }
   .riya { transform: none; }
   .riya__typing span { animation: none; opacity: .8; }
 }
