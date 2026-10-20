@@ -101,6 +101,11 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: var(--header-h);
+  scroll-behavior: smooth; /* native, for in-page links only */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }
 
 html.is-locked {
@@ -1954,6 +1959,11 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 .faq {
   max-width: 880px;
   margin-inline: auto;
+}
+
+/* Very faint divider between questions (spacing alone blurred once an answer was open) */
+.faq__item + .faq__item {
+  border-top: 1px solid var(--hairline);
 }
 
 .faq__trigger {
