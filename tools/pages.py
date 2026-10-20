@@ -83,7 +83,6 @@ def expand_pics(html):
 def main():
     import json
     home = (ROOT / "index.html").read_text(encoding="utf-8")
-    mark = re.search(r'<svg class="h-mark".*?</svg>', home).group(0)
     watermark = re.search(r'<svg class="band__mark".*?</svg>', home).group(0)
     visit = re.search(r"    <!-- =+ 10\. VISIT US -->\n.*?</section>\n", home, flags=re.S).group(0)
     head = home[:home.index("<body>")]
@@ -100,7 +99,7 @@ def main():
         if "jsonld" in meta:
             h = h.replace("</head>", '  <script type="application/ld+json">\n  ' + json.dumps(meta["jsonld"], indent=2).replace("\n", "\n  ") + "\n  </script>\n</head>")
         main_html = (ROOT / "tools" / "pages" / f"{slug}.html").read_text(encoding="utf-8")
-        main_html = expand_pics(main_html.replace("{{mark}}", mark).replace("{{watermark}}", watermark).replace("{{visit}}", visit))
+        main_html = expand_pics(main_html.replace("{{watermark}}", watermark).replace("{{visit}}", visit))
         page = relocate(h + top + main_html + bottom, slug)
         out = ROOT / slug
         out.mkdir(exist_ok=True)

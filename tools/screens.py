@@ -24,7 +24,7 @@ AUDIT_JS = r"""
   for (const el of document.querySelectorAll('body *')) {
     const cs = getComputedStyle(el);
     if (cs.display === 'none') continue;
-    const round = /timeline__dot|steps__dot|ba__grip|riya/.test(el.className);  // the only round marks allowed: timeline points, slider grip
+    const round = /ba__grip|riya/.test(el.className);  // the only round marks allowed: timeline points, slider grip
     if (!round && (parseFloat(cs.borderTopLeftRadius) > 0 || parseFloat(cs.borderBottomRightRadius) > 0)) out.radius.push((el.className || el.tagName).toString().slice(0, 50));
     if (['SOURCE', 'SCRIPT', 'STYLE', 'TEMPLATE'].includes(el.tagName)) continue;
     if (cs.boxShadow !== 'none' || cs.textShadow !== 'none') out.shadow.push((el.className || el.tagName).toString().slice(0, 50));
