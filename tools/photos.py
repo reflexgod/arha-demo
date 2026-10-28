@@ -146,6 +146,18 @@ def tone(im, strength=0.6, limit=0.06):
     return Image.fromarray(np.clip(x, 0, 255).astype(np.uint8)), note
 
 
+def stock_grade(im):
+    """One colour grade for every stock photo, so they sit with Arha's own photos and the hero video:
+    muted (saturation 0.86), a touch warm, soft contrast, shadows lifted a little. Same idea as GRADE in video.py."""
+    x = np.asarray(im.convert("RGB")).astype(np.float32) / 255
+    lum = (x @ np.array([0.2126, 0.7152, 0.0722], np.float32))[..., None]
+    x = lum + (x - lum) * 0.86                        # saturation
+    x = x * np.array([1.02, 1.0, 0.965], np.float32)  # warm
+    x = 0.5 + (x - 0.5) * 0.96                        # contrast
+    x = 0.035 + x * (0.975 - 0.035)                   # lifted blacks, soft whites
+    return Image.fromarray(np.clip(x * 255, 0, 255).astype(np.uint8))
+
+
 def export(im, name):
     files = {}
     widths = [w for w in WIDTHS if w < im.width] + ([im.width] if im.width < WIDTHS[-1] else [])

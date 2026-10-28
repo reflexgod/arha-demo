@@ -29,5 +29,30 @@ python -m venv .venv && .venv/Scripts/python -m pip install -r tools/requirement
 .venv/Scripts/python -I tools/pages.py && .venv/Scripts/python -I tools/cases_markup.py
 ```
 
+Contact details, opening hours and the Riya webhook live in one place, `SITE` in `tools/pages.py`.
+Change them there and run the two commands above; every page, link, the call QR code and `site.js` follow.
+
+Pages are generated from data:
+
+| File | What it builds |
+|---|---|
+| `tools/treatment_pages.py` | Treatments, Technology and Kids' dentistry |
+| `tools/more_pages.py` | Our work and its case pages, Founder, Doctors, The practice, Dental tourism |
+| `tools/treatments.py` | The menus and "Common problems" |
+| `tools/technology.py` | The Technology items |
+| `tools/logo.py` | The logo seal and lockups |
+| `tools/video.py --tour` | The clinic tour video |
+
+The 360° viewer is Pannellum 2.5.6 (MIT, `assets/vendor/pannellum`).
+
+Stock photography comes from the official Unsplash API through `tools/stock.py` (search, then pick):
+
+- **Key:** `UNSPLASH_ACCESS_KEY` in a git-ignored `.env`.
+- **Download tracking:** every pick calls the photo's `download_location`, as Unsplash's API guidelines require.
+- **Grade:** every pick is given the same colour grade (`photos.stock_grade`).
+- **Credits:** each photographer is credited automatically in the local notes.
+
+There are no illustrations; every interactive uses photography.
+
 Fonts: D-DIN, Jost and Cormorant Garamond (SIL Open Font License, licences in `assets/fonts`).
 Demo imagery includes licensed stock photography and video (Unsplash, Pexels).

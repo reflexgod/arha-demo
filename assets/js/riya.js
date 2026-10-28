@@ -8,7 +8,7 @@ const WELCOME = 'Hello, I’m Riya. I can answer questions about Arha Dental Car
 const QUICK = ['Clinic timings', 'Dental implants', 'Request an appointment', 'Visiting from abroad'];
 const ICON = '<svg viewBox="0 0 919.25 902.15" aria-hidden="true" focusable="false"><use href="#arha-icon"/></svg>';
 
-export function mountRiya({ webhookUrl, launcher, panel: shell = null }) {
+export function mountRiya({ webhookUrl, phone = '', launcher, panel: shell = null }) {
   const root = document.documentElement;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isPhone = () => window.matchMedia('(max-width: 767px)').matches;
@@ -105,7 +105,7 @@ export function mountRiya({ webhookUrl, launcher, panel: shell = null }) {
       addMessage(String(reply || '…'), 'bot');
     } catch (e) {
       typing.remove();
-      addMessage('Sorry, I couldn’t reach the clinic just now. Please call +91 99755 07714 or message us on WhatsApp.', 'bot');
+      addMessage(`Sorry, I couldn’t reach the clinic just now. Please call ${phone || 'the clinic'} or message us on WhatsApp.`, 'bot');
     }
     busy = false;
     send.disabled = false;
@@ -147,6 +147,7 @@ export function mountRiya({ webhookUrl, launcher, panel: shell = null }) {
     fit();
     panel.hidden = false;
     launcher.setAttribute('aria-expanded', 'true');
+    root.classList.add('riya-open'); // the phone call bar steps aside while the chat is open
     if (isPhone()) root.classList.add('is-locked');
     requestAnimationFrame(() => {
       panel.classList.add('is-open');
@@ -159,6 +160,7 @@ export function mountRiya({ webhookUrl, launcher, panel: shell = null }) {
     isOpen = false;
     panel.classList.remove('is-open');
     launcher.setAttribute('aria-expanded', 'false');
+    root.classList.remove('riya-open');
     root.classList.remove('is-locked');
     document.removeEventListener('keydown', onKey);
     closeTimer = setTimeout(() => { panel.hidden = true; }, reduceMotion ? 0 : 300);
@@ -166,5 +168,11 @@ export function mountRiya({ webhookUrl, launcher, panel: shell = null }) {
   }
   panel.querySelector('.riya__close').addEventListener('click', close);
   launcher.setAttribute('aria-controls', 'riya');
-  return { open, close, ask, isOpen: () => isOpen, toggle: () => (isOpen ? close() : open()) };
+  // Type a question in for the visitor; they read it and press send themselves
+  const prefill = (text) => {
+    input.value = text;
+    input.dispatchEvent(new Event('input'));
+    input.focus({ preventScroll: true });
+  };
+  return { open, close, ask, prefill, isOpen: () => isOpen, toggle: () => (isOpen ? close() : open()) };
 }

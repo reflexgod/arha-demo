@@ -1,6 +1,7 @@
 """Build the home-page hero loop from the iPhone clinic walkthrough.
 
-Usage: .venv/Scripts/python -I tools/video.py
+Usage: .venv/Scripts/python -I tools/video.py            (hero loop)
+       .venv/Scripts/python -I tools/video.py --tour     (clinic tour for The practice)
 Source: src-assets/IMG_2303.MOV (1080x1920 portrait, HEVC 10-bit HLG). The 30 s tour MP4 is the same
 footage pillarboxed at ~608px wide, so the original MOV is used.
 
@@ -63,7 +64,35 @@ def run(cmd):
     subprocess.run(cmd, check=True)
 
 
+def tour():
+    """The clinic tour for The practice page: the whole walkthrough, portrait, no sound.
+    (The supplied tour MP4 is this footage pillarboxed at ~608px, so the original MOV is used.)
+    Output: tour-720.{mp4,webm}, tour-1080.mp4, tour-poster-{720,1080}.{avif,webp,jpg} (frame at 10.5 s, reception)."""
+    vf = f"{TONEMAP},{GRADE},scale={{}}:flags=lanczos,fps=30000/1001,format=yuv420p,setsar=1"
+    for name, scale, crf in (("720", "720:1280", "27"), ("1080", "1080:1920", "28")):
+        mp4 = OUT / f"tour-{name}.mp4"
+        run(["ffmpeg", "-v", "error", "-y", "-i", str(SRC), "-map", "0:v:0", "-an", "-vf", vf.format(scale),
+             "-c:v", "libx264", "-preset", "slow", "-crf", crf, "-profile:v", "high", "-pix_fmt", "yuv420p",
+             "-g", "60", "-movflags", "+faststart",
+             "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709", str(mp4)])
+        png = OUT / f"_tour-{name}.png"
+        run(["ffmpeg", "-v", "error", "-y", "-ss", "10.5", "-i", str(mp4), "-frames:v", "1", str(png)])
+        im = Image.open(png).convert("RGB")
+        png.unlink()
+        base = OUT / f"tour-poster-{name}"
+        im.save(f"{base}.avif", "AVIF", quality=55, speed=4)
+        im.save(f"{base}.webp", "WEBP", quality=75, method=6)
+        im.save(f"{base}.jpg", "JPEG", quality=76, optimize=True, progressive=True)
+    run(["ffmpeg", "-v", "error", "-y", "-i", str(OUT / "tour-720.mp4"), "-an", "-c:v", "libvpx-vp9", "-b:v", "0",
+         "-crf", "38", "-row-mt", "1", "-deadline", "good", "-cpu-used", "2", "-g", "60", str(OUT / "tour-720.webm")])
+    for f in sorted(OUT.glob("tour-*")):
+        print(f"  {f.name:<28} {f.stat().st_size / 1024:8.0f} KB")
+
+
 def main():
+    import sys
+    if "--tour" in sys.argv:
+        return tour()
     OUT.mkdir(parents=True, exist_ok=True)
     inputs = []
     for start, dur, _ in SHOTS:

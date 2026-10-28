@@ -1,14 +1,22 @@
 /* ==========================================================================
    Arha Dental Care: site behaviour. Vanilla JS, no dependencies.
 
-   1. Header hairline       6. Before & After: colour nearest centre (touch)
-   2. Desktop dropdowns     7. Mobile action bar
-   3. Side menu             8. Map facade
-   4. Reveal on scroll      9. Reviews: crossfading quote
-   5. Hero video           10. Before & After: filter, case view, slider
-                           11. Accordions (FAQ)
-                           12. Live open status
-                           13. Plan your treatment
+   0. Site config, track()   6. Before & After: colour nearest centre (touch)
+   1. Header: hairline,      7. Call now: phone call bar, desktop popover,
+      compact on scroll         call_click tracking
+   2. Desktop dropdowns      8. Map facade
+   3. Side menu              9. Reviews: crossfading quote
+   4. Reveal on scroll      10. Before & After: filter, case view, slider
+   5. Hero video            11. Accordions (FAQ)
+                            12. Live open status
+                            13. Plan your treatment
+                            14. Shared components: tabs, compare
+                                slider, Ask Riya, clinic tour
+                            15. Treatment pages: stepper, guides,
+                                checklist, decider,
+                                technology index
+                            16. Our work filter, gallery view,
+                                360° tour
    ========================================================================== */
 (() => {
   'use strict';
@@ -16,12 +24,31 @@
   const root = document.documentElement;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* 1. Header hairline: appears after 10px of scroll ----------------------- */
+  /* 0. Contact details and hours come from SITE in tools/pages.py, written into
+        every page as #site-config. track() sends an event to whichever analytics
+        is installed (Plausible or GA4), and nothing otherwise. ------------------ */
+  let SITE = {};
+  try { SITE = JSON.parse(document.getElementById('site-config').textContent); } catch (e) { /* no config: links still work */ }
+  const track = (name, props = {}) => {
+    if (window.plausible) window.plausible(name, { props });
+    else if (window.gtag) window.gtag('event', name, props);
+  };
+  window.arhaTrack = track;
+
+  /* 1. Header: hairline (and the utility line folds away) after 10px of scroll. It slides
+        out of view when scrolling down and returns when scrolling up; it stays while a
+        dropdown or the call panel is open, or while focus is inside it. ---------- */
   const header = document.querySelector('[data-header]');
   if (header) {
     let ticking = false;
+    let lastY = window.scrollY;
     const update = () => {
-      header.classList.toggle('is-scrolled', window.scrollY > 10);
+      const y = window.scrollY;
+      header.classList.toggle('is-scrolled', y > 10);
+      const busy = header.contains(document.activeElement) || header.querySelector('.is-open, .call-pop:not([hidden])');
+      if (y > lastY + 4 && y > 240 && !busy) header.classList.add('is-hidden');
+      else if (y < lastY - 4 || y <= 240) header.classList.remove('is-hidden');
+      lastY = y;
       ticking = false;
     };
     window.addEventListener('scroll', () => {
@@ -141,8 +168,9 @@
     });
   }
 
-  /* 4. Reveal on scroll: opacity only, 1.5s, once, when ~15% into the viewport.
-        Siblings revealed together are staggered 0 / .25 / .5 / .75s. -------- */
+  /* 4. Reveal on scroll, once, when ~15% into the viewport: text fades up, photographs
+        settle from 1.04 to 1 (CSS). Siblings revealed together are staggered by 120ms.
+        window.arhaReady tells the head script that reveals are running. ------------ */
   const reveals = document.querySelectorAll('.reveal');
   if (!reduceMotion && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -150,7 +178,7 @@
         .filter((e) => e.isIntersecting)
         .sort((a, b) => (a.boundingClientRect.top - b.boundingClientRect.top) || (a.boundingClientRect.left - b.boundingClientRect.left))
         .forEach((e, i) => {
-          e.target.style.setProperty('--delay', `${Math.min(i, 3) * 250}ms`);
+          e.target.style.setProperty('--delay', `${Math.min(i, 3) * 120}ms`);
           e.target.classList.add('is-in');
           io.unobserve(e.target);
         });
@@ -159,6 +187,7 @@
   } else {
     reveals.forEach((el) => el.classList.add('is-in'));
   }
+  window.arhaReady = true;
 
   /* 4b. Images fade in over their blurred preview once loaded ------------- */
   document.querySelectorAll('picture.fill img[loading="lazy"]').forEach((img) => {
@@ -229,30 +258,89 @@
     }
   }
 
-  /* 7. Mobile action bar: after the hero, hidden while the footer shows --- */
-  const bar = document.querySelector('[data-mobile-bar]');
-  const footer = document.querySelector('[data-footer]');
-  if (bar && 'IntersectionObserver' in window) {
-    let pastHero = !hero;
-    let footerVisible = false;
-    const sync = () => {
-      const show = pastHero && !footerVisible;
-      bar.classList.toggle('is-visible', show);
-      bar.toggleAttribute('inert', !show);
+  /* 7. Call now. Every tel: link is tracked as call_click. On phones the call bar
+        shows the live status (12). On a laptop (fine pointer) the header's Call now
+        opens a panel instead of dialling (from the utility line): number, copy, QR. */
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="tel:"]');
+    if (link) track('call_click', { location: link.dataset.call || 'page' });
+  });
+
+  const pop = document.getElementById('call-pop');
+  const popTrigger = document.querySelector('[data-call="utility"]');
+  const canDial = () => window.matchMedia('(pointer: coarse)').matches;
+  if (pop && popTrigger) {
+    popTrigger.setAttribute('aria-haspopup', 'dialog');
+    popTrigger.setAttribute('aria-controls', 'call-pop');
+    popTrigger.setAttribute('aria-expanded', 'false');
+    const number = pop.querySelector('.call-pop__number');
+    const copyButton = pop.querySelector('[data-copy-number]');
+    const copyStatus = pop.querySelector('[data-copy-status]');
+    const riyaButton = pop.querySelector('[data-ask-riya]');
+    let copyTimer = 0;
+
+    const onKey = (e) => { if (e.key === 'Escape') closePop(true); };
+    const onOutside = (e) => { if (!pop.contains(e.target) && !popTrigger.contains(e.target)) closePop(false); };
+    const openPop = () => {
+      window.dispatchEvent(new Event('arha:status')); // a fresh open/closed line
+      pop.hidden = false;
+      requestAnimationFrame(() => pop.classList.add('is-open'));
+      popTrigger.setAttribute('aria-expanded', 'true');
+      document.addEventListener('keydown', onKey);
+      document.addEventListener('click', onOutside);
+      number.focus({ preventScroll: true });
+      track('call_popover_open');
     };
-    if (hero) {
-      new IntersectionObserver(([e]) => {
-        pastHero = !e.isIntersecting;
-        sync();
-      }).observe(hero);
+    function closePop(returnFocus) {
+      if (pop.hidden) return;
+      pop.classList.remove('is-open');
+      popTrigger.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('click', onOutside);
+      setTimeout(() => { if (!pop.classList.contains('is-open')) pop.hidden = true; }, reduceMotion ? 0 : 200);
+      if (returnFocus) popTrigger.focus({ preventScroll: true });
     }
-    if (footer) {
-      new IntersectionObserver(([e]) => {
-        footerVisible = e.isIntersecting;
-        sync();
-      }).observe(footer);
-    }
-    sync();
+    popTrigger.addEventListener('click', (e) => {
+      if (canDial()) return; // phones and tablets dial straight away
+      e.preventDefault();
+      if (pop.hidden) openPop();
+      else closePop(false);
+    });
+    pop.querySelector('[data-call-pop-close]').addEventListener('click', () => closePop(true));
+    // Tabbing out of the popover closes it
+    pop.addEventListener('focusout', (e) => {
+      if (e.relatedTarget && !pop.contains(e.relatedTarget) && e.relatedTarget !== popTrigger) closePop(false);
+    });
+    // The header changes size between full and compact: close rather than float in the wrong place
+    let wasCompact = header.classList.contains('is-compact');
+    window.addEventListener('scroll', () => {
+      const compact = header.classList.contains('is-compact');
+      if (compact !== wasCompact) closePop(false);
+      wasCompact = compact;
+    }, { passive: true });
+
+    copyButton.addEventListener('click', async () => {
+      const text = SITE.phone || number.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        copyButton.textContent = 'Copied';
+        copyStatus.textContent = `Number copied: ${text}`;
+      } catch (err) {
+        // Clipboard blocked: select the number so it can be copied by hand
+        const range = document.createRange();
+        range.selectNodeContents(number);
+        getSelection().removeAllRanges();
+        getSelection().addRange(range);
+        copyStatus.textContent = 'Number selected. Press Control C or Command C to copy.';
+      }
+      track('copy_number');
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => { copyButton.textContent = 'Copy number'; copyStatus.textContent = ''; }, 2500);
+    });
+    riyaButton.addEventListener('click', () => {
+      closePop(false);
+      if (window.arhaRiya) window.arhaRiya.open();
+    });
   }
 
   /* 8. Map facade: Google Maps only loads after a click (privacy + speed) - */
@@ -453,8 +541,8 @@
     });
   });
 
-  /* 11b. Google reviews link: Arha's Google Business Profile. Leave empty to keep the link as "#". */
-  const GOOGLE_REVIEWS_URL = 'https://share.google/PzhwgJ9QJMErZnk9R';
+  /* 11b. Google reviews link: Arha's Google Business Profile (SITE in tools/pages.py). Empty keeps "#". */
+  const GOOGLE_REVIEWS_URL = SITE.googleReviewsUrl || '';
   if (GOOGLE_REVIEWS_URL) {
     document.querySelectorAll('[data-google-reviews]').forEach((link) => {
       link.href = GOOGLE_REVIEWS_URL;
@@ -463,14 +551,16 @@
     });
   }
 
-  /* 12. Live open status (India time). Hours live in this one config. ------- */
+  /* 12. Live open status (India time). Hours come from SITE in tools/pages.py.
+         Feeds the Visit and menu status lines, the phone call bar and the popover. */
   const CLINIC_HOURS = {
-    timeZone: 'Asia/Kolkata',
-    // 0 = Sunday ... 6 = Saturday; null = closed. Confirm with the clinic (Google shows 9:00 AM).
-    days: [null, ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30']],
+    timeZone: SITE.timeZone || 'Asia/Kolkata',
+    days: SITE.hours || [], // 0 = Sunday ... 6 = Saturday; null = closed
   };
   const statusEls = document.querySelectorAll('[data-open-status]');
-  if (statusEls.length) {
+  const barStatus = document.querySelector('[data-call-status]');
+  const popStatus = document.querySelector('[data-call-pop-status]');
+  if (CLINIC_HOURS.days.length === 7) {
     const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const toMinutes = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
     const label = (hhmm) => {
@@ -483,31 +573,46 @@
       }).formatToParts(new Date()).map((p) => [p.type, p.value]));
       return { day: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(parts.weekday), minutes: Number(parts.hour) * 60 + Number(parts.minute) };
     };
-    const describe = () => {
+    // Open: { open, until }. Closed: { opens, when }, where when is '', 'tomorrow' or a day name
+    const status = () => {
       const { day, minutes } = nowInClinic();
       const today = CLINIC_HOURS.days[day];
-      if (today && minutes >= toMinutes(today[0]) && minutes < toMinutes(today[1])) {
-        return { open: true, text: `Open now · until ${label(today[1])}` };
-      }
-      if (today && minutes < toMinutes(today[0])) return { open: false, text: `Closed · Opens today at ${label(today[0])}` };
+      if (today && minutes >= toMinutes(today[0]) && minutes < toMinutes(today[1])) return { open: true, until: label(today[1]) };
+      if (today && minutes < toMinutes(today[0])) return { open: false, opens: label(today[0]), when: '' };
       for (let i = 1; i <= 7; i += 1) {
         const next = CLINIC_HOURS.days[(day + i) % 7];
-        if (next) return { open: false, text: `Closed · Opens ${i === 1 ? 'tomorrow' : DAY_NAMES[(day + i) % 7]} at ${label(next[0])}` };
+        if (next) return { open: false, opens: label(next[0]), when: i === 1 ? 'tomorrow' : DAY_NAMES[(day + i) % 7] };
       }
-      return { open: false, text: 'Closed' };
+      return { open: false, opens: '', when: '' };
     };
+    const closedNote = document.querySelector('[data-call-pop-closed]');
+    const riyaOption = document.querySelector('[data-ask-riya]');
     const render = () => {
-      const s = describe();
-      statusEls.forEach((el) => { el.textContent = s.text; el.classList.toggle('is-open', s.open); });
+      const s = status();
+      const text = s.open ? `Open now · until ${s.until}` : s.opens ? `Closed · Opens ${s.when || 'today'} at ${s.opens}` : 'Closed';
+      statusEls.forEach((el) => { el.textContent = text; el.classList.toggle('is-open', s.open); });
+      // Phone call bar: "Open until 6:30 PM" / "Opens 9:30 AM" / "Opens tomorrow 9:30 AM" / "Opens Mon 9:30 AM"
+      if (barStatus) {
+        const when = s.when === 'tomorrow' ? 'tomorrow ' : s.when ? `${s.when.slice(0, 3)} ` : '';
+        barStatus.textContent = s.open ? `Open until ${s.until}` : `Opens ${when}${s.opens}`;
+      }
+      // Popover: when closed, it also offers WhatsApp (always there) and Riya
+      if (popStatus) {
+        popStatus.textContent = s.open ? `Open now · until ${s.until}` : `Closed now · opens ${s.when ? `${s.when} ` : ''}${s.opens}`;
+        popStatus.classList.toggle('is-open', s.open);
+        if (closedNote) closedNote.hidden = s.open;
+        if (riyaOption) riyaOption.hidden = s.open || !window.arhaRiya;
+      }
     };
     render();
     setInterval(render, 60000);
+    window.addEventListener('arha:status', render);
   }
 
   /* 13. Plan your treatment (visiting patients): one question at a time, nothing
          stored or submitted; the result opens WhatsApp with the plan written in. */
   const PLANNER = {
-    whatsapp: '919975507714',
+    whatsapp: SITE.whatsapp || '',
     // SAMPLE timings until Dr. Nikhil confirms real ones (see notes/NEXT-SESSION.md)
     treatments: {
       implants: { name: 'Dental implants', detail: 'Typically 2 visits, about 5–7 days each.' },
@@ -588,6 +693,305 @@
       daysValue.textContent = state.days;
       planner.querySelectorAll('[data-treatment]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
       show(1);
+    });
+  });
+
+  /* 14. Shared components. Every interactive block on the site is built from these,
+         so they all behave the same way.
+         Tabs ([data-tabs]): role="tablist" / "tab" / "tabpanel"; click, arrow keys, Home and
+         End; aria-selected and a roving tabindex; with data-hash the URL hash names the
+         selected panel, so it can be linked to (#problem-gaps).
+         Compare slider ([data-compare]): a range input drives --pos.
+         Ask Riya ([data-riya-ask]): opens Riya with the question typed in; without Riya
+         the link (WhatsApp) still works.
+         Clinic tour ([data-tour]): nothing loads until Play. -------------------------- */
+  document.querySelectorAll('[data-tabs]').forEach((box) => {
+    const list = box.querySelector('[role="tablist"]');
+    const tabs = [...list.querySelectorAll('[role="tab"]')];
+    const panelOf = (tab) => document.getElementById(tab.getAttribute('aria-controls'));
+    const select = (tab, { focus = false, hash = false } = {}) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        panelOf(t).hidden = !on;
+      });
+      if (focus) tab.focus({ preventScroll: true });
+      // A horizontally scrolling list (phones) keeps the selected tab in view
+      if (list.scrollWidth > list.clientWidth + 1) {
+        list.scrollTo({ left: tab.offsetLeft - list.offsetLeft - 20, behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
+      if (hash && box.hasAttribute('data-hash')) history.replaceState(null, '', `#${tab.getAttribute('aria-controls')}`);
+      box.dispatchEvent(new CustomEvent('tabchange', { detail: { tab, panel: panelOf(tab) } }));
+    };
+    tabs.forEach((tab) => tab.addEventListener('click', () => select(tab, { hash: true })));
+    list.addEventListener('keydown', (e) => {
+      const i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      const steps = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+      let next = null;
+      if (e.key in steps) next = tabs[(i + steps[e.key] + tabs.length) % tabs.length];
+      else if (e.key === 'Home') [next] = tabs;
+      else if (e.key === 'End') next = tabs[tabs.length - 1];
+      if (!next) return;
+      e.preventDefault();
+      select(next, { focus: true, hash: true });
+    });
+    // Opened from a link such as /#problem-gaps: select it and bring the block into view
+    if (box.hasAttribute('data-hash') && location.hash) {
+      const tab = tabs.find((t) => `#${t.getAttribute('aria-controls')}` === location.hash);
+      if (tab) {
+        select(tab);
+        requestAnimationFrame(() => box.scrollIntoView({ block: 'start' }));
+      }
+    }
+  });
+
+  document.querySelectorAll('[data-compare]').forEach((ba) => {
+    const range = ba.querySelector('.ba__range');
+    range.addEventListener('input', () => ba.style.setProperty('--pos', `${range.value}%`));
+  });
+
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-riya-ask]');
+    if (!link || !window.arhaRiya) return;
+    e.preventDefault();
+    window.arhaRiya.open(link.dataset.riyaAsk);
+    track('riya_ask', { question: link.dataset.riyaAsk });
+  });
+
+  document.querySelectorAll('[data-tour]').forEach((fig) => {
+    const button = fig.querySelector('.tour__play');
+    button.addEventListener('click', () => {
+      const big = fig.clientWidth * window.devicePixelRatio > 900;
+      const video = document.createElement('video');
+      video.innerHTML = (big ? '' : `<source src="${fig.dataset.base}720.webm" type="video/webm">`)
+        + `<source src="${fig.dataset.base}${big ? '1080' : '720'}.mp4" type="video/mp4">`;
+      video.muted = true;
+      video.playsInline = true;
+      video.controls = true;
+      video.poster = fig.querySelector('img').currentSrc;
+      video.setAttribute('aria-label', 'Arha Dental Care clinic tour, no sound');
+      fig.append(video);
+      fig.classList.add('is-playing');
+      button.remove();
+      video.focus();
+      video.play().catch(() => {});
+      track('tour_play');
+    });
+  });
+
+  /* 15. Treatment-page components, set up once each block scrolls into view.
+         Stepper ([data-stepper]): tabs plus Previous / Next and a progress line.
+         Implant hotspots are tabs: the numbered markers on the photograph are the tab list.
+         Design guides ([data-guides]): a toggle button draws the overlay.
+         Checklist ([data-checklist]) and decider ([data-decider]): the first matching
+         result is shown; nothing is stored or sent.
+         Technology page: groups are an accordion on phones and open, with a
+         scroll-spy index, on desktop. ---------------------------------------------- */
+  const whenVisible = (el, setup) => {
+    if (!('IntersectionObserver' in window)) { setup(el); return; }
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      io.disconnect();
+      setup(el);
+    }, { rootMargin: '200px 0px' });
+    io.observe(el);
+  };
+  const selectTab = (tab) => tab && tab.click();
+
+  document.querySelectorAll('[data-stepper]').forEach((box) => whenVisible(box, () => {
+    const tabs = [...box.querySelectorAll('[role="tab"]')];
+    const prev = box.querySelector('[data-step="-1"]');
+    const next = box.querySelector('[data-step="1"]');
+    const sync = () => {
+      const i = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+      box.style.setProperty('--at', i + 1);
+      prev.disabled = i === 0;
+      next.disabled = i === tabs.length - 1;
+    };
+    box.querySelector('[data-tabs]').addEventListener('tabchange', sync);
+    [prev, next].forEach((b) => b.addEventListener('click', () => {
+      const i = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+      selectTab(tabs[i + Number(b.dataset.step)]);
+    }));
+    sync();
+  }));
+
+  document.querySelectorAll('[data-guides]').forEach((fig) => {
+    const button = fig.querySelector('[data-guides-toggle]');
+    button.addEventListener('click', () => {
+      const on = button.getAttribute('aria-pressed') !== 'true';
+      button.setAttribute('aria-pressed', String(on));
+      button.textContent = on ? 'Hide design guides' : 'Show design guides';
+      fig.classList.toggle('is-on', on);
+    });
+  });
+
+  document.querySelectorAll('[data-checklist]').forEach((form) => {
+    const results = [...form.querySelectorAll('[data-if]')];
+    const update = () => {
+      const ticked = [...form.querySelectorAll('input:checked')].map((i) => i.value);
+      const match = (cond) => (cond === 'none' ? ticked.length === 0 : cond.slice(4).split(',').some((v) => ticked.includes(v)));
+      const shown = results.find((r) => match(r.dataset.if));
+      results.forEach((r) => { r.hidden = r !== shown; });
+    };
+    form.addEventListener('change', update);
+    update();
+  });
+
+  document.querySelectorAll('[data-decider]').forEach((form) => {
+    const answers = () => Object.fromEntries([...form.querySelectorAll('input:checked')].map((i) => [i.name, i.value]));
+    const holds = (spec, a) => spec.split(' ').every((pair) => { const [k, v] = pair.split(':'); return a[k] === v; });
+    const update = () => {
+      const a = answers();
+      form.querySelectorAll('[data-show-if]').forEach((fs) => {
+        const show = holds(fs.dataset.showIf, a);
+        fs.hidden = !show;
+        if (!show) fs.querySelectorAll('input').forEach((i) => { i.checked = false; });
+      });
+      const b = answers();
+      const results = [...form.querySelectorAll('[data-when]')];
+      const shown = results.find((r) => holds(r.dataset.when, b));
+      results.forEach((r) => { r.hidden = r !== shown; });
+    };
+    form.addEventListener('change', update);
+  });
+
+  const spyRoot = document.querySelector('[data-spy-root]');
+  if (spyRoot) {
+    const groups = [...spyRoot.querySelectorAll('details.tgroup')];
+    const desktop = window.matchMedia('(min-width: 900px)');
+    const layout = () => groups.forEach((g, i) => { g.open = desktop.matches || i === 0 || g.contains(document.querySelector(':target')); });
+    layout();
+    desktop.addEventListener('change', layout);
+    // On desktop the summaries are headings, not toggles
+    groups.forEach((g) => g.querySelector('summary').addEventListener('click', (e) => { if (desktop.matches) e.preventDefault(); }));
+    // Opening /technology/#instrument-care opens its group first
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    if (target) { const g = target.closest('details'); if (g) g.open = true; requestAnimationFrame(() => target.scrollIntoView()); }
+    const links = [...document.querySelectorAll('[data-spy]')];
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.filter((e) => e.isIntersecting).forEach((e) => {
+          links.forEach((a) => a.setAttribute('aria-current', String(a.dataset.spy === e.target.id)));
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      groups.forEach((g) => io.observe(g));
+    }
+  }
+
+  /* 16. Our work filter, gallery view and the 360° tour.
+         Gallery view: the case view's behaviour (Esc, arrows, focus trap, scroll lock).
+         360°: Pannellum (MIT, self-hosted) loads only when the visitor asks for it. ---- */
+  const workGrid = document.querySelector('[data-work-grid]');
+  if (workGrid) {
+    const chips = [...document.querySelectorAll('[data-work-filter]')];
+    const cards = [...workGrid.querySelectorAll('[data-cat]')];
+    const empty = document.querySelector('[data-work-empty]');
+    chips.forEach((chip) => chip.addEventListener('click', () => {
+      const cat = chip.dataset.workFilter;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      cards.forEach((card) => {
+        card.hidden = cat !== 'all' && card.dataset.cat !== cat;
+        card.classList.add('is-in');
+      });
+      empty.hidden = cards.some((c) => !c.hidden);
+    }));
+  }
+
+  const gview = document.getElementById('gallery-view');
+  if (gview) {
+    const shots = [...document.querySelectorAll('[data-gallery-full] li')].map((li) => li.dataset);
+    const img = gview.querySelector('[data-gv-img]');
+    const cap = gview.querySelector('[data-gv-cap]');
+    let at = 0;
+    let back = null;
+    const show = (i) => {
+      at = (i + shots.length) % shots.length;
+      img.src = shots[at].src;
+      img.alt = shots[at].alt;
+      cap.textContent = `${shots[at].cap} · ${at + 1} of ${shots.length}`;
+    };
+    const focusables = () => [...gview.querySelectorAll('button')];
+    const onKey = (e) => {
+      if (e.key === 'Escape') closeView();
+      else if (e.key === 'ArrowRight') show(at + 1);
+      else if (e.key === 'ArrowLeft') show(at - 1);
+      else if (e.key === 'Tab') {
+        const els = focusables();
+        if (e.shiftKey && document.activeElement === els[0]) { e.preventDefault(); els[els.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === els[els.length - 1]) { e.preventDefault(); els[0].focus(); }
+      }
+    };
+    const openView = (i, trigger) => {
+      back = trigger;
+      show(i);
+      root.style.setProperty('--scrollbar-w', `${window.innerWidth - root.clientWidth}px`);
+      root.classList.add('is-locked');
+      gview.removeAttribute('inert');
+      gview.classList.add('is-open');
+      document.addEventListener('keydown', onKey);
+      requestAnimationFrame(() => gview.querySelector('[data-gv-close]').focus());
+    };
+    function closeView() {
+      gview.classList.remove('is-open');
+      gview.setAttribute('inert', '');
+      root.classList.remove('is-locked');
+      document.removeEventListener('keydown', onKey);
+      if (back) back.focus();
+    }
+    document.querySelectorAll('[data-gallery-open]').forEach((b) => b.addEventListener('click', () => openView(Number(b.dataset.galleryOpen), b)));
+    gview.querySelector('[data-gv-close]').addEventListener('click', closeView);
+    gview.querySelector('[data-gv-prev]').addEventListener('click', () => show(at - 1));
+    gview.querySelector('[data-gv-next]').addEventListener('click', () => show(at + 1));
+    gview.addEventListener('click', (e) => { if (e.target === gview) closeView(); });
+  }
+
+  document.querySelectorAll('[data-pano]').forEach((box) => {
+    const start = box.querySelector('[data-pano-start]');
+    const base = box.dataset.base; // assets/, relative to this page
+    // The tour's rooms in walking order. Until Arha's own 360 photos arrive, every room shows the sample image.
+    const ROOMS = [
+      ['entrance', 'Entrance'], ['reception', 'Reception'], ['lounge', 'Lounge'],
+      ['operatory', 'Treatment room'], ['sterilisation', 'Sterilisation'],
+    ];
+    const SAMPLE = `${base}pano/sample-360.jpg`;
+    const load = (tag, attrs) => new Promise((resolve, reject) => {
+      const el = document.createElement(tag);
+      Object.assign(el, attrs, { onload: resolve, onerror: reject });
+      document.head.append(el);
+    });
+    start.addEventListener('click', async () => {
+      start.disabled = true;
+      start.textContent = 'Loading…';
+      try {
+        await Promise.all([
+          load('link', { rel: 'stylesheet', href: `${base}vendor/pannellum/pannellum.css` }),
+          load('script', { src: `${base}vendor/pannellum/pannellum.js` }),
+        ]);
+        const scenes = {};
+        ROOMS.forEach(([id, name], i) => {
+          const hotSpots = [];
+          if (i > 0) hotSpots.push({ pitch: -8, yaw: -150, type: 'scene', text: `Back to ${ROOMS[i - 1][1]}`, sceneId: ROOMS[i - 1][0] });
+          if (i < ROOMS.length - 1) hotSpots.push({ pitch: -8, yaw: 20, type: 'scene', text: `Go to ${ROOMS[i + 1][1]}`, sceneId: ROOMS[i + 1][0] });
+          scenes[id] = { title: `${name} · sample image`, type: 'equirectangular', panorama: SAMPLE, hfov: 100, hotSpots };
+        });
+        const viewer = box.querySelector('.pano__viewer');
+        viewer.hidden = false;
+        box.querySelector('.pano__cover').hidden = true;
+        window.pannellum.viewer(viewer, {
+          default: { firstScene: 'entrance', sceneFadeDuration: reduceMotion ? 0 : 300, autoLoad: true, showZoomCtrl: true, keyboardZoom: true, compass: false },
+          scenes,
+        });
+        viewer.setAttribute('aria-label', 'Sample 360° view. Drag or use the arrow keys to look around.');
+        viewer.tabIndex = 0;
+        viewer.focus();
+        track('pano_open');
+      } catch (err) {
+        start.disabled = false;
+        start.textContent = 'Try the sample 360° view';
+      }
     });
   });
 })();
