@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from picture import picture  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = "https://arha.viraajautomates.tech/"
+SITE = "https://arha.svayra.com/"
 
 PAGES = {
     "before-after": {
