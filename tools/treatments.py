@@ -10,26 +10,26 @@ GROUPS = [
         "specialty": True,  # cards carry a small SPECIALTY tag
         "items": [
             {"slug": "dental-implants", "name": "Dental implants", "live": True},
-            {"slug": "full-mouth-rehabilitation", "name": "Full mouth rehabilitation", "live": False},
-            {"slug": "maxillofacial-prosthetics", "name": "Maxillofacial prosthetics", "live": False},
+            {"slug": "full-mouth-rehabilitation", "name": "Full mouth rehabilitation", "live": True},
+            {"slug": "maxillofacial-prosthetics", "name": "Maxillofacial prosthetics", "live": True},
         ],
     },
     {
         "title": "Smile &amp; aesthetics",
         "items": [
-            {"slug": "smile-design", "name": "Smile design", "live": False},
-            {"slug": "cosmetic-dentistry", "name": "Cosmetic dentistry", "live": False},
-            {"slug": "invisalign", "name": "Invisalign clear aligners", "live": False},
-            {"slug": "orthodontics", "name": "Orthodontics (braces)", "live": False},
+            {"slug": "smile-design", "name": "Smile design", "live": True},
+            {"slug": "cosmetic-dentistry", "name": "Cosmetic dentistry", "live": True},
+            {"slug": "invisalign", "name": "Invisalign clear aligners", "live": True},
+            {"slug": "orthodontics", "name": "Orthodontics (braces)", "live": True},
         ],
     },
     {
         "title": "Everyday &amp; family care",
         "items": [
-            {"slug": "general-dentistry", "name": "General dentistry &amp; cleaning", "live": False},
-            {"slug": "root-canal-treatment", "name": "Root canal treatment", "live": False},
-            {"slug": "crowns-bridges", "name": "Crowns &amp; bridges", "live": False},
-            {"slug": "kids-dentistry", "name": "Kids’ dentistry", "live": False},
+            {"slug": "general-dentistry", "name": "General dentistry &amp; cleaning", "live": True},
+            {"slug": "root-canal-treatment", "name": "Root canal treatment", "live": True},
+            {"slug": "crowns-bridges", "name": "Crowns &amp; bridges", "live": True},
+            {"slug": "kids-dentistry", "name": "Kids’ dentistry", "live": True},
         ],
     },
 ]

@@ -5,6 +5,7 @@ Output: assets/illustrations/<name>.svg. Used where a photograph would be dishon
 the "Common problems we fix" before/after pairs show what a treatment does, not a patient.
 Style: paper ground, ink outlines (1.5), stone gums, bronze for whatever the treatment adds.
 """
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -253,7 +254,88 @@ def main():
     for name, make in PAIRS.items():
         for state, after in (("before", False), ("after", True)):
             (OUT / f"problem-{name}-{state}.svg").write_text(make(after), encoding="utf-8", newline="\n")
-    print(f"wrote {len(PAIRS) * 2} illustrations to {OUT.relative_to(ROOT)}")
+    art = treatment_art()
+    for name, text in art.items():
+        (OUT / f"{name}.svg").write_text(text, encoding="utf-8", newline="\n")
+    print(f"wrote {len(PAIRS) * 2 + len(art)} illustrations to {OUT.relative_to(ROOT)}")
+
+
+
+# ------------------------------------------------------------------ treatment pages (Phase 3)
+def implant_bridge():
+    """Three linked crowns carried by two implants (upper front view)."""
+    c = layout()
+    posts = "".join(f'<g stroke="{BRONZE}" stroke-dasharray="4 4"><path d="M{f(x - 9)} {TOP - 8}V{TOP - 58}L{f(x)} {TOP - 70}L{f(x + 9)} {TOP - 58}V{TOP - 8}"/>'
+                    + "".join(f'<path d="M{f(x - 9)} {TOP - 18 - 10 * k}L{f(x + 9)} {TOP - 24 - 10 * k}"/>' for k in range(4)) + "</g>"
+                    for x in (c[1], c[3]))
+    return svg(row(c, accent=(1, 2, 3)) + gum(c) + posts, "An implant bridge: three crowns carried by two implants", FRONT)
+
+
+def full_arch(after):
+    """Worn, short and missing teeth, then the whole front rebuilt (bronze = new restorations)."""
+    global TEETH
+    saved = TEETH
+    if not after:
+        TEETH = [(w, round(h * .74), False) for w, h, _ in saved]
+        out = front("Worn, short front teeth with one missing", skip=(4,))
+    else:
+        out = front("The front teeth rebuilt to an even length and shape", accent=tuple(range(6)))
+    TEETH = saved
+    return out
+
+
+def smile_design(after):
+    global TEETH
+    saved = TEETH
+    if not after:
+        TEETH = [(52, 100, True), (46, 112, False), (70, 112, False), (60, 126, False), (54, 92, False), (50, 116, True)]
+        out = front("Front teeth of uneven length, width and shape")
+    else:
+        out = front("The same teeth designed to even proportions along the smile line", accent=tuple(range(6)))
+    TEETH = saved
+    return out
+
+
+def aligner_stage(t):
+    """Stage t (0 = start, 1 = finish) of straightening with aligners."""
+    k = 1 - t
+    centres = layout(gap=-4 + 8 * t, spread={0: 6 * k})
+    return front(f"Aligner stage: teeth {'straight' if t == 1 else 'moving into line'}", centres=centres,
+                 rotate={1: -9 * k, 2: 6 * k, 3: -5 * k, 4: 10 * k}, drop={1: 6 * k, 4: -4 * k})
+
+
+def root_canal(step):
+    """Four steps: infected pulp, cleaned with rotary files, sealed, crown on top."""
+    if step == 0:
+        return section_tooth("ache").replace("Cross-section of a molar with decay reaching the nerve",
+                                             "Step 1: decay has reached the pulp and it is infected")
+    base = section_tooth("fixed")
+    if step == 1:
+        base = base.replace(f'fill="{BRONZE}" fill-opacity=".22" stroke="{BRONZE}"', f'fill="{PAPER}" stroke="{INK}"')
+        files = (f'<g stroke="{BRONZE}" stroke-width="1.2"><path d="M300 40L292 330"/><path d="M340 40L348 330"/>'
+                 + "".join(f'<path d="M{296 - k * .03:.1f} {80 + 26 * k}l6 -6M{344 + k * .03:.1f} {80 + 26 * k}l-6 -6"/>' for k in range(9))
+                 + f'<rect x="288" y="20" width="16" height="22" fill="{PAPER}"/><rect x="336" y="20" width="16" height="22" fill="{PAPER}"/></g>')
+        base = base.replace("</g></svg>", files + "</g></svg>")
+        title = "Step 2: the canals are cleaned and shaped with fine rotary instruments"
+    elif step == 2:
+        title = "Step 3: the cleaned canals are filled and sealed"
+    else:
+        cap = (f'<path d="M232 128C230 86 260 66 290 70C304 72 312 80 320 80C328 80 336 72 350 70C380 66 410 86 408 128'
+               f'C408 150 404 168 400 182L240 182C236 168 232 150 232 128Z" stroke="{BRONZE}" stroke-width="2"/>')
+        base = base.replace("</g></svg>", cap + "</g></svg>")
+        title = "Step 4: a crown covers and protects the treated tooth"
+    return re.sub(r"<title>.*?</title>", f"<title>{title}</title>", re.sub(r'aria-label="[^"]*"', f'aria-label="{title}"', base))
+
+
+def treatment_art():
+    out = {"implant-single": missing(True), "implant-bridge": implant_bridge(), "implant-denture": dentures(True),
+           "full-arch-before": full_arch(False), "full-arch-after": full_arch(True),
+           "smile-design-before": smile_design(False), "smile-design-after": smile_design(True)}
+    for n in range(6):
+        out[f"aligner-stage-{n + 1}"] = aligner_stage(n / 5)
+    for n in range(4):
+        out[f"root-canal-step-{n + 1}"] = root_canal(n)
+    return out
 
 
 if __name__ == "__main__":

@@ -12,6 +12,9 @@
                             13. Plan your treatment
                             14. Shared components: tabs, compare
                                 slider, Ask Riya, clinic tour
+                            15. Treatment pages: stepper, layers,
+                                scrubber, guides, checklist, decider,
+                                technology index
    ========================================================================== */
 (() => {
   'use strict';
@@ -769,4 +772,140 @@
       track('tour_play');
     });
   });
+
+  /* 15. Treatment-page components, set up once each block scrolls into view.
+         Stepper ([data-stepper]): tabs plus Previous / Next and a progress line.
+         Layer explorer ([data-layers]): the drawing follows the selected part; hovering
+         or tapping a part of the drawing selects it.
+         Scrubber ([data-scrubber]): a range input steps through the frames.
+         Design guides ([data-guides]): a toggle button draws the overlay.
+         Checklist ([data-checklist]) and decider ([data-decider]): the first matching
+         result is shown; nothing is stored or sent.
+         Technology page: groups are an accordion on phones and open, with a
+         scroll-spy index, on desktop. ---------------------------------------------- */
+  const whenVisible = (el, setup) => {
+    if (!('IntersectionObserver' in window)) { setup(el); return; }
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      io.disconnect();
+      setup(el);
+    }, { rootMargin: '200px 0px' });
+    io.observe(el);
+  };
+  const selectTab = (tab) => tab && tab.click();
+
+  document.querySelectorAll('[data-stepper]').forEach((box) => whenVisible(box, () => {
+    const tabs = [...box.querySelectorAll('[role="tab"]')];
+    const prev = box.querySelector('[data-step="-1"]');
+    const next = box.querySelector('[data-step="1"]');
+    const sync = () => {
+      const i = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+      box.style.setProperty('--at', i + 1);
+      prev.disabled = i === 0;
+      next.disabled = i === tabs.length - 1;
+    };
+    box.querySelector('[data-tabs]').addEventListener('tabchange', sync);
+    [prev, next].forEach((b) => b.addEventListener('click', () => {
+      const i = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
+      selectTab(tabs[i + Number(b.dataset.step)]);
+    }));
+    sync();
+  }));
+
+  document.querySelectorAll('[data-layers]').forEach((box) => whenVisible(box, () => {
+    const tabs = [...box.querySelectorAll('[role="tab"]')];
+    const keyOf = (tab) => tab.getAttribute('aria-controls').replace(/^layer-/, '');
+    const sync = () => {
+      const tab = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
+      box.dataset.active = keyOf(tab);
+    };
+    box.querySelector('[data-tabs]').addEventListener('tabchange', sync);
+    box.querySelectorAll('[data-layer]').forEach((part) => {
+      const tab = tabs.find((t) => keyOf(t) === part.dataset.layer);
+      part.addEventListener('click', () => selectTab(tab));
+      if (window.matchMedia('(hover: hover)').matches) part.addEventListener('mouseenter', () => selectTab(tab));
+    });
+    sync();
+  }));
+
+  document.querySelectorAll('[data-scrubber]').forEach((fig) => whenVisible(fig, () => {
+    const img = fig.querySelector('img');
+    const base = img.src.slice(0, img.src.lastIndexOf('/') + 1); // frames sit beside the first one
+    const frames = fig.dataset.frames.split(',').map((name) => base + name);
+    frames.forEach((src) => { const im = new Image(); im.src = src; }); // preload, so scrubbing never flickers
+    const range = fig.querySelector('input[type="range"]');
+    const out = fig.querySelector('[data-scrub-out]');
+    const last = frames.length;
+    range.addEventListener('input', () => {
+      const n = Number(range.value);
+      img.src = frames[n - 1];
+      img.alt = n === 1 ? 'Illustration: crooked front teeth at the start of aligner treatment'
+        : n === last ? 'Illustration: the front teeth straight at the end of aligner treatment'
+          : `Illustration: the front teeth part of the way into line, stage ${n} of ${last}`;
+      out.textContent = n;
+    });
+  }));
+
+  document.querySelectorAll('[data-guides]').forEach((fig) => {
+    const button = fig.querySelector('[data-guides-toggle]');
+    button.addEventListener('click', () => {
+      const on = button.getAttribute('aria-pressed') !== 'true';
+      button.setAttribute('aria-pressed', String(on));
+      button.textContent = on ? 'Hide design guides' : 'Show design guides';
+      fig.classList.toggle('is-on', on);
+    });
+  });
+
+  document.querySelectorAll('[data-checklist]').forEach((form) => {
+    const results = [...form.querySelectorAll('[data-if]')];
+    const update = () => {
+      const ticked = [...form.querySelectorAll('input:checked')].map((i) => i.value);
+      const match = (cond) => (cond === 'none' ? ticked.length === 0 : cond.slice(4).split(',').some((v) => ticked.includes(v)));
+      const shown = results.find((r) => match(r.dataset.if));
+      results.forEach((r) => { r.hidden = r !== shown; });
+    };
+    form.addEventListener('change', update);
+    update();
+  });
+
+  document.querySelectorAll('[data-decider]').forEach((form) => {
+    const answers = () => Object.fromEntries([...form.querySelectorAll('input:checked')].map((i) => [i.name, i.value]));
+    const holds = (spec, a) => spec.split(' ').every((pair) => { const [k, v] = pair.split(':'); return a[k] === v; });
+    const update = () => {
+      const a = answers();
+      form.querySelectorAll('[data-show-if]').forEach((fs) => {
+        const show = holds(fs.dataset.showIf, a);
+        fs.hidden = !show;
+        if (!show) fs.querySelectorAll('input').forEach((i) => { i.checked = false; });
+      });
+      const b = answers();
+      const results = [...form.querySelectorAll('[data-when]')];
+      const shown = results.find((r) => holds(r.dataset.when, b));
+      results.forEach((r) => { r.hidden = r !== shown; });
+    };
+    form.addEventListener('change', update);
+  });
+
+  const spyRoot = document.querySelector('[data-spy-root]');
+  if (spyRoot) {
+    const groups = [...spyRoot.querySelectorAll('details.tgroup')];
+    const desktop = window.matchMedia('(min-width: 900px)');
+    const layout = () => groups.forEach((g, i) => { g.open = desktop.matches || i === 0 || g.contains(document.querySelector(':target')); });
+    layout();
+    desktop.addEventListener('change', layout);
+    // On desktop the summaries are headings, not toggles
+    groups.forEach((g) => g.querySelector('summary').addEventListener('click', (e) => { if (desktop.matches) e.preventDefault(); }));
+    // Opening /technology/#instrument-care opens its group first
+    const target = location.hash && document.getElementById(location.hash.slice(1));
+    if (target) { const g = target.closest('details'); if (g) g.open = true; requestAnimationFrame(() => target.scrollIntoView()); }
+    const links = [...document.querySelectorAll('[data-spy]')];
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.filter((e) => e.isIntersecting).forEach((e) => {
+          links.forEach((a) => a.setAttribute('aria-current', String(a.dataset.spy === e.target.id)));
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      groups.forEach((g) => io.observe(g));
+    }
+  }
 })();

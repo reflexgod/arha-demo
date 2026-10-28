@@ -18,7 +18,8 @@ ITEMS = [
         "alt": "Arha's X-ray room: a floor-standing panoramic X-ray unit against a marble wall, with its computer beside it",
         "what": "A floor-standing panoramic X-ray unit in its own room, which images all your teeth and both jaws in one pass.",
         "for_you": "Routine X-rays are taken here during your visit, with no trip to a separate imaging centre.",
-        "treatments": ["dental-implants", "full-mouth-rehabilitation", "root-canal-treatment", "orthodontics"],
+        "treatments": ["dental-implants", "full-mouth-rehabilitation", "maxillofacial-prosthetics", "root-canal-treatment",
+                       "orthodontics", "invisalign", "crowns-bridges", "general-dentistry", "kids-dentistry"],
     },
     {
         "slug": "treatment-rooms",
@@ -30,7 +31,8 @@ ITEMS = [
         "alt": "An Arha treatment room: a cream dental chair under an overhead light, marble walls and a laptop on the counter",
         "what": "Rooms with a fully adjustable dental chair, an overhead operating light and a screen beside the chair.",
         "for_you": "You lie back comfortably, the work area is well lit, and your images can be shown to you as we explain.",
-        "treatments": ["general-dentistry", "root-canal-treatment", "crowns-bridges", "cosmetic-dentistry"],
+        "treatments": ["general-dentistry", "root-canal-treatment", "crowns-bridges", "cosmetic-dentistry", "kids-dentistry",
+                       "orthodontics", "dental-implants", "smile-design"],
     },
     {
         "slug": "planning-desk",
@@ -42,7 +44,8 @@ ITEMS = [
         "alt": "A consultation desk in a treatment room with a large monitor, a laptop and notebooks",
         "what": "A consultation desk in the treatment room, with a large monitor for X-rays and photographs.",
         "for_you": "Your options are talked through on screen, at a desk, before anything is decided.",
-        "treatments": ["smile-design", "dental-implants", "full-mouth-rehabilitation", "invisalign"],
+        "treatments": ["smile-design", "dental-implants", "full-mouth-rehabilitation", "invisalign", "cosmetic-dentistry",
+                       "maxillofacial-prosthetics", "orthodontics"],
     },
     {
         "slug": "sterilisation-room",
@@ -54,7 +57,7 @@ ITEMS = [
         "alt": "Arha's sterilisation room: a benchtop steam steriliser beside a sink, under pale cabinets",
         "what": "A separate sterilisation room with a benchtop steam steriliser and its own sink.",
         "for_you": "Instruments are cleaned and sterilised in their own room, away from where you are treated.",
-        "treatments": [],
+        "treatments": [],  # empty = used in every treatment
     },
     {
         "slug": "instrument-care",
@@ -66,7 +69,7 @@ ITEMS = [
         "alt": "An automatic handpiece cleaning and oiling unit next to a white water distiller on a counter",
         "what": "An automatic unit that cleans and oils the dental handpieces, beside a water distiller.",
         "for_you": "Handpieces are maintained after use, and distilled water is made on site for the equipment.",
-        "treatments": [],
+        "treatments": [],  # empty = used in every treatment
     },
 ]
 

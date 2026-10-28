@@ -569,8 +569,8 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 .tag {
   display: inline-block;
   padding: 3px 6px 2px;
-  border: 1px solid currentColor;
-  color: var(--bronze);
+  border: 1px solid var(--bronze); /* bronze line, text in the surrounding colour (AA at 10px) */
+  color: inherit;
   font: 700 10px/1 var(--font-head);
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -2781,6 +2781,815 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 
 .faq__panel p {
   padding: 0 0 26px;
+}
+
+/* Treatment pages, hub, technology (v2) ------------------------------------------ */
+
+/* Breadcrumb in the page hero */
+.crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-bottom: 18px;
+  color: var(--paper-82);
+  font: 600 12px/1.4 var(--font-body);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.crumbs li + li::before {
+  content: "/";
+  margin-right: 10px;
+  color: var(--paper-66);
+}
+
+.crumbs a {
+  transition: color var(--t-link);
+}
+
+.crumbs a:hover,
+.crumbs a:focus-visible {
+  color: var(--bronze);
+}
+
+.page-hero--plain .crumbs ol { color: var(--muted); }
+.page-hero--plain .crumbs li + li::before { color: var(--muted); }
+
+.tag--light {
+  margin-bottom: 14px;
+  color: var(--paper);
+  border-color: var(--paper-66);
+}
+
+.hero__actions,
+.band__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin-top: 28px;
+}
+
+.band__actions { justify-content: center; }
+
+/* A hero without a photograph (Kids' dentistry): stone, text left, line art right */
+.page-hero--plain {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  padding-block: clamp(48px, 7vw, 96px);
+  background: var(--stone);
+  color: var(--ink);
+}
+
+.page-hero--plain::after { display: none; }
+
+.page-hero--plain__inner {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+
+.page-hero--plain .hero__lede { color: var(--ink); }
+
+.page-hero--plain__art img {
+  width: 100%;
+  mix-blend-mode: multiply;
+}
+
+@media (min-width: 900px) {
+  .page-hero--plain__inner { grid-template-columns: 1fr 1fr; gap: 64px; }
+}
+
+/* Interactive section: one shared look --------------------------------------- */
+.ix .section-head { margin-bottom: clamp(32px, 4vw, 48px); }
+
+.ix-sub {
+  margin-top: clamp(48px, 6vw, 72px);
+  padding-top: clamp(32px, 4vw, 48px);
+  border-top: 1px solid var(--hairline-strong);
+}
+
+.ix-sub__title {
+  margin-bottom: 20px;
+}
+
+.ix-sub--split {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+}
+
+.ix-sub--split p { margin-top: 8px; color: var(--muted); }
+
+@media (min-width: 900px) {
+  .ix-sub--split { grid-template-columns: 1fr 1.4fr; gap: 56px; }
+}
+
+.ix-note {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.ix-note a,
+.titem__used a {
+  border-bottom: 1px solid currentColor;
+  transition: color var(--t-link);
+}
+
+.ix-note a:hover,
+.titem__used a:hover { color: var(--bronze); }
+
+.ix-strong {
+  margin-top: 14px;
+  font-weight: 600;
+}
+
+.art {
+  width: 100%;
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+}
+
+/* Tabs, every variant: list + panel */
+.itabs {
+  display: grid;
+  gap: 24px;
+}
+
+.itabs__list {
+  display: flex;
+  gap: 8px;
+  margin-inline: calc(var(--gutter) * -1);
+  padding: 2px var(--gutter) 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.itabs__list::-webkit-scrollbar { display: none; }
+
+.itabs__tab {
+  flex: none;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--hairline-strong);
+  font-size: 16px;
+  line-height: 1.3;
+  text-align: left;
+  white-space: nowrap;
+  transition: color var(--t-link), border-color var(--t-link), background-color var(--t-link);
+}
+
+.itabs__tab:hover { border-color: var(--ink); }
+
+.itabs__tab[aria-selected="true"] {
+  border-color: var(--charcoal);
+  background: var(--charcoal);
+  color: var(--paper);
+}
+
+.itabs__panel h3 { margin-bottom: 12px; }
+.itabs__panel p + p { margin-top: 10px; }
+.itabs__panel .cta { margin-top: 22px; }
+
+/* Vertical list beside the panel (Who we help, layers) */
+@media (min-width: 900px) {
+  .itabs--side { grid-template-columns: 300px 1fr; gap: 56px; align-items: start; }
+  .itabs--side .itabs__list,
+  .itabs--layers .itabs__list { flex-direction: column; gap: 0; margin: 0; padding: 0; overflow: visible; }
+  .itabs--side .itabs__tab,
+  .itabs--layers .itabs__tab { padding: 13px 0 13px 18px; border: 0; border-left: 1px solid var(--hairline-strong); background: none; color: var(--ink); white-space: normal; }
+  .itabs--side .itabs__tab:hover,
+  .itabs--layers .itabs__tab:hover { color: var(--bronze); }
+  .itabs--side .itabs__tab[aria-selected="true"],
+  .itabs--layers .itabs__tab[aria-selected="true"] { border-left: 2px solid var(--bronze); padding-left: 17px; font-weight: 600; }
+}
+
+.itabs--side .itabs__panel { max-width: 640px; }
+
+/* Two-way comparison (aligners vs braces, materials, age guide) */
+.vs {
+  display: grid;
+  gap: 0;
+  max-width: 880px;
+}
+
+.vs > div {
+  display: grid;
+  gap: 4px 32px;
+  padding: 16px 0;
+  border-top: 1px solid var(--hairline-strong);
+}
+
+.vs dt {
+  font: 600 12px/1.5 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 768px) {
+  .vs > div { grid-template-columns: 200px 1fr; }
+  .vs--three { grid-template-columns: repeat(3, 1fr); gap: 0 40px; max-width: none; }
+  .vs--three > div { grid-template-columns: 1fr; }
+}
+
+/* Layer explorer (implants): drawing beside the list of parts */
+.layers {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+}
+
+.layers__art {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+}
+
+.layers__art [data-layer] {
+  cursor: pointer;
+  transition: opacity 200ms ease;
+}
+
+.layers__art .l-fill,
+.layers__art .l-line {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  fill: none;
+  transition: stroke 200ms ease;
+}
+
+.layers__art .l-line { stroke-width: 1; }
+.layers__art .l-bone { fill: var(--stone); }
+.layers__art .l-gum { fill: #EAD6C8; }
+.layers__art .l-metal { fill: var(--paper); }
+.layers__art .l-tooth { fill: var(--paper); }
+
+.layers[data-active] [data-layer] { opacity: .38; }
+
+.layers[data-active="crown"] [data-layer="crown"],
+.layers[data-active="abutment"] [data-layer="abutment"],
+.layers[data-active="implant"] [data-layer="implant"],
+.layers[data-active="gum"] [data-layer="gum"],
+.layers[data-active="bone"] [data-layer="bone"] {
+  opacity: 1;
+}
+
+.layers[data-active="crown"] [data-layer="crown"] .l-fill,
+.layers[data-active="abutment"] [data-layer="abutment"] .l-fill,
+.layers[data-active="implant"] [data-layer="implant"] .l-fill,
+.layers[data-active="implant"] [data-layer="implant"] .l-line,
+.layers[data-active="gum"] [data-layer="gum"] .l-fill,
+.layers[data-active="bone"] [data-layer="bone"] .l-fill {
+  stroke: var(--bronze);
+  stroke-width: 2.5;
+}
+
+@media (min-width: 900px) {
+  .layers { grid-template-columns: 1fr 1fr; gap: 64px; }
+  .itabs--layers { grid-template-columns: 200px 1fr; gap: 40px; align-items: start; }
+}
+
+.itabs--options .itabs__panel { display: grid; gap: 16px; }
+.itabs--options .itabs__panel:not([hidden]) { display: grid; }
+.itabs--options .art { max-width: 640px; }
+
+@media (min-width: 900px) {
+  .itabs--options .itabs__panel { grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+}
+
+/* Stepper: progress line, numbered steps, Previous / Next */
+.stepper {
+  --at: 1;
+  position: relative;
+}
+
+.stepper__track {
+  height: 1px;
+  margin-bottom: 20px;
+  background: var(--hairline-strong);
+}
+
+.stepper__progress {
+  display: block;
+  width: calc(var(--at) / var(--steps) * 100%);
+  height: 2px;
+  margin-top: -.5px;
+  background: var(--bronze);
+  transition: width 300ms ease;
+}
+
+.itabs--steps .itabs__tab {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.stepper__num {
+  color: var(--bronze);
+  font: 700 13px/1 var(--font-head);
+  letter-spacing: .08em;
+}
+
+.itabs--steps .itabs__tab[aria-selected="true"] .stepper__num { color: var(--paper); }
+
+.itabs--steps .itabs__panel:not([hidden]) {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+}
+
+.stepper__count {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font: 600 12px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.stepper__visits {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.stepper__nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 28px;
+}
+
+.stepper__nav button:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+@media (min-width: 900px) {
+  .itabs--steps .itabs__list { justify-content: space-between; margin: 0; padding: 0; overflow: visible; }
+  .itabs--steps .itabs__tab { flex: 1; justify-content: flex-start; border: 0; padding: 8px 12px 8px 0; background: none; color: var(--muted); white-space: normal; }
+  .itabs--steps .itabs__tab:hover { color: var(--ink); }
+  .itabs--steps .itabs__tab[aria-selected="true"] { background: none; color: var(--ink); font-weight: 600; }
+  .itabs--steps .itabs__tab[aria-selected="true"] .stepper__num { color: var(--bronze); }
+  .itabs--steps .itabs__panel:not([hidden]) { grid-template-columns: 1.2fr 1fr; gap: 56px; }
+  .itabs--steps .itabs__panel:not([hidden]):not(:has(.art)) { grid-template-columns: 1fr; max-width: 720px; }
+}
+
+/* Matrix (cosmetic): concern -> three options */
+.matrix__row {
+  display: grid;
+  gap: 0;
+}
+
+.matrix__cell {
+  padding: 22px 0;
+  border-top: 1px solid var(--hairline-strong);
+  transition: opacity 200ms ease;
+}
+
+.matrix__cell--no { opacity: .55; }
+
+.matrix__opt {
+  font: 700 17px/1.3 var(--font-head);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.matrix__fit {
+  margin: 6px 0 8px;
+  font: 600 12px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.matrix__cell--good .matrix__fit { color: var(--ink); }
+.matrix__cell--good .matrix__fit::before { content: ""; display: inline-block; width: 18px; height: 2px; margin: 0 10px 3px 0; background: var(--bronze); vertical-align: middle; }
+.matrix__cell--some .matrix__fit,
+.matrix__cell--no .matrix__fit { color: var(--muted); }
+
+@media (min-width: 768px) {
+  .matrix__row { grid-template-columns: repeat(3, 1fr); gap: 0 32px; }
+}
+
+/* Range scrubber (aligner stages) */
+.scrubber {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.scrubber img {
+  width: 100%;
+  border: 1px solid var(--hairline);
+  background: var(--paper);
+}
+
+.scrubber figcaption {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.scrubber label {
+  font: 600 13px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.scrubber input[type="range"],
+.compare-range {
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  accent-color: var(--bronze);
+  cursor: pointer;
+}
+
+/* Checklist and decider */
+.checklist fieldset,
+.decider fieldset {
+  margin: 0 0 20px;
+  padding: 0;
+  border: 0;
+}
+
+.checklist legend,
+.decider legend {
+  margin-bottom: 14px;
+  font: 700 17px/1.35 var(--font-head);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.check,
+.radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  min-height: 44px;
+  padding: 10px 0;
+  border-top: 1px solid var(--hairline);
+  cursor: pointer;
+}
+
+.check input,
+.radio input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 3px 0 0;
+  accent-color: var(--charcoal);
+}
+
+.checklist__out > div,
+.decider__out > div {
+  margin-top: 8px;
+  padding: 20px 22px;
+  border-left: 2px solid var(--bronze);
+  background: var(--paper);
+}
+
+.checklist__out .cta,
+.decider__out .cta { margin-top: 16px; }
+
+.checklist__note {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+@media (min-width: 900px) {
+  .checklist { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; align-items: start; }
+  .checklist fieldset { grid-row: span 2; }
+  .decider { max-width: 880px; }
+}
+
+/* Smile design guides: a hairline overlay on a sample photograph */
+.guides-wrap {
+  display: grid;
+  gap: 32px;
+  align-items: center;
+}
+
+.guides { margin: 0; }
+
+.guides__frame {
+  aspect-ratio: 4 / 5;
+}
+
+.guides__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.guides__lines {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 2;
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.guides__lines .g-mid { stroke-dasharray: 6 6; }
+.guides__lines .g-curve { stroke: var(--bronze); stroke-width: 2.5; }
+.guides__lines .g-ticks { stroke-width: 1.5; }
+
+.guides__lines text {
+  fill: var(--paper);
+  stroke: none;
+  font: 600 15px/1 var(--font-body);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.guides.is-on .guides__lines { opacity: 1; }
+
+.guides figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px 20px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.guides__text p + p { margin-top: 12px; }
+.guides__text h3 { margin-bottom: 14px; }
+
+@media (min-width: 900px) {
+  .guides-wrap { grid-template-columns: minmax(0, 420px) 1fr; gap: 64px; }
+}
+
+/* Check-up timeline (general dentistry) */
+.timeline-steps {
+  display: grid;
+  gap: 28px;
+  counter-reset: none;
+}
+
+.timeline-steps li {
+  padding-top: 18px;
+  border-top: 2px solid var(--hairline-strong);
+}
+
+.timeline-steps li:first-child { border-top-color: var(--bronze); }
+
+.timeline-steps__num {
+  margin-bottom: 10px;
+  color: var(--bronze);
+  font: 700 14px/1 var(--font-head);
+  letter-spacing: .08em;
+}
+
+.timeline-steps h3 { margin-bottom: 8px; }
+
+@media (min-width: 900px) {
+  .timeline-steps { grid-template-columns: repeat(5, 1fr); gap: 24px; }
+}
+
+/* Technology used in this treatment */
+.tech-strip__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: 24px;
+  padding-top: 32px;
+  border-top: 1px solid var(--hairline);
+}
+
+.tech-strip__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.tech-strip__item a { display: block; }
+
+.tech-strip__media {
+  display: block;
+  aspect-ratio: 4 / 3;
+}
+
+.tech-strip__name {
+  display: block;
+  margin-top: 10px;
+  font-size: 15px;
+  transition: color var(--t-link);
+}
+
+.tech-strip__item a:hover .tech-strip__name,
+.tech-strip__item a:focus-visible .tech-strip__name { color: var(--bronze); }
+
+@media (min-width: 900px) {
+  .tech-strip__list { grid-template-columns: repeat(5, 1fr); }
+}
+
+.cases-empty {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 32px;
+  border: 1px solid var(--hairline-strong);
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Treatments hub: three groups of cards */
+.tgroup-block + .tgroup-block { margin-top: clamp(56px, 7vw, 88px); }
+
+.tgroup-block__head {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.tgroup-block__head p { color: var(--muted); }
+
+.tcards {
+  display: grid;
+  gap: 12px;
+}
+
+.tcard a {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  height: 100%;
+  padding: 26px 24px;
+  border: 1px solid var(--hairline-strong);
+  transition: border-color var(--t-link);
+}
+
+.tcard .tag { justify-self: start; }
+
+.tcard p { color: var(--muted); }
+
+.tcard__more {
+  margin-top: 6px;
+  font: 600 13px/1.2 var(--font-body);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: color var(--t-link);
+}
+
+.tcard a:hover,
+.tcard a:focus-visible { border-color: var(--ink); }
+
+.tcard a:hover .tcard__more,
+.tcard a:focus-visible .tcard__more { color: var(--bronze); }
+
+@media (min-width: 768px) {
+  .tcards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1100px) {
+  .tcards { grid-template-columns: repeat(4, 1fr); }
+  .tgroup-block:first-child .tcards { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* Technology page: sticky index (scroll-spy) beside the groups; accordion on phones */
+.tech-page {
+  display: grid;
+  gap: 24px;
+}
+
+.tech-index { display: none; }
+
+.tgroup {
+  border-top: 1px solid var(--hairline-strong);
+}
+
+.tgroup summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 16px;
+  min-height: 56px;
+  padding: 18px 0;
+  cursor: pointer;
+  list-style: none;
+}
+
+.tgroup summary::-webkit-details-marker { display: none; }
+
+.tgroup summary .plus { margin-left: auto; align-self: center; }
+.tgroup[open] summary .plus { transform: rotate(45deg); }
+
+.tgroup__name {
+  font: 700 22px/1.2 var(--font-head);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.tgroup__sub {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.tgroup__items {
+  display: grid;
+  gap: 40px;
+  padding: 8px 0 48px;
+}
+
+.titem {
+  display: grid;
+  gap: 20px;
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+.titem__media { aspect-ratio: 4 / 3; }
+.titem__media .art { position: absolute; inset: 0; height: 100%; object-fit: cover; border: 0; }
+
+.titem__text dl {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.titem__text dt {
+  color: var(--muted);
+  font: 600 12px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.titem__text dd { margin-top: 4px; }
+
+.titem__used {
+  margin-top: 16px;
+  font-size: 15px;
+}
+
+@media (min-width: 900px) {
+  .tech-page { grid-template-columns: 220px 1fr; gap: 64px; align-items: start; }
+  .tech-index { display: block; position: sticky; top: calc(var(--header-h) + 32px); }
+  .tech-index a {
+    display: block;
+    padding: 12px 0 12px 18px;
+    border-left: 1px solid var(--hairline-strong);
+    font: 600 14px/1.3 var(--font-body);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: color var(--t-link);
+  }
+  .tech-index a:hover { color: var(--bronze); }
+  .tech-index a[aria-current="true"] { border-left: 2px solid var(--bronze); padding-left: 17px; }
+  .tgroup { scroll-margin-top: calc(var(--header-h) + 24px); }
+  .tgroup summary { pointer-events: none; }
+  .tgroup summary .plus { display: none; }
+  .titem { grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+}
+
+/* Kids' dentistry */
+.kids-message {
+  margin-inline: auto;
+  font-size: 20px;
+}
+
+.cite {
+  max-width: 640px;
+  margin: 18px auto 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.stat {
+  margin: 0;
+  padding: 32px;
+  border-left: 2px solid var(--bronze);
+  background: var(--stone);
+}
+
+.stat__num {
+  font: 700 clamp(44px, 6vw, 68px)/1 var(--font-head);
+  letter-spacing: .04em;
+}
+
+.stat figcaption p:first-child {
+  margin-top: 12px;
+  font-size: 20px;
+}
+
+.stat .cite { margin: 12px 0 0; }
+
+.knock {
+  display: grid;
+  max-width: 1080px;
+  margin-inline: auto;
+}
+
+@media (min-width: 900px) {
+  .knock { grid-template-columns: 1fr 1fr; }
 }
 
 /* Book: two paths side by side (stacked on phones) */

@@ -18,6 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from picture import picture  # noqa: E402
 import technology  # noqa: E402
+import treatment_pages  # noqa: E402
 import treatments  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -48,23 +49,6 @@ PAGES = {
     "before-after": {
         "title": "Before &amp; After | Arha Dental Care, Peddar Road",
         "description": "Before and after results from Arha Dental Care on Peddar Road, Mumbai: dental implants, full mouth rehabilitation, veneers and aligners.",
-    },
-    "dental-implants": {
-        "title": "Dental Implants in South Mumbai | Arha Dental Care, Peddar Road",
-        "description": "Prosthodontist-led dental implants on Peddar Road, Mumbai. How implants work, who they suit, the treatment journey and answers to common questions.",
-        "jsonld": {
-            "@context": "https://schema.org",
-            "@type": "MedicalProcedure",
-            "name": "Dental implants",
-            "alternateName": "Dental implant treatment",
-            "procedureType": "https://schema.org/SurgicalProcedure",
-            "bodyLocation": "Jaw and teeth",
-            "description": "Replacement of missing teeth with implants that support a crown, bridge or denture, planned by a prosthodontist.",
-            "howPerformed": "Consultation and scans, treatment planning, implant placement under local anaesthetic, healing, then the final tooth is fitted.",
-            "preparation": "A consultation with an examination and scans.",
-            "followup": "Regular reviews and professional cleaning.",
-            "url": SITE_URL + "dental-implants/",
-        },
     },
     "book": {
         "title": "Book a Consultation | Arha Dental Care, Peddar Road",
@@ -251,15 +235,20 @@ def main():
     top = home[home.index("<body>"):home.index('  <main id="main"')]
     bottom = home[home.index("  </main>") + len("  </main>\n"):]
 
-    for slug, meta in PAGES.items():
+    pages = dict(PAGES)
+    for slug, meta, main_html in treatment_pages.all_pages(SITE_URL, treatments.problems()):
+        pages[slug] = {**meta, "main": main_html}
+    for slug, meta in pages.items():
         h = re.sub(r"<title>.*?</title>", f"<title>{meta['title']}</title>", head)
         h = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{meta["description"]}">', h)
         h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{meta["description"]}">', h)
         h = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{meta["title"]}">', h)
         h = h.replace(f'href="{SITE_URL}"', f'href="{SITE_URL}{slug}/"').replace(f'content="{SITE_URL}"', f'content="{SITE_URL}{slug}/"')
-        if "jsonld" in meta:
-            h = h.replace("</head>", '  <script type="application/ld+json">\n  ' + json.dumps(meta["jsonld"], indent=2).replace("\n", "\n  ") + "\n  </script>\n</head>")
-        main_html = (ROOT / "tools" / "pages" / f"{slug}.html").read_text(encoding="utf-8")
+        blocks = meta.get("jsonld") or []
+        for block in blocks if isinstance(blocks, list) else [blocks]:
+            h = h.replace("</head>", '  <script type="application/ld+json">\n  ' + json.dumps(block, indent=2, ensure_ascii=False).replace("\n", "\n  ") + "\n  </script>\n</head>")
+        main_html = meta.get("main") or (ROOT / "tools" / "pages" / f"{slug}.html").read_text(encoding="utf-8")
+        main_html = main_html.replace("{{problems}}", treatments.problems())
         main_html = expand_pics(main_html.replace("{{visit}}", visit).replace("{{planner}}", planner))
         page = relocate(apply_site(h + top + main_html + bottom), slug)
         out = ROOT / slug
