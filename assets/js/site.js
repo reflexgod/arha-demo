@@ -1,14 +1,15 @@
 /* ==========================================================================
    Arha Dental Care: site behaviour. Vanilla JS, no dependencies.
 
-   1. Header hairline       6. Before & After: colour nearest centre (touch)
-   2. Desktop dropdowns     7. Mobile action bar
-   3. Side menu             8. Map facade
-   4. Reveal on scroll      9. Reviews: crossfading quote
-   5. Hero video           10. Before & After: filter, case view, slider
-                           11. Accordions (FAQ)
-                           12. Live open status
-                           13. Plan your treatment
+   0. Site config, track()   6. Before & After: colour nearest centre (touch)
+   1. Header: hairline,      7. Call now: phone call bar, desktop popover,
+      compact on scroll         call_click tracking
+   2. Desktop dropdowns      8. Map facade
+   3. Side menu              9. Reviews: crossfading quote
+   4. Reveal on scroll      10. Before & After: filter, case view, slider
+   5. Hero video            11. Accordions (FAQ)
+                            12. Live open status
+                            13. Plan your treatment
    ========================================================================== */
 (() => {
   'use strict';
@@ -16,12 +17,27 @@
   const root = document.documentElement;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* 1. Header hairline: appears after 10px of scroll ----------------------- */
+  /* 0. Contact details and hours come from SITE in tools/pages.py, written into
+        every page as #site-config. track() sends an event to whichever analytics
+        is installed (Plausible or GA4), and nothing otherwise. ------------------ */
+  let SITE = {};
+  try { SITE = JSON.parse(document.getElementById('site-config').textContent); } catch (e) { /* no config: links still work */ }
+  const track = (name, props = {}) => {
+    if (window.plausible) window.plausible(name, { props });
+    else if (window.gtag) window.gtag('event', name, props);
+  };
+  window.arhaTrack = track;
+
+  /* 1. Header: hairline after 10px of scroll; past 120px it compacts to one slim
+        row (logo, Book, Call now, menu) and returns to full size above 40px. -- */
   const header = document.querySelector('[data-header]');
   if (header) {
     let ticking = false;
     const update = () => {
-      header.classList.toggle('is-scrolled', window.scrollY > 10);
+      const y = window.scrollY;
+      header.classList.toggle('is-scrolled', y > 10);
+      if (y > 120) header.classList.add('is-compact');
+      else if (y < 40) header.classList.remove('is-compact');
       ticking = false;
     };
     window.addEventListener('scroll', () => {
@@ -229,30 +245,89 @@
     }
   }
 
-  /* 7. Mobile action bar: after the hero, hidden while the footer shows --- */
-  const bar = document.querySelector('[data-mobile-bar]');
-  const footer = document.querySelector('[data-footer]');
-  if (bar && 'IntersectionObserver' in window) {
-    let pastHero = !hero;
-    let footerVisible = false;
-    const sync = () => {
-      const show = pastHero && !footerVisible;
-      bar.classList.toggle('is-visible', show);
-      bar.toggleAttribute('inert', !show);
+  /* 7. Call now. Every tel: link is tracked as call_click. On phones the call bar
+        shows the live status (12). On a laptop (fine pointer) the header's Call now
+        opens a popover instead of dialling: number, copy, QR code, WhatsApp. -- */
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href^="tel:"]');
+    if (link) track('call_click', { location: link.dataset.call || 'page' });
+  });
+
+  const pop = document.getElementById('call-pop');
+  const popTrigger = document.querySelector('[data-call="header"]');
+  const canDial = () => window.matchMedia('(pointer: coarse)').matches;
+  if (pop && popTrigger) {
+    popTrigger.setAttribute('aria-haspopup', 'dialog');
+    popTrigger.setAttribute('aria-controls', 'call-pop');
+    popTrigger.setAttribute('aria-expanded', 'false');
+    const number = pop.querySelector('.call-pop__number');
+    const copyButton = pop.querySelector('[data-copy-number]');
+    const copyStatus = pop.querySelector('[data-copy-status]');
+    const riyaButton = pop.querySelector('[data-ask-riya]');
+    let copyTimer = 0;
+
+    const onKey = (e) => { if (e.key === 'Escape') closePop(true); };
+    const onOutside = (e) => { if (!pop.contains(e.target) && !popTrigger.contains(e.target)) closePop(false); };
+    const openPop = () => {
+      window.dispatchEvent(new Event('arha:status')); // a fresh open/closed line
+      pop.hidden = false;
+      requestAnimationFrame(() => pop.classList.add('is-open'));
+      popTrigger.setAttribute('aria-expanded', 'true');
+      document.addEventListener('keydown', onKey);
+      document.addEventListener('click', onOutside);
+      number.focus({ preventScroll: true });
+      track('call_popover_open');
     };
-    if (hero) {
-      new IntersectionObserver(([e]) => {
-        pastHero = !e.isIntersecting;
-        sync();
-      }).observe(hero);
+    function closePop(returnFocus) {
+      if (pop.hidden) return;
+      pop.classList.remove('is-open');
+      popTrigger.setAttribute('aria-expanded', 'false');
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('click', onOutside);
+      setTimeout(() => { if (!pop.classList.contains('is-open')) pop.hidden = true; }, reduceMotion ? 0 : 200);
+      if (returnFocus) popTrigger.focus({ preventScroll: true });
     }
-    if (footer) {
-      new IntersectionObserver(([e]) => {
-        footerVisible = e.isIntersecting;
-        sync();
-      }).observe(footer);
-    }
-    sync();
+    popTrigger.addEventListener('click', (e) => {
+      if (canDial()) return; // phones and tablets dial straight away
+      e.preventDefault();
+      if (pop.hidden) openPop();
+      else closePop(false);
+    });
+    pop.querySelector('[data-call-pop-close]').addEventListener('click', () => closePop(true));
+    // Tabbing out of the popover closes it
+    pop.addEventListener('focusout', (e) => {
+      if (e.relatedTarget && !pop.contains(e.relatedTarget) && e.relatedTarget !== popTrigger) closePop(false);
+    });
+    // The header changes size between full and compact: close rather than float in the wrong place
+    let wasCompact = header.classList.contains('is-compact');
+    window.addEventListener('scroll', () => {
+      const compact = header.classList.contains('is-compact');
+      if (compact !== wasCompact) closePop(false);
+      wasCompact = compact;
+    }, { passive: true });
+
+    copyButton.addEventListener('click', async () => {
+      const text = SITE.phone || number.textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        copyButton.textContent = 'Copied';
+        copyStatus.textContent = `Number copied: ${text}`;
+      } catch (err) {
+        // Clipboard blocked: select the number so it can be copied by hand
+        const range = document.createRange();
+        range.selectNodeContents(number);
+        getSelection().removeAllRanges();
+        getSelection().addRange(range);
+        copyStatus.textContent = 'Number selected. Press Control C or Command C to copy.';
+      }
+      track('copy_number');
+      clearTimeout(copyTimer);
+      copyTimer = setTimeout(() => { copyButton.textContent = 'Copy number'; copyStatus.textContent = ''; }, 2500);
+    });
+    riyaButton.addEventListener('click', () => {
+      closePop(false);
+      if (window.arhaRiya) window.arhaRiya.open();
+    });
   }
 
   /* 8. Map facade: Google Maps only loads after a click (privacy + speed) - */
@@ -453,8 +528,8 @@
     });
   });
 
-  /* 11b. Google reviews link: Arha's Google Business Profile. Leave empty to keep the link as "#". */
-  const GOOGLE_REVIEWS_URL = 'https://share.google/PzhwgJ9QJMErZnk9R';
+  /* 11b. Google reviews link: Arha's Google Business Profile (SITE in tools/pages.py). Empty keeps "#". */
+  const GOOGLE_REVIEWS_URL = SITE.googleReviewsUrl || '';
   if (GOOGLE_REVIEWS_URL) {
     document.querySelectorAll('[data-google-reviews]').forEach((link) => {
       link.href = GOOGLE_REVIEWS_URL;
@@ -463,14 +538,16 @@
     });
   }
 
-  /* 12. Live open status (India time). Hours live in this one config. ------- */
+  /* 12. Live open status (India time). Hours come from SITE in tools/pages.py.
+         Feeds the Visit and menu status lines, the phone call bar and the popover. */
   const CLINIC_HOURS = {
-    timeZone: 'Asia/Kolkata',
-    // 0 = Sunday ... 6 = Saturday; null = closed. Confirm with the clinic (Google shows 9:00 AM).
-    days: [null, ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30'], ['09:30', '18:30']],
+    timeZone: SITE.timeZone || 'Asia/Kolkata',
+    days: SITE.hours || [], // 0 = Sunday ... 6 = Saturday; null = closed
   };
   const statusEls = document.querySelectorAll('[data-open-status]');
-  if (statusEls.length) {
+  const barStatus = document.querySelector('[data-call-status]');
+  const popStatus = document.querySelector('[data-call-pop-status]');
+  if (CLINIC_HOURS.days.length === 7) {
     const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const toMinutes = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
     const label = (hhmm) => {
@@ -483,31 +560,46 @@
       }).formatToParts(new Date()).map((p) => [p.type, p.value]));
       return { day: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(parts.weekday), minutes: Number(parts.hour) * 60 + Number(parts.minute) };
     };
-    const describe = () => {
+    // Open: { open, until }. Closed: { opens, when }, where when is '', 'tomorrow' or a day name
+    const status = () => {
       const { day, minutes } = nowInClinic();
       const today = CLINIC_HOURS.days[day];
-      if (today && minutes >= toMinutes(today[0]) && minutes < toMinutes(today[1])) {
-        return { open: true, text: `Open now · until ${label(today[1])}` };
-      }
-      if (today && minutes < toMinutes(today[0])) return { open: false, text: `Closed · Opens today at ${label(today[0])}` };
+      if (today && minutes >= toMinutes(today[0]) && minutes < toMinutes(today[1])) return { open: true, until: label(today[1]) };
+      if (today && minutes < toMinutes(today[0])) return { open: false, opens: label(today[0]), when: '' };
       for (let i = 1; i <= 7; i += 1) {
         const next = CLINIC_HOURS.days[(day + i) % 7];
-        if (next) return { open: false, text: `Closed · Opens ${i === 1 ? 'tomorrow' : DAY_NAMES[(day + i) % 7]} at ${label(next[0])}` };
+        if (next) return { open: false, opens: label(next[0]), when: i === 1 ? 'tomorrow' : DAY_NAMES[(day + i) % 7] };
       }
-      return { open: false, text: 'Closed' };
+      return { open: false, opens: '', when: '' };
     };
+    const closedNote = document.querySelector('[data-call-pop-closed]');
+    const riyaOption = document.querySelector('[data-ask-riya]');
     const render = () => {
-      const s = describe();
-      statusEls.forEach((el) => { el.textContent = s.text; el.classList.toggle('is-open', s.open); });
+      const s = status();
+      const text = s.open ? `Open now · until ${s.until}` : s.opens ? `Closed · Opens ${s.when || 'today'} at ${s.opens}` : 'Closed';
+      statusEls.forEach((el) => { el.textContent = text; el.classList.toggle('is-open', s.open); });
+      // Phone call bar: "Open until 6:30 PM" / "Opens 9:30 AM" / "Opens tomorrow 9:30 AM" / "Opens Mon 9:30 AM"
+      if (barStatus) {
+        const when = s.when === 'tomorrow' ? 'tomorrow ' : s.when ? `${s.when.slice(0, 3)} ` : '';
+        barStatus.textContent = s.open ? `Open until ${s.until}` : `Opens ${when}${s.opens}`;
+      }
+      // Popover: when closed, it also offers WhatsApp (always there) and Riya
+      if (popStatus) {
+        popStatus.textContent = s.open ? `Open now · until ${s.until}` : `Closed now · opens ${s.when ? `${s.when} ` : ''}${s.opens}`;
+        popStatus.classList.toggle('is-open', s.open);
+        if (closedNote) closedNote.hidden = s.open;
+        if (riyaOption) riyaOption.hidden = s.open || !window.arhaRiya;
+      }
     };
     render();
     setInterval(render, 60000);
+    window.addEventListener('arha:status', render);
   }
 
   /* 13. Plan your treatment (visiting patients): one question at a time, nothing
          stored or submitted; the result opens WhatsApp with the plan written in. */
   const PLANNER = {
-    whatsapp: '919975507714',
+    whatsapp: SITE.whatsapp || '',
     // SAMPLE timings until Dr. Nikhil confirms real ones (see notes/NEXT-SESSION.md)
     treatments: {
       implants: { name: 'Dental implants', detail: 'Typically 2 visits, about 5–7 days each.' },

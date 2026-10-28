@@ -2,7 +2,7 @@
    Arha Dental Care: site styles (one stylesheet for every page)
 
     1. Fonts            6. Calls to action      11. Footer
-    2. Tokens           7. Header + dropdowns   12. Mobile action bar
+    2. Tokens           7. Header + dropdowns   12. Call bar (phones)
     3. Base             8. Side menu            13. Motion
     4. Layout + media   9. Hero                 14. Reduced motion
     5. Type            10. Home sections
@@ -74,7 +74,7 @@
 
   --max: 1240px;
   --gutter: 40px;
-  --header-h: 86px;
+  --header-h: 104px;
   --section-y: clamp(72px, 10vw, 120px);
 
   --t-link: 100ms ease-in-out;   /* links, CTAs, menu items */
@@ -196,6 +196,17 @@ address {
 ::selection {
   background: var(--stone);
   color: var(--ink);
+}
+
+/* The hidden attribute always wins, even over components that set display */
+[hidden] {
+  display: none !important;
+}
+
+/* Phone numbers never break across lines */
+[data-show="phone"],
+[data-show="emergency"] {
+  white-space: nowrap;
 }
 
 .visually-hidden {
@@ -357,7 +368,11 @@ p {
   border-color: var(--bronze);
 }
 
-/* 7. Header + dropdowns */
+/* 7. Header + dropdowns
+   Desktop: logo (wordmark + seal) on the left; on the right a utility row over the
+   menu and two buttons. Scrolled past 120px it compacts to one slim row. Tablets keep
+   the utility row and buttons with the side menu; phones show logo, Book and menu
+   (Call now is the bar at the bottom). */
 .site-header {
   position: fixed;
   inset: 0 0 auto;
@@ -365,7 +380,7 @@ p {
   height: var(--header-h);
   background: var(--paper);
   border-bottom: 1px solid transparent;
-  transition: border-color 200ms ease-in-out;
+  transition: border-color 200ms ease-in-out, height 250ms ease;
 }
 
 /* 1px hairline only once the page has scrolled */
@@ -374,32 +389,90 @@ p {
 }
 
 .site-header__inner {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
+  gap: 32px;
   height: 100%;
   padding-inline: var(--gutter);
 }
 
 .brand {
-  grid-column: 1;
-  justify-self: start;
+  flex: none;
+  display: block;
 }
 
 .brand img {
-  width: 150px;
+  width: 204px; /* the wordmark part is 150px; the seal sits behind its right end */
+  transition: width 250ms ease;
+}
+
+.site-header__main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  margin-left: auto;
+  height: 100%;
+}
+
+.site-header__row {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Utility row: phone, email, WhatsApp, emergencies */
+.utility {
+  display: none;
+  align-items: center;
+  gap: 26px;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: .02em;
+  transition: opacity 200ms ease, height 250ms ease;
+}
+
+.utility a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 32px;
+  color: var(--muted);
+  transition: color var(--t-link);
+}
+
+.utility a:hover,
+.utility a:focus-visible {
+  color: var(--bronze);
+}
+
+.utility .utility__urgent {
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.icon {
+  flex: none;
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
 }
 
 .nav {
   display: none;
-  grid-column: 2;
 }
 
 .nav__list {
   display: flex;
   align-items: stretch;
-  gap: 36px;
-  height: var(--header-h);
+  gap: 30px;
+  height: 64px;
 }
 
 .nav__item {
@@ -408,15 +481,19 @@ p {
   align-items: center;
 }
 
-.nav__trigger {
+.nav__trigger,
+.nav__link {
   padding: 8px 0;
-  font: 600 15px/1.2 var(--font-body);
+  font: 600 14px/1.2 var(--font-body);
   letter-spacing: .08em;
   text-transform: uppercase;
+  white-space: nowrap;
   transition: color var(--t-link);
 }
 
 .nav__trigger:hover,
+.nav__link:hover,
+.nav__link:focus-visible,
 .nav__item.is-open > .nav__trigger {
   color: var(--bronze);
 }
@@ -430,7 +507,7 @@ p {
   background: var(--charcoal);
   opacity: 0;
   visibility: hidden;
-  transition: opacity 400ms ease, visibility 0s linear 400ms;
+  transition: opacity 250ms ease, visibility 0s linear 250ms;
 }
 
 .nav__item.is-open > .dropdown,
@@ -438,7 +515,7 @@ html:not(.js) .nav__item:hover > .dropdown,
 html:not(.js) .nav__item:focus-within > .dropdown {
   opacity: 1;
   visibility: visible;
-  transition: opacity 400ms ease, visibility 0s;
+  transition: opacity 250ms ease, visibility 0s;
 }
 
 .dropdown a {
@@ -457,16 +534,129 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   color: var(--bronze);
 }
 
-.header-actions {
-  grid-column: 3;
-  justify-self: end;
-  display: flex;
-  align-items: center;
-  gap: 28px;
+/* Treatments: a full-width panel under the header, one column per group */
+.nav__item--mega {
+  position: static;
 }
 
-.header-actions .cta {
+.dropdown--mega {
+  left: 0;
+  right: 0;
+  min-width: 0;
+  padding: 44px var(--gutter) 40px;
+}
+
+.mega {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) minmax(220px, .8fr);
+  gap: 40px;
+  max-width: var(--max);
+  margin-inline: auto;
+}
+
+.mega__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: none;
+  margin-bottom: 14px;
+  color: var(--paper-66);
+  font: 700 13px/1.2 var(--font-head);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 6px 2px;
+  border: 1px solid currentColor;
+  color: var(--bronze);
+  font: 700 10px/1 var(--font-head);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.dropdown--mega ul a {
+  padding: 6px 0;
+  color: var(--paper-82);
+  font: 400 16px/1.4 var(--font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  white-space: normal;
+}
+
+.mega__foot {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 22px;
+  padding-left: 40px;
+  border-left: 1px solid var(--paper-16);
+}
+
+.mega__foot .cta {
+  color: var(--paper);
+}
+
+.dropdown--mega .mega__urgent {
+  padding: 0;
+  color: var(--paper-82);
+  font: 400 15px/1.5 var(--font-body);
+  letter-spacing: .01em;
+  text-transform: none;
+  white-space: normal;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Header buttons: the only boxed buttons on the site. Square, 1px, no shadow. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid var(--charcoal);
+  font: 600 13px/1 var(--font-body);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color var(--t-link), border-color var(--t-link), background-color var(--t-link);
+}
+
+.btn--line:hover,
+.btn--line:focus-visible {
+  color: var(--bronze);
+  border-color: var(--bronze);
+}
+
+.btn--solid {
+  background: var(--charcoal);
+  color: var(--paper);
+}
+
+.btn--solid:hover,
+.btn--solid:focus-visible,
+.btn--solid[aria-expanded="true"] {
+  color: var(--bronze);
+}
+
+.btn__short {
   display: none;
+}
+
+.arrow {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
 }
 
 .menu-toggle {
@@ -490,16 +680,154 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   color: var(--bronze);
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .header-actions .cta { display: inline-block; }
-}
-
-@media (min-width: 1024px) {
-  .nav { display: block; }
-}
-
+/* Phones: logo, Book, menu */
 @media (max-width: 767px) {
-  .brand img { width: 118px; }
+  .brand img { width: 160px; }
+  .header-actions .btn--solid,
+  .btn__long { display: none; }
+  .btn__short { display: inline; }
+  .header-actions .btn { min-height: 40px; padding: 0 12px; }
+}
+
+@media (max-width: 359px) {
+  .brand img { width: 118px; } /* the wordmark alone: the seal would crowd the smallest phones */
+}
+
+/* Tablets and up: utility row over the buttons */
+@media (min-width: 768px) {
+  .site-header__main { justify-content: flex-end; gap: 2px; padding-bottom: 12px; }
+  .utility { display: flex; height: 32px; }
+}
+
+/* Desktop: the full menu sits beside the buttons, so no hamburger */
+@media (min-width: 1280px) {
+  .site-header__main { padding-bottom: 0; }
+  .nav { display: block; }
+  .site-header:not(.is-compact) .menu-toggle { display: none; }
+}
+
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .site-header__inner { gap: 24px; }
+  .site-header__row { gap: 28px; }
+  .nav__list { gap: 24px; }
+  .header-actions .btn__long { display: none; }
+  .header-actions .btn__short { display: inline; }
+}
+
+/* Scrolled: one slim row (logo, Book, Call now, menu) */
+@media (min-width: 768px) {
+  .site-header.is-compact { height: 72px; }
+  .is-compact .brand img { width: 170px; }
+  .is-compact .site-header__main { justify-content: center; padding-bottom: 0; }
+  .is-compact .utility { height: 0; overflow: hidden; opacity: 0; visibility: hidden; }
+  .is-compact .nav { display: none; }
+}
+
+/* Desktop Call now: number, copy, QR, WhatsApp (charcoal, like the dropdowns) */
+.call-pop {
+  position: absolute;
+  top: 100%;
+  right: var(--gutter);
+  z-index: 2;
+  width: 340px;
+  padding: 28px 28px 24px;
+  background: var(--charcoal);
+  color: var(--paper);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+.call-pop.is-open {
+  opacity: 1;
+  transform: none;
+}
+
+.call-pop__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 44px;
+  height: 44px;
+  transition: color var(--t-link);
+}
+
+.call-pop__close::before,
+.call-pop__close::after {
+  content: "";
+  position: absolute;
+  top: 21px;
+  left: 14px;
+  width: 16px;
+  height: 1.5px;
+  background: currentColor;
+  transform: rotate(45deg);
+}
+
+.call-pop__close::after { transform: rotate(-45deg); }
+.call-pop__close:hover { color: var(--bronze); }
+
+.call-pop__title {
+  color: var(--paper-66);
+  font: 600 12px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.call-pop__number {
+  display: inline-block;
+  margin-top: 10px;
+  font: 700 30px/1.15 var(--font-head);
+  letter-spacing: .06em;
+  white-space: nowrap;
+  transition: color var(--t-link);
+}
+
+.call-pop__number:hover { color: var(--bronze); }
+
+.call-pop .open-status {
+  margin-top: 10px;
+  color: var(--paper-66);
+}
+
+.call-pop .open-status.is-open { color: var(--paper); }
+
+.call-pop__scan {
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  align-items: center;
+  gap: 18px;
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid var(--paper-16);
+}
+
+.call-pop__scan img {
+  width: 112px;
+  height: 112px;
+  image-rendering: pixelated;
+}
+
+.call-pop__scan p,
+.call-pop__closed {
+  color: var(--paper-82);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.call-pop__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+  margin-top: 22px;
+}
+
+.call-pop__actions .cta {
+  font-size: 13px;
+}
+
+.call-pop__closed {
+  margin-top: 16px;
 }
 
 /* 8. Side menu (hamburger): charcoal panel from the right */
@@ -665,6 +993,25 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 .acc__panel a:hover,
 .acc__panel a:focus-visible {
   color: var(--bronze);
+}
+
+/* Single links between the accordion groups, sized like the group titles */
+.acc__link {
+  display: block;
+  padding: 20px 0;
+  font: 600 16px/1.2 var(--font-body);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  transition: color var(--t-link);
+}
+
+.acc__link:hover,
+.acc__link:focus-visible {
+  color: var(--bronze);
+}
+
+.acc__link--urgent {
+  color: var(--paper-82);
 }
 
 .side-menu__foot {
@@ -2015,8 +2362,204 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   .paths { grid-template-columns: 1fr 1fr; gap: 40px; }
 }
 
+/* Emergencies: call first (charcoal), hospital warning (stone), then first aid */
+.urgent {
+  padding-block: clamp(56px, 8vw, 104px);
+  background: var(--charcoal);
+  color: var(--paper);
+}
+
+.urgent__eyebrow {
+  color: var(--paper-66);
+  font: 600 12px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.urgent h1 {
+  margin-top: 14px;
+}
+
+.urgent__number {
+  display: inline-block;
+  margin-top: 22px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--paper-66);
+  font: 700 clamp(34px, 6vw, 56px)/1.1 var(--font-head);
+  letter-spacing: .05em;
+  white-space: nowrap;
+  transition: color var(--t-link), border-color var(--t-link);
+}
+
+.urgent__number:hover,
+.urgent__number:focus-visible {
+  color: var(--bronze);
+  border-color: var(--bronze);
+}
+
+.urgent__lede {
+  margin-top: 22px;
+  color: var(--paper-82);
+  font-size: 20px;
+}
+
+.urgent .open-status {
+  margin-top: 16px;
+  color: var(--paper-66);
+}
+
+.urgent .open-status.is-open { color: var(--paper); }
+
+.urgent__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  margin-top: 32px;
+}
+
+.hospital__inner {
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.hospital__list {
+  margin-top: 22px;
+}
+
+.hospital__list li {
+  padding: 12px 0;
+  border-top: 1px solid var(--hairline-strong);
+}
+
+.hospital__note {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--hairline-strong);
+  font-weight: 600;
+}
+
+.hospital__note a {
+  border-bottom: 1px solid currentColor;
+}
+
+.counts {
+  max-width: 880px;
+  margin-inline: auto;
+}
+
+.counts li + li {
+  border-top: 1px solid var(--hairline);
+}
+
+.counts a {
+  display: grid;
+  gap: 4px 32px;
+  padding: 20px 0;
+  transition: color var(--t-link);
+}
+
+.counts a:hover .counts__name,
+.counts a:focus-visible .counts__name {
+  color: var(--bronze);
+}
+
+.counts__name {
+  font: 700 17px/1.35 var(--font-head);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  transition: color var(--t-link);
+}
+
+.counts__line {
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .counts a { grid-template-columns: 300px 1fr; align-items: baseline; }
+}
+
+.aid {
+  display: grid;
+  gap: 56px 64px;
+  max-width: 1080px;
+  margin-inline: auto;
+}
+
+.aid__item {
+  padding-top: 26px;
+  border-top: 1px solid var(--hairline-strong);
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.aid__steps {
+  margin-top: 18px;
+  counter-reset: step;
+}
+
+.aid__steps li {
+  position: relative;
+  padding: 6px 0 6px 40px;
+  counter-increment: step;
+}
+
+.aid__steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: 6px;
+  left: 0;
+  color: var(--muted);
+  font: 700 14px/1.75 var(--font-head);
+  letter-spacing: .08em;
+}
+
+.aid__dont {
+  margin-top: 14px;
+  padding-left: 40px;
+  font-weight: 600;
+}
+
+.aid__then {
+  margin-top: 12px;
+  padding-left: 40px;
+  color: var(--muted);
+}
+
+.aid__then .cta {
+  margin-top: 6px;
+  color: var(--ink);
+}
+
+.aid__who {
+  margin-top: 18px;
+  font: 600 12px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+.aid__who + .aid__steps {
+  margin-top: 8px;
+}
+
+.aid__pair {
+  display: grid;
+  gap: 8px 64px;
+}
+
+.aid__note {
+  max-width: 1080px;
+  margin: 56px auto 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+@media (min-width: 900px) {
+  .aid { grid-template-columns: 1fr 1fr; }
+  .aid__item--wide { grid-column: 1 / -1; }
+  .aid__pair { grid-template-columns: 1fr 1fr; }
+}
+
 /* Riya, the AI receptionist ------------------------------------------------- */
-/* Floating UI order: launcher (58) > bubble (57) > chat window (56) > mobile bar (40). Modals (side menu,
+/* Floating UI order: launcher (58) > bubble (57) > chat window (56) > call bar (40). Modals (side menu,
    case view) sit above all of it, and the launcher hides while one locks the page. */
 .riya-launcher {
   position: fixed;
@@ -2356,9 +2899,9 @@ html.is-locked .riya-launcher { visibility: hidden; }
 @media (max-width: 767px) {
   .riya-launcher {
     right: 12px;
-    bottom: calc(72px + env(safe-area-inset-bottom)); /* clear of the Call / Book bar */
+    bottom: calc(72px + env(safe-area-inset-bottom)); /* above the call bar */
   }
-  /* Compact bubble above the launcher, clear of the Call / Book bar */
+  /* Compact bubble above the launcher, clear of the call bar */
   .riya-bubble {
     right: 12px;
     bottom: calc(140px + env(safe-area-inset-bottom));
@@ -2663,7 +3206,7 @@ html.is-locked .riya-launcher { visibility: hidden; }
 }
 
 .footer__logo {
-  width: 190px;
+  width: 258px; /* the wordmark part is 190px */
   margin: 24px auto 0;
 }
 
@@ -2727,51 +3270,74 @@ html.is-locked .riya-launcher { visibility: hidden; }
   .footer__cols { grid-template-columns: 1.3fr 1fr 1fr 1fr; }
 }
 
-/* 12. Mobile action bar (phones only, after the hero, hidden over the footer) */
-.mobile-bar {
+/* 12. Call bar (phones): one tap to reception, on every page from the first paint.
+   The whole bar is a single tel: link. Label in D-DIN with a 1px underline that
+   extends on press and focus; the live status after a thin rule. It steps aside
+   only while Riya's chat is open. */
+.call-bar {
   display: none;
 }
 
 @media (max-width: 767px) {
-  .mobile-bar {
+  body {
+    padding-bottom: calc(56px + env(safe-area-inset-bottom)); /* the footer ends above the bar */
+  }
+
+  .call-bar {
     position: fixed;
     inset: auto 0 0;
     z-index: 40;
-    display: grid;
-    grid-template-columns: 1fr 1px 1.7fr;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
     height: calc(56px + env(safe-area-inset-bottom));
-    padding-bottom: env(safe-area-inset-bottom);
+    padding: 0 var(--gutter) env(safe-area-inset-bottom);
     background: var(--charcoal);
     color: var(--paper);
-    transform: translateY(100%);
-    transition: transform 280ms var(--ease-panel);
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .mobile-bar.is-visible {
-    transform: none;
-  }
-
-  .mobile-bar a {
-    display: grid;
-    place-items: center;
-    font: 600 14px/1 var(--font-body);
-    letter-spacing: .1em;
+  .call-bar__label {
+    position: relative;
+    padding: 6px 0;
+    font: 700 15px/1 var(--font-head);
+    letter-spacing: .14em;
     text-transform: uppercase;
-    transition: color var(--t-link);
   }
 
-  .mobile-bar a:hover,
-  .mobile-bar a:focus-visible {
-    color: var(--bronze);
+  .call-bar__label::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 1px;
+    background: currentColor;
+    transition: left 200ms ease, right 200ms ease;
   }
 
-  .mobile-bar a:focus-visible {
-    outline-offset: -6px;
+  .call-bar:active .call-bar__label::after,
+  .call-bar:focus-visible .call-bar__label::after {
+    left: -10px;
+    right: -10px;
   }
 
-  .mobile-bar__rule {
-    margin-block: 16px;
-    background: var(--paper-16);
+  .call-bar:focus-visible {
+    outline: 2px solid var(--bronze);
+    outline-offset: -5px;
+  }
+
+  .call-bar__status {
+    padding-left: 16px;
+    border-left: 1px solid var(--paper-16);
+    color: var(--paper-66);
+    font: 600 12px/1.6 var(--font-body);
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  html.riya-open .call-bar {
+    visibility: hidden;
   }
 }
 

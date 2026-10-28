@@ -104,6 +104,102 @@ def raster(svg_text, px):
     return Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGB")
 
 
+# Seal: a thin bronze ring with tracked D-DIN caps around the icon and "ESTD 1980", Arha's own
+# geometry. Letters are converted to outlines so the seal stays exact inside an <img> (no web font).
+SEAL_TEXT = "PEDDAR ROAD · MUMBAI · SPECIALIST DENTISTRY · "
+SEAL_YEAR = "ESTD 1980"  # the demo's "Since 1980"; confirm it is the founding year (notes/TO-CONFIRM.md)
+SEAL = 200  # viewBox side
+
+
+def glyph_runs(font, text, size, tracking):
+    """[(glyph name, advance in px)] for text at size px, plus tracking (em) after every glyph."""
+    cmap, hmtx, upm = font.getBestCmap(), font["hmtx"], font["head"].unitsPerEm
+    return [(cmap[ord(ch)], hmtx[cmap[ord(ch)]][0] * size / upm + tracking * size) for ch in text]
+
+
+def glyph_path(font, name, transform):
+    from fontTools.pens.svgPathPen import SVGPathPen
+    from fontTools.pens.transformPen import TransformPen
+    gs = font.getGlyphSet()
+    pen = SVGPathPen(gs, ntos=fmt)
+    gs[name].draw(TransformPen(pen, transform))
+    return pen.getCommands()
+
+
+def seal_svg(colour, title="Arha Dental Care, Peddar Road, Mumbai, established 1980"):
+    import math
+    from fontTools.ttLib import TTFont
+    font = TTFont(ROOT / "assets" / "fonts" / "d-din-bold.woff2")
+    upm, cap = font["head"].unitsPerEm, font["OS/2"].sCapHeight
+    c, r_ring, track = SEAL / 2, SEAL / 2 - 1, .16
+    top = r_ring - 7  # the letters' cap line sits 7 units inside the ring
+    # Size the ring text so it closes exactly on itself: sum of advances = circumference at the baseline
+    size = 10.0
+    for _ in range(40):
+        r_base = top - cap * size / upm
+        total = sum(a for _, a in glyph_runs(font, SEAL_TEXT, size, track))
+        size *= 2 * math.pi * r_base / total
+    r_base = top - cap * size / upm
+    k = size / upm
+    paths, pos = [], 0.0
+    for (name, adv), ch in zip(glyph_runs(font, SEAL_TEXT, size, track), SEAL_TEXT):
+        theta = (pos + (adv - track * size) / 2) / r_base  # glyph centre, clockwise from the top
+        pos += adv
+        if ch == " ":
+            continue
+        gw = font["hmtx"][name][0] * k
+        cs, sn = math.cos(theta), math.sin(theta)
+        # font (x, y up) -> upright glyph centred on 0 at the baseline -> out to r_base -> rotate by theta
+        transform = (k * cs, k * sn, k * sn, -k * cs,
+                     c - gw / 2 * cs + r_base * sn, c - gw / 2 * sn - r_base * cs)
+        paths.append(glyph_path(font, name, transform))
+    r_inner = r_base - 6
+    # Centre: the icon, with "ESTD 1980" beneath it
+    iw = 62
+    ik = iw / icon_box.width
+    ih = icon_box.height * ik
+    iy = c - ih / 2 - 9
+    icon_d = "".join(d for d, _ in icon)
+    ysize = 10.5
+    yk = ysize / upm
+    yruns = glyph_runs(font, SEAL_YEAR, ysize, .2)
+    ywidth = sum(a for _, a in yruns) - .2 * ysize
+    x, ybase = c - ywidth / 2, iy + ih + 8 + cap * yk
+    for (name, adv), ch in zip(yruns, SEAL_YEAR):
+        if ch != " ":
+            paths.append(glyph_path(font, name, (yk, 0, 0, -yk, x, ybase)))
+        x += adv
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {SEAL} {SEAL}" role="img" aria-label="{title}">'
+            f"<title>{title}</title>"
+            f'<g fill="none" stroke="{colour}"><circle cx="{fmt(c)}" cy="{fmt(c)}" r="{fmt(r_ring)}" stroke-width="1.5"/>'
+            f'<circle cx="{fmt(c)}" cy="{fmt(c)}" r="{fmt(r_inner)}" stroke-width=".75"/></g>'
+            f'<g fill="{colour}"><path d="{"".join(paths)}"/>'
+            f'<path transform="translate({fmt(c - iw / 2)} {fmt(iy)}) scale({ik:.5f})" d="{icon_d}"/></g></svg>\n')
+
+
+def lockup_svg(word_fill, halo, title="Arha Dental Care"):
+    """Wordmark on top, the seal behind its right end. A halo in the background colour keeps
+    every letter clean where it crosses the seal's lines."""
+    seal = seal_svg(BRONZE)
+    inner = seal[seal.index("</title>") + len("</title>"):seal.rindex("</svg>")]
+    w, h = word_box.width, word_box.height
+    d = h * 1.36                       # seal diameter: taller than the wordmark, as on a stamp
+    cx, cy = w + d * .3, h * .5        # only its ring passes behind the final A; the emblem stays clear
+    x0, y0 = 0, min(0, cy - d / 2)
+    x1, y1 = max(w, cx + d / 2), max(h, cy + d / 2)
+    s = d / SEAL
+    word_d = "".join(f'<path d="{p}"/>' for p, _ in word)
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{fmt(x0)} {fmt(y0)} {fmt(x1 - x0)} {fmt(y1 - y0)}" role="img" aria-label="{title}">'
+            f"<title>{title}</title>"
+            f'<g transform="translate({fmt(cx - d / 2)} {fmt(cy - d / 2)}) scale({s:.5f})">{inner}</g>'
+            f'<g fill="{halo}" stroke="{halo}" stroke-width="44" stroke-linejoin="round">{word_d}</g>'
+            f'<g fill="{word_fill}">{word_d}</g></svg>\n')
+
+
+(OUT / "logo-seal-bronze.svg").write_text(seal_svg(BRONZE), encoding="utf-8")
+(OUT / "logo-lockup-dark.svg").write_text(lockup_svg(CHARCOAL, PAPER), encoding="utf-8")
+(OUT / "logo-lockup-light.svg").write_text(lockup_svg(PAPER, CHARCOAL), encoding="utf-8")
+
 raster(fav, 180).save(ROOT / "apple-touch-icon.png", optimize=True)
 big = raster(fav, 256)
 big.save(ROOT / "favicon.ico", sizes=[(16, 16), (32, 32), (48, 48)])

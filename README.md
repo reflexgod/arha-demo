@@ -29,5 +29,8 @@ python -m venv .venv && .venv/Scripts/python -m pip install -r tools/requirement
 .venv/Scripts/python -I tools/pages.py && .venv/Scripts/python -I tools/cases_markup.py
 ```
 
+Contact details, opening hours and the Riya webhook live in one place, `SITE` in `tools/pages.py`.
+Change them there and run the two commands above; every page, link, the call QR code and `site.js` follow.
+
 Fonts: D-DIN, Jost and Cormorant Garamond (SIL Open Font License, licences in `assets/fonts`).
 Demo imagery includes licensed stock photography and video (Unsplash, Pexels).
