@@ -894,7 +894,7 @@ def technology_page(site_url):
         index.append(f'<li><a href="technology/#group-{key}" data-spy="group-{key}">{name}</a></li>')
         blocks.append(f"""
           <details class="tgroup" id="group-{key}" open>
-            <summary><span class="tgroup__name">{name}</span><span class="tgroup__sub">{sub}</span><span class="plus" aria-hidden="true"></span></summary>
+            <summary><h2 class="tgroup__name">{name}</h2><span class="tgroup__sub">{sub}</span><span class="plus" aria-hidden="true"></span></summary>
             <div class="tgroup__items">{"".join(cards)}
             </div>
           </details>""")

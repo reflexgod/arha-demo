@@ -141,7 +141,7 @@ def main():
         s = re.sub(r"<!-- cases:start(?: only=([\w-]+))?.*?<!-- cases:end -->",
                    lambda m: render(prefix, featured, m.group(1)), s, flags=re.S)
         s = re.sub(r"<!-- filters:start -->.*?<!-- filters:end -->", lambda m: filters(), s, flags=re.S)
-        page.write_text(s, encoding="utf-8")
+        page.write_text(s, encoding="utf-8", newline="\n")
         print("updated", page.relative_to(ROOT))
 
 

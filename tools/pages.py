@@ -227,7 +227,7 @@ def main():
     original = index.read_text(encoding="utf-8")
     home = apply_site(menus(original))
     if home != original:
-        index.write_text(home, encoding="utf-8")
+        index.write_text(home, encoding="utf-8", newline="\n")
         print("updated index.html (contact details, menus)")
     call_qr()
 
@@ -258,7 +258,7 @@ def main():
         page = relocate(apply_site(h + top + main_html + bottom), slug)
         out = ROOT / slug
         out.mkdir(parents=True, exist_ok=True)
-        (out / "index.html").write_text(page, encoding="utf-8")
+        (out / "index.html").write_text(page, encoding="utf-8", newline="\n")
         print(f"wrote {slug}/index.html  {len(page) // 1024} KB")
 
 

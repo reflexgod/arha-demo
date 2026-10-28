@@ -83,6 +83,16 @@
   --ease-panel: cubic-bezier(.2, .6, .2, 1); /* side menu slide */
 }
 
+/* On stone, muted text is ink at 74% (about 5.6:1); #6B6766 there is only 4.37:1 */
+.section--stone,
+.band--stone,
+.page-hero--plain,
+.timing,
+.stat,
+.portrait-ph {
+  --muted: rgba(37, 36, 36, .74);
+}
+
 @media (max-width: 767px) {
   :root {
     --gutter: 20px;
@@ -2227,8 +2237,10 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   border-bottom-color: var(--bronze);
 }
 
+.tech__tab[aria-selected="true"] .tech__num { color: var(--paper); }
+
 .tech__num {
-  color: var(--bronze);
+  color: var(--paper-66); /* bronze on charcoal is 3.9:1, too low at 13px */
   font: 700 13px/1 var(--font-head);
   letter-spacing: .08em;
 }
@@ -3089,7 +3101,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 }
 
 .stepper__num {
-  color: var(--bronze);
+  color: var(--ink);
   font: 700 13px/1 var(--font-head);
   letter-spacing: .08em;
 }
@@ -3132,7 +3144,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   .itabs--steps .itabs__tab { flex: 1; justify-content: flex-start; border: 0; padding: 8px 12px 8px 0; background: none; color: var(--muted); white-space: normal; }
   .itabs--steps .itabs__tab:hover { color: var(--ink); }
   .itabs--steps .itabs__tab[aria-selected="true"] { background: none; color: var(--ink); font-weight: 600; }
-  .itabs--steps .itabs__tab[aria-selected="true"] .stepper__num { color: var(--bronze); }
+  .itabs--steps .itabs__tab[aria-selected="true"] .stepper__num { color: var(--ink); }
   .itabs--steps .itabs__panel:not([hidden]) { grid-template-columns: 1.2fr 1fr; gap: 56px; }
   .itabs--steps .itabs__panel:not([hidden]):not(:has(.art)) { grid-template-columns: 1fr; max-width: 720px; }
 }
@@ -3343,7 +3355,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 
 .timeline-steps__num {
   margin-bottom: 10px;
-  color: var(--bronze);
+  color: var(--ink);
   font: 700 14px/1 var(--font-head);
   letter-spacing: .08em;
 }
@@ -3484,6 +3496,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 .tgroup[open] summary .plus { transform: rotate(45deg); }
 
 .tgroup__name {
+  margin: 0;
   font: 700 22px/1.2 var(--font-head);
   letter-spacing: .12em;
   text-transform: uppercase;
@@ -5078,6 +5091,44 @@ html.is-locked .riya-launcher { visibility: hidden; }
   html.riya-open .call-bar {
     visibility: hidden;
   }
+}
+
+/* Touch targets (phones and tablets): at least 44px tall. Text CTAs keep their look and get a
+   larger invisible hit area; buttons and list links grow for real. */
+@media (pointer: coarse) {
+  .cta,
+  .crumbs a,
+  .footer__bottom a {
+    position: relative;
+  }
+
+  .cta::before,
+  .crumbs a::before,
+  .footer__bottom a::before {
+    content: "";
+    position: absolute;
+    inset: -13px -6px;
+  }
+
+  .cta::before { inset: -9px -6px; }
+
+  .header-actions .btn,
+  .chips a,
+  .skip-link,
+  .planner__options button {
+    min-height: 44px;
+  }
+
+  .skip-link { display: inline-flex; align-items: center; }
+
+  .footer__cols li a,
+  .side-menu__foot a:not(.cta) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .footer__cols li { line-height: 1.3; }
 }
 
 /* 13. Motion: opacity-only reveals (1.5s), once, staggered 0 / .25 / .5 / .75s.

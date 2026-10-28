@@ -32,5 +32,19 @@ python -m venv .venv && .venv/Scripts/python -m pip install -r tools/requirement
 Contact details, opening hours and the Riya webhook live in one place, `SITE` in `tools/pages.py`.
 Change them there and run the two commands above; every page, link, the call QR code and `site.js` follow.
 
+Pages are generated from data:
+
+| File | What it builds |
+|---|---|
+| `tools/treatment_pages.py` | Treatments, Technology and Kids' dentistry |
+| `tools/more_pages.py` | Our work and its case pages, Founder, Doctors, The practice, Dental tourism |
+| `tools/treatments.py` | The menus and "Common problems" |
+| `tools/technology.py` | The Technology items |
+| `tools/illustrations.py` | The line drawings |
+| `tools/logo.py` | The logo seal and lockups |
+| `tools/video.py --tour` | The clinic tour video |
+
+The 360° viewer is Pannellum 2.5.6 (MIT, `assets/vendor/pannellum`).
+
 Fonts: D-DIN, Jost and Cormorant Garamond (SIL Open Font License, licences in `assets/fonts`).
 Demo imagery includes licensed stock photography and video (Unsplash, Pexels).

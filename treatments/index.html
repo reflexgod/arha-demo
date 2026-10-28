@@ -25,7 +25,6 @@
 
   <link rel="preload" href="../assets/fonts/jost-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/d-din-bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../assets/fonts/cormorant-garamond-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>
@@ -708,9 +707,10 @@
 
   <!-- ===================================================================== CALL BAR (phones)
        One tap to reception: the whole bar is a single tel: link, on every page from the first paint.
+       Its accessible name starts with the visible "Call now", then the reception number (hidden text).
        site.js replaces the hours with the live status (India time); without JS the hours stay. -->
-  <a class="call-bar" href="tel:+910000000000" data-call="call_bar" data-label="phone" aria-label="Call Arha Dental Care reception, +91 00000 00000">
-    <span class="call-bar__label">Call now</span>
+  <a class="call-bar" href="tel:+910000000000" data-call="call_bar">
+    <span class="call-bar__label">Call now</span><span class="visually-hidden">: Arha Dental Care reception, <span data-show="phone">+91 00000 00000</span>.</span>
     <span class="call-bar__status" data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span>
   </a>
 

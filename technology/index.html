@@ -25,7 +25,6 @@
 
   <link rel="preload" href="../assets/fonts/jost-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../assets/fonts/d-din-bold.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="../assets/fonts/cormorant-garamond-400-italic.woff2" as="font" type="font/woff2" crossorigin>
 
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>
@@ -297,7 +296,7 @@
         </nav>
         <div class="tech-groups" data-spy-root>
           <details class="tgroup" id="group-see" open>
-            <summary><span class="tgroup__name">See more</span><span class="tgroup__sub">Diagnosis and imaging</span><span class="plus" aria-hidden="true"></span></summary>
+            <summary><h2 class="tgroup__name">See more</h2><span class="tgroup__sub">Diagnosis and imaging</span><span class="plus" aria-hidden="true"></span></summary>
             <div class="tgroup__items">
             <article class="titem reveal" id="panoramic-x-ray" aria-labelledby="panoramic-x-ray-name">
               <div class="titem__media media">
@@ -319,7 +318,7 @@
             </div>
           </details>
           <details class="tgroup" id="group-plan" open>
-            <summary><span class="tgroup__name">Plan precisely</span><span class="tgroup__sub">Digital planning</span><span class="plus" aria-hidden="true"></span></summary>
+            <summary><h2 class="tgroup__name">Plan precisely</h2><span class="tgroup__sub">Digital planning</span><span class="plus" aria-hidden="true"></span></summary>
             <div class="tgroup__items">
             <article class="titem reveal" id="planning-desk" aria-labelledby="planning-desk-name">
               <div class="titem__media media">
@@ -341,7 +340,7 @@
             </div>
           </details>
           <details class="tgroup" id="group-treat" open>
-            <summary><span class="tgroup__name">Treat gently</span><span class="tgroup__sub">Comfort and precision</span><span class="plus" aria-hidden="true"></span></summary>
+            <summary><h2 class="tgroup__name">Treat gently</h2><span class="tgroup__sub">Comfort and precision</span><span class="plus" aria-hidden="true"></span></summary>
             <div class="tgroup__items">
             <article class="titem reveal" id="treatment-rooms" aria-labelledby="treatment-rooms-name">
               <div class="titem__media media">
@@ -376,7 +375,7 @@
             </div>
           </details>
           <details class="tgroup" id="group-safe" open>
-            <summary><span class="tgroup__name">Kept safe</span><span class="tgroup__sub">Sterilisation</span><span class="plus" aria-hidden="true"></span></summary>
+            <summary><h2 class="tgroup__name">Kept safe</h2><span class="tgroup__sub">Sterilisation</span><span class="plus" aria-hidden="true"></span></summary>
             <div class="tgroup__items">
             <article class="titem reveal" id="sterilisation-room" aria-labelledby="sterilisation-room-name">
               <div class="titem__media media">
@@ -527,9 +526,10 @@
 
   <!-- ===================================================================== CALL BAR (phones)
        One tap to reception: the whole bar is a single tel: link, on every page from the first paint.
+       Its accessible name starts with the visible "Call now", then the reception number (hidden text).
        site.js replaces the hours with the live status (India time); without JS the hours stay. -->
-  <a class="call-bar" href="tel:+910000000000" data-call="call_bar" data-label="phone" aria-label="Call Arha Dental Care reception, +91 00000 00000">
-    <span class="call-bar__label">Call now</span>
+  <a class="call-bar" href="tel:+910000000000" data-call="call_bar">
+    <span class="call-bar__label">Call now</span><span class="visually-hidden">: Arha Dental Care reception, <span data-show="phone">+91 00000 00000</span>.</span>
     <span class="call-bar__status" data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span>
   </a>
 
