@@ -154,18 +154,23 @@
     toggles.forEach((t) => t.addEventListener('click', openMenu));
     menu.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeMenu));
 
-    // Accordion groups: one thin plus per group, rotates to a cross
-    menu.querySelectorAll('.acc__trigger').forEach((trigger) => {
-      const group = trigger.closest('.acc__group');
-      const content = document.getElementById(trigger.getAttribute('aria-controls'));
-      content.setAttribute('inert', '');
-      trigger.addEventListener('click', () => {
-        const open = trigger.getAttribute('aria-expanded') !== 'true';
-        trigger.setAttribute('aria-expanded', String(open));
-        group.classList.toggle('is-open', open);
-        content.toggleAttribute('inert', !open);
+    // Drill-down (apa): a level slides in with its own Back link; focus moves to it and back
+    const levels = [...menu.querySelectorAll('[data-level]')];
+    const show = (name, from) => {
+      levels.forEach((lvl) => {
+        const on = lvl.dataset.level === name;
+        lvl.hidden = !on;
+        lvl.classList.toggle('is-in', on && name !== 'root');
       });
-    });
+      menu.querySelectorAll('[data-open-level]').forEach((b) => b.setAttribute('aria-expanded', String(b.dataset.openLevel === name)));
+      const target = name === 'root'
+        ? menu.querySelector(`[data-open-level="${from}"]`)
+        : menu.querySelector(`[data-level="${name}"] [data-back]`);
+      if (target) target.focus({ preventScroll: true });
+    };
+    menu.querySelectorAll('[data-open-level]').forEach((b) => b.addEventListener('click', () => show(b.dataset.openLevel)));
+    menu.querySelectorAll('[data-back]').forEach((b) => b.addEventListener('click', () => show('root', b.closest('[data-level]').dataset.level)));
+    toggles.forEach((t) => t.addEventListener('click', () => levels.forEach((lvl) => { lvl.hidden = lvl.dataset.level !== 'root'; })));
   }
 
   /* 4. Reveal on scroll, once, when ~15% into the viewport: text fades up, photographs
@@ -267,12 +272,15 @@
   });
 
   const pop = document.getElementById('call-pop');
-  const popTrigger = document.querySelector('[data-call="utility"]');
+  const popTriggers = [...document.querySelectorAll('[data-call-pop]')];
   const canDial = () => window.matchMedia('(pointer: coarse)').matches;
-  if (pop && popTrigger) {
-    popTrigger.setAttribute('aria-haspopup', 'dialog');
-    popTrigger.setAttribute('aria-controls', 'call-pop');
-    popTrigger.setAttribute('aria-expanded', 'false');
+  if (pop && popTriggers.length) {
+    let popTrigger = popTriggers[0];
+    popTriggers.forEach((t) => {
+      t.setAttribute('aria-haspopup', 'dialog');
+      t.setAttribute('aria-controls', 'call-pop');
+      t.setAttribute('aria-expanded', 'false');
+    });
     const number = pop.querySelector('.call-pop__number');
     const copyButton = pop.querySelector('[data-copy-number]');
     const copyStatus = pop.querySelector('[data-copy-status]');
@@ -280,43 +288,44 @@
     let copyTimer = 0;
 
     const onKey = (e) => { if (e.key === 'Escape') closePop(true); };
-    const onOutside = (e) => { if (!pop.contains(e.target) && !popTrigger.contains(e.target)) closePop(false); };
+    const onOutside = (e) => { if (!pop.contains(e.target) && !popTriggers.some((t) => t.contains(e.target))) closePop(false); };
     const openPop = () => {
       window.dispatchEvent(new Event('arha:status')); // a fresh open/closed line
+      header.classList.remove('is-hidden');
       pop.hidden = false;
       requestAnimationFrame(() => pop.classList.add('is-open'));
       popTrigger.setAttribute('aria-expanded', 'true');
       document.addEventListener('keydown', onKey);
       document.addEventListener('click', onOutside);
       number.focus({ preventScroll: true });
-      track('call_popover_open');
+      track('call_popover_open', { location: popTrigger.dataset.call || 'page' });
     };
     function closePop(returnFocus) {
       if (pop.hidden) return;
       pop.classList.remove('is-open');
-      popTrigger.setAttribute('aria-expanded', 'false');
+      popTriggers.forEach((t) => t.setAttribute('aria-expanded', 'false'));
       document.removeEventListener('keydown', onKey);
       document.removeEventListener('click', onOutside);
       setTimeout(() => { if (!pop.classList.contains('is-open')) pop.hidden = true; }, reduceMotion ? 0 : 200);
       if (returnFocus) popTrigger.focus({ preventScroll: true });
     }
-    popTrigger.addEventListener('click', (e) => {
+    popTriggers.forEach((t) => t.addEventListener('click', (e) => {
       if (canDial()) return; // phones and tablets dial straight away
       e.preventDefault();
-      if (pop.hidden) openPop();
-      else closePop(false);
-    });
+      if (!pop.hidden && popTrigger === t) { closePop(false); return; }
+      popTrigger = t;
+      openPop();
+    }));
     pop.querySelector('[data-call-pop-close]').addEventListener('click', () => closePop(true));
     // Tabbing out of the popover closes it
     pop.addEventListener('focusout', (e) => {
-      if (e.relatedTarget && !pop.contains(e.relatedTarget) && e.relatedTarget !== popTrigger) closePop(false);
+      if (e.relatedTarget && !pop.contains(e.relatedTarget) && !popTriggers.includes(e.relatedTarget)) closePop(false);
     });
-    // The header changes size between full and compact: close rather than float in the wrong place
-    let wasCompact = header.classList.contains('is-compact');
+    // Scrolling far closes it rather than leaving it floating over the page
+    let openedAt = 0;
     window.addEventListener('scroll', () => {
-      const compact = header.classList.contains('is-compact');
-      if (compact !== wasCompact) closePop(false);
-      wasCompact = compact;
+      if (pop.hidden) { openedAt = window.scrollY; return; }
+      if (Math.abs(window.scrollY - openedAt) > 320) closePop(false);
     }, { passive: true });
 
     copyButton.addEventListener('click', async () => {
@@ -993,5 +1002,239 @@
         start.textContent = 'Try the sample 360° view';
       }
     });
+  });
+  /* 17. v4 shared components (one set, every page): before/after slider, hotspots, expanding
+         panels, drag gallery and review carousel, sticky story, lightbox, preview swap.
+         Pointer and keyboard friendly; reduced motion gets the same content without movement. */
+
+  // Before/after slider: drag anywhere on the photograph (vertical scrolling still works on
+  // touch); the range input underneath gives keyboard and screen-reader control.
+  document.querySelectorAll('[data-ba]').forEach((box) => {
+    const range = box.querySelector('.ba__range');
+    const set = (pct) => {
+      const v = Math.max(0, Math.min(100, pct));
+      box.style.setProperty('--pos', `${v}%`);
+      range.value = String(Math.round(v));
+    };
+    let dragging = false;
+    let decided = false;
+    let startX = 0;
+    let startY = 0;
+    const at = (e) => ((e.clientX - box.getBoundingClientRect().left) / box.clientWidth) * 100;
+    box.addEventListener('pointerdown', (e) => {
+      if (e.button !== 0) return;
+      dragging = true;
+      decided = e.pointerType === 'mouse';
+      startX = e.clientX;
+      startY = e.clientY;
+      if (decided) {
+        set(at(e));
+        box.setPointerCapture(e.pointerId);
+        box.classList.add('is-dragging');
+      }
+    });
+    box.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      if (!decided) {
+        // On touch, a mostly horizontal move takes the slider; a vertical one scrolls the page
+        const dx = Math.abs(e.clientX - startX);
+        const dy = Math.abs(e.clientY - startY);
+        if (dx < 6 && dy < 6) return;
+        if (dy > dx) { dragging = false; return; }
+        decided = true;
+        box.setPointerCapture(e.pointerId);
+        box.classList.add('is-dragging');
+      }
+      set(at(e));
+    });
+    const end = () => { dragging = false; box.classList.remove('is-dragging'); };
+    box.addEventListener('pointerup', end);
+    box.addEventListener('pointercancel', end);
+    range.addEventListener('input', () => set(Number(range.value)));
+    box.addEventListener('pointerdown', () => track('ba_drag'), { once: true });
+  });
+
+  // Hotspots: one card open at a time; numbers are buttons; arrow keys move between them
+  document.querySelectorAll('[data-spots]').forEach((box) => {
+    const spots = [...box.querySelectorAll('.spot')];
+    const open = (spot) => spots.forEach((s) => {
+      const on = s === spot;
+      s.setAttribute('aria-expanded', String(on));
+      document.getElementById(s.getAttribute('aria-controls')).hidden = !on;
+    });
+    spots.forEach((s, i) => {
+      s.addEventListener('click', () => { open(s); track('hotspot', { n: i + 1 }); });
+      s.addEventListener('keydown', (e) => {
+        const d = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+        if (!d) return;
+        e.preventDefault();
+        const next = spots[(i + d + spots.length) % spots.length];
+        next.focus();
+        open(next);
+      });
+    });
+  });
+
+  // Expanding panels: hover or focus on a laptop, tap on a phone
+  document.querySelectorAll('[data-xpanels]').forEach((list) => {
+    const panels = [...list.querySelectorAll('[data-xpanel]')];
+    const activate = (p) => panels.forEach((x) => x.classList.toggle('is-active', x === p));
+    panels.forEach((p) => {
+      p.addEventListener('mouseenter', () => { if (window.matchMedia('(hover: hover)').matches) activate(p); });
+      p.addEventListener('focusin', () => activate(p));
+      p.addEventListener('click', (e) => { if (!e.target.closest('a')) activate(p); });
+    });
+  });
+
+  // Drag gallery and carousel: native scroll-snap (swipe on touch), mouse drag, arrows, a progress line
+  document.querySelectorAll('[data-drag]').forEach((box) => {
+    const strip = box.querySelector('.drag__track');
+    const bar = box.querySelector('.drag__progress span');
+    const prev = box.querySelector('.drag__btn--prev');
+    const next = box.querySelector('.drag__btn--next');
+    const update = () => {
+      const max = strip.scrollWidth - strip.clientWidth;
+      const part = Math.max(strip.clientWidth / strip.scrollWidth, 0.08);
+      if (bar) {
+        bar.style.width = `${part * 100}%`;
+        bar.style.transform = `translateX(${max > 0 ? (strip.scrollLeft / max) * ((1 / part) - 1) * 100 : 0}%)`;
+      }
+      if (prev) prev.disabled = strip.scrollLeft < 4;
+      if (next) next.disabled = strip.scrollLeft > max - 4;
+    };
+    const step = (dir) => {
+      const item = strip.children[0];
+      const gap = parseFloat(getComputedStyle(strip).columnGap) || 0;
+      strip.scrollBy({ left: dir * (item ? item.getBoundingClientRect().width + gap : strip.clientWidth), behavior: reduceMotion ? 'auto' : 'smooth' });
+    };
+    if (prev) prev.addEventListener('click', () => step(-1));
+    if (next) next.addEventListener('click', () => step(1));
+    strip.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    window.addEventListener('resize', update);
+    if (!strip.hasAttribute('tabindex')) strip.tabIndex = 0;
+    strip.addEventListener('keydown', (e) => {
+      if (e.target !== strip) return;
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); step(e.key === 'ArrowRight' ? 1 : -1); }
+    });
+    // Mouse drag (touch already swipes natively); a drag never counts as a click
+    let down = false;
+    let moved = false;
+    let x0 = 0;
+    let left0 = 0;
+    strip.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0 || e.target.closest('[data-ba]')) return;
+      down = true;
+      moved = false;
+      x0 = e.clientX;
+      left0 = strip.scrollLeft;
+      strip.classList.add('is-grabbing');
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!down) return;
+      if (Math.abs(e.clientX - x0) > 4) moved = true;
+      strip.scrollLeft = left0 - (e.clientX - x0);
+    });
+    window.addEventListener('pointerup', () => {
+      if (!down) return;
+      down = false;
+      strip.classList.remove('is-grabbing');
+    });
+    strip.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    strip.addEventListener('dragstart', (e) => e.preventDefault());
+    update();
+  });
+
+  // Sticky story: the step crossing the middle of the screen selects the pinned photograph
+  document.querySelectorAll('[data-story]').forEach((box) => {
+    const imgs = [...box.querySelectorAll('.story__img')];
+    const steps = [...box.querySelectorAll('.story__step')];
+    const select = (i) => {
+      imgs.forEach((im) => im.classList.toggle('is-active', im.dataset.i === i));
+      steps.forEach((st) => st.classList.toggle('is-active', st.dataset.i === i));
+    };
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) select(en.target.dataset.i); });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    steps.forEach((st) => io.observe(st));
+  });
+
+  // Lightbox: [data-lightbox] links open their large photograph; arrows, Esc, focus kept inside
+  const lbLinks = [...document.querySelectorAll('[data-lightbox] a[data-full]')];
+  if (lbLinks.length) {
+    const lb = document.createElement('div');
+    lb.className = 'lightbox';
+    lb.setAttribute('role', 'dialog');
+    lb.setAttribute('aria-modal', 'true');
+    lb.setAttribute('aria-label', 'Photograph');
+    lb.hidden = true;
+    lb.innerHTML = '<button class="lightbox__close" type="button" aria-label="Close"></button>'
+      + '<button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous photograph"></button>'
+      + '<figure class="lightbox__fig"><img alt=""><figcaption></figcaption></figure>'
+      + '<button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next photograph"></button>';
+    document.body.append(lb);
+    const img = lb.querySelector('img');
+    const cap = lb.querySelector('figcaption');
+    let at = 0;
+    let back = null;
+    const show = (i) => {
+      at = (i + lbLinks.length) % lbLinks.length;
+      const a = lbLinks[at];
+      img.src = a.dataset.full;
+      img.alt = a.querySelector('img') ? a.querySelector('img').alt : '';
+      cap.textContent = a.dataset.caption || '';
+    };
+    const onKey = (e) => {
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowRight') show(at + 1);
+      else if (e.key === 'ArrowLeft') show(at - 1);
+      else if (e.key === 'Tab') {
+        const els = [...lb.querySelectorAll('button')];
+        const i = els.indexOf(document.activeElement);
+        e.preventDefault();
+        els[(i + (e.shiftKey ? -1 : 1) + els.length) % els.length].focus();
+      }
+    };
+    function close() {
+      lb.classList.remove('is-open');
+      root.classList.remove('is-locked');
+      document.removeEventListener('keydown', onKey);
+      setTimeout(() => { lb.hidden = true; }, reduceMotion ? 0 : 250);
+      if (back) back.focus({ preventScroll: true });
+    }
+    lbLinks.forEach((a, i) => a.addEventListener('click', (e) => {
+      e.preventDefault();
+      back = a;
+      show(i);
+      lb.hidden = false;
+      root.classList.add('is-locked');
+      requestAnimationFrame(() => lb.classList.add('is-open'));
+      document.addEventListener('keydown', onKey);
+      lb.querySelector('.lightbox__close').focus();
+      track('lightbox_open');
+    }));
+    lb.querySelector('.lightbox__close').addEventListener('click', close);
+    lb.querySelector('.lightbox__nav--prev').addEventListener('click', () => show(at - 1));
+    lb.querySelector('.lightbox__nav--next').addEventListener('click', () => show(at + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+  }
+
+  // Treatments index: hovering or focusing a treatment swaps the large preview photograph
+  document.querySelectorAll('[data-preview]').forEach((box) => {
+    const shots = [...box.querySelectorAll('.tindex__shot')];
+    box.querySelectorAll('[data-shot]').forEach((a) => {
+      const on = () => shots.forEach((s) => s.classList.toggle('is-active', s.dataset.shot === a.dataset.shot));
+      a.addEventListener('mouseenter', on);
+      a.addEventListener('focus', on);
+    });
+  });
+
+  // Case page: angle thumbnails switch the large slider's photograph
+  document.querySelectorAll('[data-angles]').forEach((box) => {
+    const thumbs = [...box.querySelectorAll('[data-angle]')];
+    const views = [...box.querySelectorAll('.case-angle')];
+    thumbs.forEach((t) => t.addEventListener('click', () => {
+      thumbs.forEach((x) => x.setAttribute('aria-pressed', String(x === t)));
+      views.forEach((v) => { v.hidden = v.dataset.view !== t.dataset.angle; });
+    }));
   });
 })();

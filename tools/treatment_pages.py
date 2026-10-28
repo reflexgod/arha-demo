@@ -658,11 +658,11 @@ def faq_block(faq):
 """
 
 
-CLOSING_PHOTOS = [  # Arha's own rooms, chosen by title so a page always closes on the same photograph
-    ("arha-dental-care-lounge-peddar-road", "Arha's patient lounge: soft seating and warm light", "50% 55%"),
-    ("dental-operatory-arha-dental-care-peddar-road-06", "An Arha treatment room on Peddar Road", "50% 55%"),
+CLOSING_PHOTOS = [  # Arha's own rooms, chosen by title so a page always closes on the same photograph (no desk or laptop shots)
     ("arha-dental-care-reception-south-mumbai-dental-clinic-01-lower", "Arha Dental Care reception: a curved front desk, soft seating and a glass entrance door", "35% 70%"),
-    ("dental-operatory-arha-dental-care-peddar-road-04", "An Arha treatment room under soft light", "50% 55%"),
+    ("arha-dental-care-lounge-peddar-road", "Arha's patient lounge: soft seating and warm light", "50% 55%"),
+    ("dental-operatory-arha-dental-care-peddar-road-01", "An Arha treatment room: the dental chair under its overhead light", "50% 62%"),
+    ("arha-dental-care-reception-south-mumbai-dental-clinic-01", "Arha's reception and the glass entrance door", "50% 60%"),
 ]
 
 

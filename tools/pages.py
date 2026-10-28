@@ -18,11 +18,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from picture import picture  # noqa: E402
+import chrome  # noqa: E402
 import finish  # noqa: E402
+import home  # noqa: E402
 import more_pages  # noqa: E402
 import technology  # noqa: E402
 import treatment_pages  # noqa: E402
 import treatments  # noqa: E402
+import v4_pages  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE_URL = "https://arha.svayra.com/"
@@ -113,6 +116,8 @@ def show_values():
         "emergency": SITE["emergency"],
         "google-rating": SITE["google_rating"] or "",
         "google-count": f'{SITE["google_review_count"]} reviews' if SITE["google_review_count"] else "",
+        # The homepage shows a visible placeholder until the clinic confirms the count (notes/TO-CONFIRM.md)
+        "google-count-label": f'{SITE["google_review_count"]} reviews' if SITE["google_review_count"] else "Review count to come",
         "usp": SITE["usp_line"],
         **hours_text(),
     }
@@ -244,10 +249,23 @@ def expand_pics(html):
     return re.sub(r"^([ \t]*)\{\{pic (.+?)\}\}$", repl, html, flags=re.M)
 
 
+def build_home(page):
+    """index.html is the source of every page's chrome: the header, menu and footer (tools/chrome.py) and the
+    homepage's sections (tools/home.py) are written into it; the <head>, call bar and Riya stay as they are."""
+    visit = re.search(r"    <!-- =+ 10\. VISIT US -->\n.*?</section>\n", page, flags=re.S).group(0)
+    start = page.index("  <!-- ===================================================================== HEADER -->")
+    main_at = page.index('  <main id="main"')
+    end_main = page.index("  </main>\n") + len("  </main>\n")
+    call_bar = page.index("  <!-- ===================================================================== CALL BAR")
+    return (page[:start] + chrome.header() + chrome.side_menu() + "\n" + home.main_html(visit) + "\n"
+            + chrome.footer() + "\n" + page[call_bar:])
+
+
 def main():
     index = ROOT / "index.html"
     original = index.read_text(encoding="utf-8")
-    home = finishing_head(apply_site(menus(original)), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster"))
+    home_page = expand_pics(build_home(original))
+    home = finishing_head(apply_site(menus(home_page)), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster"))
     finish.favicons()
     if home != original:
         index.write_text(home, encoding="utf-8", newline="\n")
@@ -263,9 +281,7 @@ def main():
     bottom = home[home.index("  </main>") + len("  </main>\n"):]
 
     pages = dict(PAGES)
-    for slug, meta, main_html in treatment_pages.all_pages(SITE_URL, treatments.problems()):
-        pages[slug] = {**meta, "main": main_html}
-    for slug, meta, main_html in more_pages.all_pages(SITE_URL, visit):
+    for slug, meta, main_html in v4_pages.all_pages(SITE_URL, visit):
         pages[slug] = {**meta, "main": main_html}
     for slug, meta in pages.items():
         h = re.sub(r"<title>.*?</title>", f"<title>{meta['title']}</title>", head)
@@ -273,6 +289,9 @@ def main():
         h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{meta["description"]}">', h)
         h = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{meta["title"]}">', h)
         h = h.replace(f'href="{SITE_URL}"', f'href="{SITE_URL}{slug}/"').replace(f'content="{SITE_URL}"', f'content="{SITE_URL}{slug}/"')
+        if slug == "before-after":  # the before/after index is now Our work
+            h = h.replace(f'href="{SITE_URL}before-after/"', f'href="{SITE_URL}our-work/"')
+            h = h.replace("</head>", '  <meta http-equiv="refresh" content="0; url=../our-work/">\n</head>')
         if slug == "404":  # a missing page has no address of its own
             h = re.sub(r'\s*<link rel="canonical"[^>]*>', "", h)
             h = re.sub(r'\s*<meta property="og:url"[^>]*>', "", h)
