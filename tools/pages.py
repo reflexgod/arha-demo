@@ -17,6 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from picture import picture  # noqa: E402
+import more_pages  # noqa: E402
 import technology  # noqa: E402
 import treatment_pages  # noqa: E402
 import treatments  # noqa: E402
@@ -185,16 +186,18 @@ def menus(html):
 
 # ---------------------------------------------------------------- inner pages
 def relocate(html, slug):
-    """Move root-relative paths one folder down; links to this page become ./"""
+    """Move root-relative paths down to the page's folder (one or two levels); links to this page become ./"""
+    up = "../" * (slug.count("/") + 1)
+
     def fix_url(u):
         u = u.strip()
         if not u or u.startswith(SKIP):
             return u
         if u in ("./", "."):
-            return "../"
+            return up
         if u.startswith("./#"):
-            return "../" + u[2:]
-        return "../" + u
+            return up + u[2:]
+        return up + u
 
     def fix_attr(m):
         attr, val = m.group(1), m.group(2)
@@ -204,8 +207,8 @@ def relocate(html, slug):
             val = fix_url(val)
         return f'{attr}="{val}"'
 
-    html = re.sub(r'\b(href|src|srcset|imagesrcset|data-base)="([^"]*)"', fix_attr, html)
-    html = html.replace(f'href="../{slug}/"', 'href="./"').replace(f'href="../{slug}/#', 'href="./#')
+    html = re.sub(r'\b(href|src|srcset|imagesrcset|data-base|data-src)="([^"]*)"', fix_attr, html)
+    html = html.replace(f'href="{up}{slug}/"', 'href="./"').replace(f'href="{up}{slug}/#', 'href="./#')
     return html
 
 
@@ -238,6 +241,8 @@ def main():
     pages = dict(PAGES)
     for slug, meta, main_html in treatment_pages.all_pages(SITE_URL, treatments.problems()):
         pages[slug] = {**meta, "main": main_html}
+    for slug, meta, main_html in more_pages.all_pages(SITE_URL, visit):
+        pages[slug] = {**meta, "main": main_html}
     for slug, meta in pages.items():
         h = re.sub(r"<title>.*?</title>", f"<title>{meta['title']}</title>", head)
         h = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{meta["description"]}">', h)
@@ -252,7 +257,7 @@ def main():
         main_html = expand_pics(main_html.replace("{{visit}}", visit).replace("{{planner}}", planner))
         page = relocate(apply_site(h + top + main_html + bottom), slug)
         out = ROOT / slug
-        out.mkdir(exist_ok=True)
+        out.mkdir(parents=True, exist_ok=True)
         (out / "index.html").write_text(page, encoding="utf-8")
         print(f"wrote {slug}/index.html  {len(page) // 1024} KB")
 

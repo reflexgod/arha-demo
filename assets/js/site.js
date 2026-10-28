@@ -15,6 +15,8 @@
                             15. Treatment pages: stepper, layers,
                                 scrubber, guides, checklist, decider,
                                 technology index
+                            16. Our work filter, gallery view,
+                                360° tour
    ========================================================================== */
 (() => {
   'use strict';
@@ -908,4 +910,118 @@
       groups.forEach((g) => io.observe(g));
     }
   }
+
+  /* 16. Our work filter, gallery view and the 360° tour.
+         Gallery view: the case view's behaviour (Esc, arrows, focus trap, scroll lock).
+         360°: Pannellum (MIT, self-hosted) loads only when the visitor asks for it. ---- */
+  const workGrid = document.querySelector('[data-work-grid]');
+  if (workGrid) {
+    const chips = [...document.querySelectorAll('[data-work-filter]')];
+    const cards = [...workGrid.querySelectorAll('[data-cat]')];
+    const empty = document.querySelector('[data-work-empty]');
+    chips.forEach((chip) => chip.addEventListener('click', () => {
+      const cat = chip.dataset.workFilter;
+      chips.forEach((c) => c.setAttribute('aria-pressed', String(c === chip)));
+      cards.forEach((card) => {
+        card.hidden = cat !== 'all' && card.dataset.cat !== cat;
+        card.classList.add('is-in');
+      });
+      empty.hidden = cards.some((c) => !c.hidden);
+    }));
+  }
+
+  const gview = document.getElementById('gallery-view');
+  if (gview) {
+    const shots = [...document.querySelectorAll('[data-gallery-full] li')].map((li) => li.dataset);
+    const img = gview.querySelector('[data-gv-img]');
+    const cap = gview.querySelector('[data-gv-cap]');
+    let at = 0;
+    let back = null;
+    const show = (i) => {
+      at = (i + shots.length) % shots.length;
+      img.src = shots[at].src;
+      img.alt = shots[at].alt;
+      cap.textContent = `${shots[at].cap} · ${at + 1} of ${shots.length}`;
+    };
+    const focusables = () => [...gview.querySelectorAll('button')];
+    const onKey = (e) => {
+      if (e.key === 'Escape') closeView();
+      else if (e.key === 'ArrowRight') show(at + 1);
+      else if (e.key === 'ArrowLeft') show(at - 1);
+      else if (e.key === 'Tab') {
+        const els = focusables();
+        if (e.shiftKey && document.activeElement === els[0]) { e.preventDefault(); els[els.length - 1].focus(); }
+        else if (!e.shiftKey && document.activeElement === els[els.length - 1]) { e.preventDefault(); els[0].focus(); }
+      }
+    };
+    const openView = (i, trigger) => {
+      back = trigger;
+      show(i);
+      root.style.setProperty('--scrollbar-w', `${window.innerWidth - root.clientWidth}px`);
+      root.classList.add('is-locked');
+      gview.removeAttribute('inert');
+      gview.classList.add('is-open');
+      document.addEventListener('keydown', onKey);
+      requestAnimationFrame(() => gview.querySelector('[data-gv-close]').focus());
+    };
+    function closeView() {
+      gview.classList.remove('is-open');
+      gview.setAttribute('inert', '');
+      root.classList.remove('is-locked');
+      document.removeEventListener('keydown', onKey);
+      if (back) back.focus();
+    }
+    document.querySelectorAll('[data-gallery-open]').forEach((b) => b.addEventListener('click', () => openView(Number(b.dataset.galleryOpen), b)));
+    gview.querySelector('[data-gv-close]').addEventListener('click', closeView);
+    gview.querySelector('[data-gv-prev]').addEventListener('click', () => show(at - 1));
+    gview.querySelector('[data-gv-next]').addEventListener('click', () => show(at + 1));
+    gview.addEventListener('click', (e) => { if (e.target === gview) closeView(); });
+  }
+
+  document.querySelectorAll('[data-pano]').forEach((box) => {
+    const start = box.querySelector('[data-pano-start]');
+    const base = box.dataset.base; // assets/, relative to this page
+    // The tour's rooms in walking order. Until Arha's own 360 photos arrive, every room shows the sample image.
+    const ROOMS = [
+      ['entrance', 'Entrance'], ['reception', 'Reception'], ['lounge', 'Lounge'],
+      ['operatory', 'Treatment room'], ['sterilisation', 'Sterilisation'],
+    ];
+    const SAMPLE = `${base}pano/sample-360.jpg`;
+    const load = (tag, attrs) => new Promise((resolve, reject) => {
+      const el = document.createElement(tag);
+      Object.assign(el, attrs, { onload: resolve, onerror: reject });
+      document.head.append(el);
+    });
+    start.addEventListener('click', async () => {
+      start.disabled = true;
+      start.textContent = 'Loading…';
+      try {
+        await Promise.all([
+          load('link', { rel: 'stylesheet', href: `${base}vendor/pannellum/pannellum.css` }),
+          load('script', { src: `${base}vendor/pannellum/pannellum.js` }),
+        ]);
+        const scenes = {};
+        ROOMS.forEach(([id, name], i) => {
+          const hotSpots = [];
+          if (i > 0) hotSpots.push({ pitch: -8, yaw: -150, type: 'scene', text: `Back to ${ROOMS[i - 1][1]}`, sceneId: ROOMS[i - 1][0] });
+          if (i < ROOMS.length - 1) hotSpots.push({ pitch: -8, yaw: 20, type: 'scene', text: `Go to ${ROOMS[i + 1][1]}`, sceneId: ROOMS[i + 1][0] });
+          scenes[id] = { title: `${name} · sample image`, type: 'equirectangular', panorama: SAMPLE, hfov: 100, hotSpots };
+        });
+        const viewer = box.querySelector('.pano__viewer');
+        viewer.hidden = false;
+        box.querySelector('.pano__cover').hidden = true;
+        window.pannellum.viewer(viewer, {
+          default: { firstScene: 'entrance', sceneFadeDuration: reduceMotion ? 0 : 300, autoLoad: true, showZoomCtrl: true, keyboardZoom: true, compass: false },
+          scenes,
+        });
+        viewer.setAttribute('aria-label', 'Sample 360° view. Drag or use the arrow keys to look around.');
+        viewer.tabIndex = 0;
+        viewer.focus();
+        track('pano_open');
+      } catch (err) {
+        start.disabled = false;
+        start.textContent = 'Try the sample 360° view';
+      }
+    });
+  });
 })();
