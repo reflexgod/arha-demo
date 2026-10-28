@@ -17,6 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from picture import picture  # noqa: E402
+import technology  # noqa: E402
 import treatments  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -34,6 +35,11 @@ SITE = {
     "time_zone": "Asia/Kolkata",
     "riya_webhook_url": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat",
     "google_reviews_url": "https://share.google/PzhwgJ9QJMErZnk9R",
+    # Google rating strip: only the real figures. The demo has shown 5.0; the count is unknown (None hides it).
+    "google_rating": "5.0",
+    "google_review_count": None,
+    # Hero line for the technology USP: from what Arha's own photos show, until the equipment list is confirmed
+    "usp_line": "In-house X-ray · Own sterilisation room · Prosthodontist-led",
 }
 
 DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
@@ -114,6 +120,9 @@ def show_values():
         "whatsapp": SITE["whatsapp"],
         "email": SITE["email"],
         "emergency": SITE["emergency"],
+        "google-rating": SITE["google_rating"] or "",
+        "google-count": f'{SITE["google_review_count"]} reviews' if SITE["google_review_count"] else "",
+        "usp": SITE["usp_line"],
         **hours_text(),
     }
 
@@ -176,11 +185,17 @@ def call_qr():
 
 
 def menus(html):
-    """The Treatments mega menu and side-menu list come from tools/treatments.py."""
-    html = re.sub(r"(<!-- treatments-menu:start -->\n).*?(\s*<!-- treatments-menu:end -->)",
-                  lambda m: m.group(1) + treatments.mega_menu().rstrip("\n") + m.group(2), html, flags=re.S)
-    html = re.sub(r"(<!-- treatments-side:start -->\n).*?(\s*<!-- treatments-side:end -->)",
-                  lambda m: m.group(1) + treatments.side_menu().rstrip("\n") + m.group(2), html, flags=re.S)
+    """Generated blocks between <!-- name:start --> / <!-- name:end --> markers: the Treatments menus and
+    Common problems (tools/treatments.py), and the Technology band (tools/technology.py)."""
+    blocks = {
+        "treatments-menu": treatments.mega_menu,
+        "treatments-side": treatments.side_menu,
+        "technology-band": technology.band,
+        "problems": treatments.problems,
+    }
+    for name, make in blocks.items():
+        html = re.sub(rf"(<!-- {name}:start -->\n).*?(\s*<!-- {name}:end -->)",
+                      lambda m: m.group(1) + make().rstrip("\n") + m.group(2), html, flags=re.S)
     return html
 
 

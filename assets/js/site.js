@@ -10,6 +10,8 @@
    5. Hero video            11. Accordions (FAQ)
                             12. Live open status
                             13. Plan your treatment
+                            14. Shared components: tabs, compare
+                                slider, Ask Riya, clinic tour
    ========================================================================== */
 (() => {
   'use strict';
@@ -680,6 +682,91 @@
       daysValue.textContent = state.days;
       planner.querySelectorAll('[data-treatment]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
       show(1);
+    });
+  });
+
+  /* 14. Shared components. Every interactive block on the site is built from these,
+         so they all behave the same way.
+         Tabs ([data-tabs]): role="tablist" / "tab" / "tabpanel"; click, arrow keys, Home and
+         End; aria-selected and a roving tabindex; with data-hash the URL hash names the
+         selected panel, so it can be linked to (#problem-gaps).
+         Compare slider ([data-compare]): a range input drives --pos.
+         Ask Riya ([data-riya-ask]): opens Riya with the question typed in; without Riya
+         the link (WhatsApp) still works.
+         Clinic tour ([data-tour]): nothing loads until Play. -------------------------- */
+  document.querySelectorAll('[data-tabs]').forEach((box) => {
+    const list = box.querySelector('[role="tablist"]');
+    const tabs = [...list.querySelectorAll('[role="tab"]')];
+    const panelOf = (tab) => document.getElementById(tab.getAttribute('aria-controls'));
+    const select = (tab, { focus = false, hash = false } = {}) => {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        panelOf(t).hidden = !on;
+      });
+      if (focus) tab.focus({ preventScroll: true });
+      // A horizontally scrolling list (phones) keeps the selected tab in view
+      if (list.scrollWidth > list.clientWidth + 1) {
+        list.scrollTo({ left: tab.offsetLeft - list.offsetLeft - 20, behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
+      if (hash && box.hasAttribute('data-hash')) history.replaceState(null, '', `#${tab.getAttribute('aria-controls')}`);
+      box.dispatchEvent(new CustomEvent('tabchange', { detail: { tab, panel: panelOf(tab) } }));
+    };
+    tabs.forEach((tab) => tab.addEventListener('click', () => select(tab, { hash: true })));
+    list.addEventListener('keydown', (e) => {
+      const i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      const steps = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+      let next = null;
+      if (e.key in steps) next = tabs[(i + steps[e.key] + tabs.length) % tabs.length];
+      else if (e.key === 'Home') [next] = tabs;
+      else if (e.key === 'End') next = tabs[tabs.length - 1];
+      if (!next) return;
+      e.preventDefault();
+      select(next, { focus: true, hash: true });
+    });
+    // Opened from a link such as /#problem-gaps: select it and bring the block into view
+    if (box.hasAttribute('data-hash') && location.hash) {
+      const tab = tabs.find((t) => `#${t.getAttribute('aria-controls')}` === location.hash);
+      if (tab) {
+        select(tab);
+        requestAnimationFrame(() => box.scrollIntoView({ block: 'start' }));
+      }
+    }
+  });
+
+  document.querySelectorAll('[data-compare]').forEach((ba) => {
+    const range = ba.querySelector('.ba__range');
+    range.addEventListener('input', () => ba.style.setProperty('--pos', `${range.value}%`));
+  });
+
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-riya-ask]');
+    if (!link || !window.arhaRiya) return;
+    e.preventDefault();
+    window.arhaRiya.open(link.dataset.riyaAsk);
+    track('riya_ask', { question: link.dataset.riyaAsk });
+  });
+
+  document.querySelectorAll('[data-tour]').forEach((fig) => {
+    const button = fig.querySelector('.tour__play');
+    button.addEventListener('click', () => {
+      const big = fig.clientWidth * window.devicePixelRatio > 900;
+      const video = document.createElement('video');
+      video.innerHTML = (big ? '' : `<source src="${fig.dataset.base}720.webm" type="video/webm">`)
+        + `<source src="${fig.dataset.base}${big ? '1080' : '720'}.mp4" type="video/mp4">`;
+      video.muted = true;
+      video.playsInline = true;
+      video.controls = true;
+      video.poster = fig.querySelector('img').currentSrc;
+      video.setAttribute('aria-label', 'Arha Dental Care clinic tour, no sound');
+      fig.append(video);
+      fig.classList.add('is-playing');
+      button.remove();
+      video.focus();
+      video.play().catch(() => {});
+      track('tour_play');
     });
   });
 })();

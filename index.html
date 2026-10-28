@@ -267,6 +267,8 @@
       </div>
       <div class="hero__content">
         <div class="hero__text reveal">
+          <!-- Technology USP: SITE["usp_line"] in tools/pages.py (from what Arha's photos show; swap once the equipment list is confirmed) -->
+          <p class="hero__eyebrow" data-show="usp">In-house X-ray · Own sterilisation room · Prosthodontist-led</p>
           <h1 id="hero-title">Specialist dentistry <br class="br-wide">on Peddar Road</h1>
           <p class="hero__lede">Your smile, designed around your face, your comfort and the way you live.</p>
           <a class="cta" href="book/">Book a Consultation</a>
@@ -274,6 +276,16 @@
       </div>
       <span class="hero__scroll" aria-hidden="true"></span>
     </section>
+
+    <!-- =================================================================== GOOGLE RATING STRIP -->
+    <!-- Only the real figures: SITE["google_rating"] / ["google_review_count"] in tools/pages.py (an empty count is hidden) -->
+    <div class="rating-strip">
+      <p class="container rating-strip__inner">
+        <span class="rating-strip__score"><svg class="stars" viewBox="0 0 98 17" aria-hidden="true" focusable="false"><path d="M9.0 0.4L11.2 6.0L17.2 6.3L12.5 10.1L14.1 16.0L9.0 12.7L3.9 16.0L5.5 10.1L0.8 6.3L6.8 6.0ZM29.0 0.4L31.2 6.0L37.2 6.3L32.5 10.1L34.1 16.0L29.0 12.7L23.9 16.0L25.5 10.1L20.8 6.3L26.8 6.0ZM49.0 0.4L51.2 6.0L57.2 6.3L52.5 10.1L54.1 16.0L49.0 12.7L43.9 16.0L45.5 10.1L40.8 6.3L46.8 6.0ZM69.0 0.4L71.2 6.0L77.2 6.3L72.5 10.1L74.1 16.0L69.0 12.7L63.9 16.0L65.5 10.1L60.8 6.3L66.8 6.0ZM89.0 0.4L91.2 6.0L97.2 6.3L92.5 10.1L94.1 16.0L89.0 12.7L83.9 16.0L85.5 10.1L80.8 6.3L86.8 6.0Z"/></svg><span><span data-show="google-rating">5.0</span> on Google</span></span>
+        <span class="rating-strip__count" data-show="google-count"></span>
+        <a class="rating-strip__link" href="#" data-google-reviews>Read reviews<svg class="arrow" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.2 2H8v4.8"/></svg></a>
+      </p>
+    </div>
 
     <!-- =================================================================== 2. INTRO + PILLARS -->
     <section class="section intro" aria-labelledby="intro-title">
@@ -328,17 +340,320 @@
     </section>
 
 
-    <!-- =================================================================== 3. CLINIC STATEMENT (Arha's own photo) -->
-    <section class="statement" aria-labelledby="calm-title">
-      <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAYADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAMCBAUBBv/EAB4QAAMAAwEAAwEAAAAAAAAAAAABAgMEIRESMUFR/8QAFwEBAQEBAAAAAAAAAAAAAAAAAgEDAP/EABsRAQACAwEBAAAAAAAAAAAAAAACMQEDERIy/9oADAMBAAIRAxEAPwD1i2J/p1UqfDEea/TQ0rql0MdncrKHMJ7TT4V5w+dHbGOnXqBeqfGgTs4UnhyfHhZdpootNdFZNhzwHrhHLVl/g2IWP6ADlXMUza6gya6/EADtnWSaxJSzJ2V5bADLZ8k//9k=); background-position: 35% 70%">
-        <source type="image/avif" srcset="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-640.avif 640w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1280.avif 1280w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1920.avif 1920w" sizes="100vw">
-        <source type="image/webp" srcset="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-640.webp 640w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1280.webp 1280w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1920.webp 1920w" sizes="100vw">
-        <img src="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1280.jpg" srcset="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-640.jpg 640w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1280.jpg 1280w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1920.jpg 1920w" sizes="100vw" width="1280" height="641" loading="lazy" decoding="async" alt="Arha Dental Care reception: a curved front desk, soft seating and a glass entrance door" style="object-position: 35% 70%">
-      </picture>
-      <div class="container statement__content reveal">
-        <h2 id="calm-title">A clinic built around calm</h2>
-        <p class="lede">Marble, soft light and quiet rooms. From the moment you arrive, everything is designed to make specialist dentistry feel unhurried.</p>
-        <a class="cta" href="the-practice/">Discover the clinic</a>
+    <!-- =================================================================== TECHNOLOGY (charcoal band) -->
+    <!-- Arha's own photographs only; only what is visible is described, no brands until confirmed (tools/technology.py) -->
+    <section class="section tech" aria-labelledby="tech-title">
+      <div class="container">
+        <div class="tech__head reveal">
+          <p class="eyebrow">Technology</p>
+          <h2 id="tech-title">Equipped for precision</h2>
+          <p class="lede">Photographed at Arha on Peddar Road. Choose an item to see what it is and what it means for you.</p>
+        </div>
+        <!-- technology-band:start -->
+      <div class="tech__body" data-tabs>
+        <div class="tech__tabs" role="tablist" aria-label="Arha’s technology" aria-orientation="vertical">
+          <button class="tech__tab" type="button" role="tab" id="tt-panoramic-x-ray" aria-controls="tp-panoramic-x-ray" aria-selected="true"><span class="tech__num">01</span>Panoramic X-ray</button>
+          <button class="tech__tab" type="button" role="tab" id="tt-treatment-rooms" aria-controls="tp-treatment-rooms" aria-selected="false" tabindex="-1"><span class="tech__num">02</span>Treatment rooms</button>
+          <button class="tech__tab" type="button" role="tab" id="tt-planning-desk" aria-controls="tp-planning-desk" aria-selected="false" tabindex="-1"><span class="tech__num">03</span>Planning on screen</button>
+          <button class="tech__tab" type="button" role="tab" id="tt-sterilisation-room" aria-controls="tp-sterilisation-room" aria-selected="false" tabindex="-1"><span class="tech__num">04</span>Sterilisation</button>
+          <button class="tech__tab" type="button" role="tab" id="tt-instrument-care" aria-controls="tp-instrument-care" aria-selected="false" tabindex="-1"><span class="tech__num">05</span>Instrument care</button>
+        </div>
+        <div class="tech__panel" role="tabpanel" id="tp-panoramic-x-ray" aria-labelledby="tt-panoramic-x-ray" tabindex="0">
+          <div class="tech__media media">
+            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCABKADADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAwQFAgYBB//EACAQAAICAQUBAQEAAAAAAAAAAAABAgMEBRESITEiQRP/xAAXAQEBAQEAAAAAAAAAAAAAAAABAAID/8QAGxEBAQADAQEBAAAAAAAAAAAAAAECERIhMUH/2gAMAwEAAhEDEQA/AJ8U4PtFHDm90wmViJPpBsbH2h4PPul0br1KFKSbKWLqEbl0zjNThYrfncraHyUFyZkyuitnyiTrZbMak/kmZVvGRmtRm/thseS47CVtybC49yS7O0s6csp4T1aajLpBdIu3RvKhC709wqlX4GWt+LH4o2W7RJWTLlJjtz+SbZL6ZzdCkLXJjUW0ifS+x+D+QA9ScvRiL4GMXtGMifFsQ3ffFR7ZMstUpPZiOqZsoeMVxMp2esmocpf0PRn8mKcOS/A38JLrYEewHyQvqCab2G8Cpx9DZOH/AE72EOI1VNgdNXZX13DdcW9iNhqcZPofxPoUceK/DccNSfgWIzSENArxuD8G1Wtuz1m/wqomahp0MlbNEyGgQg91E6RmWCf/2Q==); background-position: 50% 24%">
+              <source type="image/avif" srcset="assets/img/dental-implant-equipment-arha-dental-care-mumbai-640.avif 640w, assets/img/dental-implant-equipment-arha-dental-care-mumbai-1280.avif 1280w, assets/img/dental-implant-equipment-arha-dental-care-mumbai-1920.avif 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <source type="image/webp" srcset="assets/img/dental-implant-equipment-arha-dental-care-mumbai-640.webp 640w, assets/img/dental-implant-equipment-arha-dental-care-mumbai-1280.webp 1280w, assets/img/dental-implant-equipment-arha-dental-care-mumbai-1920.webp 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <img src="assets/img/dental-implant-equipment-arha-dental-care-mumbai-1280.jpg" srcset="assets/img/dental-implant-equipment-arha-dental-care-mumbai-640.jpg 640w, assets/img/dental-implant-equipment-arha-dental-care-mumbai-1280.jpg 1280w, assets/img/dental-implant-equipment-arha-dental-care-mumbai-1920.jpg 1920w" sizes="(min-width: 900px) 56vw, 100vw" width="1280" height="1973" loading="lazy" decoding="async" alt="Arha's X-ray room: a floor-standing panoramic X-ray unit against a marble wall, with its computer beside it" style="object-position: 50% 24%">
+            </picture>
+          </div>
+          <dl class="tech__text">
+            <div><dt>What it is</dt><dd>A floor-standing panoramic X-ray unit in its own room, which images all your teeth and both jaws in one pass.</dd></div>
+            <div><dt>What it means for you</dt><dd>Routine X-rays are taken here during your visit, with no trip to a separate imaging centre.</dd></div>
+          </dl>
+        </div>
+        <div class="tech__panel" role="tabpanel" id="tp-treatment-rooms" aria-labelledby="tt-treatment-rooms" tabindex="0" hidden>
+          <div class="tech__media media">
+            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAQCAwUBBv/EACEQAAICAgIBBQAAAAAAAAAAAAABAgMEERIhMQUTFCJB/8QAFwEBAQEBAAAAAAAAAAAAAAAAAQIAA//EABcRAQEBAQAAAAAAAAAAAAAAAAABETH/2gAMAwEAAhEDEQA/AJVWpsahJaMWmUkx+qcmc4qnGtkGtEJWNInWnZHsrArlJLwLW3NM0KsaLl9mU5mLBeGbGY1E3KaWjapr1Wm0QwvT1yTaNG6lV1BDYz5tbOK/24nYx5WBk1Pj0ikl5Zkk3pit2bNvtl3x3LwimzGf6gU9JiLs7nvUAAIxHDW59jORFcH0AFziapxYpt7RVmRSfSAApj//2Q==); background-position: 50% 60%">
+              <source type="image/avif" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-01-640.avif 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.avif 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-01-1920.avif 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <source type="image/webp" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-01-640.webp 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.webp 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-01-1920.webp 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <img src="assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.jpg" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-01-640.jpg 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.jpg 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-01-1920.jpg 1920w" sizes="(min-width: 900px) 56vw, 100vw" width="1280" height="958" loading="lazy" decoding="async" alt="An Arha treatment room: a cream dental chair under an overhead light, marble walls and a laptop on the counter" style="object-position: 50% 60%">
+            </picture>
+          </div>
+          <dl class="tech__text">
+            <div><dt>What it is</dt><dd>Rooms with a fully adjustable dental chair, an overhead operating light and a screen beside the chair.</dd></div>
+            <div><dt>What it means for you</dt><dd>You lie back comfortably, the work area is well lit, and your images can be shown to you as we explain.</dd></div>
+          </dl>
+        </div>
+        <div class="tech__panel" role="tabpanel" id="tp-planning-desk" aria-labelledby="tt-planning-desk" tabindex="0" hidden>
+          <div class="tech__media media">
+            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAABAUGAAMB/8QAIhAAAgIBBAIDAQAAAAAAAAAAAQIAAwQFERIhEzEiQVFh/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAIDAf/EABkRAQEBAQEBAAAAAAAAAAAAAAABEQIxQf/aAAwDAQACEQMRAD8AZBu4VXYNoBufqE0KzSNUrzPv8VRaTFuucLSJTZ+KbKiJH52kOHYgSsiewxxNd8loWVWJdzqDSA03T3XIBYH3LjGHChR/IB1fFWrszicgVtsojHMUMp72iewqrfsfITaON6PX8uonyb6g5HRnW7m1Z49RFali2ksTMvXyNnO+nFHhJ3Gwh6sOPRkytxX7hNeolBsTEqkxU6k5Ws7GJcdi9vyO800YsG2KAnqJ81R31NNMaS2MefudF7E00KI//9k=); background-position: 50% 50%">
+              <source type="image/avif" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-04-640.avif 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-04-1280.avif 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-04-1920.avif 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <source type="image/webp" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-04-640.webp 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-04-1280.webp 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-04-1920.webp 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <img src="assets/img/dental-operatory-arha-dental-care-peddar-road-04-1280.jpg" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-04-640.jpg 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-04-1280.jpg 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-04-1920.jpg 1920w" sizes="(min-width: 900px) 56vw, 100vw" width="1280" height="960" loading="lazy" decoding="async" alt="A consultation desk in a treatment room with a large monitor, a laptop and notebooks" style="object-position: 50% 50%">
+            </picture>
+          </div>
+          <dl class="tech__text">
+            <div><dt>What it is</dt><dd>A consultation desk in the treatment room, with a large monitor for X-rays and photographs.</dd></div>
+            <div><dt>What it means for you</dt><dd>Your options are talked through on screen, at a desk, before anything is decided.</dd></div>
+          </dl>
+        </div>
+        <div class="tech__panel" role="tabpanel" id="tp-sterilisation-room" aria-labelledby="tt-sterilisation-room" tabindex="0" hidden>
+          <div class="tech__media media">
+            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCABMADADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAwQFAgYBB//EACIQAAEEAgIDAAMAAAAAAAAAAAEAAgMRBCEFMRITQRQyQv/EABcBAQEBAQAAAAAAAAAAAAAAAAABAgP/xAAXEQEBAQEAAAAAAAAAAAAAAAAAEQEh/9oADAMBAAIRAxEAPwAvt8V4ZfILJgc74m8bBc8bCw0Rc2yixROd0E47CIfVKhiYjWtshURZMZwHSUkiIPS6maFldKbPjC9BEFg9Z7pNx5MMWrCie1wboqZPPKJf2KlV2HtZIbFLTZK0oXG5NgBxTuTketttUpD7j5JaUbUh3MSMNUUvJzLyeir04211hCfje1y1AfJNxsUitYmCWgEFNPxyRR2hMldGjDKBG0zOpul34UZ7CA7BiPwJmaceJIUibkHseQu3GDcOK9vxNMFdq1+OwjpKT4lbAXONUqACFI5TKOOdKsQWaKh8wwPVw0rFyvlpxRhJDJskKNJjOG2oJfLH9KsR9aC14itrxi2ekCU+MH3S57l8NzbNLqv6SfLRtMJNfEHCkUaKFKxh+JjKFSmkpIUH/9k=); background-position: 70% 62%">
+              <source type="image/avif" srcset="assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-640.avif 640w, assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-1280.avif 1280w, assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-1920.avif 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <source type="image/webp" srcset="assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-640.webp 640w, assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-1280.webp 1280w, assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-1920.webp 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <img src="assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-1280.jpg" srcset="assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-640.jpg 640w, assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-1280.jpg 1280w, assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-1920.jpg 1920w" sizes="(min-width: 900px) 56vw, 100vw" width="1280" height="2038" loading="lazy" decoding="async" alt="Arha's sterilisation room: a benchtop steam steriliser beside a sink, under pale cabinets" style="object-position: 70% 62%">
+            </picture>
+          </div>
+          <dl class="tech__text">
+            <div><dt>What it is</dt><dd>A separate sterilisation room with a benchtop steam steriliser and its own sink.</dd></div>
+            <div><dt>What it means for you</dt><dd>Instruments are cleaned and sterilised in their own room, away from where you are treated.</dd></div>
+          </dl>
+        </div>
+        <div class="tech__panel" role="tabpanel" id="tp-instrument-care" aria-labelledby="tt-instrument-care" tabindex="0" hidden>
+          <div class="tech__media media">
+            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAQDBQYCAf/EACAQAAICAgIDAQEAAAAAAAAAAAABAgMEERIxBRMhFFH/xAAXAQADAQAAAAAAAAAAAAAAAAAAAQID/8QAGREBAQEBAQEAAAAAAAAAAAAAAAECEQMh/9oADAMBAAIRAxEAPwAvg0QJ67GpTTrbZR5ebwsaREydq0T30dwg5MV8bd74/Syqjxn0Fhyu6saXehqMeC+jNEouOtEeSv4TrHw86Z/Ls9db0ZvInzsbZp7sd3rQnLwLk9msQj8HLRoadSkI4Hi/zofpXrmKhaU0rhsiuj9JqLk4aObPrI9NcXidVMEtjC6ABwnuyOaAAoiTHk99ji6ADLTTL//Z); background-position: 50% 50%">
+              <source type="image/avif" srcset="assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-640.avif 640w, assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-1280.avif 1280w, assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-1920.avif 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <source type="image/webp" srcset="assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-640.webp 640w, assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-1280.webp 1280w, assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-1920.webp 1920w" sizes="(min-width: 900px) 56vw, 100vw">
+              <img src="assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-1280.jpg" srcset="assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-640.jpg 640w, assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-1280.jpg 1280w, assets/img/dental-dentistry-equipment-arha-dental-care-mumbai-1920.jpg 1920w" sizes="(min-width: 900px) 56vw, 100vw" width="1280" height="960" loading="lazy" decoding="async" alt="An automatic handpiece cleaning and oiling unit next to a white water distiller on a counter" style="object-position: 50% 50%">
+            </picture>
+          </div>
+          <dl class="tech__text">
+            <div><dt>What it is</dt><dd>An automatic unit that cleans and oils the dental handpieces, beside a water distiller.</dd></div>
+            <div><dt>What it means for you</dt><dd>Handpieces are maintained after use, and distilled water is made on site for the equipment.</dd></div>
+          </dl>
+        </div>
+      </div>        <!-- technology-band:end -->
+        <div class="tech__foot reveal">
+          <a class="cta" href="technology/">See all our technology<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== COMMON PROBLEMS WE FIX -->
+    <!-- Generated from PROBLEMS in tools/treatments.py; the pairs are line illustrations, never patients -->
+    <section class="section problems-section" id="common-problems" aria-labelledby="problems-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="problems-title">Common problems we fix</h2>
+          <p class="lede">Choose what is bothering you to see how it is usually put right.</p>
+        </div>
+        <!-- problems:start -->
+        <div class="problems" data-tabs data-hash>
+          <div class="problems__tabs" role="tablist" aria-label="Common problems" aria-orientation="vertical">
+            <button class="problems__tab" type="button" role="tab" id="pt-missing-tooth" aria-controls="problem-missing-tooth" aria-selected="true">A missing tooth</button>
+            <button class="problems__tab" type="button" role="tab" id="pt-chipped-tooth" aria-controls="problem-chipped-tooth" aria-selected="false" tabindex="-1">Chipped or broken tooth</button>
+            <button class="problems__tab" type="button" role="tab" id="pt-gaps" aria-controls="problem-gaps" aria-selected="false" tabindex="-1">Gaps between teeth</button>
+            <button class="problems__tab" type="button" role="tab" id="pt-crooked-teeth" aria-controls="problem-crooked-teeth" aria-selected="false" tabindex="-1">Crooked teeth</button>
+            <button class="problems__tab" type="button" role="tab" id="pt-stained-teeth" aria-controls="problem-stained-teeth" aria-selected="false" tabindex="-1">Yellow or stained teeth</button>
+            <button class="problems__tab" type="button" role="tab" id="pt-toothache" aria-controls="problem-toothache" aria-selected="false" tabindex="-1">Toothache or sensitivity</button>
+            <button class="problems__tab" type="button" role="tab" id="pt-bleeding-gums" aria-controls="problem-bleeding-gums" aria-selected="false" tabindex="-1">Bleeding gums</button>
+            <button class="problems__tab" type="button" role="tab" id="pt-metal-fillings" aria-controls="problem-metal-fillings" aria-selected="false" tabindex="-1">Old metal fillings</button>
+            <button class="problems__tab" type="button" role="tab" id="pt-dentures" aria-controls="problem-dentures" aria-selected="false" tabindex="-1">Loose or uncomfortable dentures</button>
+            <button class="problems__tab" type="button" role="tab" id="pt-child-teeth" aria-controls="problem-child-teeth" aria-selected="false" tabindex="-1">My child’s teeth</button>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-missing-tooth" aria-labelledby="pt-missing-tooth" tabindex="0">
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-missing-tooth-after.svg" alt="Illustration, after: the gap filled by an implant crown, with the implant post shown in the bone above" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-missing-tooth-before.svg" alt="Illustration, before: a gap where an upper front tooth is missing" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: a missing tooth">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>A missing tooth</h3>
+              <p>A gap affects how you chew and, over time, how the teeth beside it sit.</p>
+              <p>It can be replaced with an implant, a bridge or a denture, depending on your gums, your bone and the teeth around it.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="dental-implants/">Dental implants</a></li><li><a href="crowns-bridges/">Crowns &amp; bridges</a></li></ul>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20a%20missing%20tooth.%20What%20are%20my%20options%3F" target="_blank" rel="noopener" data-riya-ask="I have a missing tooth. What are my options?">Ask Riya about this</a>
+            </div>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-chipped-tooth" aria-labelledby="pt-chipped-tooth" tabindex="0" hidden>
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-chipped-tooth-after.svg" alt="Illustration, after: the chipped corner rebuilt in tooth-coloured material" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-chipped-tooth-before.svg" alt="Illustration, before: an upper front tooth with a chipped corner" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: chipped or broken tooth">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>Chipped or broken tooth</h3>
+              <p>Small chips can often be rebuilt with tooth-coloured bonding.</p>
+              <p>A larger break may need a crown to protect what is left of the tooth.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="cosmetic-dentistry/">Cosmetic dentistry</a></li><li><a href="crowns-bridges/">Crowns &amp; bridges</a></li></ul>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20chipped%20a%20tooth.%20What%20can%20be%20done%3F" target="_blank" rel="noopener" data-riya-ask="I have chipped a tooth. What can be done?">Ask Riya about this</a>
+            </div>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-gaps" aria-labelledby="pt-gaps" tabindex="0" hidden>
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-gaps-after.svg" alt="Illustration, after: front teeth with the gaps closed" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-gaps-before.svg" alt="Illustration, before: gaps between the upper front teeth" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: gaps between teeth">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>Gaps between teeth</h3>
+              <p>Gaps can be closed by moving the teeth, or by adding to them with bonding or veneers.</p>
+              <p>The right choice depends on the size of the gap and on your bite.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="invisalign/">Invisalign clear aligners</a></li><li><a href="orthodontics/">Orthodontics (braces)</a></li><li><a href="cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20gaps%20between%20my%20teeth.%20How%20can%20they%20be%20closed%3F" target="_blank" rel="noopener" data-riya-ask="I have gaps between my teeth. How can they be closed?">Ask Riya about this</a>
+            </div>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-crooked-teeth" aria-labelledby="pt-crooked-teeth" tabindex="0" hidden>
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-crooked-teeth-after.svg" alt="Illustration, after: upper front teeth in a straight, even line" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-crooked-teeth-before.svg" alt="Illustration, before: crooked upper front teeth: turned and overlapping" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: crooked teeth">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>Crooked teeth</h3>
+              <p>Teeth can be straightened at almost any age, with clear aligners or with braces.</p>
+              <p>Straighter teeth are also easier to keep clean.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="invisalign/">Invisalign clear aligners</a></li><li><a href="orthodontics/">Orthodontics (braces)</a></li></ul>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20teeth%20are%20crooked.%20Are%20aligners%20or%20braces%20right%20for%20me%3F" target="_blank" rel="noopener" data-riya-ask="My teeth are crooked. Are aligners or braces right for me?">Ask Riya about this</a>
+            </div>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-stained-teeth" aria-labelledby="pt-stained-teeth" tabindex="0" hidden>
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-stained-teeth-after.svg" alt="Illustration, after: clean, brighter front teeth" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-stained-teeth-before.svg" alt="Illustration, before: stained front teeth" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: yellow or stained teeth">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>Yellow or stained teeth</h3>
+              <p>Surface stains often lift with a professional clean. Deeper colour responds to whitening.</p>
+              <p>Where whitening cannot help, bonding or veneers can.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="general-dentistry/">General dentistry &amp; cleaning</a></li><li><a href="cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20teeth%20look%20yellow.%20Can%20they%20be%20whitened%3F" target="_blank" rel="noopener" data-riya-ask="My teeth look yellow. Can they be whitened?">Ask Riya about this</a>
+            </div>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-toothache" aria-labelledby="pt-toothache" tabindex="0" hidden>
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-toothache-after.svg" alt="Illustration, after: the same molar cleaned, sealed and restored" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-toothache-before.svg" alt="Illustration, before: cross-section of a molar with decay reaching the nerve" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: toothache or sensitivity">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>Toothache or sensitivity</h3>
+              <p>Sensitivity can come from worn enamel or receding gums. Pain that lingers often means decay has reached the nerve.</p>
+              <p>An exam and an X-ray tell which it is. A filling or root canal treatment can usually save the tooth.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="root-canal-treatment/">Root canal treatment</a></li><li><a href="general-dentistry/">General dentistry &amp; cleaning</a></li></ul>
+              <p class="problems__urgent">In severe pain or swollen? <a href="emergency/">Dental emergencies</a></p>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20toothache.%20Should%20I%20come%20in%3F" target="_blank" rel="noopener" data-riya-ask="I have toothache. Should I come in?">Ask Riya about this</a>
+            </div>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-bleeding-gums" aria-labelledby="pt-bleeding-gums" tabindex="0" hidden>
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-bleeding-gums-after.svg" alt="Illustration, after: firm gums with a tight, even margin" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-bleeding-gums-before.svg" alt="Illustration, before: swollen gums that bleed between the teeth" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: bleeding gums">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>Bleeding gums</h3>
+              <p>Gums that bleed when you brush are usually inflamed, and that is treatable.</p>
+              <p>A professional clean and better care at home often settle it. Left alone, it can loosen teeth.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="general-dentistry/">General dentistry &amp; cleaning</a></li></ul>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20gums%20bleed%20when%20I%20brush.%20What%20should%20I%20do%3F" target="_blank" rel="noopener" data-riya-ask="My gums bleed when I brush. What should I do?">Ask Riya about this</a>
+            </div>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-metal-fillings" aria-labelledby="pt-metal-fillings" tabindex="0" hidden>
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-metal-fillings-after.svg" alt="Illustration, after: two back teeth with tooth-coloured fillings" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-metal-fillings-before.svg" alt="Illustration, before: two back teeth with dark metal fillings" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: old metal fillings">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>Old metal fillings</h3>
+              <p>Old metal fillings can crack, or leak at the edges, over the years.</p>
+              <p>When one needs replacing, it can be redone in tooth-coloured material, or with a crown.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="general-dentistry/">General dentistry &amp; cleaning</a></li><li><a href="crowns-bridges/">Crowns &amp; bridges</a></li></ul>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20Can%20my%20old%20metal%20fillings%20be%20replaced%3F" target="_blank" rel="noopener" data-riya-ask="Can my old metal fillings be replaced?">Ask Riya about this</a>
+            </div>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-dentures" aria-labelledby="pt-dentures" tabindex="0" hidden>
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-dentures-after.svg" alt="Illustration, after: a lower denture held firmly by two implants" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-dentures-before.svg" alt="Illustration, before: a lower denture lifting off the gum" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: loose or uncomfortable dentures">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>Loose or uncomfortable dentures</h3>
+              <p>A denture that moves when you eat or speak can be held firmly by a few implants.</p>
+              <p>Sometimes a refit or a new denture is enough.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="dental-implants/">Dental implants</a></li><li><a href="full-mouth-rehabilitation/">Full mouth rehabilitation</a></li></ul>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20denture%20is%20loose.%20Can%20implants%20help%3F" target="_blank" rel="noopener" data-riya-ask="My denture is loose. Can implants help?">Ask Riya about this</a>
+            </div>
+          </div>
+          <div class="problems__panel" role="tabpanel" id="problem-child-teeth" aria-labelledby="pt-child-teeth" tabindex="0" hidden>
+            <figure class="compare">
+              <div class="ba" data-compare>
+                <img src="assets/illustrations/problem-child-teeth-after.svg" alt="Illustration, after: baby teeth kept healthy, with the small cavity filled" width="640" height="400" loading="lazy">
+                <img class="ba__before" src="assets/illustrations/problem-child-teeth-before.svg" alt="Illustration, before: baby teeth with a small cavity starting" width="640" height="400" loading="lazy">
+                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
+                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: my child’s teeth">
+                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+              </div>
+              <figcaption>Illustration, not a patient</figcaption>
+            </figure>
+            <div class="problems__text">
+              <h3>My child’s teeth</h3>
+              <p>Baby teeth hold space for the adult teeth and matter for eating and speech.</p>
+              <p>Regular checks, sealants and fluoride help stop decay early.</p>
+              <p class="problems__usually">Usually treated with</p>
+              <ul class="chips"><li><a href="kids-dentistry/">Kids’ dentistry</a></li></ul>
+              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20When%20should%20my%20child%20first%20see%20a%20dentist%3F" target="_blank" rel="noopener" data-riya-ask="When should my child first see a dentist?">Ask Riya about this</a>
+            </div>
+          </div>
+        </div>        <!-- problems:end -->
       </div>
     </section>
 
@@ -478,7 +793,36 @@
     <!-- cases:end -->
         </div>
         <div class="section-cta reveal">
-          <a class="cta" href="before-after/">See all results</a>
+          <a class="cta" href="our-work/">See all results<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== WHAT PATIENTS SAY (stone, straight after Before & After) -->
+    <!-- Excerpts from Arha's Google reviews. Reviewers' first names and permission to quote: notes/TO-CONFIRM.md -->
+    <section class="section section--stone texture reviews" aria-labelledby="reviews-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="reviews-title">What patients say</h2>
+          <p class="reviews__score"><svg class="stars" viewBox="0 0 98 17" aria-hidden="true" focusable="false"><path d="M9.0 0.4L11.2 6.0L17.2 6.3L12.5 10.1L14.1 16.0L9.0 12.7L3.9 16.0L5.5 10.1L0.8 6.3L6.8 6.0ZM29.0 0.4L31.2 6.0L37.2 6.3L32.5 10.1L34.1 16.0L29.0 12.7L23.9 16.0L25.5 10.1L20.8 6.3L26.8 6.0ZM49.0 0.4L51.2 6.0L57.2 6.3L52.5 10.1L54.1 16.0L49.0 12.7L43.9 16.0L45.5 10.1L40.8 6.3L46.8 6.0ZM69.0 0.4L71.2 6.0L77.2 6.3L72.5 10.1L74.1 16.0L69.0 12.7L63.9 16.0L65.5 10.1L60.8 6.3L66.8 6.0ZM89.0 0.4L91.2 6.0L97.2 6.3L92.5 10.1L94.1 16.0L89.0 12.7L83.9 16.0L85.5 10.1L80.8 6.3L86.8 6.0Z"/></svg><span><span data-show="google-rating">5.0</span> on Google</span></p>
+        </div>
+        <ul class="voices">
+          <li class="voice voice--lead reveal">
+            <blockquote><p>“He managed my pain and resolved the problem on the same day.”</p></blockquote>
+            <p class="voice__by"><svg class="stars" viewBox="0 0 98 17" aria-hidden="true" focusable="false"><path d="M9.0 0.4L11.2 6.0L17.2 6.3L12.5 10.1L14.1 16.0L9.0 12.7L3.9 16.0L5.5 10.1L0.8 6.3L6.8 6.0ZM29.0 0.4L31.2 6.0L37.2 6.3L32.5 10.1L34.1 16.0L29.0 12.7L23.9 16.0L25.5 10.1L20.8 6.3L26.8 6.0ZM49.0 0.4L51.2 6.0L57.2 6.3L52.5 10.1L54.1 16.0L49.0 12.7L43.9 16.0L45.5 10.1L40.8 6.3L46.8 6.0ZM69.0 0.4L71.2 6.0L77.2 6.3L72.5 10.1L74.1 16.0L69.0 12.7L63.9 16.0L65.5 10.1L60.8 6.3L66.8 6.0ZM89.0 0.4L91.2 6.0L97.2 6.3L92.5 10.1L94.1 16.0L89.0 12.7L83.9 16.0L85.5 10.1L80.8 6.3L86.8 6.0Z"/></svg><span>A patient · on Google</span></p>
+          </li>
+          <li class="voice reveal">
+            <blockquote><p>“He is patient, gentle and takes the time to answer all my questions.”</p></blockquote>
+            <p class="voice__by"><svg class="stars" viewBox="0 0 98 17" aria-hidden="true" focusable="false"><path d="M9.0 0.4L11.2 6.0L17.2 6.3L12.5 10.1L14.1 16.0L9.0 12.7L3.9 16.0L5.5 10.1L0.8 6.3L6.8 6.0ZM29.0 0.4L31.2 6.0L37.2 6.3L32.5 10.1L34.1 16.0L29.0 12.7L23.9 16.0L25.5 10.1L20.8 6.3L26.8 6.0ZM49.0 0.4L51.2 6.0L57.2 6.3L52.5 10.1L54.1 16.0L49.0 12.7L43.9 16.0L45.5 10.1L40.8 6.3L46.8 6.0ZM69.0 0.4L71.2 6.0L77.2 6.3L72.5 10.1L74.1 16.0L69.0 12.7L63.9 16.0L65.5 10.1L60.8 6.3L66.8 6.0ZM89.0 0.4L91.2 6.0L97.2 6.3L92.5 10.1L94.1 16.0L89.0 12.7L83.9 16.0L85.5 10.1L80.8 6.3L86.8 6.0Z"/></svg><span>A patient · on Google</span></p>
+          </li>
+          <li class="voice reveal">
+            <blockquote><p>“Excellent doctor and excellent service.”</p></blockquote>
+            <p class="voice__by"><svg class="stars" viewBox="0 0 98 17" aria-hidden="true" focusable="false"><path d="M9.0 0.4L11.2 6.0L17.2 6.3L12.5 10.1L14.1 16.0L9.0 12.7L3.9 16.0L5.5 10.1L0.8 6.3L6.8 6.0ZM29.0 0.4L31.2 6.0L37.2 6.3L32.5 10.1L34.1 16.0L29.0 12.7L23.9 16.0L25.5 10.1L20.8 6.3L26.8 6.0ZM49.0 0.4L51.2 6.0L57.2 6.3L52.5 10.1L54.1 16.0L49.0 12.7L43.9 16.0L45.5 10.1L40.8 6.3L46.8 6.0ZM69.0 0.4L71.2 6.0L77.2 6.3L72.5 10.1L74.1 16.0L69.0 12.7L63.9 16.0L65.5 10.1L60.8 6.3L66.8 6.0ZM89.0 0.4L91.2 6.0L97.2 6.3L92.5 10.1L94.1 16.0L89.0 12.7L83.9 16.0L85.5 10.1L80.8 6.3L86.8 6.0Z"/></svg><span>A patient · on Google</span></p>
+          </li>
+        </ul>
+        <div class="section-cta reveal">
+          <!-- href set from SITE["google_reviews_url"] by assets/js/site.js -->
+          <a class="cta" href="#" data-google-reviews>Read all reviews on Google<svg class="arrow" viewBox="0 0 10 10" aria-hidden="true" focusable="false"><path d="M2 8 8 2M3.2 2H8v4.8"/></svg></a>
         </div>
       </div>
     </section>
@@ -489,6 +833,93 @@
         <h2 id="band-title">Specialist dentistry, reimagined</h2>
         <p>Arha brings specialist-level restorative and cosmetic care to South Mumbai, with the warmth of a practice that has looked after families for over four decades.</p>
         <a class="cta" href="book/">Book a Consultation</a>
+      </div>
+    </section>
+
+    <!-- =================================================================== KIDS' DENTISTRY TEASER -->
+    <!-- Line illustration until a licensed parent-and-child photograph is added (notes/TO-CONFIRM.md) -->
+    <section class="section kids-teaser" aria-labelledby="kids-title">
+      <div class="container split split--even">
+        <div class="split__media kids-teaser__media reveal">
+          <img src="assets/illustrations/problem-child-teeth-after.svg" width="640" height="400" loading="lazy" alt="Line illustration of a child's baby teeth">
+        </div>
+        <div class="split__text reveal">
+          <p class="eyebrow">Kids’ dentistry</p>
+          <h2 id="kids-title">Gentle first visits for children</h2>
+          <p>A first visit by your child’s first birthday, or within six months of the first tooth, is the guidance we follow.</p>
+          <p>Visits are short and unhurried, nothing is forced, and parents can stay in the room.</p>
+          <a class="cta" href="kids-dentistry/">Kids’ dentistry<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== 3. CLINIC STATEMENT (Arha's own photo) -->
+    <section class="statement" aria-labelledby="calm-title">
+      <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAYADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAMCBAUBBv/EAB4QAAMAAwEAAwEAAAAAAAAAAAABAgMEIRESMUFR/8QAFwEBAQEBAAAAAAAAAAAAAAAAAgEDAP/EABsRAQACAwEBAAAAAAAAAAAAAAACMQEDERIy/9oADAMBAAIRAxEAPwD1i2J/p1UqfDEea/TQ0rql0MdncrKHMJ7TT4V5w+dHbGOnXqBeqfGgTs4UnhyfHhZdpootNdFZNhzwHrhHLVl/g2IWP6ADlXMUza6gya6/EADtnWSaxJSzJ2V5bADLZ8k//9k=); background-position: 35% 70%">
+        <source type="image/avif" srcset="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-640.avif 640w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1280.avif 1280w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1920.avif 1920w" sizes="100vw">
+        <source type="image/webp" srcset="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-640.webp 640w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1280.webp 1280w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1920.webp 1920w" sizes="100vw">
+        <img src="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1280.jpg" srcset="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-640.jpg 640w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1280.jpg 1280w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-lower-1920.jpg 1920w" sizes="100vw" width="1280" height="641" loading="lazy" decoding="async" alt="Arha Dental Care reception: a curved front desk, soft seating and a glass entrance door" style="object-position: 35% 70%">
+      </picture>
+      <div class="container statement__content reveal">
+        <h2 id="calm-title">A clinic built around calm</h2>
+        <p class="lede">Marble, soft light and quiet rooms. From the moment you arrive, everything is designed to make specialist dentistry feel unhurried.</p>
+        <a class="cta" href="the-practice/">Discover the clinic</a>
+      </div>
+    </section>
+
+    <!-- =================================================================== THE PRACTICE TEASER -->
+    <section class="section practice-teaser" aria-labelledby="practice-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="practice-title">Inside the practice</h2>
+          <p class="lede">Reception, lounge and treatment rooms on Peddar Road, photographed as they are.</p>
+        </div>
+        <div class="practice-grid">
+          <!-- Clinic tour (tools/video.py --tour): nothing loads until Play; no sound; no autoplay -->
+          <figure class="tour reveal" data-tour data-base="assets/video/tour-">
+            <picture class="fill">
+              <source type="image/avif" srcset="assets/video/tour-poster-720.avif 720w, assets/video/tour-poster-1080.avif 1080w" sizes="(min-width: 900px) 30vw, 100vw">
+              <source type="image/webp" srcset="assets/video/tour-poster-720.webp 720w, assets/video/tour-poster-1080.webp 1080w" sizes="(min-width: 900px) 30vw, 100vw">
+              <img src="assets/video/tour-poster-720.jpg" width="720" height="1280" loading="lazy" decoding="async" alt="Arha's reception, the first frame of the clinic tour">
+            </picture>
+            <button class="tour__play" type="button">
+              <span class="tour__icon" aria-hidden="true"></span>
+              <span class="tour__label">Play the clinic tour <span class="tour__len">1 min 24 s · no sound</span></span>
+            </button>
+          </figure>
+          <div class="practice-grid__item media media--hover reveal">
+            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAoADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAUCAwQGAf/EACAQAAEFAAIDAQEAAAAAAAAAAAEAAgMEEQUhEhMxIkH/xAAXAQEBAQEAAAAAAAAAAAAAAAABAgAD/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAERAhL/2gAMAwEAAhEDEQA/AMgsMcM1aa1Z0nYC5+q2QzDSV3PERs9A37ijFE81RzD8XsURPWJ9Zrtf8CphrNY7sJBLLWd5jpNuPp/gEq6eJujpXxODG4Fd5TLrkW1g1wICbVLZhAGqsV1EwZ2ubodQ2PaFGab1jVjpE74q69E7wWDJJyOvxaI7IcPqTyxeLtUW2fX1qfQw0BUXHpCEKaONAMvaeWYGvr7n8QhaCuQ5AFkhASmVxBQhFZ//2Q==); background-position: 50% 40%">
+              <source type="image/avif" srcset="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-640.avif 640w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1280.avif 1280w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1920.avif 1920w" sizes="(min-width: 900px) 30vw, 50vw">
+              <source type="image/webp" srcset="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-640.webp 640w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1280.webp 1280w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1920.webp 1920w" sizes="(min-width: 900px) 30vw, 50vw">
+              <img src="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1280.jpg" srcset="assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-640.jpg 640w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1280.jpg 1280w, assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1920.jpg 1920w" sizes="(min-width: 900px) 30vw, 50vw" width="1280" height="1070" loading="lazy" decoding="async" alt="Arha's reception: the gold emblem and wordmark on a marble wall above the front desk" style="object-position: 50% 40%">
+            </picture>
+          </div>
+          <div class="practice-grid__item media media--hover reveal">
+            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCABVADADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAwUGBAACAf/EACEQAAEFAAICAwEAAAAAAAAAAAEAAgMEERIhBSITFDFB/8QAGAEBAQEBAQAAAAAAAAAAAAAAAQIDAAT/xAAbEQEBAQADAQEAAAAAAAAAAAAAAQIDETEhEv/aAAwDAQACEQMRAD8AyVYObgQqGkC1mFI6EoYe04jtNzpebTeNb+wgBvsvLrCH9kAohbGjpfc1Z2T8lqg9kwVJx/vSa1K73gFL68fKQKs8dC1sY0KtCFUtZzB2FleCFSW42uYcCQ2483FEpCrze2J3T9gkdCAvl7VFXi4NCvM7qdXqJetjJBqo687fjGFTFnWO0IsF5zWZq7RyopbAIzUuskFpS195w7KD98vOaoNplRfxlVDE4OYFOUGlzgcVBA0tYFrxs9pi3HpQWw43VtttwocbeXqp16rHhVYf3xARPH0nyygkHE8i8O2UhxCa1aDIAOgotV08UaYjYNC2uAAxEAAHSHIr479RtP3m4g1WFzwtV3HFGowjo4nc+nHhhWBawBaRq8xNwIuYs/yvt8A6QpEf+ILx2tOOMtp2w48gmfjxrQuXJ16c+GbF7K5chTyhu/Vy5OEbf//Z); background-position: 50% 60%">
+              <source type="image/avif" srcset="assets/img/arha-dental-care-lounge-peddar-road-640.avif 640w, assets/img/arha-dental-care-lounge-peddar-road-1080.avif 1080w" sizes="(min-width: 900px) 30vw, 50vw">
+              <source type="image/webp" srcset="assets/img/arha-dental-care-lounge-peddar-road-640.webp 640w, assets/img/arha-dental-care-lounge-peddar-road-1080.webp 1080w" sizes="(min-width: 900px) 30vw, 50vw">
+              <img src="assets/img/arha-dental-care-lounge-peddar-road-1080.jpg" srcset="assets/img/arha-dental-care-lounge-peddar-road-640.jpg 640w, assets/img/arha-dental-care-lounge-peddar-road-1080.jpg 1080w" sizes="(min-width: 900px) 30vw, 50vw" width="1080" height="1920" loading="lazy" decoding="async" alt="The patients' lounge: a soft sofa, a plant and warm light" style="object-position: 50% 60%">
+            </picture>
+          </div>
+          <div class="practice-grid__item media media--hover reveal">
+            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAvADADASIAAhEBAxEB/8QAGgAAAwADAQAAAAAAAAAAAAAAAwQFAAECBv/EACEQAAEFAAICAwEAAAAAAAAAAAEAAgMEERIhEzEFIkEy/8QAFwEBAQEBAAAAAAAAAAAAAAAAAQACA//EABYRAQEBAAAAAAAAAAAAAAAAAAARAf/aAAwDAQACEQMRAD8AkU6Dx+KjHWcwjQmq9iE+sTfNj2EjFnTgMcP11cv5DrFybXBxCLXkEru0IpJG4n0hOhefxXfCwrHQxgegiivMVITH/TlTjeMwFSBI6ToKjQhdoLl0ohplN0veLhzTWKu0mAMzEr8jV0FwCISEdp2LDbc44l4wfJxTzKfWqxIdOE8uwrdaIkjAh167QVXqQAdqxD1o8aESeIPYQisaAFohIRHU+EvLE43jxATb4g4JOWPiVF//2Q==); background-position: 50% 55%">
+              <source type="image/avif" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-02-640.avif 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-02-1280.avif 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-02-1920.avif 1920w" sizes="(min-width: 900px) 30vw, 50vw">
+              <source type="image/webp" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-02-640.webp 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-02-1280.webp 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-02-1920.webp 1920w" sizes="(min-width: 900px) 30vw, 50vw">
+              <img src="assets/img/dental-operatory-arha-dental-care-peddar-road-02-1280.jpg" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-02-640.jpg 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-02-1280.jpg 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-02-1920.jpg 1920w" sizes="(min-width: 900px) 30vw, 50vw" width="1280" height="1243" loading="lazy" decoding="async" alt="A treatment room with a dental chair, a desk and marble walls" style="object-position: 50% 55%">
+            </picture>
+          </div>
+          <div class="practice-grid__item media media--hover reveal">
+            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAtADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAgEG/8QAIhAAAgICAgICAwAAAAAAAAAAAQIAAxEhBBITMQUyIiNR/8QAFgEBAQEAAAAAAAAAAAAAAAAAAQIA/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAERAjH/2gAMAwEAAhEDEQA/AN9wZwOAZl0AUlTEDc62YwZOMrrycDExZfkQFKmwCH8GpqxdmJit4b+SmtAHucsoUyZp2E6Q4+xh0pRt43ALZ2MIbenqJw0nWub8nb1A8dHvYalargfiDiN8SQIYDMXewg7ls8UeoGz4sPsQ5lHVkRLqfH9YbhcNr3HYam6h5HHaX+DSiqCBGKrvG4KUoNbjB1oQ2NTDASgWuOFJkyz5M1MRK14/WZ5/k1K1hzMLJX//2Q==); background-position: 50% 55%">
+              <source type="image/avif" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-06-640.avif 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-06-1280.avif 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-06-1920.avif 1920w" sizes="(min-width: 900px) 30vw, 50vw">
+              <source type="image/webp" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-06-640.webp 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-06-1280.webp 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-06-1920.webp 1920w" sizes="(min-width: 900px) 30vw, 50vw">
+              <img src="assets/img/dental-operatory-arha-dental-care-peddar-road-06-1280.jpg" srcset="assets/img/dental-operatory-arha-dental-care-peddar-road-06-640.jpg 640w, assets/img/dental-operatory-arha-dental-care-peddar-road-06-1280.jpg 1280w, assets/img/dental-operatory-arha-dental-care-peddar-road-06-1920.jpg 1920w" sizes="(min-width: 900px) 30vw, 50vw" width="1280" height="1198" loading="lazy" decoding="async" alt="A second treatment room seen through a glass door" style="object-position: 50% 55%">
+            </picture>
+          </div>
+        </div>
+        <div class="section-cta practice-teaser__links reveal">
+          <a class="cta" href="the-practice/#tour">Take the 360° tour<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+          <a class="cta" href="the-practice/">See the practice<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+        </div>
       </div>
     </section>
 
@@ -580,34 +1011,6 @@
           <h2 id="travel-title">Visiting Mumbai for treatment?</h2>
           <p>Many of our patients live abroad. Start with a virtual consultation, and we will plan your treatment and timeline before you arrive.</p>
           <a class="cta" href="dental-implants/#plan">Plan your treatment</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- =================================================================== 9. WHAT PATIENTS SAY (stone) -->
-    <section class="section reviews" aria-labelledby="reviews-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 id="reviews-title">5.0 on Google</h2>
-          <p class="stars" role="img" aria-label="Rated 5 out of 5">★★★★★</p>
-        </div>
-        <ul class="review-list">
-          <li class="review-list__item reveal">
-            <blockquote><p>“He managed my pain and resolved the problem on the same day.”</p></blockquote>
-            <p class="review-list__source">Google review</p>
-          </li>
-          <li class="review-list__item reveal">
-            <blockquote><p>“Excellent doctor and excellent service.”</p></blockquote>
-            <p class="review-list__source">Google review</p>
-          </li>
-          <li class="review-list__item reveal">
-            <blockquote><p>“He is patient, gentle and takes the time to answer all my questions.”</p></blockquote>
-            <p class="review-list__source">Google review</p>
-          </li>
-        </ul>
-        <div class="section-cta reveal">
-          <!-- href set from GOOGLE_REVIEWS_URL in assets/js/site.js -->
-          <a class="cta" href="#" data-google-reviews>Read all reviews on Google</a>
         </div>
       </div>
     </section>
