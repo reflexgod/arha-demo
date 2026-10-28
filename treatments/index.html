@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -296,22 +298,43 @@
         </div>
         <ul class="tcards">
             <li class="tcard reveal"><a href="../dental-implants/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAABAADBQEG/8QAIBAAAgICAgIDAAAAAAAAAAAAAAECEQMEEyEFMRIiMv/EABUBAQEAAAAAAAAAAAAAAAAAAAEA/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAER/9oADAMBAAIRAxEAPwDyCiyODXsVBRssnjjJUhTPshp4fGPKrRXl0eKVMEAQVk1/irQZqmSIx+xMV1YSDpiYz6EH625wxplGzn5Z2ihuzl0GHVrp4+zOzfpjJT+oLJ3IaI//2Q==); background-position: 30% 50%">
+                  <source type="image/avif" srcset="../assets/img/stock-implant-hero-640.avif 640w, ../assets/img/stock-implant-hero-1280.avif 1280w, ../assets/img/stock-implant-hero-1920.avif 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-implant-hero-640.webp 640w, ../assets/img/stock-implant-hero-1280.webp 1280w, ../assets/img/stock-implant-hero-1920.webp 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/stock-implant-hero-1280.jpg" srcset="../assets/img/stock-implant-hero-640.jpg 640w, ../assets/img/stock-implant-hero-1280.jpg 1280w, ../assets/img/stock-implant-hero-1920.jpg 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A ceramic crown seated on a dental implant in a model of the jaw" style="object-position: 30% 50%">
+                </picture>
+              </span>
               <span class="tag">Specialty</span>
               <h3>Dental implants</h3>
               <p>One tooth, several, or a full arch, planned around the tooth you will see.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
             <li class="tcard reveal"><a href="../full-mouth-rehabilitation/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAwQBAgUA/8QAHhAAAwACAgMBAAAAAAAAAAAAAAECAxEEMQUSISL/xAAWAQEBAQAAAAAAAAAAAAAAAAABAAL/xAAYEQEBAQEBAAAAAAAAAAAAAAAAARECIf/aAAwDAQACEQMRAD8AzlRZU30CGuOpa/Q3wBOtFXkQ6+PjtfGgF8J/Wg2HC7yIHWRHZsNzsTu2nok0dEN0umQq2SaCiz5IfYZeRcrTAXoXtIzeYZT2TmRUMyc1e1tomtgaCTDr/9k=); background-position: 50% 55%">
+                  <source type="image/avif" srcset="../assets/img/stock-crowns-640.avif 640w, ../assets/img/stock-crowns-1280.avif 1280w, ../assets/img/stock-crowns-1920.avif 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-crowns-640.webp 640w, ../assets/img/stock-crowns-1280.webp 1280w, ../assets/img/stock-crowns-1920.webp 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/stock-crowns-1280.jpg" srcset="../assets/img/stock-crowns-640.jpg 640w, ../assets/img/stock-crowns-1280.jpg 1280w, ../assets/img/stock-crowns-1920.jpg 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="Four ceramic crowns resting on a dark surface" style="object-position: 50% 55%">
+                </picture>
+              </span>
               <span class="tag">Specialty</span>
               <h3>Full mouth rehabilitation</h3>
               <p>Worn, broken or missing teeth rebuilt as one plan, phase by phase.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
             <li class="tcard reveal"><a href="../maxillofacial-prosthetics/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAQCAwUBBv/EACEQAAICAgIBBQAAAAAAAAAAAAABAgMEERIhMQUTFCJB/8QAFwEBAQEBAAAAAAAAAAAAAAAAAQIAA//EABcRAQEBAQAAAAAAAAAAAAAAAAABETH/2gAMAwEAAhEDEQA/AJVWpsahJaMWmUkx+qcmc4qnGtkGtEJWNInWnZHsrArlJLwLW3NM0KsaLl9mU5mLBeGbGY1E3KaWjapr1Wm0QwvT1yTaNG6lV1BDYz5tbOK/24nYx5WBk1Pj0ikl5Zkk3pit2bNvtl3x3LwimzGf6gU9JiLs7nvUAAIxHDW59jORFcH0AFziapxYpt7RVmRSfSAApj//2Q==); background-position: 50% 60%">
+                  <source type="image/avif" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-01-640.avif 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.avif 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1920.avif 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-01-640.webp 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.webp 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1920.webp 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.jpg" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-01-640.jpg 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.jpg 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1920.jpg 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="958" loading="lazy" decoding="async" alt="A quiet Arha treatment room with the chair under its overhead light" style="object-position: 50% 60%">
+                </picture>
+              </span>
               <span class="tag">Specialty</span>
               <h3>Maxillofacial prosthetics</h3>
               <p>Custom prostheses after surgery or injury, or for a condition from birth.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
         </ul>
       </div>
@@ -322,28 +345,56 @@
         </div>
         <ul class="tcards">
             <li class="tcard reveal"><a href="../smile-design/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCABIADADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAwQFAAYBAv/EACIQAAICAgICAwEBAAAAAAAAAAECAAMEEQUhEjETIkEUUf/EABgBAQEBAQEAAAAAAAAAAAAAAAIBAwAE/8QAGxEBAQADAQEBAAAAAAAAAAAAAAECETESIVH/2gAMAwEAAhEDEQA/AKdT+UFl2fGNxiitQfc2VjrauhPLHsqHbyWm1HMTNGgTFr+N024vZW9a6EqOmxs9bNLuFyMT5xsTm+LNnzAnc6/FsHxjcsHKa+xxlfKWN63GU5Cw+9xfEx0B7lWnCrcfkWi9a6GmWrjTQq0V3f5B38aVG0iYusxn+29SWFLjlxbpwUqHkBPr+jwOtwGPyC21aJ7iWVfpjow0ZP0qUaoxmjJI/Y1ZR5D1E7cVlOxFs9y9UasoEaPcS5NVeslR3FwXQ/sKnld0RLsfE7EfFsuW7x71uVjS1igmOUcei/YiHZVXoQX67ZlQpn2cdWEkpmaPuO0ZoPsyi9sw1J9TV4yp3qMjIQj3AW3eXSzhtDts8ehPaMdruzPacZrXBIlrHpWtR1HjiGWThFJhkdh+zTQHszXaxIG5WwqfMbM00eMZ5VRUBPQhkeaaaM3/2Q==); background-position: 50% 40%">
+                  <source type="image/avif" srcset="../assets/img/stock-natural-smile-640.avif 640w, ../assets/img/stock-natural-smile-1280.avif 1280w, ../assets/img/stock-natural-smile-1920.avif 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-natural-smile-640.webp 640w, ../assets/img/stock-natural-smile-1280.webp 1280w, ../assets/img/stock-natural-smile-1920.webp 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/stock-natural-smile-1280.jpg" srcset="../assets/img/stock-natural-smile-640.jpg 640w, ../assets/img/stock-natural-smile-1280.jpg 1280w, ../assets/img/stock-natural-smile-1920.jpg 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="1920" loading="lazy" decoding="async" alt="Close-up of a natural smile" style="object-position: 50% 40%">
+                </picture>
+              </span>
               
               <h3>Smile design</h3>
               <p>Your smile planned around your face, and previewed before work begins.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
             <li class="tcard reveal"><a href="../cosmetic-dentistry/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAABQIEBgMAAf/EACIQAAICAgIDAQADAAAAAAAAAAECAAMEEQUhEhMxMhUiM//EABcBAAMBAAAAAAAAAAAAAAAAAAECAwD/xAAZEQEBAQADAAAAAAAAAAAAAAAAARESITH/2gAMAwEAAhEDEQA/ABGxns71GuFT1nRneyiutD8kMMj3dSOrYaevySG24G33Fk/zEo5lpr+Q1oni0CsS5sAQNOSKtpp3HIBh0YNNxC5PIeQ6M9x+aos2TBFs8x9nwMyN0ZsDW5/kU8AAZD2rcp3M7hF31sxrHTS9mHGUs6glv6SGPW6/qMepW+yrkBa4tGMLVcVMu1WB4bOlTlGlbEpWgxHK61GMdnfUDwLQ2ozXkitd6k1ZeiY0leyYLyGR5MQs9l8ptSoMo1sbW2YGZuSH2Qk0+yqB3h6/IjcXyVVauoXxPSy1lOdfYtPBOQSLJdwuxKGR+5ewfzFp56//2Q==); background-position: 50% 45%">
+                  <source type="image/avif" srcset="../assets/img/stock-case-1-640.avif 640w, ../assets/img/stock-case-1-1280.avif 1280w, ../assets/img/stock-case-1-1600.avif 1600w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-case-1-640.webp 640w, ../assets/img/stock-case-1-1280.webp 1280w, ../assets/img/stock-case-1-1600.webp 1600w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/stock-case-1-1280.jpg" srcset="../assets/img/stock-case-1-640.jpg 640w, ../assets/img/stock-case-1-1280.jpg 1280w, ../assets/img/stock-case-1-1600.jpg 1600w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="1600" loading="lazy" decoding="async" alt="Sample image: a close-up of a smile" style="object-position: 50% 45%">
+                </picture>
+              </span>
               
               <h3>Cosmetic dentistry</h3>
               <p>Veneers, whitening and bonding, matched to the concern.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
             <li class="tcard reveal"><a href="../invisalign/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAgAG/8QAIRAAAQMEAgMBAAAAAAAAAAAAAQACAwQREiExQQUTFCL/xAAXAQEBAQEAAAAAAAAAAAAAAAABAAID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAERAjH/2gAMAwEAAhEDEQA/AOE5neAFapISIwUpR+M9bgSFXaAxllxrqCBi5GAu1AfK0HZWPtjZq6I01LJ6ztAdVA9rNRO2VpsUhi7JS16HJoS80t9BIPrtcpf7f1tSHqA/pTpGSZclPfT7NWRGwZ7KZESgzGinWMFlxY1p0isGk4L4kRjLtNR0YftSYKnaqU9XxtZJtlOIwtlxAsAtRSNeOUdsbTtWnSjI3PdcpkR2CI5zGDS6L9lajPV14Vt2lMRzFvay8BC7QlKCtc08p1nk7C11EbwuuckYtegjqvaeVRgkAC89SE6VmnJxCYzX/9k=); background-position: 50% 45%">
+                  <source type="image/avif" srcset="../assets/img/stock-case-4-640.avif 640w, ../assets/img/stock-case-4-1280.avif 1280w, ../assets/img/stock-case-4-1345.avif 1345w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-case-4-640.webp 640w, ../assets/img/stock-case-4-1280.webp 1280w, ../assets/img/stock-case-4-1345.webp 1345w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/stock-case-4-1280.jpg" srcset="../assets/img/stock-case-4-640.jpg 640w, ../assets/img/stock-case-4-1280.jpg 1280w, ../assets/img/stock-case-4-1345.jpg 1345w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="1601" loading="lazy" decoding="async" alt="Sample image: a smile with straight teeth" style="object-position: 50% 45%">
+                </picture>
+              </span>
               
               <h3>Invisalign clear aligners</h3>
               <p>Clear, removable aligners for teens and adults.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
             <li class="tcard reveal"><a href="../orthodontics/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAwQFBgD/xAAfEAACAgICAwEAAAAAAAAAAAABAgADBCEFERITMRT/xAAXAQADAQAAAAAAAAAAAAAAAAABAgMA/8QAHBEAAwEBAQADAAAAAAAAAAAAAAERAiFREiJB/9oADAMBAAIRAxEAPwC/VnLYNGIchYDJfG3MW2Y9lAuRF14Nn1k93ZD5AQ1HIlh4mOChDTsSTkgY9uoi8KNfo1beFBJkPNb9DHxh8y4tXowOAhdtjuZZnWbW7xGhwMAodwmf3V8jlVg71OvxxdsyqcdItVQkjLYL0YhmP7GlxsAHQgrOK73C9V2AS+OZTP2UlgAJZ4XjwR2whq+OCfYyr+jS6h1NPgMfVdP/2Q==); background-position: 50% 40%">
+                  <source type="image/avif" srcset="../assets/img/stock-patient-chair-640.avif 640w, ../assets/img/stock-patient-chair-1280.avif 1280w, ../assets/img/stock-patient-chair-1920.avif 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-patient-chair-640.webp 640w, ../assets/img/stock-patient-chair-1280.webp 1280w, ../assets/img/stock-patient-chair-1920.webp 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/stock-patient-chair-1280.jpg" srcset="../assets/img/stock-patient-chair-640.jpg 640w, ../assets/img/stock-patient-chair-1280.jpg 1280w, ../assets/img/stock-patient-chair-1920.jpg 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A patient in the dental chair during an examination" style="object-position: 50% 40%">
+                </picture>
+              </span>
               
               <h3>Orthodontics (braces)</h3>
               <p>Metal braces and clear aligners for children, teens and adults.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
         </ul>
       </div>
@@ -354,28 +405,56 @@
         </div>
         <ul class="tcards">
             <li class="tcard reveal"><a href="../general-dentistry/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAvADADASIAAhEBAxEB/8QAGgAAAwADAQAAAAAAAAAAAAAAAwQFAAECBv/EACEQAAEFAAICAwEAAAAAAAAAAAEAAgMEERIhEzEFIkEy/8QAFwEBAQEBAAAAAAAAAAAAAAAAAQACA//EABYRAQEBAAAAAAAAAAAAAAAAAAARAf/aAAwDAQACEQMRAD8AkU6Dx+KjHWcwjQmq9iE+sTfNj2EjFnTgMcP11cv5DrFybXBxCLXkEru0IpJG4n0hOhefxXfCwrHQxgegiivMVITH/TlTjeMwFSBI6ToKjQhdoLl0ohplN0veLhzTWKu0mAMzEr8jV0FwCISEdp2LDbc44l4wfJxTzKfWqxIdOE8uwrdaIkjAh167QVXqQAdqxD1o8aESeIPYQisaAFohIRHU+EvLE43jxATb4g4JOWPiVF//2Q==); background-position: 50% 55%">
+                  <source type="image/avif" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-02-640.avif 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-02-1280.avif 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-02-1920.avif 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-02-640.webp 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-02-1280.webp 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-02-1920.webp 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/dental-operatory-arha-dental-care-peddar-road-02-1280.jpg" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-02-640.jpg 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-02-1280.jpg 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-02-1920.jpg 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="1243" loading="lazy" decoding="async" alt="An Arha treatment room with a dental chair, a desk and marble walls" style="object-position: 50% 55%">
+                </picture>
+              </span>
               
               <h3>General dentistry &amp; cleaning</h3>
               <p>Check-ups, professional cleaning and fillings.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
             <li class="tcard reveal"><a href="../root-canal-treatment/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAeADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAgMEBQYAAf/EACAQAAICAgICAwAAAAAAAAAAAAECAAMEESExBRITFCL/xAAWAQEBAQAAAAAAAAAAAAAAAAACAwH/xAAYEQEBAQEBAAAAAAAAAAAAAAAAAQIRIf/aAAwDAQACEQMRAD8AwW57qCvckogYahqufUbXMcgAjvoWtyqmA2JanYM2VOwQ0RFWJswxRYo3FOxB5i6PBV1gmTaalUgmVy2ERwuYiA5Wt8Y+OU02oebi0v8ApNTJ0ZdiPwTLNc+wVdwWVTPHZZSsFeJU2V+zbELJvaxyTEfKRHmBq+v/2Q==); background-position: 50% 50%">
+                  <source type="image/avif" srcset="../assets/img/stock-dentist-hands-640.avif 640w, ../assets/img/stock-dentist-hands-1280.avif 1280w, ../assets/img/stock-dentist-hands-1920.avif 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-dentist-hands-640.webp 640w, ../assets/img/stock-dentist-hands-1280.webp 1280w, ../assets/img/stock-dentist-hands-1920.webp 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/stock-dentist-hands-1280.jpg" srcset="../assets/img/stock-dentist-hands-640.jpg 640w, ../assets/img/stock-dentist-hands-1280.jpg 1280w, ../assets/img/stock-dentist-hands-1920.jpg 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="805" loading="lazy" decoding="async" alt="A dentist’s gloved hands at work, holding fine instruments" style="object-position: 50% 50%">
+                </picture>
+              </span>
               
               <h3>Root canal treatment</h3>
               <p>Saving an infected tooth, with rotary instruments.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
             <li class="tcard reveal"><a href="../crowns-bridges/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGwAAAwEAAwEAAAAAAAAAAAAAAAQFBgECAwf/xAAiEAACAgICAgIDAAAAAAAAAAAAAQIDBCEREgUxQWETQlH/xAAWAQEBAQAAAAAAAAAAAAAAAAABAgD/xAAWEQEBAQAAAAAAAAAAAAAAAAAAARH/2gAMAwEAAhEDEQA/AMnCiyb9MZq8fZ2T6s2FXhoV/qj1nhQhDUQZIxa+mP1f8JuRS3Y2UcyyVM2ktCVlqmvsnVyEZU7CNIw/s6PXobRjeq+Mvk4lw0IqucGPUQclsJqU7OwVcnwtk1eJlHltGr/FFLYtkShGLGxUrHZmO6mJd+NMt+SlGXJBtXEnwBfQlFP4GakktABSHndJk7Lk+r2AAWcz5Pl7JT3IABUf/9k=); background-position: 60% 40%">
+                  <source type="image/avif" srcset="../assets/img/stock-gloved-hands-640.avif 640w, ../assets/img/stock-gloved-hands-1280.avif 1280w, ../assets/img/stock-gloved-hands-1920.avif 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-gloved-hands-640.webp 640w, ../assets/img/stock-gloved-hands-1280.webp 1280w, ../assets/img/stock-gloved-hands-1920.webp 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/stock-gloved-hands-1280.jpg" srcset="../assets/img/stock-gloved-hands-640.jpg 640w, ../assets/img/stock-gloved-hands-1280.jpg 1280w, ../assets/img/stock-gloved-hands-1920.jpg 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="960" loading="lazy" decoding="async" alt="A gloved hand picking up a fine dental instrument from a tray" style="object-position: 60% 40%">
+                </picture>
+              </span>
               
               <h3>Crowns &amp; bridges</h3>
               <p>Ceramic, zirconia and PFM crowns, and bridges for a missing tooth.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
             <li class="tcard reveal"><a href="../kids-dentistry/">
+              <span class="tcard__media media media--hover">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAQIA/8QAIBAAAgICAQUBAAAAAAAAAAAAAQIAAwQRIQUSEzFBFP/EABcBAQEBAQAAAAAAAAAAAAAAAAIBAAP/xAAcEQACAgIDAAAAAAAAAAAAAAAAAQIREiExMkH/2gAMAwEAAhEDEQA/APW2M7epQwnPaAYw/TwnyYtPj+QVqyhCROGPEQzc01NoTvGua1NwsqDHloZRsRYkg8w1TbmKV7NGI5TBVMAnUO+cW2eVonJUbF+k+3FORbvUqYuOlNemhqKlC71F8stvgxdkc7UWZegY8QAdavsyy411HfuSP0NZaeYVBoWafB//2Q==); background-position: 50% 45%">
+                  <source type="image/avif" srcset="../assets/img/stock-kid-dentist-640.avif 640w, ../assets/img/stock-kid-dentist-1280.avif 1280w, ../assets/img/stock-kid-dentist-1920.avif 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-kid-dentist-640.webp 640w, ../assets/img/stock-kid-dentist-1280.webp 1280w, ../assets/img/stock-kid-dentist-1920.webp 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw">
+                  <img src="../assets/img/stock-kid-dentist-1280.jpg" srcset="../assets/img/stock-kid-dentist-640.jpg 640w, ../assets/img/stock-kid-dentist-1280.jpg 1280w, ../assets/img/stock-kid-dentist-1920.jpg 1920w" sizes="(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A boy in the dental chair with the dentist beside him" style="object-position: 50% 45%">
+                </picture>
+              </span>
               
               <h3>Kids’ dentistry</h3>
               <p>Gentle first visits, check-ups, sealants and fluoride.</p>
-              <span class="tcard__more">Read more<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></span>
+              <span class="cta">Learn more</span>
             </a></li>
         </ul>
       </div>
@@ -390,7 +469,7 @@
           <p class="lede">Not sure which treatment you need? Start with what is bothering you.</p>
         </div>
         <div class="problems" data-tabs data-hash>
-          <div class="problems__tabs" role="tablist" aria-label="Common problems" aria-orientation="vertical">
+          <div class="problems__tabs" role="tablist" aria-label="Common problems">
             <button class="problems__tab" type="button" role="tab" id="pt-missing-tooth" aria-controls="problem-missing-tooth" aria-selected="true">A missing tooth</button>
             <button class="problems__tab" type="button" role="tab" id="pt-chipped-tooth" aria-controls="problem-chipped-tooth" aria-selected="false" tabindex="-1">Chipped or broken tooth</button>
             <button class="problems__tab" type="button" role="tab" id="pt-gaps" aria-controls="problem-gaps" aria-selected="false" tabindex="-1">Gaps between teeth</button>
@@ -403,204 +482,153 @@
             <button class="problems__tab" type="button" role="tab" id="pt-child-teeth" aria-controls="problem-child-teeth" aria-selected="false" tabindex="-1">My child’s teeth</button>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-missing-tooth" aria-labelledby="pt-missing-tooth" tabindex="0">
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-missing-tooth-after.svg" alt="Illustration, after: the gap filled by an implant crown, with the implant post shown in the bone above" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-missing-tooth-before.svg" alt="Illustration, before: a gap where an upper front tooth is missing" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: a missing tooth">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwUGAQQC/8QAIhAAAgICAQQDAQAAAAAAAAAAAQIAAwQRBRMhMUESFFFh/8QAFwEBAQEBAAAAAAAAAAAAAAAAAwIEAP/EABkRAAMBAQEAAAAAAAAAAAAAAAABEQIhEv/aAAwDAQACEQMRAD8AkBU/5NCkHxK2ziq0QnQia7HRcgKP2FTWmkLem5PYGOcEMlB2PUaYnGI1QYiHyMNKsdtD1J9I7WuEbmNu8wI7zu+v1csr/Y1r4P5IDEekjPKdF3KB6z3iIXl80EntuANx15gEc9UGSlCtapf4dyfXXuPEzNuQ47aPqTVeY61gAzzbmuyEEwp0TkBV2BM0nfuUlPIoKgNiRhcmzcOL3A8y9Khpw//Z); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-implant-model-640.avif 640w, ../assets/img/stock-implant-model-1280.avif 1280w, ../assets/img/stock-implant-model-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-implant-model-640.webp 640w, ../assets/img/stock-implant-model-1280.webp 1280w, ../assets/img/stock-implant-model-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-implant-model-1280.jpg" srcset="../assets/img/stock-implant-model-640.jpg 640w, ../assets/img/stock-implant-model-1280.jpg 1280w, ../assets/img/stock-implant-model-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A jaw model showing an implant crown between two natural teeth">
+</picture></div>
             <div class="problems__text">
               <h3>A missing tooth</h3>
               <p>A gap affects how you chew and, over time, how the teeth beside it sit.</p>
               <p>It can be replaced with an implant, a bridge or a denture, depending on your gums, your bone and the teeth around it.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../dental-implants/">Dental implants</a></li><li><a href="../crowns-bridges/">Crowns &amp; bridges</a></li></ul>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20a%20missing%20tooth.%20What%20are%20my%20options%3F" target="_blank" rel="noopener" data-riya-ask="I have a missing tooth. What are my options?">Ask Riya about this</a>
+              <a class="cta" href="../dental-implants/">Dental implants<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              <p class="problems__also">Also: <a href="../crowns-bridges/">Crowns &amp; bridges</a></p>
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20a%20missing%20tooth.%20What%20are%20my%20options%3F" target="_blank" rel="noopener" data-riya-ask="I have a missing tooth. What are my options?">Ask Riya about this</a>
             </div>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-chipped-tooth" aria-labelledby="pt-chipped-tooth" tabindex="0" hidden>
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-chipped-tooth-after.svg" alt="Illustration, after: the chipped corner rebuilt in tooth-coloured material" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-chipped-tooth-before.svg" alt="Illustration, before: an upper front tooth with a chipped corner" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: chipped or broken tooth">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCABIADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAABAUAAQYDAv/EACUQAAICAgICAgEFAAAAAAAAAAECAAMEEQUSITEiQVETFBUjgf/EABcBAQEBAQAAAAAAAAAAAAAAAAECAwD/xAAcEQADAQADAQEAAAAAAAAAAAAAAQIREiExA0H/2gAMAwEAAhEDEQA/AM1jKe3gQ56GKep7xcY1t8hDnKBdQpFQxVThl39R1hcV2Agy2onmG4nKrW2tyTR9IM/iCBKGC1f1DaeTrcDZEKW6qwfUcJ5NCXkcZUQlRqZ265lcrNRyzdazMr0NuR/sdJlfpa12WfmdEw7Ad+Y8wsMfpjYhT4gA8CSbJoQqtiD2Z7HIWUeyYddQV+oozU0fUNZWSx9zJ2hiHGIS/Z/MdczsLM8tn9spmU+GpoyB0Gp2bJ8RRjXhUEJW9T7MNHgerskediJc+zufAjS4o33BbKEaGnZg35ZUuQ9TMycRlsJhS8iX9ncv9wp9xZUzhKqyF8yzW5Px3KruDOBuOceukV9mIgpLq+KFApuY/cKqxSB8jCMnMop3rUT5PL+fiZSkwr6N+C7BBsOozOIeu5JIV6VHgLarVHYM5PyVijqGMkkUFdgduTZYfLGcSSfckkoyP//Z); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-bonding-640.avif 640w, ../assets/img/stock-bonding-1280.avif 1280w, ../assets/img/stock-bonding-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-bonding-640.webp 640w, ../assets/img/stock-bonding-1280.webp 1280w, ../assets/img/stock-bonding-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-bonding-1280.jpg" srcset="../assets/img/stock-bonding-640.jpg 640w, ../assets/img/stock-bonding-1280.jpg 1280w, ../assets/img/stock-bonding-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="1920" loading="lazy" decoding="async" alt="A dentist shaping tooth-coloured bonding on a front tooth">
+</picture></div>
             <div class="problems__text">
               <h3>Chipped or broken tooth</h3>
               <p>Small chips can often be rebuilt with tooth-coloured bonding.</p>
               <p>A larger break may need a crown to protect what is left of the tooth.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../cosmetic-dentistry/">Cosmetic dentistry</a></li><li><a href="../crowns-bridges/">Crowns &amp; bridges</a></li></ul>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20chipped%20a%20tooth.%20What%20can%20be%20done%3F" target="_blank" rel="noopener" data-riya-ask="I have chipped a tooth. What can be done?">Ask Riya about this</a>
+              <a class="cta" href="../cosmetic-dentistry/">Cosmetic dentistry<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              <p class="problems__also">Also: <a href="../crowns-bridges/">Crowns &amp; bridges</a></p>
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20chipped%20a%20tooth.%20What%20can%20be%20done%3F" target="_blank" rel="noopener" data-riya-ask="I have chipped a tooth. What can be done?">Ask Riya about this</a>
             </div>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-gaps" aria-labelledby="pt-gaps" tabindex="0" hidden>
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-gaps-after.svg" alt="Illustration, after: front teeth with the gaps closed" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-gaps-before.svg" alt="Illustration, before: gaps between the upper front teeth" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: gaps between teeth">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAeADADASIAAhEBAxEB/8QAGAABAQEBAQAAAAAAAAAAAAAABQYDBAL/xAAhEAACAgIBBAMAAAAAAAAAAAABAgADBBEhBRITMSJBUf/EABcBAQEBAQAAAAAAAAAAAAAAAAECAAT/xAAaEQEBAAMBAQAAAAAAAAAAAAAAAQIREwMS/9oADAMBAAIRAxEAPwAKhTc0STDJUTm6Uo3zKCkJoSHV9jkwm/J0DBYj1Fq1r1NQEAjodE1k4Ddp4guQhqYiW+Sq9hkn1VR5DqGlT0eent2MNxuu0aHMAHwPE6a729QpmGzi5Ovua15IJ9wdXJE0rc7mPOFb7l8Z5k5mr5LDqIu5I1MRWCdxiLjMX//Z); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-gaps-640.avif 640w, ../assets/img/stock-gaps-1280.avif 1280w, ../assets/img/stock-gaps-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-gaps-640.webp 640w, ../assets/img/stock-gaps-1280.webp 1280w, ../assets/img/stock-gaps-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-gaps-1280.jpg" srcset="../assets/img/stock-gaps-640.jpg 640w, ../assets/img/stock-gaps-1280.jpg 1280w, ../assets/img/stock-gaps-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="811" loading="lazy" decoding="async" alt="Front teeth with small gaps between them">
+</picture></div>
             <div class="problems__text">
               <h3>Gaps between teeth</h3>
               <p>Gaps can be closed by moving the teeth, or by adding to them with bonding or veneers.</p>
               <p>The right choice depends on the size of the gap and on your bite.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../invisalign/">Invisalign clear aligners</a></li><li><a href="../orthodontics/">Orthodontics (braces)</a></li><li><a href="../cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20gaps%20between%20my%20teeth.%20How%20can%20they%20be%20closed%3F" target="_blank" rel="noopener" data-riya-ask="I have gaps between my teeth. How can they be closed?">Ask Riya about this</a>
+              <a class="cta" href="../invisalign/">Invisalign clear aligners<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              <p class="problems__also">Also: <a href="../orthodontics/">Orthodontics (braces)</a>, <a href="../cosmetic-dentistry/">Cosmetic dentistry</a></p>
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20gaps%20between%20my%20teeth.%20How%20can%20they%20be%20closed%3F" target="_blank" rel="noopener" data-riya-ask="I have gaps between my teeth. How can they be closed?">Ask Riya about this</a>
             </div>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-crooked-teeth" aria-labelledby="pt-crooked-teeth" tabindex="0" hidden>
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-crooked-teeth-after.svg" alt="Illustration, after: upper front teeth in a straight, even line" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-crooked-teeth-before.svg" alt="Illustration, before: crooked upper front teeth: turned and overlapping" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: crooked teeth">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAgYB/8QAHxAAAgICAwEBAQAAAAAAAAAAAQMAAgQRBSExEkET/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABcRAQEBAQAAAAAAAAAAAAAAAAABESH/2gAMAwEAAhEDEQA/APOVJAiuA8VPcscljC9ehJSuOsL/AEJlGo2Q2xHQgVsvvyGbYKrqwgluB8EFdaZkmtdRU7YdxkoLTvUMrG1+RFT6MquVGf5io8nPcKwlg7nT3GlAyrESpOagX7i6McAxjLbowCW7MS9M/IHQEzd1VezdTuS+V+vwwkTa/9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-crooked-640.avif 640w, ../assets/img/stock-crooked-1280.avif 1280w, ../assets/img/stock-crooked-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-crooked-640.webp 640w, ../assets/img/stock-crooked-1280.webp 1280w, ../assets/img/stock-crooked-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-crooked-1280.jpg" srcset="../assets/img/stock-crooked-640.jpg 640w, ../assets/img/stock-crooked-1280.jpg 1280w, ../assets/img/stock-crooked-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A smile with uneven, overlapping lower teeth">
+</picture></div>
             <div class="problems__text">
               <h3>Crooked teeth</h3>
               <p>Teeth can be straightened at almost any age, with clear aligners or with braces.</p>
               <p>Straighter teeth are also easier to keep clean.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../invisalign/">Invisalign clear aligners</a></li><li><a href="../orthodontics/">Orthodontics (braces)</a></li></ul>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20teeth%20are%20crooked.%20Are%20aligners%20or%20braces%20right%20for%20me%3F" target="_blank" rel="noopener" data-riya-ask="My teeth are crooked. Are aligners or braces right for me?">Ask Riya about this</a>
+              <a class="cta" href="../invisalign/">Invisalign clear aligners<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              <p class="problems__also">Also: <a href="../orthodontics/">Orthodontics (braces)</a></p>
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20teeth%20are%20crooked.%20Are%20aligners%20or%20braces%20right%20for%20me%3F" target="_blank" rel="noopener" data-riya-ask="My teeth are crooked. Are aligners or braces right for me?">Ask Riya about this</a>
             </div>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-stained-teeth" aria-labelledby="pt-stained-teeth" tabindex="0" hidden>
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-stained-teeth-after.svg" alt="Illustration, after: clean, brighter front teeth" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-stained-teeth-before.svg" alt="Illustration, before: stained front teeth" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: yellow or stained teeth">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAjADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAAIB/8QAHRAAAgMBAQEBAQAAAAAAAAAAAQIAAxEEEiExQf/EABcBAQEBAQAAAAAAAAAAAAAAAAEAAgP/xAAXEQEBAQEAAAAAAAAAAAAAAAAAAREh/9oADAMBAAIRAxEAPwCJRX6bZRUhVySqrijZKCE2Ls5u0dFx6jfPYMiBrbYxz1vDGuKDYyZI3bT5YkSjYxrXZLv6GdsyQdLxhhuTpfVJzJQVfMFcgYRAK9C/2MVdKxBqTvyGoqOyayGrSbfgEGeID6RHaawANhWUEQBZoF5ppAPPsNUPs00idT8nrTTQof/Z); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-stained-640.avif 640w, ../assets/img/stock-stained-1280.avif 1280w, ../assets/img/stock-stained-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-stained-640.webp 640w, ../assets/img/stock-stained-1280.webp 1280w, ../assets/img/stock-stained-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-stained-1280.jpg" srcset="../assets/img/stock-stained-640.jpg 640w, ../assets/img/stock-stained-1280.jpg 1280w, ../assets/img/stock-stained-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="930" loading="lazy" decoding="async" alt="A natural smile with yellowed teeth">
+</picture></div>
             <div class="problems__text">
               <h3>Yellow or stained teeth</h3>
               <p>Surface stains often lift with a professional clean. Deeper colour responds to whitening.</p>
               <p>Where whitening cannot help, bonding or veneers can.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../general-dentistry/">General dentistry &amp; cleaning</a></li><li><a href="../cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20teeth%20look%20yellow.%20Can%20they%20be%20whitened%3F" target="_blank" rel="noopener" data-riya-ask="My teeth look yellow. Can they be whitened?">Ask Riya about this</a>
+              <a class="cta" href="../general-dentistry/">General dentistry &amp; cleaning<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              <p class="problems__also">Also: <a href="../cosmetic-dentistry/">Cosmetic dentistry</a></p>
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20teeth%20look%20yellow.%20Can%20they%20be%20whitened%3F" target="_blank" rel="noopener" data-riya-ask="My teeth look yellow. Can they be whitened?">Ask Riya about this</a>
             </div>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-toothache" aria-labelledby="pt-toothache" tabindex="0" hidden>
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-toothache-after.svg" alt="Illustration, after: the same molar cleaned, sealed and restored" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-toothache-before.svg" alt="Illustration, before: cross-section of a molar with decay reaching the nerve" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: toothache or sensitivity">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAwQGBQL/xAAgEAACAgIDAQADAAAAAAAAAAABAgADBREEEiExIkJx/8QAFgEBAQEAAAAAAAAAAAAAAAAAAgED/8QAGREBAQADAQAAAAAAAAAAAAAAAAECESES/9oADAMBAAIRAxEAPwB5YRRBpCdlX6YhKZCwqhAmEqst3fUoL1W757FWoRT75Bb1pMebN8GzvWBGCIHhqgH4mMkexsyynQ3MbKZE1tpTNO5+lRknkLC9x3JVa3CyQ/cznIZAMu0MnWsZfhna2Mw9MGj9c0ocPz2azqxlMp7IDIjFHV4/staTukRwK//Z); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-toothache-640.avif 640w, ../assets/img/stock-toothache-1280.avif 1280w, ../assets/img/stock-toothache-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-toothache-640.webp 640w, ../assets/img/stock-toothache-1280.webp 1280w, ../assets/img/stock-toothache-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-toothache-1280.jpg" srcset="../assets/img/stock-toothache-640.jpg 640w, ../assets/img/stock-toothache-1280.jpg 1280w, ../assets/img/stock-toothache-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A young man holding his cheek in pain">
+</picture></div>
             <div class="problems__text">
               <h3>Toothache or sensitivity</h3>
               <p>Sensitivity can come from worn enamel or receding gums. Pain that lingers often means decay has reached the nerve.</p>
               <p>An exam and an X-ray tell which it is. A filling or root canal treatment can usually save the tooth.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../root-canal-treatment/">Root canal treatment</a></li><li><a href="../general-dentistry/">General dentistry &amp; cleaning</a></li></ul>
-              <p class="problems__urgent">In severe pain or swollen? <a href="../emergency/">Dental emergencies</a></p>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20toothache.%20Should%20I%20come%20in%3F" target="_blank" rel="noopener" data-riya-ask="I have toothache. Should I come in?">Ask Riya about this</a>
+              <a class="cta" href="../root-canal-treatment/">Root canal treatment<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              <p class="problems__also">Also: <a href="../general-dentistry/">General dentistry &amp; cleaning</a></p><p class="problems__urgent">In severe pain or swollen? <a href="../emergency/">Dental emergencies</a></p>
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20I%20have%20toothache.%20Should%20I%20come%20in%3F" target="_blank" rel="noopener" data-riya-ask="I have toothache. Should I come in?">Ask Riya about this</a>
             </div>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-bleeding-gums" aria-labelledby="pt-bleeding-gums" tabindex="0" hidden>
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-bleeding-gums-after.svg" alt="Illustration, after: firm gums with a tight, even margin" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-bleeding-gums-before.svg" alt="Illustration, before: swollen gums that bleed between the teeth" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: bleeding gums">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAeADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAABAUGAwIA/8QAIBAAAgICAwEAAwAAAAAAAAAAAQIABAMREiExBRMiQf/EABcBAQEBAQAAAAAAAAAAAAAAAAACAQT/xAAYEQEBAQEBAAAAAAAAAAAAAAAAARIRAv/aAAwDAQACEQMRAD8AmEQkxhVrMxHUHrgExzS/Vh1IdGm2H5rFQdTR/lNx8javlUINiatmUqdCOM3UfbolCeory4yplZfXls6k1cGmMGrXsB4sI8oshA3EOtQnBmZfDCp5lVKugHs6/MgHsQY7Dn+zp8za9hWIPu2FKHUmrTcnMYli47MEzYxuOMvI/9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-gums-640.avif 640w, ../assets/img/stock-gums-1280.avif 1280w, ../assets/img/stock-gums-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-gums-640.webp 640w, ../assets/img/stock-gums-1280.webp 1280w, ../assets/img/stock-gums-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-gums-1280.jpg" srcset="../assets/img/stock-gums-640.jpg 640w, ../assets/img/stock-gums-1280.jpg 1280w, ../assets/img/stock-gums-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="810" loading="lazy" decoding="async" alt="A close-up of teeth and the gum line">
+</picture></div>
             <div class="problems__text">
               <h3>Bleeding gums</h3>
               <p>Gums that bleed when you brush are usually inflamed, and that is treatable.</p>
               <p>A professional clean and better care at home often settle it. Left alone, it can loosen teeth.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../general-dentistry/">General dentistry &amp; cleaning</a></li></ul>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20gums%20bleed%20when%20I%20brush.%20What%20should%20I%20do%3F" target="_blank" rel="noopener" data-riya-ask="My gums bleed when I brush. What should I do?">Ask Riya about this</a>
+              <a class="cta" href="../general-dentistry/">General dentistry &amp; cleaning<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20gums%20bleed%20when%20I%20brush.%20What%20should%20I%20do%3F" target="_blank" rel="noopener" data-riya-ask="My gums bleed when I brush. What should I do?">Ask Riya about this</a>
             </div>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-metal-fillings" aria-labelledby="pt-metal-fillings" tabindex="0" hidden>
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-metal-fillings-after.svg" alt="Illustration, after: two back teeth with tooth-coloured fillings" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-metal-fillings-before.svg" alt="Illustration, before: two back teeth with dark metal fillings" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: old metal fillings">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQABAQADAQAAAAAAAAAAAAAAAwUBBAYC/8QAIhAAAgICAgICAwAAAAAAAAAAAQIAAwQRITESUQUUI0Fh/8QAGAEAAwEBAAAAAAAAAAAAAAAAAAECAwT/xAAZEQEBAQEBAQAAAAAAAAAAAAAAARESAjH/2gAMAwEAAhEDEQA/ALOVlJUh5kg5SvZvckWfIWXnRJiUK7ESXXPUWvuqi63Ne62u4dwnxGZO4K4NqnezFp9R6H4jxNfIv3H8HHBE1rcdrD1AfT5GAlDcRqAo1Jtue1x7mVyCB3HjKOhR08e4i2J/Jz65be4yZTe4uT2LWq2HQmExqyd8SZXlH3GGUw/cnFY//9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-metal-fillings-640.avif 640w, ../assets/img/stock-metal-fillings-1280.avif 1280w, ../assets/img/stock-metal-fillings-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-metal-fillings-640.webp 640w, ../assets/img/stock-metal-fillings-1280.webp 1280w, ../assets/img/stock-metal-fillings-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-metal-fillings-1280.jpg" srcset="../assets/img/stock-metal-fillings-640.jpg 640w, ../assets/img/stock-metal-fillings-1280.jpg 1280w, ../assets/img/stock-metal-fillings-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="Back teeth with old dark metal fillings">
+</picture></div>
             <div class="problems__text">
               <h3>Old metal fillings</h3>
               <p>Old metal fillings can crack, or leak at the edges, over the years.</p>
               <p>When one needs replacing, it can be redone in tooth-coloured material, or with a crown.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../general-dentistry/">General dentistry &amp; cleaning</a></li><li><a href="../crowns-bridges/">Crowns &amp; bridges</a></li></ul>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20Can%20my%20old%20metal%20fillings%20be%20replaced%3F" target="_blank" rel="noopener" data-riya-ask="Can my old metal fillings be replaced?">Ask Riya about this</a>
+              <a class="cta" href="../general-dentistry/">General dentistry &amp; cleaning<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              <p class="problems__also">Also: <a href="../crowns-bridges/">Crowns &amp; bridges</a></p>
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20Can%20my%20old%20metal%20fillings%20be%20replaced%3F" target="_blank" rel="noopener" data-riya-ask="Can my old metal fillings be replaced?">Ask Riya about this</a>
             </div>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-dentures" aria-labelledby="pt-dentures" tabindex="0" hidden>
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-dentures-after.svg" alt="Illustration, after: a lower denture held firmly by two implants" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-dentures-before.svg" alt="Illustration, before: a lower denture lifting off the gum" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: loose or uncomfortable dentures">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAdADADASIAAhEBAxEB/8QAGgAAAwEAAwAAAAAAAAAAAAAAAAEEBgIDBf/EAB8QAAICAgIDAQAAAAAAAAAAAAABAxECBBIhMTJBUv/EABcBAQEBAQAAAAAAAAAAAAAAAAACAQP/xAAXEQEBAQEAAAAAAAAAAAAAAAAAEgER/9oADAMBAAIRAxEAPwDQ2ArCzk6GFoTaryT5y8X5CszqjkguyRTr6zktmP8ASCpUC+AAQ6ZOTfRNNHlxsvpCyxT6YbTOz5Sq0rPPmm2I3fZrMtaNvtEm3qRNeppT/9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-denture-hand-640.avif 640w, ../assets/img/stock-denture-hand-1280.avif 1280w, ../assets/img/stock-denture-hand-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-denture-hand-640.webp 640w, ../assets/img/stock-denture-hand-1280.webp 1280w, ../assets/img/stock-denture-hand-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-denture-hand-1280.jpg" srcset="../assets/img/stock-denture-hand-640.jpg 640w, ../assets/img/stock-denture-hand-1280.jpg 1280w, ../assets/img/stock-denture-hand-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="770" loading="lazy" decoding="async" alt="A hand holding a partial denture">
+</picture></div>
             <div class="problems__text">
               <h3>Loose or uncomfortable dentures</h3>
               <p>A denture that moves when you eat or speak can be held firmly by a few implants.</p>
               <p>Sometimes a refit or a new denture is enough.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../dental-implants/">Dental implants</a></li><li><a href="../full-mouth-rehabilitation/">Full mouth rehabilitation</a></li></ul>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20denture%20is%20loose.%20Can%20implants%20help%3F" target="_blank" rel="noopener" data-riya-ask="My denture is loose. Can implants help?">Ask Riya about this</a>
+              <a class="cta" href="../dental-implants/">Dental implants<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              <p class="problems__also">Also: <a href="../full-mouth-rehabilitation/">Full mouth rehabilitation</a></p>
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20My%20denture%20is%20loose.%20Can%20implants%20help%3F" target="_blank" rel="noopener" data-riya-ask="My denture is loose. Can implants help?">Ask Riya about this</a>
             </div>
           </div>
           <div class="problems__panel" role="tabpanel" id="problem-child-teeth" aria-labelledby="pt-child-teeth" tabindex="0" hidden>
-            <figure class="compare">
-              <div class="ba" data-compare>
-                <img src="../assets/illustrations/problem-child-teeth-after.svg" alt="Illustration, after: baby teeth kept healthy, with the small cavity filled" width="640" height="400" loading="lazy">
-                <img class="ba__before" src="../assets/illustrations/problem-child-teeth-before.svg" alt="Illustration, before: baby teeth with a small cavity starting" width="640" height="400" loading="lazy">
-                <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-                <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: my child’s teeth">
-                <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-              </div>
-              <figcaption>Illustration, not a patient</figcaption>
-            </figure>
+            <div class="problems__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAABAUBAgMGAP/EACAQAAICAgIDAQEAAAAAAAAAAAECAAMEESExBRNBEhT/xAAXAQEBAQEAAAAAAAAAAAAAAAACAQME/8QAGxEAAwEBAQEBAAAAAAAAAAAAAAECEQMhEjH/2gAMAwEAAhEDEQA/AK1Y/q5k2Wj7IOQCO4szr2B0sMrzWSq9wYG9TwDKf2Cpu4FhK1nJMzz62DcQPG8N5TS0aNet47ngkV47MgBJhleWOjNp2Uc1qbZKUWfQZlfj/rsTrbcJFrJ1EltQ9xEvJr8B2TT1AGHW6toCMDge5dkQ7GxkVd6mx0OpPhN6KurmcEd/jjWhIiLKsalyNTtbNMCDEHk8JXYkCJozmtfp/9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-kid-chair-640.avif 640w, ../assets/img/stock-kid-chair-1280.avif 1280w, ../assets/img/stock-kid-chair-1920.avif 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-kid-chair-640.webp 640w, ../assets/img/stock-kid-chair-1280.webp 1280w, ../assets/img/stock-kid-chair-1920.webp 1920w" sizes="(min-width: 900px) 62vw, 100vw">
+  <img src="../assets/img/stock-kid-chair-1280.jpg" srcset="../assets/img/stock-kid-chair-640.jpg 640w, ../assets/img/stock-kid-chair-1280.jpg 1280w, ../assets/img/stock-kid-chair-1920.jpg 1920w" sizes="(min-width: 900px) 62vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A girl sitting in the dental chair">
+</picture></div>
             <div class="problems__text">
               <h3>My child’s teeth</h3>
               <p>Baby teeth hold space for the adult teeth and matter for eating and speech.</p>
               <p>Regular checks, sealants and fluoride help stop decay early.</p>
-              <p class="problems__usually">Usually treated with</p>
-              <ul class="chips"><li><a href="../kids-dentistry/">Kids’ dentistry</a></li></ul>
-              <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20When%20should%20my%20child%20first%20see%20a%20dentist%3F" target="_blank" rel="noopener" data-riya-ask="When should my child first see a dentist?">Ask Riya about this</a>
+              <a class="cta" href="../kids-dentistry/">Kids’ dentistry<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
+              
+              <a class="text-link" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care.%20When%20should%20my%20child%20first%20see%20a%20dentist%3F" target="_blank" rel="noopener" data-riya-ask="When should my child first see a dentist?">Ask Riya about this</a>
             </div>
           </div>
         </div>

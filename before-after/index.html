@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {

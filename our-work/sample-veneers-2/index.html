@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -281,17 +283,20 @@
       <div class="container">
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../our-work/">Our work</a></li><li aria-current="page">Smile design & veneers, sample case</li></ol></nav>
         <div class="case-page__grid">
-          <figure class="compare case-compare">
-            <div class="ba" data-compare>
+          <figure class="case-photos case-photos--pair">
+            <div class="media media--hover case-photos__img">
             <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAABAUBAgMG/8QAIhAAAgICAgIDAQEAAAAAAAAAAQIAAwQRITESIgUTQRVR/8QAGAEAAwEBAAAAAAAAAAAAAAAAAAEDAgT/xAAaEQEAAwEBAQAAAAAAAAAAAAAAAQIRQSEx/9oADAMBAAIRAxEAPwC9nJ4hWMPWKkyNHmHY+Uv+zndYp10dyUsHW5VrQ40IJb5odiAZ/Lp5VEicdfxaROxus+2kgzk8+srcdTVU7wd2eLD1MrR5h/2ZY9Tq2njjHoTQMWKbC9LMq8ymRla9dQkqAOILZR9lm9QwtUALISP2Jc+n3PE6YVBa9RL8kFBhH1m3sDL6weVk0OV4MlT5TVaN9RNxnWytub1VjuZ1UEdwtVCrGU5wNlN4Vmcp8heWsIE6nMX7FIEVfyDY5JE1WErSlHIMLqyQO4FIJ1MKGwywepqtpYRRQSWEa0j1hAlOttzC6VUDmYgSHYjqUqnZ/9k=); background-position: 50% 45%">
               <source type="image/avif" srcset="../../assets/img/stock-case-6-640.avif 640w, ../../assets/img/stock-case-6-800.avif 800w" sizes="(min-width: 900px) 50vw, 100vw">
               <source type="image/webp" srcset="../../assets/img/stock-case-6-640.webp 640w, ../../assets/img/stock-case-6-800.webp 800w" sizes="(min-width: 900px) 50vw, 100vw">
               <img src="../../assets/img/stock-case-6-800.jpg" srcset="../../assets/img/stock-case-6-640.jpg 640w, ../../assets/img/stock-case-6-800.jpg 800w" sizes="(min-width: 900px) 50vw, 100vw" width="800" height="1000" fetchpriority="high" decoding="async" alt="Sample image for the demo: after (smile design & veneers)" style="object-position: 50% 45%">
             </picture>
-              <div class="ba__before ba__pending"><p>Before photograph</p><p>Added with the patient’s written consent at launch.</p></div>
-              <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
-              <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+            </div>
+            <div class="media media--hover case-photos__img">
+              <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAABAUGBwMC/8QAIxAAAgICAgICAwEAAAAAAAAAAQIAAwQRBRITISJBBjFxUf/EABgBAQEBAQEAAAAAAAAAAAAAAAMCAQAE/8QAGhEBAQEBAQEBAAAAAAAAAAAAAAECESExQf/aAAwDAQACEQMRAD8ArcvMrxqySRI7lObFjkL7gvI8rZmHqhPuc8XjGt+T/ci1cz1xXkirgyk4fnFOlY6iq7hR02BFTpZiWeiRqd11zxqFN6XKCp3OkjeB5ZthHMr63FiBhNSyri2DOO0q8ZkVB+pHcdsMNR/V5AB+4evpsfDw2p09mTnMdC+1jEq7rFnIUMFJMyN1PA2Bf0vXX+zQ+Js8mOvv6mXVMRkD+zRPxxy1K7iQNZ7xrBbBuUotUVD1EdmE2M4OofjP5EAMjRcUyx7wYPyB71nQnTHr96nvJq0kxdT+Hhtblj19zQ+Ix/BQv8iLhMQG3sRKlB1UARY89RuYiWLAak8bQjsTOZh6XiDMe0bEMK+QDcV45+YjZfVMyLozANdXrY3GisCNiSCXOMnQb7lPhkmobjc8B+v/2Q==); background-position: 50% 50%">
+                <source type="image/avif" srcset="../../assets/img/stock-case-6-face-640.avif 640w, ../../assets/img/stock-case-6-face-1280.avif 1280w, ../../assets/img/stock-case-6-face-1458.avif 1458w" sizes="(min-width: 900px) 25vw, 50vw">
+                <source type="image/webp" srcset="../../assets/img/stock-case-6-face-640.webp 640w, ../../assets/img/stock-case-6-face-1280.webp 1280w, ../../assets/img/stock-case-6-face-1458.webp 1458w" sizes="(min-width: 900px) 25vw, 50vw">
+                <img src="../../assets/img/stock-case-6-face-1280.jpg" srcset="../../assets/img/stock-case-6-face-640.jpg 640w, ../../assets/img/stock-case-6-face-1280.jpg 1280w, ../../assets/img/stock-case-6-face-1458.jpg 1458w" sizes="(min-width: 900px) 25vw, 50vw" width="1280" height="1599" loading="lazy" decoding="async" alt="Sample image for the demo: full face">
+              </picture>
             </div>
             <figcaption>Sample. Real, consented cases replace these at launch.</figcaption>
           </figure>
@@ -312,16 +317,6 @@
             <p class="case-page__note">Results vary. Every plan is made for one person.</p>
           </div>
         </div>
-        <figure class="case-face reveal">
-          <div class="media case-face__media">
-            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAABAUGBwMC/8QAIxAAAgICAgICAwEAAAAAAAAAAQIAAwQRBRITISJBBjFxUf/EABgBAQEBAQEAAAAAAAAAAAAAAAMCAQAE/8QAGhEBAQEBAQEBAAAAAAAAAAAAAAECESExQf/aAAwDAQACEQMRAD8ArcvMrxqySRI7lObFjkL7gvI8rZmHqhPuc8XjGt+T/ci1cz1xXkirgyk4fnFOlY6iq7hR02BFTpZiWeiRqd11zxqFN6XKCp3OkjeB5ZthHMr63FiBhNSyri2DOO0q8ZkVB+pHcdsMNR/V5AB+4evpsfDw2p09mTnMdC+1jEq7rFnIUMFJMyN1PA2Bf0vXX+zQ+Js8mOvv6mXVMRkD+zRPxxy1K7iQNZ7xrBbBuUotUVD1EdmE2M4OofjP5EAMjRcUyx7wYPyB71nQnTHr96nvJq0kxdT+Hhtblj19zQ+Ix/BQv8iLhMQG3sRKlB1UARY89RuYiWLAak8bQjsTOZh6XiDMe0bEMK+QDcV45+YjZfVMyLozANdXrY3GisCNiSCXOMnQb7lPhkmobjc8B+v/2Q==); background-position: 50% 50%">
-              <source type="image/avif" srcset="../../assets/img/stock-case-6-face-640.avif 640w, ../../assets/img/stock-case-6-face-1280.avif 1280w, ../../assets/img/stock-case-6-face-1458.avif 1458w" sizes="(min-width: 900px) 30vw, 100vw">
-              <source type="image/webp" srcset="../../assets/img/stock-case-6-face-640.webp 640w, ../../assets/img/stock-case-6-face-1280.webp 1280w, ../../assets/img/stock-case-6-face-1458.webp 1458w" sizes="(min-width: 900px) 30vw, 100vw">
-              <img src="../../assets/img/stock-case-6-face-1280.jpg" srcset="../../assets/img/stock-case-6-face-640.jpg 640w, ../../assets/img/stock-case-6-face-1280.jpg 1280w, ../../assets/img/stock-case-6-face-1458.jpg 1458w" sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="1599" loading="lazy" decoding="async" alt="Sample image for the demo: full face">
-            </picture>
-          </div>
-          <figcaption>Full face · Sample</figcaption>
-        </figure>
         <nav class="case-nav" aria-label="More cases">
           <a href="../../our-work/sample-implants-2/"><span>Previous case</span>Dental implants</a>
           <a href="../../our-work/">All cases</a>

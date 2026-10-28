@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -281,17 +283,20 @@
       <div class="container">
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../our-work/">Our work</a></li><li aria-current="page">Invisalign & aligners, sample case</li></ol></nav>
         <div class="case-page__grid">
-          <figure class="compare case-compare">
-            <div class="ba" data-compare>
+          <figure class="case-photos case-photos--pair">
+            <div class="media media--hover case-photos__img">
             <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAgAG/8QAIRAAAQMEAgMBAAAAAAAAAAAAAQACAwQREiExQQUTFCL/xAAXAQEBAQEAAAAAAAAAAAAAAAABAAID/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAERAjH/2gAMAwEAAhEDEQA/AOE5neAFapISIwUpR+M9bgSFXaAxllxrqCBi5GAu1AfK0HZWPtjZq6I01LJ6ztAdVA9rNRO2VpsUhi7JS16HJoS80t9BIPrtcpf7f1tSHqA/pTpGSZclPfT7NWRGwZ7KZESgzGinWMFlxY1p0isGk4L4kRjLtNR0YftSYKnaqU9XxtZJtlOIwtlxAsAtRSNeOUdsbTtWnSjI3PdcpkR2CI5zGDS6L9lajPV14Vt2lMRzFvay8BC7QlKCtc08p1nk7C11EbwuuckYtegjqvaeVRgkAC89SE6VmnJxCYzX/9k=); background-position: 50% 45%">
               <source type="image/avif" srcset="../../assets/img/stock-case-4-640.avif 640w, ../../assets/img/stock-case-4-1280.avif 1280w, ../../assets/img/stock-case-4-1345.avif 1345w" sizes="(min-width: 900px) 50vw, 100vw">
               <source type="image/webp" srcset="../../assets/img/stock-case-4-640.webp 640w, ../../assets/img/stock-case-4-1280.webp 1280w, ../../assets/img/stock-case-4-1345.webp 1345w" sizes="(min-width: 900px) 50vw, 100vw">
               <img src="../../assets/img/stock-case-4-1280.jpg" srcset="../../assets/img/stock-case-4-640.jpg 640w, ../../assets/img/stock-case-4-1280.jpg 1280w, ../../assets/img/stock-case-4-1345.jpg 1345w" sizes="(min-width: 900px) 50vw, 100vw" width="1280" height="1601" fetchpriority="high" decoding="async" alt="Sample image for the demo: after (invisalign & aligners)" style="object-position: 50% 45%">
             </picture>
-              <div class="ba__before ba__pending"><p>Before photograph</p><p>Added with the patient’s written consent at launch.</p></div>
-              <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
-              <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
+            </div>
+            <div class="media media--hover case-photos__img">
+              <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAABQMEBgIHAP/EACIQAAICAgICAwEBAAAAAAAAAAECAAMEEQUhEhMiMUEVMv/EABcBAAMBAAAAAAAAAAAAAAAAAAACAwH/xAAYEQEBAQEBAAAAAAAAAAAAAAAAAQIRMf/aAAwDAQACEQMRAD8Az+P8rBNXxrBKgdzJ42/MajVF7KoElpTJuzOCnU5ZzenUOTdrCL4tHig3F4YYEcW/UWxlIUbkvoT71OGuVOo0vGWdYjAUM4BmkpwVsrGpksW/wcHc0mByOlAJhRkpjceKzsy1bYK16lP+htepEcg2HUU3Er8hr4yu5a07E+9AY7k1VepvBXntb9xLGyCuoUo00Txq/NY+ksmMXIDa2YtjhGEzaq1Z6lujMdP2TUaQVgztEAhFXJk6EQxr/MbmwWvOf2Lcd3qFfsV437EfXieSjUgrIfTLq/5nOhuSVVq6SGi+EpCysoG4hiDqbC1//9k=); background-position: 50% 50%">
+                <source type="image/avif" srcset="../../assets/img/stock-case-4-face-640.avif 640w, ../../assets/img/stock-case-4-face-1280.avif 1280w, ../../assets/img/stock-case-4-face-1920.avif 1920w" sizes="(min-width: 900px) 25vw, 50vw">
+                <source type="image/webp" srcset="../../assets/img/stock-case-4-face-640.webp 640w, ../../assets/img/stock-case-4-face-1280.webp 1280w, ../../assets/img/stock-case-4-face-1920.webp 1920w" sizes="(min-width: 900px) 25vw, 50vw">
+                <img src="../../assets/img/stock-case-4-face-1280.jpg" srcset="../../assets/img/stock-case-4-face-640.jpg 640w, ../../assets/img/stock-case-4-face-1280.jpg 1280w, ../../assets/img/stock-case-4-face-1920.jpg 1920w" sizes="(min-width: 900px) 25vw, 50vw" width="1280" height="1600" loading="lazy" decoding="async" alt="Sample image for the demo: full face">
+              </picture>
             </div>
             <figcaption>Sample. Real, consented cases replace these at launch.</figcaption>
           </figure>
@@ -312,16 +317,6 @@
             <p class="case-page__note">Results vary. Every plan is made for one person.</p>
           </div>
         </div>
-        <figure class="case-face reveal">
-          <div class="media case-face__media">
-            <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGgABAAMBAQEAAAAAAAAAAAAABQMEBgIHAP/EACIQAAICAgICAwEBAAAAAAAAAAECAAMEEQUhEhMiMUEVMv/EABcBAAMBAAAAAAAAAAAAAAAAAAACAwH/xAAYEQEBAQEBAAAAAAAAAAAAAAAAAQIRMf/aAAwDAQACEQMRAD8Az+P8rBNXxrBKgdzJ42/MajVF7KoElpTJuzOCnU5ZzenUOTdrCL4tHig3F4YYEcW/UWxlIUbkvoT71OGuVOo0vGWdYjAUM4BmkpwVsrGpksW/wcHc0mByOlAJhRkpjceKzsy1bYK16lP+htepEcg2HUU3Er8hr4yu5a07E+9AY7k1VepvBXntb9xLGyCuoUo00Txq/NY+ksmMXIDa2YtjhGEzaq1Z6lujMdP2TUaQVgztEAhFXJk6EQxr/MbmwWvOf2Lcd3qFfsV437EfXieSjUgrIfTLq/5nOhuSVVq6SGi+EpCysoG4hiDqbC1//9k=); background-position: 50% 50%">
-              <source type="image/avif" srcset="../../assets/img/stock-case-4-face-640.avif 640w, ../../assets/img/stock-case-4-face-1280.avif 1280w, ../../assets/img/stock-case-4-face-1920.avif 1920w" sizes="(min-width: 900px) 30vw, 100vw">
-              <source type="image/webp" srcset="../../assets/img/stock-case-4-face-640.webp 640w, ../../assets/img/stock-case-4-face-1280.webp 1280w, ../../assets/img/stock-case-4-face-1920.webp 1920w" sizes="(min-width: 900px) 30vw, 100vw">
-              <img src="../../assets/img/stock-case-4-face-1280.jpg" srcset="../../assets/img/stock-case-4-face-640.jpg 640w, ../../assets/img/stock-case-4-face-1280.jpg 1280w, ../../assets/img/stock-case-4-face-1920.jpg 1920w" sizes="(min-width: 900px) 30vw, 100vw" width="1280" height="1600" loading="lazy" decoding="async" alt="Sample image for the demo: full face">
-            </picture>
-          </div>
-          <figcaption>Full face · Sample</figcaption>
-        </figure>
         <nav class="case-nav" aria-label="More cases">
           <a href="../../our-work/sample-full-mouth-1/"><span>Previous case</span>Full mouth rehabilitation</a>
           <a href="../../our-work/">All cases</a>

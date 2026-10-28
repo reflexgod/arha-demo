@@ -12,8 +12,8 @@
                             13. Plan your treatment
                             14. Shared components: tabs, compare
                                 slider, Ask Riya, clinic tour
-                            15. Treatment pages: stepper, layers,
-                                scrubber, guides, checklist, decider,
+                            15. Treatment pages: stepper, guides,
+                                checklist, decider,
                                 technology index
                             16. Our work filter, gallery view,
                                 360° tour
@@ -164,8 +164,9 @@
     });
   }
 
-  /* 4. Reveal on scroll: opacity only, 1.5s, once, when ~15% into the viewport.
-        Siblings revealed together are staggered 0 / .25 / .5 / .75s. -------- */
+  /* 4. Reveal on scroll, once, when ~15% into the viewport: text fades up, photographs
+        settle from 1.04 to 1 (CSS). Siblings revealed together are staggered by 120ms.
+        window.arhaReady tells the head script that reveals are running. ------------ */
   const reveals = document.querySelectorAll('.reveal');
   if (!reduceMotion && 'IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
@@ -173,7 +174,7 @@
         .filter((e) => e.isIntersecting)
         .sort((a, b) => (a.boundingClientRect.top - b.boundingClientRect.top) || (a.boundingClientRect.left - b.boundingClientRect.left))
         .forEach((e, i) => {
-          e.target.style.setProperty('--delay', `${Math.min(i, 3) * 250}ms`);
+          e.target.style.setProperty('--delay', `${Math.min(i, 3) * 120}ms`);
           e.target.classList.add('is-in');
           io.unobserve(e.target);
         });
@@ -182,6 +183,7 @@
   } else {
     reveals.forEach((el) => el.classList.add('is-in'));
   }
+  window.arhaReady = true;
 
   /* 4b. Images fade in over their blurred preview once loaded ------------- */
   document.querySelectorAll('picture.fill img[loading="lazy"]').forEach((img) => {
@@ -777,9 +779,7 @@
 
   /* 15. Treatment-page components, set up once each block scrolls into view.
          Stepper ([data-stepper]): tabs plus Previous / Next and a progress line.
-         Layer explorer ([data-layers]): the drawing follows the selected part; hovering
-         or tapping a part of the drawing selects it.
-         Scrubber ([data-scrubber]): a range input steps through the frames.
+         Implant hotspots are tabs: the numbered markers on the photograph are the tab list.
          Design guides ([data-guides]): a toggle button draws the overlay.
          Checklist ([data-checklist]) and decider ([data-decider]): the first matching
          result is shown; nothing is stored or sent.
@@ -812,40 +812,6 @@
       selectTab(tabs[i + Number(b.dataset.step)]);
     }));
     sync();
-  }));
-
-  document.querySelectorAll('[data-layers]').forEach((box) => whenVisible(box, () => {
-    const tabs = [...box.querySelectorAll('[role="tab"]')];
-    const keyOf = (tab) => tab.getAttribute('aria-controls').replace(/^layer-/, '');
-    const sync = () => {
-      const tab = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
-      box.dataset.active = keyOf(tab);
-    };
-    box.querySelector('[data-tabs]').addEventListener('tabchange', sync);
-    box.querySelectorAll('[data-layer]').forEach((part) => {
-      const tab = tabs.find((t) => keyOf(t) === part.dataset.layer);
-      part.addEventListener('click', () => selectTab(tab));
-      if (window.matchMedia('(hover: hover)').matches) part.addEventListener('mouseenter', () => selectTab(tab));
-    });
-    sync();
-  }));
-
-  document.querySelectorAll('[data-scrubber]').forEach((fig) => whenVisible(fig, () => {
-    const img = fig.querySelector('img');
-    const base = img.src.slice(0, img.src.lastIndexOf('/') + 1); // frames sit beside the first one
-    const frames = fig.dataset.frames.split(',').map((name) => base + name);
-    frames.forEach((src) => { const im = new Image(); im.src = src; }); // preload, so scrubbing never flickers
-    const range = fig.querySelector('input[type="range"]');
-    const out = fig.querySelector('[data-scrub-out]');
-    const last = frames.length;
-    range.addEventListener('input', () => {
-      const n = Number(range.value);
-      img.src = frames[n - 1];
-      img.alt = n === 1 ? 'Illustration: crooked front teeth at the start of aligner treatment'
-        : n === last ? 'Illustration: the front teeth straight at the end of aligner treatment'
-          : `Illustration: the front teeth part of the way into line, stage ${n} of ${last}`;
-      out.textContent = n;
-    });
   }));
 
   document.querySelectorAll('[data-guides]').forEach((fig) => {

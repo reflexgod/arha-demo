@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -365,21 +367,36 @@
           <h2 id="ix-title">Your check-up, step by step</h2>
           <p class="lede">What happens at a routine visit, and a quick gum self-check you can do at home.</p>
         </div>
-      <ol class="timeline-steps reveal"><li><p class="timeline-steps__num">01</p><h3>We ask how you are</h3><p>Any pain or sensitivity, and any changes in your health or medicines.</p></li><li><p class="timeline-steps__num">02</p><h3>Examination</h3><p>Teeth, gums, bite, tongue and the soft tissues of the mouth.</p></li><li><p class="timeline-steps__num">03</p><h3>X-rays, if needed</h3><p>Taken in-house, and only when they will tell us something useful.</p></li><li><p class="timeline-steps__num">04</p><h3>Cleaning</h3><p>Scaling and polishing to remove plaque, tartar and surface stains.</p></li><li><p class="timeline-steps__num">05</p><h3>Your plan</h3><p>What we found, what needs doing now, and what can wait.</p></li></ol><div class="ix-sub reveal"><form class="checklist" data-checklist onsubmit="return false"><fieldset><legend>Gum self-check: tick anything you have noticed</legend><ul><li><label class="check"><input type="checkbox" value="bleeding"><span>Bleeding when you brush or floss</span></label></li><li><label class="check"><input type="checkbox" value="breath"><span>Bad breath that does not go away</span></label></li><li><label class="check"><input type="checkbox" value="receding"><span>Gums pulling back from the teeth</span></label></li><li><label class="check"><input type="checkbox" value="loose"><span>A tooth that feels loose</span></label></li></ul></fieldset><div class="checklist__out" aria-live="polite"><div class="checklist__result" data-if="any:receding,loose" hidden><p><strong>These can be signs of more advanced gum disease.</strong> Please book a check-up soon.</p><a class="cta" href="../book/">Book a check-up</a></div><div class="checklist__result" data-if="any:bleeding,breath" hidden><p><strong>These are common early signs of gum inflammation.</strong> A check-up and professional clean usually help.</p><a class="cta" href="../book/">Book a check-up</a></div><div class="checklist__result" data-if="none" hidden><p>Nothing ticked. Keep up regular check-ups.</p></div></div><p class="checklist__note">This is not a diagnosis. Only an examination can tell.</p></form></div>
+      <div class="photo-pair reveal"><div class="ix-photo media" style="aspect-ratio: 3 / 2"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAUCAwQBBv/EACEQAAICAQQCAwAAAAAAAAAAAAECAAMEERIhMRNBIjSB/8QAGAEBAQEBAQAAAAAAAAAAAAAAAQMCAAT/xAAcEQEBAQABBQAAAAAAAAAAAAAAARECEiExQXH/2gAMAwEAAhEDEQA/AFPk2SyqwvOeLcZalYQSOvRiSV6ODHGKQygRbT8uJqpbw8kwd9MrMfVNYutXY0005jWNtHU7lUFhqBGJ8oRowJly1l+hLMXBYtzG1GEqgEwxvqYcXH2nkQy8diw06jJ1RCAIW1bq90N7lXgY6ooJ7m5kDCLK8kI+0maxlLp3O0WIKoHQkmYheDCE2nC9rGN4GvuNx9X8hCZinLxHmcx2W86H3J1WMR3CEKfT/9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-exam-640.avif 640w, ../assets/img/stock-exam-1280.avif 1280w, ../assets/img/stock-exam-1920.avif 1920w" sizes="(min-width: 900px) 45vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-exam-640.webp 640w, ../assets/img/stock-exam-1280.webp 1280w, ../assets/img/stock-exam-1920.webp 1920w" sizes="(min-width: 900px) 45vw, 100vw">
+  <img src="../assets/img/stock-exam-1280.jpg" srcset="../assets/img/stock-exam-640.jpg 640w, ../assets/img/stock-exam-1280.jpg 1280w, ../assets/img/stock-exam-1920.jpg 1920w" sizes="(min-width: 900px) 45vw, 100vw" width="1280" height="960" loading="lazy" decoding="async" alt="A dentist examining a patient’s teeth with a mirror and probe">
+</picture></div><div class="ix-photo media" style="aspect-ratio: 3 / 2"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAABAADBQEC/8QAIBAAAgICAwADAQAAAAAAAAAAAQIAAwQREiExExQiQf/EABYBAQEBAAAAAAAAAAAAAAAAAAIDAf/EABgRAAMBAQAAAAAAAAAAAAAAAAABEQIS/9oADAMBAAIRAxEAPwCLXqJx12wEjKANmV1ZCK/sFKymr9fVe4OxuJOoj7fOrQg9MbPI0S1bDnzd6MtS4LPT4ZZeQEoNDDoxMCpRmux/K/2CGFeDz71G/IDcNzaVUON4PIUhtmXibC6b2aVFQY7ImeWC29RtWQAsUgeqP/KJqDsKlupGsLCHLkGa0FM//9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-cleaning-640.avif 640w, ../assets/img/stock-cleaning-1280.avif 1280w, ../assets/img/stock-cleaning-1920.avif 1920w" sizes="(min-width: 900px) 45vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-cleaning-640.webp 640w, ../assets/img/stock-cleaning-1280.webp 1280w, ../assets/img/stock-cleaning-1920.webp 1920w" sizes="(min-width: 900px) 45vw, 100vw">
+  <img src="../assets/img/stock-cleaning-1280.jpg" srcset="../assets/img/stock-cleaning-640.jpg 640w, ../assets/img/stock-cleaning-1280.jpg 1280w, ../assets/img/stock-cleaning-1920.jpg 1920w" sizes="(min-width: 900px) 45vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A dentist cleaning a patient’s teeth">
+</picture></div></div><ol class="timeline-steps reveal"><li><p class="timeline-steps__num">01</p><h3>We ask how you are</h3><p>Any pain or sensitivity, and any changes in your health or medicines.</p></li><li><p class="timeline-steps__num">02</p><h3>Examination</h3><p>Teeth, gums, bite, tongue and the soft tissues of the mouth.</p></li><li><p class="timeline-steps__num">03</p><h3>X-rays, if needed</h3><p>Taken in-house, and only when they will tell us something useful.</p></li><li><p class="timeline-steps__num">04</p><h3>Cleaning</h3><p>Scaling and polishing to remove plaque, tartar and surface stains.</p></li><li><p class="timeline-steps__num">05</p><h3>Your plan</h3><p>What we found, what needs doing now, and what can wait.</p></li></ol><div class="ix-sub reveal"><form class="checklist" data-checklist onsubmit="return false"><fieldset><legend>Gum self-check: tick anything you have noticed</legend><ul><li><label class="check"><input type="checkbox" value="bleeding"><span>Bleeding when you brush or floss</span></label></li><li><label class="check"><input type="checkbox" value="breath"><span>Bad breath that does not go away</span></label></li><li><label class="check"><input type="checkbox" value="receding"><span>Gums pulling back from the teeth</span></label></li><li><label class="check"><input type="checkbox" value="loose"><span>A tooth that feels loose</span></label></li></ul></fieldset><div class="checklist__out" aria-live="polite"><div class="checklist__result" data-if="any:receding,loose" hidden><p><strong>These can be signs of more advanced gum disease.</strong> Please book a check-up soon.</p><a class="cta" href="../book/">Book a check-up</a></div><div class="checklist__result" data-if="any:bleeding,breath" hidden><p><strong>These are common early signs of gum inflammation.</strong> A check-up and professional clean usually help.</p><a class="cta" href="../book/">Book a check-up</a></div><div class="checklist__result" data-if="none" hidden><p>Nothing ticked. Keep up regular check-ups.</p></div></div><p class="checklist__note">This is not a diagnosis. Only an examination can tell.</p></form></div>
       </div>
     </section>
 
-    <section class="section " aria-labelledby="who-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 id="who-title">Is this for you?</h2>
+    <section class="section who-split" aria-labelledby="who-title">
+      <div class="container split split--even">
+        <div class="split__media media media--hover who-split__media reveal">
+          <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAQCAwUBBv/EACEQAAICAgIBBQAAAAAAAAAAAAABAgMEERIhMQUTFCJB/8QAFwEBAQEBAAAAAAAAAAAAAAAAAQIAA//EABcRAQEBAQAAAAAAAAAAAAAAAAABETH/2gAMAwEAAhEDEQA/AJVWpsahJaMWmUkx+qcmc4qnGtkGtEJWNInWnZHsrArlJLwLW3NM0KsaLl9mU5mLBeGbGY1E3KaWjapr1Wm0QwvT1yTaNG6lV1BDYz5tbOK/24nYx5WBk1Pj0ikl5Zkk3pit2bNvtl3x3LwimzGf6gU9JiLs7nvUAAIxHDW59jORFcH0AFziapxYpt7RVmRSfSAApj//2Q==); background-position: 50% 60%">
+            <source type="image/avif" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-01-640.avif 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.avif 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1920.avif 1920w" sizes="(min-width: 900px) 50vw, 100vw">
+            <source type="image/webp" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-01-640.webp 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.webp 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1920.webp 1920w" sizes="(min-width: 900px) 50vw, 100vw">
+            <img src="../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.jpg" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-01-640.jpg 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1280.jpg 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-01-1920.jpg 1920w" sizes="(min-width: 900px) 50vw, 100vw" width="1280" height="958" loading="lazy" decoding="async" alt="An Arha treatment room: the dental chair under its overhead light" style="object-position: 50% 60%">
+          </picture>
         </div>
-        <ul class="who">
-          <li class="reveal"><h3>It has been a while</h3><p>No check-up in the last year or more.</p></li>
-          <li class="reveal"><h3>Bleeding gums or bad breath</h3><p>Common early signs of gum inflammation.</p></li>
-          <li class="reveal"><h3>Sensitivity or a small cavity</h3><p>Caught early, often a simple filling.</p></li>
-          <li class="reveal"><h3>Old fillings that need checking</h3><p>Fillings that are worn, cracked or leaking.</p></li>
-        </ul>
+        <div class="split__text">
+          <h2 id="who-title" class="reveal">Is this for you?</h2>
+          <ul class="who who--list">
+            <li class="reveal"><h3>It has been a while</h3><p>No check-up in the last year or more.</p></li>
+            <li class="reveal"><h3>Bleeding gums or bad breath</h3><p>Common early signs of gum inflammation.</p></li>
+            <li class="reveal"><h3>Sensitivity or a small cavity</h3><p>Caught early, often a simple filling.</p></li>
+            <li class="reveal"><h3>Old fillings that need checking</h3><p>Fillings that are worn, cracked or leaking.</p></li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -427,23 +444,6 @@
             </span>
             <span class="tech-strip__name">Instrument care</span></a></li>
         </ul>
-      </div>
-    </section>
-
-    <section class="section results" aria-labelledby="cases-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 id="cases-title">Results</h2>
-        </div>
-        <div data-cases-block>
-          <p class="cases-note reveal">Sample images for demo. Arha’s own cases, shared with patient consent, will appear here. Results vary.</p>
-          <!-- cases:start only=none (generated by tools/cases_markup.py) -->
-    <p class="cases-empty">Cases for this treatment will appear here once patients have given their consent.</p>
-    <!-- cases:end -->
-        </div>
-        <div class="section-cta reveal">
-          <a class="cta" href="../our-work/">See all our work<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
-        </div>
       </div>
     </section>
 

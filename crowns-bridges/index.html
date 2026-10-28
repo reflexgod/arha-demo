@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -365,7 +367,19 @@
           <h2 id="ix-title">Choosing a material</h2>
           <p class="lede">Compare the three crown materials, then answer two questions about a missing tooth.</p>
         </div>
-      <div class="reveal"><div class="itabs itabs--pills" data-tabs><div class="itabs__list" role="tablist" aria-label="Crown material" aria-orientation="horizontal"><button class="itabs__tab" type="button" role="tab" id="mat-t-ceramic" aria-controls="mat-ceramic" aria-selected="true">Ceramic</button><button class="itabs__tab" type="button" role="tab" id="mat-t-zirconia" aria-controls="mat-zirconia" aria-selected="false" tabindex="-1">Zirconia</button><button class="itabs__tab" type="button" role="tab" id="mat-t-pfm" aria-controls="mat-pfm" aria-selected="false" tabindex="-1">PFM</button></div><div class="itabs__panel" role="tabpanel" id="mat-ceramic" aria-labelledby="mat-t-ceramic" tabindex="0"><dl class="vs"><div><dt>Look</dt><dd>The most natural; light passes through it like enamel</dd></div><div><dt>Strength</dt><dd>Strong for front teeth, less so for heavy chewing</dd></div><div><dt>Metal-free</dt><dd>Yes</dd></div><div><dt>Usually used for</dt><dd>Front teeth</dd></div></dl></div><div class="itabs__panel" role="tabpanel" id="mat-zirconia" aria-labelledby="mat-t-zirconia" tabindex="0" hidden><dl class="vs"><div><dt>Look</dt><dd>Natural, slightly more opaque</dd></div><div><dt>Strength</dt><dd>Very strong</dd></div><div><dt>Metal-free</dt><dd>Yes</dd></div><div><dt>Usually used for</dt><dd>Back teeth, and front teeth where strength matters</dd></div></dl></div><div class="itabs__panel" role="tabpanel" id="mat-pfm" aria-labelledby="mat-t-pfm" tabindex="0" hidden><dl class="vs"><div><dt>Look</dt><dd>Good, though a grey line can show at the gum over time</dd></div><div><dt>Strength</dt><dd>Strong, with a long track record</dd></div><div><dt>Metal-free</dt><dd>No: porcelain over a metal base</dd></div><div><dt>Usually used for</dt><dd>Back teeth and bridges</dd></div></dl></div></div></div><div class="ix-sub reveal"><h3 class="ix-sub__title">Missing tooth: crown, bridge or implant?</h3><form class="decider" data-decider onsubmit="return false">
+      <div class="reveal"><div class="itabs itabs--photo itabs--split" data-tabs><div class="itabs__list" role="tablist" aria-label="Crown material" aria-orientation="horizontal"><button class="itabs__tab" type="button" role="tab" id="mat-t-ceramic" aria-controls="mat-ceramic" aria-selected="true">Ceramic</button><button class="itabs__tab" type="button" role="tab" id="mat-t-zirconia" aria-controls="mat-zirconia" aria-selected="false" tabindex="-1">Zirconia</button><button class="itabs__tab" type="button" role="tab" id="mat-t-pfm" aria-controls="mat-pfm" aria-selected="false" tabindex="-1">PFM</button></div><div class="itabs__panel" role="tabpanel" id="mat-ceramic" aria-labelledby="mat-t-ceramic" tabindex="0"><div class="ix-photo media" style="aspect-ratio: 3 / 2"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAABQYBAgMABP/EACIQAAIDAAIBBAMAAAAAAAAAAAECAAMRBAUSEyExURQyQf/EABUBAQEAAAAAAAAAAAAAAAAAAAAB/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8ASyckhpIHkcm1fCsc+wMDHfqWVGb+QnR1LkgkQrT1aIoLASBYat1+RKw72dVSLi5sBH9pR1LZaNjNwrKPSBObFjxz3lxfYowEwG786lFOZB3K7fNVTAJvs+zK+ZPzA3v5L3MSTPPJEnIH/9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-veneers-640.avif 640w, ../assets/img/stock-veneers-1280.avif 1280w, ../assets/img/stock-veneers-1920.avif 1920w" sizes="(min-width: 900px) 60vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-veneers-640.webp 640w, ../assets/img/stock-veneers-1280.webp 1280w, ../assets/img/stock-veneers-1920.webp 1920w" sizes="(min-width: 900px) 60vw, 100vw">
+  <img src="../assets/img/stock-veneers-1280.jpg" srcset="../assets/img/stock-veneers-640.jpg 640w, ../assets/img/stock-veneers-1280.jpg 1280w, ../assets/img/stock-veneers-1920.jpg 1920w" sizes="(min-width: 900px) 60vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="Thin porcelain restorations, translucent like enamel">
+</picture></div><div class="itabs__body"><dl class="vs"><div><dt>Look</dt><dd>The most natural; light passes through it like enamel</dd></div><div><dt>Strength</dt><dd>Strong for front teeth, less so for heavy chewing</dd></div><div><dt>Metal-free</dt><dd>Yes</dd></div><div><dt>Usually used for</dt><dd>Front teeth</dd></div></dl></div></div><div class="itabs__panel" role="tabpanel" id="mat-zirconia" aria-labelledby="mat-t-zirconia" tabindex="0" hidden><div class="ix-photo media" style="aspect-ratio: 3 / 2"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGgAAAQUBAAAAAAAAAAAAAAAAAAEDBAUGAv/EAB4QAAICAgMBAQAAAAAAAAAAAAECAAMEEQUhMUFR/8QAFgEBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAABEB/9oADAMBAAIRAxEAPwDF7huIBs6En4mA1uiRAhBWPgga3/Joa+PRB3B8asDwSDOlWHyJo/ZdNj1sfkabCU+RVjnA49nYFhLglMZNdSwXHWtDoSj5RiHMaYL83voyLZlsw9kbs+wCyUjoWtv2PJa0bRNmSUrGpGn/2Q==); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-zirconia-640.avif 640w, ../assets/img/stock-zirconia-1280.avif 1280w, ../assets/img/stock-zirconia-1920.avif 1920w" sizes="(min-width: 900px) 60vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-zirconia-640.webp 640w, ../assets/img/stock-zirconia-1280.webp 1280w, ../assets/img/stock-zirconia-1920.webp 1920w" sizes="(min-width: 900px) 60vw, 100vw">
+  <img src="../assets/img/stock-zirconia-1280.jpg" srcset="../assets/img/stock-zirconia-640.jpg 640w, ../assets/img/stock-zirconia-1280.jpg 1280w, ../assets/img/stock-zirconia-1920.jpg 1920w" sizes="(min-width: 900px) 60vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="Solid white crowns on a dental model">
+</picture></div><div class="itabs__body"><dl class="vs"><div><dt>Look</dt><dd>Natural, slightly more opaque</dd></div><div><dt>Strength</dt><dd>Very strong</dd></div><div><dt>Metal-free</dt><dd>Yes</dd></div><div><dt>Usually used for</dt><dd>Back teeth, and front teeth where strength matters</dd></div></dl></div></div><div class="itabs__panel" role="tabpanel" id="mat-pfm" aria-labelledby="mat-t-pfm" tabindex="0" hidden><div class="ix-photo media" style="aspect-ratio: 3 / 2"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAABAUAAgMBBv/EAB8QAAICAgMAAwAAAAAAAAAAAAABAgQDERIhQQUTMv/EABYBAQEBAAAAAAAAAAAAAAAAAAACAf/EABcRAQEBAQAAAAAAAAAAAAAAAAABEQL/2gAMAwEAAhEDEQA/APGEIFVqzysAZJ+E0/R3j+MSXZhbo8VtIBWcLSXF6ZUDWvhlkmuh5VwLEls0jTjW8J9m5LRnTYLf56BM8txaYbiXKAJbioyI1WENuHGbYMNLkE47Fj6ei4iv/9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-pfm-640.avif 640w, ../assets/img/stock-pfm-1280.avif 1280w, ../assets/img/stock-pfm-1920.avif 1920w" sizes="(min-width: 900px) 60vw, 100vw">
+  <source type="image/webp" srcset="../assets/img/stock-pfm-640.webp 640w, ../assets/img/stock-pfm-1280.webp 1280w, ../assets/img/stock-pfm-1920.webp 1920w" sizes="(min-width: 900px) 60vw, 100vw">
+  <img src="../assets/img/stock-pfm-1280.jpg" srcset="../assets/img/stock-pfm-640.jpg 640w, ../assets/img/stock-pfm-1280.jpg 1280w, ../assets/img/stock-pfm-1920.jpg 1920w" sizes="(min-width: 900px) 60vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A crown on a dental model">
+</picture></div><div class="itabs__body"><dl class="vs"><div><dt>Look</dt><dd>Good, though a grey line can show at the gum over time</dd></div><div><dt>Strength</dt><dd>Strong, with a long track record</dd></div><div><dt>Metal-free</dt><dd>No: porcelain over a metal base</dd></div><div><dt>Usually used for</dt><dd>Back teeth and bridges</dd></div></dl></div></div></div></div><div class="ix-sub reveal"><h3 class="ix-sub__title">Missing tooth: crown, bridge or implant?</h3><form class="decider" data-decider onsubmit="return false">
           <fieldset><legend>Is the tooth still there?</legend>
             <label class="radio"><input type="radio" name="d-there" value="yes"><span>Yes, but it is badly broken or filled</span></label>
             <label class="radio"><input type="radio" name="d-there" value="no"><span>No, it is missing</span></label>
@@ -386,17 +400,24 @@
       </div>
     </section>
 
-    <section class="section " aria-labelledby="who-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 id="who-title">Is this for you?</h2>
+    <section class="section who-split" aria-labelledby="who-title">
+      <div class="container split split--even">
+        <div class="split__media media media--hover who-split__media reveal">
+          <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCABVADADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAwUGBAACAf/EACEQAAEFAAICAwEAAAAAAAAAAAEAAgMEERIhBSITFDFB/8QAGAEBAQEBAQAAAAAAAAAAAAAAAQIDAAT/xAAbEQEBAQADAQEAAAAAAAAAAAAAAQIDETEhEv/aAAwDAQACEQMRAD8AyVYObgQqGkC1mFI6EoYe04jtNzpebTeNb+wgBvsvLrCH9kAohbGjpfc1Z2T8lqg9kwVJx/vSa1K73gFL68fKQKs8dC1sY0KtCFUtZzB2FleCFSW42uYcCQ2483FEpCrze2J3T9gkdCAvl7VFXi4NCvM7qdXqJetjJBqo687fjGFTFnWO0IsF5zWZq7RyopbAIzUuskFpS195w7KD98vOaoNplRfxlVDE4OYFOUGlzgcVBA0tYFrxs9pi3HpQWw43VtttwocbeXqp16rHhVYf3xARPH0nyygkHE8i8O2UhxCa1aDIAOgotV08UaYjYNC2uAAxEAAHSHIr479RtP3m4g1WFzwtV3HFGowjo4nc+nHhhWBawBaRq8xNwIuYs/yvt8A6QpEf+ILx2tOOMtp2w48gmfjxrQuXJ16c+GbF7K5chTyhu/Vy5OEbf//Z); background-position: 50% 60%">
+            <source type="image/avif" srcset="../assets/img/arha-dental-care-lounge-peddar-road-640.avif 640w, ../assets/img/arha-dental-care-lounge-peddar-road-1080.avif 1080w" sizes="(min-width: 900px) 50vw, 100vw">
+            <source type="image/webp" srcset="../assets/img/arha-dental-care-lounge-peddar-road-640.webp 640w, ../assets/img/arha-dental-care-lounge-peddar-road-1080.webp 1080w" sizes="(min-width: 900px) 50vw, 100vw">
+            <img src="../assets/img/arha-dental-care-lounge-peddar-road-1080.jpg" srcset="../assets/img/arha-dental-care-lounge-peddar-road-640.jpg 640w, ../assets/img/arha-dental-care-lounge-peddar-road-1080.jpg 1080w" sizes="(min-width: 900px) 50vw, 100vw" width="1080" height="1920" loading="lazy" decoding="async" alt="The patients' lounge at Arha" style="object-position: 50% 60%">
+          </picture>
         </div>
-        <ul class="who">
-          <li class="reveal"><h3>A broken or cracked tooth</h3><p>A tooth too damaged for a filling.</p></li>
-          <li class="reveal"><h3>A large old filling</h3><p>A tooth weakened by a big filling.</p></li>
-          <li class="reveal"><h3>A tooth after root canal treatment</h3><p>Protection for a more brittle tooth.</p></li>
-          <li class="reveal"><h3>One missing tooth</h3><p>A bridge across the gap, or an implant crown.</p></li>
-        </ul>
+        <div class="split__text">
+          <h2 id="who-title" class="reveal">Is this for you?</h2>
+          <ul class="who who--list">
+            <li class="reveal"><h3>A broken or cracked tooth</h3><p>A tooth too damaged for a filling.</p></li>
+            <li class="reveal"><h3>A large old filling</h3><p>A tooth weakened by a big filling.</p></li>
+            <li class="reveal"><h3>A tooth after root canal treatment</h3><p>Protection for a more brittle tooth.</p></li>
+            <li class="reveal"><h3>One missing tooth</h3><p>A bridge across the gap, or an implant crown.</p></li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -459,23 +480,6 @@
             </span>
             <span class="tech-strip__name">Instrument care</span></a></li>
         </ul>
-      </div>
-    </section>
-
-    <section class="section results" aria-labelledby="cases-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 id="cases-title">Results</h2>
-        </div>
-        <div data-cases-block>
-          <p class="cases-note reveal">Sample images for demo. Arha’s own cases, shared with patient consent, will appear here. Results vary.</p>
-          <!-- cases:start only=none (generated by tools/cases_markup.py) -->
-    <p class="cases-empty">Cases for this treatment will appear here once patients have given their consent.</p>
-    <!-- cases:end -->
-        </div>
-        <div class="section-cta reveal">
-          <a class="cta" href="../our-work/">See all our work<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a>
-        </div>
       </div>
     </section>
 

@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -281,17 +283,13 @@
       <div class="container">
         <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../">Home</a></li><li><a href="../../our-work/">Our work</a></li><li aria-current="page">Dental implants, sample case</li></ol></nav>
         <div class="case-page__grid">
-          <figure class="compare case-compare">
-            <div class="ba" data-compare>
+          <figure class="case-photos">
+            <div class="media media--hover case-photos__img">
             <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGgAAAwEBAQEAAAAAAAAAAAAAAgMFBAABBv/EAB8QAAICAwEAAwEAAAAAAAAAAAABAgMEESESEzFBUf/EABYBAQEBAAAAAAAAAAAAAAAAAAIAAf/EABgRAQEBAQEAAAAAAAAAAAAAAAABERIx/9oADAMBAAIRAxEAPwD52V+mPryE0TntsbBNBw5VWNvODsaTcybRZ/TbXcosJapzj6gZJR0wo5G4ibLlsylKiRh0fCG0eQQ6CFRkAoeXwbDYUYjoVb/DCwDs8xMV+S9lJ4bmjHk4PkmWGfCvwJVaPPegvnRN3DIwNdMET1k9NVF+yXWqC0ok/MsimPsvSh9kXMubk+l6NuBduzk9maL6OgzcHTfH6NjPwvsWnwCb4TdNnkt82Yrp+mdNsU30UgWv/9k=); background-position: 50% 45%">
               <source type="image/avif" srcset="../../assets/img/stock-case-5-640.avif 640w, ../../assets/img/stock-case-5-1280.avif 1280w, ../../assets/img/stock-case-5-1920.avif 1920w" sizes="(min-width: 900px) 50vw, 100vw">
               <source type="image/webp" srcset="../../assets/img/stock-case-5-640.webp 640w, ../../assets/img/stock-case-5-1280.webp 1280w, ../../assets/img/stock-case-5-1920.webp 1920w" sizes="(min-width: 900px) 50vw, 100vw">
               <img src="../../assets/img/stock-case-5-1280.jpg" srcset="../../assets/img/stock-case-5-640.jpg 640w, ../../assets/img/stock-case-5-1280.jpg 1280w, ../../assets/img/stock-case-5-1920.jpg 1920w" sizes="(min-width: 900px) 50vw, 100vw" width="1280" height="1600" fetchpriority="high" decoding="async" alt="Sample image for the demo: after (dental implants)" style="object-position: 50% 45%">
             </picture>
-              <div class="ba__before ba__pending"><p>Before photograph</p><p>Added with the patient’s written consent at launch.</p></div>
-              <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
-              <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
             </div>
             <figcaption>Sample. Real, consented cases replace these at launch.</figcaption>
           </figure>

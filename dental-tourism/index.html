@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -335,17 +337,24 @@
     </section>
 
 
-    <section class="section " aria-labelledby="why-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 id="why-title">Why Arha</h2>
+    <section class="section who-split" aria-labelledby="who-title">
+      <div class="container split split--even">
+        <div class="split__media media media--hover who-split__media reveal">
+          <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAlADADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAwQAAQUC/8QAHhAAAwEAAgMBAQAAAAAAAAAAAAECAxEhBBIxIkH/xAAXAQEBAQEAAAAAAAAAAAAAAAABAgAD/8QAFREBAQAAAAAAAAAAAAAAAAAAAAH/2gAMAwEAAhEDEQA/ANB4NWujT8bD8psHzPt2Me6U/lnOOlEecr+hIiePorNU39Ld0v6UgxWSYtvPqGjTrti/k2FVCF6nUbMz627DZbIIWtla9Qe2vfQtO6S+lVsmUHb8ikytdeUArSeQe2vQMzrp8hM6ZCGih1TLdMhBDh0+TnVvghAZ/9k=); background-position: 50% 50%">
+            <source type="image/avif" srcset="../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-640.avif 640w, ../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1280.avif 1280w, ../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1920.avif 1920w" sizes="(min-width: 900px) 50vw, 100vw">
+            <source type="image/webp" srcset="../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-640.webp 640w, ../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1280.webp 1280w, ../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1920.webp 1920w" sizes="(min-width: 900px) 50vw, 100vw">
+            <img src="../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1280.jpg" srcset="../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-640.jpg 640w, ../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1280.jpg 1280w, ../assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1920.jpg 1920w" sizes="(min-width: 900px) 50vw, 100vw" width="1280" height="976" loading="lazy" decoding="async" alt="The door of suite 107, Doctor House, with the Arha sign and the doctors' names" style="object-position: 50% 50%">
+          </picture>
         </div>
-        <ul class="who">
-          <li class="reveal"><h3>On Peddar Road, South Mumbai</h3><p>Opposite Jaslok Hospital, in Doctor House, 14 Peddar Road.</p></li>
-          <li class="reveal"><h3>Close to Marine Drive</h3><p>South Mumbai has a wide choice of hotels and serviced apartments a short drive away.</p></li>
-          <li class="reveal"><h3>Specialist-led</h3><p>Implants, full mouth rehabilitation and smile design, led by a prosthodontist.</p></li>
-          <li class="reveal"><h3>Planned before you fly</h3><p>Your plan, visits and written estimate are agreed before you book travel.</p></li>
-        </ul>
+        <div class="split__text">
+          <h2 id="who-title" class="reveal">Why Arha</h2>
+          <ul class="who who--list">
+            <li class="reveal"><h3>On Peddar Road, South Mumbai</h3><p>Opposite Jaslok Hospital, in Doctor House, 14 Peddar Road.</p></li>
+            <li class="reveal"><h3>Close to Marine Drive</h3><p>South Mumbai has a wide choice of hotels and serviced apartments a short drive away.</p></li>
+            <li class="reveal"><h3>Specialist-led</h3><p>Implants, full mouth rehabilitation and smile design, led by a prosthodontist.</p></li>
+            <li class="reveal"><h3>Planned before you fly</h3><p>Your plan, visits and written estimate are agreed before you book travel.</p></li>
+          </ul>
+        </div>
       </div>
     </section>
 

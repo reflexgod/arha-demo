@@ -39,3 +39,8 @@ review/
 
 # Internal notes, credits and client to-dos (kept local, never published)
 notes/
+
+### Secrets (API keys): never committed
+.env
+.env/
+*.env

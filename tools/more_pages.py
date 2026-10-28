@@ -9,7 +9,7 @@ from urllib.parse import quote
 
 import cases_markup
 from picture import picture
-from treatment_pages import ARROW, closing, crumbs, crumbs_jsonld, faq_block, steps_block, who_block, section
+from treatment_pages import ARROW, closing, crumbs, crumbs_jsonld, faq_block, section, steps_block, who_split
 
 CAT_TREATMENT = {"implants": "dental-implants", "full-mouth": "full-mouth-rehabilitation",
                  "veneers": "cosmetic-dentistry", "aligners": "invisalign"}
@@ -122,26 +122,19 @@ def case_page(site_url, n, cs):
     trail = [("Home", ""), ("Our work", "our-work/"), (f"{c['name']}, sample case", f"our-work/{c['slug']}/")]
     pic = picture(c["img"], "(min-width: 900px) 50vw, 100vw", f"Sample image for the demo: after ({c['name'].lower()})", pos=c.get("pos"), eager=True, indent="            ")
     face = (f"""
-        <figure class="case-face reveal">
-          <div class="media case-face__media">
-{picture(c['face'], '(min-width: 900px) 30vw, 100vw', 'Sample image for the demo: full face', indent='            ')}
-          </div>
-          <figcaption>Full face · Sample</figcaption>
-        </figure>""" if c.get("face") else "")
+            <div class="media media--hover case-photos__img">
+{picture(c['face'], '(min-width: 900px) 25vw, 50vw', 'Sample image for the demo: full face', indent='              ')}
+            </div>""" if c.get("face") else "")
     main = f"""  <main id="main" tabindex="-1">
 
     <section class="section case-page" aria-labelledby="page-title">
       <div class="container">
         {crumbs(trail)}
         <div class="case-page__grid">
-          <figure class="compare case-compare">
-            <div class="ba" data-compare>
+          <figure class="case-photos{' case-photos--pair' if c.get('face') else ''}">
+            <div class="media media--hover case-photos__img">
 {pic}
-              <div class="ba__before ba__pending"><p>Before photograph</p><p>Added with the patient’s written consent at launch.</p></div>
-              <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-              <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after">
-              <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-            </div>
+            </div>{face}
             <figcaption>{SAMPLE_LINE}</figcaption>
           </figure>
           <div class="case-page__text">
@@ -160,7 +153,7 @@ def case_page(site_url, n, cs):
             <p class="case-page__used">Treatment: <a href="{treat}/">{html.escape(c['name'])}</a></p>
             <p class="case-page__note">Results vary. Every plan is made for one person.</p>
           </div>
-        </div>{face}
+        </div>
         <nav class="case-nav" aria-label="More cases">
           <a href="our-work/{prev_c['slug']}/"><span>Previous case</span>{html.escape(prev_c['name'])}</a>
           <a href="our-work/">All cases</a>
@@ -421,7 +414,7 @@ def tourism_page(site_url):
     main = f"""  <main id="main" tabindex="-1">
 
 {hero('{{pic stock-marine-drive | 100vw | Marine Drive and the South Mumbai skyline across the bay | pos=50% 50% | eager}}', "Dental tourism", "Planning dental treatment in Mumbai from abroad: one virtual consultation, a written plan, then your visits.", trail)}
-{section("", "why-title", "Why Arha", who_block(why))}
+{who_split(why, 0, "Why Arha", ("arha-dental-care-exterior-dental-clinic-peddar-road", "The door of suite 107, Doctor House, with the Arha sign and the doctors' names", "50% 50%"))}
 {section("section--stone texture", "how-title", "How it works", steps_block(steps))}
     <section class="section" aria-labelledby="trip-title">
       <div class="container split split--even">

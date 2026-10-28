@@ -65,8 +65,7 @@ def side_menu(indent="                  "):
 
 
 # ------------------------------------------------------------------ Common problems we fix
-# Shown on the homepage and /treatments/. Each before/after pair is a line illustration
-# (tools/illustrations.py), never a patient. "treat" lists treatment slugs from GROUPS.
+# Shown on the homepage and /treatments/, each with a real photograph (PHOTOS). "treat" lists treatment slugs from GROUPS.
 PROBLEMS = [
     {"slug": "missing-tooth", "name": "A missing tooth",
      "lines": ["A gap affects how you chew and, over time, how the teeth beside it sit.",
@@ -121,53 +120,59 @@ PROBLEMS = [
      "ask": "When should my child first see a dentist?"},
 ]
 
+ARROW = '<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg>'
+
+
 def treatment(slug):
     return next(t for g in GROUPS for t in g["items"] if t["slug"] == slug)
 
 
+PHOTOS = {  # one real photograph per problem (Unsplash, tools/stock.py; Arha's own photos where they fit)
+    "missing-tooth": ("stock-implant-model", "A jaw model showing an implant crown between two natural teeth"),
+    "chipped-tooth": ("stock-bonding", "A dentist shaping tooth-coloured bonding on a front tooth"),
+    "gaps": ("stock-gaps", "Front teeth with small gaps between them"),
+    "crooked-teeth": ("stock-crooked", "A smile with uneven, overlapping lower teeth"),
+    "stained-teeth": ("stock-stained", "A natural smile with yellowed teeth"),
+    "toothache": ("stock-toothache", "A young man holding his cheek in pain"),
+    "bleeding-gums": ("stock-gums", "A close-up of teeth and the gum line"),
+    "metal-fillings": ("stock-metal-fillings", "Back teeth with old dark metal fillings"),
+    "dentures": ("stock-denture-hand", "A hand holding a partial denture"),
+    "child-teeth": ("stock-kid-chair", "A girl sitting in the dental chair"),
+}
+
+
 def problems(indent="        "):
-    """Common problems we fix: tabs on the left, a stage with a before/after illustration on the right.
-    The URL hash (#problem-<slug>) selects a problem, so each one can be linked to directly."""
-    import re
-    from pathlib import Path
+    """Common problems we fix: a list of problems, and for the selected one a large photograph
+    (two-thirds of the width), two lines, a link to the treatment and Ask Riya. Tabs pattern;
+    the URL hash (#problem-<slug>) selects a problem, so each one can be linked to directly."""
     from urllib.parse import quote
-    art = Path(__file__).resolve().parent.parent / "assets" / "illustrations"
-
-    def alt(slug, state):  # the drawing's own <title>, written by tools/illustrations.py
-        text = (art / f"problem-{slug}-{state}.svg").read_text(encoding="utf-8")
-        return f"Illustration, {state}: " + re.search(r"<title>(.*?)</title>", text).group(1).lower()
-
+    from picture import picture
     i = indent
     tabs, panels = [], []
     for n, p in enumerate(PROBLEMS):
         sel = n == 0
         tabs.append(f'{i}    <button class="problems__tab" type="button" role="tab" id="pt-{p["slug"]}" aria-controls="problem-{p["slug"]}" '
                     f'aria-selected="{str(sel).lower()}"{"" if sel else " tabindex=\"-1\""}>{p["name"]}</button>')
-        chips = "".join(f'<li><a href="{s}/">{treatment(s)["name"]}</a></li>' for s in p["treat"])
-        urgent = (f'\n{i}      <p class="problems__urgent">In severe pain or swollen? <a href="emergency/">Dental emergencies</a></p>'
+        main = treatment(p["treat"][0])
+        also = ", ".join(f'<a href="{s}/">{treatment(s)["name"]}</a>' for s in p["treat"][1:])
+        also = f'<p class="problems__also">Also: {also}</p>' if also else ""
+        urgent = ('<p class="problems__urgent">In severe pain or swollen? <a href="emergency/">Dental emergencies</a></p>'
                   if p.get("urgent") else "")
         wa = "https://wa.me/910000000000?text=" + quote(f"Hello Arha Dental Care. {p['ask']}")
+        img, alt = PHOTOS[p["slug"]]
+        pic = picture(img, "(min-width: 900px) 62vw, 100vw", alt, indent="")
         panels.append(f"""{i}  <div class="problems__panel" role="tabpanel" id="problem-{p["slug"]}" aria-labelledby="pt-{p["slug"]}" tabindex="0"{"" if sel else " hidden"}>
-{i}    <figure class="compare">
-{i}      <div class="ba" data-compare>
-{i}        <img src="assets/illustrations/problem-{p["slug"]}-after.svg" alt="{alt(p["slug"], "after")}" width="640" height="400" loading="lazy">
-{i}        <img class="ba__before" src="assets/illustrations/problem-{p["slug"]}-before.svg" alt="{alt(p["slug"], "before")}" width="640" height="400" loading="lazy">
-{i}        <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-{i}        <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: {p["name"].lower()}">
-{i}        <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-{i}      </div>
-{i}      <figcaption>Illustration, not a patient</figcaption>
-{i}    </figure>
+{i}    <div class="problems__media media">{pic}</div>
 {i}    <div class="problems__text">
 {i}      <h3>{p["name"]}</h3>
 {i}      <p>{p["lines"][0]}</p>
 {i}      <p>{p["lines"][1]}</p>
-{i}      <p class="problems__usually">Usually treated with</p>
-{i}      <ul class="chips">{chips}</ul>{urgent}
-{i}      <a class="cta" href="{wa}" target="_blank" rel="noopener" data-riya-ask="{p["ask"]}">Ask Riya about this</a>
+{i}      <a class="cta" href="{main["slug"]}/">{main["name"]}{ARROW}</a>
+{i}      {also}{urgent}
+{i}      <a class="text-link" href="{wa}" target="_blank" rel="noopener" data-riya-ask="{p["ask"]}">Ask Riya about this</a>
 {i}    </div>
 {i}  </div>""")
     return (f'{i}<div class="problems" data-tabs data-hash>\n'
-            f'{i}  <div class="problems__tabs" role="tablist" aria-label="Common problems" aria-orientation="vertical">\n'
+            f'{i}  <div class="problems__tabs" role="tablist" aria-label="Common problems">\n'
             + "\n".join(tabs) + f"\n{i}  </div>\n"
             + "\n".join(panels) + f"\n{i}</div>\n")

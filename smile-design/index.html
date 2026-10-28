@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -367,21 +369,18 @@
         </div>
       <div class="guides-wrap reveal">
         <figure class="guides" data-guides>
-          <div class="guides__frame media">
-<picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAQYC/8QAIRAAAgIDAAICAwAAAAAAAAAAAQIAAwQRIRIxBRMUMkH/xAAXAQEBAQEAAAAAAAAAAAAAAAACAQAE/8QAGBEBAQEBAQAAAAAAAAAAAAAAAQARIQL/2gAMAwEAAhEDEQA/ANx22ZSrGxJ1ACmPVWTmLqY/1bnr6tCaLQBBPk6jITNS/wAg78csdwKZqg+4x+UrCW1AQncYW3wHYCrRMM9XmnICbe1ygx1uHIFi+5INT1vvsZovI0CYwipEehlbe5j2sg1uNAh1gXpBPZEyo7T6bNGUaHBEkoOxmqzwMNWpvUrj1Fji95GMe4ONbjQrBiKbJV1Mk1tmNumhMqxy59Qe220HxCjcSycvwOhHb+KZDyjtzKWZ/F+RKsOy3jfJhlHZx68MoYjHnZVyx26hcn7GEs4SAqDOYwyfITqPj/0EB1j74X//2Q==); background-position: 50% 50%">
+          <div class="guides__frame media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAA8ADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAQYC/8QAIRAAAgIDAAICAwAAAAAAAAAAAQIAAwQRIRIxBRMUMkH/xAAXAQEBAQEAAAAAAAAAAAAAAAACAQAE/8QAGBEBAQEBAQAAAAAAAAAAAAAAAQARIQL/2gAMAwEAAhEDEQA/ANx22ZSrGxJ1ACmPVWTmLqY/1bnr6tCaLQBBPk6jITNS/wAg78csdwKZqg+4x+UrCW1AQncYW3wHYCrRMM9XmnICbe1ygx1uHIFi+5INT1vvsZovI0CYwipEehlbe5j2sg1uNAh1gXpBPZEyo7T6bNGUaHBEkoOxmqzwMNWpvUrj1Fji95GMe4ONbjQrBiKbJV1Mk1tmNumhMqxy59Qe220HxCjcSycvwOhHb+KZDyjtzKWZ/F+RKsOy3jfJhlHZx68MoYjHnZVyx26hcn7GEs4SAqDOYwyfITqPj/0EB1j74X//2Q==); background-position: 50% 50%">
   <source type="image/avif" srcset="../assets/img/stock-case-2-640.avif 640w, ../assets/img/stock-case-2-1280.avif 1280w, ../assets/img/stock-case-2-1346.avif 1346w" sizes="(min-width: 900px) 40vw, 100vw">
   <source type="image/webp" srcset="../assets/img/stock-case-2-640.webp 640w, ../assets/img/stock-case-2-1280.webp 1280w, ../assets/img/stock-case-2-1346.webp 1346w" sizes="(min-width: 900px) 40vw, 100vw">
   <img src="../assets/img/stock-case-2-1280.jpg" srcset="../assets/img/stock-case-2-640.jpg 640w, ../assets/img/stock-case-2-1280.jpg 1280w, ../assets/img/stock-case-2-1346.jpg 1346w" sizes="(min-width: 900px) 40vw, 100vw" width="1280" height="1600" loading="lazy" decoding="async" alt="Sample photograph of a smile, used to show the design guides" style="object-position: 50% 50%">
-</picture>
-          <svg class="guides__overlay" viewBox="0 0 640 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+</picture><svg class="guides__overlay" viewBox="0 0 640 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <g class="guides__lines">
               <path class="g-mid" d="M430 300V500"/>
               <path class="g-curve" d="M238 390Q440 446 548 398"/>
               <g class="g-ticks"><path d="M282 352V420"/><path d="M330 352V420"/><path d="M380 352V420"/><path d="M482 352V420"/><path d="M530 352V420"/></g>
               <text x="438" y="316">Midline</text><text x="452" y="456">Smile line</text><text x="270" y="342">Proportions</text>
             </g>
-          </svg>
-          </div>
+          </svg></div>
           <figcaption><span>Sample photograph</span><button class="cta" type="button" aria-pressed="false" data-guides-toggle>Show design guides</button></figcaption>
         </figure>
         <div class="guides__text">
@@ -390,32 +389,27 @@
           <p>The design is then previewed so you can see it, and change it, before treatment.</p>
         </div>
       </div>
-      <div class="ix-sub ix-sub--split reveal"><div><h3 class="ix-sub__title">Before and after the design</h3>
-        <p>Uneven lengths and widths brought into proportion along the smile line.</p></div>
-        <figure class="compare">
-        <div class="ba" data-compare>
-          <img src="../assets/illustrations/smile-design-after.svg" alt="Illustration, after: the same teeth designed to even proportions along the smile line" width="640" height="400" loading="lazy">
-          <img class="ba__before" src="../assets/illustrations/smile-design-before.svg" alt="Illustration, before: front teeth of uneven length, width and shape" width="640" height="400" loading="lazy">
-          <span class="ba__label ba__label--before">Before</span><span class="ba__label ba__label--after">After</span>
-          <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Compare before and after: a smile design">
-          <span class="ba__handle" aria-hidden="true"><span class="ba__grip"></span></span>
-        </div>
-        <figcaption>Illustration, not a patient</figcaption>
-      </figure></div>
       </div>
     </section>
 
-    <section class="section " aria-labelledby="who-title">
-      <div class="container">
-        <div class="section-head reveal">
-          <h2 id="who-title">Is this for you?</h2>
+    <section class="section who-split" aria-labelledby="who-title">
+      <div class="container split split--even">
+        <div class="split__media media media--hover who-split__media reveal">
+          <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAtADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAgEG/8QAIhAAAgICAgICAwAAAAAAAAAAAQIAAxEhBBITMQUyIiNR/8QAFgEBAQEAAAAAAAAAAAAAAAAAAQIA/8QAGBEBAQEBAQAAAAAAAAAAAAAAAAERAjH/2gAMAwEAAhEDEQA/AN9wZwOAZl0AUlTEDc62YwZOMrrycDExZfkQFKmwCH8GpqxdmJit4b+SmtAHucsoUyZp2E6Q4+xh0pRt43ALZ2MIbenqJw0nWub8nb1A8dHvYalargfiDiN8SQIYDMXewg7ls8UeoGz4sPsQ5lHVkRLqfH9YbhcNr3HYam6h5HHaX+DSiqCBGKrvG4KUoNbjB1oQ2NTDASgWuOFJkyz5M1MRK14/WZ5/k1K1hzMLJX//2Q==); background-position: 50% 55%">
+            <source type="image/avif" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-06-640.avif 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-06-1280.avif 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-06-1920.avif 1920w" sizes="(min-width: 900px) 50vw, 100vw">
+            <source type="image/webp" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-06-640.webp 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-06-1280.webp 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-06-1920.webp 1920w" sizes="(min-width: 900px) 50vw, 100vw">
+            <img src="../assets/img/dental-operatory-arha-dental-care-peddar-road-06-1280.jpg" srcset="../assets/img/dental-operatory-arha-dental-care-peddar-road-06-640.jpg 640w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-06-1280.jpg 1280w, ../assets/img/dental-operatory-arha-dental-care-peddar-road-06-1920.jpg 1920w" sizes="(min-width: 900px) 50vw, 100vw" width="1280" height="1198" loading="lazy" decoding="async" alt="A treatment room seen through a glass door" style="object-position: 50% 55%">
+          </picture>
         </div>
-        <ul class="who">
-          <li class="reveal"><h3>Teeth of uneven length or shape</h3><p>Edges that do not follow your lip line, or teeth out of proportion.</p></li>
-          <li class="reveal"><h3>Gaps, chips or worn edges</h3><p>Small flaws that add up across a smile.</p></li>
-          <li class="reveal"><h3>A smile that shows too much or too little</h3><p>Tooth length and gum line considered together.</p></li>
-          <li class="reveal"><h3>Old cosmetic work you are unhappy with</h3><p>Crowns or veneers that no longer look right.</p></li>
-        </ul>
+        <div class="split__text">
+          <h2 id="who-title" class="reveal">Is this for you?</h2>
+          <ul class="who who--list">
+            <li class="reveal"><h3>Teeth of uneven length or shape</h3><p>Edges that do not follow your lip line, or teeth out of proportion.</p></li>
+            <li class="reveal"><h3>Gaps, chips or worn edges</h3><p>Small flaws that add up across a smile.</p></li>
+            <li class="reveal"><h3>A smile that shows too much or too little</h3><p>Tooth length and gum line considered together.</p></li>
+            <li class="reveal"><h3>Old cosmetic work you are unhappy with</h3><p>Crowns or veneers that no longer look right.</p></li>
+          </ul>
+        </div>
       </div>
     </section>
 

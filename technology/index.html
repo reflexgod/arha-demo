@@ -29,6 +29,8 @@
   <link rel="stylesheet" href="../assets/css/site.css">
   <script>
     document.documentElement.classList.add('js');
+    // If site.js never runs (blocked or failed), show everything rather than leave reveals hidden
+    setTimeout(function () { if (!window.arhaReady) document.documentElement.classList.remove('js'); }, 2500);
     // First visit in this tab: Arha's emblem draws itself, then the page is revealed (skipped on reduced motion)
     try {
       if (!sessionStorage.getItem('arha-intro') && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -361,7 +363,11 @@
             </article>
             <article class="titem reveal" id="rotary-endodontics" aria-labelledby="rotary-endodontics-name">
               <div class="titem__media media">
-                <img class="art" src="../assets/illustrations/root-canal-step-2.svg" alt="Illustration: Step 2: the canals are cleaned and shaped with fine rotary instruments" width="640" height="400" loading="lazy">
+                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAABAYBAgUD/8QAHRAAAgMBAQEBAQAAAAAAAAAAAQMAAhEEBRIhQf/EABcBAQEBAQAAAAAAAAAAAAAAAAECAwT/xAAaEQACAwEBAAAAAAAAAAAAAAAAAQIRIRID/9oADAMBAAIRAxEAPwDYDi60v08oamC06KLOCHpuWVhqBGKpR5nbn9h7vTC04Z2dzA6cmR38xsDJ42zTq8YNe46nfW/2MfktomgBMWUp+NwzrXqus5suUsM2qeA9m3XbdhqPZKq4Zj26PofshJDTkZ2SsGXn9YdF/mFdSa3ToP7FQ3PHcWELHr2vUDZDZ0R8+lZDiUNwn8liourtBA+t5bcRi8FFbrH0Ni1YOo4f/9k=); background-position: 50% 50%">
+                  <source type="image/avif" srcset="../assets/img/stock-endo-files-640.avif 640w, ../assets/img/stock-endo-files-1280.avif 1280w, ../assets/img/stock-endo-files-1920.avif 1920w" sizes="(min-width: 900px) 40vw, 100vw">
+                  <source type="image/webp" srcset="../assets/img/stock-endo-files-640.webp 640w, ../assets/img/stock-endo-files-1280.webp 1280w, ../assets/img/stock-endo-files-1920.webp 1920w" sizes="(min-width: 900px) 40vw, 100vw">
+                  <img src="../assets/img/stock-endo-files-1280.jpg" srcset="../assets/img/stock-endo-files-640.jpg 640w, ../assets/img/stock-endo-files-1280.jpg 1280w, ../assets/img/stock-endo-files-1920.jpg 1920w" sizes="(min-width: 900px) 40vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="Fine endodontic files with coloured handles, laid out on a surface" style="object-position: 50% 50%">
+                </picture>
               </div>
               <div class="titem__text">
                 <h3 id="rotary-endodontics-name">Rotary endodontics</h3>
