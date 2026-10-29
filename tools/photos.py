@@ -174,6 +174,56 @@ def export(im, name):
     return files, (im.width, im.height)
 
 
+# ---------------------------------------------------------------- demo simulations (sample pairs only)
+def teeth_mask(im, box, sat=0.30, light=0.50, hue=None):
+    """Soft mask of the teeth inside box = (left, top, right, bottom) fractions of the image: bright,
+    low-saturation pixels within an ellipse fitted to the box (lips, gums and skin are more saturated
+    or darker). hue=(lo, hi) in degrees picks stained teeth by colour instead (yellow teeth are more
+    saturated than pale lips). Used only to simulate sample pairs for the demo, never on a patient's photograph."""
+    x = np.asarray(im.convert("RGB")).astype(np.float32) / 255
+    h, w = x.shape[:2]
+    mx, mn = x.max(2), x.min(2)
+    s = (mx - mn) / np.maximum(mx, 1e-3)
+    l0, t0, r0, b0 = box[0] * w, box[1] * h, box[2] * w, box[3] * h
+    yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
+    ell = ((xx - (l0 + r0) / 2) / ((r0 - l0) / 2)) ** 2 + ((yy - (t0 + b0) / 2) / ((b0 - t0) / 2)) ** 2 <= 1
+    ref = np.percentile(mx[ell], 90) if ell.any() else 1
+    if hue:
+        hsv = np.asarray(im.convert("RGB").convert("HSV")).astype(np.float32)
+        deg = hsv[..., 0] * 360 / 255
+        m = ell & (mx > light * ref) & (((deg >= hue[0]) & (deg <= hue[1])) | (s < 0.10))
+    else:
+        m = ell & (s < sat) & (mx > light * ref)
+    k = 3 if not hue else 7  # stained teeth: a wider opening removes specks on the lips
+    mask = Image.fromarray((m * 255).astype(np.uint8)).filter(ImageFilter.MinFilter(k)).filter(ImageFilter.MaxFilter(k))
+    return mask.filter(ImageFilter.GaussianBlur(max(1.5, w / 900)))
+
+
+def stain_teeth(im, mask, amount=1.0):
+    """Simulated staining: teeth shift towards a warm yellow-brown, a little darker near the gum line."""
+    x = np.asarray(im.convert("RGB")).astype(np.float32) / 255
+    a = np.asarray(mask).astype(np.float32)[..., None] / 255 * amount
+    h = x.shape[0]
+    rows = np.where(a[..., 0].max(1) > 0.2)[0]
+    top, bot = (rows.min(), rows.max()) if rows.size else (0, h)
+    grad = np.clip(1 - (np.arange(h, dtype=np.float32) - top) / max(bot - top, 1), 0, 1)[:, None, None]
+    tint = np.array([0.97, 0.86, 0.62], np.float32) * (0.90 - 0.10 * grad)
+    y = x * (1 - a) + (x * tint) * a
+    return Image.fromarray(np.clip(y * 255, 0, 255).astype(np.uint8))
+
+
+def whiten_teeth(im, mask, amount=1.0):
+    """Simulated whitening: teeth lose their yellow cast and brighten slightly; never paper-white."""
+    x = np.asarray(im.convert("RGB")).astype(np.float32) / 255
+    a = np.asarray(mask).astype(np.float32)[..., None] / 255 * amount
+    lum = (x @ np.array([0.2126, 0.7152, 0.0722], np.float32))[..., None]
+    w = lum + (x - lum) * 0.45                       # most of the yellow chroma goes
+    w = w * np.array([0.99, 1.0, 1.03], np.float32)  # a cool touch
+    w = np.minimum(w * 1.06 + 0.02, 0.92)            # brighter, capped below white
+    y = x * (1 - a) + w * a
+    return Image.fromarray(np.clip(y * 255, 0, 255).astype(np.uint8))
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--only")
