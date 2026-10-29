@@ -42,9 +42,9 @@ SITE = {
     "time_zone": "Asia/Kolkata",
     "riya_webhook_url": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat",
     "google_reviews_url": "https://share.google/PzhwgJ9QJMErZnk9R",
-    # Google rating strip: only the real figures. The demo has shown 5.0; the count is unknown (None hides it).
+    # Google rating: the real figures, checked on Google on 29 Oct 2026 (5.0 stars from 31 reviews)
     "google_rating": "5.0",
-    "google_review_count": None,
+    "google_review_count": 31,
     # Hero line for the technology USP: from what Arha's own photos show, until the equipment list is confirmed
     "usp_line": "In-house X-ray · Own sterilisation room · Prosthodontist-led",
 }
@@ -117,7 +117,7 @@ def show_values():
         "google-rating": SITE["google_rating"] or "",
         "google-count": f'{SITE["google_review_count"]} reviews' if SITE["google_review_count"] else "",
         # The homepage shows a visible placeholder until the clinic confirms the count (notes/TO-CONFIRM.md)
-        "google-count-label": f'{SITE["google_review_count"]} reviews' if SITE["google_review_count"] else "Review count to come",
+        "google-count-label": f'{SITE["google_review_count"]} Google reviews' if SITE["google_review_count"] else "Google reviews",
         "usp": SITE["usp_line"],
         **hours_text(),
     }

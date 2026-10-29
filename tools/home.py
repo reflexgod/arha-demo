@@ -15,9 +15,15 @@ ARROW = '<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" 
 PENDING = "Before photograph · added with the patient’s consent"
 SHORT = "Before photo · to come"  # on grid tiles; the case page and notes carry the full wording
 
-REVIEWS = ["He managed my pain and resolved the problem on the same day.",
-           "Excellent doctor and excellent service.",
-           "He is patient, gentle and takes the time to answer all my questions."]
+REVIEWS = [  # real Google reviews (lines quoted as written; "grate" corrected to "great")
+    "He managed my pain and resolved the problem on the same day.",
+    "I had a very positive experience getting my cavity treated by Dr. Nikhil Jain.",
+    "Excellent doctor and excellent service.",
+    "I would highly recommend Dr. Jain to anyone considering orthodontic treatment.",
+    "He is patient, gentle and takes the time to answer all my questions.",
+    "The cap procedure was absolutely painless at Arha Dental Care.",
+    "It was a smooth experience with great advice that gave her a comforting outcome.",
+]
 
 HOTSPOTS = [  # Arha's treatment room (dental-operatory-01); positions in % of the photograph
     ("68%", "74%", "A fully adjustable chair", "Every treatment room has a fully adjustable dental chair.",
@@ -232,8 +238,7 @@ def main_html(visit):
         <div class="section-head reveal">
           <p class="eyebrow">What patients say</p>
           <!-- Rating and count from SITE (tools/pages.py); the count is a placeholder until the clinic confirms it -->
-          <h2 id="reviews-title" class="reviews-hl__score"><span data-show="google-rating">5.0</span> on Google</h2>
-          <p class="reviews-hl__count" data-show="google-count-label">Review count to come</p>
+          <h2 id="reviews-title" class="reviews-hl__score"><span data-show="google-rating">5.0</span> · <span data-show="google-count-label">31 Google reviews</span></h2>
         </div>
 {carousel(REVIEWS)}
         <p class="section-cta"><a class="link" href="#" data-google-reviews>Read all reviews on Google</a></p>
