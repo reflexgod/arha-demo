@@ -143,6 +143,37 @@ def t_blend(pg, path, vp, box, name):
     rec(path, name, vp, "second photograph shows", float(op) > .5, f"opacity {op}")
 
 
+def t_scan(pg, path, vp, box="[data-scan]", name="Scan scrubber (Arha's screen)"):
+    """The ring glides from arch to arch and the step text follows."""
+    into_view(pg, box)
+    before = ev(pg, "(b) => [document.querySelector(b + ' .scan__focus').style.transform, [...document.querySelectorAll(b + ' .scan__text')].findIndex((t) => !t.hidden)]", box)
+    t_range(pg, path, vp, box, name, "--x")
+    if vp == 1440:
+        pg.locator(f"{box} input[type=range]").first.focus(); pg.keyboard.press("End")
+    pg.wait_for_timeout(200)
+    after = ev(pg, "(b) => [document.querySelector(b + ' .scan__focus').style.transform, [...document.querySelectorAll(b + ' .scan__text')].findIndex((t) => !t.hidden)]", box)
+    rec(path, name, vp, "ring moves to another arch", after[0] != before[0], after[0][:40])
+    rec(path, name, vp, "step text follows", after[1] != before[1], f"step {before[1]} -> {after[1]}")
+
+
+def t_riya(pg, vp):
+    """Riya: docked in the CALL NOW bar on phones; on desktop it steps aside over text."""
+    go(pg, "problems/missing-tooth/")
+    pg.wait_for_timeout(400)
+    if vp == 390:
+        r = ev(pg, """() => { const l = document.querySelector('.riya-launcher').getBoundingClientRect();
+            const b = document.querySelector('.call-bar').getBoundingClientRect();
+            return [Math.round(l.top - b.top), Math.round(l.bottom - b.bottom), Math.round(innerWidth - l.right)]; }""")
+        rec("problems/missing-tooth", "Riya launcher", vp, "docked in the CALL NOW bar", r[0] == 0 and abs(r[1]) <= 1 and r[2] == 0, r)
+    else:
+        seen = set()
+        h = ev(pg, "() => document.body.scrollHeight")
+        for y in range(0, h, 300):
+            pg.evaluate(f"window.scrollTo(0, {y})"); pg.wait_for_timeout(80)
+            seen.add(ev(pg, "() => document.querySelector('.riya-launcher').classList.contains('is-aside')"))
+        rec("problems/missing-tooth", "Riya launcher", vp, "steps aside over text, returns", seen == {True, False}, sorted(seen))
+
+
 def t_picker(pg, path, vp):
     box = "[data-checklist]"
     into_view(pg, box)
@@ -244,7 +275,7 @@ PROBLEM_TESTS = {
     "missing-tooth": lambda pg, p, vp, cdp: t_xfade(pg, p, vp, "Implant/Bridge/Denture toggle", "[data-xfade]", ["Implant", "Bridge", "Denture"]),
     "chipped-tooth": lambda pg, p, vp, cdp: t_loupe(pg, p, vp, cdp),
     "gaps": lambda pg, p, vp, cdp: t_xpanels(pg, p, vp, ".xpanels--ix", "Bonding/Veneers/Aligners panels"),
-    "crooked-teeth": lambda pg, p, vp, cdp: t_blend(pg, p, vp, "[data-blend]", "Crowded-to-straight blend"),
+    "crooked-teeth": lambda pg, p, vp, cdp: t_scan(pg, p, vp),
     "stained-teeth": lambda pg, p, vp, cdp: t_blend(pg, p, vp, "[data-blend]", "Whitening simulation"),
     "toothache": lambda pg, p, vp, cdp: t_picker(pg, p, vp),
     "bleeding-gums": lambda pg, p, vp, cdp: t_quiz(pg, p, vp),
@@ -269,6 +300,7 @@ def acc(pg, path, vp):
     """FAQ accordion on the page: open the first question."""
     if not ev(pg, "() => !!document.querySelector('.faq__trigger')"):
         return
+    go(pg, path)  # a fresh load: a tap right after a synthesized touch gesture can be taken as its end, not a click
     into_view(pg, ".faq")
     pg.wait_for_timeout(1200)  # let the section's reveal settle before tapping
     for _ in range(10):  # and wait until the question has stopped moving
@@ -359,7 +391,10 @@ def g_home(pg, vp, cdp):
     go(pg, path)
     t_ba(pg, "home", vp, cdp)
     # reviews carousel, hotspots, trio panels, journey
+    # A fresh load: on a phone, the first tap after the slider test's synthesized fling only ends the fling
+    go(pg, path)
     into_view(pg, ".drag--quotes")
+    pg.wait_for_timeout(300)
     before = ev(pg, "() => document.querySelector('.drag--quotes .drag__track').scrollLeft")
     nb = pg.locator(".drag--quotes .drag__btn--next")
     (nb.tap if vp == 390 else nb.click)(); pg.wait_for_timeout(900)
@@ -375,9 +410,13 @@ def g_home(pg, vp, cdp):
 
 
 def g_other(pg, vp, cdp):
-    for path in ["our-work/sample-veneers-1/", "our-work/sample-aligners-1/"]:
+    # The slider only on the same-photo simulation (v4 fixes 3); the other cases show one large photograph
+    go(pg, "our-work/sample-veneers-1/")
+    t_ba(pg, "our-work/sample-veneers-1/", vp, cdp)
+    for path in ["our-work/sample-implants-1/", "our-work/sample-full-mouth-1/", "our-work/sample-aligners-1/"]:
         go(pg, path)
-        t_ba(pg, path, vp, cdp)
+        r = ev(pg, "() => { const f = document.querySelector('.case-v4__photo img'); return f ? [f.naturalWidth, Math.round(f.getBoundingClientRect().width), !!document.querySelector('[data-ba]')] : null; }")
+        rec(path, "Case photograph", vp, "large photo, no mismatched pair", bool(r) and r[0] > 0 and r[1] > 300 and not r[2], r)
     go(pg, "our-work/")
     into_view(pg, ".work-filter")
     btn = pg.locator(".work-filter button", has_text="Implants")
@@ -405,6 +444,8 @@ def run():
             if "treatments" in groups:
                 import ix_treatments
                 ix_treatments.run(pg, vp, cdp, rec, go, into_view, ev, active_index, selected_tab, visible_text, t_xfade, t_range, t_xpanels, acc)
+            if "other" in groups:
+                t_riya(pg, vp)
             rec("(all pages visited)", "JavaScript errors", vp, "none thrown", not errors, errors[:3])
             ctx.close()
         br.close()

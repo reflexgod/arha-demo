@@ -13,7 +13,7 @@ import colour_check  # noqa: E402
 OUT = Path(sys.argv[1]) / "ix_results.json"
 results = json.loads(OUT.read_text()) if OUT.exists() else []
 results = [r for r in results if r["interactive"] != "Colour on hover"]
-PAGES = ["", "problems/missing-tooth/", "problems/gaps/", "dental-implants/", "orthodontics/", "our-work/", "our-work/sample-implants-1/", "founder/", "kids-dentistry/"]
+PAGES = ["", "problems/missing-tooth/", "problems/gaps/", "dental-implants/", "orthodontics/", "our-work/", "our-work/sample-implants-1/", "problems/bleeding-gums/", "kids-dentistry/"]  # founder: Arha photos only, no black and white stock left
 
 with sync_playwright() as p:
     br = launch(p)

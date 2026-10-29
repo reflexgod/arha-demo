@@ -84,7 +84,7 @@ def mobile(pg, cdp, path, sel="[data-ba]"):
 
 
 if __name__ == "__main__":
-    paths = sys.argv[2:] or ["", "our-work/sample-veneers-1/", "our-work/sample-implants-1/"]
+    paths = sys.argv[2:] or ["", "our-work/sample-veneers-1/"]  # the only same-photo simulations (v4 fixes 3)
     with sync_playwright() as p:
         br = launch(p)
         pg = br.new_page(viewport={"width": 1440, "height": 900})
