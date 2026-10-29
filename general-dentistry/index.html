@@ -443,14 +443,79 @@
     <section class="section section--stone ix ix--checkup" aria-labelledby="ix-title">
       <div class="container">
         <div class="section-head reveal">
-          <h2 id="ix-title">A gum self-check</h2>
-          <p class="lede">Four questions you can answer at home. It is not a diagnosis, but it tells you when to come in.</p>
+          <h2 id="ix-title">Your check-up, step by step</h2>
+          <p class="lede">Swipe, drag or use the arrows to walk through a routine visit.</p>
         </div>
-      <div class="ix-split reveal"><div class="ix-photo media" style="aspect-ratio: 3 / 2"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAUCAwQBBv/EACEQAAICAQQCAwAAAAAAAAAAAAECAAMEERIhMRNBIjSB/8QAGAEBAQEBAQAAAAAAAAAAAAAAAQMCAAT/xAAcEQEBAQABBQAAAAAAAAAAAAAAARECEiExQXH/2gAMAwEAAhEDEQA/AFPk2SyqwvOeLcZalYQSOvRiSV6ODHGKQygRbT8uJqpbw8kwd9MrMfVNYutXY0005jWNtHU7lUFhqBGJ8oRowJly1l+hLMXBYtzG1GEqgEwxvqYcXH2nkQy8diw06jJ1RCAIW1bq90N7lXgY6ooJ7m5kDCLK8kI+0maxlLp3O0WIKoHQkmYheDCE2nC9rGN4GvuNx9X8hCZinLxHmcx2W86H3J1WMR3CEKfT/9k=); background-position: 50% 50%">
-  <source type="image/avif" srcset="../assets/img/stock-exam-640.avif 640w, ../assets/img/stock-exam-1280.avif 1280w, ../assets/img/stock-exam-1920.avif 1920w" sizes="(min-width: 900px) 45vw, 100vw">
-  <source type="image/webp" srcset="../assets/img/stock-exam-640.webp 640w, ../assets/img/stock-exam-1280.webp 1280w, ../assets/img/stock-exam-1920.webp 1920w" sizes="(min-width: 900px) 45vw, 100vw">
-  <img src="../assets/img/stock-exam-1280.jpg" srcset="../assets/img/stock-exam-640.jpg 640w, ../assets/img/stock-exam-1280.jpg 1280w, ../assets/img/stock-exam-1920.jpg 1920w" sizes="(min-width: 900px) 45vw, 100vw" width="1280" height="960" loading="lazy" decoding="async" alt="A dentist examining a patient’s teeth with a mirror and probe">
-</picture></div><form class="checklist" data-checklist onsubmit="return false"><fieldset><legend>Gum self-check: tick anything you have noticed</legend><ul><li><label class="check"><input type="checkbox" value="bleeding"><span>Bleeding when you brush or floss</span></label></li><li><label class="check"><input type="checkbox" value="breath"><span>Bad breath that does not go away</span></label></li><li><label class="check"><input type="checkbox" value="receding"><span>Gums pulling back from the teeth</span></label></li><li><label class="check"><input type="checkbox" value="loose"><span>A tooth that feels loose</span></label></li></ul></fieldset><div class="checklist__out" aria-live="polite"><div class="checklist__result" data-if="any:receding,loose" hidden><p><strong>These can be signs of more advanced gum disease.</strong> Please book a check-up soon.</p><a class="cta" href="../book/">Book a check-up</a></div><div class="checklist__result" data-if="any:bleeding,breath" hidden><p><strong>These are common early signs of gum inflammation.</strong> A check-up and professional clean usually help.</p><a class="cta" href="../book/">Book a check-up</a></div><div class="checklist__result" data-if="none" hidden><p>Nothing ticked. Keep up regular check-ups.</p></div></div><p class="checklist__note">This is not a diagnosis. Only an examination can tell.</p></form></div>
+      <div class="drag drag--timeline reveal" data-drag aria-label="Your check-up, step by step">
+        <ul class="drag__track">
+          <li class="tl-card" id="ask">
+            <div class="tl-card__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCABIADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAwQAAQUCBv/EACEQAAICAgIDAQEBAAAAAAAAAAECAAMEESEiBRIxEzJB/8QAGAEBAQEBAQAAAAAAAAAAAAAAAgEDAAT/xAAbEQACAwEBAQAAAAAAAAAAAAAAAQIRMQMhQf/aAAwDAQACEQMRAD8AvyJ20WVesPnNtxOAOkynhpy0vHB9uJopvjYimIun5mmSpA1O5i6Bq+FiHkL/AFj3xJi+TbmOWGS0rNXTQaglRqMZSe7jUaxsUFBuSUbRYSpi1XUbjFDlml3VhDqFpqAG4YKmPpK0MH+Jl5mMbTxH3fQ1Bi1QeZXIKQvX2bmOptQNRID1MarfYiCVevsQZ2rBU1B3EmcLz/sLkxqK+nGRYRFVck/Y7bUGEEmMN/ZjK7NVQkM3bATWw2WxQZ5Wp+w3NrCvIA1PUeY2L1VaiZhtlstxUfI5kZfTW5mllL7nUUf/AGJXcE2SVghbxqBtcbnUi2LnH7cR6lfzTckkE34LmvRS+8ltTlX4kkiWBlpRu9YCy0mSSUJ//9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-consultation-640.avif 640w, ../assets/img/stock-consultation-1280.avif 1280w, ../assets/img/stock-consultation-1920.avif 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <source type="image/webp" srcset="../assets/img/stock-consultation-640.webp 640w, ../assets/img/stock-consultation-1280.webp 1280w, ../assets/img/stock-consultation-1920.webp 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <img src="../assets/img/stock-consultation-1280.jpg" srcset="../assets/img/stock-consultation-640.jpg 640w, ../assets/img/stock-consultation-1280.jpg 1280w, ../assets/img/stock-consultation-1920.jpg 1920w" sizes="(min-width: 900px) 28vw, 78vw" width="1280" height="1919" loading="lazy" decoding="async" alt="A dentist talking with a patient">
+</picture></div>
+            <p class="tl-card__num">01</p>
+            <h3>We ask how you are</h3>
+            <p>Any pain, changes or worries since your last visit, and your medical history.</p>
+          </li>
+          <li class="tl-card" id="exam">
+            <div class="tl-card__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAUCAwQBBv/EACEQAAICAQQCAwAAAAAAAAAAAAECAAMEERIhMRNBIjSB/8QAGAEBAQEBAQAAAAAAAAAAAAAAAQMCAAT/xAAcEQEBAQABBQAAAAAAAAAAAAAAARECEiExQXH/2gAMAwEAAhEDEQA/AFPk2SyqwvOeLcZalYQSOvRiSV6ODHGKQygRbT8uJqpbw8kwd9MrMfVNYutXY0005jWNtHU7lUFhqBGJ8oRowJly1l+hLMXBYtzG1GEqgEwxvqYcXH2nkQy8diw06jJ1RCAIW1bq90N7lXgY6ooJ7m5kDCLK8kI+0maxlLp3O0WIKoHQkmYheDCE2nC9rGN4GvuNx9X8hCZinLxHmcx2W86H3J1WMR3CEKfT/9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-exam-640.avif 640w, ../assets/img/stock-exam-1280.avif 1280w, ../assets/img/stock-exam-1920.avif 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <source type="image/webp" srcset="../assets/img/stock-exam-640.webp 640w, ../assets/img/stock-exam-1280.webp 1280w, ../assets/img/stock-exam-1920.webp 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <img src="../assets/img/stock-exam-1280.jpg" srcset="../assets/img/stock-exam-640.jpg 640w, ../assets/img/stock-exam-1280.jpg 1280w, ../assets/img/stock-exam-1920.jpg 1920w" sizes="(min-width: 900px) 28vw, 78vw" width="1280" height="960" loading="lazy" decoding="async" alt="A dentist examining a patient’s teeth with a mirror and probe">
+</picture></div>
+            <p class="tl-card__num">02</p>
+            <h3>Examination</h3>
+            <p>Teeth, fillings, gums, tongue and the soft tissues of the mouth, looked at carefully.</p>
+          </li>
+          <li class="tl-card" id="xray">
+            <div class="tl-card__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAAAwYCBAUB/8QAIBAAAgICAgMBAQAAAAAAAAAAAQIAAwQRBRITInEhMf/EABcBAAMBAAAAAAAAAAAAAAAAAAABAgP/xAAXEQEBAQEAAAAAAAAAAAAAAAAAAREC/9oADAMBAAIRAxEAPwBNC7aH69RIoPaHKdtCSpXKdpJaiJoVYgIEI+MFWGUbEeNxvO4WbGRxZqQGZ/GOKsgfYzZFq2Uj5K5Z9kCobaHcFQCIDHPtLrsOokNHKshlElZlFhqD2uv5BkjcelglVxW0GMOJf5awCYtBf3cuUZhpGoQdTY//2Q==); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-xray-screen-640.avif 640w, ../assets/img/stock-xray-screen-1280.avif 1280w, ../assets/img/stock-xray-screen-1920.avif 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <source type="image/webp" srcset="../assets/img/stock-xray-screen-640.webp 640w, ../assets/img/stock-xray-screen-1280.webp 1280w, ../assets/img/stock-xray-screen-1920.webp 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <img src="../assets/img/stock-xray-screen-1280.jpg" srcset="../assets/img/stock-xray-screen-640.jpg 640w, ../assets/img/stock-xray-screen-1280.jpg 1280w, ../assets/img/stock-xray-screen-1920.jpg 1920w" sizes="(min-width: 900px) 28vw, 78vw" width="1280" height="853" loading="lazy" decoding="async" alt="A dental X-ray on a screen beside the chair">
+</picture></div>
+            <p class="tl-card__num">03</p>
+            <h3>X-rays, if needed</h3>
+            <p>Only when they will show something we need to see, taken in the clinic.</p>
+          </li>
+          <li class="tl-card" id="gum-care">
+            <div class="tl-card__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAgEG/8QAHhAAAgIDAQEBAQAAAAAAAAAAAQIAAwQREiFBE1H/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALxWBvUismMEwNrjkgyDzN2cyZPOvsvYNndQJk3KwUe3sRzHYV1hf5AoF4Nmi63jeiZstv0QHDA219CMTmpRGv6rbRgmfn0SlmUh1JkWx+GKmQMd9jYPs3XkFfDEQ5Q7+Rmtf2Hko//Z); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-mirror-probe-640.avif 640w, ../assets/img/stock-mirror-probe-1280.avif 1280w, ../assets/img/stock-mirror-probe-1920.avif 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <source type="image/webp" srcset="../assets/img/stock-mirror-probe-640.webp 640w, ../assets/img/stock-mirror-probe-1280.webp 1280w, ../assets/img/stock-mirror-probe-1920.webp 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <img src="../assets/img/stock-mirror-probe-1280.jpg" srcset="../assets/img/stock-mirror-probe-640.jpg 640w, ../assets/img/stock-mirror-probe-1280.jpg 1280w, ../assets/img/stock-mirror-probe-1920.jpg 1920w" sizes="(min-width: 900px) 28vw, 78vw" width="1280" height="853" loading="lazy" decoding="async" alt="A dental mirror and probe on a tray">
+</picture></div>
+            <p class="tl-card__num">04</p>
+            <h3>Gum check</h3>
+            <p>The gum line is measured gently around each tooth, to catch gum disease early.</p>
+          </li>
+          <li class="tl-card" id="clean">
+            <div class="tl-card__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQABAAMBAQAAAAAAAAAAAAAABAADBQEC/8QAIBAAAgICAwADAQAAAAAAAAAAAQIAAwQREiExExQiQf/EABYBAQEBAAAAAAAAAAAAAAAAAAIDAf/EABgRAAMBAQAAAAAAAAAAAAAAAAABEQIS/9oADAMBAAIRAxEAPwCLXqJx12wEjKANmV1ZCK/sFKymr9fVe4OxuJOoj7fOrQg9MbPI0S1bDnzd6MtS4LPT4ZZeQEoNDDoxMCpRmux/K/2CGFeDz71G/IDcNzaVUON4PIUhtmXibC6b2aVFQY7ImeWC29RtWQAsUgeqP/KJqDsKlupGsLCHLkGa0FM//9k=); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-cleaning-640.avif 640w, ../assets/img/stock-cleaning-1280.avif 1280w, ../assets/img/stock-cleaning-1920.avif 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <source type="image/webp" srcset="../assets/img/stock-cleaning-640.webp 640w, ../assets/img/stock-cleaning-1280.webp 1280w, ../assets/img/stock-cleaning-1920.webp 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <img src="../assets/img/stock-cleaning-1280.jpg" srcset="../assets/img/stock-cleaning-640.jpg 640w, ../assets/img/stock-cleaning-1280.jpg 1280w, ../assets/img/stock-cleaning-1920.jpg 1920w" sizes="(min-width: 900px) 28vw, 78vw" width="1280" height="853" loading="lazy" decoding="async" alt="A dentist cleaning a patient’s teeth">
+</picture></div>
+            <p class="tl-card__num">05</p>
+            <h3>Cleaning</h3>
+            <p>Tartar and stain are removed and the teeth polished, with advice for home.</p>
+          </li>
+          <li class="tl-card" id="plan">
+            <div class="tl-card__media media"><picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCABIADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAABAUAAwYBAv/EACEQAAICAgMBAAMBAAAAAAAAAAABAgMEEQUSITETIkFR/8QAGQEAAwEBAQAAAAAAAAAAAAAAAAEDAgQF/8QAGhEAAwEBAQEAAAAAAAAAAAAAAAERAiExEv/aAAwDAQACEQMRAD8AXRsTe0MsHL6CLFba9D6PGedIzutQ6u5TqtAtmf3QHa1KSR2VShFMqqyXEWrdrPSx9HcdpxLfypMUCmXVjqDsK7uVOhWvwLxsVVtIOND6nD1KWrEdzL+tSDlxrs1IqzeMlOGkUwoZ0wXAvU/NhjS39FjxbMRN+g0+Rkpa2DzWZ+oMManr9LVtWr/ACrkO0tDCv949jHhT00GJZB1JM92yhr+CbHuaethE7Ja+lU+E2ulPIuDql4YzJaVz0ajOs1U9mUvlu1msumdqFtUtWI0OJNOn6Z7p19L6c2VXmzDzSi1PRypuFm9+BE86EYesQW8g5LwDsvnN/WCyJ6Q0z85WJpMSyluTZ1uT+s89WUyoS06EK3aKpeshBJDpEibIQYiJbZaoLRCAB//Z); background-position: 50% 50%">
+  <source type="image/avif" srcset="../assets/img/stock-smiling-patient-640.avif 640w, ../assets/img/stock-smiling-patient-1280.avif 1280w, ../assets/img/stock-smiling-patient-1920.avif 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <source type="image/webp" srcset="../assets/img/stock-smiling-patient-640.webp 640w, ../assets/img/stock-smiling-patient-1280.webp 1280w, ../assets/img/stock-smiling-patient-1920.webp 1920w" sizes="(min-width: 900px) 28vw, 78vw">
+  <img src="../assets/img/stock-smiling-patient-1280.jpg" srcset="../assets/img/stock-smiling-patient-640.jpg 640w, ../assets/img/stock-smiling-patient-1280.jpg 1280w, ../assets/img/stock-smiling-patient-1920.jpg 1920w" sizes="(min-width: 900px) 28vw, 78vw" width="1280" height="1920" loading="lazy" decoding="async" alt="A smiling woman seated in a warmly lit room">
+</picture></div>
+            <p class="tl-card__num">06</p>
+            <h3>Your plan</h3>
+            <p>What we found, what needs doing and when, explained clearly, and your next visit.</p>
+          </li>
+        </ul>
+        <div class="drag__ui">
+          <button class="drag__btn drag__btn--prev" type="button" aria-label="Previous step"></button>
+          <span class="drag__progress" aria-hidden="true"><span></span></span>
+          <button class="drag__btn drag__btn--next" type="button" aria-label="Next step"></button>
+        </div>
+      </div>
+      <p class="ix-note">Bleeding gums? Try the <a href="../problems/bleeding-gums/">gum self-check</a>.</p>
       </div>
     </section>
 

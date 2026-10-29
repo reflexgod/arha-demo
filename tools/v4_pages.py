@@ -383,8 +383,8 @@ def case_page(site_url, n, cs):
 # ------------------------------------------------------------------ about: founder, doctors, practice, gallery
 QUOTE = "A good restoration should never announce itself. My aim is a result that feels natural, functions beautifully and lasts."
 TIMELINE = [("1980", "Dr. Vasant P. Jain begins a family dental practice in Mumbai.", "arha-dental-care-exterior-dental-clinic-peddar-road", "50% 40%"),
-            ("Year to come", "Dr. Nikhil V. Jain joins the practice, as a prosthodontist and implantologist.", "dental-operatory-arha-dental-care-peddar-road-01", "50% 60%"),
-            ("Year to come", "Arha Dental Care opens at 107, Doctor House, 14 Peddar Road.", "arha-dental-care-reception-south-mumbai-dental-clinic-02", "50% 40%"),
+            ("The next generation", "Dr. Nikhil V. Jain joins the practice, as a prosthodontist and implantologist.", "dental-operatory-arha-dental-care-peddar-road-01", "50% 60%"),
+            ("Arha", "Arha Dental Care opens at 107, Doctor House, 14 Peddar Road.", "arha-dental-care-reception-south-mumbai-dental-clinic-02", "50% 40%"),
             ("Today", "Two generations, one standard of care.", "arha-dental-care-lounge-peddar-road", "50% 55%")]
 
 
@@ -413,7 +413,6 @@ def founder_page(site_url):
           <footer>Dr. Nikhil V. Jain</footer>
         </blockquote>
         <p class="reveal">Arha was designed to make specialist dentistry feel unhurried: marble, soft light, quiet treatment rooms, an X-ray room and a separate room for sterilisation, all under one roof.</p>
-        <div class="ph reveal"><p class="ph__label">To come · The story</p><p>How the practice began, the patients and families it has looked after, and how it became Arha. In the family’s own words.</p></div>
       </div>
     </article>
 
@@ -531,7 +530,7 @@ PANO = """    <!-- =============================================================
             <img src="assets/pano/sample-360-poster.jpg" width="1280" height="704" loading="lazy" alt="A sample 360° photograph of a white room">
           </picture>
           <div class="pano__cover">
-            <p class="pano__soon">Sample: Arha’s own 360° tour coming soon</p>
+            <p class="pano__soon">Sample 360° scene for the demo</p>
             <p>Until the clinic’s own 360° photographs are taken, look around with a sample image.</p>
             <button class="link link--light" type="button" data-pano-start>Start the sample 360° view</button>
           </div>

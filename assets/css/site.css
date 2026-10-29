@@ -6665,3 +6665,64 @@ img.bw-photo.in-colour,
   .brings__shot, .xfade__img, .agedial__img, .loupe__lens, .brings__item { transition: none !important; }
   .fmenu__sub:not([hidden]), .xfade__panel:not([hidden]), .picker__result, .quiz__result, .agedial__text { animation: none !important; }
 }
+
+/* ---------------------------------------------------------------- treatment interactives (feedback 7) */
+/* Invisalign: a stage scrubber, then aligners or braces */
+.stages { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 64px; align-items: center; }
+.stages__stage { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--paper); }
+.stages__img { position: absolute; inset: 0; opacity: 0; transition: opacity .7s var(--ease); }
+.stages__img.is-active { opacity: 1; }
+.stages__img picture, .stages__img img { display: block; width: 100%; height: 100%; }
+.stages__img img { object-fit: cover; }
+.stages__count { display: block; margin-bottom: 16px; font: 700 18px/1.2 var(--font-head); letter-spacing: 1.5px; text-transform: uppercase; }
+.stages__count output { color: var(--bronze); }
+.stages__ticks { display: flex; justify-content: space-between; margin-top: 10px; color: var(--muted); font: 600 12px/1 var(--font-body); letter-spacing: 1px; text-transform: uppercase; }
+.stages__text { margin-top: 40px; min-height: 7em; }
+.stages__text:not([hidden]) { animation: crossfade .5s var(--ease); }
+.stages__text h3 { font-size: 20px; }
+.stages__text p { margin-top: 12px; }
+.stages input[type="range"] { width: 100%; height: 28px; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; }
+.stages input[type="range"]::-webkit-slider-runnable-track { height: 1px; background: var(--ink); }
+.stages input[type="range"]::-moz-range-track { height: 1px; background: var(--ink); }
+.stages input[type="range"]::-webkit-slider-thumb { width: 22px; height: 22px; margin-top: -11px; border: 1px solid var(--ink); border-radius: 50%; background: var(--paper); -webkit-appearance: none; appearance: none; }
+.stages input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border: 1px solid var(--ink); border-radius: 50%; background: var(--paper); }
+.stages input[type="range"]:focus-visible { outline: 2px solid var(--bronze); outline-offset: 6px; }
+.vs-wrap { max-width: 760px; margin: 96px auto 0; }
+.vs-wrap__title { margin-bottom: 20px; font-size: 20px; }
+.vs-wrap .itabs__list { display: flex; gap: 32px; border-bottom: 1px solid var(--hairline-strong); }
+
+/* General dentistry: the check-up as a drag timeline of photo cards */
+.drag--timeline .drag__track { gap: 32px; }
+.tl-card { flex: 0 0 min(30vw, 400px); scroll-snap-align: start; }
+.tl-card__media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.tl-card__num { margin-top: 20px; color: var(--bronze); font: 500 13px/1 var(--font-body); letter-spacing: 1px; }
+.tl-card h3 { margin-top: 12px; font-size: 18px; }
+.tl-card p:last-child { margin-top: 10px; color: var(--muted); }
+
+/* Root canal: a numbered list of steps beside one crossfading photograph */
+.xfade--steps .xfade__tabs { flex-direction: column; gap: 0; border: 0; border-top: 1px solid var(--hairline-strong); }
+.xfade--steps .xfade__tabs [role="tab"] { display: flex; gap: 20px; align-items: baseline; padding: 18px 0; border-bottom: 1px solid var(--hairline-strong); font: 700 20px/1.2 var(--font-head); letter-spacing: 1.5px; text-align: left; box-shadow: none; }
+.xfade--steps .xfade__tabs [role="tab"][aria-selected="true"] { color: var(--ink); box-shadow: inset 2px 0 0 var(--bronze); padding-left: 16px; }
+.xfade__num { color: var(--bronze); font: 500 13px/1 var(--font-body); letter-spacing: 1px; }
+.xfade--steps .xfade__panel { margin-top: 24px; max-width: 46ch; }
+
+@media (max-width: 899px) {
+  .stages { grid-template-columns: 1fr; gap: 32px; }
+  .tl-card { flex-basis: 78vw; }
+  .vs-wrap { margin-top: 72px; }
+}
+
+/* Crowns: the mini decider */
+.decider { max-width: 760px; margin: 96px auto 0; }
+.decider h3 { font-size: 20px; }
+.decider fieldset { margin: 24px 0 0; padding: 20px 0 0; border: 0; border-top: 1px solid var(--hairline-strong); }
+.decider legend { float: left; width: 100%; margin-bottom: 16px; font-size: 17px; }
+.decider fieldset:not([hidden]) { animation: crossfade .5s var(--ease); }
+.decider label { position: relative; display: inline-block; margin: 0 12px 0 0; cursor: pointer; }
+.decider input { position: absolute; opacity: 0; }
+.decider label span { display: inline-block; padding: 12px 18px; border: 1px solid var(--hairline-strong); font: 600 13px/1 var(--font-body); letter-spacing: 1px; text-transform: uppercase; transition: background-color .25s var(--ease), color .25s var(--ease); }
+.decider input:checked + span { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.decider input:focus-visible + span { outline: 2px solid var(--bronze); outline-offset: 2px; }
+.decider__out { margin-top: 32px; }
+.decider__out > div:not([hidden]) { padding-top: 24px; border-top: 1px solid var(--ink); animation: crossfade .5s var(--ease); }
+.decider__out .link { margin-top: 32px; }

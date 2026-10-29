@@ -1447,4 +1447,22 @@
       });
     });
   });
+
+  // Invisalign stages ([data-stages]): a range steps through the stages; the photograph crossfades
+  document.querySelectorAll('[data-stages]').forEach((box) => {
+    const range = box.querySelector('input[type="range"]');
+    const out = box.querySelector('[data-stage-out]');
+    const texts = [...box.querySelectorAll('.stages__text')];
+    const imgs = [...box.querySelectorAll('.stages__img')];
+    const set = () => {
+      const v = range.value;
+      texts.forEach((tx) => { tx.hidden = tx.dataset.stage !== v; });
+      imgs.forEach((im) => im.classList.toggle('is-active', im.dataset.stage === v));
+      out.textContent = v;
+      const shown = texts.find((tx) => !tx.hidden);
+      range.setAttribute('aria-valuetext', `Stage ${v}: ${shown ? shown.querySelector('h3').textContent : ''}`);
+    };
+    range.addEventListener('input', set);
+    set();
+  });
 })();

@@ -198,7 +198,7 @@ TREATMENTS = {
         "intro": ("Straight teeth at any age",
                   "Orthodontics moves teeth into a better position, for a bite that works well and teeth that are easier to clean.",
                   "Metal braces and clear aligners are both available at Arha, for children, teens and adults, with an early orthodontic assessment for children."),
-        "interactive": ("ages", "What usually suits each age", "Choose an age group to see what is usually suitable."),
+        "interactive": ("ages", "What usually suits each age", "Hover or tap an age group to see what is usually suitable."),
         "who": [("Crowded or crooked teeth", "Teeth that overlap, turn or sit out of line."),
                 ("Gaps", "Spaces between teeth."),
                 ("Teeth that stick out", "Front teeth that are prominent or easily knocked."),
@@ -226,7 +226,7 @@ TREATMENTS = {
         "intro": ("Prevention first",
                   "Regular check-ups find problems while they are still small and simple to treat. A professional clean removes the hard deposits that brushing cannot.",
                   "How often you need to come depends on your teeth and gums. We will suggest an interval that suits you."),
-        "interactive": ("checkup", "A gum self-check", "Four questions you can answer at home. It is not a diagnosis, but it tells you when to come in."),
+        "interactive": ("checkup", "Your check-up, step by step", "Swipe, drag or use the arrows to walk through a routine visit."),
         "who": [("It has been a while", "No check-up in the last year or more."),
                 ("Bleeding gums or bad breath", "Common early signs of gum inflammation."),
                 ("Sensitivity or a small cavity", "Caught early, often a simple filling."),
@@ -254,7 +254,7 @@ TREATMENTS = {
         "intro": ("Keep your own tooth",
                   "Inside each tooth is the pulp: nerves and blood vessels in narrow canals. When decay or a crack lets infection reach it, root canal treatment removes the infected pulp and seals the canals.",
                   "At Arha the canals are cleaned with rotary instruments: fine, flexible files driven by a motor. The tooth is then usually protected with a crown."),
-        "interactive": ("root-canal", "What happens, step by step", "Step through a root canal treatment, then check the common signs."),
+        "interactive": ("root-canal", "What happens, step by step", "Choose a step to see what happens to the tooth."),
         "who": [("Lingering pain or sensitivity", "Pain that stays after hot or cold, or wakes you at night."),
                 ("A deep cavity or crack", "Damage that reaches close to the nerve."),
                 ("Swelling or a gum boil", "Signs that infection has spread from the tooth."),
@@ -456,7 +456,7 @@ def ix_implants():
 
 
 def ix_phases():
-    v = f'<p class="stepper__visits">Visits: {TBC.lower()}</p>'
+    v = ""  # visits are agreed at the consultation; no placeholder line
     steps = [("Diagnose", "A full examination, X-rays, photographs and records of how your teeth meet. We start with what bothers you most.",
               "stock-xray-screen", "A dental X-ray of the whole mouth on a screen beside the chair", v),
              ("Design the bite &amp; smile", "Your new bite and tooth shapes are designed on models and on screen, around your face and your jaw.",
@@ -486,17 +486,17 @@ def ix_who_we_help():
 
 
 def ix_guides():
-    # Midline, smile line and tooth boundaries measured on the 640 x 800 sample photograph (stock-case-2)
-    ticks = "".join(f'<path d="M{x} 352V420"/>' for x in (282, 330, 380, 482, 530))
+    # Midline, smile line and tooth boundaries measured on the 640 x 800 sample photograph (stock-case-3)
+    ticks = "".join(f'<path d="M{x} 322V402"/>' for x in (182, 228, 405, 450))
     overlay = f"""<svg class="guides__overlay" viewBox="0 0 640 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <g class="guides__lines">
-              <path class="g-mid" d="M430 300V500"/>
-              <path class="g-curve" d="M238 390Q440 446 548 398"/>
+              <path class="g-mid" d="M336 286V484"/>
+              <path class="g-curve" d="M160 368Q336 446 490 372"/>
               <g class="g-ticks">{ticks}</g>
-              <text x="438" y="316">Midline</text><text x="452" y="456">Smile line</text><text x="270" y="342">Proportions</text>
+              <text x="344" y="280">Midline</text><text x="470" y="436">Smile line</text><text x="120" y="312">Proportions</text>
             </g>
           </svg>"""
-    pic = picture("stock-case-3", "(min-width: 900px) 40vw, 100vw", "Sample photograph of a smile, used to show the design guides", pos="50% 42%", indent="")
+    pic = picture("stock-case-3", "(min-width: 900px) 40vw, 100vw", "Sample photograph of a smile, used to show the design guides", pos="50% 50%", indent="")
     return f"""<div class="guides-wrap reveal">
         <figure class="guides" data-guides>
           <div class="guides__frame media">{pic}{overlay}</div>
@@ -541,55 +541,111 @@ def ix_matrix():
 
 
 def ix_aligners():
-    steps = [("Scan", "Your teeth are recorded with photographs, X-rays and impressions or a scan, and every stage is planned digitally.",
-              "stock-scan", "A clinician scanning a patient’s teeth"),
-             ("Your aligners", "A series of thin, clear aligners is made for your teeth, each a small step from the last.",
-              "stock-aligner", "A clear aligner"),
-             ("Wear them", "You wear each set most of the day and night, changing to the next on schedule.",
-              "stock-aligner-in", "Fingers fitting a clear aligner over the teeth"),
-             ("Straighter teeth", "Retainers keep the new position once the last aligner is done.",
-              "stock-man-smile", "A young man with a natural, even smile")]
-    return (f'<div class="reveal">{stepper("aligner", "How aligner treatment works", steps)}</div>'
-            f'<p class="ix-note">Not sure whether aligners or braces suit you? See <a href="orthodontics/">orthodontics (braces)</a>.</p>')
+    """A range that steps through the stages (site.js 19, [data-stages]), then aligners and braces compared."""
+    stages = [("Your scan", "Your teeth are recorded with photographs, X-rays and a scan or impressions, and every stage is planned on screen.",
+               "stock-scan", "A clinician scanning a patient’s teeth"),
+              ("Your aligners", "A series of thin, clear aligners is made for your teeth, each a small step from the last.",
+               "stock-aligner", "A clear aligner on a pale background"),
+              ("Wearing them", "You wear each set most of the day and night, and move to the next set when we say.",
+               "stock-aligner-in", "Fingers fitting a clear aligner over the teeth"),
+              ("Straighter teeth", "When the last aligner is done, a retainer keeps the teeth in their new place.",
+               "stock-man-smile", "A young man with a natural, even smile")]
+    n = len(stages)
+    imgs = "".join(f'<div class="stages__img{" is-active" if k == 0 else ""}" data-stage="{k + 1}">{picture(img, "(min-width: 900px) 55vw, 100vw", alt, indent="")}</div>'
+                   for k, (_t, _x, img, alt) in enumerate(stages))
+    texts = "".join(f'<div class="stages__text" data-stage="{k + 1}"{"" if k == 0 else " hidden"}><h3>{ti}</h3><p>{tx}</p></div>'
+                    for k, (ti, tx, _i, _a) in enumerate(stages))
+    ticks = "".join(f"<span>Stage {k + 1}</span>" for k in range(n))
+    vs_rows = [("Visible", "Nearly invisible", "Brackets and a wire show"), ("Removable", "Yes, to eat and clean", "No, fixed until the end"),
+               ("Eating", "Anything, with the aligners out", "Some hard or sticky foods are avoided"),
+               ("Cleaning", "Brush as usual; clean the aligners too", "More care around the brackets"),
+               ("Check-ups", "Regular reviews of progress", "Regular visits to adjust the wire")]
+    vs = tabs("vs", [("aligners", "Aligners"), ("braces", "Braces")],
+              lambda key: '<dl class="vs">' + "".join(f"<div><dt>{r}</dt><dd>{a if key == 'aligners' else b}</dd></div>" for r, a, b in vs_rows) + "</dl>",
+              "Aligners or braces", cls="itabs--vs")
+    return f"""<div class="stages reveal" data-stages>
+        <div class="stages__stage media">{imgs}</div>
+        <div class="stages__side">
+          <label class="stages__control" for="stage-range"><span class="stages__count">Stage <output data-stage-out>1</output> of {n}</span>
+            <input id="stage-range" type="range" min="1" max="{n}" step="1" value="1" aria-valuetext="Stage 1: {stages[0][0]}">
+          </label>
+          <div class="stages__ticks" aria-hidden="true">{ticks}</div>{texts}
+        </div>
+      </div>
+      <div class="vs-wrap reveal"><h3 class="vs-wrap__title">Aligners or braces?</h3>{vs}<p class="ix-note">Not sure which suits you? See <a href="orthodontics/">orthodontics (braces)</a>.</p></div>"""
 
 
 def ix_ages():
-    ages = [("child", "Child (7 to 11)", "stock-kid-dentist", "A boy in the dental chair with the dentist beside him",
-             "An early orthodontic check around age 7 can spot problems with how the jaws and teeth are growing. Some children benefit from early treatment; most only need monitoring.",
-             "Usually: monitoring, sometimes an early appliance or braces."),
-            ("teen", "Teen (12 to 18)", "stock-teen", "A smiling teenager",
-             "Most adult teeth are in, so this is the most common time for braces, or aligners where they suit. Wearing them as advised makes the biggest difference.",
-             "Usually: metal braces or clear aligners."),
-            ("adult", "Adult", "stock-woman-smile", "A woman with a natural smile",
-             "It is never too late. Many adults choose clear aligners; braces suit some bites better. Gum health is checked first.",
-             "Usually: clear aligners or braces.")]
-    items = [(k, n, img, alt, f'<h3>{n}</h3><p>{d}</p><p class="ix-strong">{u}</p><a class="cta" href="invisalign/">Invisalign clear aligners{ARROW}</a>')
-             for k, n, img, alt, d, u in ages]
-    return f'<div class="reveal">{photo_tabs("age", "Age group", items, cls="itabs--photo itabs--split")}</div>'
+    """Child, teen or adult as expanding photo panels (hover or focus on a laptop, tap on a phone)."""
+    ages = [("stock-kid-dentist", "50% 40%", "A boy in the dental chair with the dentist beside him", "Child (7 to 11)",
+             "An early orthodontic check around age 7 spots problems with how the jaws and teeth are growing. Most children only need monitoring; some benefit from early treatment."),
+            ("stock-teen-boy", "50% 30%", "A smiling teenage boy", "Teen (12 to 18)",
+             "Most adult teeth are in, so this is the most common time for braces, or aligners where they suit."),
+            ("stock-woman-smile", "50% 30%", "A woman with a natural smile", "Adult",
+             "It is never too late. Many adults choose clear aligners; braces suit some bites better. Gum health is checked first.")]
+    lis = "".join(f"""
+        <li class="xpanel{' is-active' if k == 0 else ''}" data-xpanel tabindex="0">
+          {picture(name, '(min-width: 900px) 50vw, 100vw', alt, pos=pos, indent='')}
+          <div class="xpanel__body">
+            <h3>{title}</h3>
+            <div class="xpanel__more">
+              <p>{text}</p>
+              <a class="link link--light" href="invisalign/">Invisalign clear aligners</a>
+            </div>
+          </div>
+        </li>""" for k, (name, pos, alt, title, text) in enumerate(ages))
+    return f'<ul class="xpanels xpanels--ix reveal" data-xpanels>{lis}\n      </ul>'
 
 
 def ix_checkup():
-    check = checklist("gums", "Gum self-check: tick anything you have noticed",
-                      [("bleeding", "Bleeding when you brush or floss"), ("breath", "Bad breath that does not go away"),
-                       ("receding", "Gums pulling back from the teeth"), ("loose", "A tooth that feels loose")],
-                      [("any:receding,loose", "<p><strong>These can be signs of more advanced gum disease.</strong> Please book a check-up soon.</p><a class=\"cta\" href=\"book/\">Book a check-up</a>"),
-                       ("any:bleeding,breath", "<p><strong>These are common early signs of gum inflammation.</strong> A check-up and professional clean usually help.</p><a class=\"cta\" href=\"book/\">Book a check-up</a>"),
-                       ("none", "<p>Nothing ticked. Keep up regular check-ups.</p>")],
-                      "This is not a diagnosis. Only an examination can tell.")
-    return f'<div class="ix-split reveal">{photo("stock-exam", "A dentist examining a patient’s teeth with a mirror and probe", "(min-width: 900px) 45vw, 100vw")}{check}</div>'
+    """Your check-up, step by step: photo cards in the shared drag strip (swipe, drag or the arrows)."""
+    steps = [("ask", "We ask how you are", "Any pain, changes or worries since your last visit, and your medical history.", "stock-consultation", "A dentist talking with a patient"),
+             ("exam", "Examination", "Teeth, fillings, gums, tongue and the soft tissues of the mouth, looked at carefully.", "stock-exam", "A dentist examining a patient’s teeth with a mirror and probe"),
+             ("xray", "X-rays, if needed", "Only when they will show something we need to see, taken in the clinic.", "stock-xray-screen", "A dental X-ray on a screen beside the chair"),
+             ("gum-care", "Gum check", "The gum line is measured gently around each tooth, to catch gum disease early.", "stock-mirror-probe", "A dental mirror and probe on a tray"),
+             ("clean", "Cleaning", "Tartar and stain are removed and the teeth polished, with advice for home.", "stock-cleaning", "A dentist cleaning a patient’s teeth"),
+             ("plan", "Your plan", "What we found, what needs doing and when, explained clearly, and your next visit.", "stock-smiling-patient", "A smiling woman seated in a warmly lit room")]
+    cards = "".join(f"""
+          <li class="tl-card" id="{k}">
+            <div class="tl-card__media media">{picture(img, '(min-width: 900px) 28vw, 78vw', alt, indent='')}</div>
+            <p class="tl-card__num">{n + 1:02d}</p>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </li>""" for n, (k, title, text, img, alt) in enumerate(steps))
+    return f"""<div class="drag drag--timeline reveal" data-drag aria-label="Your check-up, step by step">
+        <ul class="drag__track">{cards}
+        </ul>
+        <div class="drag__ui">
+          <button class="drag__btn drag__btn--prev" type="button" aria-label="Previous step"></button>
+          <span class="drag__progress" aria-hidden="true"><span></span></span>
+          <button class="drag__btn drag__btn--next" type="button" aria-label="Next step"></button>
+        </div>
+      </div>
+      <p class="ix-note">Bleeding gums? Try the <a href="problems/bleeding-gums/">gum self-check</a>.</p>"""
 
 
 def ix_root_canal():
-    steps = [("Infected pulp", "Decay or a crack has let bacteria reach the pulp, causing pain, swelling or sensitivity that lingers.",
+    """Four steps as a numbered list beside one photo stage that crossfades (tabs + site.js 19 [data-xfade])."""
+    steps = [("infected", "Infected pulp", "Decay or a crack has let bacteria reach the pulp, causing pain, swelling or sensitivity that lingers.",
               "stock-decayed-tooth", "An extracted molar with deep decay in its crown"),
-             ("Cleaned", "Under local anaesthetic, the infected pulp is removed and the canals are cleaned and shaped with rotary instruments.",
+             ("cleaned", "Cleaned", "Under local anaesthetic, the infected pulp is removed and the canals are cleaned and shaped with rotary instruments.",
               "stock-endo-files", "Fine endodontic files with coloured handles, used to clean the canals"),
-             ("Sealed and checked", "The clean canals are filled and sealed so that bacteria cannot return, and an X-ray checks the result.",
+             ("sealed", "Sealed and checked", "The clean canals are filled and sealed so that bacteria cannot return, and an X-ray checks the result.",
               "stock-xray-panoramic", "A panoramic dental X-ray of the whole mouth"),
-             ("Crown on top", "A crown is usually placed to protect the tooth, as a treated back tooth is more brittle.",
+             ("crown", "Crown on top", "A crown is usually placed to protect the tooth, as a treated back tooth is more brittle.",
               "stock-lab-model", "Ceramic crowns on a dental model")]
-    st = stepper("rct", "Steps of root canal treatment", steps)
-    return f'<div class="reveal">{st}</div>'
+    tabs_html = "".join(f'<button type="button" role="tab" id="rct-t-{k}" aria-controls="rct-p-{k}" aria-selected="{str(n == 0).lower()}"{"" if n == 0 else " tabindex=\"-1\""}>'
+                        f'<span class="xfade__num">{n + 1:02d}</span>{title}</button>' for n, (k, title, _x, _i, _a) in enumerate(steps))
+    shots = "".join(f'<div class="xfade__img{" is-active" if n == 0 else ""}" data-for="rct-p-{k}">{picture(img, "(min-width: 900px) 55vw, 100vw", alt, indent="")}</div>'
+                    for n, (k, _t, _x, img, alt) in enumerate(steps))
+    panels = "".join(f'<div class="xfade__panel" role="tabpanel" id="rct-p-{k}" aria-labelledby="rct-t-{k}"{"" if n == 0 else " hidden"}><p>{text}</p></div>'
+                     for n, (k, _t, text, _i, _a) in enumerate(steps))
+    return f"""<div class="xfade xfade--steps reveal" data-tabs data-xfade>
+        <div class="xfade__stage media">{shots}</div>
+        <div class="xfade__side">
+          <div class="xfade__tabs" role="tablist" aria-label="Steps of root canal treatment" aria-orientation="vertical">{tabs_html}</div>{panels}
+        </div>
+      </div>"""
 
 
 def ix_materials():
@@ -602,7 +658,26 @@ def ix_materials():
     labels = ["Look", "Strength", "Metal-free", "Usually used for"]
     items = [(k, n, img, alt, '<dl class="vs">' + "".join(f"<div><dt>{l}</dt><dd>{v}</dd></div>" for l, v in zip(labels, vals)) + "</dl>")
              for k, n, img, alt, vals in mats]
-    return f'<div class="reveal">{photo_tabs("mat", "Crown material", items, cls="itabs--photo itabs--split")}</div>'
+    decider = """<form class="decider reveal" data-decider aria-labelledby="dec-title" onsubmit="return false">
+        <h3 id="dec-title">Crown, bridge or implant?</h3>
+        <fieldset><legend>Is the tooth still there?</legend>
+          <label><input type="radio" name="there" value="yes"><span>Yes</span></label><label><input type="radio" name="there" value="no"><span>No, it is missing</span></label>
+        </fieldset>
+        <fieldset data-show-if="there:yes" hidden><legend>Is it badly broken, cracked or heavily filled?</legend>
+          <label><input type="radio" name="weak" value="yes"><span>Yes</span></label><label><input type="radio" name="weak" value="no"><span>No</span></label>
+        </fieldset>
+        <fieldset data-show-if="there:no" hidden><legend>Are the teeth either side healthy, with few or no fillings?</legend>
+          <label><input type="radio" name="sides" value="yes"><span>Yes</span></label><label><input type="radio" name="sides" value="no"><span>No, they need work too</span></label>
+        </fieldset>
+        <div class="decider__out" aria-live="polite">
+          <div data-when="there:yes weak:yes" hidden><p class="picker__step">Usually a crown</p><p>A crown covers and protects what is left of the tooth.</p></div>
+          <div data-when="there:yes weak:no" hidden><p class="picker__step">Perhaps just a filling</p><p>A sound tooth may only need a tooth-coloured filling. An examination tells.</p><a class="link" href="general-dentistry/">General dentistry</a></div>
+          <div data-when="there:no sides:yes" hidden><p class="picker__step">Often an implant</p><p>An implant replaces the tooth without touching the healthy teeth beside it.</p><a class="link" href="dental-implants/">Dental implants</a></div>
+          <div data-when="there:no sides:no" hidden><p class="picker__step">Often a bridge</p><p>A bridge can use crowns that the teeth beside the gap may need anyway.</p></div>
+        </div>
+        <p class="ix-flag">General guidance, not a diagnosis. Your consultation gives the answer for you.</p>
+      </form>"""
+    return f'<div class="reveal">{photo_tabs("mat", "Crown material", items, cls="itabs--photo itabs--split")}</div>\n      {decider}'
 
 
 INTERACTIVES = {"implants": ix_implants, "phases": ix_phases, "who-we-help": ix_who_we_help, "guides": ix_guides,

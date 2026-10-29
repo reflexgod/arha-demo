@@ -459,6 +459,25 @@
   <source type="image/webp" srcset="../assets/img/stock-pfm-640.webp 640w, ../assets/img/stock-pfm-1280.webp 1280w, ../assets/img/stock-pfm-1920.webp 1920w" sizes="(min-width: 900px) 60vw, 100vw">
   <img src="../assets/img/stock-pfm-1280.jpg" srcset="../assets/img/stock-pfm-640.jpg 640w, ../assets/img/stock-pfm-1280.jpg 1280w, ../assets/img/stock-pfm-1920.jpg 1920w" sizes="(min-width: 900px) 60vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A crown on a dental model">
 </picture></div><div class="itabs__body"><dl class="vs"><div><dt>Look</dt><dd>Good, though a grey line can show at the gum over time</dd></div><div><dt>Strength</dt><dd>Strong, with a long track record</dd></div><div><dt>Metal-free</dt><dd>No: porcelain over a metal base</dd></div><div><dt>Usually used for</dt><dd>Back teeth and bridges</dd></div></dl></div></div></div></div>
+      <form class="decider reveal" data-decider aria-labelledby="dec-title" onsubmit="return false">
+        <h3 id="dec-title">Crown, bridge or implant?</h3>
+        <fieldset><legend>Is the tooth still there?</legend>
+          <label><input type="radio" name="there" value="yes"><span>Yes</span></label><label><input type="radio" name="there" value="no"><span>No, it is missing</span></label>
+        </fieldset>
+        <fieldset data-show-if="there:yes" hidden><legend>Is it badly broken, cracked or heavily filled?</legend>
+          <label><input type="radio" name="weak" value="yes"><span>Yes</span></label><label><input type="radio" name="weak" value="no"><span>No</span></label>
+        </fieldset>
+        <fieldset data-show-if="there:no" hidden><legend>Are the teeth either side healthy, with few or no fillings?</legend>
+          <label><input type="radio" name="sides" value="yes"><span>Yes</span></label><label><input type="radio" name="sides" value="no"><span>No, they need work too</span></label>
+        </fieldset>
+        <div class="decider__out" aria-live="polite">
+          <div data-when="there:yes weak:yes" hidden><p class="picker__step">Usually a crown</p><p>A crown covers and protects what is left of the tooth.</p></div>
+          <div data-when="there:yes weak:no" hidden><p class="picker__step">Perhaps just a filling</p><p>A sound tooth may only need a tooth-coloured filling. An examination tells.</p><a class="link" href="../general-dentistry/">General dentistry</a></div>
+          <div data-when="there:no sides:yes" hidden><p class="picker__step">Often an implant</p><p>An implant replaces the tooth without touching the healthy teeth beside it.</p><a class="link" href="../dental-implants/">Dental implants</a></div>
+          <div data-when="there:no sides:no" hidden><p class="picker__step">Often a bridge</p><p>A bridge can use crowns that the teeth beside the gap may need anyway.</p></div>
+        </div>
+        <p class="ix-flag">General guidance, not a diagnosis. Your consultation gives the answer for you.</p>
+      </form>
       </div>
     </section>
 
