@@ -5605,7 +5605,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 /* ---------------------------------------------------------------- hero */
 .hero h1 { font-size: 28px; }
 .hero__lede { font-size: 22px; line-height: 1.4; }
-.hero__actions { display: flex; flex-wrap: wrap; gap: 16px 32px; margin-top: 28px; }
+.hero__actions { display: flex; flex-wrap: wrap; gap: 16px 32px; margin-top: 32px; }
 
 @media (max-width: 767px) {
   .hero h1 { font-size: 25px; }
@@ -6020,7 +6020,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 .inside::after { content: ""; position: absolute; inset: 0; background: rgba(var(--shade), .55); }
 .inside__grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr minmax(260px, 30vw); gap: 64px; align-items: end; padding-block: var(--section-y); }
 .inside__text p { max-width: 520px; margin-top: 16px; font-size: 20px; }
-.inside__links { display: flex; flex-wrap: wrap; gap: 16px 32px; margin-top: 28px !important; }
+.inside__links { display: flex; flex-wrap: wrap; gap: 16px 32px; margin-top: 32px !important; }
 .inside .tour { grid-column: 2; width: 100%; max-height: 78vh; aspect-ratio: 9 / 16; margin: 0 0 0 auto; }
 
 @media (max-width: 767px) {
@@ -6073,7 +6073,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 .page-hero--tall { height: 92vh; min-height: 560px; max-height: 1000px; }
 .page-hero--tall .hero__text { max-width: 640px; }
 .page-hero .eyebrow { margin-bottom: 12px; }
-.page-hero .hero__actions { display: flex; flex-wrap: wrap; gap: 16px 32px; margin-top: 28px; }
+.page-hero .hero__actions { display: flex; flex-wrap: wrap; gap: 16px 32px; margin-top: 32px; }
 
 @media (max-width: 767px) {
   .page-hero--tall { height: 86vh; min-height: 480px; }
@@ -6726,3 +6726,18 @@ img.bw-photo.in-colour,
 .decider__out { margin-top: 32px; }
 .decider__out > div:not([hidden]) { padding-top: 24px; border-top: 1px solid var(--ink); animation: crossfade .5s var(--ease); }
 .decider__out .link { margin-top: 32px; }
+
+/* ---------------------------------------------------------------- v4 feedback 8: link spacing
+   Every text link or CTA sits at least 32px below the text above it (checked at 1440 and 390). */
+.statement__content .link,
+.statement__content .cta,
+.quote-band__content .link,
+.xpanel__more .link,
+.xpanel__more .cta,
+.path__actions,
+.stepper__nav,
+main .container > p + .cta,
+main .container > p + .link { margin-top: 32px; }
+.fix__item > p:last-of-type { margin-bottom: 32px; }
+.fix__item .link { margin-top: auto; padding-top: 0; }
+.hero__actions { margin-top: 32px; }
