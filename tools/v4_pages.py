@@ -12,6 +12,7 @@ from PIL import Image
 
 import home
 import more_pages
+import problems
 import technology
 import treatment_pages as tp
 import treatments
@@ -96,12 +97,22 @@ def step_photo(title, used):
     return next(s for s in ROOM_FALLBACK + [shot for _k, shot in STEP_PHOTOS] if s[0] not in used)
 
 
-def process(t):
-    used, steps = set(), []
-    for title, text in t["steps"]:
-        name, pos, alt = step_photo(title, used)
-        used.add(name)
-        steps.append((name, pos, alt, title, text))
+PROCESS_PHOTO = {  # one photograph per treatment page, pinned while its steps scroll past (used nowhere else)
+    "dental-implants": ("stock-clinic-consult", "50% 40%", "A dentist talking a patient in the chair through her treatment"),
+    "maxillofacial-prosthetics": ("stock-lab-model", "50% 50%", "A dental model with finished teeth, made in the laboratory"),
+    "smile-design": ("stock-clinic-work", "50% 35%", "A dentist at work in a bright treatment room"),
+    "cosmetic-dentistry": ("stock-face-7", "50% 35%", "An older woman in a headscarf, smiling"),
+    "invisalign": ("stock-face-8", "50% 30%", "A young woman laughing, photographed against a dark background"),
+    "orthodontics": ("stock-braces", "50% 50%", "A smile with metal braces"),
+    "general-dentistry": ("stock-instrument-tray", "50% 50%", "Sterile instruments laid out on a tray"),
+    "crowns-bridges": ("stock-molar", "50% 50%", "A close-up of a back tooth"),
+}
+
+
+def process(t, slug):
+    """How it works: the steps scroll past one pinned photograph (the page's own, PROCESS_PHOTO)."""
+    name, pos, alt = PROCESS_PHOTO[slug]
+    steps = [(name, pos, alt, title, text) if n == 0 else (None, None, None, title, text) for n, (title, text) in enumerate(t["steps"])]
     return f"""
     <!-- =================================================================== HOW IT WORKS (sticky story) -->
     <section class="section section--flush process" aria-labelledby="process-title">
@@ -188,15 +199,24 @@ def treatment_page(slug, site_url):
     eyebrow = "Specialist care" if slug in tp.specialty_slugs() else ""
     body = page_hero(f"{{{{pic {name} | 100vw | {alt} | pos={pos} | eager}}}}", t["h1"], t["lede"], trail, eyebrow)
     body += intro(t)
+    fixes = problems.for_treatment(slug)
+    if fixes:
+        body += f"""
+    <!-- =================================================================== PROBLEMS IT FIXES -->
+    <nav class="container fixes-line reveal" aria-label="Problems this treatment fixes">
+      <p class="eyebrow">Often chosen for</p>
+      <ul>{"".join(f'<li><a class="link" href="problems/{s}/">{n}</a></li>' for s, n in fixes)}</ul>
+    </nav>
+"""
     if t["steps"]:
-        body += process(t)
+        body += process(t, slug)
     kind, ix_title, ix_lede = t["interactive"]
     body += "\n    <!-- =================================================================== INTERACTIVE -->" + tp.section(
         f"section--stone ix ix--{kind}", "ix-title", ix_title, "      " + tp.INTERACTIVES[kind](), ix_lede)
     body += results_pairs(t["cases"])
-    body += tech_used(slug)
+    body += problems.tech_list([x["slug"] for x in technology.ITEMS if not x["treatments"] or slug in x["treatments"]][:4])
     body += tp.faq_block(t["faq"])
-    body += tp.closing()
+    body += problems.closing_band()
     jsonld = [
         {"@context": "https://schema.org", "@type": "MedicalProcedure", "name": html.unescape(t["h1"]),
          "description": html.unescape(t["intro"][1]), "url": site_url + slug + "/"},
@@ -253,14 +273,14 @@ def hub_page(site_url):
       </div>
     </section>
 
-    <!-- =================================================================== COMMON PROBLEMS WE FIX -->
-    <section class="section section--stone problems-hl" id="problems" aria-labelledby="problems-title">
-      <div class="container-wide">
-{head("problems-title", "Common problems we fix", "Choose a concern to see how it is usually treated.")}
-{problems_stage()}
+    <!-- =================================================================== WHAT WE FIX (links to the problem pages) -->
+    <section class="section section--stone problem-links" id="problems" aria-labelledby="problems-title">
+      <div class="container">
+{head("problems-title", "Start with what is bothering you", "Each problem has its own page: what you may notice, and what treatment would involve.", "What we fix")}
+        <ul class="problem-links__list reveal">{"".join(f'<li><a href="problems/{s}/">{problems.PROBLEMS[s]["menu"]}{ARROW}</a></li>' for s in problems.ORDER)}</ul>
       </div>
     </section>
-{tp.closing()}"""
+{problems.closing_band()}"""
     meta = {"title": "Explore Treatments | Arha Dental Care, Peddar Road, South Mumbai",
             "description": "Dental treatments at Arha Dental Care, Peddar Road: implants, full mouth rehabilitation, smile design, aligners, braces, root canals, crowns, general and kids’ dentistry.",
             "jsonld": [tp.crumbs_jsonld(site_url, trail)]}
@@ -575,4 +595,5 @@ def all_pages(site_url, visit):
     out += [("founder", *founder_page(site_url)), ("doctors", *doctors_page(site_url)),
             ("the-practice", *practice_page(site_url, visit)), ("gallery", *gallery_page(site_url)),
             ("dental-tourism", *more_pages.tourism_page(site_url))]
+    out += problems.all_pages(site_url)
     return out

@@ -1,5 +1,5 @@
 """The homepage <main>, in apaaesthetic.com's rhythm (notes/FINAL-v4.md section 5): ten large, calm
-sections, each one idea. Written into index.html by tools/pages.py; the shared components it uses
+sections, each one idea. Problems first (notes/V4-PROBLEMS-FIRST.md): "What brings you in?" follows the hero. Written into index.html by tools/pages.py; the shared components it uses
 (before/after slider, hotspots, expanding panels, review carousel, sticky story) live in site.js 17.
 
 Facts only from the clinic. Before/after pairs are stock samples (tools/pairs.py), each labelled
@@ -8,6 +8,7 @@ Facts only from the clinic. Before/after pairs are stock samples (tools/pairs.py
 import html
 
 import more_pages
+import problems
 import treatments
 from picture import picture
 
@@ -150,7 +151,7 @@ def story(steps, i="      ", label="Your journey at Arha"):
     imgs = "".join(f"""
 {i}    <div class="story__img{' is-active' if n == 0 else ''}" data-i="{n}">
 {picture(name, '(min-width: 900px) 50vw, 100vw', alt, pos=pos, indent=i + '      ')}
-{i}    </div>""" for n, (name, pos, alt, _t, _b) in enumerate(steps))
+{i}    </div>""" for n, (name, pos, alt, _t, _b) in enumerate(steps) if name)
     items = "".join(f"""
 {i}    <li class="story__step{' is-active' if n == 0 else ''}" data-i="{n}">
 {i}      <p class="story__num">{n + 1:02d}</p>
@@ -264,6 +265,8 @@ def main_html(visit):
       </div>
     </section>
 
+{problems.brings_you_in()}
+
     <!-- =================================================================== 2. GOOGLE REVIEWS -->
     <section class="section reviews-hl" aria-labelledby="reviews-title">
       <div class="container">
@@ -306,17 +309,6 @@ def main_html(visit):
         </div>
 {results_home(cases)}
         <p class="section-cta"><a class="link" href="our-work/">See all our work{ARROW}</a></p>
-      </div>
-    </section>
-
-    <!-- =================================================================== 6. COMMON PROBLEMS WE FIX -->
-    <section class="section section--stone problems-hl" aria-labelledby="problems-title">
-      <div class="container-wide">
-        <div class="section-head reveal">
-          <h2 id="problems-title">Common problems we fix</h2>
-          <p class="lede">Choose a concern to see how it is usually treated.</p>
-        </div>
-{problems_stage()}
       </div>
     </section>
 

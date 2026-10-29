@@ -165,7 +165,7 @@ TREATMENTS = {
         "description": "Invisalign clear aligners at Arha Dental Care, Peddar Road, Mumbai: straightening teeth with clear, removable aligners, for teens and adults.",
         "h1": "Invisalign clear aligners",
         "lede": "Straightening teeth with a series of clear, removable aligners.",
-        "hero": ("stock-case-4", "Sample image: a smile with straight teeth", "50% 45%"),
+        "hero": ("stock-case-6", "A wide, natural smile with straight teeth", "50% 45%"),
         "card": "Clear, removable aligners for teens and adults.",
         "intro": ("Straighter teeth, almost unseen",
                   "Clear aligners are thin, clear trays made for your teeth. Each set moves them a little, and you change to the next set on a schedule.",
@@ -464,7 +464,7 @@ def ix_phases():
              ("Trial smile", "You try the design in temporary teeth, so you can see, speak and chew with it before anything is final.",
               "stock-mirror", "A patient looking at his smile in a hand mirror with the dentist beside him", v),
              ("Final restorations", "The final crowns, bridges or implant teeth are made and fitted in stages, with the bite checked at each visit.",
-              "stock-veneers", "Finished porcelain veneers, ready to be fitted", v),
+              "stock-lab-grind", "Gloved hands finishing a ceramic crown in the laboratory", v),
              ("Maintenance", "Regular reviews and cleaning protect the work. A night guard may be advised if you grind your teeth.",
               "stock-cleaning", "A dentist cleaning a patient’s teeth", v)]
     return f'<div class="reveal">{stepper("phase", "Phases of full mouth rehabilitation", steps)}</div>'
@@ -496,7 +496,7 @@ def ix_guides():
               <text x="438" y="316">Midline</text><text x="452" y="456">Smile line</text><text x="270" y="342">Proportions</text>
             </g>
           </svg>"""
-    pic = picture("stock-case-2", "(min-width: 900px) 40vw, 100vw", "Sample photograph of a smile, used to show the design guides", pos="50% 50%", indent="")
+    pic = picture("stock-case-3", "(min-width: 900px) 40vw, 100vw", "Sample photograph of a smile, used to show the design guides", pos="50% 42%", indent="")
     return f"""<div class="guides-wrap reveal">
         <figure class="guides" data-guides>
           <div class="guides__frame media">{pic}{overlay}</div>
@@ -513,7 +513,7 @@ def ix_guides():
 def ix_matrix():
     opts = ["Whitening", "Bonding", "Veneers"]
     grid = {
-        "stains": ("Stains", "stock-stained", "A natural smile with yellowed teeth",
+        "stains": ("Stains", "stock-sim-whiten-before", "A natural smile with yellowed teeth",
                    [("good", "Lightens natural tooth colour; works best on general yellowing."),
                     ("some", "Can cover a dark patch on a single tooth."),
                     ("some", "For deep stains that whitening cannot lift.")]),
@@ -587,13 +587,13 @@ def ix_root_canal():
              ("Sealed and checked", "The clean canals are filled and sealed so that bacteria cannot return, and an X-ray checks the result.",
               "stock-xray-panoramic", "A panoramic dental X-ray of the whole mouth"),
              ("Crown on top", "A crown is usually placed to protect the tooth, as a treated back tooth is more brittle.",
-              "stock-bridge-model", "Ceramic crowns on a dental model")]
+              "stock-lab-model", "Ceramic crowns on a dental model")]
     st = stepper("rct", "Steps of root canal treatment", steps)
     return f'<div class="reveal">{st}</div>'
 
 
 def ix_materials():
-    mats = [("ceramic", "Ceramic", "stock-veneers", "Thin porcelain restorations, translucent like enamel",
+    mats = [("ceramic", "Ceramic", "stock-crowns", "Ceramic crowns, translucent like enamel",
              ["The most natural; light passes through it like enamel", "Strong for front teeth, less so for heavy chewing", "Yes", "Front teeth"]),
             ("zirconia", "Zirconia", "stock-zirconia", "Solid white crowns on a dental model",
              ["Natural, slightly more opaque", "Very strong", "Yes", "Back teeth, and front teeth where strength matters"]),

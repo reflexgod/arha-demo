@@ -85,9 +85,15 @@
       timer = setTimeout(() => setOpen(item, false), 120);
     });
     // Keyboard focus opens it; a mouse click focusing the button does not re-open it
-    item.addEventListener('focusin', (e) => { if (e.target.matches(':focus-visible')) open(); });
-    item.addEventListener('focusout', (e) => { if (!item.contains(e.relatedTarget)) setOpen(item, false); });
-    trigger.addEventListener('click', () => {
+    item.addEventListener('focusin', (e) => { if (e.target.matches(':focus-visible') && !item.escaped) open(); });
+    item.addEventListener('focusout', (e) => { if (!item.contains(e.relatedTarget)) { item.escaped = false; setOpen(item, false); } });
+    trigger.addEventListener('click', (e) => {
+      // Enter or Space on a panel that focus already opened moves into it instead of closing it
+      if (e.detail === 0 && item.classList.contains('is-open')) {
+        const first = item.querySelector('.dropdown a');
+        if (first) first.focus();
+        return;
+      }
       if (item.classList.contains('is-open') && !item.matches(':hover')) setOpen(item, false);
       else open();
     });
@@ -98,13 +104,15 @@
     if (!openItem) return;
     const hadFocus = openItem.contains(document.activeElement);
     setOpen(openItem, false);
+    // Focus goes back to the button without opening the panel again
+    openItem.escaped = true;
     if (hadFocus) openItem.querySelector('.nav__trigger').focus({ preventScroll: true });
   });
   document.addEventListener('click', (e) => {
     navItems.forEach((item) => { if (!item.contains(e.target)) setOpen(item, false); });
   });
 
-  /* 3. Side menu: slide-in panel, focus trapped, Esc closes, scroll locked - */
+  /* 3. Full-screen menu (every width): focus trapped, Esc closes, scroll locked, + groups - */
   const menu = document.getElementById('side-menu');
   if (menu) {
     const panel = menu.querySelector('.side-menu__panel');
@@ -154,23 +162,17 @@
     toggles.forEach((t) => t.addEventListener('click', openMenu));
     menu.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeMenu));
 
-    // Drill-down (apa): a level slides in with its own Back link; focus moves to it and back
-    const levels = [...menu.querySelectorAll('[data-level]')];
-    const show = (name, from) => {
-      levels.forEach((lvl) => {
-        const on = lvl.dataset.level === name;
-        lvl.hidden = !on;
-        lvl.classList.toggle('is-in', on && name !== 'root');
-      });
-      menu.querySelectorAll('[data-open-level]').forEach((b) => b.setAttribute('aria-expanded', String(b.dataset.openLevel === name)));
-      const target = name === 'root'
-        ? menu.querySelector(`[data-open-level="${from}"]`)
-        : menu.querySelector(`[data-level="${name}"] [data-back]`);
-      if (target) target.focus({ preventScroll: true });
+    // apa's + groups: one open at a time; the button keeps focus
+    const groupToggles = [...menu.querySelectorAll('.fmenu__toggle')];
+    const setGroup = (btn, open) => {
+      btn.setAttribute('aria-expanded', String(open));
+      document.getElementById(btn.getAttribute('aria-controls')).hidden = !open;
     };
-    menu.querySelectorAll('[data-open-level]').forEach((b) => b.addEventListener('click', () => show(b.dataset.openLevel)));
-    menu.querySelectorAll('[data-back]').forEach((b) => b.addEventListener('click', () => show('root', b.closest('[data-level]').dataset.level)));
-    toggles.forEach((t) => t.addEventListener('click', () => levels.forEach((lvl) => { lvl.hidden = lvl.dataset.level !== 'root'; })));
+    groupToggles.forEach((btn) => btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      groupToggles.forEach((other) => setGroup(other, other === btn && open));
+    }));
+    toggles.forEach((t) => t.addEventListener('click', () => groupToggles.forEach((btn) => setGroup(btn, false))));
   }
 
   /* 4. Reveal on scroll, once, when ~15% into the viewport: text fades up, photographs
@@ -1179,7 +1181,7 @@
     const imgs = [...box.querySelectorAll('.story__img')];
     const steps = [...box.querySelectorAll('.story__step')];
     const select = (i) => {
-      imgs.forEach((im) => im.classList.toggle('is-active', im.dataset.i === i));
+      if (imgs.length > 1) imgs.forEach((im) => im.classList.toggle('is-active', im.dataset.i === i));
       steps.forEach((st) => st.classList.toggle('is-active', st.dataset.i === i));
     };
     const io = new IntersectionObserver((entries) => {
@@ -1312,4 +1314,137 @@
     }), { threshold: [0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 1] });
     greyPhotos.forEach((img) => io.observe(img));
   }
+
+  /* 19. Problem pages (tools/problems.py) and the homepage "What brings you in?".
+         Photo toggle ([data-xfade]): tabs (section 14) whose photographs crossfade on one stage.
+         Magnifier ([data-loupe]): the lens follows the mouse, a finger or the arrow keys.
+         Blend ([data-blend]): a range mixes two photographs. Gum self-check ([data-quiz]).
+         Age dial ([data-agedial]). Nothing is stored or sent. ----------------------------- */
+  document.querySelectorAll('[data-xfade]').forEach((box) => {
+    const imgs = [...box.querySelectorAll('.xfade__img')];
+    box.addEventListener('tabchange', (e) => {
+      imgs.forEach((im) => im.classList.toggle('is-active', im.dataset.for === e.detail.panel.id));
+    });
+  });
+
+  document.querySelectorAll('[data-loupe]').forEach((fig) => {
+    const img = fig.querySelector('img');
+    const lens = fig.querySelector('.loupe__lens');
+    const zoom = 2.6;
+    let x = 0.5;
+    let y = 0.5;
+    let frame = 0;
+    const big = () => {
+      // The largest file in the srcset, for a sharp lens (in colour: the lens shows the real photograph)
+      const set = (img.getAttribute('srcset') || '').split(',').map((s) => s.trim().split(/\s+/));
+      const best = set.sort((p, q) => parseInt(q[1], 10) - parseInt(p[1], 10))[0];
+      return best ? best[0] : img.currentSrc;
+    };
+    const paint = () => {
+      frame = 0;
+      const w = fig.clientWidth;
+      const h = fig.clientHeight;
+      const size = lens.offsetWidth;
+      fig.style.setProperty('--lx', `${x * w}px`);
+      fig.style.setProperty('--ly', `${y * h}px`);
+      lens.style.backgroundSize = `${w * zoom}px ${h * zoom}px`;
+      lens.style.backgroundPosition = `${-(x * w * zoom - size / 2)}px ${-(y * h * zoom - size / 2)}px`;
+    };
+    const move = (cx, cy) => {
+      const r = fig.getBoundingClientRect();
+      x = Math.max(0, Math.min(1, (cx - r.left) / r.width));
+      y = Math.max(0, Math.min(1, (cy - r.top) / r.height));
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+    const on = () => {
+      if (!lens.style.backgroundImage) lens.style.backgroundImage = `url("${big()}")`;
+      fig.classList.add('is-on');
+    };
+    const off = () => fig.classList.remove('is-on');
+    fig.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { on(); move(e.clientX, e.clientY); } });
+    fig.addEventListener('pointerdown', (e) => { on(); fig.setPointerCapture(e.pointerId); move(e.clientX, e.clientY); });
+    fig.addEventListener('pointermove', (e) => { if (fig.classList.contains('is-on')) move(e.clientX, e.clientY); });
+    fig.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse') off(); });
+    fig.addEventListener('pointerup', (e) => { if (e.pointerType !== 'mouse') off(); });
+    fig.addEventListener('pointercancel', off);
+    fig.addEventListener('focus', () => { on(); paint(); });
+    fig.addEventListener('blur', off);
+    fig.addEventListener('keydown', (e) => {
+      const d = e.shiftKey ? 0.1 : 0.03;
+      const keys = { ArrowLeft: [-d, 0], ArrowRight: [d, 0], ArrowUp: [0, -d], ArrowDown: [0, d] };
+      if (!(e.key in keys)) return;
+      e.preventDefault();
+      on();
+      x = Math.max(0, Math.min(1, x + keys[e.key][0]));
+      y = Math.max(0, Math.min(1, y + keys[e.key][1]));
+      if (!frame) frame = requestAnimationFrame(paint);
+    });
+  });
+
+  document.querySelectorAll('[data-blend]').forEach((box) => {
+    const range = box.querySelector('input[type="range"]');
+    const ticks = [...box.querySelectorAll('.blend__ticks span')].map((s) => s.textContent);
+    const set = () => {
+      const v = Number(range.value);
+      box.style.setProperty('--mix', String(v / 100));
+      range.setAttribute('aria-valuetext', ticks[Math.round((v / 100) * (ticks.length - 1))] || `${v}%`);
+    };
+    range.addEventListener('input', set);
+    set();
+  });
+
+  document.querySelectorAll('[data-quiz]').forEach((form) => {
+    const names = [...new Set([...form.querySelectorAll('input[type="radio"]')].map((i) => i.name))];
+    const results = [...form.querySelectorAll('[data-score]')];
+    form.addEventListener('change', () => {
+      const picked = names.map((n) => form.querySelector(`input[name="${n}"]:checked`));
+      const key = picked.some((i) => !i) ? 'pending' : String(Math.min(2, picked.filter((i) => i.value === 'yes').length));
+      results.forEach((r) => { r.hidden = r.dataset.score !== key; });
+    });
+  });
+
+  document.querySelectorAll('[data-agedial]').forEach((box) => {
+    const range = box.querySelector('input[type="range"]');
+    const out = box.querySelector('[data-age-out]');
+    const texts = [...box.querySelectorAll('.agedial__text')];
+    const imgs = [...box.querySelectorAll('.agedial__img')];
+    const set = () => {
+      const age = Number(range.value);
+      const band = texts.find((tx) => age >= Number(tx.dataset.min) && age <= Number(tx.dataset.max)) || texts[0];
+      texts.forEach((tx) => { tx.hidden = tx !== band; });
+      imgs.forEach((im) => im.classList.toggle('is-active', im.dataset.band === band.dataset.band));
+      const label = age === 0 ? 'Under 1' : `${age}`;
+      out.textContent = label;
+      range.setAttribute('aria-valuetext', `${age === 0 ? 'Under 1 year' : `${age} year${age === 1 ? '' : 's'}`}: ${band.querySelector('h3').textContent}`);
+    };
+    range.addEventListener('input', set);
+    set();
+  });
+
+  // What brings you in? Hover or focus a problem to see it; on touch the first tap shows it and the
+  // caption's link (or a second tap) opens its page
+  document.querySelectorAll('[data-brings]').forEach((box) => {
+    const items = [...box.querySelectorAll('.brings__item')];
+    const shots = [...box.querySelectorAll('.brings__shot')];
+    const touch = window.matchMedia('(hover: none)');
+    const show = (item) => {
+      items.forEach((it) => it.classList.toggle('is-active', it === item));
+      shots.forEach((s) => {
+        const on = s.dataset.i === item.dataset.i;
+        s.classList.toggle('is-active', on);
+        s.querySelector('a').tabIndex = on ? 0 : -1;
+      });
+    };
+    items.forEach((item) => {
+      let wasActive = false;
+      item.addEventListener('pointerdown', () => { wasActive = item.classList.contains('is-active'); });
+      item.addEventListener('mouseenter', () => { if (!touch.matches) show(item); });
+      item.addEventListener('focus', () => show(item));
+      item.addEventListener('click', (e) => {
+        // The tap's own focus has already shown it, so judge by the state before the tap
+        if (touch.matches && e.detail !== 0 && !wasActive) { e.preventDefault(); show(item); }
+        wasActive = false;
+      });
+    });
+  });
 })();
