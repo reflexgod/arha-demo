@@ -82,7 +82,7 @@ TREATMENTS = {
         "description": "Maxillofacial prosthetics at Arha Dental Care, Peddar Road: custom prostheses that help restore eating, speech and appearance after surgery, injury or a condition present from birth.",
         "h1": "Maxillofacial prosthetics",
         "lede": "Custom prostheses that help restore eating, speaking and appearance when part of the mouth or jaw is missing.",
-        "hero": ("dental-operatory-arha-dental-care-peddar-road-01", "A quiet Arha treatment room with the chair under its overhead light", "50% 60%"),
+        "hero": ("stock-prosthesis-hands", "Gloved hands finishing a dental prosthesis with a fine instrument", "50% 45%"),
         "card": "Custom prostheses after surgery or injury, or for a condition from birth.",
         "intro": ("Care that goes beyond teeth",
                   "Maxillofacial prosthetics is the part of prosthodontics that replaces missing parts of the mouth and jaw with prostheses made for one person.",
@@ -193,7 +193,7 @@ TREATMENTS = {
         "description": "Braces and clear aligners for children, teens and adults at Arha Dental Care, Peddar Road, Mumbai, with early orthodontic assessment for children.",
         "h1": "Orthodontics (braces)",
         "lede": "Braces and aligners for children, teens and adults.",
-        "hero": ("stock-patient-chair", "A patient in the dental chair during an examination", "50% 40%"),
+        "hero": ("stock-face-15", "A smiling young man", "50% 30%"),
         "card": "Metal braces and clear aligners for children, teens and adults.",
         "intro": ("Straight teeth at any age",
                   "Orthodontics moves teeth into a better position, for a bite that works well and teeth that are easier to clean.",
@@ -221,7 +221,7 @@ TREATMENTS = {
         "description": "Dental check-ups, professional cleaning and tooth-coloured fillings at Arha Dental Care, Peddar Road, South Mumbai.",
         "h1": "General dentistry &amp; cleaning",
         "lede": "Check-ups, cleaning and fillings that keep problems small.",
-        "hero": ("dental-operatory-arha-dental-care-peddar-road-02", "An Arha treatment room with a dental chair, a desk and marble walls", "50% 55%"),
+        "hero": ("stock-case-5-face", "A woman with curly hair laughing", "50% 30%"),
         "card": "Check-ups, professional cleaning and fillings.",
         "intro": ("Prevention first",
                   "Regular check-ups find problems while they are still small and simple to treat. A professional clean removes the hard deposits that brushing cannot.",
@@ -249,7 +249,7 @@ TREATMENTS = {
         "description": "Root canal treatment at Arha Dental Care, Peddar Road: saving an infected tooth with rotary endodontics, explained step by step.",
         "h1": "Root canal treatment",
         "lede": "Saving a tooth whose nerve is infected or inflamed.",
-        "hero": ("stock-dentist-hands", "A dentist’s gloved hands at work, holding fine instruments", "50% 50%"),
+        "hero": ("stock-mirror-tray", "Dental mirrors laid out on a steel tray", "50% 50%"),
         "card": "Saving an infected tooth, with rotary instruments.",
         "intro": ("Keep your own tooth",
                   "Inside each tooth is the pulp: nerves and blood vessels in narrow canals. When decay or a crack lets infection reach it, root canal treatment removes the infected pulp and seals the canals.",
@@ -471,14 +471,14 @@ def ix_phases():
 
 
 def ix_who_we_help():
-    # Arha's own rooms: respectful, no clinical or graphic photographs
-    who = [("surgery", "After oral cancer surgery", "dental-operatory-arha-dental-care-peddar-road-01", "A quiet Arha treatment room",
+    # Calm laboratory and clinical photographs: respectful, never a patient, nothing graphic
+    who = [("surgery", "After oral cancer surgery", "stock-lab", "Gloved hands holding a dental model during planning",
             "When surgery removes part of the palate or jaw, a prosthesis called an obturator can close the gap, so that eating, drinking and speaking feel more normal again. It is planned with your surgical team, sometimes before the operation."),
-           ("cleft", "Cleft palate", "arha-dental-care-lounge-peddar-road", "The calm patients’ lounge at Arha",
+           ("cleft", "Cleft palate", "stock-mirror", "A patient looking at his smile in a hand mirror with the dentist beside him",
             "Some children and adults born with a cleft palate are helped by a plate that closes an opening in the roof of the mouth or supports speech. It works alongside the care of the cleft team."),
-           ("injury", "Facial or jaw injury", "dental-operatory-arha-dental-care-peddar-road-06", "An Arha treatment room seen through a glass door",
+           ("injury", "Facial or jaw injury", "stock-molar", "A close-up of a back tooth",
             "After an accident, teeth and parts of the jaw can be rebuilt in stages, with prostheses that restore the bite and support the shape of the face."),
-           ("birth", "From birth", "arha-dental-care-reception-south-mumbai-dental-clinic-02", "Arha’s reception on Peddar Road",
+           ("birth", "From birth", "stock-zirconia", "Solid white crowns on a dental model",
             "Some people are born without certain teeth or parts of the jaw. Prostheses, sometimes held by implants, can help with chewing, speech and appearance.")]
     items = [(k, n, img, alt, f"<h3>{n}</h3><p>{d}</p><p class=\"ix-note\">Every situation is different. A consultation, and often your surgeon’s advice, decides what is possible.</p>")
              for k, n, img, alt, d in who]
@@ -649,7 +649,7 @@ def ix_root_canal():
 
 
 def ix_materials():
-    mats = [("ceramic", "Ceramic", "stock-crowns", "Ceramic crowns, translucent like enamel",
+    mats = [("ceramic", "Ceramic", "stock-lab-grind", "A ceramic crown being finished in the laboratory",
              ["The most natural; light passes through it like enamel", "Strong for front teeth, less so for heavy chewing", "Yes", "Front teeth"]),
             ("zirconia", "Zirconia", "stock-zirconia", "Solid white crowns on a dental model",
              ["Natural, slightly more opaque", "Very strong", "Yes", "Back teeth, and front teeth where strength matters"]),
@@ -742,11 +742,10 @@ CLOSING_PHOTOS = [  # Arha's own rooms, chosen by title so a page always closes 
 
 
 def closing(title="Begin with a conversation", text="Every plan at Arha starts with a consultation: a careful examination, a clear explanation and a plan made for you."):
-    name, alt, pos = CLOSING_PHOTOS[sum(map(ord, title)) % len(CLOSING_PHOTOS)]
+    """apa's dark band as punctuation: no photograph (v4 feedback 5: a photo is on two pages at most), the two actions."""
     return f"""
-    <!-- =================================================================== CALL / BOOK -->
-    <section class="statement statement--close band" aria-labelledby="closing-title">
-      {{{{pic {name} | 100vw | {alt} | pos={pos}}}}}
+    <!-- =================================================================== CALL / BOOK (a plain charcoal band) -->
+    <section class="statement statement--close statement--plain band" aria-labelledby="closing-title">
       <div class="container statement__content reveal">
         <h2 id="closing-title">{title}</h2>
         <p>{text}</p>
@@ -949,7 +948,7 @@ def technology_page(site_url):
 
     <!-- =================================================================== HERO -->
     <section class="page-hero" aria-labelledby="page-title">
-      {{{{pic dental-implant-equipment-arha-dental-care-mumbai | 100vw | Arha's X-ray room: a floor-standing panoramic X-ray unit against a marble wall | pos=50% 22% | eager}}}}
+      {{{{pic stock-xray-panoramic | 100vw | A panoramic dental X-ray of the whole mouth | pos=50% 50% | eager}}}}
       <div class="page-hero__content">
         <div class="hero__text">
           {crumbs([("Home", ""), ("Technology", "technology/")])}

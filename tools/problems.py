@@ -485,20 +485,8 @@ def problem_page(slug, site_url):
 
 
 def closing_band(title="Begin with a conversation", text="Every plan at Arha starts with a consultation: a careful examination, a clear explanation and a plan made for you."):
-    """apa's dark band as punctuation: no photograph, the two actions."""
-    return f"""
-    <!-- =================================================================== CALL / BOOK (a plain charcoal band) -->
-    <section class="statement statement--close statement--plain band" aria-labelledby="closing-title">
-      <div class="container statement__content reveal">
-        <h2 id="closing-title">{title}</h2>
-        <p>{text}</p>
-        <div class="band__actions">
-          <a class="cta" href="book/">Book a Consultation</a>
-          <a class="cta" href="tel:+910000000000" data-call="treatment_band">Call <span data-show="phone">+91 00000 00000</span></a>
-        </div>
-      </div>
-    </section>
-"""
+    """apa's dark band as punctuation: no photograph, the two actions (tools/treatment_pages.closing)."""
+    return tp.closing(title, text)
 
 
 def index_page(site_url):
@@ -512,7 +500,11 @@ def index_page(site_url):
         <div class="section-head reveal"><h1 id="page-title">What we fix</h1><p class="lede">Start with what is bothering you. Each page shows what treatment would involve.</p></div>
       </div>
     </section>
-{brings_you_in(heading=False)}
+    <section class="section section--stone problem-links" aria-label="Problems we fix">
+      <div class="container">
+        <ul class="problem-links__list reveal">{"".join(f'<li><a href="problems/{s}/">{PROBLEMS[s]["menu"]}{ARROW}</a></li>' for s in ORDER)}</ul>
+      </div>
+    </section>
 {closing_band()}"""
     meta = {"title": "What We Fix: Common Dental Problems | Arha Dental Care, Peddar Road",
             "description": "Missing, chipped, crooked or stained teeth, gaps, toothache, bleeding gums, old fillings, loose dentures and children's teeth: how Arha Dental Care on Peddar Road usually fixes each.",

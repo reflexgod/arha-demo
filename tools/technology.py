@@ -26,7 +26,7 @@ ITEMS = [
         "name": "Treatment rooms",
         "short": "Treatment rooms",
         "group": "treat",
-        "photo": "dental-operatory-arha-dental-care-peddar-road-01",
+        "photo": "dental-operatory-arha-dental-care-peddar-road-02",
         "pos": "50% 60%",
         "alt": "An Arha treatment room: a cream dental chair under an overhead light, marble walls and a laptop on the counter",
         "what": "Rooms with a fully adjustable dental chair, an overhead operating light and a screen beside the chair.",

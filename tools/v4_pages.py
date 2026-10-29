@@ -149,17 +149,21 @@ def intro(t):
 CAT_FOR = {"implants": ["implants"], "full-mouth": ["full-mouth"], "veneers": ["veneers"], "aligners": ["aligners"]}
 
 
-def results_pairs(cat, title="Results"):
-    """This treatment's sample cases as static before | after pairs, each linking to its case page."""
+def results_pairs(cat, title="Sample cases"):
+    """This treatment's sample cases as quiet links to their case pages (the photographs themselves stay on
+    the homepage, Our work and each case page: v4 feedback 5)."""
     mine = [c for c in more_pages.cases() if cat and c["cat"] == cat]
     if not mine:
         return ""
+    lis = "".join(f"""
+          <li><a class="more-cases__link" href="our-work/{c['slug']}/"><span>{html.escape(c['name'])}</span><span>{html.escape(c['meta'])} · Sample case for demo</span></a></li>""" for c in mine)
     return f"""
-    <!-- =================================================================== RESULTS (static before | after pairs) -->
-    <section class="section results-v4" aria-labelledby="results-title">
-      <div class="container-wide">
-{head("results-title", title, "Sample cases for the demo. Real cases, shared with each patient’s written consent, replace them before launch.")}
-{results_grid(mine)}
+    <!-- =================================================================== SAMPLE CASES (links) -->
+    <section class="section results-links" aria-labelledby="results-title">
+      <div class="container">
+{head("results-title", title, "Before and after, built from stock photographs for the demo. Real, consented cases replace them before launch.")}
+        <ul class="more-cases__list reveal">{lis}
+        </ul>
         <p class="section-cta"><a class="link" href="our-work/">See all our work{ARROW}</a></p>
       </div>
     </section>
@@ -240,9 +244,6 @@ def hub_page(site_url):
             links += f"""
               <li>
                 <a class="tindex__link" href="{s}/" data-shot="{s}">
-                  <span class="tindex__thumb media">
-{picture(photo, '96px', '', pos=pos, indent='                    ')}
-                  </span>
                   <span class="tindex__name">{item['name']}</span>
                   <span class="tindex__card">{card}</span>
                 </a>
@@ -382,8 +383,8 @@ def case_page(site_url, n, cs):
 
 # ------------------------------------------------------------------ about: founder, doctors, practice, gallery
 QUOTE = "A good restoration should never announce itself. My aim is a result that feels natural, functions beautifully and lasts."
-TIMELINE = [("1980", "Dr. Vasant P. Jain begins a family dental practice in Mumbai.", "arha-dental-care-exterior-dental-clinic-peddar-road", "50% 40%"),
-            ("The next generation", "Dr. Nikhil V. Jain joins the practice, as a prosthodontist and implantologist.", "dental-operatory-arha-dental-care-peddar-road-01", "50% 60%"),
+TIMELINE = [("1980", "Dr. Vasant P. Jain begins a family dental practice in Mumbai.", "arha-dental-care-logo-dental-clinic-peddar-road", "50% 50%"),
+            ("The next generation", "Dr. Nikhil V. Jain joins the practice, as a prosthodontist and implantologist.", "stock-handpieces", "50% 50%"),
             ("Arha", "Arha Dental Care opens at 107, Doctor House, 14 Peddar Road.", "arha-dental-care-reception-south-mumbai-dental-clinic-02", "50% 40%"),
             ("Today", "Two generations, one standard of care.", "arha-dental-care-lounge-peddar-road", "50% 55%")]
 
@@ -398,7 +399,7 @@ def founder_page(site_url):
             <p class="tl-card__year">{year}</p>
             <p>{text}</p>
           </li>""" for year, text, name, pos in TIMELINE)
-    body = page_hero("{{pic stock-dentist-hands | 100vw | A dentist's gloved hands at work | pos=30% 50% | eager}}",
+    body = page_hero("{{pic arha-dental-care-reception-south-mumbai-dental-clinic-01 | 100vw | Arha's reception: a curved front desk and soft seating | pos=50% 50% | eager}}",
                      "Dr. Nikhil V. Jain", "Prosthodontist and implantologist, and the founder of Arha Dental Care on Peddar Road.", trail, "About the founder", actions=False)
     body += f"""
     <!-- =================================================================== THE LONG READ -->
@@ -503,7 +504,7 @@ def practice_page(site_url, visit):
 
     <!-- =================================================================== HYGIENE AND STERILISATION -->
     <section class="statement statement--hygiene" aria-labelledby="hygiene-title">
-      {{{{pic autoclave-pantry-equipment-arha-dental-care-mumbai | 100vw | Arha's sterilisation room: a benchtop steam steriliser beside a sink, under pale cabinets | pos=70% 62%}}}}
+      {{{{pic stock-instrument-tray | 100vw | Sterile instruments laid out on a tray | pos=50% 50%}}}}
       <div class="container statement__content reveal">
         <p class="eyebrow eyebrow--light">Hygiene &amp; sterilisation</p>
         <h2 id="hygiene-title">Kept safe, in a room of its own</h2>

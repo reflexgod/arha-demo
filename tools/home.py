@@ -40,10 +40,10 @@ TRIO = [("arha-dental-care-exterior-dental-clinic-peddar-road", "50% 40%",
          "The door of suite 107 at Arha: the gold emblem and the names of Dr. Vasant P. Jain and Dr. Nikhil V. Jain",
          "Legacy since 1980", "What began as Dr. Vasant P. Jain’s family practice is now Arha: the same trust, in a space designed for modern dentistry.",
          "founder/", "About the founder"),
-        ("stock-gloved-hands", "60% 40%", "A gloved hand picking up a fine dental instrument from a tray",
+        ("stock-handpieces", "50% 50%", "Dental handpieces, ready on their holders",
          "Specialist precision", "Dr. Nikhil V. Jain is an MDS Prosthodontist and ITI Scholar, focused on implants and full mouth rehabilitation.",
          "doctors/", "Meet the doctors"),
-        ("stock-natural-smile", "50% 40%", "Close-up of a natural smile",
+        ("stock-face-13", "50% 30%", "A woman smiling, photographed in black and white",
          "Designed for you", "Every treatment plan is considered in relation to your face, your bite and your comfort, never a template.",
          "treatments/", "Explore treatments")]
 
