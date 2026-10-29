@@ -1,88 +1,72 @@
-"""Sample before/after pairs for the demo, every one labelled "Sample case for demo" on the site.
+"""Before/after simulations for the demo (v4 fixes 3, point 2): both sides are the SAME photograph, so
+the alignment is pixel-perfect, and every one is labelled "Simulation for demo" on the site.
 
 Usage: .venv/Scripts/python -I tools/pairs.py [--sheet <out.jpg>]
-Writes assets/img/stock-pair-<n>-before-<w>.* and stock-pair-<n>-after-<w>.* (3:2, mouth centred),
-and the whitening simulation used by "Common problems" (stock-sim-whiten-before/after).
-
-Two kinds (notes/V4-FEEDBACK-2.md, point 4):
-  sim    one stock photograph; the "before" is the same photograph with its teeth masked and tinted
-         (photos.teeth_mask / stain_teeth). Same face, same light: only the teeth change.
-  stock  a stock "before" (crowded, worn, uneven teeth) paired with a stock "after" smile of a
-         different person, both cropped to the same framing.
-None of these are Arha's patients. Real consented cases replace them before launch (notes/TO-CONFIRM.md).
+Framing is wide: the lower face from about the nose tip to the chin, the teeth well under 40% of the
+width, never macro. The "before" is the same photograph with a gentle warm shade on the teeth (a traced
+outline, teeth_only, and photos.stain_teeth at a low strength): a shade difference, never broken or decayed teeth.
+None of these are Arha's patients; real consented cases replace them before launch (notes/TO-CONFIRM.md).
+Writes assets/img/stock-pair-1-{before,after}-<w>.* (featured case) and stock-sim-whiten-{before,after}-<w>.*
+(Yellow or stained teeth).
 """
 import sys
 from pathlib import Path
 
-from PIL import Image
+import numpy as np
+from PIL import Image, ImageDraw, ImageFilter
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from photos import export, stain_teeth, stock_grade, teeth_mask, whiten_teeth  # noqa: E402
+from photos import export, stain_teeth, stock_grade  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 STOCK = ROOT / "src-assets" / "stock"
-ASPECT = 3 / 2
-MOUTH = 0.80  # lip corners span 80% of the frame width where the photograph allows it
 
-# (source, (mouth centre x, centre y, mouth width) as fractions of the source)
-SHOTS = {
-    "blonde": ("cand/c5.jpg", (0.68, 0.39, 0.36)),
-    "beard": ("cand/c2.jpg", (0.50, 0.51, 0.90)),
-    "frontal": ("smile-1.jpg", (0.48, 0.45, 0.55)),
-    "woman-tilt": ("cand/c4.jpg", (0.74, 0.51, 0.37)),
-    "worn": ("before-worn.jpg", (0.52, 0.52, 0.95)),
-    "uneven": ("before-missing-2.jpg", (0.50, 0.45, 0.95)),
-    "red-lips": ("before-missing.jpg", (0.535, 0.30, 0.65)),
-    "crowded": ("before-crowded.jpg", (0.50, 0.50, 1.00)),
-    "straight": ("loupe-teeth.jpg", (0.50, 0.50, 1.00)),
-    "yellow": ("cand/c1.jpg", (0.45, 0.40, 0.65)),
+# name: (source, crop (left, top, right, bottom) as fractions of the source, the visible teeth traced as a
+#        polygon in the crop (fractions), shade strength). A traced outline is exact where an automatic
+#        mask confuses warm, shaded teeth with skin; the dark gaps between teeth are left out (teeth_only).
+SIMS = {
+    "stock-pair-1": ("sim-smile-b.jpg", (0.0, 0.0, 1.0, 1.0),
+                     [(0.466, 0.535), (0.578, 0.517), (0.660, 0.498), (0.727, 0.478), (0.736, 0.512),
+                      (0.662, 0.562), (0.578, 0.597), (0.474, 0.612)], 0.45),
+    "stock-sim-whiten": ("cand/c10.jpg", (0.0, 0.26, 1.0, 0.70),
+                         [(0.523, 0.385), (0.648, 0.352), (0.778, 0.352), (0.778, 0.428), (0.714, 0.476),
+                          (0.626, 0.490), (0.536, 0.467)], 0.45),
 }
 
-# case n: (kind, before shot, after shot, teeth box in the after frame for "sim")
-PAIRS = {
-    1: ("sim", None, "blonde", (0.22, 0.33, 0.82, 0.60)),  # featured: smile design & veneers
-    2: ("stock", "worn", "beard", None),                   # implants
-    3: ("stock", "uneven", "frontal", None),               # full mouth
-    4: ("stock", "crowded", "straight", None),             # aligners
-    5: ("stock", "red-lips", "woman-tilt", None),          # veneers
-}
-WHITEN_BOX = (-0.25, 0.36, 1.25, 0.76)  # teeth in the "yellow" frame
+
+def teeth_only(im, poly):
+    """Feathered polygon mask, minus anything much darker than the teeth inside it."""
+    w, h = im.size
+    m = Image.new("L", (w, h), 0)
+    ImageDraw.Draw(m).polygon([(x * w, y * h) for x, y in poly], fill=255)
+    g = np.asarray(im.convert("L")).astype(np.float32)
+    inside = np.asarray(m) > 0
+    ref = np.percentile(g[inside], 85)
+    keep = (g > 0.45 * ref) & inside
+    out = Image.fromarray((keep * 255).astype(np.uint8))
+    return out.filter(ImageFilter.GaussianBlur(max(2, w / 700)))
 
 
-def frame(key):
-    src, (cx, cy, w) = SHOTS[key]
+def frame(src, crop):
     im = Image.open(STOCK / src).convert("RGB")
     W, H = im.size
-    cw = min(w * W / MOUTH, W, H * ASPECT)
-    ch = cw / ASPECT
-    left = min(max(cx * W - cw / 2, 0), W - cw)
-    top = min(max(cy * H - ch / 2, 0), H - ch)
-    im = im.crop((round(left), round(top), round(left + cw), round(top + ch)))
+    l, t, r, b = crop
+    im = im.crop((round(l * W), round(t * H), round(r * W), round(b * H)))
     if im.width > 1920:
-        im = im.resize((1920, round(1920 / ASPECT)), Image.LANCZOS)
-    elif im.width < 1280:
-        im = im.resize((1280, round(1280 / ASPECT)), Image.LANCZOS)
+        im = im.resize((1920, round(im.height * 1920 / im.width)), Image.LANCZOS)
     return im
 
 
 def build():
     out = {}
-    for n, (kind, before, after, box) in PAIRS.items():
-        a = frame(after)
-        if kind == "sim":
-            b = stain_teeth(a, teeth_mask(a, box, sat=0.22), 0.75)
-        else:
-            b = frame(before).resize(a.size, Image.LANCZOS)
-        a, b = stock_grade(a), stock_grade(b)
-        export(b, f"stock-pair-{n}-before")
-        export(a, f"stock-pair-{n}-after")
-        out[n] = (b, a)
-        print(n, kind, a.size)
-    y = frame("yellow")
-    w = whiten_teeth(y, teeth_mask(y, WHITEN_BOX, light=0.45, hue=(24, 70)), 0.9)
-    export(stock_grade(y), "stock-sim-whiten-before")
-    export(stock_grade(w), "stock-sim-whiten-after")
-    out["whiten"] = (stock_grade(y), stock_grade(w))
+    for name, (src, crop, poly, strength) in SIMS.items():
+        after = frame(src, crop)
+        before = stain_teeth(after, teeth_only(after, poly), strength)
+        before, after = stock_grade(before), stock_grade(after)
+        export(before, f"{name}-before")
+        export(after, f"{name}-after")
+        out[name] = (before, after)
+        print(name, after.size)
     return out
 
 
@@ -90,16 +74,16 @@ def sheet(pairs, path):
     rows = []
     for b, a in pairs.values():
         b, a = b.copy(), a.copy()
-        b.thumbnail((600, 400))
-        a.thumbnail((600, 400))
-        row = Image.new("RGB", (1210, 400), "white")
+        b.thumbnail((700, 470))
+        a.thumbnail((700, 470))
+        row = Image.new("RGB", (1410, 470), "white")
         row.paste(b, (0, 0))
-        row.paste(a, (610, 0))
+        row.paste(a, (710, 0))
         rows.append(row)
-    s = Image.new("RGB", (1210, 410 * len(rows)), "white")
+    s = Image.new("RGB", (1410, 480 * len(rows)), "white")
     for k, r in enumerate(rows):
-        s.paste(r, (0, k * 410))
-    s.save(path, quality=82)
+        s.paste(r, (0, k * 480))
+    s.save(path, quality=85)
 
 
 if __name__ == "__main__":

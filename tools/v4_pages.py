@@ -97,15 +97,15 @@ def step_photo(title, used):
     return next(s for s in ROOM_FALLBACK + [shot for _k, shot in STEP_PHOTOS] if s[0] not in used)
 
 
-PROCESS_PHOTO = {  # one photograph per treatment page, pinned while its steps scroll past (used nowhere else)
-    "dental-implants": ("stock-clinic-consult", "50% 40%", "A dentist talking a patient in the chair through her treatment"),
-    "maxillofacial-prosthetics": ("stock-lab-model", "50% 50%", "A dental model with finished teeth, made in the laboratory"),
-    "smile-design": ("stock-clinic-work", "50% 35%", "A dentist at work in a bright treatment room"),
-    "cosmetic-dentistry": ("stock-face-7", "50% 35%", "An older woman in a headscarf, smiling"),
-    "invisalign": ("stock-face-8", "50% 30%", "A young woman laughing, photographed against a dark background"),
-    "orthodontics": ("stock-braces", "50% 50%", "A smile with metal braces"),
+PROCESS_PHOTO = {  # one photograph per treatment page, pinned while its steps scroll past: Arha's own rooms first
+    "dental-implants": ("arha-dental-care-operatory-chair", "50% 50%", "The dental chair and its light in an Arha treatment room"),
+    "maxillofacial-prosthetics": ("arha-dental-care-planning-room", "50% 50%", "A quiet room at Arha with a desk beside the equipment counter"),
+    "smile-design": ("stock-dentist-hands", "50% 50%", "A dentist's gloved hands at work, holding fine instruments"),
+    "cosmetic-dentistry": ("arha-dental-care-operatory-laptop", "50% 50%", "An Arha treatment room with the chair, the light and a laptop on the counter"),
+    "invisalign": ("arha-dental-care-operatory-chair", "50% 50%", "The dental chair and its light in an Arha treatment room"),
+    "orthodontics": ("arha-dental-care-planning-room", "50% 50%", "A quiet room at Arha with a desk beside the equipment counter"),
     "general-dentistry": ("stock-instrument-tray", "50% 50%", "Sterile instruments laid out on a tray"),
-    "crowns-bridges": ("stock-molar", "50% 50%", "A close-up of a back tooth"),
+    "crowns-bridges": ("arha-dental-care-delivery-unit", "50% 45%", "The instrument holder at an Arha chair, with its handpieces ready"),
 }
 
 
@@ -239,7 +239,7 @@ def hub_page(site_url):
         for item in g["items"]:
             s = item["slug"]
             t = tp.TREATMENTS.get(s)
-            photo, alt, pos = t["hero"] if t else ("stock-parent-child", "A parent and child smiling together", "50% 40%")
+            photo, alt, pos = (t.get("preview") or t["hero"]) if t else ("stock-parent-child", "A parent and child smiling together", "50% 40%")
             card = t["card"] if t else tp.KIDS["card"]
             links += f"""
               <li>
@@ -294,15 +294,15 @@ def work_page(site_url):
     chips = "".join(f'<button type="button" data-work-filter="{k}" aria-pressed="{str(k == "all").lower()}">{v}</button>'
                     for k, v in more_pages.cases_markup.FILTERS)
     trail = [("Home", ""), ("Our work", "our-work/")]
-    body = page_hero("{{pic stock-woman-smile | 100vw | A woman smiling naturally | pos=50% 35% | eager}}", "Our work",
+    body = page_hero("{{pic arha-dental-care-logo-wall | 100vw | The Arha Dental Care emblem in gold on the reception’s marble wall | pos=50% 45% | eager}}", "Our work",
                      "Natural results, planned around each face and bite.", trail)
     body += f"""
     <!-- =================================================================== BEFORE & AFTER (filterable sliders) -->
     <section class="section" aria-labelledby="work-title">
       <div class="container-wide">
-{head("work-title", "Before &amp; after", "Choose a treatment, then open a case to compare its before and after.")}
+{head("work-title", "Before &amp; after", "Choose a treatment, then open a case to see how it was planned.")}
         <div class="work-filter" role="group" aria-label="Filter by treatment">{chips}</div>
-        <p class="cases-note">Sample cases for the demo, built from stock photographs. Real cases, shared with each patient’s written consent, replace them before launch. Results vary.</p>
+        <p class="cases-note">Sample cases for the demo: one simulation on a stock photograph, and clinical-detail photographs for the others. Real cases, shared with each patient’s written consent, replace them before launch. Results vary.</p>
 {results_grid(cs)}
         <p class="work-empty" data-work-empty hidden>No cases for this treatment yet.</p>
       </div>
@@ -328,7 +328,15 @@ def case_page(site_url, n, cs):
     prev_c, next_c = cs[n - 1], cs[(n + 1) % len(cs)]
     treat = more_pages.CAT_TREATMENT[c["cat"]]
     trail = [("Home", ""), ("Our work", "our-work/"), (f"{c['name']}, sample case", f"our-work/{c['slug']}/")]
-    big = ba(c, "(min-width: 900px) 90vw, 100vw", "        ", eager=True)
+    if c.get("before"):
+        big = ba(c, "(min-width: 900px) 90vw, 100vw", "        ", eager=True)
+        note = "Drag across the photograph, tap it, or use the arrow keys to compare. A simulation on one stock photograph for the demo; a real, consented case replaces it before launch."
+    else:
+        big = f"""        <figure class="case-v4__photo media">
+{picture(c['img'], '(min-width: 900px) 90vw, 100vw', c['card_alt'], pos=c.get('card_pos'), eager=True, indent='          ')}
+          <figcaption class="sample-line">{home.SAMPLE}</figcaption>
+        </figure>"""
+        note = "A sample case for the demo, shown with a clinical-detail photograph. Real, consented cases with their own photographs replace it before launch."
     others = [x for x in cs if x is not c]
     more = "".join(f"""
           <li><a class="more-cases__link" href="our-work/{o['slug']}/"><span>{html.escape(o['name'])}</span><span>{html.escape(o['meta'])}</span></a></li>""" for o in others)
@@ -344,7 +352,7 @@ def case_page(site_url, n, cs):
       </div>
       <div class="container-wide case-v4__stage">
 {big}
-        <p class="cases-note">Drag across the photograph, tap it, or use the arrow keys to compare. Built from stock photographs for the demo; a real, consented case replaces it before launch.</p>
+        <p class="cases-note">{note}</p>
       </div>
       <div class="container case-v4__story">
         <dl class="case-story case-story--cols">

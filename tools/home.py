@@ -13,7 +13,8 @@ import treatments
 from picture import picture
 
 ARROW = '<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg>'
-SAMPLE = "Sample case for demo"  # under every before/after pair (tools/pairs.py; notes/TO-CONFIRM.md)
+SAMPLE = "Sample case for demo"  # on every sample case (notes/TO-CONFIRM.md)
+SIMULATION = "Simulation for demo"  # on every before/after slider: both sides are one photograph (tools/pairs.py)
 
 REVIEWS = [  # real Google reviews (lines quoted as written; "grate" corrected to "great")
     "He managed my pain and resolved the problem on the same day.",
@@ -25,42 +26,47 @@ REVIEWS = [  # real Google reviews (lines quoted as written; "grate" corrected t
     "It was a smooth experience with great advice that gave her a comforting outcome.",
 ]
 
-HOTSPOTS = [  # Arha's treatment room (dental-operatory-01); positions in % of the photograph
-    ("68%", "74%", "A fully adjustable chair", "Every treatment room has a fully adjustable dental chair.",
-     "You lie back comfortably, at an angle that suits the work and you."),
-    ("53%", "37%", "An overhead operating light", "A dedicated light over the chair, separate from the room’s lighting.",
-     "The work area is well lit, so fine detail can be seen clearly."),
-    ("66%", "59%", "A screen beside the chair", "A screen at the chair for X-rays and photographs.",
-     "Your images can be shown to you while we explain them."),
-    ("37%", "58%", "Handpieces, cared for after use", "The handpieces on the chair are cleaned and oiled by an automatic unit after use.",
-     "Instruments are maintained to a routine, in a room of their own."),
+# Technology (v4 fixes 3, point 3): only what sets Arha apart, each on one of Arha's own photographs.
+# (photo, alt, x, y, name, what it is, what it means for you). Positions in % of each photograph.
+HOTSPOTS = [
+    ("dental-implant-equipment-arha-dental-care-mumbai", "Arha's X-ray room: a floor-standing panoramic X-ray unit against a marble wall",
+     "46%", "27%", "An in-house panoramic X-ray",
+     "A panoramic X-ray unit in a room of its own at the clinic, showing all the teeth and both jaws in one image.",
+     "Your X-rays are taken during your visit, so your plan can be explained the same day, with no trip to an imaging centre."),
+    ("dental-operatory-arha-dental-care-peddar-road-01", "An Arha treatment room; the laptop on the counter shows a 3D model of a patient's teeth",
+     "65%", "58%", "Digital 3D models of your teeth",
+     "Scans of your teeth are viewed on screen in the treatment room as 3D models.",
+     "You can see your own teeth from every side, and how a plan would change them, before any treatment starts."),
+    ("autoclave-pantry-equipment-arha-dental-care-mumbai", "Arha's sterilisation room: the steriliser on the counter beside a sink",
+     "80%", "50%", "A sterilisation room of its own",
+     "Instruments are cleaned and sterilised in a separate room, in a steam steriliser, away from where you are treated.",
+     "Everything used for your treatment has been through the same careful routine, every time."),
 ]
 
 TRIO = [("arha-dental-care-exterior-dental-clinic-peddar-road", "50% 40%",
          "The door of suite 107 at Arha: the gold emblem and the names of Dr. Vasant P. Jain and Dr. Nikhil V. Jain",
          "Legacy since 1980", "What began as Dr. Vasant P. Jain’s family practice is now Arha: the same trust, in a space designed for modern dentistry.",
          "founder/", "About the founder"),
-        ("stock-handpieces", "50% 50%", "Dental handpieces, ready on their holders",
+        ("arha-dental-care-delivery-unit", "50% 45%", "The instrument holder at an Arha chair, with its handpieces ready",
          "Specialist precision", "Dr. Nikhil V. Jain is an MDS Prosthodontist and ITI Scholar, focused on implants and full mouth rehabilitation.",
          "doctors/", "Meet the doctors"),
-        ("stock-face-13", "50% 30%", "A woman smiling, photographed in black and white",
+        ("arha-dental-care-consultation-desk", "50% 50%", "The consultation desk in an Arha treatment room",
          "Designed for you", "Every treatment plan is considered in relation to your face, your bite and your comfort, never a template.",
          "treatments/", "Explore treatments")]
 
-JOURNEY = [("stock-consultation", "45% 35%", "A dentist talking a patient through a treatment model", "Consultation",
+JOURNEY = [("stock-consult-desk", "50% 40%", "A dentist explaining a treatment plan to a patient at a desk, with X-rays on screen", "Consultation",
             "We listen first: your concerns, your goals and your history, then a thorough examination and a clear explanation of your options."),
-           ("stock-patient-chair", "50% 45%", "A relaxed patient in the dental chair during a check-up", "Your treatment",
+           ("arha-dental-care-chair-window", "50% 55%", "The dental chair under its light in an Arha treatment room", "Your treatment",
             "Planned in detail and carried out with precision, at a pace that keeps you comfortable."),
-           ("stock-smiling-patient", "50% 35%", "A smiling woman seated in a warmly lit room", "Lifelong care",
+           ("arha-dental-care-reception-wide", "50% 50%", "Arha's reception and waiting area", "Lifelong care",
             "Your treatment is the start of a long relationship: reviews, cleanings and care to protect your result for years.")]
 
-
 def ba(c, sizes, i="          ", eager=False):
-    """Before/after slider (site.js 17) for one case: the before photograph on the left of the line, the
-    after on the right. Drag anywhere on the photograph, click or tap to jump, arrow keys on the handle."""
+    """Before/after slider (site.js 17) for a same-photograph simulation: the before on the left of the line,
+    the after on the right. Drag anywhere on the photograph, click or tap to jump, arrow keys on the handle."""
     name = c["name"].lower()
-    before = picture(c["before"], sizes, f"Before: {name} (sample case for demo)", pos=c.get("pos"), eager=eager, indent=i + "    ")
-    after = picture(c["img"], sizes, f"After: {name} (sample case for demo)", pos=c.get("pos"), eager=eager, indent=i + "    ")
+    before = picture(c["before"], sizes, f"Before: {name} (simulation for demo)", pos=c.get("pos"), eager=eager, indent=i + "    ")
+    after = picture(c["img"], sizes, f"After: {name} (simulation for demo)", pos=c.get("pos"), eager=eager, indent=i + "    ")
     return f"""{i}<figure class="ba" data-ba data-colour-group style="--pos: 50%">
 {i}  <div class="ba__layer ba__layer--after">
 {after}
@@ -71,53 +77,46 @@ def ba(c, sizes, i="          ", eager=False):
 {i}  <span class="ba__tag ba__tag--before" aria-hidden="true">Before</span><span class="ba__tag ba__tag--after" aria-hidden="true">After</span>
 {i}  <span class="ba__line" aria-hidden="true"></span>
 {i}  <span class="ba__handle" role="slider" tabindex="0" aria-label="Compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Half before, half after"></span>
-{i}  <figcaption class="sample-line">{SAMPLE}</figcaption>
+{i}  <figcaption class="sample-line">{SIMULATION}</figcaption>
 {i}</figure>"""
 
 
-def pair(c, sizes, i="          "):
-    """apa's static before | after pair: two photographs side by side (colour on hover)."""
-    name = c["name"].lower()
-    sides = "".join(f"""
-{i}  <figure class="pair__side">
-{picture(c[key], sizes, f"{label}: {name} (sample case for demo)", pos=c.get("pos"), indent=i + "    ")}
-{i}    <figcaption>{label}</figcaption>
-{i}  </figure>""" for key, label in (("before", "Before"), ("img", "After")))
-    return f'{i}<div class="pair" data-colour-group>{sides}\n{i}</div>'
-
-
-def pair_card(c, prefix="", i="      ", sizes="(min-width: 900px) 22vw, 50vw", tag="li", attrs=""):
-    """One sample case as a static pair with its name, linking to the case page."""
+def case_card(c, prefix="", i="      ", sizes="(min-width: 900px) 30vw, 100vw", attrs=""):
+    """A sample case as an elegant card: its image, the title, "See the case" (no mouth pairs, no portraits)."""
+    note = SIMULATION if c.get("before") else SAMPLE
     return f"""
-{i}<{tag} class="pair-card reveal"{attrs}>
+{i}<li class="case-card reveal"{attrs}>
 {i}  <a href="{prefix}our-work/{c['slug']}/">
-{pair(c, sizes, i + '    ')}
-{i}    <p class="sample-line">{SAMPLE}</p>
-{i}    <h3 class="pair-card__name">{html.escape(c['name'])}</h3>
-{i}    <p class="pair-card__meta">{html.escape(c['meta'])}</p>
-{i}    <span class="link">See the full transformation{ARROW}</span>
+{i}    <span class="case-card__media media media--hover">
+{picture(c['card'], sizes, c['card_alt'], pos=c.get('card_pos'), indent=i + '      ')}
+{i}    </span>
+{i}    <span class="sample-line">{note}</span>
+{i}    <span class="case-card__name">{html.escape(c['name'])}</span>
+{i}    <span class="case-card__meta">{html.escape(c['meta'])}</span>
+{i}    <span class="link">See the case{ARROW}</span>
 {i}  </a>
-{i}</{tag}>"""
+{i}</li>"""
 
 
 def results_grid(cases, prefix="", i="      "):
-    """Static before | after pairs; each links to its case page. data-cat feeds the Our work filter."""
-    tiles = "".join(pair_card(c, prefix, i + "  ", attrs=f' data-cat="{c["cat"]}"') for c in cases)
-    return f'{i}<ul class="pairs-grid" data-work-grid>{tiles}\n{i}</ul>'
+    """Every sample case as a card; data-cat feeds the Our work filter."""
+    tiles = "".join(case_card(c, prefix, i + "  ", attrs=f' data-cat="{c["cat"]}"') for c in cases)
+    return f'{i}<ul class="case-cards" data-work-grid>{tiles}\n{i}</ul>'
 
 
 def results_home(cases, i="        "):
-    """Homepage: one large slider for the featured case, then the others as static pairs."""
-    first, rest = cases[0], cases[1:]
+    """Homepage: one large slider (the featured simulation), then the other cases as cards."""
+    first = next(c for c in cases if c.get("before"))
+    rest = [c for c in cases if c is not first]
     return f"""{i}<div class="featured-case reveal">
 {ba(first, '(min-width: 900px) 80vw, 100vw', i + '  ')}
 {i}  <div class="featured-case__text">
 {i}    <h3>{html.escape(first['name'])}</h3>
 {i}    <p>{html.escape(first['meta'])}</p>
-{i}    <a class="link" href="our-work/{first['slug']}/">See the full transformation{ARROW}</a>
+{i}    <a class="link" href="our-work/{first['slug']}/">See the case{ARROW}</a>
 {i}  </div>
 {i}</div>
-{i}<ul class="pairs-grid pairs-grid--home">{"".join(pair_card(c, "", i + "  ") for c in rest)}
+{i}<ul class="case-cards case-cards--home">{"".join(case_card(c, "", i + "  ") for c in rest)}
 {i}</ul>"""
 
 
@@ -181,10 +180,14 @@ def carousel(quotes, i="        "):
 
 
 def hotspots(i="      "):
-    spots, panels = [], []
-    for n, (x, y, name, what, you) in enumerate(HOTSPOTS):
-        spots.append(f'{i}    <button class="spot" type="button" style="--x: {x}; --y: {y}" aria-expanded="{str(n == 0).lower()}" aria-controls="hs-{n}">'
-                     f'<span aria-hidden="true">{n + 1}</span><span class="visually-hidden">{name}</span></button>')
+    """Three of Arha's own photographs side by side, one numbered marker on each; the card below says what
+    it is and what it means for you (site.js 17, [data-spots])."""
+    shots, panels = [], []
+    for n, (photo, alt, x, y, name, what, you) in enumerate(HOTSPOTS):
+        shots.append(f"""{i}    <figure class="spots__shot">
+{picture(photo, '(min-width: 900px) 33vw, 80vw', alt, indent=i + '      ')}
+{i}      <button class="spot" type="button" style="--x: {x}; --y: {y}" aria-expanded="{str(n == 0).lower()}" aria-controls="hs-{n}"><span aria-hidden="true">{n + 1}</span><span class="visually-hidden">{name}</span></button>
+{i}    </figure>""")
         panels.append(f"""{i}    <div class="spots__card" id="hs-{n}"{'' if n == 0 else ' hidden'}>
 {i}      <p class="spots__num">{n + 1:02d}</p>
 {i}      <h3>{name}</h3>
@@ -193,13 +196,9 @@ def hotspots(i="      "):
 {i}        <div><dt>What it means for you</dt><dd>{you}</dd></div>
 {i}      </dl>
 {i}    </div>""")
-    pic = picture("dental-operatory-arha-dental-care-peddar-road-01", "100vw",
-                  "An Arha treatment room: the dental chair under its overhead light, marble walls and a laptop on the counter",
-                  pos="50% 55%", indent=i + "    ")
-    return f"""{i}<div class="spots" data-spots>
-{i}  <div class="spots__media">
-{pic}
-{chr(10).join(spots)}
+    return f"""{i}<div class="spots spots--three" data-spots>
+{i}  <div class="spots__row">
+{chr(10).join(shots)}
 {i}  </div>
 {i}  <div class="spots__cards">
 {chr(10).join(panels)}
@@ -294,7 +293,7 @@ def main_html(visit):
       <div class="container section-head reveal">
         <p class="eyebrow">Technology &amp; innovation</p>
         <h2 id="tech-title">Equipped in-house</h2>
-        <p class="lede">One of Arha’s treatment rooms. Tap a number to see what it is, and what it means for you.</p>
+        <p class="lede">Three things you will find in Arha’s own rooms. Tap a number to see what it is, and what it means for you.</p>
       </div>
 {hotspots()}
       <p class="section-cta container"><a class="link" href="technology/">Explore technology &amp; innovation{ARROW}</a></p>
@@ -305,7 +304,7 @@ def main_html(visit):
       <div class="container-wide">
         <div class="section-head reveal">
           <h2 id="results-title">Results that look like you</h2>
-          <p class="lede">Careful, natural improvements that keep your smile in balance with your face. Drag across the photograph to compare.</p>
+          <p class="lede">Careful, natural improvements that keep your smile in balance with your face. Drag across the photograph to compare a simulated shade.</p>
         </div>
 {results_home(cases)}
         <p class="section-cta"><a class="link" href="our-work/">See all our work{ARROW}</a></p>

@@ -60,14 +60,20 @@ NAMES = {"implants": "Dental implants", "full-mouth": "Full mouth rehabilitation
 # Sample cases: stock images (notes/credits.md, local only), clearly marked SAMPLE everywhere they appear.
 DOCTOR = "Dr. Nikhil V. Jain"
 SAMPLE = "Sample case for demo"
-CASES = [  # tools/pairs.py: 1 is simulated from one photograph (teeth tinted); 2-5 pair two stock photographs
-    {"img": "stock-pair-1-after", "before": "stock-pair-1-before", "cat": "veneers", "meta": "Smile design · shade and shape", "sample": True, "doctor": DOCTOR},
-    {"img": "stock-pair-2-after", "before": "stock-pair-2-before", "cat": "implants", "meta": "Implants · missing and worn teeth", "sample": True, "doctor": DOCTOR},
-    {"img": "stock-pair-3-after", "before": "stock-pair-3-before", "cat": "full-mouth", "meta": "Full mouth · an even, rebuilt smile", "sample": True, "doctor": DOCTOR},
-    {"img": "stock-pair-4-after", "before": "stock-pair-4-before", "cat": "aligners", "meta": "Aligners · crowded teeth", "sample": True, "doctor": DOCTOR},
-    {"img": "stock-pair-5-after", "before": "stock-pair-5-before", "cat": "veneers", "meta": "Veneers · uneven front teeth", "sample": True, "doctor": DOCTOR},
+# Sample cases (v4 fixes 3, point 2). A before/after slider only for a same-photograph simulation
+# (tools/pairs.py, "Simulation for demo"); the others show a clinical-detail photograph and the story.
+# card: the photograph on the homepage and Our work cards (and the large one on a case page without a slider).
+CASES = [
+    {"img": "stock-pair-1-after", "before": "stock-pair-1-before", "cat": "veneers", "meta": "Smile design · a lighter, even shade",
+     "card": "stock-pair-1-after", "card_alt": "A natural smile after a subtle shade change (simulation for demo)", "card_pos": "55% 50%", "sample": True, "doctor": DOCTOR},
+    {"img": "stock-implant-models", "cat": "implants", "meta": "Implants · replacing a missing tooth",
+     "card": "stock-implant-models", "card_alt": "Implant models: crowns on titanium posts in a model of the jaw", "card_pos": "50% 50%", "sample": True, "doctor": DOCTOR},
+    {"img": "stock-restorations-set", "cat": "full-mouth", "meta": "Full mouth · an even, rebuilt bite",
+     "card": "stock-restorations-set", "card_alt": "A full set of restorations on a dental model", "card_pos": "50% 50%", "sample": True, "doctor": DOCTOR},
+    {"img": "stock-aligner-model", "cat": "aligners", "meta": "Aligners · straightening crowded teeth",
+     "card": "stock-aligner-model", "card_alt": "A clear aligner above a model of the teeth", "card_pos": "50% 45%", "sample": True, "doctor": DOCTOR},
     # Real case template (needs written patient consent before publishing):
-    # {"img": "case-implant-01", "before": "case-implant-01-before", "cat": "implants",
+    # {"img": "case-implant-01", "before": "case-implant-01-before", "card": "case-implant-01", "cat": "implants",
     #  "meta": "4 visits · 5 months", "story": ("…", "…", "…"), "looks": "…", "works": "…", "note": "…",
     #  "doctor": DOCTOR, "days": 6, "city": "London", "sample": False},
 ]

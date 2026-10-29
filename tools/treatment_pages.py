@@ -110,7 +110,8 @@ TREATMENTS = {
         "description": "Smile design at Arha Dental Care, Peddar Road, Mumbai: your smile planned around your face and previewed before any work begins.",
         "h1": "Smile design",
         "lede": "Your new smile, planned around your face and previewed before any work begins.",
-        "hero": ("stock-natural-smile", "Close-up of a natural smile", "50% 40%"),
+        "hero": ("dental-operatory-arha-dental-care-peddar-road-04", "The planning desk in an Arha treatment room: a screen, a laptop and notes", "50% 50%"),
+        "preview": ("stock-veneer-brush", "A veneer placed on a model with a fine brush", "50% 50%"),
         "card": "Your smile planned around your face, and previewed before work begins.",
         "intro": ("Planned first, then made",
                   "Smile design is the planning that comes before cosmetic treatment: the length, width, shape and colour of your teeth, considered with your lips, your face and your bite.",
@@ -138,7 +139,7 @@ TREATMENTS = {
         "description": "Cosmetic dentistry at Arha Dental Care, Peddar Road: veneers, teeth whitening and bonding, chosen for what your teeth actually need.",
         "h1": "Cosmetic dentistry",
         "lede": "Veneers, whitening and bonding, chosen for what your teeth actually need.",
-        "hero": ("stock-case-1", "Sample image: a close-up of a smile", "50% 45%"),
+        "hero": ("stock-crowns-soft", "Ceramic restorations, softly lit", "50% 55%"),
         "card": "Veneers, whitening and bonding, matched to the concern.",
         "intro": ("The lightest treatment that does the job",
                   "Cosmetic dentistry improves the colour, shape and alignment of teeth. The best result often comes from the least invasive option.",
@@ -165,7 +166,7 @@ TREATMENTS = {
         "description": "Invisalign clear aligners at Arha Dental Care, Peddar Road, Mumbai: straightening teeth with clear, removable aligners, for teens and adults.",
         "h1": "Invisalign clear aligners",
         "lede": "Straightening teeth with a series of clear, removable aligners.",
-        "hero": ("stock-case-6", "A wide, natural smile with straight teeth", "50% 45%"),
+        "hero": ("stock-aligner-sculpture", "A clear aligner, lit like a sculpture", "50% 50%"),
         "card": "Clear, removable aligners for teens and adults.",
         "intro": ("Straighter teeth, almost unseen",
                   "Clear aligners are thin, clear trays made for your teeth. Each set moves them a little, and you change to the next set on a schedule.",
@@ -193,7 +194,7 @@ TREATMENTS = {
         "description": "Braces and clear aligners for children, teens and adults at Arha Dental Care, Peddar Road, Mumbai, with early orthodontic assessment for children.",
         "h1": "Orthodontics (braces)",
         "lede": "Braces and aligners for children, teens and adults.",
-        "hero": ("stock-face-15", "A smiling young man", "50% 30%"),
+        "hero": ("stock-braces-model", "Metal braces on a model of the teeth", "50% 55%"),
         "card": "Metal braces and clear aligners for children, teens and adults.",
         "intro": ("Straight teeth at any age",
                   "Orthodontics moves teeth into a better position, for a bite that works well and teeth that are easier to clean.",
@@ -221,7 +222,8 @@ TREATMENTS = {
         "description": "Dental check-ups, professional cleaning and tooth-coloured fillings at Arha Dental Care, Peddar Road, South Mumbai.",
         "h1": "General dentistry &amp; cleaning",
         "lede": "Check-ups, cleaning and fillings that keep problems small.",
-        "hero": ("stock-case-5-face", "A woman with curly hair laughing", "50% 30%"),
+        "hero": ("dental-operatory-arha-dental-care-peddar-road-02", "An Arha treatment room: the chair, a desk and marble walls", "50% 55%"),
+        "preview": ("stock-scalers", "Scaling instruments laid out on a white tray", "50% 50%"),
         "card": "Check-ups, professional cleaning and fillings.",
         "intro": ("Prevention first",
                   "Regular check-ups find problems while they are still small and simple to treat. A professional clean removes the hard deposits that brushing cannot.",
@@ -458,7 +460,7 @@ def ix_implants():
 def ix_phases():
     v = ""  # visits are agreed at the consultation; no placeholder line
     steps = [("Diagnose", "A full examination, X-rays, photographs and records of how your teeth meet. We start with what bothers you most.",
-              "stock-xray-screen", "A dental X-ray of the whole mouth on a screen beside the chair", v),
+              "arha-dental-care-operatory-laptop", "An Arha treatment room, where records and photographs are reviewed on screen", v),
              ("Design the bite &amp; smile", "Your new bite and tooth shapes are designed on models and on screen, around your face and your jaw.",
               "stock-lab", "Gloved hands holding a dental model during planning", v),
              ("Trial smile", "You try the design in temporary teeth, so you can see, speak and chew with it before anything is final.",
@@ -466,7 +468,7 @@ def ix_phases():
              ("Final restorations", "The final crowns, bridges or implant teeth are made and fitted in stages, with the bite checked at each visit.",
               "stock-lab-grind", "Gloved hands finishing a ceramic crown in the laboratory", v),
              ("Maintenance", "Regular reviews and cleaning protect the work. A night guard may be advised if you grind your teeth.",
-              "stock-cleaning", "A dentist cleaning a patient’s teeth", v)]
+              "stock-brushes-grey", "Toothbrushes for care at home", v)]
     return f'<div class="reveal">{stepper("phase", "Phases of full mouth rehabilitation", steps)}</div>'
 
 
@@ -476,7 +478,7 @@ def ix_who_we_help():
             "When surgery removes part of the palate or jaw, a prosthesis called an obturator can close the gap, so that eating, drinking and speaking feel more normal again. It is planned with your surgical team, sometimes before the operation."),
            ("cleft", "Cleft palate", "stock-mirror", "A patient looking at his smile in a hand mirror with the dentist beside him",
             "Some children and adults born with a cleft palate are helped by a plate that closes an opening in the roof of the mouth or supports speech. It works alongside the care of the cleft team."),
-           ("injury", "Facial or jaw injury", "stock-molar", "A close-up of a back tooth",
+           ("injury", "Facial or jaw injury", "stock-prosthesis-model", "A prosthesis made on a stone model of the jaw",
             "After an accident, teeth and parts of the jaw can be rebuilt in stages, with prostheses that restore the bite and support the shape of the face."),
            ("birth", "From birth", "stock-zirconia", "Solid white crowns on a dental model",
             "Some people are born without certain teeth or parts of the jaw. Prostheses, sometimes held by implants, can help with chewing, speech and appearance.")]
@@ -513,15 +515,15 @@ def ix_guides():
 def ix_matrix():
     opts = ["Whitening", "Bonding", "Veneers"]
     grid = {
-        "stains": ("Stains", "stock-sim-whiten-before", "A natural smile with yellowed teeth",
+        "stains": ("Stains", "stock-shade-card", "A shade card held up to choose a tooth colour",
                    [("good", "Lightens natural tooth colour; works best on general yellowing."),
                     ("some", "Can cover a dark patch on a single tooth."),
                     ("some", "For deep stains that whitening cannot lift.")]),
-        "chips": ("Chips", "stock-bonding", "A dentist shaping tooth-coloured bonding on a front tooth",
+        "chips": ("Chips", "stock-veneer-brush", "A thin veneer placed on a model with a fine brush",
                   [("no", "Changes colour, not shape."),
                    ("good", "Tooth-coloured resin rebuilds small chips with little or no drilling."),
                    ("some", "For larger chips, or when several teeth need reshaping.")]),
-        "gaps": ("Gaps", "stock-gaps", "Front teeth with small gaps between them",
+        "gaps": ("Gaps", "stock-veneers-grey", "Veneers that change the width of the front teeth, on grey fabric",
                  [("no", "Changes colour, not spacing."),
                   ("good", "Adds width to close small gaps."),
                   ("some", "Closes gaps while also changing shape and colour.")]),
@@ -543,11 +545,11 @@ def ix_matrix():
 def ix_aligners():
     """A range that steps through the stages (site.js 19, [data-stages]), then aligners and braces compared."""
     stages = [("Your scan", "Your teeth are recorded with photographs, X-rays and a scan or impressions, and every stage is planned on screen.",
-               "stock-scan", "A clinician scanning a patient’s teeth"),
+               "arha-dental-care-scan-screen", "A screen in an Arha treatment room showing 3D scans of the upper and lower teeth"),
               ("Your aligners", "A series of thin, clear aligners is made for your teeth, each a small step from the last.",
-               "stock-aligner", "A clear aligner on a pale background"),
+               "stock-aligner-case", "A clear aligner in its case"),
               ("Wearing them", "You wear each set most of the day and night, and move to the next set when we say.",
-               "stock-aligner-in", "Fingers fitting a clear aligner over the teeth"),
+               "stock-aligner-case-hand", "A clear aligner held in a gloved hand beside its case"),
               ("Straighter teeth", "When the last aligner is done, a retainer keeps the teeth in their new place.",
                "stock-man-smile", "A young man with a natural, even smile")]
     n = len(stages)
@@ -579,9 +581,9 @@ def ix_ages():
     """Child, teen or adult as expanding photo panels (hover or focus on a laptop, tap on a phone)."""
     ages = [("stock-kid-dentist", "50% 40%", "A boy in the dental chair with the dentist beside him", "Child (7 to 11)",
              "An early orthodontic check around age 7 spots problems with how the jaws and teeth are growing. Most children only need monitoring; some benefit from early treatment."),
-            ("stock-teen-boy", "50% 30%", "A smiling teenage boy", "Teen (12 to 18)",
+            ("stock-braces", "50% 50%", "A smile with metal braces", "Teen (12 to 18)",
              "Most adult teeth are in, so this is the most common time for braces, or aligners where they suit."),
-            ("stock-woman-smile", "50% 30%", "A woman with a natural smile", "Adult",
+            ("stock-aligners-shadow", "50% 50%", "Clear aligners on a model, in soft shadow", "Adult",
              "It is never too late. Many adults choose clear aligners; braces suit some bites better. Gum health is checked first.")]
     lis = "".join(f"""
         <li class="xpanel{' is-active' if k == 0 else ''}" data-xpanel tabindex="0">
@@ -599,12 +601,11 @@ def ix_ages():
 
 def ix_checkup():
     """Your check-up, step by step: photo cards in the shared drag strip (swipe, drag or the arrows)."""
-    steps = [("ask", "We ask how you are", "Any pain, changes or worries since your last visit, and your medical history.", "stock-consultation", "A dentist talking with a patient"),
+    steps = [("ask", "We ask how you are", "Any pain, changes or worries since your last visit, and your medical history.", "stock-consultation", "A dentist talking a patient through a treatment model"),
              ("exam", "Examination", "Teeth, fillings, gums, tongue and the soft tissues of the mouth, looked at carefully.", "stock-exam", "A dentist examining a patient’s teeth with a mirror and probe"),
-             ("xray", "X-rays, if needed", "Only when they will show something we need to see, taken in the clinic.", "stock-xray-screen", "A dental X-ray on a screen beside the chair"),
+             ("xray", "X-rays, if needed", "Only when they will show something we need to see, taken in the clinic.", "stock-xray-panoramic", "A panoramic dental X-ray of the whole mouth"),
              ("gum-care", "Gum check", "The gum line is measured gently around each tooth, to catch gum disease early.", "stock-mirror-probe", "A dental mirror and probe on a tray"),
-             ("clean", "Cleaning", "Tartar and stain are removed and the teeth polished, with advice for home.", "stock-cleaning", "A dentist cleaning a patient’s teeth"),
-             ("plan", "Your plan", "What we found, what needs doing and when, explained clearly, and your next visit.", "stock-smiling-patient", "A smiling woman seated in a warmly lit room")]
+             ("clean", "Cleaning", "Tartar and stain are removed and the teeth polished, and you are told what we found and when to come back.", "stock-scalers", "Scaling instruments laid out on a white tray")]
     cards = "".join(f"""
           <li class="tl-card" id="{k}">
             <div class="tl-card__media media">{picture(img, '(min-width: 900px) 28vw, 78vw', alt, indent='')}</div>
@@ -626,12 +627,12 @@ def ix_checkup():
 
 def ix_root_canal():
     """Four steps as a numbered list beside one photo stage that crossfades (tabs + site.js 19 [data-xfade])."""
-    steps = [("infected", "Infected pulp", "Decay or a crack has let bacteria reach the pulp, causing pain, swelling or sensitivity that lingers.",
-              "stock-decayed-tooth", "An extracted molar with deep decay in its crown"),
+    steps = [("infected", "Infected pulp", "Decay or a crack has let bacteria reach the pulp, causing pain, swelling or sensitivity that lingers. An X-ray shows it.",
+              "stock-xray-panoramic", "A panoramic dental X-ray of the whole mouth"),
              ("cleaned", "Cleaned", "Under local anaesthetic, the infected pulp is removed and the canals are cleaned and shaped with rotary instruments.",
               "stock-endo-files", "Fine endodontic files with coloured handles, used to clean the canals"),
              ("sealed", "Sealed and checked", "The clean canals are filled and sealed so that bacteria cannot return, and an X-ray checks the result.",
-              "stock-xray-panoramic", "A panoramic dental X-ray of the whole mouth"),
+              "stock-mirror-probe", "A dental mirror and probe on a tray"),
              ("crown", "Crown on top", "A crown is usually placed to protect the tooth, as a treated back tooth is more brittle.",
               "stock-lab-model", "Ceramic crowns on a dental model")]
     tabs_html = "".join(f'<button type="button" role="tab" id="rct-t-{k}" aria-controls="rct-p-{k}" aria-selected="{str(n == 0).lower()}"{"" if n == 0 else " tabindex=\"-1\""}>'
@@ -948,7 +949,7 @@ def technology_page(site_url):
 
     <!-- =================================================================== HERO -->
     <section class="page-hero" aria-labelledby="page-title">
-      {{{{pic stock-xray-panoramic | 100vw | A panoramic dental X-ray of the whole mouth | pos=50% 50% | eager}}}}
+      {{{{pic stock-handpieces-dark | 100vw | Dental handpieces on their holders, softly lit | pos=50% 50% | eager}}}}
       <div class="page-hero__content">
         <div class="hero__text">
           {crumbs([("Home", ""), ("Technology", "technology/")])}
@@ -1005,8 +1006,8 @@ def kids_page(site_url):
              "Twice-daily brushing with fluoride toothpaste, and cleaning between the teeth.",
              "Sugary and fizzy drinks between meals. Mouthguards for sport.")]
 
-    shots = {"0-2": ("stock-toddler", "A smiling toddler"), "3-5": ("stock-child-brush", "A young child brushing their teeth"),
-             "6-9": ("stock-kid-chair", "A girl in the dental chair"), "10-14": ("stock-teen-boy", "A smiling teenage boy")}
+    shots = {"0-2": ("stock-kid-brush-wood", "A small wooden toothbrush for a first set of teeth"), "3-5": ("stock-kid-brush-bright", "A bright children's toothbrush"),
+             "6-9": ("stock-kid-brush-electric", "A children's electric toothbrush"), "10-14": ("stock-aligner-case", "A clear aligner in its case")}
     guide = photo_tabs("ages", "Age group", [
         (k, f"Ages {n}", *shots[k], f'<h3 class="visually-hidden">Ages {n}</h3><dl class="vs">'
                                     f"<div><dt>What we check</dt><dd>{chk}</dd></div><div><dt>Care at home</dt><dd>{home}</dd></div>"

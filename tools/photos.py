@@ -175,7 +175,7 @@ def export(im, name):
 
 
 # ---------------------------------------------------------------- demo simulations (sample pairs only)
-def teeth_mask(im, box, sat=0.30, light=0.50, hue=None):
+def teeth_mask(im, box, sat=0.30, light=0.50, hue=None, rect=False):
     """Soft mask of the teeth inside box = (left, top, right, bottom) fractions of the image: bright,
     low-saturation pixels within an ellipse fitted to the box (lips, gums and skin are more saturated
     or darker). hue=(lo, hi) in degrees picks stained teeth by colour instead (yellow teeth are more
@@ -186,7 +186,10 @@ def teeth_mask(im, box, sat=0.30, light=0.50, hue=None):
     s = (mx - mn) / np.maximum(mx, 1e-3)
     l0, t0, r0, b0 = box[0] * w, box[1] * h, box[2] * w, box[3] * h
     yy, xx = np.mgrid[0:h, 0:w].astype(np.float32)
-    ell = ((xx - (l0 + r0) / 2) / ((r0 - l0) / 2)) ** 2 + ((yy - (t0 + b0) / 2) / ((b0 - t0) / 2)) ** 2 <= 1
+    if rect:  # a smile is wider than an ellipse allows: the whole box (the edges are feathered below)
+        ell = (xx >= l0) & (xx <= r0) & (yy >= t0) & (yy <= b0)
+    else:
+        ell = ((xx - (l0 + r0) / 2) / ((r0 - l0) / 2)) ** 2 + ((yy - (t0 + b0) / 2) / ((b0 - t0) / 2)) ** 2 <= 1
     ref = np.percentile(mx[ell], 90) if ell.any() else 1
     if hue:
         hsv = np.asarray(im.convert("RGB").convert("HSV")).astype(np.float32)
