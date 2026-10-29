@@ -6786,6 +6786,61 @@ img.bw-photo.in-colour,
 .decider__out > div:not([hidden]) { padding-top: 24px; border-top: 1px solid var(--ink); animation: crossfade .5s var(--ease); }
 .decider__out .link { margin-top: 32px; }
 
+/* ---------------------------------------------------------------- v4 fixes 3, point 2
+   Homepage technology: three of Arha's own photographs, one marker each, the card below (site.js 17) */
+.spots--three { width: 100%; max-width: 1400px; margin: 0 auto; padding-inline: var(--gutter); }
+.spots__row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.spots__shot { position: relative; margin: 0; aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone); }
+.spots__shot picture, .spots__shot img { display: block; width: 100%; height: 100%; }
+.spots__shot img { object-fit: cover; transition: transform 1.2s var(--ease); }
+.spots__shot::after { content: ""; position: absolute; right: 0; bottom: 0; left: 0; height: 2px; background: var(--bronze); transform: scaleX(0); transform-origin: left; transition: transform .6s var(--ease); }
+.spots__shot:has(.spot[aria-expanded="true"])::after { transform: scaleX(1); }
+.spots__shot:has(.spot[aria-expanded="true"]) img { transform: scale(1.03); }
+.spots--three .spots__cards { position: static; width: auto; max-width: 720px; margin: 40px auto 0; }
+.spots--three .spots__card { display: grid; grid-template-columns: auto 1fr; gap: 0 32px; padding: 32px 40px; background: var(--stone); text-align: left; }
+.spots--three .spots__card[hidden] { display: none; }
+.spots--three .spots__num { grid-row: span 2; padding-top: 4px; }
+.spots--three .spots__card h3 { margin-top: 0; }
+.tech-hl .section-cta { text-align: center; }
+
+@media (max-width: 767px) {
+  .spots--three { padding-inline: 0; }
+  .spots__row { display: flex; gap: 12px; padding-inline: var(--gutter); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); scrollbar-width: none; overscroll-behavior-x: contain; }
+  .spots__row::-webkit-scrollbar { display: none; }
+  .spots__shot { flex: 0 0 72vw; scroll-snap-align: start; }
+  .spots--three .spots__cards { margin: 28px var(--gutter) 0; }
+  .spots--three .spots__card { grid-template-columns: 1fr; padding: 28px 24px; }
+  .spots--three .spots__num { grid-row: auto; padding: 0 0 6px; }
+}
+
+/* Sample cases as cards: the image, "Sample case for demo", the title, "See the case" */
+.case-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 56px 32px; margin: 0; padding: 0; list-style: none; }
+.case-cards--home { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 96px; }
+.case-card > a { display: flex; flex-direction: column; height: 100%; color: inherit; text-decoration: none; }
+.case-card__media { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; }
+.case-card__media picture, .case-card__media img { display: block; width: 100%; height: 100%; }
+.case-card__media img { object-fit: cover; transition: transform 1.2s var(--ease); }
+.case-card > a:hover .case-card__media img, .case-card > a:focus-visible .case-card__media img { transform: scale(1.03); }
+.case-card .sample-line { display: block; margin-top: 20px; }
+.case-card__name { display: block; margin-top: 8px; font: 700 18px/1.3 var(--font-head); letter-spacing: 1.5px; text-transform: uppercase; transition: color var(--t-link); }
+.case-card__meta { display: block; margin: 8px 0 32px; color: var(--muted); }
+.case-card .link { align-self: flex-start; margin-top: auto; }
+.case-card > a:hover .case-card__name { color: var(--bronze); }
+.case-card[hidden] { display: none; }
+
+/* Case page without a slider: one large clinical-detail photograph */
+.case-v4__photo { position: relative; margin: 0; aspect-ratio: 16 / 9; max-height: 80vh; width: 100%; overflow: hidden; }
+.case-v4__photo picture, .case-v4__photo img { display: block; width: 100%; height: 100%; }
+.case-v4__photo img { object-fit: cover; }
+.case-v4__photo .sample-line { position: absolute; bottom: 14px; left: 20px; margin: 0; color: var(--paper); text-shadow: 0 0 10px rgba(var(--shade), .6); }
+.case-v4__stage .cases-note { max-width: 640px; margin: 20px auto 0; }
+
+@media (max-width: 899px) {
+  .case-cards--home { grid-template-columns: 1fr; gap: 48px; margin-top: 72px; }
+  .case-cards--home .case-card__media { aspect-ratio: 3 / 2; }
+  .case-v4__photo { aspect-ratio: 4 / 3; }
+}
+
 /* ---------------------------------------------------------------- v4 feedback 8: link spacing
    Every text link or CTA sits at least 32px below the text above it (checked at 1440 and 390). */
 .statement__content .link,
