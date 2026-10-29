@@ -166,7 +166,7 @@ TREATMENTS = {
         "description": "Invisalign clear aligners at Arha Dental Care, Peddar Road, Mumbai: straightening teeth with clear, removable aligners, for teens and adults.",
         "h1": "Invisalign clear aligners",
         "lede": "Straightening teeth with a series of clear, removable aligners.",
-        "hero": ("stock-aligner-sculpture", "A clear aligner, lit like a sculpture", "50% 50%"),
+        "hero": ("stock-aligner-case-hand", "A clear aligner held in a gloved hand beside its open case", "50% 50%"),
         "card": "Clear, removable aligners for teens and adults.",
         "intro": ("Straighter teeth, almost unseen",
                   "Clear aligners are thin, clear trays made for your teeth. Each set moves them a little, and you change to the next set on a schedule.",
@@ -549,7 +549,7 @@ def ix_aligners():
               ("Your aligners", "A series of thin, clear aligners is made for your teeth, each a small step from the last.",
                "stock-aligner-case", "A clear aligner in its case"),
               ("Wearing them", "You wear each set most of the day and night, and move to the next set when we say.",
-               "stock-aligner-case-hand", "A clear aligner held in a gloved hand beside its case"),
+               "stock-aligner-hands", "Hands holding a clear aligner, its case and a cleaning spray"),
               ("Straighter teeth", "When the last aligner is done, a retainer keeps the teeth in their new place.",
                "stock-man-smile", "A young man with a natural, even smile")]
     n = len(stages)
@@ -1007,7 +1007,7 @@ def kids_page(site_url):
              "Sugary and fizzy drinks between meals. Mouthguards for sport.")]
 
     shots = {"0-2": ("stock-kid-brush-wood", "A small wooden toothbrush for a first set of teeth"), "3-5": ("stock-kid-brush-bright", "A bright children's toothbrush"),
-             "6-9": ("stock-kid-brush-electric", "A children's electric toothbrush"), "10-14": ("stock-aligner-case", "A clear aligner in its case")}
+             "6-9": ("stock-kid-brush-electric", "A children's electric toothbrush"), "10-14": ("stock-aligner-hands", "Hands holding a clear aligner and its case")}
     guide = photo_tabs("ages", "Age group", [
         (k, f"Ages {n}", *shots[k], f'<h3 class="visually-hidden">Ages {n}</h3><dl class="vs">'
                                     f"<div><dt>What we check</dt><dd>{chk}</dd></div><div><dt>Care at home</dt><dd>{home}</dd></div>"

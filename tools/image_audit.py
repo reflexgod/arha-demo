@@ -61,7 +61,7 @@ EXTRA = {  # v4 fixes 3 picks (tools/qa/stock_slots.json), each looked at before
                      "stock-veneer-placing", "stock-veneer-brush", "stock-bridge-white", "stock-flosser", "stock-steel-instruments",
                      "stock-kids-brushes", "stock-kid-brush-wood", "stock-kid-brush-bright", "stock-kid-brush-electric",
                      "stock-brushes-grey", "stock-scalers"], OBJECT),
-    **dict.fromkeys(["stock-shade-card", "stock-shade-tab", "stock-aligner-case-hand", "stock-aligner-gloved"], HANDS),
+    **dict.fromkeys(["stock-shade-card", "stock-shade-tab", "stock-aligner-case-hand", "stock-aligner-gloved", "stock-aligner-hands"], HANDS),
     "stock-consult-desk": PERSON,
     "stock-sim-smile-a": MOUTH, "stock-sim-smile-b": MOUTH,
 }
