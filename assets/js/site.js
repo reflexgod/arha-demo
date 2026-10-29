@@ -1237,4 +1237,46 @@
       views.forEach((v) => { v.hidden = v.dataset.view !== t.dataset.angle; });
     }));
   });
+
+  /* 18. Colour on hover: every black and white photograph turns to full colour (600 ms, site.css).
+         With a mouse, under the pointer, even beneath overlays, hotspots and captions;
+         on touch, while the photograph is mostly in view. */
+  const greyPhotos = [...document.querySelectorAll('img')].filter((img) => /grayscale\(1\)|saturate\(0\)/.test(getComputedStyle(img).filter));
+  greyPhotos.forEach((img) => {
+    img.classList.add('bw-photo');
+    // Keep the photograph's own transitions (fade-in, zoom) and add the slow colour change
+    const cs = getComputedStyle(img);
+    const own = cs.transitionDuration.split(',').some((d) => parseFloat(d) > 0) ? cs.transition : '';
+    if (!/filter/.test(own)) img.style.transition = (own ? `${own}, ` : '') + 'filter .6s ease';
+  });
+  if (greyPhotos.length && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const grey = new Set(greyPhotos);
+    let lit = new Set();
+    let frame = 0;
+    let px = 0;
+    let py = 0;
+    const paint = () => {
+      frame = 0;
+      const now = new Set(document.elementsFromPoint(px, py).filter((el) => grey.has(el)));
+      lit.forEach((img) => { if (!now.has(img)) img.classList.remove('in-colour'); });
+      now.forEach((img) => img.classList.add('in-colour'));
+      lit = now;
+    };
+    document.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return;
+      px = e.clientX;
+      py = e.clientY;
+      if (!frame) frame = requestAnimationFrame(paint);
+    }, { passive: true });
+    document.documentElement.addEventListener('pointerleave', () => { lit.forEach((img) => img.classList.remove('in-colour')); lit = new Set(); });
+    window.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(paint); }, { passive: true });
+  } else if (greyPhotos.length && 'IntersectionObserver' in window) {
+    // "Mostly in view": 60% of the photograph, or 60% of the screen for one taller than the screen
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => {
+      const tall = e.boundingClientRect.height > window.innerHeight;
+      const shown = tall ? e.intersectionRect.height / window.innerHeight : e.intersectionRatio;
+      e.target.classList.toggle('in-colour', e.isIntersecting && shown >= 0.6);
+    }), { threshold: [0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 1] });
+    greyPhotos.forEach((img) => io.observe(img));
+  }
 })();

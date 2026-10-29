@@ -6269,3 +6269,8 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 @media (max-width: 599px) {
   .more-cases__grid { grid-template-columns: 1fr; gap: 32px; }
 }
+
+/* ---------------------------------------------------------------- colour on hover (site.js 18)
+   Every black and white photograph turns to full colour: under the mouse on a laptop, while mostly
+   in view on a phone. Slow: site.js adds a 600 ms filter transition to each photograph's own. */
+img.bw-photo.in-colour { filter: none !important; }
