@@ -43,6 +43,8 @@
   </script>
   <script type="application/json" id="site-config">{"phone": "+91 00000 00000", "tel": "+910000000000", "whatsapp": "910000000000", "email": "hello@example.com", "emergency": "+91 00000 00000", "timeZone": "Asia/Kolkata", "hours": [null, ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"]], "riyaWebhookUrl": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat", "googleReviewsUrl": "https://share.google/PzhwgJ9QJMErZnk9R"}</script>
   <script src="../assets/js/site.js" defer></script>
+  <!-- Seamless navigation: pages are prefetched when a link is hovered or pressed (Speculation Rules; site.js 20 elsewhere) -->
+  <script type="speculationrules">{"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"not": {"selector_matches": "[target=_blank], [data-call], [data-google-reviews]"}}]}, "eagerness": "moderate"}]}</script>
 
   <script type="application/ld+json">
   {

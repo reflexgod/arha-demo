@@ -1465,4 +1465,28 @@
     range.addEventListener('input', set);
     set();
   });
+
+  /* 20. Seamless navigation where Speculation Rules are not supported (Safari, Firefox): a page is
+         prefetched when its link is hovered for a moment, focused or touched, once. */
+  if (!(HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules'))) {
+    const done = new Set();
+    let hoverTimer = 0;
+    const prefetch = (a) => {
+      if (!a || a.target === '_blank' || a.hasAttribute('data-call') || a.origin !== location.origin) return;
+      const url = a.href.split('#')[0];
+      if (url === location.href.split('#')[0] || done.has(url)) return;
+      done.add(url);
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = url;
+      document.head.append(link);
+    };
+    document.addEventListener('pointerover', (e) => {
+      const a = e.target.closest('a[href]');
+      clearTimeout(hoverTimer);
+      if (a) hoverTimer = setTimeout(() => prefetch(a), 120);
+    }, { passive: true });
+    document.addEventListener('touchstart', (e) => prefetch(e.target.closest('a[href]')), { passive: true });
+    document.addEventListener('focusin', (e) => prefetch(e.target.closest('a[href]')));
+  }
 })();

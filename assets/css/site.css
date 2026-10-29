@@ -1696,7 +1696,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   place-items: center;
   background: var(--paper);
   pointer-events: none;
-  animation: intro-out 450ms ease 1300ms forwards;
+  animation: intro-out 350ms var(--ease) 800ms forwards;
 }
 
 .intro-mark svg {
@@ -1712,7 +1712,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   stroke-width: 12; /* ~1.2px at the 96px display size (emblem drawn on a ~920-unit canvas) */
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: intro-draw 1200ms ease-in-out forwards, intro-fill 300ms ease 1000ms forwards;
+  animation: intro-draw 750ms ease-in-out forwards, intro-fill 250ms ease 600ms forwards;
 }
 
 @keyframes intro-draw { to { stroke-dashoffset: 0; } }
@@ -5098,9 +5098,12 @@ a:hover .media--hover picture.fill img {
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 320ms;
+  animation-duration: 380ms;
   animation-timing-function: var(--ease);
 }
+
+/* The header stays put while the page beneath it cross-fades */
+::view-transition-group(site-header) { animation-duration: 0s; }
 
 .site-header { view-transition-name: site-header; }
 
@@ -6741,3 +6744,9 @@ main .container > p + .link { margin-top: 32px; }
 .fix__item > p:last-of-type { margin-bottom: 32px; }
 .fix__item .link { margin-top: auto; padding-top: 0; }
 .hero__actions { margin-top: 32px; }
+
+/* ---------------------------------------------------------------- seamless (notes/V4-FEEDBACK-2.md, point 10)
+   No grey flash on tap; controls respond at once on touch (no double-tap zoom delay). */
+a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+[data-ba], .blend__control, .agedial__control { touch-action: pan-y; }
+[data-loupe] { touch-action: none; }
