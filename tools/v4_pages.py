@@ -294,7 +294,7 @@ def work_page(site_url):
     chips = "".join(f'<button type="button" data-work-filter="{k}" aria-pressed="{str(k == "all").lower()}">{v}</button>'
                     for k, v in more_pages.cases_markup.FILTERS)
     trail = [("Home", ""), ("Our work", "our-work/")]
-    body = page_hero("{{pic arha-dental-care-logo-wall | 100vw | The Arha Dental Care emblem in gold on the reception’s marble wall | pos=50% 45% | eager}}", "Our work",
+    body = page_hero("{{pic arha-dental-care-exterior-dental-clinic-peddar-road | 100vw | The Arha Dental Care sign at suite 107, with both doctors’ names and qualifications | pos=50% 20% | eager}}", "Our work",
                      "Natural results, planned around each face and bite.", trail)
     body += f"""
     <!-- =================================================================== BEFORE & AFTER (filterable sliders) -->
@@ -392,7 +392,7 @@ def case_page(site_url, n, cs):
 # ------------------------------------------------------------------ about: founder, doctors, practice, gallery
 QUOTE = "A good restoration should never announce itself. My aim is a result that feels natural, functions beautifully and lasts."
 TIMELINE = [("1980", "Dr. Vasant P. Jain begins a family dental practice in Mumbai.", "arha-dental-care-logo-dental-clinic-peddar-road", "50% 50%"),
-            ("The next generation", "Dr. Nikhil V. Jain joins the practice, as a prosthodontist and implantologist.", "stock-handpieces", "50% 50%"),
+            ("The next generation", "Dr. Nikhil V. Jain joins the practice, as a prosthodontist and implantologist.", "arha-dental-care-entrance-door", "50% 60%"),
             ("Arha", "Arha Dental Care opens at 107, Doctor House, 14 Peddar Road.", "arha-dental-care-reception-south-mumbai-dental-clinic-02", "50% 40%"),
             ("Today", "Two generations, one standard of care.", "arha-dental-care-lounge-peddar-road", "50% 55%")]
 
