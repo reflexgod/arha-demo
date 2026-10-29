@@ -6585,6 +6585,7 @@ img.bw-photo.in-colour,
 .blend__control { display: block; max-width: 720px; margin: 32px auto 0; }
 .blend__ticks { display: flex; justify-content: space-between; margin-top: 12px; color: var(--muted); font: 600 12px/1 var(--font-body); letter-spacing: 1px; text-transform: uppercase; }
 .blend--shade .blend__stage img { filter: none !important; } /* the simulation is about colour: always in colour */
+.ba .ba__layer img { filter: none !important; } /* the before/after sliders are shade simulations (v4 fixes 3): always in colour, and no filter fade while dragging */
 
 .blend input[type="range"],
 .agedial input[type="range"] { width: 100%; height: 28px; margin: 0; background: transparent; cursor: pointer; -webkit-appearance: none; appearance: none; }

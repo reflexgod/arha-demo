@@ -1307,7 +1307,8 @@
       lit = now;
     };
     document.addEventListener('pointermove', (e) => {
-      if (e.pointerType !== 'mouse') return;
+      // Not while a button is held (dragging a slider or a gallery): the hover state cannot change, and the hit test costs a frame
+      if (e.pointerType !== 'mouse' || e.buttons) return;
       px = e.clientX;
       py = e.clientY;
       if (!frame) frame = requestAnimationFrame(paint);
@@ -1587,5 +1588,5 @@
   window.addEventListener('scroll', queueAside, { passive: true });
   window.addEventListener('resize', queueAside, { passive: true });
   window.addEventListener('load', queueAside);
-  setInterval(() => { if (wide.matches) queueAside(); }, 1000);  // the bubble arrives on its own timer
+  setInterval(() => { if (wide.matches && document.querySelector('.riya-bubble.is-visible')) queueAside(); }, 1000);  // the bubble arrives on its own timer
 })();
