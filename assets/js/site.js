@@ -1276,10 +1276,17 @@
   const greyPhotos = [...document.querySelectorAll('img')].filter((img) => /grayscale\(1\)|saturate\(0\)/.test(getComputedStyle(img).filter));
   greyPhotos.forEach((img) => {
     img.classList.add('bw-photo');
-    // Keep the photograph's own transitions (fade-in, zoom) and add the slow colour change
+    // Keep the photograph's own transitions (fade-in, zoom); the colour change is always the slow 600 ms
     const cs = getComputedStyle(img);
-    const own = cs.transitionDuration.split(',').some((d) => parseFloat(d) > 0) ? cs.transition : '';
-    if (!/filter/.test(own)) img.style.transition = (own ? `${own}, ` : '') + 'filter .6s ease';
+    const list = (v) => v.split(/,(?![^(]*\))/).map((s) => s.trim());
+    const props = list(cs.transitionProperty);
+    const durs = list(cs.transitionDuration);
+    const ease = list(cs.transitionTimingFunction);
+    const delays = list(cs.transitionDelay);
+    const own = props.map((prop, i) => ({ prop, dur: durs[i % durs.length], ease: ease[i % ease.length], delay: delays[i % delays.length] }))
+      .filter((x) => x.prop !== 'filter' && x.prop !== 'all' && parseFloat(x.dur) > 0)
+      .map((x) => `${x.prop} ${x.dur} ${x.ease} ${x.delay}`);
+    img.style.transition = own.concat('filter .6s ease').join(', ');
   });
   if (greyPhotos.length && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     const grey = new Set(greyPhotos);
@@ -1292,6 +1299,8 @@
       const now = new Set();
       document.elementsFromPoint(px, py).forEach((el) => {
         if (grey.has(el)) now.add(el.closest('[data-colour-group]') || el);
+        // A slider's photographs ignore the pointer (so the whole photo can be dragged): its group counts
+        else if (el.hasAttribute('data-colour-group') && el.querySelector('img.bw-photo')) now.add(el);
       });
       lit.forEach((el) => { if (!now.has(el)) el.classList.remove('in-colour'); });
       now.forEach((el) => el.classList.add('in-colour'));
@@ -1312,7 +1321,8 @@
       const shown = tall ? e.intersectionRect.height / window.innerHeight : e.intersectionRatio;
       e.target.classList.toggle('in-colour', e.isIntersecting && shown >= 0.6);
     }), { threshold: [0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 1] });
-    greyPhotos.forEach((img) => io.observe(img));
+    // A slider or a pair is watched as one (half of a slider's photograph is clipped by the line)
+    new Set(greyPhotos.map((img) => img.closest('[data-colour-group]') || img)).forEach((el) => io.observe(el));
   }
 
   /* 19. Problem pages (tools/problems.py) and the homepage "What brings you in?".
