@@ -54,7 +54,17 @@ for n in range(1, 17):
     KIND[f"stock-face-{n}"] = PERSON
 for n in (1, 2, 3, 4, 5, 6):
     KIND[f"stock-case-{n}-face"] = PERSON
-EXTRA = {}  # new picks are added here (tools/qa/shortlist.py prints the line to paste)
+EXTRA = {  # v4 fixes 3 picks (tools/qa/stock_slots.json), each looked at before use
+    **dict.fromkeys(["stock-crowns-soft", "stock-veneers-grey", "stock-implant-models", "stock-restorations-set", "stock-aligner-model",
+                     "stock-aligner-sculpture", "stock-aligner-case", "stock-prosthesis-model", "stock-braces-model", "stock-aligners-shadow",
+                     "stock-handpieces-dark", "stock-implant-crown", "stock-veneer-fingertip", "stock-veneers-fabric", "stock-denture-dark",
+                     "stock-veneer-placing", "stock-veneer-brush", "stock-bridge-white", "stock-flosser", "stock-steel-instruments",
+                     "stock-kids-brushes", "stock-kid-brush-wood", "stock-kid-brush-bright", "stock-kid-brush-electric",
+                     "stock-brushes-grey", "stock-scalers"], OBJECT),
+    **dict.fromkeys(["stock-shade-card", "stock-shade-tab", "stock-aligner-case-hand", "stock-aligner-gloved"], HANDS),
+    "stock-consult-desk": PERSON,
+    "stock-sim-smile-a": MOUTH, "stock-sim-smile-b": MOUTH,
+}
 
 
 def kind(name):

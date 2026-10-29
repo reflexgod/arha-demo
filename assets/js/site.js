@@ -1403,6 +1403,34 @@
     set();
   });
 
+  // Scan scrubber (crooked teeth): a ring glides between the 3D arches on Arha's screen; one transform a frame
+  document.querySelectorAll('[data-scan]').forEach((box) => {
+    const range = box.querySelector('input[type="range"]');
+    const stage = box.querySelector('.scan__stage');
+    const ring = box.querySelector('.scan__focus');
+    const texts = [...box.querySelectorAll('.scan__text')];
+    const pts = box.dataset.points.split(',').map((p) => p.trim().split(/\s+/).map(Number));
+    let frame = 0;
+    const paint = () => {
+      frame = 0;
+      const t = (Number(range.value) / 100) * (pts.length - 1);
+      const k = Math.min(pts.length - 2, Math.floor(t));
+      const f = t - k;
+      const [x, y, r] = pts[k].map((v, n) => v + (pts[k + 1][n] - v) * f);
+      const w = stage.clientWidth;
+      const h = stage.clientHeight;
+      // The ring is 100px wide in CSS: scale it to the arch
+      ring.style.transform = `translate3d(${x * w - 50}px, ${y * h - 50}px, 0) scale(${(2 * r * w) / 100})`;
+      const step = Math.round(t);
+      texts.forEach((tx) => { tx.hidden = Number(tx.dataset.step) !== step; });
+      range.setAttribute('aria-valuetext', texts[step].querySelector('h3').textContent);
+    };
+    const queue = () => { if (!frame) frame = requestAnimationFrame(paint); };
+    range.addEventListener('input', queue);
+    if ('ResizeObserver' in window) new ResizeObserver(queue).observe(stage);
+    paint();
+  });
+
   document.querySelectorAll('[data-quiz]').forEach((form) => {
     const names = [...new Set([...form.querySelectorAll('input[type="radio"]')].map((i) => i.name))];
     const results = [...form.querySelectorAll('[data-score]')];

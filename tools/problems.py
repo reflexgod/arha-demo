@@ -21,7 +21,7 @@ NAMES = {t["slug"]: t["name"] for g in treatments.GROUPS for t in g["items"]}
 PROBLEMS = {
     "missing-tooth": {
         "name": "A missing tooth", "menu": "A missing tooth",
-        "hero": ("stock-face-4", "A smiling older man with a grey beard", "50% 30%"),
+        "hero": ("stock-implant-crown", "A single implant crown on its titanium post, against a dark background", "50% 50%"),
         "line": "A gap changes how you chew, and over time how the teeth beside it sit. It can be replaced with an implant, a bridge or a denture.",
         "notice": [("Chewing on one side", "You avoid the gap without thinking about it."),
                    ("Teeth shifting", "The teeth next to the gap, and the one opposite, can drift into the space."),
@@ -30,6 +30,7 @@ PROBLEMS = {
         "fix": [("dental-implants", "An implant", "A fixed tooth on a small titanium post in the jaw. The teeth beside it are left as they are."),
                 ("crowns-bridges", "A bridge", "A fixed tooth held by crowns on the teeth either side of the gap."),
                 ("full-mouth-rehabilitation", "A denture", "A removable tooth or teeth on a base that rests on the gums.")],
+        "clinic": ("arha-dental-care-operatory-glass-door", "A treatment room at Arha, seen through its glass door: the chair, the light and a screen"),
         "tech": ["panoramic-x-ray", "planning-desk"],
         "faq": [("Do I need to replace a single missing back tooth?", "Not always, but a gap can let the teeth around it move and change your bite over time. We will look at your bite and tell you honestly whether replacing it matters for you."),
                 ("Which option lasts longest?", "Each can serve you well for many years with good care. How long depends on your gums, your bone, your bite and how you look after it, so we talk it through at the consultation."),
@@ -37,7 +38,7 @@ PROBLEMS = {
     },
     "chipped-tooth": {
         "name": "A chipped or broken tooth", "menu": "Chipped or broken tooth",
-        "hero": ("stock-face-2", "A smiling young man with long hair", "50% 30%"),
+        "hero": ("stock-veneer-fingertip", "A thin porcelain veneer held up beside the front teeth of a dental model", "50% 40%"),
         "line": "A small chip can often be rebuilt in tooth-coloured bonding. A larger break may need a crown to protect what is left.",
         "notice": [("A rough or sharp edge", "Your tongue keeps finding it."),
                    ("Sensitivity", "Cold or sweet food can twinge if the break is deeper."),
@@ -46,6 +47,7 @@ PROBLEMS = {
         "fix": [("cosmetic-dentistry", "Bonding", "Tooth-coloured material shaped onto the tooth in one visit, for small chips."),
                 ("crowns-bridges", "A crown", "A cap that covers and protects a tooth that has lost more of its structure."),
                 ("cosmetic-dentistry", "A veneer", "A thin porcelain facing for a front tooth, when shape and colour matter too.")],
+        "clinic": ("arha-dental-care-reception-desk", "Arha’s reception: the gold emblem on the marble wall above the front desk"),
         "tech": ["treatment-rooms", "panoramic-x-ray"],
         "faq": [("Is a chipped tooth an emergency?", "A small chip with no pain can wait for a normal appointment. Severe pain, a large break or a tooth knocked loose should be seen soon: see Dental emergencies."),
                 ("Will a repair show?", "Bonding and porcelain are matched to the shade of your teeth, so a well-made repair blends in."),
@@ -53,7 +55,7 @@ PROBLEMS = {
     },
     "gaps": {
         "name": "Gaps between teeth", "menu": "Gaps between teeth",
-        "hero": ("stock-face-6", "A smiling older woman in a patterned headscarf", "50% 30%"),
+        "hero": ("stock-veneers-fabric", "Four porcelain veneers resting on soft grey fabric", "50% 50%"),
         "line": "Gaps can be closed by adding to the teeth with bonding or veneers, or by moving them with aligners. The right choice depends on the gap and your bite.",
         "notice": [("A space you see in photos", "Most often between the two front teeth."),
                    ("Food catching", "Food collects in the space when you eat."),
@@ -62,6 +64,7 @@ PROBLEMS = {
         "fix": [("cosmetic-dentistry", "Bonding", "Tooth-coloured material added to the edges of the teeth to close a small gap."),
                 ("cosmetic-dentistry", "Veneers", "Thin porcelain facings that change the width and shape of the front teeth."),
                 ("invisalign", "Aligners", "Clear trays that move the teeth together, without adding to them.")],
+        "clinic": ("arha-dental-care-logo-wall", "The Arha Dental Care emblem in gold on the reception’s marble wall"),
         "tech": ["planning-desk", "treatment-rooms"],
         "faq": [("Will the gap come back?", "After aligners, a retainer keeps the teeth where they are. Bonding and veneers do not move, but are checked at your regular visits."),
                 ("Can a large gap be closed with bonding?", "Bonding suits small gaps best. A large gap may look better closed by moving the teeth, or with veneers, so the teeth keep natural proportions."),
@@ -69,7 +72,7 @@ PROBLEMS = {
     },
     "crooked-teeth": {
         "name": "Crooked teeth", "menu": "Crooked teeth",
-        "hero": ("stock-face-10", "A smiling young man photographed against a dark background", "50% 30%"),
+        "hero": ("stock-aligner", "A clear aligner on a pale background", "50% 50%"),
         "line": "Teeth can be straightened at almost any age, with clear aligners or with braces. Straighter teeth are also easier to keep clean.",
         "notice": [("Overlapping teeth", "Teeth that sit in front of or behind their neighbours."),
                    ("Hard-to-clean corners", "Floss and the toothbrush struggle to reach between crowded teeth."),
@@ -85,7 +88,7 @@ PROBLEMS = {
     },
     "stained-teeth": {
         "name": "Yellow or stained teeth", "menu": "Yellow or stained teeth",
-        "hero": ("stock-face-3", "A smiling woman with short dark hair and a shawl", "50% 30%"),
+        "hero": ("stock-shade-tab", "A hand holding a tooth shade tab above an open shade guide", "50% 50%"),
         "line": "Surface stains often lift with a professional clean. Deeper colour responds to whitening, and where whitening cannot help, bonding or veneers can.",
         "notice": [("Surface stains", "From tea, coffee, paan or smoking, often at the edges and between teeth."),
                    ("An even yellow tone", "Teeth naturally darken a little with age."),
@@ -94,6 +97,7 @@ PROBLEMS = {
         "fix": [("general-dentistry", "A professional clean", "Removes surface stain and tartar; often the first step."),
                 ("cosmetic-dentistry", "Whitening", "Lightens the natural colour of the teeth, under our supervision."),
                 ("cosmetic-dentistry", "Bonding or veneers", "For colour that whitening cannot change, or when shape matters too.")],
+        "clinic": ("arha-dental-care-reception-wide", "The reception and waiting area, with the emblem wall and a plant"),
         "tech": ["treatment-rooms"],
         "faq": [("Does whitening damage the teeth?", "Supervised whitening is designed to be safe for enamel. Some people feel short-lived sensitivity, which settles. We check your teeth and gums first."),
                 ("Will crowns and fillings whiten?", "No. Whitening changes natural teeth only, so existing crowns or fillings may need replacing to match afterwards."),
@@ -101,7 +105,7 @@ PROBLEMS = {
     },
     "toothache": {
         "name": "Toothache or sensitivity", "menu": "Toothache or sensitivity", "urgent": True,
-        "hero": ("stock-toothache", "A young man holding his cheek in pain", "50% 35%"),
+        "hero": ("stock-xray-screen", "A dental X-ray of the whole mouth on a monitor beside the chair", "50% 50%"),
         "line": "Sensitivity can come from worn enamel or receding gums; pain that lingers often means decay has reached the nerve. An exam and an X-ray tell which it is.",
         "notice": [("A short, sharp twinge", "With cold or sweet food, gone in seconds."),
                    ("Pain that lingers", "An ache that stays after the cold or heat has gone."),
@@ -117,7 +121,7 @@ PROBLEMS = {
     },
     "bleeding-gums": {
         "name": "Bleeding gums", "menu": "Bleeding gums",
-        "hero": ("stock-face-5", "A smiling young woman in glasses and a grey t-shirt", "50% 30%"),
+        "hero": ("stock-flosser", "A water flosser and a length of dental floss on a white surface", "50% 50%"),
         "line": "Gums that bleed when you brush are usually inflamed, and that is treatable. A professional clean and better care at home often settle it.",
         "notice": [("Pink in the sink", "Bleeding when you brush or floss."),
                    ("Red or puffy gums", "Healthy gums are pale pink and firm."),
@@ -126,6 +130,7 @@ PROBLEMS = {
         "fix": [("general-dentistry", "A professional clean", "Removes the tartar and plaque that keep the gums inflamed."),
                 ("general-dentistry", "Gum care", "Deeper cleaning and closer reviews when the gums need more help."),
                 ("general-dentistry", "Care at home", "Brushing, flossing and the right tools, shown at your visit.")],
+        "clinic": ("arha-dental-care-steriliser", "Arha’s steriliser on the counter of the sterilisation room"),
         "tech": ["treatment-rooms", "sterilisation-room"],
         "faq": [("Should I stop brushing where it bleeds?", "No. Keep brushing gently, twice a day, and clean between the teeth. Bleeding usually settles as the gums heal."),
                 ("Is bleeding serious?", "It is common and treatable, but left alone, gum disease can loosen teeth. It is worth a check."),
@@ -133,7 +138,7 @@ PROBLEMS = {
     },
     "metal-fillings": {
         "name": "Old metal fillings", "menu": "Old metal fillings",
-        "hero": ("stock-face-12", "A woman smiling broadly, photographed close up in black and white", "50% 35%"),
+        "hero": ("stock-steel-instruments", "Fine steel dental instruments laid side by side", "50% 50%"),
         "line": "Old metal fillings can crack, or leak at the edges, over the years. When one needs replacing, it can be redone in tooth-coloured material, or with a crown.",
         "notice": [("A dark grey tooth", "Metal can show through the enamel around it."),
                    ("Cracks around a filling", "Fine lines in the tooth next to an old filling."),
@@ -142,6 +147,7 @@ PROBLEMS = {
         "fix": [("general-dentistry", "A tooth-coloured filling", "When the filling is small or medium, it is replaced in a composite that matches the tooth."),
                 ("crowns-bridges", "A crown or onlay", "When a large filling has weakened the tooth, a cap protects what is left."),
                 ("general-dentistry", "Watching it", "A sound filling with no decay can stay; we check it at your visits.")],
+        "clinic": ("arha-dental-care-equipment-counter", "Equipment on the counter of Arha’s sterilisation room"),
         "tech": ["panoramic-x-ray", "treatment-rooms"],
         "faq": [("Should all my metal fillings be replaced?", "No. A filling that is sound, with no decay or cracks around it, can stay. We replace fillings when there is a reason to."),
                 ("Are tooth-coloured fillings strong?", "Modern composites are strong enough for most back teeth. For a very large filling, a crown or onlay may protect the tooth better."),
@@ -149,7 +155,7 @@ PROBLEMS = {
     },
     "loose-dentures": {
         "name": "Loose or uncomfortable dentures", "menu": "Loose dentures",
-        "hero": ("stock-face-11", "A smiling older man in a white shirt", "50% 30%"),
+        "hero": ("stock-denture-dark", "A full denture with pink gum, photographed against a dark background", "50% 50%"),
         "line": "A denture that moves when you eat or speak can be held firmly by a few implants. Sometimes a refit or a new denture is enough.",
         "notice": [("Movement when you eat", "The denture lifts or rocks when you chew."),
                    ("Sore spots", "Places on the gums that hurt where the denture presses."),
@@ -158,6 +164,7 @@ PROBLEMS = {
         "fix": [("full-mouth-rehabilitation", "A refit or new denture", "The fit is adjusted to how your gums have changed, or a new denture is made."),
                 ("dental-implants", "Implant-retained denture", "Two or more implants hold the denture firmly; you still take it out to clean."),
                 ("dental-implants", "Fixed implant teeth", "A full arch of teeth fixed to implants, for some patients.")],
+        "clinic": ("arha-dental-care-reception-desk", "Arha’s front desk under the gold emblem"),
         "tech": ["panoramic-x-ray", "planning-desk"],
         "faq": [("Why has my denture become loose?", "The gums and bone under a denture slowly change shape, so a denture that once fitted well can loosen. A refit or a new denture helps."),
                 ("Can I have implants if I have worn dentures for years?", "Often, yes. It depends on the bone, which an X-ray shows."),
@@ -165,7 +172,7 @@ PROBLEMS = {
     },
     "child-teeth": {
         "name": "My child’s teeth", "menu": "My child’s teeth",
-        "hero": ("stock-kid-face", "A smiling young girl in a bright scarf", "50% 35%"),
+        "hero": ("stock-kids-brushes", "Four small children's toothbrushes in soft colours, standing in a row", "50% 45%"),
         "line": "Baby teeth hold space for the adult teeth and matter for eating and speech. Regular checks, sealants and fluoride help stop decay early.",
         "notice": [("The first teeth", "Usually from around six months; the first visit can follow soon after."),
                    ("Marks or spots", "White, brown or dark patches on the teeth."),
@@ -174,6 +181,7 @@ PROBLEMS = {
         "fix": [("kids-dentistry", "Check-ups", "Gentle visits that let your child get used to the dentist."),
                 ("kids-dentistry", "Sealants and fluoride", "Protection for the grooves of the back teeth, and stronger enamel."),
                 ("orthodontics", "An early orthodontic check", "Spotting bite or crowding problems while the jaws are still growing.")],
+        "clinic": ("arha-dental-care-entrance-door", "The door of suite 107 at Doctor House, with the Arha emblem"),
         "tech": ["treatment-rooms", "panoramic-x-ray"],
         "faq": [("When should my child first see a dentist?", "Around the time the first tooth appears, or by their first birthday. Early visits are short and gentle."),
                 ("Do baby teeth need fillings?", "Often, yes. Baby teeth hold space for the adult teeth, and decay in them can hurt and spread."),
@@ -225,9 +233,9 @@ def ix_missing():
 
 
 def ix_chipped():
-    lens = pic("stock-straight-smile", "A close-up of a smile: the edges of the front teeth", "(min-width: 900px) 70vw, 100vw")
+    lens = pic("stock-veneers-grey", "Four thin porcelain veneers on dark leather", "(min-width: 900px) 70vw, 100vw")
     return f"""      <div class="loupe-wrap reveal">
-        <figure class="loupe" data-loupe tabindex="0" aria-label="Magnifier. Move over the photograph, or use the arrow keys, to look closely at the edges of the teeth.">
+        <figure class="loupe" data-loupe tabindex="0" aria-label="Magnifier. Move over the photograph, or use the arrow keys, to look closely at the porcelain veneers.">
           {lens}
           <span class="loupe__lens" aria-hidden="true"></span>
           <figcaption class="loupe__hint">Move over the photograph · drag on a phone · arrow keys</figcaption>
@@ -240,11 +248,11 @@ def ix_chipped():
 
 
 def ix_gaps():
-    items = [("stock-bonding", "50% 40%", "A dentist shaping tooth-coloured material on a front tooth", "Bonding",
+    items = [("stock-veneer-placing", "50% 50%", "A fine brush placing a thin tooth-coloured facing on a dental model", "Bonding",
               "Tooth-coloured material added to the sides of the teeth. Quick and conservative, for small gaps.", "cosmetic-dentistry/", "Cosmetic dentistry"),
              ("stock-veneers", "50% 50%", "Thin porcelain veneers resting on a dark surface", "Veneers",
               "Thin porcelain facings that reshape the front teeth, closing gaps while improving shape and colour.", "cosmetic-dentistry/", "Cosmetic dentistry"),
-             ("stock-aligner-in", "50% 40%", "Fingers fitting a clear aligner over the teeth", "Aligners",
+             ("stock-aligner-gloved", "50% 50%", "A clear aligner held in a gloved hand beside its blue case", "Aligners",
               "Clear trays that move the teeth together. Nothing is added to the teeth.", "invisalign/", "Invisalign clear aligners")]
     lis = "".join(f"""
         <li class="xpanel{' is-active' if n == 0 else ''}" data-xpanel tabindex="0">
@@ -277,10 +285,29 @@ def blend(slug, a, b, start, end, label, tag, ticks=None, cls=""):
 
 
 def ix_crooked():
-    return blend("ct", ("stock-crowded-arch", "Crowded, overlapping teeth seen with the lips held back"),
-                 ("stock-gum-check", "Straight, even teeth seen with the lips held back"),
-                 "Crowded", "Straight", "Blend from crowded to straight teeth", "Illustration: two different stock photographs",
-                 ticks=["Crowded", "Moving", "Straight"], cls="blend--steps") + f"""
+    """A scrubber across the screen in Arha's treatment room (arha-dental-care-scan-screen): a focus ring
+    moves from one 3D arch to the next and the text follows (site.js 19, [data-scan]). data-points are
+    fractions of the 4:3 stage (the square photograph cropped top and bottom): x, y and the ring's radius (of the width)."""
+    steps = [("Scan", "Your teeth in 3D", "Your teeth are recorded and shown as a 3D model on the screen in the treatment room."),
+             ("Plan", "Each movement, planned", "The planning software moves the teeth in small steps, so you can see how they would straighten."),
+             ("Result", "Where they could end up", "You see the planned result before anything starts, and decide with us whether it is right for you.")]
+    texts = "".join(f'<div class="scan__text" data-step="{k}"{"" if k == 0 else " hidden"}><h3>{t}</h3><p>{x}</p></div>' for k, (_s, t, x) in enumerate(steps))
+    ticks = "".join(f"<span>{s}</span>" for s, _t, _x in steps)
+    return f"""      <div class="scan reveal" data-scan data-points="0.305 0.537 0.1, 0.5 0.543 0.105, 0.815 0.575 0.145">
+        <figure class="scan__stage media">
+          {pic("arha-dental-care-scan-screen", "The screen in an Arha treatment room, showing three 3D models of an upper arch of teeth", "(min-width: 900px) 55vw, 100vw")}
+          <span class="scan__focus" aria-hidden="true"></span>
+          <figcaption class="scan__tag">Arha’s screen · a planning view</figcaption>
+        </figure>
+        <div class="scan__side">
+          <label class="scan__control" for="ct-scan"><span class="visually-hidden">Move across the screen</span>
+            <input id="ct-scan" type="range" min="0" max="100" value="0" step="1" aria-valuetext="{steps[0][1]}">
+          </label>
+          <div class="scan__ticks" aria-hidden="true">{ticks}</div>
+          <div class="scan__texts" aria-live="polite">{texts}</div>
+          <p class="ix-note">Photographed on the screen in our treatment room. A planning view, not a patient’s result.</p>
+        </div>
+      </div>
       <div class="compare2 reveal">
         <div><h3>Clear aligners</h3><p>Nearly invisible trays, changed as the teeth move. Removable for eating and cleaning; worn most of the day.</p><a class="link" href="invisalign/">Invisalign clear aligners{ARROW}</a></div>
         <div><h3>Braces</h3><p>Brackets and a wire that stay on and are adjusted at visits. Suit some movements better.</p><a class="link" href="orthodontics/">Orthodontics (braces){ARROW}</a></div>
@@ -304,7 +331,7 @@ def ix_toothache():
                ("any:cold", "Book a check-up", "A short twinge with cold or heat is often from worn enamel or a receding gum. Pain that lingers after the cold has gone should be seen sooner.", "general-dentistry/", "General dentistry")]
     res = "".join(f'<div class="picker__result" data-if="{c}" hidden><p class="picker__step">{h}</p><p>{t}</p><a class="link" href="{href}">{cta}{ARROW}</a></div>' for c, h, t, href, cta in results)
     return f"""      <div class="ix-split ix-split--picker reveal">
-        <div class="ix-split__media media">{pic("stock-decayed-tooth", "An extracted molar with deep decay in its crown", "(min-width: 900px) 40vw, 100vw")}</div>
+        <div class="ix-split__media media">{pic("arha-dental-care-xray-room", "Arha’s X-ray room: a panoramic X-ray unit against a marble wall", "(min-width: 900px) 40vw, 100vw")}</div>
         <form class="picker" data-checklist aria-labelledby="picker-legend">
           <fieldset>
             <legend id="picker-legend">What do you feel? Tick all that apply.</legend>
@@ -325,7 +352,7 @@ def ix_gums():
               <label><input type="radio" name="{k}" value="yes"><span>Yes</span></label><label><input type="radio" name="{k}" value="no"><span>No</span></label>
             </fieldset>""" for n, (k, q) in enumerate(qs))
     return f"""      <div class="ix-split ix-split--quiz reveal">
-        <div class="ix-split__media media">{pic("stock-gums", "A close-up of the front teeth and the gum line", "(min-width: 900px) 45vw, 100vw")}</div>
+        <div class="ix-split__media media">{pic("stock-brushes-grey", "Two soft toothbrushes and their box on a grey-green surface", "(min-width: 900px) 45vw, 100vw")}</div>
         <form class="quiz" data-quiz aria-label="Gum self-check">{fields}
           <div class="quiz__results" aria-live="polite">
             <p class="quiz__result" data-score="pending">Answer the three questions to see your result.</p>
@@ -339,8 +366,8 @@ def ix_gums():
 
 
 def ix_metal():
-    return xfade("mf", [("metal", "Metal", "stock-metal-fillings", "Back teeth with old dark metal fillings"),
-                        ("white", "Tooth-coloured", "stock-filling-white", "A dentist shaping tooth-coloured material on a tooth")],
+    return xfade("mf", [("metal", "Metal", "stock-handpieces-dark", "Steel dental handpieces in their holder: metal, as a material"),
+                        ("white", "Tooth-coloured", "stock-bridge-white", "Three tooth-coloured restorations joined as one piece, shown on their own")],
                  [("How it looks", {"metal": "Dark grey; it can show through the tooth.", "white": "Matched to the shade of the tooth."}),
                   ("How it is held", {"metal": "Packed into a shaped cavity.", "white": "Bonded to the tooth, so less of it is drilled away."}),
                   ("When we replace one", {"metal": "When it is cracked, leaking or has decay beneath it.", "white": "It is placed when an old filling needs replacing."})],
@@ -348,7 +375,7 @@ def ix_metal():
 
 
 def ix_dentures():
-    return xfade("ld", [("conventional", "Conventional", "stock-denture-man", "An older man fitting a lower denture"),
+    return xfade("ld", [("conventional", "Conventional", "stock-denture-hand", "A removable denture with pink gum, held in the hand"),
                         ("implant", "Implant-retained", "stock-implant-overdenture", "A denture on a model, with the clips that attach it to implants")],
                  [("What holds it", {"conventional": "The fit against the gums, and sometimes adhesive.", "implant": "Two or more implants it clips onto."}),
                   ("When you eat and talk", {"conventional": "It can lift or rock, especially a lower denture.", "implant": "It stays firmly in place."}),
@@ -357,11 +384,11 @@ def ix_dentures():
 
 
 def ix_child():
-    bands = [(0, 2, "Birth to 2", "stock-toddler", "A smiling toddler", "The first teeth arrive. Book the first visit around the first tooth or the first birthday, and wipe or brush the teeth twice a day."),
-             (3, 5, "3 to 5 years", "stock-kid-smile", "A young boy pointing at his teeth", "All the baby teeth are in. Short check-ups, fluoride and help with brushing; watch for sweet drinks."),
-             (6, 9, "6 to 9 years", "stock-kid-boy", "A smiling boy in a grey hoodie", "The first adult molars come through. Sealants protect their grooves; an early orthodontic check spots crowding."),
-             (10, 12, "10 to 12 years", "stock-braces-kid", "A smiling girl wearing braces", "The last baby teeth go. A good time to plan braces or aligners if the bite needs it."),
-             (13, 18, "Teenagers", "stock-teen", "A smiling teenage boy in a patterned shirt", "Adult teeth in place. Regular cleans, sports mouthguards, and straightening if wanted.")]
+    bands = [(0, 2, "Birth to 2", "stock-kid-brush-wood", "A small wooden toothbrush with soft red bristles", "The first teeth arrive. Book the first visit around the first tooth or the first birthday, and wipe or brush the teeth twice a day."),
+             (3, 5, "3 to 5 years", "stock-child-brush", "A young boy brushing his teeth", "All the baby teeth are in. Short check-ups, fluoride and help with brushing; watch for sweet drinks."),
+             (6, 9, "6 to 9 years", "stock-kid-brush-electric", "A children’s electric toothbrush with a bright pattern", "The first adult molars come through. Sealants protect their grooves; an early orthodontic check spots crowding."),
+             (10, 12, "10 to 12 years", "stock-aligners-shadow", "Clear aligners on a model, in soft shadow", "The last baby teeth go. A good time to plan braces or aligners if the bite needs it."),
+             (13, 18, "Teenagers", "stock-kid-brush-bright", "A bright toothbrush with yellow bristles", "Adult teeth in place. Regular cleans, sports mouthguards, and straightening if wanted.")]
     shots = "".join(f'\n          <div class="agedial__img{" is-active" if n == 0 else ""}" data-band="{n}">{pic(p, a, "(min-width: 900px) 45vw, 100vw")}</div>' for n, (_a, _b, _l, p, a, _t) in enumerate(bands))
     texts = "".join(f'\n          <div class="agedial__text" data-band="{n}" data-min="{lo}" data-max="{hi}"{"" if n == 0 else " hidden"}><h3>{lab}</h3><p>{t}</p></div>' for n, (lo, hi, lab, _p, _a, t) in enumerate(bands))
     return f"""      <div class="agedial reveal" data-agedial>
@@ -379,9 +406,9 @@ def ix_child():
 
 INTERACTIVES = {
     "missing-tooth": ("Implant, bridge or denture?", "Choose an option to see it, and how it compares.", ix_missing),
-    "chipped-tooth": ("Look closely", "Move the magnifier over the smile, then compare the two usual repairs.", ix_chipped),
+    "chipped-tooth": ("Look closely", "Move the magnifier over the veneers to see how fine the porcelain is, then compare the two usual repairs.", ix_chipped),
     "gaps": ("Three ways to close a gap", "Hover or tap each one to see how it works.", ix_gaps),
-    "crooked-teeth": ("From crowded to straight", "Slide to blend a crowded smile into a straight one.", ix_crooked),
+    "crooked-teeth": ("From crowded to straight, planned on screen", "Slide across the screen in our treatment room to follow an aligner plan.", ix_crooked),
     "stained-teeth": ("See what whitening can do", "Slide to lighten the teeth in this simulation.", ix_stained),
     "toothache": ("What is the pain telling you?", "Tick what you feel to see the likely next step.", ix_toothache),
     "bleeding-gums": ("A gum self-check", "Three questions you can answer at home.", ix_gums),
@@ -424,14 +451,32 @@ def fix_block(p):
 """
 
 
-def expect_block():
+def expect_block(clinic=None):
+    """The four steps of a first visit; with clinic (photo, alt), Arha's own room beside them."""
     steps = "".join(f"<li><p class=\"expect__num\">{n + 1:02d}</p><h3>{t}</h3><p>{b}</p></li>" for n, (t, b) in enumerate(EXPECT))
-    return f"""
+    head = '<div class="section-head reveal"><h2 id="expect-title">What to expect</h2><p class="lede">Visits and timing are decided at your consultation.</p></div>'
+    if not clinic:
+        return f"""
     <!-- =================================================================== WHAT TO EXPECT -->
     <section class="section section--stone expect" aria-labelledby="expect-title">
       <div class="container">
-        <div class="section-head reveal"><h2 id="expect-title">What to expect</h2><p class="lede">Visits and timing are decided at your consultation.</p></div>
+        {head}
         <ol class="expect__list reveal">{steps}</ol>
+      </div>
+    </section>
+"""
+    return f"""
+    <!-- =================================================================== WHAT TO EXPECT (beside Arha's own room) -->
+    <section class="section section--stone expect expect--photo" aria-labelledby="expect-title">
+      <div class="container-wide expect__grid">
+        <figure class="expect__media media reveal">
+{picture(clinic[0], "(min-width: 900px) 40vw, 100vw", clinic[1], indent="          ")}
+          <figcaption>At Arha, Peddar Road</figcaption>
+        </figure>
+        <div class="expect__body">
+          {head}
+          <ol class="expect__list reveal">{steps}</ol>
+        </div>
       </div>
     </section>
 """
@@ -474,7 +519,7 @@ def problem_page(slug, site_url):
     </section>
 """
     body += fix_block(p)
-    body += expect_block()
+    body += expect_block(p.get("clinic"))
     body += tech_list(p["tech"])
     body += tp.faq_block(p["faq"])
     body += closing_band()

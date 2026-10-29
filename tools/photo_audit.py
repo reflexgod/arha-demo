@@ -16,8 +16,8 @@ import photo_ids  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 SKIP = ("gallery", "before-after")  # the photo album; a redirect
-# The one exception, by design (v4 feedback 3): a sample case's own before/after pair is on the homepage,
-# on Our work and on its own case page, because the homepage pairs link to the case pages Our work lists.
+# The one exception, by design (v4 feedback 3): a sample case's own before/after pair, or its card photograph,
+# is on the homepage, on Our work and on its own case page, because the homepage cards link to the case pages Our work lists.
 CASE_PAGES = 3
 
 
@@ -56,6 +56,11 @@ def audit():
             if k > 1:
                 problems.append(f"{rel}: {name} appears {k} times")
     cases = {photo_ids.groups().get(f"stock-pair-{n}-after") for n in range(1, 10)}
+    try:  # a sample case's card photograph follows the same rule as its pair (v4 fixes 3, point 2)
+        import cases_markup
+        cases |= {photo_ids.groups().get(c["card"], c["card"]) for c in cases_markup.CASES}
+    except ImportError:
+        pass
     for name, where in sorted(site.items()):
         if len(where) > (CASE_PAGES if name in cases and all(w in ("home", "our-work") or w.startswith("our-work/") for w in where) else 2):
             problems.append(f"{name} on {len(where)} pages: {', '.join(sorted(where))}")
