@@ -1,41 +1,629 @@
 {
  "_about": "Stock slots (v4 fixes 3, addition). use: page | section | what it must say | crop | colour. queries: the cached searches the shortlist came from (src-assets/search/*.json). candidates: 6-8 key:index. scores per candidate: fit, premium, palette, crop, faces/gross, resolution, unused (1-5 each).",
  "slots": [
-  {"id": "problems-missing-tooth-hero", "use": "Problem page A missing tooth (hero) and Home What brings you in? | a replacement tooth: an implant crown | 16:9 full bleed, 4:5 stage | B&W", "queries": ["implant", "crown", "denture", "missing (v4a)"], "candidates": ["implant:3", "implant:7", "implant:8", "implant:23", "crown:11", "implant:13", "implant:9"]},
-  {"id": "problems-chipped-tooth-hero", "use": "Problem page Chipped or broken tooth (hero) and Home stage | a repair that restores an edge: a single veneer | 16:9, 4:5 | B&W", "queries": ["crown", "veneer", "shade", "broken (v4d)"], "candidates": ["crown:4", "crown:26", "crown:7", "crown:12", "veneer:15", "crown:5", "shade:0"]},
-  {"id": "problems-gaps-hero", "use": "Problem page Gaps between teeth (hero) and Home stage | veneers that close a gap, shown as objects | 16:9, 4:5 | B&W", "queries": ["veneer", "crown", "shade", "diastema (v4c)"], "candidates": ["crown:18", "veneer:28", "veneer:12", "veneer:27", "shade:8", "shade:12", "shade:28"]},
-  {"id": "problems-crooked-teeth-hero", "use": "Problem page Crooked teeth (hero) and Home stage | straightening without braces: a clear aligner | 16:9, 4:5 | B&W", "queries": ["aligner", "braces", "crooked (v4a)"], "candidates": ["aligner:11", "aligner:3", "aligner:15", "aligner:8", "aligner:9", "aligner:0", "braces:0"]},
-  {"id": "problems-stained-teeth-hero", "use": "Problem page Yellow or stained teeth (hero) and Home stage | tooth shade, chosen with care: a shade guide | 16:9, 4:5 | B&W", "queries": ["shade", "veneer", "crown"], "candidates": ["shade:14", "shade:5", "shade:10", "shade:11", "shade:6", "shade:18", "shade:7"]},
-  {"id": "problems-toothache-hero", "use": "Problem page Toothache or sensitivity (hero) and Home stage | finding the cause: an X-ray | 16:9, 4:5 | B&W", "queries": ["xray", "instruments", "toothache (v3b)"], "candidates": ["xray:1", "xray:2", "xray:0", "xray:5", "instruments:21", "instruments:9"]},
-  {"id": "problems-bleeding-gums-hero", "use": "Problem page Bleeding gums (hero) and Home stage | daily gum care: floss | 16:9, 4:5 | B&W", "queries": ["floss", "brush", "gums (v4c)"], "candidates": ["floss:28", "floss:11", "floss:6", "floss:2", "floss:9", "floss:20", "brush:22"]},
-  {"id": "problems-metal-fillings-hero", "use": "Problem page Old metal fillings (hero) and Home stage | precise restorative work: fine instruments | 16:9, 4:5 | B&W", "queries": ["instruments", "tray", "composite", "amalgam (v4c)"], "candidates": ["instruments:7", "instruments:14", "instruments:6", "instruments:12", "instruments:25", "tray:1", "instruments:2"]},
-  {"id": "problems-loose-dentures-hero", "use": "Problem page Loose dentures (hero) and Home stage | a well-made denture, shown as an object | 16:9, 4:5 | B&W", "queries": ["denture", "implant", "crown"], "candidates": ["denture:25", "denture:29", "denture:24", "denture:28", "denture:18", "crown:29", "denture:26"]},
-  {"id": "problems-child-teeth-hero", "use": "Problem page My child's teeth (hero) and Home stage | children's dental care, gently: small toothbrushes | 16:9, 4:5 | B&W", "queries": ["kidbrush", "brush", "kids (v4c)"], "candidates": ["kidbrush:19", "kidbrush:9", "kidbrush:8", "kidbrush:5", "kidbrush:1", "kidbrush:24", "kidbrush:6"]},
-  {"id": "problems-gaps-bonding", "use": "Problem page Gaps, expanding panel Bonding | tooth-coloured material shaped onto a tooth (on a model, not a mouth) | tall panel 1:2 | B&W", "queries": ["composite", "crown", "shade", "filling (v4a)"], "candidates": ["composite:16", "crown:14", "shade:2", "composite:3", "crown:1", "shade:22"]},
-  {"id": "problems-gaps-aligners", "use": "Problem page Gaps, expanding panel Aligners | a clear aligner in a gloved hand | tall panel 1:2 | B&W", "queries": ["aligner", "braces", "instruments"], "candidates": ["aligner:5", "aligner:7", "aligner:0", "aligner:9", "aligner:8", "aligner:18"]},
-  {"id": "problems-metal-fillings-metal", "use": "Problem page Metal fillings, toggle side Metal | metal, as a material: steel instruments | 16:9 | B&W", "queries": ["instruments", "tray", "composite"], "candidates": ["instruments:6", "instruments:2", "instruments:21", "instruments:14", "instruments:10", "instruments:5"]},
-  {"id": "problems-metal-fillings-white", "use": "Problem page Metal fillings, toggle side Tooth-coloured | tooth-coloured material, as an object | 16:9 | B&W", "queries": ["composite", "crown", "shade"], "candidates": ["composite:13", "crown:5", "composite:14", "crown:20", "shade:6", "crown:26"]},
-  {"id": "problems-toothache-picker", "use": "Problem page Toothache, beside the symptom picker | calm diagnostics: an X-ray on screen | 4:5 | B&W", "queries": ["xray", "instruments", "consult"], "candidates": ["xray:1", "xray:2", "instruments:21", "xray:0", "instruments:9", "consult:11"]},
-  {"id": "problems-bleeding-gums-quiz", "use": "Problem page Bleeding gums, beside the self-check | care at home: toothbrushes | 1:1 | B&W", "queries": ["brush", "floss", "kidbrush"], "candidates": ["brush:16", "brush:22", "brush:4", "brush:14", "brush:12", "brush:6", "floss:20"]},
-  {"id": "cosmetic-hero", "use": "Cosmetic dentistry (hero) and /treatments/ preview | porcelain craft: crowns and veneers as objects | 16:9 full bleed | B&W", "queries": ["crown", "veneer", "shade"], "candidates": ["crown:5", "crown:12", "veneer:15", "crown:7", "crown:26", "veneer:21"]},
-  {"id": "cosmetic-matrix-stains", "use": "Cosmetic dentistry, matrix row Stains | shade, measured: a shade tab | 3:2 | B&W", "queries": ["shade", "crown", "composite"], "candidates": ["shade:5", "shade:10", "shade:18", "shade:14", "shade:7", "shade:4"]},
-  {"id": "cosmetic-matrix-chips", "use": "Cosmetic dentistry, matrix row Chips | a veneer placed on a model with a fine brush | 3:2 | B&W", "queries": ["crown", "composite", "shade"], "candidates": ["crown:14", "shade:2", "composite:24", "crown:15", "shade:3", "crown:1"]},
-  {"id": "cosmetic-matrix-gaps", "use": "Cosmetic dentistry, matrix row Gaps | veneers that change width, as objects | 3:2 | B&W", "queries": ["veneer", "crown", "shade"], "candidates": ["veneer:12", "veneer:28", "crown:12", "veneer:15", "shade:12", "veneer:27"]},
-  {"id": "invisalign-hero", "use": "Invisalign clear aligners (hero) and /treatments/ preview | a clear aligner, premium product shot | 16:9 full bleed | B&W", "queries": ["aligner", "braces", "invisalign (v3b)"], "candidates": ["aligner:15", "aligner:8", "aligner:9", "aligner:0", "aligner:7", "aligner:3"]},
-  {"id": "invisalign-stage-wear", "use": "Invisalign, stage scrubber step Wearing them | an aligner in a gloved hand with its case | 4:3 | B&W", "queries": ["aligner", "instruments", "braces"], "candidates": ["aligner:7", "aligner:5", "aligner:0", "aligner:18", "aligner:28", "aligner:9"]},
-  {"id": "orthodontics-hero", "use": "Orthodontics (hero) and /treatments/ preview | braces, shown on a model | 16:9 full bleed | B&W", "queries": ["braces", "aligner", "braces (v4c)"], "candidates": ["braces:0", "aligner:9", "braces:1", "implant:9", "denture:0", "aligner:8"]},
-  {"id": "orthodontics-adult", "use": "Orthodontics, panel Adult | discreet straightening for adults: aligners | tall panel | B&W", "queries": ["aligner", "braces"], "candidates": ["aligner:8", "aligner:11", "aligner:3", "aligner:9", "aligner:0", "aligner:15"]},
-  {"id": "general-clean", "use": "General dentistry, check-up timeline step Cleaning | scaling and polishing instruments, clean and bright | 4:5 | B&W", "queries": ["instruments", "tray", "floss"], "candidates": ["instruments:20", "tray:1", "instruments:23", "tray:2", "instruments:12", "instruments:25"]},
-  {"id": "crowns-process", "use": "Crowns & bridges, How it works (pinned photo) | a finished bridge, product shot | 4:5 | B&W", "queries": ["crown", "implant", "denture"], "candidates": ["crown:20", "crown:11", "implant:13", "crown:9", "crown:24", "implant:16"]},
-  {"id": "maxillofacial-injury", "use": "Maxillofacial, Who we help: facial or jaw injury | careful rebuilding: a model with restorations (never a patient) | 3:2 | B&W", "queries": ["implant", "crown", "lab"], "candidates": ["implant:13", "crown:22", "implant:16", "crown:24", "implant:19", "implant:14"]},
-  {"id": "kids-age-0-2", "use": "Kids' dentistry, age tab 0 to 2 | the first toothbrush | 3:2 | B&W", "queries": ["kidbrush", "brush"], "candidates": ["kidbrush:0", "kidbrush:2", "kidbrush:3", "kidbrush:26", "kidbrush:10", "kidbrush:7"]},
-  {"id": "kids-age-3-5", "use": "Kids' dentistry, age tab 3 to 5 | learning to brush: bright children's brushes | 3:2 | B&W", "queries": ["kidbrush", "brush"], "candidates": ["kidbrush:7", "kidbrush:5", "kidbrush:6", "kidbrush:24", "kidbrush:11", "kidbrush:12"]},
-  {"id": "kids-age-6-9", "use": "Kids' dentistry, age tab 6 to 9 | grown-up habits: an electric brush for children | 3:2 | B&W", "queries": ["kidbrush", "brush"], "candidates": ["kidbrush:20", "kidbrush:21", "brush:12", "brush:13", "brush:23", "kidbrush:28"]},
-  {"id": "kids-age-10-14", "use": "Kids' dentistry, age tab 10 to 14 | braces and aligners: an aligner | 3:2 | B&W", "queries": ["aligner", "braces", "kidbrush"], "candidates": ["aligner:0", "aligner:9", "aligner:18", "aligner:28", "braces:0", "aligner:3"]},
-  {"id": "case-implants", "use": "Sample case Dental implants (case page, large) | an implant crown on a model | 16:10 | B&W", "queries": ["implant", "crown"], "candidates": ["implant:9", "implant:23", "implant:7", "crown:11", "implant:8", "implant:13"]},
-  {"id": "case-full-mouth", "use": "Sample case Full mouth rehabilitation (case page, large) | a full set of restorations, product shot | 16:10 | B&W", "queries": ["crown", "denture", "implant"], "candidates": ["crown:24", "denture:24", "crown:29", "implant:16", "denture:28", "crown:21"]},
-  {"id": "case-aligners", "use": "Sample case Invisalign & aligners (case page, large) | an aligner beside a dental model | 16:10 | B&W", "queries": ["aligner", "braces"], "candidates": ["aligner:9", "aligner:8", "aligner:3", "aligner:11", "aligner:0", "aligner:28"]},
-  {"id": "home-journey-consultation", "use": "Home, Your journey: Consultation (the page's one stock person) | a dentist explaining a plan to a patient at a desk | 4:5 sticky | B&W", "queries": ["consult", "xray", "instruments"], "candidates": ["consult:21", "consult:6", "consult:12", "consult:11", "consult:0", "xray:0"]},
-  {"id": "simulation-featured", "use": "Home featured slider and Sample case 1 | a natural, frontal lower-face smile (nose tip to chin), teeth under 40% of the width, for a subtle shade simulation | 3:2 | colour on hover", "queries": ["smile", "veneer", "smile (v4b)"], "candidates": ["smile:18", "smile:19", "smile:21", "smile:22", "smile:23", "smile:5", "smile:20"]}
+  {
+   "id": "problems-missing-tooth-hero",
+   "use": "Problem page A missing tooth (hero) and Home What brings you in? | a replacement tooth: an implant crown | 16:9 full bleed, 4:5 stage | B&W",
+   "queries": [
+    "implant",
+    "crown",
+    "denture",
+    "missing (v4a)"
+   ],
+   "candidates": [
+    "implant:3",
+    "implant:7",
+    "implant:8",
+    "implant:23",
+    "crown:11",
+    "implant:13",
+    "implant:9"
+   ]
+  },
+  {
+   "id": "problems-chipped-tooth-hero",
+   "use": "Problem page Chipped or broken tooth (hero) and Home stage | a repair that restores an edge: a single veneer | 16:9, 4:5 | B&W",
+   "queries": [
+    "crown",
+    "veneer",
+    "shade",
+    "broken (v4d)"
+   ],
+   "candidates": [
+    "crown:4",
+    "crown:26",
+    "crown:7",
+    "crown:12",
+    "veneer:15",
+    "crown:5",
+    "shade:0"
+   ]
+  },
+  {
+   "id": "problems-gaps-hero",
+   "use": "Problem page Gaps between teeth (hero) and Home stage | veneers that close a gap, shown as objects | 16:9, 4:5 | B&W",
+   "queries": [
+    "veneer",
+    "crown",
+    "shade",
+    "diastema (v4c)"
+   ],
+   "candidates": [
+    "crown:18",
+    "veneer:28",
+    "veneer:12",
+    "veneer:27",
+    "shade:8",
+    "shade:12",
+    "shade:28"
+   ]
+  },
+  {
+   "id": "problems-crooked-teeth-hero",
+   "use": "Problem page Crooked teeth (hero) and Home stage | straightening without braces: a clear aligner | 16:9, 4:5 | B&W",
+   "queries": [
+    "aligner",
+    "braces",
+    "crooked (v4a)"
+   ],
+   "candidates": [
+    "aligner:11",
+    "aligner:3",
+    "aligner:15",
+    "aligner:8",
+    "aligner:9",
+    "aligner:0",
+    "braces:0"
+   ]
+  },
+  {
+   "id": "problems-stained-teeth-hero",
+   "use": "Problem page Yellow or stained teeth (hero) and Home stage | tooth shade, chosen with care: a shade guide | 16:9, 4:5 | B&W",
+   "queries": [
+    "shade",
+    "veneer",
+    "crown"
+   ],
+   "candidates": [
+    "shade:14",
+    "shade:5",
+    "shade:10",
+    "shade:11",
+    "shade:6",
+    "shade:18",
+    "shade:7",
+    "shade:4"
+   ]
+  },
+  {
+   "id": "problems-toothache-hero",
+   "use": "Problem page Toothache or sensitivity (hero) and Home stage | finding the cause: an X-ray | 16:9, 4:5 | B&W",
+   "queries": [
+    "xray",
+    "instruments",
+    "toothache (v3b)"
+   ],
+   "candidates": [
+    "xray:1",
+    "xray:2",
+    "xray:0",
+    "xray:5",
+    "instruments:21",
+    "instruments:9"
+   ]
+  },
+  {
+   "id": "problems-bleeding-gums-hero",
+   "use": "Problem page Bleeding gums (hero) and Home stage | daily gum care: floss | 16:9, 4:5 | B&W",
+   "queries": [
+    "floss",
+    "brush",
+    "gums (v4c)"
+   ],
+   "candidates": [
+    "floss:28",
+    "floss:11",
+    "floss:6",
+    "floss:2",
+    "floss:9",
+    "floss:20",
+    "brush:22"
+   ]
+  },
+  {
+   "id": "problems-metal-fillings-hero",
+   "use": "Problem page Old metal fillings (hero) and Home stage | precise restorative work: fine instruments | 16:9, 4:5 | B&W",
+   "queries": [
+    "instruments",
+    "tray",
+    "composite",
+    "amalgam (v4c)"
+   ],
+   "candidates": [
+    "instruments:7",
+    "instruments:14",
+    "instruments:6",
+    "instruments:12",
+    "instruments:25",
+    "tray:1",
+    "instruments:2"
+   ]
+  },
+  {
+   "id": "problems-loose-dentures-hero",
+   "use": "Problem page Loose dentures (hero) and Home stage | a well-made denture, shown as an object | 16:9, 4:5 | B&W",
+   "queries": [
+    "denture",
+    "implant",
+    "crown"
+   ],
+   "candidates": [
+    "denture:25",
+    "denture:29",
+    "denture:24",
+    "denture:28",
+    "denture:18",
+    "crown:29",
+    "denture:26"
+   ]
+  },
+  {
+   "id": "problems-child-teeth-hero",
+   "use": "Problem page My child's teeth (hero) and Home stage | children's dental care, gently: small toothbrushes | 16:9, 4:5 | B&W",
+   "queries": [
+    "kidbrush",
+    "brush",
+    "kids (v4c)"
+   ],
+   "candidates": [
+    "kidbrush:19",
+    "kidbrush:9",
+    "kidbrush:8",
+    "kidbrush:5",
+    "kidbrush:1",
+    "kidbrush:24",
+    "kidbrush:6"
+   ]
+  },
+  {
+   "id": "problems-gaps-bonding",
+   "use": "Problem page Gaps, expanding panel Bonding | tooth-coloured material shaped onto a tooth (on a model, not a mouth) | tall panel 1:2 | B&W",
+   "queries": [
+    "composite",
+    "crown",
+    "shade",
+    "filling (v4a)"
+   ],
+   "candidates": [
+    "composite:16",
+    "crown:14",
+    "shade:2",
+    "composite:3",
+    "crown:1",
+    "shade:22"
+   ]
+  },
+  {
+   "id": "problems-gaps-aligners",
+   "use": "Problem page Gaps, expanding panel Aligners | a clear aligner in a gloved hand | tall panel 1:2 | B&W",
+   "queries": [
+    "aligner",
+    "braces",
+    "instruments"
+   ],
+   "candidates": [
+    "aligner:5",
+    "aligner:7",
+    "aligner:0",
+    "aligner:9",
+    "aligner:8",
+    "aligner:18"
+   ]
+  },
+  {
+   "id": "problems-metal-fillings-metal",
+   "use": "Problem page Metal fillings, toggle side Metal | metal, as a material: steel instruments | 16:9 | B&W",
+   "queries": [
+    "instruments",
+    "tray",
+    "composite"
+   ],
+   "candidates": [
+    "instruments:6",
+    "instruments:2",
+    "instruments:21",
+    "instruments:14",
+    "instruments:10",
+    "instruments:5"
+   ]
+  },
+  {
+   "id": "problems-metal-fillings-white",
+   "use": "Problem page Metal fillings, toggle side Tooth-coloured | tooth-coloured material, as an object | 16:9 | B&W",
+   "queries": [
+    "composite",
+    "crown",
+    "shade"
+   ],
+   "candidates": [
+    "composite:13",
+    "crown:5",
+    "composite:14",
+    "crown:20",
+    "shade:6",
+    "crown:26"
+   ]
+  },
+  {
+   "id": "problems-toothache-picker",
+   "use": "Problem page Toothache, beside the symptom picker | calm diagnostics: an X-ray on screen | 4:5 | B&W",
+   "queries": [
+    "xray",
+    "instruments",
+    "consult"
+   ],
+   "candidates": [
+    "xray:1",
+    "xray:2",
+    "instruments:21",
+    "xray:0",
+    "instruments:9",
+    "consult:11"
+   ]
+  },
+  {
+   "id": "problems-bleeding-gums-quiz",
+   "use": "Problem page Bleeding gums, beside the self-check | care at home: toothbrushes | 1:1 | B&W",
+   "queries": [
+    "brush",
+    "floss",
+    "kidbrush"
+   ],
+   "candidates": [
+    "brush:16",
+    "brush:22",
+    "brush:4",
+    "brush:14",
+    "brush:12",
+    "brush:6",
+    "floss:20"
+   ]
+  },
+  {
+   "id": "cosmetic-hero",
+   "use": "Cosmetic dentistry (hero) and /treatments/ preview | porcelain craft: crowns and veneers as objects | 16:9 full bleed | B&W",
+   "queries": [
+    "crown",
+    "veneer",
+    "shade"
+   ],
+   "candidates": [
+    "crown:5",
+    "crown:12",
+    "veneer:15",
+    "crown:7",
+    "crown:26",
+    "veneer:21"
+   ]
+  },
+  {
+   "id": "cosmetic-matrix-stains",
+   "use": "Cosmetic dentistry, matrix row Stains | shade, measured: a shade tab | 3:2 | B&W",
+   "queries": [
+    "shade",
+    "crown",
+    "composite"
+   ],
+   "candidates": [
+    "shade:5",
+    "shade:10",
+    "shade:18",
+    "shade:14",
+    "shade:7",
+    "shade:4",
+    "shade:11"
+   ]
+  },
+  {
+   "id": "cosmetic-matrix-chips",
+   "use": "Cosmetic dentistry, matrix row Chips | a veneer placed on a model with a fine brush | 3:2 | B&W",
+   "queries": [
+    "crown",
+    "composite",
+    "shade"
+   ],
+   "candidates": [
+    "crown:14",
+    "shade:2",
+    "composite:24",
+    "crown:15",
+    "shade:3",
+    "crown:1"
+   ]
+  },
+  {
+   "id": "cosmetic-matrix-gaps",
+   "use": "Cosmetic dentistry, matrix row Gaps | veneers that change width, as objects | 3:2 | B&W",
+   "queries": [
+    "veneer",
+    "crown",
+    "shade"
+   ],
+   "candidates": [
+    "veneer:12",
+    "veneer:28",
+    "crown:12",
+    "veneer:15",
+    "shade:12",
+    "veneer:27"
+   ]
+  },
+  {
+   "id": "invisalign-hero",
+   "use": "Invisalign clear aligners (hero) and /treatments/ preview | a clear aligner, premium product shot | 16:9 full bleed | B&W",
+   "queries": [
+    "aligner",
+    "braces",
+    "invisalign (v3b)"
+   ],
+   "candidates": [
+    "aligner:15",
+    "aligner:8",
+    "aligner:9",
+    "aligner:0",
+    "aligner:7",
+    "aligner:3"
+   ]
+  },
+  {
+   "id": "invisalign-stage-wear",
+   "use": "Invisalign, stage scrubber step Wearing them | an aligner in a gloved hand with its case | 4:3 | B&W",
+   "queries": [
+    "aligner",
+    "instruments",
+    "braces"
+   ],
+   "candidates": [
+    "aligner:7",
+    "aligner:5",
+    "aligner:0",
+    "aligner:18",
+    "aligner:28",
+    "aligner:9"
+   ]
+  },
+  {
+   "id": "orthodontics-hero",
+   "use": "Orthodontics (hero) and /treatments/ preview | braces, shown on a model | 16:9 full bleed | B&W",
+   "queries": [
+    "braces",
+    "aligner",
+    "braces (v4c)"
+   ],
+   "candidates": [
+    "braces:0",
+    "aligner:9",
+    "braces:1",
+    "implant:9",
+    "denture:0",
+    "aligner:8"
+   ]
+  },
+  {
+   "id": "orthodontics-adult",
+   "use": "Orthodontics, panel Adult | discreet straightening for adults: aligners | tall panel | B&W",
+   "queries": [
+    "aligner",
+    "braces"
+   ],
+   "candidates": [
+    "aligner:8",
+    "aligner:11",
+    "aligner:3",
+    "aligner:9",
+    "aligner:0",
+    "aligner:15"
+   ]
+  },
+  {
+   "id": "general-clean",
+   "use": "General dentistry, check-up timeline step Cleaning | scaling and polishing instruments, clean and bright | 4:5 | B&W",
+   "queries": [
+    "instruments",
+    "tray",
+    "floss"
+   ],
+   "candidates": [
+    "instruments:20",
+    "tray:1",
+    "instruments:23",
+    "tray:2",
+    "instruments:12",
+    "instruments:25"
+   ]
+  },
+  {
+   "id": "crowns-process",
+   "use": "Crowns & bridges, How it works (pinned photo) | a finished bridge, product shot | 4:5 | B&W",
+   "queries": [
+    "crown",
+    "implant",
+    "denture"
+   ],
+   "candidates": [
+    "crown:20",
+    "crown:11",
+    "implant:13",
+    "crown:9",
+    "crown:24",
+    "implant:16"
+   ]
+  },
+  {
+   "id": "maxillofacial-injury",
+   "use": "Maxillofacial, Who we help: facial or jaw injury | careful rebuilding: a model with restorations (never a patient) | 3:2 | B&W",
+   "queries": [
+    "implant",
+    "crown",
+    "lab"
+   ],
+   "candidates": [
+    "implant:13",
+    "crown:22",
+    "implant:16",
+    "crown:24",
+    "implant:19",
+    "implant:14"
+   ]
+  },
+  {
+   "id": "kids-age-0-2",
+   "use": "Kids' dentistry, age tab 0 to 2 | the first toothbrush | 3:2 | B&W",
+   "queries": [
+    "kidbrush",
+    "brush"
+   ],
+   "candidates": [
+    "kidbrush:0",
+    "kidbrush:2",
+    "kidbrush:3",
+    "kidbrush:26",
+    "kidbrush:10",
+    "kidbrush:7"
+   ]
+  },
+  {
+   "id": "kids-age-3-5",
+   "use": "Kids' dentistry, age tab 3 to 5 | learning to brush: bright children's brushes | 3:2 | B&W",
+   "queries": [
+    "kidbrush",
+    "brush"
+   ],
+   "candidates": [
+    "kidbrush:7",
+    "kidbrush:5",
+    "kidbrush:6",
+    "kidbrush:24",
+    "kidbrush:11",
+    "kidbrush:12"
+   ]
+  },
+  {
+   "id": "kids-age-6-9",
+   "use": "Kids' dentistry, age tab 6 to 9 | grown-up habits: an electric brush for children | 3:2 | B&W",
+   "queries": [
+    "kidbrush",
+    "brush"
+   ],
+   "candidates": [
+    "kidbrush:20",
+    "kidbrush:21",
+    "brush:12",
+    "brush:13",
+    "brush:23",
+    "kidbrush:28"
+   ]
+  },
+  {
+   "id": "kids-age-10-14",
+   "use": "Kids' dentistry, age tab 10 to 14 | braces and aligners: an aligner | 3:2 | B&W",
+   "queries": [
+    "aligner",
+    "braces",
+    "kidbrush"
+   ],
+   "candidates": [
+    "aligner:0",
+    "aligner:9",
+    "aligner:18",
+    "aligner:28",
+    "braces:0",
+    "aligner:3"
+   ]
+  },
+  {
+   "id": "case-implants",
+   "use": "Sample case Dental implants (case page, large) | an implant crown on a model | 16:10 | B&W",
+   "queries": [
+    "implant",
+    "crown"
+   ],
+   "candidates": [
+    "implant:9",
+    "implant:23",
+    "implant:7",
+    "crown:11",
+    "implant:8",
+    "implant:13"
+   ]
+  },
+  {
+   "id": "case-full-mouth",
+   "use": "Sample case Full mouth rehabilitation (case page, large) | a full set of restorations, product shot | 16:10 | B&W",
+   "queries": [
+    "crown",
+    "denture",
+    "implant"
+   ],
+   "candidates": [
+    "crown:24",
+    "denture:24",
+    "crown:29",
+    "implant:16",
+    "denture:28",
+    "crown:21"
+   ]
+  },
+  {
+   "id": "case-aligners",
+   "use": "Sample case Invisalign & aligners (case page, large) | an aligner beside a dental model | 16:10 | B&W",
+   "queries": [
+    "aligner",
+    "braces"
+   ],
+   "candidates": [
+    "aligner:9",
+    "aligner:8",
+    "aligner:3",
+    "aligner:11",
+    "aligner:0",
+    "aligner:28"
+   ]
+  },
+  {
+   "id": "home-journey-consultation",
+   "use": "Home, Your journey: Consultation (the page's one stock person) | a dentist explaining a plan to a patient at a desk | 4:5 sticky | B&W",
+   "queries": [
+    "consult",
+    "xray",
+    "instruments"
+   ],
+   "candidates": [
+    "consult:21",
+    "consult:6",
+    "consult:12",
+    "consult:11",
+    "consult:0",
+    "xray:0"
+   ]
+  },
+  {
+   "id": "simulation-featured",
+   "use": "Home featured slider and Sample case 1 | a natural, frontal lower-face smile (nose tip to chin), teeth under 40% of the width, for a subtle shade simulation | 3:2 | colour on hover",
+   "queries": [
+    "smile",
+    "veneer",
+    "smile (v4b)"
+   ],
+   "candidates": [
+    "smile:18",
+    "smile:19",
+    "smile:21",
+    "smile:22",
+    "smile:23",
+    "smile:5",
+    "smile:20"
+   ]
+  }
  ]
 }

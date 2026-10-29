@@ -6225,17 +6225,16 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
   .drag--timeline .drag__track > li { width: 78vw; }
 }
 
-/* The doctors: two large portraits */
-.docs-v4 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-.doc-v4__portrait { aspect-ratio: 4 / 5; margin-bottom: 28px; }
+/* The doctors: two cards of what is known (portraits are added after the clinic's photoshoot) */
+.docs-v4 { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; max-width: 1200px; margin-inline: auto; }
+.doc-v4 { padding-top: 32px; border-top: 1px solid var(--ink); }
 .doc-v4 h2 { margin-top: 10px; }
 .doc-v4__quals { margin-top: 8px; color: var(--muted); }
 .doc-v4 .vs { margin-top: 24px; max-width: 560px; }
 .doc-v4__actions { margin-top: 28px; }
 
 @media (max-width: 767px) {
-  .docs-v4 { grid-template-columns: 1fr; gap: 72px; }
-  .doc-v4 > :not(.doc-v4__portrait) { padding-inline: 20px; }
+  .docs-v4 { grid-template-columns: 1fr; gap: 56px; }
 }
 
 /* The practice: rooms as a draggable strip of tall photographs, each at its own shape */
@@ -6841,6 +6840,29 @@ img.bw-photo.in-colour,
   .case-cards--home { grid-template-columns: 1fr; gap: 48px; margin-top: 72px; }
   .case-cards--home .case-card__media { aspect-ratio: 3 / 2; }
   .case-v4__photo { aspect-ratio: 4 / 3; }
+}
+
+/* ---------------------------------------------------------------- Riya never on text (v4 fixes 3, point 5)
+   Larger screens: the launcher steps aside while text is beneath it (site.js 21). Phones: it is docked at the
+   right end of the CALL NOW bar, so it never floats over the page. */
+.riya-launcher { transition: background-color var(--t-link), transform .45s var(--ease), opacity .3s ease; }
+.riya-launcher.is-aside:not(:focus-visible) { opacity: 0; pointer-events: none; transform: translateX(calc(100% + 24px)); }
+.riya-bubble.is-visible.is-aside:not(:focus-within) { opacity: 0; pointer-events: none; transform: translateY(6px); }
+
+@media (max-width: 767px) {
+  .riya-launcher {
+    right: 0;
+    bottom: 0;
+    z-index: 41;
+    width: 56px;
+    height: calc(56px + env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom);
+    border-left: 1px solid rgba(250, 250, 246, .16);
+    border-radius: 0;
+  }
+  .riya-launcher > svg { width: 22px; }
+  .call-bar { padding-right: calc(var(--gutter) + 56px); }
+  .riya-bubble { right: 8px; bottom: calc(66px + env(safe-area-inset-bottom)); }
 }
 
 /* ---------------------------------------------------------------- v4 feedback 8: link spacing

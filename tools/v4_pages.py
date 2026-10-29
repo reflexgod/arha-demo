@@ -450,23 +450,22 @@ def doctors_page(site_url):
     cards = ""
     for key, name, quals, role, focus, cta in docs:
         wa = "https://wa.me/910000000000?text=" + quote(f"Hello Arha Dental Care, I'd like to book a consultation with {name}.")
-        focus_html = f"<dd>{focus}</dd>" if focus else '<dd class="ph-inline">To come</dd>'
+        # Only what is known is shown: no portrait frames or "to come" rows (no visual placeholders)
+        focus_html = f"""
+          <dl class="vs">
+            <div><dt>Areas of focus</dt><dd>{focus}</dd></div>
+          </dl>""" if focus else ""
         cards += f"""
         <article class="doc-v4 reveal" id="{key}" aria-labelledby="{key}-name">
-          <div class="doc-v4__portrait portrait-ph" role="img" aria-label="Portrait of {name}, to come"><img src="assets/logo/logo-seal-bronze.svg" alt="" width="96" height="96"><p>Portrait to come</p></div>
           <p class="eyebrow">{role}</p>
           <h2 id="{key}-name">{name}</h2>
-          <p class="doc-v4__quals">{quals}</p>
-          <dl class="vs">
-            <div><dt>Areas of focus</dt>{focus_html}</div>
-            <div><dt>Languages</dt><dd class="ph-inline">To come</dd></div>
-          </dl>
+          <p class="doc-v4__quals">{quals}</p>{focus_html}
           <p class="doc-v4__actions"><a class="link" href="{wa}" target="_blank" rel="noopener">{cta}</a></p>
         </article>"""
     body = page_hero("{{pic dental-operatory-arha-dental-care-peddar-road-06 | 100vw | An Arha treatment room on Peddar Road | pos=50% 55% | eager}}",
                      "The doctors", "Two generations, one standard of care, on Peddar Road.", trail, "About")
     body += f"""
-    <!-- Qualifications as on the clinic's door sign. Portraits, languages and Dr. Vasant's areas of focus: to come. -->
+    <!-- Qualifications as on the clinic's door sign. Portraits, languages and Dr. Vasant's areas of focus are added when the clinic sends them (notes/TO-CONFIRM.md). -->
     <section class="section" aria-label="Our dentists">
       <div class="container-wide docs-v4">{cards}
       </div>

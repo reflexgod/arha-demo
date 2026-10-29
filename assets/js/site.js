@@ -1527,4 +1527,65 @@
     document.addEventListener('touchstart', (e) => prefetch(e.target.closest('a[href]')), { passive: true });
     document.addEventListener('focusin', (e) => prefetch(e.target.closest('a[href]')));
   }
+
+  /* 21. Riya's launcher never sits on text (v4 fixes 3, point 5). On phones it is docked in the CALL NOW
+         bar (site.css). On larger screens it floats in the corner and steps aside (.is-aside) while a line of
+         text is beneath it, checked once a frame while scrolling: nine points under the launcher, each
+         tested against the text at that point (caret position), with the launcher itself click-through. */
+  const wide = window.matchMedia('(min-width: 768px)');
+  let riyaBtn = null;
+  let asideFrame = 0;
+  const textAt = (x, y) => {
+    let node = null;
+    let offset = 0;
+    if (document.caretPositionFromPoint) {
+      const pos = document.caretPositionFromPoint(x, y);
+      if (pos) { node = pos.offsetNode; offset = pos.offset; }
+    } else if (document.caretRangeFromPoint) {
+      const r = document.caretRangeFromPoint(x, y);
+      if (r) { node = r.startContainer; offset = r.startOffset; }
+    }
+    if (!node || node.nodeType !== 3 || !node.data.trim() || node.parentElement.closest('.riya-launcher, .riya-bubble')) return false;
+    const range = document.createRange();
+    const start = Math.max(0, Math.min(offset, node.length - 1));
+    range.setStart(node, start);
+    range.setEnd(node, start + 1);
+    const box = range.getBoundingClientRect();
+    return x >= box.left - 6 && x <= box.right + 6 && y >= box.top - 4 && y <= box.bottom + 4;
+  };
+  const checkAside = () => {
+    asideFrame = 0;
+    riyaBtn = riyaBtn || document.querySelector('.riya-launcher');
+    if (!riyaBtn || !wide.matches || document.documentElement.classList.contains('riya-open')) {
+      if (riyaBtn) riyaBtn.classList.remove('is-aside');
+      return;
+    }
+    // Its resting place: offsets ignore the transform that moves it aside (fixed, so relative to the screen)
+    const r = { left: riyaBtn.offsetLeft, top: riyaBtn.offsetTop, width: riyaBtn.offsetWidth, height: riyaBtn.offsetHeight };
+    const was = riyaBtn.style.pointerEvents;
+    const over = (box) => {
+      for (const fx of [0.1, 0.5, 0.9]) {
+        for (const fy of [0.15, 0.5, 0.85]) {
+          if (textAt(box.left + box.width * fx, box.top + box.height * fy)) return true;
+        }
+      }
+      return false;
+    };
+    riyaBtn.style.pointerEvents = 'none';
+    riyaBtn.classList.toggle('is-aside', over(r));
+    riyaBtn.style.pointerEvents = was;
+    // The proactive bubble (shown at most once a visit) waits while text is beneath it, too
+    const bubble = document.querySelector('.riya-bubble.is-visible');
+    if (bubble) {
+      bubble.style.visibility = 'hidden';
+      const covers = over(bubble.getBoundingClientRect());
+      bubble.style.visibility = '';
+      bubble.classList.toggle('is-aside', covers);
+    }
+  };
+  const queueAside = () => { if (!asideFrame) asideFrame = requestAnimationFrame(checkAside); };
+  window.addEventListener('scroll', queueAside, { passive: true });
+  window.addEventListener('resize', queueAside, { passive: true });
+  window.addEventListener('load', queueAside);
+  setInterval(() => { if (wide.matches) queueAside(); }, 1000);  // the bubble arrives on its own timer
 })();

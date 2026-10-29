@@ -1,77 +1,2170 @@
 {
  "_about": "Scores 1-5 per shortlist candidate (tools/qa/stock_slots.json), in this order: fit, premium, palette, crop, faces/gross, resolution, unused. Judged by eye from review/stock-shortlist/<slot>.jpg on 29 Oct 2026; resolution from the API size (>= 2400 px long side = 5); unused = not on another page of the site as built (1 = already on two pages). 'winner' is a candidate key, or 'arha:<photo>' when one of Arha's own photographs took the slot. Candidates that are the same Unsplash photo under two searches share one score and are marked 'same'.",
  "slots": {
-  "problems-missing-tooth-hero": {"winner": "implant:3", "why": "The only candidate that is one replacement tooth on its own, lit like a product shot; the dark ground carries the white headline at 1440 and 390.",
-   "scores": {"implant:3": [5,5,4,4,5,5,5], "implant:7": [4,3,2,4,5,5,2], "implant:8": [3,3,2,3,5,5,5], "implant:23": [4,2,2,3,3,5,5], "crown:11": "same:implant:3", "implant:13": [2,4,4,4,5,5,3], "implant:9": [2,3,3,4,5,5,3]}},
-  "problems-chipped-tooth-hero": {"winner": "crown:4", "why": "A single thin facing held up beside the edge it would restore: exactly the repair the page describes, on a pale ground that matches the grade.",
-   "scores": {"crown:4": [5,4,5,3,5,5,5], "crown:26": [3,4,3,3,5,5,5], "crown:7": [3,5,3,4,5,5,3], "crown:12": [3,4,3,4,5,5,5], "veneer:15": [3,4,3,4,5,5,5], "crown:5": [2,4,4,4,4,5,3], "shade:0": [4,4,5,3,5,5,5]}},
-  "problems-gaps-hero": {"winner": "crown:18", "why": "Four veneers in a soft row on grey fabric: calm, light and plainly about the front teeth; the darker leather shots are already on the cosmetic page.",
-   "scores": {"crown:18": [4,5,5,4,5,5,5], "veneer:28": [4,4,4,4,5,5,3], "veneer:12": [3,5,3,4,5,5,3], "veneer:27": [4,4,4,4,5,5,1], "shade:8": [4,4,4,4,5,5,1], "shade:12": "same:veneer:28", "shade:28": "same:crown:18"}},
-  "problems-crooked-teeth-hero": {"winner": "aligner:3", "why": "A clear aligner alone on white: the cleanest product shot of 'straightening without braces', and it survives both the 16:9 and 4:5 crops.",
-   "scores": {"aligner:11": [4,4,3,4,5,5,5], "aligner:3": [5,5,5,4,5,5,5], "aligner:15": [2,5,2,4,5,5,5], "aligner:8": [4,4,3,4,5,5,3], "aligner:9": [4,4,3,4,5,5,2], "aligner:0": [3,4,4,2,5,5,3], "braces:0": [2,3,3,4,5,5,3]}},
-  "problems-stained-teeth-hero": {"winner": "shade:14", "why": "A shade tab held against its guide says 'colour, chosen with care' at a glance; tied with shade:5 (the same shoot), 14 keeps the tab nearer the centre for the 4:5 homepage stage.",
-   "scores": {"shade:14": [5,4,4,4,5,5,5], "shade:5": [5,4,4,3,5,5,5], "shade:10": [4,4,3,2,5,5,3], "shade:11": [3,3,4,3,5,5,5], "shade:6": [2,4,4,4,5,5,5], "shade:18": [2,3,3,4,5,5,5], "shade:7": [4,3,3,3,5,5,5]}},
-  "problems-toothache-hero": {"winner": "xray:1", "why": "An X-ray on the monitor beside the chair: 'finding the cause' without a face or a sore mouth; xray:2 is already on two pages and the consultation shots show faces.",
-   "scores": {"xray:1": [5,4,4,4,5,5,5], "xray:2": [4,4,4,4,4,5,1], "xray:0": [4,3,3,3,2,5,5], "xray:5": [2,2,2,3,2,5,5], "instruments:21": [2,4,4,2,5,5,5], "instruments:9": [2,4,4,4,5,5,1]}},
-  "problems-bleeding-gums-hero": {"winner": "floss:11", "why": "A water flosser and floss on white: daily gum care as a clean still life; the others are busier, coloured or dated.",
-   "scores": {"floss:28": [4,3,4,4,5,5,5], "floss:11": [5,5,5,4,5,5,5], "floss:6": [3,3,3,4,5,5,5], "floss:2": [4,4,4,3,5,5,5], "floss:9": [4,3,2,4,5,5,5], "floss:20": [3,3,2,4,5,5,5], "brush:22": [3,3,3,4,5,5,5]}},
-  "problems-metal-fillings-hero": {"winner": "instruments:7", "why": "Fine steel instruments in soft grey light: precise restorative work, and the best match for the grade; the scalers and handpieces are used elsewhere.",
-   "scores": {"instruments:7": [5,5,5,5,5,5,5], "instruments:14": [4,4,4,4,5,5,5], "instruments:6": [4,4,4,4,5,5,5], "instruments:12": [3,3,4,2,5,5,5], "instruments:25": [3,3,4,2,5,5,5], "tray:1": [3,4,3,4,5,5,2], "instruments:2": [3,4,3,4,5,5,3]}},
-  "problems-loose-dentures-hero": {"winner": "denture:25", "why": "A well-made full denture straight on, on black: dignified and clear; the side angles crop badly and denture:18 (with glasses) reads as old age, not care.",
-   "scores": {"denture:25": [5,5,4,5,5,5,5], "denture:29": [3,3,3,4,4,5,5], "denture:24": [4,4,4,4,5,5,5], "denture:28": [4,4,4,3,5,5,5], "denture:18": [3,3,3,4,5,5,5], "crown:29": "same:denture:25", "denture:26": [3,4,4,3,4,5,5]}},
-  "problems-child-teeth-hero": {"winner": "kidbrush:19", "why": "Four small brushes in soft pastels: gentle and unmistakably for children, and the palette sits well in black and white.",
-   "scores": {"kidbrush:19": [5,5,5,3,5,5,5], "kidbrush:9": [4,4,3,4,5,5,5], "kidbrush:8": [4,4,4,3,5,5,5], "kidbrush:5": [3,3,2,3,5,5,5], "kidbrush:1": [4,4,4,3,5,5,5], "kidbrush:24": [2,2,1,4,5,5,5], "kidbrush:6": [3,3,2,4,5,5,5]}},
-  "problems-gaps-bonding": {"winner": "crown:14", "why": "Tooth-coloured material placed on a model with a fine brush: bonding without a patient's mouth; the lab-grinding shots are already on two pages.",
-   "scores": {"composite:16": [2,3,2,4,5,5,5], "crown:14": [5,4,4,4,4,5,5], "shade:2": "same:crown:14", "composite:3": [3,4,3,4,5,5,1], "crown:1": "same:composite:3", "shade:22": [3,3,3,3,5,5,5]}},
-  "problems-gaps-aligners": {"winner": "aligner:5", "why": "A clear aligner in a gloved hand, upright, for the tall panel; aligner:7 is the Invisalign hero.",
-   "scores": {"aligner:5": [5,4,3,4,5,5,4], "aligner:7": [5,4,3,3,5,5,3], "aligner:0": [3,4,4,4,5,5,3], "aligner:9": [3,4,3,3,5,5,1], "aligner:8": [3,4,3,3,5,5,3], "aligner:18": [4,3,4,4,5,5,3]}},
-  "problems-metal-fillings-metal": {"winner": "instruments:2", "why": "Steel handpieces in their holder: 'metal, as a material' without repeating the hero's laid-out instruments (instruments:6 and :14 are the same look as the hero).",
-   "scores": {"instruments:6": [4,4,4,4,5,5,5], "instruments:2": [4,4,4,5,5,5,4], "instruments:21": [3,4,4,2,5,5,5], "instruments:14": [3,4,4,4,5,5,5], "instruments:10": [4,4,4,4,5,5,5], "instruments:5": [3,3,4,2,5,5,5]}},
-  "problems-metal-fillings-white": {"winner": "crown:20", "why": "A tooth-coloured bridge floating on white: the material as an object, bright against the dark 'metal' side.",
-   "scores": {"composite:13": [3,4,4,4,4,5,2], "crown:5": "same:composite:13", "composite:14": [4,4,3,4,5,5,5], "crown:20": [5,5,5,4,5,5,5], "shade:6": [2,4,4,4,5,5,5], "crown:26": [3,4,3,3,5,5,5]}},
-  "problems-toothache-picker": {"winner": "arha:arha-dental-care-xray-room", "why": "No free candidate scored 4+ on fit: xray:1 became this page's hero and xray:2 is on two pages. Arha's own X-ray room (a still from the walkthrough video) takes the slot, as the brief asks.",
-   "scores": {"xray:1": [5,4,4,3,5,5,1], "xray:2": [4,4,4,3,4,5,1], "instruments:21": [2,4,4,3,5,5,5], "xray:0": [4,3,3,3,2,5,5], "instruments:9": [2,4,4,4,5,5,1], "consult:11": [3,3,3,3,2,5,5]}},
-  "problems-bleeding-gums-quiz": {"winner": "brush:16", "why": "A whole care routine laid flat on a calm grey-green ground that holds a square crop; brush:4 is close but reads as bathroom styling.",
-   "scores": {"brush:16": [5,5,4,5,5,5,4], "brush:22": [3,3,3,4,5,5,5], "brush:4": [4,4,5,4,5,5,5], "brush:14": [3,4,4,3,5,5,5], "brush:12": [3,4,4,4,5,5,5], "brush:6": [4,4,5,3,5,5,5], "floss:20": [3,3,2,4,5,5,5]}},
-  "cosmetic-hero": {"winner": "crown:5", "why": "Porcelain crowns in soft, low light: craft rather than a smile, and the lightest of the set for a full-bleed hero.",
-   "scores": {"crown:5": [4,5,5,5,5,5,5], "crown:12": [4,4,3,4,5,5,5], "veneer:15": [4,4,3,4,5,5,5], "crown:7": [4,5,3,4,5,5,3], "crown:26": [3,4,3,2,5,5,5], "veneer:21": [3,4,3,4,4,5,5]}},
-  "cosmetic-matrix-stains": {"winner": "shade:10", "why": "Tied with shade:4; the tabs on the card read clearly at a small size where shade:4's kit is busy. shade:5 is the same shoot as the stained-teeth hero.",
-   "scores": {"shade:5": [5,4,4,4,5,5,2], "shade:10": [4,4,3,3,5,5,5], "shade:18": [3,3,3,4,5,5,5], "shade:14": [5,4,4,4,5,5,1], "shade:7": [3,3,3,4,5,5,5], "shade:4": [4,4,3,3,5,5,5]}},
-  "cosmetic-matrix-chips": {"winner": "crown:15", "why": "A veneer lifted on a fine brush above the model: shaping a chipped edge, and not the frame already on the gaps page.",
-   "scores": {"crown:14": [5,4,4,4,4,5,3], "shade:2": "same:crown:14", "composite:24": "same:crown:14", "crown:15": [5,4,4,4,4,5,5], "shade:3": [3,4,4,4,5,5,5], "crown:1": [3,4,3,4,5,5,1]}},
-  "cosmetic-matrix-gaps": {"winner": "veneer:28", "why": "Tied with crown:12; veneer:28's mid-grey ground matches the grade and the diagonal row reads as 'width'. veneer:12 is already on this page.",
-   "scores": {"veneer:12": [4,5,3,4,5,5,1], "veneer:28": [4,4,4,4,5,5,4], "crown:12": [4,4,3,4,5,5,5], "veneer:15": "same:crown:12", "shade:12": "same:veneer:28", "veneer:27": [4,4,4,4,5,5,1]}},
-  "invisalign-hero": {"winner": "aligner:7", "why": "Changed on 29 Oct: the earlier pick (aligner:15) is a 3D render of a glass spiral, not an aligner (fit 2). aligner:7, a clear aligner in a gloved hand beside its case, scores highest of the free candidates; aligner:3 is on two pages.",
-   "scores": {"aligner:15": [2,5,2,5,5,5,5], "aligner:8": [4,4,3,4,5,5,3], "aligner:9": [4,4,3,4,5,5,1], "aligner:0": [3,4,4,2,5,5,4], "aligner:7": [5,4,3,4,5,5,5], "aligner:3": [5,5,5,4,5,5,1]}},
-  "invisalign-stage-wear": {"winner": "aligner:18", "why": "Changed on 29 Oct with the hero: hands holding an aligner, its case and a spray (picked from the cached search, one API call). aligner:7 is now the hero and aligner:5 is the same shoot.",
-   "scores": {"aligner:7": [5,4,3,4,5,5,1], "aligner:5": [5,4,3,4,5,5,2], "aligner:0": [3,4,4,2,5,5,3], "aligner:18": [4,4,4,4,5,5,4], "aligner:28": [4,3,2,4,5,5,5], "aligner:9": [3,4,3,4,5,5,1]}},
-  "orthodontics-hero": {"winner": "braces:0", "why": "The only candidate showing braces on a model; braces:1 is a patient with a retractor (never) and the rest are aligners or plain models.",
-   "scores": {"braces:0": [5,3,3,4,5,5,5], "aligner:9": [2,4,3,4,5,5,1], "braces:1": [3,2,2,3,1,5,1], "implant:9": [2,3,3,4,5,5,4], "denture:0": [2,3,3,4,5,5,5], "aligner:8": [3,4,3,4,5,5,3]}},
-  "orthodontics-adult": {"winner": "aligner:8", "why": "Clear aligners on models in soft shadow: discreet adult straightening, upright enough for a tall panel; aligner:11 lies flat and loses itself in a tall crop.",
-   "scores": {"aligner:8": [5,4,3,4,5,5,4], "aligner:11": [4,4,3,3,5,5,5], "aligner:3": [5,5,5,3,5,5,1], "aligner:9": [4,4,3,3,5,5,1], "aligner:0": [3,4,4,4,5,5,4], "aligner:15": [2,5,2,4,5,5,5]}},
-  "general-clean": {"winner": "instruments:20", "why": "Tied with instruments:23; 20 shows the mirror and probe with the scalers, the whole cleaning set on a bright tray.",
-   "scores": {"instruments:20": [5,4,3,4,5,5,5], "tray:1": "same:instruments:20", "instruments:23": [5,4,3,3,5,5,5], "tray:2": [5,4,3,3,5,5,5], "instruments:12": [3,3,4,2,5,5,5], "instruments:25": [3,3,4,3,5,5,5]}},
-  "crowns-process": {"winner": "arha:arha-dental-care-delivery-unit", "why": "crown:20 scores highest (33 of 35) but is on the old metal fillings page; the crowns page needed one of Arha's own rooms, and How it works is where the clinic is the subject, so the delivery unit still from the walkthrough video takes it.",
-   "scores": {"crown:20": [5,5,5,4,5,5,4], "crown:11": [3,5,4,4,5,5,1], "implant:13": [4,4,4,4,5,5,4], "crown:9": [4,4,3,4,5,5,4], "crown:24": [4,4,3,4,5,5,1], "implant:16": [3,3,4,4,5,5,5]}},
-  "maxillofacial-injury": {"winner": "implant:13", "why": "A prosthesis on a stone model: careful rebuilding with no patient in sight; the plaster models say less.",
-   "scores": {"implant:13": [5,4,4,4,5,5,5], "crown:22": [3,3,4,4,5,5,5], "implant:16": "same:crown:22", "crown:24": [4,4,3,4,5,5,1], "implant:19": [4,3,4,4,5,5,5], "implant:14": [4,3,3,4,5,5,5]}},
-  "kids-age-0-2": {"winner": "kidbrush:26", "why": "A small wooden brush with soft bristles: the first toothbrush, calm and natural; kidbrush:10 fits as well but its orange ground fights the grade.",
-   "scores": {"kidbrush:0": [4,3,2,3,5,5,5], "kidbrush:2": [4,4,3,3,5,5,5], "kidbrush:3": [4,4,4,3,5,5,5], "kidbrush:26": [4,4,4,5,5,5,4], "kidbrush:10": [5,3,2,4,5,5,5], "kidbrush:7": [3,4,4,4,5,5,4]}},
-  "kids-age-3-5": {"winner": "kidbrush:7", "why": "A bright children's brush, close and simple; the flat lays on turquoise are louder than the rest of the site.",
-   "scores": {"kidbrush:7": [4,4,4,5,5,5,4], "kidbrush:5": [4,3,2,3,5,5,5], "kidbrush:6": [4,3,2,4,5,5,5], "kidbrush:24": [2,2,1,4,5,5,5], "kidbrush:11": [3,3,3,3,5,5,5], "kidbrush:12": [3,3,3,4,5,5,5]}},
-  "kids-age-6-9": {"winner": "kidbrush:20", "why": "Ties at 29 broken on fit: kidbrush:20 is plainly a children's electric brush; brush:12 is an adult one.",
-   "scores": {"kidbrush:20": [5,4,3,3,5,5,4], "kidbrush:21": [3,3,4,4,5,5,5], "brush:12": [2,4,4,4,5,5,5], "brush:13": [2,3,4,3,5,5,5], "brush:23": [2,4,4,3,5,5,5], "kidbrush:28": [2,3,4,2,5,5,5]}},
-  "kids-age-10-14": {"winner": "aligner:18", "why": "Changed on 29 Oct after scoring: aligner:18 (hands holding an aligner and its case) beats aligner:0 on crop, and aligner:0 stays on the Invisalign page.",
-   "scores": {"aligner:0": [4,4,4,3,5,5,4], "aligner:9": [3,4,3,4,5,5,1], "aligner:18": [4,4,4,4,5,5,4], "aligner:28": [3,3,2,4,5,5,5], "braces:0": [4,3,3,4,5,5,3], "aligner:3": [4,5,5,4,5,5,1]}},
-  "case-implants": {"winner": "implant:7", "why": "Ties at 28 broken on fit: an implant model with its neighbours explains the case; the single crown on black is the missing-tooth hero.",
-   "scores": {"implant:9": [2,3,3,4,5,5,4], "implant:23": [4,2,2,4,3,5,5], "implant:7": [5,3,2,4,5,5,4], "crown:11": [4,5,4,3,5,5,2], "implant:8": [3,3,2,4,5,5,5], "implant:13": [2,4,4,4,5,5,4]}},
-  "case-full-mouth": {"winner": "crown:24", "why": "A full arch of restorations, straight on: the result of full mouth rehabilitation as one object.",
-   "scores": {"crown:24": [5,4,4,4,5,5,5], "denture:24": [4,4,4,4,5,5,5], "crown:29": [4,5,4,4,5,5,2], "implant:16": [2,3,4,4,5,5,5], "denture:28": [3,4,4,3,5,5,5], "crown:21": [3,4,4,3,4,5,5]}},
-  "case-aligners": {"winner": "aligner:9", "why": "An aligner above a dental model: the slot's brief exactly, with depth on black.",
-   "scores": {"aligner:9": [5,4,3,4,5,5,5], "aligner:8": [4,4,3,4,5,5,3], "aligner:3": [4,5,5,4,5,5,1], "aligner:11": [3,4,3,4,5,5,5], "aligner:0": [3,4,4,2,5,5,3], "aligner:28": [3,3,2,4,5,5,5]}},
-  "home-journey-consultation": {"winner": "consult:21", "why": "A plan explained at a desk with the X-ray on screen: the consultation as a conversation, not a chair; the homepage's one stock image of people.",
-   "scores": {"consult:21": [5,4,4,4,4,5,5], "consult:6": [4,4,4,4,3,5,5], "consult:12": [3,4,4,4,3,5,5], "consult:11": [4,3,3,3,3,5,5], "consult:0": [4,4,4,3,3,5,5], "xray:0": "same:consult:11"}},
-  "simulation-featured": {"winner": "smile:20", "why": "Frontal enough, nose tip to chin, teeth about a fifth of the width, natural colour: the right base for a subtle same-photo shade simulation. The Vitaly Gariev frames are portrait and too tight for 3:2.",
-   "scores": {"smile:18": [4,4,4,3,4,5,5], "smile:19": [4,4,4,3,4,5,5], "smile:21": [4,4,4,3,4,5,5], "smile:22": [4,4,4,3,4,5,5], "smile:23": [4,4,4,3,4,5,5], "smile:5": [3,3,4,4,3,5,5], "smile:20": [5,4,4,4,4,5,5]}}
+  "problems-missing-tooth-hero": {
+   "winner": "implant:3",
+   "why": "The only candidate that is one replacement tooth on its own, lit like a product shot; the dark ground carries the white headline at 1440 and 390.",
+   "scores": {
+    "implant:3": [
+     5,
+     5,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "implant:7": [
+     4,
+     3,
+     2,
+     4,
+     5,
+     5,
+     2
+    ],
+    "implant:8": [
+     3,
+     3,
+     2,
+     3,
+     5,
+     5,
+     5
+    ],
+    "implant:23": [
+     4,
+     2,
+     2,
+     3,
+     3,
+     5,
+     5
+    ],
+    "crown:11": "same:implant:3",
+    "implant:13": [
+     2,
+     4,
+     4,
+     4,
+     5,
+     5,
+     3
+    ],
+    "implant:9": [
+     2,
+     3,
+     3,
+     4,
+     5,
+     5,
+     3
+    ]
+   }
+  },
+  "problems-chipped-tooth-hero": {
+   "winner": "crown:4",
+   "why": "A single thin facing held up beside the edge it would restore: exactly the repair the page describes, on a pale ground that matches the grade.",
+   "scores": {
+    "crown:4": [
+     5,
+     4,
+     5,
+     3,
+     5,
+     5,
+     5
+    ],
+    "crown:26": [
+     3,
+     4,
+     3,
+     3,
+     5,
+     5,
+     5
+    ],
+    "crown:7": [
+     3,
+     5,
+     3,
+     4,
+     5,
+     5,
+     3
+    ],
+    "crown:12": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "veneer:15": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "crown:5": [
+     2,
+     4,
+     4,
+     4,
+     4,
+     5,
+     3
+    ],
+    "shade:0": [
+     4,
+     4,
+     5,
+     3,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "problems-gaps-hero": {
+   "winner": "crown:18",
+   "why": "Four veneers in a soft row on grey fabric: calm, light and plainly about the front teeth; the darker leather shots are already on the cosmetic page.",
+   "scores": {
+    "crown:18": [
+     4,
+     5,
+     5,
+     4,
+     5,
+     5,
+     5
+    ],
+    "veneer:28": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     3
+    ],
+    "veneer:12": [
+     3,
+     5,
+     3,
+     4,
+     5,
+     5,
+     3
+    ],
+    "veneer:27": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     1
+    ],
+    "shade:8": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     1
+    ],
+    "shade:12": "same:veneer:28",
+    "shade:28": "same:crown:18"
+   }
+  },
+  "problems-crooked-teeth-hero": {
+   "winner": "aligner:3",
+   "why": "A clear aligner alone on white: the cleanest product shot of 'straightening without braces', and it survives both the 16:9 and 4:5 crops.",
+   "scores": {
+    "aligner:11": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "aligner:3": [
+     5,
+     5,
+     5,
+     4,
+     5,
+     5,
+     5
+    ],
+    "aligner:15": [
+     2,
+     5,
+     2,
+     4,
+     5,
+     5,
+     5
+    ],
+    "aligner:8": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     3
+    ],
+    "aligner:9": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     2
+    ],
+    "aligner:0": [
+     3,
+     4,
+     4,
+     2,
+     5,
+     5,
+     3
+    ],
+    "braces:0": [
+     2,
+     3,
+     3,
+     4,
+     5,
+     5,
+     3
+    ]
+   }
+  },
+  "problems-stained-teeth-hero": {
+   "winner": "shade:4",
+   "why": "Changed on 29 Oct: the earlier pick (shade:14, and shade:5 and shade:10 from the same photographer) shows guitar picks, not shade tabs; it was caught at full size in the visual pass. shade:4 is a real VITA shade guide on a dental lab table (one API call from the cached search); shown from its top third.",
+   "scores": {
+    "shade:14": [
+     1,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "shade:5": [
+     1,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "shade:10": [
+     1,
+     4,
+     3,
+     2,
+     5,
+     5,
+     5
+    ],
+    "shade:11": [
+     3,
+     3,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "shade:6": [
+     2,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "shade:18": [
+     2,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "shade:7": [
+     4,
+     3,
+     3,
+     3,
+     5,
+     5,
+     5
+    ],
+    "shade:4": [
+     5,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "problems-toothache-hero": {
+   "winner": "xray:1",
+   "why": "An X-ray on the monitor beside the chair: 'finding the cause' without a face or a sore mouth; xray:2 is already on two pages and the consultation shots show faces.",
+   "scores": {
+    "xray:1": [
+     5,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "xray:2": [
+     4,
+     4,
+     4,
+     4,
+     4,
+     5,
+     1
+    ],
+    "xray:0": [
+     4,
+     3,
+     3,
+     3,
+     2,
+     5,
+     5
+    ],
+    "xray:5": [
+     2,
+     2,
+     2,
+     3,
+     2,
+     5,
+     5
+    ],
+    "instruments:21": [
+     2,
+     4,
+     4,
+     2,
+     5,
+     5,
+     5
+    ],
+    "instruments:9": [
+     2,
+     4,
+     4,
+     4,
+     5,
+     5,
+     1
+    ]
+   }
+  },
+  "problems-bleeding-gums-hero": {
+   "winner": "floss:2",
+   "why": "Changed on 29 Oct: the earlier pick (floss:11) is a medical device printed 'not for use in humans', not a water flosser; caught at full size in the visual pass. floss:2, a coil of floss in an open hand, is daily gum care as a calm still life (floss:28 is string, not floss).",
+   "scores": {
+    "floss:28": [
+     2,
+     3,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "floss:11": [
+     1,
+     5,
+     5,
+     4,
+     5,
+     5,
+     5
+    ],
+    "floss:6": [
+     3,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "floss:2": [
+     5,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "floss:9": [
+     4,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ],
+    "floss:20": [
+     3,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ],
+    "brush:22": [
+     3,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "problems-metal-fillings-hero": {
+   "winner": "instruments:7",
+   "why": "Fine steel instruments in soft grey light: precise restorative work, and the best match for the grade; the scalers and handpieces are used elsewhere.",
+   "scores": {
+    "instruments:7": [
+     5,
+     5,
+     5,
+     5,
+     5,
+     5,
+     5
+    ],
+    "instruments:14": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "instruments:6": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "instruments:12": [
+     3,
+     3,
+     4,
+     2,
+     5,
+     5,
+     5
+    ],
+    "instruments:25": [
+     3,
+     3,
+     4,
+     2,
+     5,
+     5,
+     5
+    ],
+    "tray:1": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     2
+    ],
+    "instruments:2": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     3
+    ]
+   }
+  },
+  "problems-loose-dentures-hero": {
+   "winner": "denture:25",
+   "why": "A well-made full denture straight on, on black: dignified and clear; the side angles crop badly and denture:18 (with glasses) reads as old age, not care.",
+   "scores": {
+    "denture:25": [
+     5,
+     5,
+     4,
+     5,
+     5,
+     5,
+     5
+    ],
+    "denture:29": [
+     3,
+     3,
+     3,
+     4,
+     4,
+     5,
+     5
+    ],
+    "denture:24": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "denture:28": [
+     4,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "denture:18": [
+     3,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "crown:29": "same:denture:25",
+    "denture:26": [
+     3,
+     4,
+     4,
+     3,
+     4,
+     5,
+     5
+    ]
+   }
+  },
+  "problems-child-teeth-hero": {
+   "winner": "kidbrush:19",
+   "why": "Four small brushes in soft pastels: gentle and unmistakably for children, and the palette sits well in black and white.",
+   "scores": {
+    "kidbrush:19": [
+     5,
+     5,
+     5,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:9": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:8": [
+     4,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:5": [
+     3,
+     3,
+     2,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:1": [
+     4,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:24": [
+     2,
+     2,
+     1,
+     4,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:6": [
+     3,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "problems-gaps-bonding": {
+   "winner": "crown:14",
+   "why": "Tooth-coloured material placed on a model with a fine brush: bonding without a patient's mouth; the lab-grinding shots are already on two pages.",
+   "scores": {
+    "composite:16": [
+     2,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ],
+    "crown:14": [
+     5,
+     4,
+     4,
+     4,
+     4,
+     5,
+     5
+    ],
+    "shade:2": "same:crown:14",
+    "composite:3": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     1
+    ],
+    "crown:1": "same:composite:3",
+    "shade:22": [
+     3,
+     3,
+     3,
+     3,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "problems-gaps-aligners": {
+   "winner": "aligner:5",
+   "why": "A clear aligner in a gloved hand, upright, for the tall panel; aligner:7 is the Invisalign hero.",
+   "scores": {
+    "aligner:5": [
+     5,
+     4,
+     3,
+     4,
+     5,
+     5,
+     4
+    ],
+    "aligner:7": [
+     5,
+     4,
+     3,
+     3,
+     5,
+     5,
+     3
+    ],
+    "aligner:0": [
+     3,
+     4,
+     4,
+     4,
+     5,
+     5,
+     3
+    ],
+    "aligner:9": [
+     3,
+     4,
+     3,
+     3,
+     5,
+     5,
+     1
+    ],
+    "aligner:8": [
+     3,
+     4,
+     3,
+     3,
+     5,
+     5,
+     3
+    ],
+    "aligner:18": [
+     4,
+     3,
+     4,
+     4,
+     5,
+     5,
+     3
+    ]
+   }
+  },
+  "problems-metal-fillings-metal": {
+   "winner": "instruments:2",
+   "why": "Steel handpieces in their holder: 'metal, as a material' without repeating the hero's laid-out instruments (instruments:6 and :14 are the same look as the hero).",
+   "scores": {
+    "instruments:6": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "instruments:2": [
+     4,
+     4,
+     4,
+     5,
+     5,
+     5,
+     4
+    ],
+    "instruments:21": [
+     3,
+     4,
+     4,
+     2,
+     5,
+     5,
+     5
+    ],
+    "instruments:14": [
+     3,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "instruments:10": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "instruments:5": [
+     3,
+     3,
+     4,
+     2,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "problems-metal-fillings-white": {
+   "winner": "crown:20",
+   "why": "A tooth-coloured bridge floating on white: the material as an object, bright against the dark 'metal' side.",
+   "scores": {
+    "composite:13": [
+     3,
+     4,
+     4,
+     4,
+     4,
+     5,
+     2
+    ],
+    "crown:5": "same:composite:13",
+    "composite:14": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "crown:20": [
+     5,
+     5,
+     5,
+     4,
+     5,
+     5,
+     5
+    ],
+    "shade:6": [
+     2,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "crown:26": [
+     3,
+     4,
+     3,
+     3,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "problems-toothache-picker": {
+   "winner": "arha:arha-dental-care-xray-room",
+   "why": "No free candidate scored 4+ on fit: xray:1 became this page's hero and xray:2 is on two pages. Arha's own X-ray room (a still from the walkthrough video) takes the slot, as the brief asks.",
+   "scores": {
+    "xray:1": [
+     5,
+     4,
+     4,
+     3,
+     5,
+     5,
+     1
+    ],
+    "xray:2": [
+     4,
+     4,
+     4,
+     3,
+     4,
+     5,
+     1
+    ],
+    "instruments:21": [
+     2,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "xray:0": [
+     4,
+     3,
+     3,
+     3,
+     2,
+     5,
+     5
+    ],
+    "instruments:9": [
+     2,
+     4,
+     4,
+     4,
+     5,
+     5,
+     1
+    ],
+    "consult:11": [
+     3,
+     3,
+     3,
+     3,
+     2,
+     5,
+     5
+    ]
+   }
+  },
+  "problems-bleeding-gums-quiz": {
+   "winner": "brush:16",
+   "why": "A whole care routine laid flat on a calm grey-green ground that holds a square crop; brush:4 is close but reads as bathroom styling.",
+   "scores": {
+    "brush:16": [
+     5,
+     5,
+     4,
+     5,
+     5,
+     5,
+     4
+    ],
+    "brush:22": [
+     3,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "brush:4": [
+     4,
+     4,
+     5,
+     4,
+     5,
+     5,
+     5
+    ],
+    "brush:14": [
+     3,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "brush:12": [
+     3,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "brush:6": [
+     4,
+     4,
+     5,
+     3,
+     5,
+     5,
+     5
+    ],
+    "floss:20": [
+     3,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "cosmetic-hero": {
+   "winner": "crown:5",
+   "why": "Porcelain crowns in soft, low light: craft rather than a smile, and the lightest of the set for a full-bleed hero.",
+   "scores": {
+    "crown:5": [
+     4,
+     5,
+     5,
+     5,
+     5,
+     5,
+     5
+    ],
+    "crown:12": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "veneer:15": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "crown:7": [
+     4,
+     5,
+     3,
+     4,
+     5,
+     5,
+     3
+    ],
+    "crown:26": [
+     3,
+     4,
+     3,
+     2,
+     5,
+     5,
+     5
+    ],
+    "veneer:21": [
+     3,
+     4,
+     3,
+     4,
+     4,
+     5,
+     5
+    ]
+   }
+  },
+  "cosmetic-matrix-stains": {
+   "winner": "shade:11",
+   "why": "Changed on 29 Oct: the earlier pick (shade:10) is a card of guitar picks. shade:11, sets of artificial teeth in natural shades, is real dental shade material, clean on white, and wide enough for 3:2; shade:4 is now the stained-teeth hero.",
+   "scores": {
+    "shade:5": [
+     1,
+     4,
+     4,
+     4,
+     5,
+     5,
+     2
+    ],
+    "shade:10": [
+     1,
+     4,
+     3,
+     3,
+     5,
+     5,
+     5
+    ],
+    "shade:18": [
+     3,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "shade:14": [
+     1,
+     4,
+     4,
+     4,
+     5,
+     5,
+     1
+    ],
+    "shade:7": [
+     3,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "shade:4": [
+     4,
+     4,
+     3,
+     3,
+     5,
+     5,
+     4
+    ],
+    "shade:11": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "cosmetic-matrix-chips": {
+   "winner": "crown:15",
+   "why": "A veneer lifted on a fine brush above the model: shaping a chipped edge, and not the frame already on the gaps page.",
+   "scores": {
+    "crown:14": [
+     5,
+     4,
+     4,
+     4,
+     4,
+     5,
+     3
+    ],
+    "shade:2": "same:crown:14",
+    "composite:24": "same:crown:14",
+    "crown:15": [
+     5,
+     4,
+     4,
+     4,
+     4,
+     5,
+     5
+    ],
+    "shade:3": [
+     3,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "crown:1": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     1
+    ]
+   }
+  },
+  "cosmetic-matrix-gaps": {
+   "winner": "veneer:28",
+   "why": "Tied with crown:12; veneer:28's mid-grey ground matches the grade and the diagonal row reads as 'width'. veneer:12 is already on this page.",
+   "scores": {
+    "veneer:12": [
+     4,
+     5,
+     3,
+     4,
+     5,
+     5,
+     1
+    ],
+    "veneer:28": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     4
+    ],
+    "crown:12": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "veneer:15": "same:crown:12",
+    "shade:12": "same:veneer:28",
+    "veneer:27": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     1
+    ]
+   }
+  },
+  "invisalign-hero": {
+   "winner": "aligner:7",
+   "why": "Changed on 29 Oct: the earlier pick (aligner:15) is a 3D render of a glass spiral, not an aligner (fit 2). aligner:7, a clear aligner in a gloved hand beside its case, scores highest of the free candidates; aligner:3 is on two pages.",
+   "scores": {
+    "aligner:15": [
+     2,
+     5,
+     2,
+     5,
+     5,
+     5,
+     5
+    ],
+    "aligner:8": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     3
+    ],
+    "aligner:9": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     1
+    ],
+    "aligner:0": [
+     3,
+     4,
+     4,
+     2,
+     5,
+     5,
+     4
+    ],
+    "aligner:7": [
+     5,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "aligner:3": [
+     5,
+     5,
+     5,
+     4,
+     5,
+     5,
+     1
+    ]
+   }
+  },
+  "invisalign-stage-wear": {
+   "winner": "aligner:18",
+   "why": "Changed on 29 Oct with the hero: hands holding an aligner, its case and a spray (picked from the cached search, one API call). aligner:7 is now the hero and aligner:5 is the same shoot.",
+   "scores": {
+    "aligner:7": [
+     5,
+     4,
+     3,
+     4,
+     5,
+     5,
+     1
+    ],
+    "aligner:5": [
+     5,
+     4,
+     3,
+     4,
+     5,
+     5,
+     2
+    ],
+    "aligner:0": [
+     3,
+     4,
+     4,
+     2,
+     5,
+     5,
+     3
+    ],
+    "aligner:18": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     4
+    ],
+    "aligner:28": [
+     4,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ],
+    "aligner:9": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     1
+    ]
+   }
+  },
+  "orthodontics-hero": {
+   "winner": "braces:0",
+   "why": "The only candidate showing braces on a model; braces:1 is a patient with a retractor (never) and the rest are aligners or plain models.",
+   "scores": {
+    "braces:0": [
+     5,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "aligner:9": [
+     2,
+     4,
+     3,
+     4,
+     5,
+     5,
+     1
+    ],
+    "braces:1": [
+     3,
+     2,
+     2,
+     3,
+     1,
+     5,
+     1
+    ],
+    "implant:9": [
+     2,
+     3,
+     3,
+     4,
+     5,
+     5,
+     4
+    ],
+    "denture:0": [
+     2,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "aligner:8": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     3
+    ]
+   }
+  },
+  "orthodontics-adult": {
+   "winner": "aligner:8",
+   "why": "Clear aligners on models in soft shadow: discreet adult straightening, upright enough for a tall panel; aligner:11 lies flat and loses itself in a tall crop.",
+   "scores": {
+    "aligner:8": [
+     5,
+     4,
+     3,
+     4,
+     5,
+     5,
+     4
+    ],
+    "aligner:11": [
+     4,
+     4,
+     3,
+     3,
+     5,
+     5,
+     5
+    ],
+    "aligner:3": [
+     5,
+     5,
+     5,
+     3,
+     5,
+     5,
+     1
+    ],
+    "aligner:9": [
+     4,
+     4,
+     3,
+     3,
+     5,
+     5,
+     1
+    ],
+    "aligner:0": [
+     3,
+     4,
+     4,
+     4,
+     5,
+     5,
+     4
+    ],
+    "aligner:15": [
+     2,
+     5,
+     2,
+     4,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "general-clean": {
+   "winner": "instruments:20",
+   "why": "Tied with instruments:23; 20 shows the mirror and probe with the scalers, the whole cleaning set on a bright tray.",
+   "scores": {
+    "instruments:20": [
+     5,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "tray:1": "same:instruments:20",
+    "instruments:23": [
+     5,
+     4,
+     3,
+     3,
+     5,
+     5,
+     5
+    ],
+    "tray:2": [
+     5,
+     4,
+     3,
+     3,
+     5,
+     5,
+     5
+    ],
+    "instruments:12": [
+     3,
+     3,
+     4,
+     2,
+     5,
+     5,
+     5
+    ],
+    "instruments:25": [
+     3,
+     3,
+     4,
+     3,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "crowns-process": {
+   "winner": "arha:arha-dental-care-delivery-unit",
+   "why": "crown:20 scores highest (33 of 35) but is on the old metal fillings page; the crowns page needed one of Arha's own rooms, and How it works is where the clinic is the subject, so the delivery unit still from the walkthrough video takes it.",
+   "scores": {
+    "crown:20": [
+     5,
+     5,
+     5,
+     4,
+     5,
+     5,
+     4
+    ],
+    "crown:11": [
+     3,
+     5,
+     4,
+     4,
+     5,
+     5,
+     1
+    ],
+    "implant:13": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     4
+    ],
+    "crown:9": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     4
+    ],
+    "crown:24": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     1
+    ],
+    "implant:16": [
+     3,
+     3,
+     4,
+     4,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "maxillofacial-injury": {
+   "winner": "implant:13",
+   "why": "A prosthesis on a stone model: careful rebuilding with no patient in sight; the plaster models say less.",
+   "scores": {
+    "implant:13": [
+     5,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "crown:22": [
+     3,
+     3,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "implant:16": "same:crown:22",
+    "crown:24": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     1
+    ],
+    "implant:19": [
+     4,
+     3,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "implant:14": [
+     4,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "kids-age-0-2": {
+   "winner": "kidbrush:26",
+   "why": "A small wooden brush with soft bristles: the first toothbrush, calm and natural; kidbrush:10 fits as well but its orange ground fights the grade.",
+   "scores": {
+    "kidbrush:0": [
+     4,
+     3,
+     2,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:2": [
+     4,
+     4,
+     3,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:3": [
+     4,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:26": [
+     4,
+     4,
+     4,
+     5,
+     5,
+     5,
+     4
+    ],
+    "kidbrush:10": [
+     5,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:7": [
+     3,
+     4,
+     4,
+     4,
+     5,
+     5,
+     4
+    ]
+   }
+  },
+  "kids-age-3-5": {
+   "winner": "kidbrush:7",
+   "why": "A bright children's brush, close and simple; the flat lays on turquoise are louder than the rest of the site.",
+   "scores": {
+    "kidbrush:7": [
+     4,
+     4,
+     4,
+     5,
+     5,
+     5,
+     4
+    ],
+    "kidbrush:5": [
+     4,
+     3,
+     2,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:6": [
+     4,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:24": [
+     2,
+     2,
+     1,
+     4,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:11": [
+     3,
+     3,
+     3,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:12": [
+     3,
+     3,
+     3,
+     4,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "kids-age-6-9": {
+   "winner": "kidbrush:20",
+   "why": "Ties at 29 broken on fit: kidbrush:20 is plainly a children's electric brush; brush:12 is an adult one.",
+   "scores": {
+    "kidbrush:20": [
+     5,
+     4,
+     3,
+     3,
+     5,
+     5,
+     4
+    ],
+    "kidbrush:21": [
+     3,
+     3,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "brush:12": [
+     2,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "brush:13": [
+     2,
+     3,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "brush:23": [
+     2,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "kidbrush:28": [
+     2,
+     3,
+     4,
+     2,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "kids-age-10-14": {
+   "winner": "aligner:18",
+   "why": "Changed on 29 Oct after scoring: aligner:18 (hands holding an aligner and its case) beats aligner:0 on crop, and aligner:0 stays on the Invisalign page.",
+   "scores": {
+    "aligner:0": [
+     4,
+     4,
+     4,
+     3,
+     5,
+     5,
+     4
+    ],
+    "aligner:9": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     1
+    ],
+    "aligner:18": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     4
+    ],
+    "aligner:28": [
+     3,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ],
+    "braces:0": [
+     4,
+     3,
+     3,
+     4,
+     5,
+     5,
+     3
+    ],
+    "aligner:3": [
+     4,
+     5,
+     5,
+     4,
+     5,
+     5,
+     1
+    ]
+   }
+  },
+  "case-implants": {
+   "winner": "implant:7",
+   "why": "Ties at 28 broken on fit: an implant model with its neighbours explains the case; the single crown on black is the missing-tooth hero.",
+   "scores": {
+    "implant:9": [
+     2,
+     3,
+     3,
+     4,
+     5,
+     5,
+     4
+    ],
+    "implant:23": [
+     4,
+     2,
+     2,
+     4,
+     3,
+     5,
+     5
+    ],
+    "implant:7": [
+     5,
+     3,
+     2,
+     4,
+     5,
+     5,
+     4
+    ],
+    "crown:11": [
+     4,
+     5,
+     4,
+     3,
+     5,
+     5,
+     2
+    ],
+    "implant:8": [
+     3,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ],
+    "implant:13": [
+     2,
+     4,
+     4,
+     4,
+     5,
+     5,
+     4
+    ]
+   }
+  },
+  "case-full-mouth": {
+   "winner": "crown:24",
+   "why": "A full arch of restorations, straight on: the result of full mouth rehabilitation as one object.",
+   "scores": {
+    "crown:24": [
+     5,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "denture:24": [
+     4,
+     4,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "crown:29": [
+     4,
+     5,
+     4,
+     4,
+     5,
+     5,
+     2
+    ],
+    "implant:16": [
+     2,
+     3,
+     4,
+     4,
+     5,
+     5,
+     5
+    ],
+    "denture:28": [
+     3,
+     4,
+     4,
+     3,
+     5,
+     5,
+     5
+    ],
+    "crown:21": [
+     3,
+     4,
+     4,
+     3,
+     4,
+     5,
+     5
+    ]
+   }
+  },
+  "case-aligners": {
+   "winner": "aligner:9",
+   "why": "An aligner above a dental model: the slot's brief exactly, with depth on black.",
+   "scores": {
+    "aligner:9": [
+     5,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "aligner:8": [
+     4,
+     4,
+     3,
+     4,
+     5,
+     5,
+     3
+    ],
+    "aligner:3": [
+     4,
+     5,
+     5,
+     4,
+     5,
+     5,
+     1
+    ],
+    "aligner:11": [
+     3,
+     4,
+     3,
+     4,
+     5,
+     5,
+     5
+    ],
+    "aligner:0": [
+     3,
+     4,
+     4,
+     2,
+     5,
+     5,
+     3
+    ],
+    "aligner:28": [
+     3,
+     3,
+     2,
+     4,
+     5,
+     5,
+     5
+    ]
+   }
+  },
+  "home-journey-consultation": {
+   "winner": "consult:21",
+   "why": "A plan explained at a desk with the X-ray on screen: the consultation as a conversation, not a chair; the homepage's one stock image of people.",
+   "scores": {
+    "consult:21": [
+     5,
+     4,
+     4,
+     4,
+     4,
+     5,
+     5
+    ],
+    "consult:6": [
+     4,
+     4,
+     4,
+     4,
+     3,
+     5,
+     5
+    ],
+    "consult:12": [
+     3,
+     4,
+     4,
+     4,
+     3,
+     5,
+     5
+    ],
+    "consult:11": [
+     4,
+     3,
+     3,
+     3,
+     3,
+     5,
+     5
+    ],
+    "consult:0": [
+     4,
+     4,
+     4,
+     3,
+     3,
+     5,
+     5
+    ],
+    "xray:0": "same:consult:11"
+   }
+  },
+  "simulation-featured": {
+   "winner": "smile:20",
+   "why": "Frontal enough, nose tip to chin, teeth about a fifth of the width, natural colour: the right base for a subtle same-photo shade simulation. The Vitaly Gariev frames are portrait and too tight for 3:2.",
+   "scores": {
+    "smile:18": [
+     4,
+     4,
+     4,
+     3,
+     4,
+     5,
+     5
+    ],
+    "smile:19": [
+     4,
+     4,
+     4,
+     3,
+     4,
+     5,
+     5
+    ],
+    "smile:21": [
+     4,
+     4,
+     4,
+     3,
+     4,
+     5,
+     5
+    ],
+    "smile:22": [
+     4,
+     4,
+     4,
+     3,
+     4,
+     5,
+     5
+    ],
+    "smile:23": [
+     4,
+     4,
+     4,
+     3,
+     4,
+     5,
+     5
+    ],
+    "smile:5": [
+     3,
+     3,
+     4,
+     4,
+     3,
+     5,
+     5
+    ],
+    "smile:20": [
+     5,
+     4,
+     4,
+     4,
+     4,
+     5,
+     5
+    ]
+   }
+  }
  }
 }

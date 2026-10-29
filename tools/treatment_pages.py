@@ -515,7 +515,7 @@ def ix_guides():
 def ix_matrix():
     opts = ["Whitening", "Bonding", "Veneers"]
     grid = {
-        "stains": ("Stains", "stock-shade-card", "A shade card held up to choose a tooth colour",
+        "stains": ("Stains", "stock-teeth-shades", "Sets of artificial teeth in a range of natural shades",
                    [("good", "Lightens natural tooth colour; works best on general yellowing."),
                     ("some", "Can cover a dark patch on a single tooth."),
                     ("some", "For deep stains that whitening cannot lift.")]),

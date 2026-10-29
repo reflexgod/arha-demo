@@ -88,7 +88,7 @@ PROBLEMS = {
     },
     "stained-teeth": {
         "name": "Yellow or stained teeth", "menu": "Yellow or stained teeth",
-        "hero": ("stock-shade-tab", "A hand holding a tooth shade tab above an open shade guide", "50% 50%"),
+        "hero": ("stock-shade-guide", "A tooth shade guide on a dental lab table, beside fine brushes and porcelain", "50% 22%"),
         "line": "Surface stains often lift with a professional clean. Deeper colour responds to whitening, and where whitening cannot help, bonding or veneers can.",
         "notice": [("Surface stains", "From tea, coffee, paan or smoking, often at the edges and between teeth."),
                    ("An even yellow tone", "Teeth naturally darken a little with age."),
@@ -121,7 +121,7 @@ PROBLEMS = {
     },
     "bleeding-gums": {
         "name": "Bleeding gums", "menu": "Bleeding gums",
-        "hero": ("stock-flosser", "A water flosser and a length of dental floss on a white surface", "50% 50%"),
+        "hero": ("stock-floss-hand", "A coil of dental floss in an open hand, one strand drawn out", "50% 55%"),
         "line": "Gums that bleed when you brush are usually inflamed, and that is treatable. A professional clean and better care at home often settle it.",
         "notice": [("Pink in the sink", "Bleeding when you brush or floss."),
                    ("Red or puffy gums", "Healthy gums are pale pink and firm."),
