@@ -4,7 +4,7 @@ Usage: .venv/Scripts/python -I tools/cases_markup.py   (fills every page with a 
 Edit CASES below, then re-run. Each case needs an image set in assets/img (from photos.py / cases.py).
 Fields per case:
   img      smile close-up image set (required)      face     full-face frame of the same patient (optional)
-  before   real "before" image -> drag comparison slider (optional; never faked)
+  before   the "before" image of the pair (sample cases: tools/pairs.py; real cases need written consent)
   cat, meta, story (concern, plan, result), looks, works, note (doctor's one-line note)
   doctor   who treated the case: shown only on real cases
   days, city   "Completed in X days · visiting from CITY": shown only on real cases with both values
@@ -59,15 +59,15 @@ NAMES = {"implants": "Dental implants", "full-mouth": "Full mouth rehabilitation
 
 # Sample cases: stock images (notes/credits.md, local only), clearly marked SAMPLE everywhere they appear.
 DOCTOR = "Dr. Nikhil V. Jain"
-CASES = [
-    {"img": "stock-case-1", "pos": "50% 45%", "face": "stock-case-1-face", "cat": "implants", "meta": "Sample case · 3 visits · 4 months", "sample": True, "doctor": DOCTOR},
-    {"img": "stock-case-2", "pos": "50% 45%", "face": "stock-case-2-face", "cat": "veneers", "meta": "Sample case · 3 visits · 3 weeks", "sample": True, "doctor": DOCTOR},
-    {"img": "stock-case-3", "pos": "50% 45%", "cat": "full-mouth", "meta": "Sample case · 6 visits · 5 months", "sample": True, "doctor": DOCTOR},
-    {"img": "stock-case-4", "pos": "50% 45%", "face": "stock-case-4-face", "cat": "aligners", "meta": "Sample case · 8 visits · 9 months", "sample": True, "doctor": DOCTOR},
-    {"img": "stock-case-5", "pos": "50% 45%", "cat": "implants", "meta": "Sample case · 4 visits · 5 months", "sample": True, "doctor": DOCTOR},
-    {"img": "stock-case-6", "pos": "50% 45%", "face": "stock-case-6-face", "cat": "veneers", "meta": "Sample case · 2 visits · 2 weeks", "sample": True, "doctor": DOCTOR},
+SAMPLE = "Sample case for demo"
+CASES = [  # tools/pairs.py: 1 is simulated from one photograph (teeth tinted); 2-5 pair two stock photographs
+    {"img": "stock-pair-1-after", "before": "stock-pair-1-before", "cat": "veneers", "meta": "Smile design · shade and shape", "sample": True, "doctor": DOCTOR},
+    {"img": "stock-pair-2-after", "before": "stock-pair-2-before", "cat": "implants", "meta": "Implants · missing and worn teeth", "sample": True, "doctor": DOCTOR},
+    {"img": "stock-pair-3-after", "before": "stock-pair-3-before", "cat": "full-mouth", "meta": "Full mouth · an even, rebuilt smile", "sample": True, "doctor": DOCTOR},
+    {"img": "stock-pair-4-after", "before": "stock-pair-4-before", "cat": "aligners", "meta": "Aligners · crowded teeth", "sample": True, "doctor": DOCTOR},
+    {"img": "stock-pair-5-after", "before": "stock-pair-5-before", "cat": "veneers", "meta": "Veneers · uneven front teeth", "sample": True, "doctor": DOCTOR},
     # Real case template (needs written patient consent before publishing):
-    # {"img": "case-implant-01", "face": "case-implant-01-face", "before": "case-implant-01-before", "cat": "implants",
+    # {"img": "case-implant-01", "before": "case-implant-01-before", "cat": "implants",
     #  "meta": "4 visits · 5 months", "story": ("…", "…", "…"), "looks": "…", "works": "…", "note": "…",
     #  "doctor": DOCTOR, "days": 6, "city": "London", "sample": False},
 ]

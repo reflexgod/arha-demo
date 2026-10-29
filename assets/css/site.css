@@ -5612,137 +5612,169 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
   .hero__lede { font-size: 19px; }
 }
 
-/* ---------------------------------------------------------------- before/after slider */
+/* ---------------------------------------------------------------- before/after slider (site.js 17)
+   Drag anywhere on the photograph (pointer capture; vertical swipes still scroll the page), click or
+   tap to jump, arrow keys on the handle. --pos moves on the compositor-friendly clip-path only. */
 .ba {
   --pos: 50%;
   position: relative;
-  aspect-ratio: 4 / 5;
+  margin: 0;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   background: var(--stone);
   cursor: ew-resize;
   touch-action: pan-y;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .ba__layer { position: absolute; inset: 0; }
-.ba__layer--before { z-index: 1; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
-.ba__layer img { pointer-events: none; }
-.ba__veil img { filter: grayscale(1) blur(18px) brightness(.5); transform: scale(1.12); }
-
-.ba__note {
-  position: absolute;
-  top: 50%;
-  left: calc(var(--pos) / 2);
-  z-index: 1;
-  width: min(220px, calc(var(--pos) - 32px));
-  color: var(--paper);
-  font: 500 13px/1.45 var(--font-body);
-  letter-spacing: 1px;
-  text-align: center;
-  text-transform: uppercase;
-  transform: translate(-50%, -50%);
-}
-
-.ba--pending-after .ba__note {
-  left: calc(var(--pos) + (100% - var(--pos)) / 2);
-  width: min(220px, calc(100% - var(--pos) - 32px));
-}
+.ba__layer picture, .ba__layer img { display: block; width: 100%; height: 100%; }
+.ba__layer img { object-fit: cover; pointer-events: none; -webkit-user-drag: none; }
+.ba__layer--before { z-index: 1; clip-path: inset(0 calc(100% - var(--pos)) 0 0); will-change: clip-path; }
 
 .ba__tag {
   position: absolute;
   top: 16px;
-  z-index: 2;
+  z-index: 3;
   color: var(--paper);
   font: 600 12px/1 var(--font-body);
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  text-shadow: 0 0 12px rgba(var(--shade), .5);
+  text-shadow: 0 0 12px rgba(var(--shade), .55);
   pointer-events: none;
 }
 
 .ba__tag--before { left: 16px; }
 .ba__tag--after { right: 16px; }
 
-.ba__handle {
+.ba__line {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: var(--pos);
+  left: 0;
   z-index: 2;
   width: 1px;
   background: var(--paper);
+  transform: translateX(var(--pos-px, 0px));
   pointer-events: none;
+  will-change: transform;
 }
 
+.ba__handle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  margin: -24px 0 0 -24px;
+  border: 1px solid var(--paper);
+  border-radius: 50%;
+  background: rgba(var(--shade), .35);
+  transform: translateX(var(--pos-px, 0px));
+  transition: box-shadow .3s var(--ease);
+  will-change: transform;
+}
+
+.ba__handle::before,
 .ba__handle::after {
   content: "";
   position: absolute;
   top: 50%;
-  left: 50%;
-  width: 46px;
-  height: 46px;
-  border: 1px solid var(--paper);
-  border-radius: 50%;
-  background:
-    linear-gradient(135deg, transparent 45%, var(--paper) 45% 55%, transparent 55%) 13px 50% / 7px 7px no-repeat,
-    rgba(var(--shade), .35);
-  transform: translate(-50%, -50%);
-  transition: transform .3s var(--ease);
-}
-
-.ba__handle::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  width: 18px;
+  width: 7px;
   height: 7px;
-  border-left: 1.4px solid var(--paper);
-  border-right: 1.4px solid var(--paper);
-  transform: translate(-50%, -50%);
+  border: solid var(--paper);
+  border-width: 0 0 1.4px 1.4px;
 }
 
-.ba.is-dragging .ba__handle::after { transform: translate(-50%, -50%) scale(1.08); }
+.ba__handle::before { left: 12px; transform: translateY(-50%) rotate(45deg); }
+.ba__handle::after { right: 12px; transform: translateY(-50%) rotate(-135deg); }
+.ba.is-dragging .ba__handle,
+.ba__handle:focus-visible { box-shadow: 0 0 0 6px rgba(250, 250, 246, .22); }
+.ba__handle:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; }
 
-.ba__range {
+/* Until site.js measures the box, place the line and handle by percentage */
+.ba:not(.is-ready) .ba__line,
+.ba:not(.is-ready) .ba__handle { left: var(--pos); transform: none; }
+
+.ba .sample-line {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  bottom: 12px;
+  left: 16px;
+  z-index: 3;
   margin: 0;
-  opacity: 0;
+  color: var(--paper);
+  text-shadow: 0 0 10px rgba(var(--shade), .6);
   pointer-events: none;
 }
 
-.ba:has(.ba__range:focus-visible) { outline: 2px solid var(--bronze); outline-offset: 3px; }
+/* "Sample case for demo": one small line under or on every sample pair */
+.sample-line {
+  margin-top: 12px;
+  color: var(--muted);
+  font: 500 12px/1.3 var(--font-body);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
 
-/* ---------------------------------------------------------------- results grid (sliders) */
-.results-grid {
+/* ---------------------------------------------------------------- static before | after pairs (apa) */
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.pair__side { position: relative; margin: 0; aspect-ratio: 3 / 4; overflow: hidden; background: var(--stone); }
+.pair__side picture, .pair__side img { display: block; width: 100%; height: 100%; }
+.pair__side img { object-fit: cover; }
+
+.pair__side figcaption {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: var(--paper);
+  font: 600 11px/1 var(--font-body);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(var(--shade), .55);
+}
+
+.pairs-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 56px 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 64px 32px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.result__text { margin-top: 20px; }
-.result__text h3 { font-size: 18px; }
-.result__text p { margin-top: 6px; color: var(--muted); font-size: 16px; }
-.result__text .link { margin-top: 16px; }
+.pairs-grid--home { grid-template-columns: repeat(4, 1fr); gap: 48px 24px; margin-top: 96px; }
+.pair-card > a { display: block; color: inherit; text-decoration: none; }
+.pair-card__name { margin-top: 16px; font-size: 18px; }
+.pair-card__meta { margin-top: 6px; color: var(--muted); font-size: 16px; }
+.pair-card .link { margin-top: 32px; }
 
-@media (max-width: 899px) {
-  .results-grid { grid-template-columns: 1fr 1fr; gap: 40px 16px; }
+.featured-case .ba { max-height: 82vh; width: 100%; }
+.featured-case__text { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 24px; margin-top: 28px; }
+.featured-case__text h3 { font-size: 22px; }
+.featured-case__text p { color: var(--muted); }
+.featured-case__text .link { margin-left: auto; }
+
+@media (max-width: 1099px) {
+  .pairs-grid--home { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 599px) {
-  .results-grid { grid-template-columns: 1fr; gap: 48px; }
-  .results-grid .ba { aspect-ratio: 1; }
+  .pairs-grid, .pairs-grid--home { grid-template-columns: 1fr; gap: 56px; }
+  .pairs-grid--home { margin-top: 72px; }
+  .ba { aspect-ratio: 4 / 5; }
+  .featured-case__text { display: block; }
+  .featured-case__text .link { margin-top: 32px; }
 }
 
 .cases-note { margin-top: 16px; color: var(--muted); font-size: 15px; }
+
+/* Case page: other cases as a quiet list */
+.more-cases__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--hairline-strong); }
+.more-cases__link { display: flex; justify-content: space-between; gap: 24px; padding: 20px 0; border-bottom: 1px solid var(--hairline-strong); color: inherit; text-decoration: none; }
+.more-cases__link span:last-child { color: var(--muted); }
 
 /* ---------------------------------------------------------------- common problems */
 .problems {
@@ -5767,7 +5799,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 .problems__tab:hover { color: var(--ink); }
 .problems__tab[aria-selected="true"] { color: var(--ink); box-shadow: inset 2px 0 0 var(--bronze); }
 .problems__panel:not([hidden]) { animation: crossfade .7s var(--ease); }
-.problems__panel .ba { aspect-ratio: 3 / 2; }
+.problems__photo { aspect-ratio: 3 / 2; }
 .problems__text { max-width: var(--text-col); margin-top: 28px; }
 .problems__label { margin-top: 24px; color: var(--muted); font: 500 13px/1 var(--font-body); letter-spacing: 1px; text-transform: uppercase; }
 .problems__links { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 14px; }
@@ -5789,7 +5821,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
   .problems__list::-webkit-scrollbar { display: none; }
   .problems__tab { flex: 0 0 auto; padding: 14px 0; border: 0; white-space: nowrap; }
   .problems__tab[aria-selected="true"] { box-shadow: inset 0 -2px 0 var(--bronze); }
-  .problems__panel .ba { aspect-ratio: 4 / 5; }
+  .problems__photo { aspect-ratio: 4 / 5; }
 }
 
 /* ---------------------------------------------------------------- expanding panels (feature trio) */
@@ -6031,7 +6063,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 
 /* ---------------------------------------------------------------- reduced motion: same content, no movement */
 @media (prefers-reduced-motion: reduce) {
-  .xpanel, .xpanel__more, .story__img, .story__step, .drag__progress span, .ba__handle::after { transition: none !important; }
+  .xpanel, .xpanel__more, .story__img, .story__step, .drag__progress span, .ba__handle { transition: none !important; }
   .spot::after, .drill__level.is-in, .problems__panel:not([hidden]), .spots__card { animation: none !important; }
   .story__step { opacity: 1; }
 }
@@ -6140,7 +6172,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 .case-v4__head { max-width: 760px; margin: 40px auto 48px; text-align: center; }
 .case-v4__head h1 { margin-top: 14px; }
 .case-v4__meta { margin-top: 10px; color: var(--muted); }
-.case-v4__stage .ba { aspect-ratio: 16 / 10; max-height: 86vh; width: 100%; }
+.case-v4__stage .ba { max-height: 86vh; width: 100%; }
 .case-v4__thumbs { display: flex; justify-content: center; gap: 16px; margin-top: 20px; }
 
 .case-thumb {
@@ -6166,7 +6198,6 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 .case-v4 .case-nav { margin-top: 72px; }
 
 @media (max-width: 767px) {
-  .case-v4__stage .ba { aspect-ratio: 4 / 5; }
   .case-story--cols, .case-story--two { grid-template-columns: 1fr; gap: 24px; padding-inline: 20px; }
 }
 
@@ -6273,4 +6304,5 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 /* ---------------------------------------------------------------- colour on hover (site.js 18)
    Every black and white photograph turns to full colour: under the mouse on a laptop, while mostly
    in view on a phone. Slow: site.js adds a 600 ms filter transition to each photograph's own. */
-img.bw-photo.in-colour { filter: none !important; }
+img.bw-photo.in-colour,
+.in-colour img.bw-photo { filter: none !important; }

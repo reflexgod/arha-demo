@@ -1007,50 +1007,80 @@
          panels, drag gallery and review carousel, sticky story, lightbox, preview swap.
          Pointer and keyboard friendly; reduced motion gets the same content without movement. */
 
-  // Before/after slider: drag anywhere on the photograph (vertical scrolling still works on
-  // touch); the range input underneath gives keyboard and screen-reader control.
+  // Before/after slider. Pointer events with capture on the whole photograph: a mouse jumps on press and
+  // drags; on touch, touch-action: pan-y keeps vertical swipes for the page, a horizontal drag moves
+  // the line and a tap jumps to it. Arrow keys (Shift for 10%), Home and End on the handle. One update
+  // per frame, on transform and clip-path only.
   document.querySelectorAll('[data-ba]').forEach((box) => {
-    const range = box.querySelector('.ba__range');
-    const set = (pct) => {
-      const v = Math.max(0, Math.min(100, pct));
-      box.style.setProperty('--pos', `${v}%`);
-      range.value = String(Math.round(v));
+    const handle = box.querySelector('.ba__handle');
+    let pos = 50;
+    let width = box.clientWidth;
+    let frame = 0;
+    const paint = () => {
+      frame = 0;
+      box.style.setProperty('--pos', `${pos}%`);
+      box.style.setProperty('--pos-px', `${(pos / 100) * width}px`);
+      const v = Math.round(pos);
+      handle.setAttribute('aria-valuenow', String(v));
+      handle.setAttribute('aria-valuetext', `${v}% before, ${100 - v}% after`);
     };
-    let dragging = false;
-    let decided = false;
+    const set = (pct) => {
+      pos = Math.max(0, Math.min(100, pct));
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+    const at = (x) => {
+      const r = box.getBoundingClientRect();
+      return ((x - r.left) / r.width) * 100;
+    };
+    new ResizeObserver(() => { width = box.clientWidth; paint(); box.classList.add('is-ready'); }).observe(box);
+
+    let id = null;
     let startX = 0;
     let startY = 0;
-    const at = (e) => ((e.clientX - box.getBoundingClientRect().left) / box.clientWidth) * 100;
+    let moving = false;
     box.addEventListener('pointerdown', (e) => {
-      if (e.button !== 0) return;
-      dragging = true;
-      decided = e.pointerType === 'mouse';
+      if (e.button !== 0 || id !== null) return;
+      id = e.pointerId;
       startX = e.clientX;
       startY = e.clientY;
-      if (decided) {
-        set(at(e));
-        box.setPointerCapture(e.pointerId);
+      moving = e.pointerType === 'mouse';
+      box.setPointerCapture(id);
+      if (moving) {
+        e.preventDefault();
+        set(at(e.clientX));
         box.classList.add('is-dragging');
       }
     });
     box.addEventListener('pointermove', (e) => {
-      if (!dragging) return;
-      if (!decided) {
-        // On touch, a mostly horizontal move takes the slider; a vertical one scrolls the page
+      if (e.pointerId !== id) return;
+      if (!moving) {
         const dx = Math.abs(e.clientX - startX);
-        const dy = Math.abs(e.clientY - startY);
-        if (dx < 6 && dy < 6) return;
-        if (dy > dx) { dragging = false; return; }
-        decided = true;
-        box.setPointerCapture(e.pointerId);
+        if (dx < 4 || dx < Math.abs(e.clientY - startY)) return;
+        moving = true;
         box.classList.add('is-dragging');
       }
-      set(at(e));
+      set(at(e.clientX));
     });
-    const end = () => { dragging = false; box.classList.remove('is-dragging'); };
+    const end = (e) => {
+      if (e.pointerId !== id) return;
+      // A tap (no drag) jumps to where it landed; a vertical swipe becomes pointercancel and scrolls
+      if (e.type === 'pointerup' && !moving && Math.hypot(e.clientX - startX, e.clientY - startY) < 10) set(at(e.clientX));
+      if (box.hasPointerCapture(id)) box.releasePointerCapture(id);
+      id = null;
+      moving = false;
+      box.classList.remove('is-dragging');
+    };
     box.addEventListener('pointerup', end);
     box.addEventListener('pointercancel', end);
-    range.addEventListener('input', () => set(Number(range.value)));
+    box.addEventListener('lostpointercapture', end);
+    box.addEventListener('dragstart', (e) => e.preventDefault());
+    handle.addEventListener('keydown', (e) => {
+      const step = e.shiftKey ? 10 : 2;
+      const keys = { ArrowLeft: pos - step, ArrowDown: pos - step, ArrowRight: pos + step, ArrowUp: pos + step, Home: 0, End: 100, PageDown: pos - 10, PageUp: pos + 10 };
+      if (!(e.key in keys)) return;
+      e.preventDefault();
+      set(keys[e.key]);
+    });
     box.addEventListener('pointerdown', () => track('ba_drag'), { once: true });
   });
 
@@ -1257,9 +1287,12 @@
     let py = 0;
     const paint = () => {
       frame = 0;
-      const now = new Set(document.elementsFromPoint(px, py).filter((el) => grey.has(el)));
-      lit.forEach((img) => { if (!now.has(img)) img.classList.remove('in-colour'); });
-      now.forEach((img) => img.classList.add('in-colour'));
+      const now = new Set();
+      document.elementsFromPoint(px, py).forEach((el) => {
+        if (grey.has(el)) now.add(el.closest('[data-colour-group]') || el);
+      });
+      lit.forEach((el) => { if (!now.has(el)) el.classList.remove('in-colour'); });
+      now.forEach((el) => el.classList.add('in-colour'));
       lit = now;
     };
     document.addEventListener('pointermove', (e) => {
@@ -1268,7 +1301,7 @@
       py = e.clientY;
       if (!frame) frame = requestAnimationFrame(paint);
     }, { passive: true });
-    document.documentElement.addEventListener('pointerleave', () => { lit.forEach((img) => img.classList.remove('in-colour')); lit = new Set(); });
+    document.documentElement.addEventListener('pointerleave', () => { lit.forEach((el) => el.classList.remove('in-colour')); lit = new Set(); });
     window.addEventListener('scroll', () => { if (!frame) frame = requestAnimationFrame(paint); }, { passive: true });
   } else if (greyPhotos.length && 'IntersectionObserver' in window) {
     // "Mostly in view": 60% of the photograph, or 60% of the screen for one taller than the screen

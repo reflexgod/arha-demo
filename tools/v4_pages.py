@@ -138,26 +138,17 @@ def intro(t):
 CAT_FOR = {"implants": ["implants"], "full-mouth": ["full-mouth"], "veneers": ["veneers"], "aligners": ["aligners"]}
 
 
-def results_carousel(cat, title="Results"):
-    """Before/after sliders in a drag carousel: this treatment's sample cases first, then the others."""
-    cs = more_pages.cases()
-    mine = [c for c in cs if cat and c["cat"] == cat]
-    rest = [c for c in cs if c not in mine]
-    items = "".join(f"""
-          <li class="result result--slide">
-{ba(c['img'], f"Sample image for the demo: after ({c['name'].lower()})", '(min-width: 900px) 36vw, 84vw', c.get('pos'), label=home.SHORT, i='            ')}
-            <div class="result__text">
-              <h3>{html.escape(c['name'])}</h3>
-              <p>{html.escape(c['meta'])}</p>
-              <a class="link" href="our-work/{c['slug']}/">See the full transformation{ARROW}</a>
-            </div>
-          </li>""" for c in mine + rest)
+def results_pairs(cat, title="Results"):
+    """This treatment's sample cases as static before | after pairs, each linking to its case page."""
+    mine = [c for c in more_pages.cases() if cat and c["cat"] == cat]
+    if not mine:
+        return ""
     return f"""
-    <!-- =================================================================== RESULTS (before/after carousel) -->
+    <!-- =================================================================== RESULTS (static before | after pairs) -->
     <section class="section results-v4" aria-labelledby="results-title">
       <div class="container-wide">
-{head("results-title", title, "Drag across a photograph to compare. Sample images for the demo; each before photograph is added with the patient’s written consent.")}
-{drag(items, "Before and after results", "drag--results")}
+{head("results-title", title, "Sample cases for the demo. Real cases, shared with each patient’s written consent, replace them before launch.")}
+{results_grid(mine)}
         <p class="section-cta"><a class="link" href="our-work/">See all our work{ARROW}</a></p>
       </div>
     </section>
@@ -202,7 +193,7 @@ def treatment_page(slug, site_url):
     kind, ix_title, ix_lede = t["interactive"]
     body += "\n    <!-- =================================================================== INTERACTIVE -->" + tp.section(
         f"section--stone ix ix--{kind}", "ix-title", ix_title, "      " + tp.INTERACTIVES[kind](), ix_lede)
-    body += results_carousel(t["cases"])
+    body += results_pairs(t["cases"])
     body += tech_used(slug)
     body += tp.faq_block(t["faq"])
     body += tp.closing()
@@ -288,9 +279,9 @@ def work_page(site_url):
     <!-- =================================================================== BEFORE & AFTER (filterable sliders) -->
     <section class="section" aria-labelledby="work-title">
       <div class="container-wide">
-{head("work-title", "Before &amp; after", "Choose a treatment, then drag across a photograph to compare.")}
+{head("work-title", "Before &amp; after", "Choose a treatment, then open a case to compare its before and after.")}
         <div class="work-filter" role="group" aria-label="Filter by treatment">{chips}</div>
-        <p class="cases-note">Sample images for the demo. Each before photograph is added with the patient’s written consent. Results vary.</p>
+        <p class="cases-note">Sample cases for the demo, built from stock photographs. Real cases, shared with each patient’s written consent, replace them before launch. Results vary.</p>
 {results_grid(cs)}
         <p class="work-empty" data-work-empty hidden>No cases for this treatment yet.</p>
       </div>
@@ -301,16 +292,6 @@ def work_page(site_url):
       <div class="container">
 {head("testimonials-title", "Testimonials", "", "In patients’ own words")}
 {carousel(home.REVIEWS)}
-        <div class="video-slot reveal">
-          <div class="video-slot__frame media">
-            {{{{pic arha-dental-care-lounge-peddar-road | (min-width: 768px) 55vw, 100vw | Arha's patient lounge, where the film will be recorded | pos=50% 55%}}}}
-            <span class="video-slot__icon" aria-hidden="true"></span>
-          </div>
-          <div>
-            <p class="eyebrow">To come · Video testimonial</p>
-            <p>A short film of a patient describing their treatment, recorded with their written consent.</p>
-          </div>
-        </div>
         <p class="section-cta"><a class="link" href="#" data-google-reviews>Read all reviews on Google</a></p>
       </div>
     </section>
@@ -326,28 +307,10 @@ def case_page(site_url, n, cs):
     prev_c, next_c = cs[n - 1], cs[(n + 1) % len(cs)]
     treat = more_pages.CAT_TREATMENT[c["cat"]]
     trail = [("Home", ""), ("Our work", "our-work/"), (f"{c['name']}, sample case", f"our-work/{c['slug']}/")]
-    views = [("smile", "Smile", c["img"], c.get("pos"))] + ([("face", "Full face", c["face"], "50% 35%")] if c.get("face") else [])
-    big = "".join(f"""
-        <div class="case-angle" data-view="{key}"{'' if k == 0 else ' hidden'}>
-{ba(name, f"Sample image for the demo: after ({c['name'].lower()}, {label.lower()})", '(min-width: 900px) 90vw, 100vw', pos, i='          ', eager=k == 0)}
-        </div>""" for k, (key, label, name, pos) in enumerate(views))
-    thumbs = "".join(f"""
-          <button class="case-thumb" type="button" data-angle="{key}" aria-pressed="{str(k == 0).lower()}">
-            <span class="case-thumb__media media">
-{picture(name, '120px', '', pos=pos, indent='              ')}
-            </span>
-            <span>{label}</span>
-          </button>""" for k, (key, label, name, pos) in enumerate(views))
-    others = [x for x in cs if x is not c][:3]
+    big = ba(c, "(min-width: 900px) 90vw, 100vw", "        ", eager=True)
+    others = [x for x in cs if x is not c]
     more = "".join(f"""
-          <li>
-            <a href="our-work/{o['slug']}/">
-              <span class="more-cases__media media media--hover">
-{picture(o['img'], '(min-width: 900px) 30vw, 100vw', f"Sample image for the demo ({o['name'].lower()})", pos=o.get('pos'), indent='                ')}
-              </span>
-              <span class="more-cases__name">{html.escape(o['name'])}</span>
-            </a>
-          </li>""" for o in others)
+          <li><a class="more-cases__link" href="our-work/{o['slug']}/"><span>{html.escape(o['name'])}</span><span>{html.escape(o['meta'])}</span></a></li>""" for o in others)
     body = f"""
     <section class="section case-v4" aria-labelledby="page-title">
       <div class="container">
@@ -358,10 +321,9 @@ def case_page(site_url, n, cs):
           <p class="case-v4__meta">{html.escape(c['meta'])}</p>
         </header>
       </div>
-      <div class="container-wide case-v4__stage" data-angles>{big}
-        <div class="case-v4__thumbs" role="group" aria-label="Angles">{thumbs}
-        </div>
-        <p class="cases-note">{more_pages.SAMPLE_LINE} Drag across the photograph to compare; the before photograph is added with the patient’s written consent.</p>
+      <div class="container-wide case-v4__stage">
+{big}
+        <p class="cases-note">Drag across the photograph, tap it, or use the arrow keys to compare. Built from stock photographs for the demo; a real, consented case replaces it before launch.</p>
       </div>
       <div class="container case-v4__story">
         <dl class="case-story case-story--cols">
@@ -386,7 +348,7 @@ def case_page(site_url, n, cs):
     <section class="section more-cases" aria-labelledby="more-title">
       <div class="container-wide">
 {head("more-title", "More transformations")}
-        <ul class="more-cases__grid">{more}
+        <ul class="more-cases__list">{more}
         </ul>
         <p class="section-cta"><a class="link link--light" href="our-work/">See all our work{ARROW}</a></p>
       </div>

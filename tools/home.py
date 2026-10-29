@@ -2,8 +2,8 @@
 sections, each one idea. Written into index.html by tools/pages.py; the shared components it uses
 (before/after slider, hotspots, expanding panels, review carousel, sticky story) live in site.js 17.
 
-Facts only from the clinic: sample cases are marked, and a before photograph is never faked. Every
-slider shows the real "after" sample and a veiled "before" until a consented pair is added.
+Facts only from the clinic. Before/after pairs are stock samples (tools/pairs.py), each labelled
+"Sample case for demo", until consented cases replace them.
 """
 import html
 
@@ -12,8 +12,7 @@ import treatments
 from picture import picture
 
 ARROW = '<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg>'
-PENDING = "Before photograph · added with the patient’s consent"
-SHORT = "Before photo · to come"  # on grid tiles; the case page and notes carry the full wording
+SAMPLE = "Sample case for demo"  # under every before/after pair (tools/pairs.py; notes/TO-CONFIRM.md)
 
 REVIEWS = [  # real Google reviews (lines quoted as written; "grate" corrected to "great")
     "He managed my pain and resolved the problem on the same day.",
@@ -55,43 +54,74 @@ JOURNEY = [("stock-consultation", "45% 35%", "A dentist talking a patient throug
             "Your treatment is the start of a long relationship: reviews, cleanings and care to protect your result for years.")]
 
 
-def ba(name, alt, sizes, pos=None, pending="before", label=PENDING, i="          ", eager=False):
-    """Before/after drag slider (site.js 17). The real photograph is one side; the other side is a veiled copy
-    with a label until a consented photograph exists. Keyboard: the range input; pointer: drag anywhere."""
-    pic = picture(name, sizes, alt, pos=pos, eager=eager, indent=i + "    ")
-    veil = picture(name, sizes, "", pos=pos, indent=i + "    ")
-    real_side, veil_side = ("after", "before") if pending == "before" else ("before", "after")
-    return f"""{i}<div class="ba ba--pending-{pending}" data-ba style="--pos: 50%">
-{i}  <div class="ba__layer ba__layer--{real_side}">
-{pic}
+def ba(c, sizes, i="          ", eager=False):
+    """Before/after slider (site.js 17) for one case: the before photograph on the left of the line, the
+    after on the right. Drag anywhere on the photograph, click or tap to jump, arrow keys on the handle."""
+    name = c["name"].lower()
+    before = picture(c["before"], sizes, f"Before: {name} (sample case for demo)", pos=c.get("pos"), eager=eager, indent=i + "    ")
+    after = picture(c["img"], sizes, f"After: {name} (sample case for demo)", pos=c.get("pos"), eager=eager, indent=i + "    ")
+    return f"""{i}<figure class="ba" data-ba data-colour-group style="--pos: 50%">
+{i}  <div class="ba__layer ba__layer--after">
+{after}
 {i}  </div>
-{i}  <div class="ba__layer ba__layer--{veil_side} ba__veil" aria-hidden="true">
-{veil}
-{i}    <p class="ba__note">{label}</p>
+{i}  <div class="ba__layer ba__layer--before">
+{before}
 {i}  </div>
-{i}  <span class="ba__tag ba__tag--before">Before</span><span class="ba__tag ba__tag--after">After</span>
-{i}  <span class="ba__handle" aria-hidden="true"></span>
-{i}  <input class="ba__range" type="range" min="0" max="100" value="50" aria-label="Drag to compare before and after">
-{i}</div>"""
+{i}  <span class="ba__tag ba__tag--before" aria-hidden="true">Before</span><span class="ba__tag ba__tag--after" aria-hidden="true">After</span>
+{i}  <span class="ba__line" aria-hidden="true"></span>
+{i}  <span class="ba__handle" role="slider" tabindex="0" aria-label="Compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="Half before, half after"></span>
+{i}  <figcaption class="sample-line">{SAMPLE}</figcaption>
+{i}</figure>"""
+
+
+def pair(c, sizes, i="          "):
+    """apa's static before | after pair: two photographs side by side (colour on hover)."""
+    name = c["name"].lower()
+    sides = "".join(f"""
+{i}  <figure class="pair__side">
+{picture(c[key], sizes, f"{label}: {name} (sample case for demo)", pos=c.get("pos"), indent=i + "    ")}
+{i}    <figcaption>{label}</figcaption>
+{i}  </figure>""" for key, label in (("before", "Before"), ("img", "After")))
+    return f'{i}<div class="pair" data-colour-group>{sides}\n{i}</div>'
+
+
+def pair_card(c, prefix="", i="      ", sizes="(min-width: 900px) 22vw, 50vw", tag="li", attrs=""):
+    """One sample case as a static pair with its name, linking to the case page."""
+    return f"""
+{i}<{tag} class="pair-card reveal"{attrs}>
+{i}  <a href="{prefix}our-work/{c['slug']}/">
+{pair(c, sizes, i + '    ')}
+{i}    <p class="sample-line">{SAMPLE}</p>
+{i}    <h3 class="pair-card__name">{html.escape(c['name'])}</h3>
+{i}    <p class="pair-card__meta">{html.escape(c['meta'])}</p>
+{i}    <span class="link">See the full transformation{ARROW}</span>
+{i}  </a>
+{i}</{tag}>"""
 
 
 def results_grid(cases, prefix="", i="      "):
-    """Full-width grid of sliders; each links to its case page."""
-    tiles = "".join(f"""
-{i}  <li class="result reveal" data-cat="{c['cat']}">
-{ba(c['img'], f"Sample image for the demo: after ({c['name'].lower()})", '(min-width: 900px) 33vw, 100vw', c.get('pos'), label=SHORT, i=i + '    ')}
-{i}    <div class="result__text">
-{i}      <h3>{html.escape(c['name'])}</h3>
-{i}      <p>{html.escape(c['meta'])}</p>
-{i}      <a class="link" href="{prefix}our-work/{c['slug']}/">See the full transformation{ARROW}</a>
-{i}    </div>
-{i}  </li>""" for c in cases)
-    return f'{i}<ul class="results-grid" data-work-grid>{tiles}\n{i}</ul>'
+    """Static before | after pairs; each links to its case page. data-cat feeds the Our work filter."""
+    tiles = "".join(pair_card(c, prefix, i + "  ", attrs=f' data-cat="{c["cat"]}"') for c in cases)
+    return f'{i}<ul class="pairs-grid" data-work-grid>{tiles}\n{i}</ul>'
+
+
+def results_home(cases, i="        "):
+    """Homepage: one large slider for the featured case, then the others as static pairs."""
+    first, rest = cases[0], cases[1:]
+    return f"""{i}<div class="featured-case reveal">
+{ba(first, '(min-width: 900px) 80vw, 100vw', i + '  ')}
+{i}  <div class="featured-case__text">
+{i}    <h3>{html.escape(first['name'])}</h3>
+{i}    <p>{html.escape(first['meta'])}</p>
+{i}    <a class="link" href="our-work/{first['slug']}/">See the full transformation{ARROW}</a>
+{i}  </div>
+{i}</div>
+{i}<ul class="pairs-grid pairs-grid--home">{"".join(pair_card(c, "", i + "  ") for c in rest)}
+{i}</ul>"""
 
 
 def problems_stage(prefix="", i="      "):
-    """Common problems we fix: a list of problems beside a large photo stage that crossfades; each stage is a
-    slider (the photograph shows the problem; the after side waits for a consented case)."""
+    """Common problems we fix: a list of problems beside a large photo stage that crossfades."""
     tabs, panels = [], []
     for n, p in enumerate(treatments.PROBLEMS):
         sel = n == 0
@@ -100,7 +130,9 @@ def problems_stage(prefix="", i="      "):
         tabs.append(f'{i}    <button class="problems__tab" type="button" role="tab" id="pt-{p["slug"]}" aria-controls="pp-{p["slug"]}" '
                     f'aria-selected="{str(sel).lower()}"{"" if sel else " tabindex=\"-1\""}>{p["name"]}</button>')
         panels.append(f"""{i}  <div class="problems__panel" role="tabpanel" id="pp-{p['slug']}" aria-labelledby="pt-{p['slug']}"{'' if sel else ' hidden'}>
-{ba(photo, alt + " (sample photograph)", '(min-width: 900px) 62vw, 100vw', pending='after', label='After photograph · added with the patient’s consent', i=i + '    ')}
+{i}    <div class="problems__photo media">
+{picture(photo, '(min-width: 900px) 62vw, 100vw', alt + " (stock photograph)", indent=i + '      ')}
+{i}    </div>
 {i}    <div class="problems__text">
 {i}      <p>{p['lines'][0]} {p['lines'][1]}</p>
 {i}      <p class="problems__label">Usually treated with</p>
@@ -204,7 +236,7 @@ def tour_figure(prefix="", i="        ", sizes="(min-width: 900px) 30vw, 80vw"):
 
 
 def main_html(visit):
-    cases = more_pages.cases()[:6]
+    cases = more_pages.cases()
     return f"""  <main id="main" tabindex="-1">
 
     <!-- =================================================================== 1. HERO (the Mumbai video) -->
@@ -237,7 +269,7 @@ def main_html(visit):
       <div class="container">
         <div class="section-head reveal">
           <p class="eyebrow">What patients say</p>
-          <!-- Rating and count from SITE (tools/pages.py); the count is a placeholder until the clinic confirms it -->
+          <!-- Rating and count from SITE (tools/pages.py), checked on Google on 29 Oct 2026 -->
           <h2 id="reviews-title" class="reviews-hl__score"><span data-show="google-rating">5.0</span> · <span data-show="google-count-label">31 Google reviews</span></h2>
         </div>
 {carousel(REVIEWS)}
@@ -270,10 +302,9 @@ def main_html(visit):
       <div class="container-wide">
         <div class="section-head reveal">
           <h2 id="results-title">Results that look like you</h2>
-          <p class="lede">Careful, natural improvements that keep your smile in balance with your face. Drag across a photograph to compare.</p>
-          <p class="cases-note">Sample images for the demo. Each case’s before photograph is added with the patient’s written consent.</p>
+          <p class="lede">Careful, natural improvements that keep your smile in balance with your face. Drag across the photograph to compare.</p>
         </div>
-{results_grid(cases)}
+{results_home(cases)}
         <p class="section-cta"><a class="link" href="our-work/">See all our work{ARROW}</a></p>
       </div>
     </section>
