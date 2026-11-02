@@ -1,7 +1,7 @@
 """Before/after simulations for the demo (v4 fixes 3, point 2): both sides are the SAME photograph, so
 the alignment is pixel-perfect, and every one is labelled "Simulation for demo" on the site.
 
-Usage: .venv/Scripts/python -I tools/pairs.py [--sheet <out.jpg>]
+Usage: .venv/Scripts/python -I tools/pairs.py [name ...] [--sheet <out.jpg>]
 Framing is wide: the lower face from about the nose tip to the chin, the teeth well under 40% of the
 width, never macro. The "before" is the same photograph with a gentle warm shade on the teeth (a traced
 outline, teeth_only, and photos.stain_teeth at a low strength): a shade difference, never broken or decayed teeth.
@@ -22,27 +22,37 @@ ROOT = Path(__file__).resolve().parent.parent
 STOCK = ROOT / "src-assets" / "stock"
 
 # name: (source, crop (left, top, right, bottom) as fractions of the source, the visible teeth traced as a
-#        polygon in the crop (fractions), shade strength). A traced outline is exact where an automatic
+#        polygon in the crop (fractions), shade strength[, teeth_only options]). A traced outline is exact where an automatic
 #        mask confuses warm, shaded teeth with skin; the dark gaps between teeth are left out (teeth_only).
 SIMS = {
     "stock-pair-1": ("sim-smile-b.jpg", (0.0, 0.0, 1.0, 1.0),
                      [(0.466, 0.535), (0.578, 0.517), (0.660, 0.498), (0.727, 0.478), (0.736, 0.512),
                       (0.662, 0.562), (0.578, 0.597), (0.474, 0.612)], 0.45),
+    # Every visible tooth, from the shaded ones on the left to the last molar in the corner; the lip's pink edge
+    # and sheen are left out by saturation (sat), and the shaded teeth kept by a lower darkness cut (dark)
     "stock-sim-whiten": ("cand/c10.jpg", (0.0, 0.26, 1.0, 0.70),
-                         [(0.523, 0.385), (0.648, 0.352), (0.778, 0.352), (0.778, 0.428), (0.714, 0.476),
-                          (0.626, 0.490), (0.536, 0.467)], 0.45),
+                         [(0.523, 0.375), (0.554, 0.38), (0.601, 0.391), (0.653, 0.391), (0.71, 0.362), (0.762, 0.32),
+                          (0.809, 0.29), (0.838, 0.268), (0.861, 0.243), (0.874, 0.229), (0.877, 0.249), (0.859, 0.288),
+                          (0.838, 0.33), (0.815, 0.365), (0.789, 0.391), (0.768, 0.41), (0.742, 0.439), (0.718, 0.458),
+                          (0.71, 0.48), (0.653, 0.486), (0.601, 0.489), (0.565, 0.47), (0.528, 0.422)], 0.45,
+                         {"sat": 0.34, "dark": 0.27}),
 }
 
 
-def teeth_only(im, poly):
-    """Feathered polygon mask, minus anything much darker than the teeth inside it."""
+def teeth_only(im, poly, sat=None, dark=0.45):
+    """Feathered polygon mask, minus anything much darker than the teeth inside it and, with sat, minus
+    anything more saturated than teeth (the pink edge of a lip caught by the outline)."""
     w, h = im.size
     m = Image.new("L", (w, h), 0)
     ImageDraw.Draw(m).polygon([(x * w, y * h) for x, y in poly], fill=255)
     g = np.asarray(im.convert("L")).astype(np.float32)
     inside = np.asarray(m) > 0
     ref = np.percentile(g[inside], 85)
-    keep = (g > 0.45 * ref) & inside
+    keep = (g > dark * ref) & inside
+    if sat is not None:
+        x = np.asarray(im.convert("RGB")).astype(np.float32)
+        mx, mn = x.max(2), x.min(2)
+        keep &= (mx - mn) / np.maximum(mx, 1) < sat
     out = Image.fromarray((keep * 255).astype(np.uint8))
     return out.filter(ImageFilter.GaussianBlur(max(2, w / 700)))
 
@@ -59,9 +69,12 @@ def frame(src, crop):
 
 def build():
     out = {}
-    for name, (src, crop, poly, strength) in SIMS.items():
+    only = [a for a in sys.argv[1:] if a in SIMS]  # name one or more to rebuild only those
+    for name, (src, crop, poly, strength, *opts) in SIMS.items():
+        if only and name not in only:
+            continue
         after = frame(src, crop)
-        before = stain_teeth(after, teeth_only(after, poly), strength)
+        before = stain_teeth(after, teeth_only(after, poly, **(opts[0] if opts else {})), strength)
         before, after = stock_grade(before), stock_grade(after)
         export(before, f"{name}-before")
         export(after, f"{name}-after")
