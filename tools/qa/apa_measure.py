@@ -21,7 +21,7 @@ JS = r"""() => {
   let blocks = [...root.children].filter((el) => { const r = el.getBoundingClientRect(); return r.height > 40 && getComputedStyle(el).display !== 'none'; });
   // A single wrapper: descend into it
   while (blocks.length === 1 && blocks[0].children.length > 1) blocks = [...blocks[0].children].filter((el) => el.getBoundingClientRect().height > 40);
-  const footer = document.querySelector('footer');
+  const footer = [...document.querySelectorAll('footer')].find((f) => !f.closest('main, blockquote, figure'));
   if (footer && !blocks.includes(footer) && !root.contains(footer)) blocks.push(footer);
   const box = (el) => { const r = el.getBoundingClientRect(); return { x: Math.round(r.x), y: Math.round(r.y + scrollY), w: Math.round(r.width), h: Math.round(r.height) }; };
   const vis = (el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 4 && r.height > 4 && cs.visibility !== 'hidden' && cs.opacity !== '0'; };

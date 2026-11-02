@@ -2,7 +2,7 @@
 
 Usage: .venv/Scripts/python -I tools/pages.py && .venv/Scripts/python -I tools/cases_markup.py
 Each page's <main> lives in tools/pages/<slug>.html and is written relative to the site root;
-paths are moved one folder down here. Markers: {{visit}} (the homepage's Visit section) {{planner}} and {{pic name | sizes | alt | pos=.. | eager}}.
+paths are moved one folder down here. Markers: {{visit}} (tools/pages/_visit.html) {{planner}} and {{pic name | sizes | alt | pos=.. | eager}}.
 Re-run after changing the header, menus or footer on the homepage so every page stays identical.
 
 Contact details live only in SITE below. The build writes them into index.html and every page:
@@ -21,6 +21,7 @@ from picture import picture  # noqa: E402
 import chrome  # noqa: E402
 import finish  # noqa: E402
 import home  # noqa: E402
+import home_apa  # noqa: E402
 import more_pages  # noqa: E402
 import technology  # noqa: E402
 import treatment_pages  # noqa: E402
@@ -28,6 +29,8 @@ import treatments  # noqa: E402
 import v4_pages  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
+# The Visit section of the inner pages ({{visit}}); the homepage follows apa and has none (V4-APA-LITERAL)
+VISIT = ROOT / "tools" / "pages" / "_visit.html"
 SITE_URL = "https://arha.svayra.com/"
 
 # The one source of truth for contact details. Placeholders until the clinic confirms (notes/TO-CONFIRM.md).
@@ -252,12 +255,12 @@ def expand_pics(html):
 def build_home(page):
     """index.html is the source of every page's chrome: the header, menu and footer (tools/chrome.py) and the
     homepage's sections (tools/home.py) are written into it; the <head>, call bar and Riya stay as they are."""
-    visit = re.search(r"    <!-- =+ 10\. VISIT US -->\n.*?</section>\n", page, flags=re.S).group(0)
+    visit = VISIT.read_text(encoding="utf-8")
     start = page.index("  <!-- ===================================================================== HEADER -->")
     main_at = page.index('  <main id="main"')
     end_main = page.index("  </main>\n") + len("  </main>\n")
     call_bar = page.index("  <!-- ===================================================================== CALL BAR")
-    return (page[:start] + chrome.header() + chrome.side_menu() + "\n" + home.main_html(visit) + "\n"
+    return (page[:start] + chrome.header() + chrome.side_menu() + "\n" + home_apa.main_html(visit) + "\n"
             + chrome.footer() + "\n" + page[call_bar:])
 
 
@@ -272,7 +275,7 @@ def main():
         print("updated index.html (contact details, menus)")
     call_qr()
 
-    visit = re.search(r"    <!-- =+ 10\. VISIT US -->\n.*?</section>\n", home, flags=re.S).group(0)
+    visit = VISIT.read_text(encoding="utf-8")
     planner = (ROOT / "tools" / "pages" / "_planner.html").read_text(encoding="utf-8")
     head = home[:home.index("<body>")]
     head = re.sub(r"\s*<!-- Hero poster is the LCP image.*?fetchpriority=\"high\">\n", "\n", head, flags=re.S)

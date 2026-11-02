@@ -6886,3 +6886,240 @@ main .container > p + .link { margin-top: 32px; }
 a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
 [data-ba], .blend__control, .agedial__control { touch-action: pan-y; }
 [data-loupe] { touch-action: none; }
+
+/* ==========================================================================
+   apa homepage (notes/V4-APA-LITERAL.md): the homepage on apaaesthetic.com's homepage layout, block by
+   block, measured in notes/APA-HOMEPAGE.md (1440 / 390). Built by tools/home_apa.py. Only Arha's
+   content differs. Links on this page are apa's 16px; the grid's tile links are 14px.
+   ========================================================================== */
+.home-apa .link { font-size: 16px; }
+.home-apa h2 { font-size: 24px; }
+.home-apa h3 { font-size: 20px; }
+.home-apa p { font-size: 18px; }
+
+/* 1. Hero: the video full-bleed, 817px at 1440 x 900 (91% of the screen); text bottom-left, 80px up */
+.ah-hero { height: 91vh; height: 91svh; min-height: 560px; }
+.ah-hero .hero__content { padding: 0 var(--gutter) 80px; }
+.ah-hero .hero__text { max-width: 680px; }
+.ah-hero h1 { font-size: 28px; }
+.home-apa .ah-hero .hero__lede { margin-top: 10px; font-size: 22px; line-height: 1.4; }
+
+/* 2 + 10. Centred headings: H2, one line under it, sometimes one link */
+.ah-head { padding: 40px var(--gutter) 26px; text-align: center; }
+.ah-head p { max-width: 1030px; margin: 10px auto 0; }
+.ah-head--reviews { padding: 60px var(--gutter) 40px; }
+.ah-head--reviews p { max-width: 704px; }
+.ah-head .link { margin-top: 32px; }
+
+/* 3. Feature trio: three 2:1 photographs edge to edge, a linked H3 and one line under each */
+.ah-trio { display: grid; grid-template-columns: repeat(3, 1fr); padding-bottom: 86px; }
+.ah-trio__media { position: relative; display: block; aspect-ratio: 2 / 1; overflow: hidden; }
+.ah-trio h3 { margin: 14px 20px 0; }
+.ah-trio h3 a, .ah-head h2 a, .ah-grid h2 a { transition: color var(--t-link); }
+.ah-trio h3 a:hover, .ah-trio h3 a:focus-visible, .ah-head h2 a:hover, .ah-head h2 a:focus-visible, .ah-grid h2 a:hover, .ah-grid h2 a:focus-visible { color: var(--bronze); }
+.ah-trio p { margin: 10px 20px 0; }
+
+/* 4. Interior band: a full-screen slideshow (two photos, 1s crossfade, site.js 22), text bottom-left */
+.ah-band { position: relative; height: 100vh; height: 100svh; min-height: 620px; overflow: hidden; color: var(--paper); }
+.ah-band__slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; }
+.ah-band__slide.is-active { opacity: 1; }
+.ah-band::after,
+.ah-process__panel::after,
+.ah-founder::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(var(--shade), .7) 0%, rgba(var(--shade), .4) 30%, rgba(var(--shade), 0) 60%);
+  pointer-events: none;
+}
+.ah-band__text { position: absolute; left: var(--gutter); bottom: 80px; z-index: 1; width: 590px; max-width: calc(100% - 2 * var(--gutter)); }
+.ah-band__text p { margin-top: 10px; }
+.ah-band__text .link { margin-top: 32px; }
+
+/* 5. Common problems we treat: apa's 3 x 3 grid of 330px squares, 20px apart. Each square is a problem
+      (above) and its fix (below), black and white until hovered; then colour and the name fade in (0.4 s) */
+.ah-grid { padding: 60px var(--gutter) 37px; text-align: center; }
+.ah-grid__lede { max-width: 1030px; margin: 10px auto 0; }
+.ah-grid__tiles { display: grid; grid-template-columns: repeat(3, 330px); justify-content: center; gap: 20px; margin: 46px 0 0; padding: 0; list-style: none; }
+.ah-tile a { position: relative; display: block; aspect-ratio: 1 / 1; overflow: hidden; color: var(--paper); }
+.ah-tile__pair { position: absolute; inset: 0; display: grid; grid-template-rows: 1fr 1fr; }
+.ah-tile__half { position: relative; overflow: hidden; }
+.home-apa .ah-tile img,
+.home-apa .ah-tile img.bw-photo { filter: brightness(.8) saturate(0); transition: opacity 900ms var(--ease), filter .4s ease-in-out !important; }
+.home-apa .ah-tile a:hover img,
+.home-apa .ah-tile a:focus-visible img,
+.home-apa .ah-tile .in-colour img { filter: none !important; }
+.ah-tile__hover {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px;
+  background: rgba(var(--shade), .38);
+  opacity: 0;
+  transition: opacity .4s ease-in-out;
+}
+.ah-tile a:hover .ah-tile__hover,
+.ah-tile a:focus-visible .ah-tile__hover { opacity: 1; }
+.ah-tile__name { font: 700 20px/1.2 var(--font-head); letter-spacing: 2px; text-transform: uppercase; }
+.ah-tile__link {
+  padding-bottom: 5px;
+  background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+  font: 600 14px/1.2 var(--font-body);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+/* Without a mouse the name and link stay in view (there is nothing to hover) */
+@media (hover: none) {
+  .ah-tile__hover { opacity: 1; background: rgba(var(--shade), .3); }
+}
+.ah-grid__cta { margin-top: 62px; }
+
+/* 6. Dark band: a centred statement and one link */
+.ah-dark { padding: 40px var(--gutter); background: var(--charcoal); color: var(--paper); text-align: center; }
+.ah-dark p { max-width: 930px; margin: 10px auto 0; }
+.ah-dark .link { margin-top: 32px; }
+
+/* 7. Process: three photo panels edge to edge, 650px tall, the numbered text overlaid bottom-left */
+.ah-process { display: grid; grid-template-columns: repeat(3, 1fr); }
+.ah-process__panel { position: relative; display: flex; align-items: flex-end; height: 650px; overflow: hidden; color: var(--paper); }
+.ah-process__text { position: relative; z-index: 1; padding: 0 40px 26px; }
+.ah-process__text p { margin-top: 10px; }
+
+/* 8. Founder: a full-screen black and white photograph; a centred quote on the left half */
+.ah-founder { position: relative; display: flex; align-items: center; height: 100vh; height: 100svh; min-height: 620px; overflow: hidden; color: var(--paper); }
+.ah-founder::after { background: linear-gradient(to right, rgba(var(--shade), .72) 0%, rgba(var(--shade), .5) 45%, rgba(var(--shade), 0) 75%); }
+.ah-founder__text { position: relative; z-index: 1; width: 600px; max-width: calc(100% - 2 * var(--gutter)); margin-left: 120px; text-align: center; }
+.ah-founder blockquote { margin: 10px 0 0; }
+.ah-founder blockquote p { font-style: italic; }
+.ah-founder blockquote footer { margin-top: 26px; font-size: 18px; }
+.ah-founder .link { margin-top: 32px; }
+
+/* 9. Step inside: the tour video | a flat colour panel with a centred H3 and one link */
+.ah-teaser { display: grid; grid-template-columns: 1fr 1fr; height: 450px; }
+.ah-teaser__video { position: relative; overflow: hidden; }
+.ah-teaser .tour { position: absolute; inset: 0; width: 100%; height: 100%; max-height: none; aspect-ratio: auto; margin: 0; }
+.ah-teaser .tour picture.fill img { object-position: 50% 45%; }
+.ah-teaser__panel { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 25px; background: var(--stone); text-align: center; }
+.home-apa .ah-teaser__panel h3 { font-size: 24px; }
+.ah-teaser__panel .link { margin-top: 32px; }
+
+/* 11. Reviews mosaic: apa's two staggered 450px columns, 15px apart; tall (3:4) and wide (3:2) tiles.
+       Tiles in three tones (charcoal, stone, paper with a hairline) and one photograph, like apa's covers:
+       a bronze quote mark, the review in the quote face, five bronze stars and the source.
+       Hover: apa's dark veil with "Google review" and "Read on Google" fades in (0.4 s) */
+.ah-mosaic { display: flex; justify-content: center; align-items: flex-start; gap: 15px; padding: 20px var(--gutter) 40px; }
+.ah-mosaic__col { display: flex; flex-direction: column; gap: 15px; width: 450px; margin: 0; padding: 0; list-style: none; }
+.ah-review a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 36px 40px 32px;
+  overflow: hidden;
+  background: var(--stone);
+  color: var(--ink);
+}
+.ah-review--tall { aspect-ratio: 3 / 4; }
+.ah-review--wide { aspect-ratio: 3 / 2; }
+.ah-review--dark a { background: var(--charcoal); color: var(--paper); }
+.ah-review--line a { background: var(--paper); box-shadow: inset 0 0 0 1px var(--hairline-strong); }
+.ah-review__mark { display: block; height: 56px; color: var(--bronze); font: 400 96px/1 var(--font-quote); }
+.ah-review blockquote { margin: 0; }
+.home-apa .ah-review blockquote p { font: italic 400 28px/1.3 var(--font-quote); letter-spacing: 0; }
+.home-apa .ah-review--tall blockquote p { font-size: 38px; line-height: 1.22; }
+.ah-review__foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 18px; border-top: 1px solid currentColor; border-color: rgba(var(--shade), .16); }
+.ah-review--dark .ah-review__foot { border-color: rgba(250, 250, 246, .22); }
+.ah-review__stars { display: inline-flex; gap: 3px; color: var(--bronze); }
+.ah-review__stars svg { width: 16px; height: 16px; fill: currentColor; }
+.ah-review__source { font: 600 12px/1.3 var(--font-body); letter-spacing: 1.5px; text-transform: uppercase; opacity: .78; }
+/* The photograph: Arha's emblem wall (3:2, the whole logo); the rating fades in on hover */
+.ah-review--photo a { padding: 0; background: var(--paper); }
+.ah-review--photo img { transition: transform .8s var(--ease), opacity 900ms var(--ease) !important; }
+.ah-review--photo a:hover img { transform: scale(1.03); }
+.ah-review__hover--score { gap: 10px; }
+.ah-review__score { font: 700 64px/1 var(--font-head); letter-spacing: 2px; }
+.ah-review__hover--score .ah-review__stars svg { width: 20px; height: 20px; }
+.ah-review__hover {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(var(--shade), .6);
+  color: var(--paper);
+  font: 600 14px/1.3 var(--font-body);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity .4s ease-in-out;
+}
+.ah-review a:hover .ah-review__hover,
+.ah-review a:focus-visible .ah-review__hover { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ah-band__slide { transition: none; }
+}
+
+/* Phones (apa at 390): one column; text 300px wide (45px in), photos 340px or full width */
+@media (max-width: 767px) {
+  .ah-hero { height: 85vh; height: 85svh; min-height: 520px; }
+  .ah-hero .hero__content { padding: 0 35px 60px; }
+  .ah-head { padding: 40px 45px 36px; }
+  .ah-head--reviews { padding: 60px 45px 40px; }
+  .ah-trio { grid-template-columns: 1fr; gap: 26px; padding-bottom: 25px; }
+  .ah-trio__media { aspect-ratio: 1 / 1; margin: 0 25px; }
+  .ah-trio h3 { margin: 20px 45px 0; }
+  .ah-trio p { margin: 10px 45px 0; }
+  .ah-band__text { left: 45px; width: 300px; max-width: calc(100% - 90px); }
+  .ah-grid { padding: 60px 45px 37px; }
+  .ah-grid__tiles { grid-template-columns: minmax(0, 300px); gap: 19px; }
+  .ah-dark { padding: 40px 45px; }
+  .ah-process { grid-template-columns: 1fr; }
+  .ah-process__panel { height: 350px; }
+  .ah-process__text { padding: 0 45px 26px; }
+  .ah-founder__text { width: 300px; max-width: calc(100% - 90px); margin: 0 auto; }
+  .ah-teaser { grid-template-columns: 1fr; grid-template-rows: 260px 276px; height: auto; }
+  .ah-mosaic { flex-direction: column; align-items: center; gap: 14px; padding: 20px 70px 40px; }
+  .ah-mosaic__col { width: 100%; max-width: 250px; gap: 14px; }
+  /* apa shows five tiles on phones, two tall and three wide: here the first three of one column, then the photograph and a tall review */
+  .ah-mosaic__col:first-child li:nth-child(n+4),
+  .ah-mosaic__col:last-child li:nth-child(1),
+  .ah-mosaic__col:last-child li:nth-child(n+4) { display: none; }
+  .ah-review a { padding: 20px 22px 18px; }
+  .ah-review--wide:not(.ah-review--photo) { aspect-ratio: auto; min-height: 167px; }
+  .ah-review--wide:not(.ah-review--photo) a { gap: 10px; }
+  .ah-review__mark { height: 34px; font-size: 64px; }
+  .home-apa .ah-review blockquote p { font-size: 19px; }
+  .home-apa .ah-review--tall blockquote p { font-size: 25px; }
+  .ah-review__foot { padding-top: 12px; }
+  .ah-review__stars svg { width: 13px; height: 13px; }
+  .ah-review__source { font-size: 10px; letter-spacing: 1px; }
+  .ah-review__score { font-size: 44px; }
+}
+
+/* 12. Footer on every page, as apa's (measured, notes/APA-HOMEPAGE.md): the closing line at 80px, the logo
+       180px wide beneath it, four 310px columns starting 192px down, and one centred line at the foot */
+.site-footer { padding: 80px 0 56px; }
+.footer__tagline { font-size: 14px; }
+.footer__logo { width: 180px; margin-top: 24px; }
+.footer__cols { margin-top: 32px; gap: 32px 40px; }
+.footer__cols h2 + * { margin-top: 10px; }
+.footer__cols address, .footer__cols p, .footer__cols li { line-height: 1.5; }
+.footer__cols nav ul { columns: 2; column-gap: 24px; }
+.footer__cols nav li { break-inside: avoid; }
+.footer__bottom { flex-direction: column; align-items: center; gap: 6px; margin-top: 56px; padding-top: 0; border-top: 0; text-align: center; }
+.footer__bottom ul { justify-content: center; }
+@media (min-width: 1024px) {
+  .footer__cols { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 767px) {
+  .footer__cols { padding-inline: 20px; }
+}

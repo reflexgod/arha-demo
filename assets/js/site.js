@@ -1589,4 +1589,22 @@
   window.addEventListener('resize', queueAside, { passive: true });
   window.addEventListener('load', queueAside);
   setInterval(() => { if (wide.matches && document.querySelector('.riya-bubble.is-visible')) queueAside(); }, 1000);  // the bubble arrives on its own timer
+
+  /* 22. The homepage band's slideshow ([data-slideshow], tools/home_apa.py), as apa's: the photographs
+         crossfade (1 s, site.css) every 4 s while the band is on screen; still with reduced motion. */
+  document.querySelectorAll('[data-slideshow]').forEach((band) => {
+    const slides = [...band.querySelectorAll('.ah-band__slide')];
+    if (slides.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let at = 0;
+    let timer = 0;
+    const next = () => {
+      slides[at].classList.remove('is-active');
+      at = (at + 1) % slides.length;
+      slides[at].classList.add('is-active');
+    };
+    new IntersectionObserver(([e]) => {
+      clearInterval(timer);
+      if (e.isIntersecting) timer = setInterval(next, 4000);
+    }).observe(band);
+  });
 })();
