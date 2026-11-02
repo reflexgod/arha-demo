@@ -60,12 +60,12 @@ PAGES = {
         "description": "Common problems we treat at Arha Dental Care, Peddar Road, Mumbai.",
     },
     "book": {
-        "title": "Book a Consultation | Arha Dental Care, Peddar Road",
+        "title": "Book an Appointment | Arha Dental Care, Peddar Road",
         "description": "Book an in-person consultation at Arha Dental Care on Peddar Road, Mumbai, or a virtual consultation from anywhere, by WhatsApp or phone.",
     },
     "404": {
         "title": "Page not found | Arha Dental Care, Peddar Road",
-        "description": "This page is not here. Find treatments, book a consultation or call Arha Dental Care on Peddar Road, Mumbai.",
+        "description": "This page is not here. Find treatments, book an appointment or call Arha Dental Care on Peddar Road, Mumbai.",
     },
     "emergency": {
         "title": "Emergency Dentist on Peddar Road, South Mumbai | Arha Dental Care",
@@ -129,11 +129,11 @@ def show_values():
 def client_config():
     """What site.js and Riya need, written into every page as JSON (no extra request)."""
     return {
-        "phone": SITE["phone"],
-        "tel": "+" + digits(SITE["phone"]),
-        "whatsapp": digits(SITE["whatsapp"]),
-        "email": SITE["email"],
-        "emergency": SITE["emergency"],
+        "phone": "" if missing("phone") else SITE["phone"],
+        "tel": "" if missing("phone") else "+" + digits(SITE["phone"]),
+        "whatsapp": "" if missing("whatsapp") else digits(SITE["whatsapp"]),
+        "email": "" if missing("email") else SITE["email"],
+        "emergency": "" if missing("emergency") else SITE["emergency"],
         "timeZone": SITE["time_zone"],
         "hours": [list(d) if d else None for d in SITE["hours"]],
         "riyaWebhookUrl": SITE["riya_webhook_url"],
@@ -154,6 +154,8 @@ def apply_site(html):
         tag = re.sub(r'href="tel:[^"]*"', f'href="tel:{number}"', tag)
         tag = re.sub(r'(https://wa\.me/)\d*', rf'\g<1>{digits(SITE["whatsapp"])}', tag)
         tag = re.sub(r'href="mailto:[^"?]*', f'href="mailto:{SITE["email"]}', tag)
+        if "data-google-reviews" in tag and SITE["google_reviews_url"] and 'href="#"' in tag:
+            tag = tag.replace('href="#"', f'href="{SITE["google_reviews_url"]}" target="_blank" rel="noopener"')
         label = re.search(r'data-label="([\w-]+)"', tag)
         if label:
             tag = re.sub(r'(aria-label="[^"]*?, )[^",]*"', rf'\g<1>{show[label.group(1)]}"', tag)
@@ -175,8 +177,72 @@ def apply_site(html):
     return html
 
 
+# ---------------------------------------------------------------- placeholders are never shown
+PLACEHOLDER_NUMBER = re.compile(r"^\+?\s*91[\s0-]*$")
+
+
+def missing(key):
+    """True while a contact detail in SITE is still a placeholder (or empty): +91 00000 00000, hello@example.com."""
+    value = (SITE.get(key) or "").strip()
+    if key == "email":
+        return not value or value.lower().endswith(("@example.com", "@example.org"))
+    return not value or bool(PLACEHOLDER_NUMBER.match(value))
+
+
+def hide_missing(html):
+    """Leave out of the page every element that would show a placeholder: tel:, WhatsApp and mailto: links, the
+    numbers in text, the call panel and empty rows left behind. Blocks marked <!--if:phone--> ... <!--endif-->
+    are kept only when the phone is real, <!--if:no-phone--> ... <!--endif--> only while it is missing (same for
+    whatsapp, email, emergency). Everything comes back on its own once SITE has the real value."""
+    gone = {k for k in ("phone", "whatsapp", "email", "emergency") if missing(k)}
+
+    def cond(m):
+        keep = (m.group(2) in gone) if m.group(1) else (m.group(2) not in gone)
+        return m.group(3) if keep else ""
+    html = re.sub(r"<!--if:(no-)?(\w+)-->(.*?)<!--endif-->", cond, html, flags=re.S)
+    if not gone:
+        return html
+
+    def anchor(m):
+        open_tag, inner = m.group(1), m.group(2)
+        if 'data-contact="fixed"' in open_tag:  # the public 112 line stays
+            return m.group(0)
+        href = re.search(r'href="([^"]*)"', open_tag)
+        href = href.group(1) if href else ""
+        if href.startswith("tel:"):
+            key = "emergency" if 'data-contact="emergency"' in open_tag else "phone"
+        elif "wa.me/" in href:
+            key = "whatsapp"
+        elif href.startswith("mailto:"):
+            key = "email"
+        else:
+            return m.group(0)
+        if key not in gone:
+            return m.group(0)
+        ask = re.search(r'data-riya-ask="([^"]*)"', open_tag)
+        if ask:  # "Ask Riya about this" keeps working without its WhatsApp fallback
+            cls = re.search(r'class="([^"]*)"', open_tag)
+            return f'<button class="{cls.group(1) if cls else ""}" type="button" data-riya-ask="{ask.group(1)}">{inner}</button>'
+        return ""
+    html = re.sub(r"(<a\b[^>]*>)(.*?)</a>", anchor, html, flags=re.S)
+    keys = "|".join(sorted(gone))
+    html = re.sub(rf'(?::\s*)?<span[^>]*\bdata-show="(?:{keys})"[^>]*>[^<]*</span>', "", html)
+    if "phone" in gone:
+        html = re.sub(r"\n?[ \t]*<!-- Call panel \(laptops\).*?(?=\n  </header>)", "", html, flags=re.S)
+        html = re.sub(r'("telephone": )"[^"]*"', r'\1""', html)
+    # Rows and wrappers left empty
+    for _ in range(2):
+        html = re.sub(r"\n?[ \t]*<li>\s*</li>", "", html)
+        html = re.sub(r"\n?[ \t]*<div>\s*<dt>[^<]*</dt>\s*<dd>\s*</dd>\s*</div>", "", html)
+        html = re.sub(r"\n?[ \t]*<p>\s*(?:·\s*)*</p>", "", html)
+        html = re.sub(r'\n?[ \t]*<(p|div) class="[\w-]*__actions[^"]*">\s*</\1>', "", html)
+    return html
+
+
 def call_qr():
     """QR code that dials reception when scanned with a phone (shown in the desktop Call now popover)."""
+    if missing("phone"):
+        return
     import segno
     segno.make(f"tel:+{digits(SITE['phone'])}", error="m").save(
         str(ROOT / "assets" / "img" / "call-qr.svg"), kind="svg", border=2, omitsize=True,
@@ -259,16 +325,17 @@ def build_home(page):
     start = page.index("  <!-- ===================================================================== HEADER -->")
     main_at = page.index('  <main id="main"')
     end_main = page.index("  </main>\n") + len("  </main>\n")
-    call_bar = page.index("  <!-- ===================================================================== CALL BAR")
+    riya = page.index("RIYA AI RECEPTIONIST")
+    riya = page.rindex("  <!-- =====", 0, riya)
     return (page[:start] + chrome.header() + chrome.side_menu() + "\n" + home_apa.main_html(visit) + "\n"
-            + chrome.footer() + "\n" + page[call_bar:])
+            + chrome.footer() + "\n" + chrome.call_bar() + "\n" + page[riya:])
 
 
 def main():
     index = ROOT / "index.html"
     original = index.read_text(encoding="utf-8")
     home_page = expand_pics(build_home(original))
-    home = finishing_head(apply_site(menus(home_page)), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster"))
+    home = finishing_head(hide_missing(apply_site(menus(home_page))), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster"))
     finish.favicons()
     if home != original:
         index.write_text(home, encoding="utf-8", newline="\n")
@@ -276,7 +343,7 @@ def main():
     call_qr()
 
     visit = VISIT.read_text(encoding="utf-8")
-    planner = (ROOT / "tools" / "pages" / "_planner.html").read_text(encoding="utf-8")
+    planner = "" if missing("whatsapp") else (ROOT / "tools" / "pages" / "_planner.html").read_text(encoding="utf-8")
     head = home[:home.index("<body>")]
     head = re.sub(r"\s*<!-- Hero poster is the LCP image.*?fetchpriority=\"high\">\n", "\n", head, flags=re.S)
     # Inner pages carry a class: their stock smiles and faces render in black and white (site.css)
@@ -309,7 +376,7 @@ def main():
         photo = (first.group(1) or first.group(2)) if first else "hero-city-poster"
         main_html = expand_pics(main_html.replace("{{visit}}", visit).replace("{{planner}}", planner))
         og = finish.og_image(slug.replace("/", "-"), html.unescape(meta["title"].split(" | ")[0]), photo)
-        page = relocate(apply_site(finishing_head(h, og) + top + main_html + bottom), slug)
+        page = relocate(hide_missing(apply_site(finishing_head(h, og) + top + main_html + bottom)), slug)
         out = ROOT / ("." if slug == "404" else slug)
         out.mkdir(parents=True, exist_ok=True)
         name = "404.html" if slug == "404" else "index.html"

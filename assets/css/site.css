@@ -7188,3 +7188,115 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 @media (min-width: 700px) { .rcards { grid-template-columns: repeat(2, 1fr); gap: 20px; } .rcard__quote p { font-size: 22px; } }
 @media (min-width: 1100px) { .rcards { grid-template-columns: repeat(3, 1fr); gap: 24px; } .rcard figure { padding: 32px 28px 26px; } }
 
+
+/* ===========================================================================================================
+   v4 keep-look additions (notes/PATIENT-REVIEW.md): the finder, the reviews carousel, the first-visit steps,
+   "Before you decide", the two-slot action bar and the footer status. The site's own tokens only: paper, ink,
+   charcoal, stone, bronze; D-DIN headings in capitals, Jost body; sharp corners, hairlines, no shadows.
+   =========================================================================================================== */
+button.link, button.cta { border-radius: 0; background-color: transparent; color: inherit; cursor: pointer; }
+button.link { border: 0; background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat; }
+button.cta { border: 0; border-bottom: 2px solid currentColor; }
+button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
+
+/* 2b. What brings you in? (site.js 23a): a stone band under the hero; options as hairline rows */
+.ah-finder { padding: 60px var(--gutter) 70px; background: var(--stone); }
+.ah-finder__head { max-width: 704px; margin: 0 auto 36px; text-align: center; }
+.ah-finder__head p { margin-top: 10px; }
+.finder { max-width: 920px; margin: 0 auto; }
+.finder__q { margin: 0 0 20px; font: 700 18px/1.3 var(--font-head); letter-spacing: 2px; text-transform: uppercase; }
+.finder .finder__count { display: block; margin-bottom: 8px; color: var(--muted); font: 600 12px/1.3 var(--font-body); letter-spacing: 1.5px; text-transform: uppercase; }
+.finder__options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--hairline-strong); }
+.finder__options li { border-bottom: 1px solid var(--hairline-strong); }
+.finder__opt { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 60px; padding: 14px 0; border: 0; background: none; color: var(--ink); font: 400 18px/1.35 var(--font-body); text-align: left; cursor: pointer; transition: color var(--t-link); }
+.finder__opt::after { content: ""; flex: none; width: 8px; height: 8px; margin-right: 4px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(45deg); }
+.finder__opt:hover, .finder__opt:focus-visible, .finder__opt[aria-pressed="true"] { color: var(--bronze); }
+.finder__back { margin-top: 24px; padding: 6px 0; border: 0; background: none; color: var(--muted); font: 600 13px/1.2 var(--font-body); letter-spacing: 1px; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.finder__back:hover, .finder__back:focus-visible { color: var(--bronze); }
+.ah-finder .finder__count, .ah-finder .finder__back { color: #57534F; } /* muted, darkened for 4.5:1 on stone */
+.ah-finder .finder__result .finder__count, .ah-finder .finder__result .finder__back, .ah-finder .finder__confirm { color: var(--muted); }
+.finder__result { padding: 36px 40px 32px; background: var(--paper); outline: none; }
+.finder__result h3 { margin: 0 0 14px; font-size: 22px; }
+.finder__result > p { max-width: 720px; }
+.finder__urgent { margin-top: 16px; padding-left: 16px; border-left: 2px solid var(--bronze); }
+.finder__links { display: flex; flex-wrap: wrap; gap: 14px 32px; margin: 24px 0 0; padding: 0; list-style: none; }
+.finder__actions { display: flex; flex-wrap: wrap; gap: 14px 32px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--hairline); }
+.finder .finder__confirm { margin-top: 20px; color: var(--muted); font-size: 15px; }
+
+/* 11. Reviews carousel (site.js 23b): the same tiles, one at a time on a scroll-snap track */
+.ah-carousel { padding: 0 var(--gutter) 60px; }
+.rv { max-width: 915px; margin: 0 auto; }
+.rv__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+.rv__track::-webkit-scrollbar { display: none; }
+.rv__slide { flex: 0 0 100%; scroll-snap-align: start; }
+.home-apa .rv .ah-review--wide:not(.ah-review--photo) { min-height: 340px; }
+.rv__controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 20px; }
+.rv__dots { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.rv__dot { position: relative; width: 32px; height: 44px; border: 0; background: none; cursor: pointer; }
+.rv__dot::after { content: ""; position: absolute; left: 4px; right: 4px; top: 21px; height: 2px; background: var(--hairline-strong); transition: background var(--t-link); }
+.rv__dot[aria-current="true"]::after { background: var(--ink); }
+.rv__dot:hover::after { background: var(--bronze); }
+.rv__buttons { display: flex; gap: 8px; }
+.rv__btn { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--hairline-strong); border-radius: 0; background: none; color: var(--ink); cursor: pointer; transition: color var(--t-link), border-color var(--t-link); }
+.rv__btn:hover, .rv__btn:focus-visible { color: var(--bronze); border-color: var(--bronze); }
+.rv__btn svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.rv__icon-play, .rv.is-paused-by-user .rv__icon-pause { display: none; }
+.rv.is-paused-by-user .rv__icon-play { display: block; }
+.rv__icon-play svg { fill: currentColor; stroke: none; }
+
+/* Book: your first visit (site.js 23c) */
+.visit-steps { margin-top: 8px; }
+.visit-steps__tabs { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border-top: 1px solid var(--hairline-strong); }
+.visit-steps__tab { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-height: 64px; margin-top: -1px; padding: 16px 12px 16px 0; border: 0; border-top: 2px solid transparent; background: none; color: var(--muted); font: 700 14px/1.25 var(--font-head); letter-spacing: 1.5px; text-transform: uppercase; text-align: left; cursor: pointer; transition: color var(--t-link), border-color var(--t-link); }
+.visit-steps__tab[aria-selected="true"] { border-top-color: var(--ink); color: var(--ink); }
+.visit-steps__tab:hover { color: var(--bronze); }
+.visit-steps__num { font: 600 13px/1 var(--font-body); letter-spacing: 1px; }
+.visit-steps__panel { max-width: 720px; padding: 24px 0 8px; outline-offset: 4px; }
+.visit-steps__panel h3 { margin: 0 0 12px; }
+.visit-steps__nav { display: flex; gap: 32px; margin-top: 16px; }
+.visit-bring { max-width: 720px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--hairline-strong); }
+.visit-bring h3 { margin: 0 0 14px; }
+.visit-bring ul { margin: 0; padding-left: 20px; list-style: disc; }
+.visit-bring li + li { margin-top: 6px; }
+.visit__directions { margin-top: 24px; }
+.book .lede a { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.book .lede a:hover, .book .lede a:focus-visible { color: var(--bronze); }
+
+/* Treatment pages: before you decide */
+.glance__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; margin: 0; border-top: 1px solid var(--hairline-strong); }
+.glance__list > div { padding: 22px 0 24px; border-bottom: 1px solid var(--hairline-strong); }
+.glance__list dt { margin-bottom: 8px; font: 700 15px/1.3 var(--font-head); letter-spacing: 1.5px; text-transform: uppercase; }
+.glance__list dd { margin: 0; }
+.glance__list dd a { text-decoration: underline; text-underline-offset: 3px; }
+.glance__list dd a:hover { color: var(--bronze); }
+.glance__book { display: flex; flex-wrap: wrap; gap: 14px 32px; margin-top: 32px; }
+.doc-v4__actions { display: flex; flex-wrap: wrap; gap: 14px 32px; }
+
+/* Footer: today's status and directions */
+.footer__status { margin-top: 10px; }
+.footer__directions { margin-top: 12px; }
+.footer__directions a { text-decoration: underline; text-underline-offset: 4px; }
+
+@media (max-width: 767px) {
+  .ah-finder { padding: 44px var(--gutter) 50px; }
+  .ah-finder__head { margin-bottom: 28px; }
+  .finder__options { grid-template-columns: 1fr; }
+  .finder__opt { font-size: 17px; }
+  .finder__result { padding: 24px 20px; }
+  .finder__result h3 { font-size: 19px; }
+  .ah-carousel { padding-bottom: 44px; }
+  .home-apa .rv .ah-review--wide:not(.ah-review--photo) { min-height: 300px; }
+  .visit-steps__tabs { display: flex; overflow-x: auto; scrollbar-width: none; }
+  .visit-steps__tabs::-webkit-scrollbar { display: none; }
+  .visit-steps__tab { flex: 0 0 auto; max-width: 150px; padding-right: 20px; }
+  .glance__list { grid-template-columns: 1fr; }
+
+  /* The action bar: two equal slots, each a label over today's status; Riya's launcher keeps its 56px */
+  .call-bar--two { justify-content: stretch; gap: 0; padding-left: 0; padding-right: 56px; }
+  .call-bar__slot { position: relative; display: flex; flex: 1 1 0; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 56px; min-width: 0; }
+  .call-bar__slot + .call-bar__slot { border-left: 1px solid var(--paper-16); }
+  .call-bar--two .call-bar__label { padding: 0 0 3px; font-size: 14px; }
+  .call-bar--two .call-bar__status { max-width: 100%; padding-left: 0; border-left: 0; overflow: hidden; font-size: 10px; line-height: 1.2; letter-spacing: .1em; text-overflow: ellipsis; }
+  .call-bar__slot:active .call-bar__label::after, .call-bar__slot:focus-visible .call-bar__label::after { left: -10px; right: -10px; }
+  .call-bar__slot:focus-visible { outline: 2px solid var(--bronze); outline-offset: -5px; }
+}

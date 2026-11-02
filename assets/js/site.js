@@ -624,12 +624,12 @@
          stored or submitted; the result opens WhatsApp with the plan written in. */
   const PLANNER = {
     whatsapp: SITE.whatsapp || '',
-    // SAMPLE timings until Dr. Nikhil confirms real ones (see notes/NEXT-SESSION.md)
+    // No visit counts or days on the site until Dr. Nikhil confirms them (the old samples are in notes/TO-CONFIRM.md)
     treatments: {
-      implants: { name: 'Dental implants', detail: 'Typically 2 visits, about 5–7 days each.' },
-      'full-mouth': { name: 'Full mouth rehabilitation', detail: 'Typically 3 visits, about 7–10 days each.' },
-      veneers: { name: 'Smile design & veneers', detail: 'Typically 2 visits, about 7–10 days in all.' },
-      aligners: { name: 'Aligners', detail: 'Typically 1 visit of about 3–5 days, then remote reviews.' },
+      implants: { name: 'Dental implants', detail: 'Dr. Nikhil confirms the number of visits and days after your virtual consultation.' },
+      'full-mouth': { name: 'Full mouth rehabilitation', detail: 'Dr. Nikhil confirms the number of visits and days after your virtual consultation.' },
+      veneers: { name: 'Smile design & veneers', detail: 'Dr. Nikhil confirms the number of visits and days after your virtual consultation.' },
+      aligners: { name: 'Aligners', detail: 'Dr. Nikhil confirms the number of visits and days after your virtual consultation.' },
       unsure: { name: 'A consultation', detail: 'We will recommend the right treatment and timeline after a virtual consultation.' },
     },
     minDays: 1,
@@ -1606,5 +1606,129 @@
       clearInterval(timer);
       if (e.isIntersecting) timer = setInterval(next, 4000);
     }).observe(band);
+  });
+  /* 23. Homepage finder and reviews carousel (tools/home_apa.py), first-visit steps (tools/pages/book.html).
+         Vanilla, no dependencies; keyboard-accessible; nothing moves on its own with reduced motion.
+         a. What brings you in? One or two taps to a plain-English answer. Focus follows the new step.
+         b. Reviews carousel: one or two tiles at a time on a scroll-snap track; advances every 7 s while on screen;
+            pauses on hover, focus or touch, and with the Pause button (WCAG 2.2.2); never with reduced motion.
+         c. Your first visit: tabs (arrow keys move between steps), Previous and Next. */
+  document.querySelectorAll('[data-finder]').forEach((finder) => {
+    const steps = [...finder.querySelectorAll('[data-step]')];
+    const live = finder.querySelector('[data-finder-live]');
+    const history = [];
+    const show = (id, focus = true) => {
+      steps.forEach((s) => { s.hidden = s.id !== id; });
+      const step = steps.find((s) => s.id === id);
+      if (!step || !focus) return;
+      const target = step.matches('.finder__result') ? step : step.querySelector('.finder__opt');
+      target.focus({ preventScroll: true });
+      const top = finder.getBoundingClientRect().top;
+      if (top < 60 || top > window.innerHeight * 0.6) finder.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      if (live) live.textContent = step.matches('.finder__result') ? step.querySelector('h3').textContent : step.querySelector('.finder__q').lastChild.textContent;
+    };
+    finder.addEventListener('click', (e) => {
+      const opt = e.target.closest('[data-go]');
+      if (opt) {
+        const from = opt.closest('[data-step]');
+        from.querySelectorAll('[data-go]').forEach((b) => b.setAttribute('aria-pressed', String(b === opt)));
+        history.push(from.id);
+        track('finder_choice', { choice: opt.textContent.trim() });
+        setTimeout(() => show(opt.dataset.go), reduceMotion ? 0 : 160);
+      } else if (e.target.closest('[data-back]')) {
+        show(history.pop() || 'q-start');
+      } else if (e.target.closest('[data-restart]')) {
+        history.length = 0;
+        finder.querySelectorAll('[aria-pressed="true"]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
+        show('q-start');
+      }
+    });
+  });
+
+  document.querySelectorAll('[data-reviews]').forEach((rv) => {
+    const track = rv.querySelector('[data-track]');
+    const slides = [...rv.querySelectorAll('[data-slide]')];
+    const dots = [...rv.querySelectorAll('[data-dot]')];
+    const pause = rv.querySelector('[data-pause]');
+    let at = 0;
+    let timer = 0;
+    let hover = false;
+    let visible = false;
+    let userPaused = reduceMotion;
+    const mark = (i) => {
+      at = i;
+      dots.forEach((d, k) => d.setAttribute('aria-current', String(k === i)));
+      slides.forEach((s, k) => { s.inert = k !== i; });
+    };
+    const go = (i, user) => {
+      const k = (i + slides.length) % slides.length;
+      track.scrollTo({ left: slides[k].offsetLeft - slides[0].offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+      mark(k);
+      if (user) schedule();
+    };
+    const schedule = () => {
+      clearTimeout(timer);
+      if (!userPaused && !hover && visible && !rv.contains(document.activeElement)) timer = setTimeout(() => { go(at + 1); schedule(); }, 7000);
+    };
+    // Swiping moves the track: follow it to the nearest slide
+    let scrollTimer = 0;
+    track.addEventListener('scroll', () => {
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        const k = Math.round(track.scrollLeft / (slides[1] ? slides[1].offsetLeft - slides[0].offsetLeft : 1));
+        if (k !== at && slides[k]) { mark(k); schedule(); }
+      }, 120);
+    }, { passive: true });
+    rv.querySelector('[data-prev]').addEventListener('click', () => go(at - 1, true));
+    rv.querySelector('[data-next]').addEventListener('click', () => go(at + 1, true));
+    dots.forEach((d, k) => d.addEventListener('click', () => go(k, true)));
+    const setPaused = (p) => {
+      userPaused = p;
+      rv.classList.toggle('is-paused-by-user', p);
+      pause.setAttribute('aria-label', p ? 'Play the reviews' : 'Pause the reviews');
+      schedule();
+    };
+    pause.addEventListener('click', () => setPaused(!userPaused));
+    if (reduceMotion) setPaused(true);
+    rv.addEventListener('mouseenter', () => { hover = true; schedule(); });
+    rv.addEventListener('mouseleave', () => { hover = false; schedule(); });
+    rv.addEventListener('touchstart', () => { hover = true; schedule(); }, { passive: true });
+    rv.addEventListener('focusin', schedule);
+    rv.addEventListener('focusout', () => setTimeout(schedule, 0));
+    rv.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(at + 1, true); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(at - 1, true); }
+    });
+    mark(0);
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; schedule(); }, { threshold: 0.4 }).observe(rv);
+  });
+
+  document.querySelectorAll('[data-visit-steps]').forEach((box) => {
+    const tabs = [...box.querySelectorAll('[role="tab"]')];
+    const panels = tabs.map((t) => document.getElementById(t.getAttribute('aria-controls')));
+    const prev = box.querySelector('[data-vs-prev]');
+    const next = box.querySelector('[data-vs-next]');
+    let at = 0;
+    const select = (i, focus) => {
+      at = Math.max(0, Math.min(tabs.length - 1, i));
+      tabs.forEach((t, k) => {
+        t.setAttribute('aria-selected', String(k === at));
+        t.tabIndex = k === at ? 0 : -1;
+        panels[k].hidden = k !== at;
+      });
+      prev.disabled = at === 0;
+      next.disabled = at === tabs.length - 1;
+      if (focus) tabs[at].focus();
+    };
+    tabs.forEach((t, k) => {
+      t.addEventListener('click', () => select(k));
+      t.addEventListener('keydown', (e) => {
+        const keys = { ArrowRight: at + 1, ArrowDown: at + 1, ArrowLeft: at - 1, ArrowUp: at - 1, Home: 0, End: tabs.length - 1 };
+        if (e.key in keys) { e.preventDefault(); select(keys[e.key], true); }
+      });
+    });
+    prev.addEventListener('click', () => select(at - 1));
+    next.addEventListener('click', () => select(at + 1));
+    select(0);
   });
 })();

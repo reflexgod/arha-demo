@@ -4,8 +4,8 @@
     <section class="section book" aria-labelledby="page-title">
       <div class="container">
         <div class="section-head reveal">
-          <h1 id="page-title">Book a consultation</h1>
-          <p class="lede">Choose an in-person visit at Peddar Road or a virtual consultation from anywhere.</p>
+          <h1 id="page-title">Book an appointment</h1>
+          <p class="lede">Choose an in-person visit at Peddar Road or a virtual consultation from anywhere. <a href="#first-visit">What happens on your first visit</a>.</p>
         </div>
         <div class="paths">
           <article class="path reveal" aria-labelledby="path-visit">
@@ -18,6 +18,7 @@
               <p>A full examination and a clear explanation of your options, in person, with time for every question.</p>
               <div class="path__actions">
                 <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20an%20in-person%20consultation%20at%20Peddar%20Road.">Book on WhatsApp</a>
+                <!--if:no-whatsapp--><button class="cta" type="button" data-riya-ask="I'd like to book an in-person appointment at Peddar Road.">Book with Riya, our receptionist</button><!--endif-->
                 <a class="cta" href="tel:+910000000000" data-call="book">Call <span data-show="phone">+91 00000 00000</span></a>
               </div>
             </div>
@@ -32,12 +33,63 @@
               <p>A video consultation to talk through your concerns, look at any X-rays or scans you already have, and plan your treatment before you travel.</p>
               <div class="path__actions">
                 <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20virtual%20consultation.">Book on WhatsApp</a>
+                <!--if:no-whatsapp--><button class="cta" type="button" data-riya-ask="I'd like to book a virtual consultation.">Book with Riya, our receptionist</button><!--endif-->
                 <a class="cta" href="tel:+910000000000" data-call="book">Call <span data-show="phone">+91 00000 00000</span></a>
               </div>
             </div>
           </article>
         </div>
-        <p class="book__note reveal">WhatsApp opens with your request already written. Nothing is sent until you press send.</p>
+        <p class="book__note reveal"><!--if:whatsapp-->WhatsApp opens with your request already written. Nothing is sent until you press send.<!--endif--><!--if:no-whatsapp-->Riya, our online receptionist, takes your name, what you need and a time that suits you, and the clinic confirms your appointment.<!--endif--></p>
+      </div>
+    </section>
+
+    <!-- =================================================================== YOUR FIRST VISIT (stepper, site.js 23). Steps from what the
+         site already says about Arha; "what to bring" and the length of a first visit are for Dr. Nikhil to confirm (notes/TO-CONFIRM.md) -->
+    <section class="section section--stone" id="first-visit" aria-labelledby="first-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="first-title">Your first visit</h2>
+          <p class="lede">Five steps, at your pace. Nothing begins until you have heard your options and decided.</p>
+        </div>
+        <div class="visit-steps reveal" data-visit-steps>
+          <div class="visit-steps__tabs" role="tablist" aria-label="Your first visit, step by step">
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-1" aria-controls="vs-1" aria-selected="true"><span class="visit-steps__num">1</span>Arrive</button>
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-2" aria-controls="vs-2" aria-selected="false" tabindex="-1"><span class="visit-steps__num">2</span>Talk with the doctor</button>
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-3" aria-controls="vs-3" aria-selected="false" tabindex="-1"><span class="visit-steps__num">3</span>A careful check</button>
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-4" aria-controls="vs-4" aria-selected="false" tabindex="-1"><span class="visit-steps__num">4</span>Your plan, explained</button>
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-5" aria-controls="vs-5" aria-selected="false" tabindex="-1"><span class="visit-steps__num">5</span>Next steps</button>
+          </div>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-1" aria-labelledby="vs-tab-1" tabindex="0">
+            <h3>Arrive at Doctor House</h3>
+            <p>Arha is at 107, Doctor House, 14 Peddar Road, opposite Jaslok Hospital. You are welcomed at reception and wait in the patients’ lounge.</p>
+          </div>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-2" aria-labelledby="vs-tab-2" tabindex="0" hidden>
+            <h3>Talk with the doctor</h3>
+            <p>You start by talking, not in the chair: what you have noticed, how long it has been going on, your health and medicines, and what you would like.</p>
+          </div>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-3" aria-labelledby="vs-tab-3" tabindex="0" hidden>
+            <h3>A careful check</h3>
+            <p>An examination of your teeth and gums. If an X-ray is needed, it is taken in the clinic’s own X-ray room, so you don’t have to go anywhere else.</p>
+          </div>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-4" aria-labelledby="vs-tab-4" tabindex="0" hidden>
+            <h3>Your plan, explained</h3>
+            <p>The doctor shows you what they found and explains your options in plain words, before anything begins. Ask anything; there is time for every question.</p>
+          </div>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-5" aria-labelledby="vs-tab-5" tabindex="0" hidden>
+            <h3>Next steps</h3>
+            <p>You decide in your own time. If you would like to go ahead, the clinic arranges your next appointment with you.</p>
+          </div>
+          <div class="visit-steps__nav"><button class="link" type="button" data-vs-prev>Previous step</button><button class="link" type="button" data-vs-next>Next step</button></div>
+        </div>
+        <div class="visit-bring reveal">
+          <h3>What to bring</h3>
+          <ul>
+            <li>Any recent dental X-rays or reports you already have</li>
+            <li>A list of the medicines you take</li>
+            <li>Your questions; it helps to write them down</li>
+            <li>For a child or an older parent: someone they trust can come along</li>
+          </ul>
+        </div>
       </div>
     </section>
 

@@ -5,13 +5,15 @@
     <section class="urgent" aria-labelledby="page-title">
       <div class="container">
         <p class="urgent__eyebrow">Dental emergencies</p>
-        <h1 id="page-title">Dental emergency? Call now</h1>
+        <h1 id="page-title"><!--if:emergency-->Dental emergency? Call now<!--endif--><!--if:no-emergency-->Dental emergency? What to do now<!--endif--></h1>
         <a class="urgent__number" href="tel:+910000000000" data-contact="emergency" data-call="emergency" data-label="emergency" aria-label="Call Arha Dental Care's emergency line, +91 00000 00000"><span data-show="emergency">+91 00000 00000</span></a>
-        <p class="urgent__lede">Tell us what happened. We’ll tell you what to do now and when to come in.</p>
+        <!--if:emergency--><p class="urgent__lede">Tell us what happened. We’ll tell you what to do now and when to come in.</p><!--endif-->
+        <!--if:no-emergency--><p class="urgent__lede">If the swelling is spreading, or breathing or swallowing is hard, go to a hospital emergency department now or call <a href="tel:112" data-contact="fixed">112</a>. Otherwise, first aid below helps until you are seen.</p><!--endif-->
         <p class="open-status urgent__status" data-open-status></p>
         <div class="urgent__actions">
           <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%20have%20a%20dental%20emergency." target="_blank" rel="noopener">WhatsApp us a photo</a>
           <a class="cta" href="#first-aid">First aid while you wait</a>
+          <!--if:no-emergency--><button class="cta" type="button" data-riya-ask="I have a dental emergency and need to be seen soon.">Ask Riya for an appointment</button><!--endif-->
         </div>
       </div>
     </section>
@@ -138,7 +140,9 @@
     <section class="band" aria-labelledby="closing-title">
       <div class="container reveal">
         <h2 id="closing-title">Not sure if it can wait?</h2>
-        <p>Call and describe it. A two-minute conversation is better than a night of guessing.</p>
+        <!--if:emergency--><p>Call and describe it. A two-minute conversation is better than a night of guessing.</p><!--endif-->
+        <!--if:no-emergency--><p>Tell Riya, our online receptionist, what is happening, and the clinic will arrange to see you.</p>
+        <button class="cta" type="button" data-riya-ask="I have a dental problem and I'm not sure if it can wait.">Ask Riya</button><!--endif-->
         <a class="cta" href="tel:+910000000000" data-contact="emergency" data-call="emergency_band">Call <span data-show="emergency">+91 00000 00000</span></a>
       </div>
     </section>

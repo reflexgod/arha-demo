@@ -31,7 +31,7 @@ TREATMENTS = {
         "card": "One tooth, several, or a full arch, planned around the tooth you will see.",
         "intro": ("A tooth that feels like your own",
                   "An implant is a small post, usually titanium, that takes the place of a missing tooth’s root. Once it has settled into the jaw, a crown, bridge or denture is fixed on top.",
-                  "Implant care at Arha is led by an ITI-certified prosthodontist, so the tooth you will see and use is planned first, and the implant is placed to support it."),
+                  "Implant care at Arha is led by Dr. Nikhil V. Jain, a prosthodontist and ITI Scholar (London), so the tooth you will see and use is planned first, and the implant is placed to support it."),
         "interactive": ("implants", "Inside an implant", "Tap a number on the photograph to see what each part does, then see how implants replace one tooth, several, or a full arch."),
         "who": [("One missing tooth", "A single implant and crown, without reshaping the healthy teeth on either side."),
                 ("Several missing teeth", "Implants can carry a bridge, so fewer implants replace more teeth."),
@@ -356,7 +356,7 @@ def hero(slug, t, specialty, i="    "):
 {i}      <h1 id="page-title">{t["h1"]}</h1>
 {i}      <p class="hero__lede">{t["lede"]}</p>
 {i}      <div class="hero__actions">
-{i}        <a class="cta" href="book/">Book a Consultation</a>
+{i}        <a class="cta" href="book/">Book an appointment</a>
 {i}        <a class="cta" href="tel:+910000000000" data-call="treatment_hero">Call <span data-show="phone">+91 00000 00000</span></a>
 {i}      </div>
 {i}    </div>
@@ -751,7 +751,7 @@ def closing(title="Begin with a conversation", text="Every plan at Arha starts w
         <h2 id="closing-title">{title}</h2>
         <p>{text}</p>
         <div class="band__actions">
-          <a class="cta" href="book/">Book a Consultation</a>
+          <a class="cta" href="book/">Book an appointment</a>
           <a class="cta" href="tel:+910000000000" data-call="treatment_band">Call <span data-show="phone">+91 00000 00000</span></a>
         </div>
       </div>
@@ -901,7 +901,7 @@ def hub_page(site_url, problems_html):
 {problems_html}
       </div>
     </section>
-{closing("Not sure where to start?", "Book a consultation and we will explain your options plainly, with no obligation to go ahead.")}
+{closing("Not sure where to start?", "Book an appointment and we will explain your options plainly, with no obligation to go ahead.")}
   </main>
 """
     meta = {"title": "Dental Treatments in South Mumbai | Arha Dental Care, Peddar Road",

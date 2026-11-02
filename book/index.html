@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Book a Consultation | Arha Dental Care, Peddar Road</title>
+  <title>Book an Appointment | Arha Dental Care, Peddar Road</title>
   <meta name="description" content="Book an in-person consultation at Arha Dental Care on Peddar Road, Mumbai, or a virtual consultation from anywhere, by WhatsApp or phone.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://arha.svayra.com/book/">
@@ -15,7 +15,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Arha Dental Care">
-  <meta property="og:title" content="Book a Consultation | Arha Dental Care, Peddar Road">
+  <meta property="og:title" content="Book an Appointment | Arha Dental Care, Peddar Road">
   <meta property="og:description" content="Book an in-person consultation at Arha Dental Care on Peddar Road, Mumbai, or a virtual consultation from anywhere, by WhatsApp or phone.">
   <meta property="og:url" content="https://arha.svayra.com/book/">
   <meta property="og:image" content="https://arha.svayra.com/assets/og/book.jpg">
@@ -41,7 +41,7 @@
       }
     } catch (e) { /* storage blocked: no intro */ }
   </script>
-  <script type="application/json" id="site-config">{"phone": "+91 00000 00000", "tel": "+910000000000", "whatsapp": "910000000000", "email": "hello@example.com", "emergency": "+91 00000 00000", "timeZone": "Asia/Kolkata", "hours": [null, ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"]], "riyaWebhookUrl": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat", "googleReviewsUrl": "https://share.google/PzhwgJ9QJMErZnk9R"}</script>
+  <script type="application/json" id="site-config">{"phone": "", "tel": "", "whatsapp": "", "email": "", "emergency": "", "timeZone": "Asia/Kolkata", "hours": [null, ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"]], "riyaWebhookUrl": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat", "googleReviewsUrl": "https://share.google/PzhwgJ9QJMErZnk9R"}</script>
   <script src="../assets/js/site.js" defer></script>
   <!-- Seamless navigation: pages are prefetched when a link is hovered or pressed (Speculation Rules; site.js 20 elsewhere) -->
   <script type="speculationrules">{"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"not": {"selector_matches": "[target=_blank], [data-call], [data-google-reviews]"}}]}, "eagerness": "moderate"}]}</script>
@@ -64,7 +64,7 @@
       {"@type": "Person", "name": "Dr. Nikhil V. Jain", "jobTitle": "Prosthodontist and Implantologist"},
       {"@type": "Person", "name": "Dr. Vasant P. Jain", "jobTitle": "Dental Surgeon", "honorificSuffix": "B.D.S."}
     ],
-    "telephone": "+91-00000-00000",
+    "telephone": "",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "107, Doctor House, 14 Peddar Road (Dr Gopalrao Deshmukh Marg), opp. Jaslok Hospital",
@@ -100,9 +100,6 @@
   <header class="site-header" data-header>
     <div class="utility-line" data-utility>
       <ul class="utility-line__list">
-        <li><a href="tel:+910000000000" data-call="utility" data-call-pop data-label="phone" aria-label="Call reception, +91 00000 00000"><span data-show="phone">+91 00000 00000</span></a></li>
-        <li><a href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener">WhatsApp</a></li>
-        <li><a href="mailto:hello@example.com">Email</a></li>
         <li><a href="../emergency/">Emergencies</a></li>
       </ul>
     </div>
@@ -163,41 +160,23 @@
               <li><a href="../founder/">About the founder</a></li>
               <li><a href="../doctors/">The doctors</a></li>
               <li><a href="../the-practice/">The practice</a></li>
-              <li><a href="../gallery/">Gallery &amp; 360° tour</a></li>
+              <li><a href="../gallery/">Gallery</a></li>
             </ul>
           </li>
           <li class="nav__item"><a class="nav__link" href="../our-work/">Our work</a></li>
-          <li class="nav__item"><a class="nav__link nav__link--book" href="./">Book a consultation</a></li>
+          <li class="nav__item"><a class="nav__link nav__link--book" href="./">Book an appointment</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <!-- One action from every page: dials on a phone, opens the call panel on a laptop -->
-        <a class="header-call" href="tel:+910000000000" data-call="header" data-call-pop><span class="header-call__long">Call now</span><span class="header-call__short">Call</span></a>
+        
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="side-menu" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
 
-    <!-- Call panel (laptops): the number large, copy it, scan the QR to call from a phone, or WhatsApp -->
-    <div class="call-pop" id="call-pop" role="dialog" aria-labelledby="call-pop-title" hidden>
-      <button class="call-pop__close" type="button" aria-label="Close" data-call-pop-close></button>
-      <p class="call-pop__title" id="call-pop-title">Call reception</p>
-      <a class="call-pop__number" href="tel:+910000000000" data-call="popover" data-show="phone">+91 00000 00000</a>
-      <p class="open-status call-pop__status" data-call-pop-status></p>
-      <div class="call-pop__scan">
-        <img src="../assets/img/call-qr.svg" width="112" height="112" loading="lazy" alt="QR code that dials Arha's reception">
-        <p>Scan with your phone’s camera to call from your phone.</p>
-      </div>
-      <div class="call-pop__actions">
-        <button class="cta" type="button" data-copy-number>Copy number</button>
-        <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener">WhatsApp us</a>
-        <button class="cta" type="button" data-ask-riya hidden>Ask Riya</button>
-      </div>
-      <p class="call-pop__closed" data-call-pop-closed hidden>We’re closed right now. Send a WhatsApp message or ask Riya, and the team will reply once the clinic opens.</p>
-      <p class="visually-hidden" role="status" data-copy-status></p>
-    </div>
   </header>
 
   <!-- ===================================================================== MENU (full screen, every width) -->
@@ -245,7 +224,7 @@
                   <li><a href="../founder/">About the founder</a></li>
                   <li><a href="../doctors/">The doctors</a></li>
                   <li><a href="../the-practice/">The practice</a></li>
-                  <li><a href="../gallery/">Gallery &amp; 360° tour</a></li>
+                  <li><a href="../gallery/">Gallery</a></li>
                 </ul>
               </div>
             </li>
@@ -254,16 +233,15 @@
             <li><a class="fmenu__link" href="../kids-dentistry/">Kids’ dentistry</a></li>
             <li><a class="fmenu__link" href="../dental-tourism/">Dental tourism</a></li>
         </ul>
-        <a class="fmenu__book" href="./">Book a consultation</a>
+        <a class="fmenu__book" href="./">Book an appointment</a>
         <ul class="fmenu__small">
           <li><a href="../the-practice/#visit">Visit us</a></li>
           <li><a href="../emergency/">Dental emergencies</a></li>
         </ul>
       </nav>
       <div class="side-menu__foot">
-        <a href="tel:+910000000000" data-call="menu" data-show="phone">+91 00000 00000</a>
+        
         <p class="open-status" data-open-status></p>
-        <p><a href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hello@example.com">Email</a></p>
         <p>107, Doctor House, 14 Peddar Road, Mumbai 400026</p>
       </div>
     </div>
@@ -275,8 +253,8 @@
     <section class="section book" aria-labelledby="page-title">
       <div class="container">
         <div class="section-head reveal">
-          <h1 id="page-title">Book a consultation</h1>
-          <p class="lede">Choose an in-person visit at Peddar Road or a virtual consultation from anywhere.</p>
+          <h1 id="page-title">Book an appointment</h1>
+          <p class="lede">Choose an in-person visit at Peddar Road or a virtual consultation from anywhere. <a href="#first-visit">What happens on your first visit</a>.</p>
         </div>
         <div class="paths">
           <article class="path reveal" aria-labelledby="path-visit">
@@ -292,8 +270,9 @@
               <h2 id="path-visit">In-person visit</h2>
               <p>A full examination and a clear explanation of your options, in person, with time for every question.</p>
               <div class="path__actions">
-                <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20an%20in-person%20consultation%20at%20Peddar%20Road.">Book on WhatsApp</a>
-                <a class="cta" href="tel:+910000000000" data-call="book">Call <span data-show="phone">+91 00000 00000</span></a>
+                
+                <button class="cta" type="button" data-riya-ask="I'd like to book an in-person appointment at Peddar Road.">Book with Riya, our receptionist</button>
+                
               </div>
             </div>
           </article>
@@ -310,66 +289,63 @@
               <h2 id="path-virtual">Virtual consultation</h2>
               <p>A video consultation to talk through your concerns, look at any X-rays or scans you already have, and plan your treatment before you travel.</p>
               <div class="path__actions">
-                <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20virtual%20consultation.">Book on WhatsApp</a>
-                <a class="cta" href="tel:+910000000000" data-call="book">Call <span data-show="phone">+91 00000 00000</span></a>
+                
+                <button class="cta" type="button" data-riya-ask="I'd like to book a virtual consultation.">Book with Riya, our receptionist</button>
+                
               </div>
             </div>
           </article>
         </div>
-        <p class="book__note reveal">WhatsApp opens with your request already written. Nothing is sent until you press send.</p>
+        <p class="book__note reveal">Riya, our online receptionist, takes your name, what you need and a time that suits you, and the clinic confirms your appointment.</p>
       </div>
     </section>
 
-    <!-- =================================================================== PLAN YOUR TREATMENT (visiting patients) -->
-    <section class="planner" id="plan" aria-labelledby="planner-title" data-planner>
-      <div class="planner__media media">
-        <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAgUGBAf/xAAhEAABBAIDAQADAAAAAAAAAAABAAIDBBEhBRIxEyMyUf/EABYBAQEBAAAAAAAAAAAAAAAAAAMCBP/EABkRAAMBAQEAAAAAAAAAAAAAAAABERIiIf/aAAwDAQACEQMRAD8Af3D89o6N9oOCVn5iVrW+qclvGLJaUaLZ0BtuJw/YIxOx3hXN4OblL8dinVPk3EDLk+HKBtWFh9B/UEkmPEqrWjKRtMA8ddo16K1CQuyutaBSa9WdHGSUyil2snLT5iIRq0tyE/HJ1lTyjN3A2pku/KU1oylmFo3zDNjqlnQl642mDrWB6p7jpi5bJ5iEaGZ//9k=); background-position: 45% 50%">
-          <source type="image/avif" srcset="../assets/img/stock-arrival-640.avif 640w, ../assets/img/stock-arrival-1280.avif 1280w, ../assets/img/stock-arrival-1920.avif 1920w" sizes="(min-width: 900px) 50vw, 100vw">
-          <source type="image/webp" srcset="../assets/img/stock-arrival-640.webp 640w, ../assets/img/stock-arrival-1280.webp 1280w, ../assets/img/stock-arrival-1920.webp 1920w" sizes="(min-width: 900px) 50vw, 100vw">
-          <img src="../assets/img/stock-arrival-1280.jpg" srcset="../assets/img/stock-arrival-640.jpg 640w, ../assets/img/stock-arrival-1280.jpg 1280w, ../assets/img/stock-arrival-1920.jpg 1920w" sizes="(min-width: 900px) 50vw, 100vw" width="1280" height="853" loading="lazy" decoding="async" alt="A suitcase standing by a softly lit window" style="object-position: 45% 50%">
-        </picture>
-      </div>
-      <div class="planner__body">
-        <h2 id="planner-title" class="reveal">Planning a visit to Mumbai?</h2>
-        <p class="planner__intro reveal">Three quick questions, and we’ll show how treatment could fit around your trip.</p>
-        <div class="planner__stage reveal">
-          <div class="planner__step is-active" data-step="1">
-            <p class="planner__count">01 / 03</p>
-            <p class="planner__q" id="planner-q1" tabindex="-1">What would you like to plan?</p>
-            <ul class="planner__options" aria-labelledby="planner-q1">
-              <li><button type="button" data-treatment="implants" aria-pressed="false">Dental implants</button></li>
-              <li><button type="button" data-treatment="full-mouth" aria-pressed="false">Full mouth rehabilitation</button></li>
-              <li><button type="button" data-treatment="veneers" aria-pressed="false">Smile design &amp; veneers</button></li>
-              <li><button type="button" data-treatment="aligners" aria-pressed="false">Aligners</button></li>
-              <li><button type="button" data-treatment="unsure" aria-pressed="false">Not sure yet</button></li>
-            </ul>
+    <!-- =================================================================== YOUR FIRST VISIT (stepper, site.js 23). Steps from what the
+         site already says about Arha; "what to bring" and the length of a first visit are for Dr. Nikhil to confirm (notes/TO-CONFIRM.md) -->
+    <section class="section section--stone" id="first-visit" aria-labelledby="first-title">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 id="first-title">Your first visit</h2>
+          <p class="lede">Five steps, at your pace. Nothing begins until you have heard your options and decided.</p>
+        </div>
+        <div class="visit-steps reveal" data-visit-steps>
+          <div class="visit-steps__tabs" role="tablist" aria-label="Your first visit, step by step">
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-1" aria-controls="vs-1" aria-selected="true"><span class="visit-steps__num">1</span>Arrive</button>
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-2" aria-controls="vs-2" aria-selected="false" tabindex="-1"><span class="visit-steps__num">2</span>Talk with the doctor</button>
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-3" aria-controls="vs-3" aria-selected="false" tabindex="-1"><span class="visit-steps__num">3</span>A careful check</button>
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-4" aria-controls="vs-4" aria-selected="false" tabindex="-1"><span class="visit-steps__num">4</span>Your plan, explained</button>
+            <button class="visit-steps__tab" type="button" role="tab" id="vs-tab-5" aria-controls="vs-5" aria-selected="false" tabindex="-1"><span class="visit-steps__num">5</span>Next steps</button>
           </div>
-          <div class="planner__step" data-step="2" inert>
-            <p class="planner__count">02 / 03</p>
-            <label class="planner__q" for="planner-city" tabindex="-1">Where are you travelling from?</label>
-            <input class="planner__input" id="planner-city" type="text" placeholder="City" autocomplete="address-level2" maxlength="60">
-            <button class="cta" type="button" data-planner-next>Next</button>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-1" aria-labelledby="vs-tab-1" tabindex="0">
+            <h3>Arrive at Doctor House</h3>
+            <p>Arha is at 107, Doctor House, 14 Peddar Road, opposite Jaslok Hospital. You are welcomed at reception and wait in the patients’ lounge.</p>
           </div>
-          <div class="planner__step" data-step="3" inert>
-            <p class="planner__count">03 / 03</p>
-            <p class="planner__q" id="planner-q3" tabindex="-1">How many days can you be in Mumbai?</p>
-            <div class="planner__stepper" role="group" aria-labelledby="planner-q3">
-              <button type="button" data-days="-1" aria-label="Fewer days">−</button>
-              <output aria-live="polite"><span data-days-value>7</span> days</output>
-              <button type="button" data-days="1" aria-label="More days">+</button>
-            </div>
-            <button class="cta" type="button" data-planner-next>See my plan</button>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-2" aria-labelledby="vs-tab-2" tabindex="0" hidden>
+            <h3>Talk with the doctor</h3>
+            <p>You start by talking, not in the chair: what you have noticed, how long it has been going on, your health and medicines, and what you would like.</p>
           </div>
-          <div class="planner__step" data-step="result" inert>
-            <p class="planner__summary" tabindex="-1" data-summary></p>
-            <p class="planner__detail" data-detail></p>
-            <p class="planner__sample">Sample timings. Your exact plan is confirmed after a virtual consultation.</p>
-            <div class="planner__actions">
-              <a class="cta" href="https://wa.me/910000000000" target="_blank" rel="noopener" data-whatsapp>Send my plan on WhatsApp</a>
-              <a class="planner__link" href="./#virtual">Book a virtual consultation</a>
-            </div>
-            <button class="planner__restart" type="button" data-planner-restart>Start again</button>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-3" aria-labelledby="vs-tab-3" tabindex="0" hidden>
+            <h3>A careful check</h3>
+            <p>An examination of your teeth and gums. If an X-ray is needed, it is taken in the clinic’s own X-ray room, so you don’t have to go anywhere else.</p>
           </div>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-4" aria-labelledby="vs-tab-4" tabindex="0" hidden>
+            <h3>Your plan, explained</h3>
+            <p>The doctor shows you what they found and explains your options in plain words, before anything begins. Ask anything; there is time for every question.</p>
+          </div>
+          <div class="visit-steps__panel" role="tabpanel" id="vs-5" aria-labelledby="vs-tab-5" tabindex="0" hidden>
+            <h3>Next steps</h3>
+            <p>You decide in your own time. If you would like to go ahead, the clinic arranges your next appointment with you.</p>
+          </div>
+          <div class="visit-steps__nav"><button class="link" type="button" data-vs-prev>Previous step</button><button class="link" type="button" data-vs-next>Next step</button></div>
+        </div>
+        <div class="visit-bring reveal">
+          <h3>What to bring</h3>
+          <ul>
+            <li>Any recent dental X-rays or reports you already have</li>
+            <li>A list of the medicines you take</li>
+            <li>Your questions; it helps to write them down</li>
+            <li>For a child or an older parent: someone they trust can come along</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -390,20 +366,9 @@
               <dt>Hours</dt>
               <dd><span data-show="hours-days">Monday to Saturday</span>, <span data-show="hours-time">9:30 AM to 6:30 PM</span><br><span data-show="hours-closed">Sunday closed</span></dd>
             </div>
-            <div>
-              <dt>Phone</dt>
-              <dd><a href="tel:+910000000000" data-call="visit" data-show="phone">+91 00000 00000</a></dd>
-            </div>
-            <div>
-              <dt>WhatsApp</dt>
-              <dd><a href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener">Message us on WhatsApp</a></dd>
-            </div>
-            <div>
-              <dt>Email</dt>
-              <dd><a href="mailto:hello@example.com" data-show="email">hello@example.com</a></dd>
-            </div>
           </dl>
-          <p class="visit__access">Wheelchair accessible · Elevator · Parking</p>
+          <!-- Access and parking details are for the clinic to confirm (notes/TO-CONFIRM.md) -->
+          <p class="visit__directions"><a class="link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Arha%20Dental%20Care%2C%20Doctor%20House%2C%2014%20Peddar%20Road%2C%20Mumbai%20400026" target="_blank" rel="noopener">Get directions</a></p>
         </div>
         <div class="map texture reveal">
           <span class="map__tag">Opposite Jaslok Hospital</span>
@@ -433,18 +398,18 @@
             Opp. Jaslok Hospital<br>
             Mumbai 400026
           </address>
+          <p class="footer__directions"><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Arha%20Dental%20Care%2C%20Doctor%20House%2C%2014%20Peddar%20Road%2C%20Mumbai%20400026" target="_blank" rel="noopener">Get directions</a></p>
         </div>
         <div>
           <h2>Hours</h2>
           <p><span data-show="hours-days">Monday to Saturday</span><br><span data-show="hours-time">9:30 AM to 6:30 PM</span><br><span data-show="hours-closed">Sunday closed</span></p>
+          <p class="open-status footer__status" data-open-status></p>
         </div>
         <div>
           <h2>Contact</h2>
           <ul>
-            <li><a href="tel:+910000000000" data-call="footer" data-show="phone">+91 00000 00000</a></li>
-            <li><a href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="mailto:hello@example.com" data-show="email">hello@example.com</a></li>
-            <li><a href="../emergency/">Dental emergencies: <span data-show="emergency">+91 00000 00000</span></a></li>
+            <li><a href="./">Book an appointment</a></li>
+            <li><a href="../emergency/">Dental emergencies</a></li>
           </ul>
         </div>
         <nav aria-labelledby="footer-explore">
@@ -457,31 +422,30 @@
             <li><a href="../founder/">About the founder</a></li>
             <li><a href="../doctors/">The doctors</a></li>
             <li><a href="../the-practice/">The practice</a></li>
-            <li><a href="../gallery/">Gallery &amp; 360° tour</a></li>
+            <li><a href="../gallery/">Gallery</a></li>
             <li><a href="../kids-dentistry/">Kids’ dentistry</a></li>
             <li><a href="../dental-tourism/">Dental tourism</a></li>
-            <li><a href="./">Book a consultation</a></li>
+            <li><a href="./">Book an appointment</a></li>
           </ul>
         </nav>
       </div>
       <div class="footer__bottom">
         <p>© 2026 Arha Dental Care</p>
         <ul>
-          <li><a href="#">Privacy</a></li>
+          <!-- Privacy: added with the privacy policy text (notes/TO-CONFIRM.md); no link to an empty page -->
           <li>Demo prepared by Viraaj</li>
         </ul>
       </div>
     </div>
   </footer>
 
-  <!-- ===================================================================== CALL BAR (phones)
-       One tap to reception: the whole bar is a single tel: link, on every page from the first paint.
-       Its accessible name starts with the visible "Call now", then the reception number (hidden text).
-       site.js replaces the hours with the live status (India time); without JS the hours stay. -->
-  <a class="call-bar" href="tel:+910000000000" data-call="call_bar">
-    <span class="call-bar__label">Call now</span><span class="visually-hidden">: Arha Dental Care reception, <span data-show="phone">+91 00000 00000</span>.</span>
-    <span class="call-bar__status" data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span>
-  </a>
+  <!-- ===================================================================== ACTION BAR (phones)
+       Generated by tools/chrome.py. The Call slot appears only with a real reception number (tools/pages.py). -->
+  <nav class="call-bar call-bar--two" aria-label="Call or book">
+    
+    <a class="call-bar__slot" href="../emergency/"><span class="call-bar__label">Emergency</span><span class="call-bar__status">Help and first aid</span></a>
+    <a class="call-bar__slot" href="./"><span class="call-bar__label">Book</span><span class="call-bar__status"><span data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span></span></a>
+  </nav>
 
   <!-- =====================================================================
        RIYA AI RECEPTIONIST (chat webhook).

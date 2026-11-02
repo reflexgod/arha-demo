@@ -27,7 +27,7 @@ IMG = ROOT / "assets" / "img"
 def page_hero(pic, title, lede, trail, eyebrow="", actions=True, i="    "):
     """apa's tall photo hero: text bottom-left over a wash; Book and Call as text links."""
     eb = f'\n{i}      <p class="eyebrow eyebrow--light">{eyebrow}</p>' if eyebrow else ""
-    act = (f'\n{i}      <p class="hero__actions"><a class="link link--light" href="book/">Book a consultation</a>'
+    act = (f'\n{i}      <p class="hero__actions"><a class="link link--light" href="book/">Book an appointment</a>'
            f'<a class="link link--light" href="tel:+910000000000" data-call="page_hero" data-call-pop>Call now</a></p>') if actions else ""
     return f"""{i}<!-- =================================================================== HERO -->
 {i}<section class="page-hero page-hero--tall" aria-labelledby="page-title">
@@ -173,6 +173,34 @@ def tech_used(slug):
 """
 
 
+PAIN_WORDS = ("hurt", "pain", "uncomfortable")
+
+
+def glance(t):
+    """Before you decide: the questions a nervous patient asks first, answered from the page's own content.
+    Visit counts are never guessed (notes/TO-CONFIRM.md); who treats you is as on the clinic door."""
+    comfort = next((a for q, a in t["faq"] if any(w in q.lower() for w in PAIN_WORDS)), None)
+    comfort = comfort or "Dr. Nikhil explains what you will feel, during and after treatment, at your consultation. Ask anything."
+    items = [a for a, _b in t["who"][:3]]
+    items = [w if k == 0 or w[1:2].isupper() else w[:1].lower() + w[1:] for k, w in enumerate(items)]
+    who = ", ".join(items)
+    return f"""
+    <!-- =================================================================== BEFORE YOU DECIDE (at a glance) -->
+    <section class="section glance" aria-labelledby="glance-title">
+      <div class="container">
+{head("glance-title", "Before you decide")}
+        <dl class="glance__list reveal">
+          <div><dt>Who it is for</dt><dd>{who}.</dd></div>
+          <div><dt>What it feels like</dt><dd>{comfort}</dd></div>
+          <div><dt>How many visits</dt><dd>It depends on your teeth and your plan. You get a personal plan, with the number of visits, at your consultation.</dd></div>
+          <div><dt>Who treats you</dt><dd>Led by Dr. Nikhil V. Jain, prosthodontist and implantologist (B.D.S., M.D.S., ITI Scholar, London). <a href="our-work/">What patients say on Google</a>.</dd></div>
+        </dl>
+        <p class="glance__book reveal"><a class="link" href="book/">Book an appointment</a><a class="link" href="book/#first-visit">What happens on your first visit</a></p>
+      </div>
+    </section>
+"""
+
+
 def treatment_page(slug, site_url):
     """apa's treatment page: tall hero, intro, the process as a sticky sequence, the page's own
     interactive, a before/after carousel, technology used, questions, then the closing band."""
@@ -191,6 +219,7 @@ def treatment_page(slug, site_url):
       <ul>{"".join(f'<li><a class="link" href="problems/{s}/">{n}</a></li>' for s, n in fixes)}</ul>
     </nav>
 """
+    body += glance(t)
     if t["steps"]:
         body += process(t, slug)
     kind, ix_title, ix_lede = t["interactive"]
@@ -428,7 +457,7 @@ def founder_page(site_url):
 {drag(tl, "The Arha story", "drag--timeline")}
       </div>
     </section>
-{tp.closing("Meet the doctors", "Dr. Nikhil V. Jain and Dr. Vasant P. Jain, at Arha on Peddar Road.").replace('<a class="cta" href="book/">Book a Consultation</a>', '<a class="cta" href="doctors/">The doctors</a>')}"""
+{tp.closing("Meet the doctors", "Dr. Nikhil V. Jain and Dr. Vasant P. Jain, at Arha on Peddar Road.").replace('<a class="cta" href="book/">Book an appointment</a>', '<a class="cta" href="doctors/">The doctors</a>')}"""
     meta = {"title": "About the Founder: Dr. Nikhil V. Jain | Arha Dental Care, Peddar Road",
             "description": "Dr. Nikhil V. Jain, prosthodontist and implantologist (B.D.S., M.D.S., ITI Scholar, London), and Arha Dental Care, his clinic on Peddar Road, Mumbai.",
             "jsonld": [tp.crumbs_jsonld(site_url, trail)]}
@@ -454,7 +483,7 @@ def doctors_page(site_url):
           <p class="eyebrow">{role}</p>
           <h2 id="{key}-name">{name}</h2>
           <p class="doc-v4__quals">{quals}</p>{focus_html}
-          <p class="doc-v4__actions"><a class="link" href="{wa}" target="_blank" rel="noopener">{cta}</a></p>
+          <p class="doc-v4__actions"><a class="link" href="{wa}" target="_blank" rel="noopener">{cta}</a><a class="link" href="book/">Book an appointment</a></p>
         </article>"""
     body = page_hero("{{pic dental-operatory-arha-dental-care-peddar-road-06 | 100vw | An Arha treatment room on Peddar Road | pos=50% 55% | eager}}",
                      "The doctors", "Dr. Nikhil V. Jain’s clinic on Peddar Road, with Dr. Vasant P. Jain on the team.", trail, "About")
@@ -500,7 +529,7 @@ def practice_page(site_url, visit):
 {head("rooms-title", "The rooms", "Drag to walk through the clinic.")}
       </div>
 {drag(rooms, "The rooms at Arha", "drag--rooms")}
-      <p class="section-cta"><a class="link" href="gallery/">Gallery &amp; 360° tour{ARROW}</a></p>
+      <p class="section-cta"><a class="link" href="gallery/">Gallery{ARROW}</a></p>
     </section>
 
     <!-- =================================================================== HYGIENE AND STERILISATION -->
@@ -514,13 +543,14 @@ def practice_page(site_url, visit):
       </div>
     </section>
 
-{visit}{tp.closing("Come and see it for yourself", "Book a consultation, or call us to arrange a visit.")}"""
+{visit}{tp.closing("Come and see it for yourself", "Book an appointment, or call us to arrange a visit.")}"""
     meta = {"title": "The Practice: Rooms, Hygiene and Sterilisation | Arha Dental Care, Peddar Road",
             "description": "Inside Arha Dental Care on Peddar Road, Mumbai: reception, lounge, treatment rooms, the X-ray room and a separate sterilisation room.",
             "jsonld": [tp.crumbs_jsonld(site_url, trail)]}
     return meta, f'  <main id="main" tabindex="-1">\n\n{body}\n  </main>\n'
 
 
+SHOW_PANO = False  # the sample 360° scene stays hidden until Arha's own 360° photographs arrive (notes/TO-CONFIRM.md)
 PANO = """    <!-- =================================================================== 360° TOUR (Pannellum, loads on click) -->
     <section class="section" id="tour" aria-labelledby="tour-title">
       <div class="container-wide">
@@ -545,7 +575,7 @@ PANO = """    <!-- =============================================================
 
 
 def gallery_page(site_url):
-    trail = [("Home", ""), ("About", "founder/"), ("Gallery &amp; 360° tour", "gallery/")]
+    trail = [("Home", ""), ("About", "founder/"), ("Gallery", "gallery/")]
     tiles = "".join(f"""
           <li class="gal__item reveal" style="--r: {ratio(name):.3f}">
             <a href="{largest(name)}" data-full="{largest(name)}" data-caption="{cap}">
@@ -556,7 +586,7 @@ def gallery_page(site_url):
             </a>
           </li>""" for name, alt, cap in more_pages.GALLERY)
     body = page_hero("{{pic arha-dental-care-lounge-peddar-road | 100vw | Arha's patient lounge: soft seating and warm light | pos=50% 55% | eager}}",
-                     "Gallery &amp; 360° tour", "Photographed at Arha, as it is. Open any photograph to see it large.", trail, "About", actions=False)
+                     "Gallery", "Photographed at Arha, as it is. Open any photograph to see it large.", trail, "About", actions=False)
     body += f"""
     <!-- =================================================================== PHOTOGRAPHS (lightbox) -->
     <section class="section" aria-labelledby="gal-title">
@@ -579,9 +609,9 @@ def gallery_page(site_url):
       </div>
     </section>
 
-{PANO.replace("{head}", head("tour-title", "360° tour", "Look around every room as if you were standing in it."))}{tp.closing("Come and see it for yourself", "Book a consultation, or call us to arrange a visit.")}"""
-    meta = {"title": "Gallery and 360° Tour | Arha Dental Care, Peddar Road",
-            "description": "Photographs of Arha Dental Care on Peddar Road, Mumbai, the clinic tour film and a 360° tour (a sample until Arha's own 360° photographs are taken).",
+{PANO.replace("{head}", head("tour-title", "360° tour", "Look around every room as if you were standing in it.")) if SHOW_PANO else ""}{tp.closing("Come and see it for yourself", "Book an appointment, or call us to arrange a visit.")}"""
+    meta = {"title": "Gallery | Arha Dental Care, Peddar Road",
+            "description": "Photographs of Arha Dental Care on Peddar Road, Mumbai, and a short film walking through the clinic.",
             "jsonld": [tp.crumbs_jsonld(site_url, trail)]}
     return meta, f'  <main id="main" tabindex="-1">\n\n{body}\n  </main>\n'
 

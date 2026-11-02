@@ -84,7 +84,7 @@ def hero():
         <div class="hero__text">
           <h1 id="hero-title">Specialist dentistry on Peddar Road</h1>
           <p class="hero__lede">Your smile, designed around your face, your comfort and the way you live.</p>
-          <p class="hero__actions"><a class="link link--light" href="book/">Book a consultation</a></p>
+          <p class="hero__actions"><a class="link link--light" href="book/">Book an appointment</a></p>
         </div>
       </div>
     </section>
@@ -170,7 +170,7 @@ def dark():
     <section class="ah-dark" aria-labelledby="dark-title">
       <h2 id="dark-title">Dentistry, done carefully</h2>
       <p>Arha is led by a prosthodontist, a specialist in restoring and replacing teeth. Every plan starts with listening and a careful examination, and is explained clearly before anything begins.</p>
-      <a class="link link--light" href="book/">Book a consultation</a>
+      <a class="link link--light" href="book/">Book an appointment</a>
     </section>
 """
 
@@ -217,57 +217,159 @@ def teaser():
       </div>
       <div class="ah-teaser__panel">
         <h3 id="teaser-title">Step inside Arha</h3>
-        <a class="link" href="gallery/">Take the 360° tour</a>
+        <a class="link" href="gallery/">See the gallery</a>
       </div>
     </section>
 """
 
 
+# ------------------------------------------------------------------ What brings you in? (treatment finder, site.js 23)
+# One or two taps to a plain-English answer. Every answer comes from the site's own problem and treatment pages and
+# ends with "Dr. Nikhil will confirm at your visit." Nothing is stored or sent.
+FINDER_START = [
+    ("Tooth pain or swelling", "q-pain"),
+    ("A gap or a missing tooth", "q-gap"),
+    ("Crooked or crowded teeth", "r-crooked"),
+    ("Stained or yellow teeth", "r-stained"),
+    ("A chipped or broken tooth", "r-chipped"),
+    ("A check-up for my child", "r-child"),
+]
+FINDER_FOLLOW = {
+    "q-pain": ("Which sounds closest?", [("Swelling, or pain that keeps me awake", "r-urgent"),
+                                         ("Pain when I bite, or with hot or cold", "r-toothache")]),
+    "q-gap": ("Which is it?", [("A tooth is missing, or has to come out", "r-missing"),
+                               ("A space between my teeth", "r-gaps")]),
+}
+FINDER_RESULTS = {
+    "r-urgent": ("Please don’t wait",
+                 "Severe pain or swelling should be seen soon. "
+                 "<!--if:emergency-->Call the clinic, tell us what is happening, and we’ll tell you what to do now and when to come in.<!--endif-->"
+                 "<!--if:no-emergency-->Our emergencies page has first aid for while you wait, and when to go to a hospital first.<!--endif-->",
+                 "Go to a hospital emergency department first if the swelling is spreading towards your eye or down your neck, if you find it hard to breathe or swallow, or if you have a high fever with a swollen face.",
+                 [("emergency/", "Dental emergencies: what to do now")], True),
+    "r-toothache": ("Toothache: finding the cause first",
+                    "Pain on biting, or with hot and cold, can come from worn enamel, a crack or decay near the nerve. An examination and an X-ray show which. Often a filling is enough; when the nerve is inflamed, root canal treatment saves the tooth.",
+                    "", [("problems/toothache/", "Toothache, explained"), ("root-canal-treatment/", "Root canal treatment")], False),
+    "r-missing": ("Replacing a missing tooth",
+                  "There are three usual ways: an implant (a fixed tooth on a small post in the jaw), a bridge (a fixed tooth held by the teeth either side) or a denture (removable). Dr. Nikhil is a prosthodontist: replacing teeth is his speciality.",
+                  "", [("problems/missing-tooth/", "A missing tooth, explained"), ("dental-implants/", "Dental implants")], False),
+    "r-gaps": ("Closing a gap between teeth",
+               "A gap can be closed by adding to the teeth, with tooth-coloured bonding or thin porcelain veneers, or by moving them together with clear aligners. The right choice depends on the gap and your bite.",
+               "", [("problems/gaps/", "Gaps, explained"), ("cosmetic-dentistry/", "Cosmetic dentistry")], False),
+    "r-crooked": ("Straightening crooked or crowded teeth",
+                  "Teeth can be straightened at almost any age, with clear aligners (trays you take out to eat and clean) or with braces. Straighter teeth are also easier to keep clean.",
+                  "", [("invisalign/", "Clear aligners"), ("orthodontics/", "Braces")], False),
+    "r-stained": ("Brightening stained or yellow teeth",
+                  "Surface stains often lift with a professional clean. Deeper colour responds to whitening, and where whitening cannot help, bonding or veneers can.",
+                  "", [("problems/stained-teeth/", "Stained teeth, explained"), ("cosmetic-dentistry/", "Cosmetic dentistry")], False),
+    "r-chipped": ("Repairing a chipped or broken tooth",
+                  "A small chip can often be rebuilt in tooth-coloured bonding. A larger break may need a crown, a cap that protects what is left of the tooth. If it hurts, or a piece has come away, it should be seen soon.",
+                  "", [("problems/chipped-tooth/", "A chipped tooth, explained"), ("crowns-bridges/", "Crowns &amp; bridges")], False),
+    "r-child": ("A check-up for your child",
+                "Gentle check-ups help children get used to the dentist. Sealants and fluoride protect the back teeth, and an early check spots bite or crowding problems while the jaws are still growing.",
+                "", [("kids-dentistry/", "Kids’ dentistry"), ("problems/child-teeth/", "Children’s teeth, explained")], False),
+}
+
+
+def finder():
+    opts = lambda items: "".join(f"""
+            <li><button class="finder__opt" type="button" data-go="{to}" aria-pressed="false">{label}</button></li>""" for label, to in items)  # noqa: E731
+    follow = "".join(f"""
+        <div class="finder__step" id="{sid}" data-step hidden>
+          <p class="finder__q" id="{sid}-q"><span class="finder__count">Question 2 of 2</span>{q}</p>
+          <ul class="finder__options finder__options--two" aria-labelledby="{sid}-q">{opts(items)}
+          </ul>
+          <button class="finder__back" type="button" data-back>Back</button>
+        </div>""" for sid, (q, items) in FINDER_FOLLOW.items())
+    results = ""
+    for rid, (title, text, urgent, links, call_first) in FINDER_RESULTS.items():
+        urgent_html = f'\n          <p class="finder__urgent">{urgent}</p>' if urgent else ""
+        link_html = "".join(f'<li><a class="link" href="{h}">{n}</a></li>' for h, n in links)
+        call = ('<a class="link" href="tel:+910000000000" data-contact="emergency" data-call="finder">Call now</a>' if call_first
+                else '<a class="link" href="tel:+910000000000" data-call="finder">Call the clinic</a>')
+        results += f"""
+        <div class="finder__result" id="{rid}" data-step tabindex="-1" hidden>
+          <p class="finder__count">What it usually means</p>
+          <h3>{title}</h3>
+          <p>{text}</p>{urgent_html}
+          <ul class="finder__links">{link_html}</ul>
+          <p class="finder__actions">{call}<a class="link" href="book/">Book an appointment</a></p>
+          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+          <button class="finder__back" type="button" data-restart>Start again</button>
+        </div>"""
+    return f"""
+    <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23) -->
+    <section class="ah-finder" id="what-brings-you-in" aria-labelledby="finder-title">
+      <div class="ah-finder__head">
+        <h2 id="finder-title">What brings you in?</h2>
+        <p>Choose what sounds closest, and we’ll explain in plain English what it usually leads to.</p>
+      </div>
+      <div class="finder" data-finder>
+        <div class="finder__step" id="q-start" data-step>
+          <p class="finder__q" id="q-start-q"><span class="finder__count">Question 1 of 2</span>What would you like help with?</p>
+          <ul class="finder__options" aria-labelledby="q-start-q">{opts(FINDER_START)}
+          </ul>
+        </div>{follow}{results}
+        <p class="visually-hidden" aria-live="polite" data-finder-live></p>
+        <noscript><p><a class="link" href="problems/">See the problems we fix</a></p></noscript>
+      </div>
+    </section>
+"""
+
+
+# ------------------------------------------------------------------ reviews: the four tiles, now a calm carousel
+REVIEW_TILES = [(1, "dark"), (0, "stone"), (2, "line"), (6, "stone")]  # reviews 2, 1, 3 and 7 (Viraaj, 2 Nov 2026)
+CHEV = {"prev": '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4 6.5 10l6 6"/></svg>',
+        "next": '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4 6 6-6 6"/></svg>',
+        "pause": '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4v12M13 4v12"/></svg>',
+        "play": '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4l10 6-10 6z"/></svg>'}
+
+
 def reviews():
-    cols = []
-    for col in MOSAIC:
-        items = ""
-        for k, shape, tone in col:
-            if k == "photo":
-                items += f"""
-          <li class="ah-review ah-review--{shape} ah-review--photo">
-            <a href="#" data-google-reviews>
-{pic('arha-dental-care-logo-dental-clinic-peddar-road', '(min-width: 900px) 450px, 250px', 'The Arha Dental Care emblem and name on the marble wall of the practice', '50% 50%', '              ')}
-              <span class="ah-review__hover ah-review__hover--score">
-                <span>Read all reviews on Google</span>
-              </span>
-            </a>
-          </li>"""
-                continue
-            items += f"""
-          <li class="ah-review ah-review--{shape} ah-review--{tone}">
+    """The same review tiles as before (text, names, stars and "Google review" unchanged), one or two at a time:
+    advances every 7 s while on screen, pauses on hover, focus or touch and with the Pause button; never moves on
+    its own with reduced motion. site.js 23."""
+    n = len(REVIEW_TILES)
+    slides = ""
+    for k, (idx, tone) in enumerate(REVIEW_TILES):
+        t = home.TESTIMONIALS[idx]
+        slides += f"""
+          <div class="ah-review ah-review--wide ah-review--{tone} rv__slide" role="group" aria-roledescription="slide" aria-label="{k + 1} of {n}" data-slide>
             <a href="#" data-google-reviews>
               <span class="ah-review__mark" aria-hidden="true">“</span>
-              <blockquote><p>{html.escape(home.TESTIMONIALS[k][3], quote=False)}</p></blockquote>
-              <span class="ah-review__name">{home.reviewer(home.TESTIMONIALS[k])}</span>
-              <span class="ah-review__foot">{home.stars(home.TESTIMONIALS[k][2], "ah-review__stars")}<span class="ah-review__source">Google review</span></span>
-              <span class="ah-review__hover"><span>{home.reviewer(home.TESTIMONIALS[k])}</span><span>Read on Google</span></span>
+              <blockquote><p>{html.escape(t[3], quote=False)}</p></blockquote>
+              <span class="ah-review__name">{home.reviewer(t)}</span>
+              <span class="ah-review__foot">{home.stars(t[2], "ah-review__stars")}<span class="ah-review__source">Google review</span></span>
+              <span class="ah-review__hover"><span>{home.reviewer(t)}</span><span>Read on Google</span></span>
             </a>
-          </li>"""
-        cols.append(items)
+          </div>"""
+    dots = "".join(f'<li><button class="rv__dot" type="button" aria-label="Show review {k + 1}" data-dot="{k}"></button></li>' for k in range(n))
     return f"""
-    <!-- =================================================================== 10. REVIEWS HEADING + 11. MOSAIC (apa: the media section) -->
+    <!-- =================================================================== 10. REVIEWS HEADING + 11. CAROUSEL -->
     <section class="ah-head ah-head--reviews" aria-labelledby="reviews-title">
       <!-- No rating or review count anywhere on the site (Viraaj, 2 Nov 2026) -->
       <h2 id="reviews-title">What patients say on Google</h2>
       <p>In patients’ own words, quoted as they wrote them on Google. Where a review is longer, it ends with “…”: read it in full on Google.</p>
       <a class="link" href="#" data-google-reviews>Read all reviews on Google</a>
     </section>
-    <section class="ah-mosaic" aria-label="Google reviews">
-      <ul class="ah-mosaic__col">{cols[0]}
-      </ul>
-      <ul class="ah-mosaic__col">{cols[1]}
-      </ul>
+    <section class="ah-carousel" aria-label="Google reviews">
+      <div class="rv" data-reviews aria-roledescription="carousel" aria-labelledby="reviews-title">
+        <div class="rv__track" data-track>{slides}
+        </div>
+        <div class="rv__controls">
+          <ul class="rv__dots">{dots}</ul>
+          <div class="rv__buttons">
+            <button class="rv__btn" type="button" data-pause aria-label="Pause the reviews"><span class="rv__icon-pause">{CHEV['pause']}</span><span class="rv__icon-play">{CHEV['play']}</span></button>
+            <button class="rv__btn" type="button" data-prev aria-label="Previous review">{CHEV['prev']}</button>
+            <button class="rv__btn" type="button" data-next aria-label="Next review">{CHEV['next']}</button>
+          </div>
+        </div>
+      </div>
     </section>
 """
 
 
 def main_html(visit=None):
     """The homepage <main>. The footer (apa's closing line, logo and columns) comes from chrome.py."""
-    return ('  <main id="main" class="home-apa" tabindex="-1">\n\n' + hero() + trio() + band() + grid() + dark() + process() + founder()
+    return ('  <main id="main" class="home-apa" tabindex="-1">\n\n' + hero() + finder() + trio() + band() + grid() + dark() + process() + founder()
             + teaser() + reviews() + "\n  </main>\n")

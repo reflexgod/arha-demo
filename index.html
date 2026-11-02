@@ -43,7 +43,7 @@
       }
     } catch (e) { /* storage blocked: no intro */ }
   </script>
-  <script type="application/json" id="site-config">{"phone": "+91 00000 00000", "tel": "+910000000000", "whatsapp": "910000000000", "email": "hello@example.com", "emergency": "+91 00000 00000", "timeZone": "Asia/Kolkata", "hours": [null, ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"]], "riyaWebhookUrl": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat", "googleReviewsUrl": "https://share.google/PzhwgJ9QJMErZnk9R"}</script>
+  <script type="application/json" id="site-config">{"phone": "", "tel": "", "whatsapp": "", "email": "", "emergency": "", "timeZone": "Asia/Kolkata", "hours": [null, ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"]], "riyaWebhookUrl": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat", "googleReviewsUrl": "https://share.google/PzhwgJ9QJMErZnk9R"}</script>
   <script src="assets/js/site.js" defer></script>
   <!-- Seamless navigation: pages are prefetched when a link is hovered or pressed (Speculation Rules; site.js 20 elsewhere) -->
   <script type="speculationrules">{"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"not": {"selector_matches": "[target=_blank], [data-call], [data-google-reviews]"}}]}, "eagerness": "moderate"}]}</script>
@@ -66,7 +66,7 @@
       {"@type": "Person", "name": "Dr. Nikhil V. Jain", "jobTitle": "Prosthodontist and Implantologist"},
       {"@type": "Person", "name": "Dr. Vasant P. Jain", "jobTitle": "Dental Surgeon", "honorificSuffix": "B.D.S."}
     ],
-    "telephone": "+91-00000-00000",
+    "telephone": "",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "107, Doctor House, 14 Peddar Road (Dr Gopalrao Deshmukh Marg), opp. Jaslok Hospital",
@@ -102,9 +102,6 @@
   <header class="site-header" data-header>
     <div class="utility-line" data-utility>
       <ul class="utility-line__list">
-        <li><a href="tel:+910000000000" data-call="utility" data-call-pop data-label="phone" aria-label="Call reception, +91 00000 00000"><span data-show="phone">+91 00000 00000</span></a></li>
-        <li><a href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener">WhatsApp</a></li>
-        <li><a href="mailto:hello@example.com">Email</a></li>
         <li><a href="emergency/">Emergencies</a></li>
       </ul>
     </div>
@@ -165,41 +162,23 @@
               <li><a href="founder/">About the founder</a></li>
               <li><a href="doctors/">The doctors</a></li>
               <li><a href="the-practice/">The practice</a></li>
-              <li><a href="gallery/">Gallery &amp; 360° tour</a></li>
+              <li><a href="gallery/">Gallery</a></li>
             </ul>
           </li>
           <li class="nav__item"><a class="nav__link" href="our-work/">Our work</a></li>
-          <li class="nav__item"><a class="nav__link nav__link--book" href="book/">Book a consultation</a></li>
+          <li class="nav__item"><a class="nav__link nav__link--book" href="book/">Book an appointment</a></li>
         </ul>
       </nav>
 
       <div class="header-actions">
         <!-- One action from every page: dials on a phone, opens the call panel on a laptop -->
-        <a class="header-call" href="tel:+910000000000" data-call="header" data-call-pop><span class="header-call__long">Call now</span><span class="header-call__short">Call</span></a>
+        
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="side-menu" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
 
-    <!-- Call panel (laptops): the number large, copy it, scan the QR to call from a phone, or WhatsApp -->
-    <div class="call-pop" id="call-pop" role="dialog" aria-labelledby="call-pop-title" hidden>
-      <button class="call-pop__close" type="button" aria-label="Close" data-call-pop-close></button>
-      <p class="call-pop__title" id="call-pop-title">Call reception</p>
-      <a class="call-pop__number" href="tel:+910000000000" data-call="popover" data-show="phone">+91 00000 00000</a>
-      <p class="open-status call-pop__status" data-call-pop-status></p>
-      <div class="call-pop__scan">
-        <img src="assets/img/call-qr.svg" width="112" height="112" loading="lazy" alt="QR code that dials Arha's reception">
-        <p>Scan with your phone’s camera to call from your phone.</p>
-      </div>
-      <div class="call-pop__actions">
-        <button class="cta" type="button" data-copy-number>Copy number</button>
-        <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener">WhatsApp us</a>
-        <button class="cta" type="button" data-ask-riya hidden>Ask Riya</button>
-      </div>
-      <p class="call-pop__closed" data-call-pop-closed hidden>We’re closed right now. Send a WhatsApp message or ask Riya, and the team will reply once the clinic opens.</p>
-      <p class="visually-hidden" role="status" data-copy-status></p>
-    </div>
   </header>
 
   <!-- ===================================================================== MENU (full screen, every width) -->
@@ -247,7 +226,7 @@
                   <li><a href="founder/">About the founder</a></li>
                   <li><a href="doctors/">The doctors</a></li>
                   <li><a href="the-practice/">The practice</a></li>
-                  <li><a href="gallery/">Gallery &amp; 360° tour</a></li>
+                  <li><a href="gallery/">Gallery</a></li>
                 </ul>
               </div>
             </li>
@@ -256,16 +235,15 @@
             <li><a class="fmenu__link" href="kids-dentistry/">Kids’ dentistry</a></li>
             <li><a class="fmenu__link" href="dental-tourism/">Dental tourism</a></li>
         </ul>
-        <a class="fmenu__book" href="book/">Book a consultation</a>
+        <a class="fmenu__book" href="book/">Book an appointment</a>
         <ul class="fmenu__small">
           <li><a href="the-practice/#visit">Visit us</a></li>
           <li><a href="emergency/">Dental emergencies</a></li>
         </ul>
       </nav>
       <div class="side-menu__foot">
-        <a href="tel:+910000000000" data-call="menu" data-show="phone">+91 00000 00000</a>
+        
         <p class="open-status" data-open-status></p>
-        <p><a href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener">WhatsApp</a> · <a href="mailto:hello@example.com">Email</a></p>
         <p>107, Doctor House, 14 Peddar Road, Mumbai 400026</p>
       </div>
     </div>
@@ -288,8 +266,120 @@
         <div class="hero__text">
           <h1 id="hero-title">Specialist dentistry on Peddar Road</h1>
           <p class="hero__lede">Your smile, designed around your face, your comfort and the way you live.</p>
-          <p class="hero__actions"><a class="link link--light" href="book/">Book a consultation</a></p>
+          <p class="hero__actions"><a class="link link--light" href="book/">Book an appointment</a></p>
         </div>
+      </div>
+    </section>
+
+    <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23) -->
+    <section class="ah-finder" id="what-brings-you-in" aria-labelledby="finder-title">
+      <div class="ah-finder__head">
+        <h2 id="finder-title">What brings you in?</h2>
+        <p>Choose what sounds closest, and we’ll explain in plain English what it usually leads to.</p>
+      </div>
+      <div class="finder" data-finder>
+        <div class="finder__step" id="q-start" data-step>
+          <p class="finder__q" id="q-start-q"><span class="finder__count">Question 1 of 2</span>What would you like help with?</p>
+          <ul class="finder__options" aria-labelledby="q-start-q">
+            <li><button class="finder__opt" type="button" data-go="q-pain" aria-pressed="false">Tooth pain or swelling</button></li>
+            <li><button class="finder__opt" type="button" data-go="q-gap" aria-pressed="false">A gap or a missing tooth</button></li>
+            <li><button class="finder__opt" type="button" data-go="r-crooked" aria-pressed="false">Crooked or crowded teeth</button></li>
+            <li><button class="finder__opt" type="button" data-go="r-stained" aria-pressed="false">Stained or yellow teeth</button></li>
+            <li><button class="finder__opt" type="button" data-go="r-chipped" aria-pressed="false">A chipped or broken tooth</button></li>
+            <li><button class="finder__opt" type="button" data-go="r-child" aria-pressed="false">A check-up for my child</button></li>
+          </ul>
+        </div>
+        <div class="finder__step" id="q-pain" data-step hidden>
+          <p class="finder__q" id="q-pain-q"><span class="finder__count">Question 2 of 2</span>Which sounds closest?</p>
+          <ul class="finder__options finder__options--two" aria-labelledby="q-pain-q">
+            <li><button class="finder__opt" type="button" data-go="r-urgent" aria-pressed="false">Swelling, or pain that keeps me awake</button></li>
+            <li><button class="finder__opt" type="button" data-go="r-toothache" aria-pressed="false">Pain when I bite, or with hot or cold</button></li>
+          </ul>
+          <button class="finder__back" type="button" data-back>Back</button>
+        </div>
+        <div class="finder__step" id="q-gap" data-step hidden>
+          <p class="finder__q" id="q-gap-q"><span class="finder__count">Question 2 of 2</span>Which is it?</p>
+          <ul class="finder__options finder__options--two" aria-labelledby="q-gap-q">
+            <li><button class="finder__opt" type="button" data-go="r-missing" aria-pressed="false">A tooth is missing, or has to come out</button></li>
+            <li><button class="finder__opt" type="button" data-go="r-gaps" aria-pressed="false">A space between my teeth</button></li>
+          </ul>
+          <button class="finder__back" type="button" data-back>Back</button>
+        </div>
+        <div class="finder__result" id="r-urgent" data-step tabindex="-1" hidden>
+          <p class="finder__count">What it usually means</p>
+          <h3>Please don’t wait</h3>
+          <p>Severe pain or swelling should be seen soon. Our emergencies page has first aid for while you wait, and when to go to a hospital first.</p>
+          <p class="finder__urgent">Go to a hospital emergency department first if the swelling is spreading towards your eye or down your neck, if you find it hard to breathe or swallow, or if you have a high fever with a swollen face.</p>
+          <ul class="finder__links"><li><a class="link" href="emergency/">Dental emergencies: what to do now</a></li></ul>
+          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
+          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+          <button class="finder__back" type="button" data-restart>Start again</button>
+        </div>
+        <div class="finder__result" id="r-toothache" data-step tabindex="-1" hidden>
+          <p class="finder__count">What it usually means</p>
+          <h3>Toothache: finding the cause first</h3>
+          <p>Pain on biting, or with hot and cold, can come from worn enamel, a crack or decay near the nerve. An examination and an X-ray show which. Often a filling is enough; when the nerve is inflamed, root canal treatment saves the tooth.</p>
+          <ul class="finder__links"><li><a class="link" href="problems/toothache/">Toothache, explained</a></li><li><a class="link" href="root-canal-treatment/">Root canal treatment</a></li></ul>
+          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
+          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+          <button class="finder__back" type="button" data-restart>Start again</button>
+        </div>
+        <div class="finder__result" id="r-missing" data-step tabindex="-1" hidden>
+          <p class="finder__count">What it usually means</p>
+          <h3>Replacing a missing tooth</h3>
+          <p>There are three usual ways: an implant (a fixed tooth on a small post in the jaw), a bridge (a fixed tooth held by the teeth either side) or a denture (removable). Dr. Nikhil is a prosthodontist: replacing teeth is his speciality.</p>
+          <ul class="finder__links"><li><a class="link" href="problems/missing-tooth/">A missing tooth, explained</a></li><li><a class="link" href="dental-implants/">Dental implants</a></li></ul>
+          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
+          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+          <button class="finder__back" type="button" data-restart>Start again</button>
+        </div>
+        <div class="finder__result" id="r-gaps" data-step tabindex="-1" hidden>
+          <p class="finder__count">What it usually means</p>
+          <h3>Closing a gap between teeth</h3>
+          <p>A gap can be closed by adding to the teeth, with tooth-coloured bonding or thin porcelain veneers, or by moving them together with clear aligners. The right choice depends on the gap and your bite.</p>
+          <ul class="finder__links"><li><a class="link" href="problems/gaps/">Gaps, explained</a></li><li><a class="link" href="cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
+          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
+          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+          <button class="finder__back" type="button" data-restart>Start again</button>
+        </div>
+        <div class="finder__result" id="r-crooked" data-step tabindex="-1" hidden>
+          <p class="finder__count">What it usually means</p>
+          <h3>Straightening crooked or crowded teeth</h3>
+          <p>Teeth can be straightened at almost any age, with clear aligners (trays you take out to eat and clean) or with braces. Straighter teeth are also easier to keep clean.</p>
+          <ul class="finder__links"><li><a class="link" href="invisalign/">Clear aligners</a></li><li><a class="link" href="orthodontics/">Braces</a></li></ul>
+          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
+          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+          <button class="finder__back" type="button" data-restart>Start again</button>
+        </div>
+        <div class="finder__result" id="r-stained" data-step tabindex="-1" hidden>
+          <p class="finder__count">What it usually means</p>
+          <h3>Brightening stained or yellow teeth</h3>
+          <p>Surface stains often lift with a professional clean. Deeper colour responds to whitening, and where whitening cannot help, bonding or veneers can.</p>
+          <ul class="finder__links"><li><a class="link" href="problems/stained-teeth/">Stained teeth, explained</a></li><li><a class="link" href="cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
+          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
+          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+          <button class="finder__back" type="button" data-restart>Start again</button>
+        </div>
+        <div class="finder__result" id="r-chipped" data-step tabindex="-1" hidden>
+          <p class="finder__count">What it usually means</p>
+          <h3>Repairing a chipped or broken tooth</h3>
+          <p>A small chip can often be rebuilt in tooth-coloured bonding. A larger break may need a crown, a cap that protects what is left of the tooth. If it hurts, or a piece has come away, it should be seen soon.</p>
+          <ul class="finder__links"><li><a class="link" href="problems/chipped-tooth/">A chipped tooth, explained</a></li><li><a class="link" href="crowns-bridges/">Crowns &amp; bridges</a></li></ul>
+          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
+          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+          <button class="finder__back" type="button" data-restart>Start again</button>
+        </div>
+        <div class="finder__result" id="r-child" data-step tabindex="-1" hidden>
+          <p class="finder__count">What it usually means</p>
+          <h3>A check-up for your child</h3>
+          <p>Gentle check-ups help children get used to the dentist. Sealants and fluoride protect the back teeth, and an early check spots bite or crowding problems while the jaws are still growing.</p>
+          <ul class="finder__links"><li><a class="link" href="kids-dentistry/">Kids’ dentistry</a></li><li><a class="link" href="problems/child-teeth/">Children’s teeth, explained</a></li></ul>
+          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
+          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+          <button class="finder__back" type="button" data-restart>Start again</button>
+        </div>
+        <p class="visually-hidden" aria-live="polite" data-finder-live></p>
+        <noscript><p><a class="link" href="problems/">See the problems we fix</a></p></noscript>
       </div>
     </section>
 
@@ -498,7 +588,7 @@
     <section class="ah-dark" aria-labelledby="dark-title">
       <h2 id="dark-title">Dentistry, done carefully</h2>
       <p>Arha is led by a prosthodontist, a specialist in restoring and replacing teeth. Every plan starts with listening and a careful examination, and is explained clearly before anything begins.</p>
-      <a class="link link--light" href="book/">Book a consultation</a>
+      <a class="link link--light" href="book/">Book an appointment</a>
     </section>
 
     <!-- =================================================================== 7. PROCESS (apa: three photo panels, numbered text overlaid) -->
@@ -572,70 +662,66 @@
       </div>
       <div class="ah-teaser__panel">
         <h3 id="teaser-title">Step inside Arha</h3>
-        <a class="link" href="gallery/">Take the 360° tour</a>
+        <a class="link" href="gallery/">See the gallery</a>
       </div>
     </section>
 
-    <!-- =================================================================== 10. REVIEWS HEADING + 11. MOSAIC (apa: the media section) -->
+    <!-- =================================================================== 10. REVIEWS HEADING + 11. CAROUSEL -->
     <section class="ah-head ah-head--reviews" aria-labelledby="reviews-title">
       <!-- No rating or review count anywhere on the site (Viraaj, 2 Nov 2026) -->
       <h2 id="reviews-title">What patients say on Google</h2>
       <p>In patients’ own words, quoted as they wrote them on Google. Where a review is longer, it ends with “…”: read it in full on Google.</p>
-      <a class="link" href="#" data-google-reviews>Read all reviews on Google</a>
+      <a class="link" href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>Read all reviews on Google</a>
     </section>
-    <section class="ah-mosaic" aria-label="Google reviews">
-      <ul class="ah-mosaic__col">
-          <li class="ah-review ah-review--tall ah-review--dark">
-            <a href="#" data-google-reviews>
+    <section class="ah-carousel" aria-label="Google reviews">
+      <div class="rv" data-reviews aria-roledescription="carousel" aria-labelledby="reviews-title">
+        <div class="rv__track" data-track>
+          <div class="ah-review ah-review--wide ah-review--dark rv__slide" role="group" aria-roledescription="slide" aria-label="1 of 4" data-slide>
+            <a href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>
               <span class="ah-review__mark" aria-hidden="true">“</span>
               <blockquote><p>Went to Arha dental care at doctor house for my mom's toothache and the whole process was so smooth! Got looked at by Dr. Nikhil ~ was the best got a quick CT figured out the 'root' cause and came up with a treatment plan all under 10 mins of being seen. Was suggested a tooth removal which was quick and pain free! 10/10 recommend 💯</p></blockquote>
               <span class="ah-review__name">Hetvi S.</span>
               <span class="ah-review__foot"><span class="ah-review__stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span><span class="ah-review__source">Google review</span></span>
               <span class="ah-review__hover"><span>Hetvi S.</span><span>Read on Google</span></span>
             </a>
-          </li>
-          <li class="ah-review ah-review--wide ah-review--stone">
-            <a href="#" data-google-reviews>
+          </div>
+          <div class="ah-review ah-review--wide ah-review--stone rv__slide" role="group" aria-roledescription="slide" aria-label="2 of 4" data-slide>
+            <a href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>
               <span class="ah-review__mark" aria-hidden="true">“</span>
               <blockquote><p>I had a very positive experience getting my cavity treated by Dr. Nikhil Jain. He was calm, professional, and explained the entire procedure clearly, making the treatment smooth and comfortable. The clinic was clean and hygienic, and the staff was warm and friendly. Highly recommend!</p></blockquote>
               <span class="ah-review__name">Poorvi J.</span>
               <span class="ah-review__foot"><span class="ah-review__stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span><span class="ah-review__source">Google review</span></span>
               <span class="ah-review__hover"><span>Poorvi J.</span><span>Read on Google</span></span>
             </a>
-          </li>
-      </ul>
-      <ul class="ah-mosaic__col">
-          <li class="ah-review ah-review--wide ah-review--line">
-            <a href="#" data-google-reviews>
+          </div>
+          <div class="ah-review ah-review--wide ah-review--line rv__slide" role="group" aria-roledescription="slide" aria-label="3 of 4" data-slide>
+            <a href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>
               <span class="ah-review__mark" aria-hidden="true">“</span>
               <blockquote><p>I had a sudden, severe toothache and managed to get an urgent appointment at Arha Dental care, Nikhil was incredibly accommodating and diagnosed the issue quickly. He managed my pain and resolved the problem on the same day. Thank youu!!! ❤️</p></blockquote>
               <span class="ah-review__name">Google reviewer</span>
               <span class="ah-review__foot"><span class="ah-review__stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span><span class="ah-review__source">Google review</span></span>
               <span class="ah-review__hover"><span>Google reviewer</span><span>Read on Google</span></span>
             </a>
-          </li>
-          <li class="ah-review ah-review--wide ah-review--photo">
-            <a href="#" data-google-reviews>
-              <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQABAQADAQAAAAAAAAAAAAAAAgMAAQQF/8QAHhAAAwACAgMBAAAAAAAAAAAAAAECAxESIQQiMUL/xAAWAQEBAQAAAAAAAAAAAAAAAAAAAQL/xAAWEQEBAQAAAAAAAAAAAAAAAAAAEUH/2gAMAwEAAhEDEQA/APYjGyyhlYlT9KeutotEOIHJV5J3oDySZ0RqTU9Dq0Fav4aRbynX5BhquGmWzNaOdXp9EVixvk2G8VNjeTRtZNijnzRSnoXiKk+x1SbL4JTA/9k=); background-position: 50% 50%">
-                <source type="image/avif" srcset="assets/img/arha-dental-care-logo-dental-clinic-peddar-road-640.avif 640w, assets/img/arha-dental-care-logo-dental-clinic-peddar-road-1160.avif 1160w" sizes="(min-width: 900px) 450px, 250px">
-                <source type="image/webp" srcset="assets/img/arha-dental-care-logo-dental-clinic-peddar-road-640.webp 640w, assets/img/arha-dental-care-logo-dental-clinic-peddar-road-1160.webp 1160w" sizes="(min-width: 900px) 450px, 250px">
-                <img src="assets/img/arha-dental-care-logo-dental-clinic-peddar-road-1160.jpg" srcset="assets/img/arha-dental-care-logo-dental-clinic-peddar-road-640.jpg 640w, assets/img/arha-dental-care-logo-dental-clinic-peddar-road-1160.jpg 1160w" sizes="(min-width: 900px) 450px, 250px" width="1160" height="770" loading="lazy" decoding="async" alt="The Arha Dental Care emblem and name on the marble wall of the practice" style="object-position: 50% 50%">
-              </picture>
-              <span class="ah-review__hover ah-review__hover--score">
-                <span>Read all reviews on Google</span>
-              </span>
-            </a>
-          </li>
-          <li class="ah-review ah-review--wide ah-review--stone">
-            <a href="#" data-google-reviews>
+          </div>
+          <div class="ah-review ah-review--wide ah-review--stone rv__slide" role="group" aria-roledescription="slide" aria-label="4 of 4" data-slide>
+            <a href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>
               <span class="ah-review__mark" aria-hidden="true">“</span>
               <blockquote><p>I’ve been going to Dr. Nikhil Jain for over 15 years now, and it’s always been a great experience. He’s one of the nicest and most caring doctors I’ve met. Whether it’s a routine visit or something urgent, he’s always been available and …</p></blockquote>
               <span class="ah-review__name">Apurva M.</span>
               <span class="ah-review__foot"><span class="ah-review__stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span><span class="ah-review__source">Google review</span></span>
               <span class="ah-review__hover"><span>Apurva M.</span><span>Read on Google</span></span>
             </a>
-          </li>
-      </ul>
+          </div>
+        </div>
+        <div class="rv__controls">
+          <ul class="rv__dots"><li><button class="rv__dot" type="button" aria-label="Show review 1" data-dot="0"></button></li><li><button class="rv__dot" type="button" aria-label="Show review 2" data-dot="1"></button></li><li><button class="rv__dot" type="button" aria-label="Show review 3" data-dot="2"></button></li><li><button class="rv__dot" type="button" aria-label="Show review 4" data-dot="3"></button></li></ul>
+          <div class="rv__buttons">
+            <button class="rv__btn" type="button" data-pause aria-label="Pause the reviews"><span class="rv__icon-pause"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4v12M13 4v12"/></svg></span><span class="rv__icon-play"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4l10 6-10 6z"/></svg></span></button>
+            <button class="rv__btn" type="button" data-prev aria-label="Previous review"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4 6.5 10l6 6"/></svg></button>
+            <button class="rv__btn" type="button" data-next aria-label="Next review"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4 6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </div>
     </section>
 
   </main>
@@ -654,18 +740,18 @@
             Opp. Jaslok Hospital<br>
             Mumbai 400026
           </address>
+          <p class="footer__directions"><a href="https://www.google.com/maps/dir/?api=1&amp;destination=Arha%20Dental%20Care%2C%20Doctor%20House%2C%2014%20Peddar%20Road%2C%20Mumbai%20400026" target="_blank" rel="noopener">Get directions</a></p>
         </div>
         <div>
           <h2>Hours</h2>
           <p><span data-show="hours-days">Monday to Saturday</span><br><span data-show="hours-time">9:30 AM to 6:30 PM</span><br><span data-show="hours-closed">Sunday closed</span></p>
+          <p class="open-status footer__status" data-open-status></p>
         </div>
         <div>
           <h2>Contact</h2>
           <ul>
-            <li><a href="tel:+910000000000" data-call="footer" data-show="phone">+91 00000 00000</a></li>
-            <li><a href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20consultation." target="_blank" rel="noopener">WhatsApp</a></li>
-            <li><a href="mailto:hello@example.com" data-show="email">hello@example.com</a></li>
-            <li><a href="emergency/">Dental emergencies: <span data-show="emergency">+91 00000 00000</span></a></li>
+            <li><a href="book/">Book an appointment</a></li>
+            <li><a href="emergency/">Dental emergencies</a></li>
           </ul>
         </div>
         <nav aria-labelledby="footer-explore">
@@ -678,31 +764,30 @@
             <li><a href="founder/">About the founder</a></li>
             <li><a href="doctors/">The doctors</a></li>
             <li><a href="the-practice/">The practice</a></li>
-            <li><a href="gallery/">Gallery &amp; 360° tour</a></li>
+            <li><a href="gallery/">Gallery</a></li>
             <li><a href="kids-dentistry/">Kids’ dentistry</a></li>
             <li><a href="dental-tourism/">Dental tourism</a></li>
-            <li><a href="book/">Book a consultation</a></li>
+            <li><a href="book/">Book an appointment</a></li>
           </ul>
         </nav>
       </div>
       <div class="footer__bottom">
         <p>© 2026 Arha Dental Care</p>
         <ul>
-          <li><a href="#">Privacy</a></li>
+          <!-- Privacy: added with the privacy policy text (notes/TO-CONFIRM.md); no link to an empty page -->
           <li>Demo prepared by Viraaj</li>
         </ul>
       </div>
     </div>
   </footer>
 
-  <!-- ===================================================================== CALL BAR (phones)
-       One tap to reception: the whole bar is a single tel: link, on every page from the first paint.
-       Its accessible name starts with the visible "Call now", then the reception number (hidden text).
-       site.js replaces the hours with the live status (India time); without JS the hours stay. -->
-  <a class="call-bar" href="tel:+910000000000" data-call="call_bar">
-    <span class="call-bar__label">Call now</span><span class="visually-hidden">: Arha Dental Care reception, <span data-show="phone">+91 00000 00000</span>.</span>
-    <span class="call-bar__status" data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span>
-  </a>
+  <!-- ===================================================================== ACTION BAR (phones)
+       Generated by tools/chrome.py. The Call slot appears only with a real reception number (tools/pages.py). -->
+  <nav class="call-bar call-bar--two" aria-label="Call or book">
+    
+    <a class="call-bar__slot" href="emergency/"><span class="call-bar__label">Emergency</span><span class="call-bar__status">Help and first aid</span></a>
+    <a class="call-bar__slot" href="book/"><span class="call-bar__label">Book</span><span class="call-bar__status"><span data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span></span></a>
+  </nav>
 
   <!-- =====================================================================
        RIYA AI RECEPTIONIST (chat webhook).
