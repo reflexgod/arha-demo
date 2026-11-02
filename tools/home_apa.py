@@ -223,95 +223,105 @@ def teaser():
 """
 
 
-# ------------------------------------------------------------------ What brings you in? (treatment finder, site.js 23)
-# One or two taps to a plain-English answer. Every answer comes from the site's own problem and treatment pages and
-# ends with "Dr. Nikhil will confirm at your visit." Nothing is stored or sent.
-FINDER_START = [
-    ("Tooth pain or swelling", "q-pain"),
-    ("A gap or a missing tooth", "q-gap"),
-    ("Crooked or crowded teeth", "r-crooked"),
-    ("Stained or yellow teeth", "r-stained"),
-    ("A chipped or broken tooth", "r-chipped"),
-    ("A check-up for my child", "r-child"),
+# ------------------------------------------------------------------ What brings you in? (treatment finder, site.js 23a)
+# Six cards, one tap to a short plain-English answer. Every answer comes from the site's own problem and treatment
+# pages and ends "Dr. Nikhil will confirm at your visit." Nothing is stored or sent.
+# The icons are drawn here (one tooth outline, placed and combined), all with the same stroke. On the answer panel the
+# card's icon is drawn large and light: every relevant clinic photograph is already on two pages (tools/photo_audit.py).
+TOOTH = ("M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12"
+         " 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z")
+
+
+def tooth(cx, cy, s, rot=0, extra=""):
+    """The tooth outline (centred on 24, 24.5 in a 48 box) moved to cx, cy, scaled by s and turned by rot degrees."""
+    return (f'<path d="{TOOTH}" transform="translate({cx} {cy}) rotate({rot}) scale({s}) translate(-24 -24.5)"'
+            f' vector-effect="non-scaling-stroke"{extra}/>')
+
+
+ICONS = {
+    "pain": tooth(22, 26, .8) + '<path d="M35.5 10.5 39.5 6M38.5 16l5-1.5M30.5 8.5l.5-5"/>',
+    "gap": tooth(13, 24.5, .62) + tooth(35, 24.5, .62, extra=' stroke-dasharray="2.5 3"'),
+    "crooked": tooth(9.5, 26.5, .46, -14) + tooth(24, 22, .46, 3) + tooth(38.5, 27, .46, 15),
+    "stained": tooth(21, 26.5, .8) + '<path d="M39 3.5l1.6 4.9 4.9 1.6-4.9 1.6L39 16.5l-1.6-4.9-4.9-1.6 4.9-1.6Z"/>',
+    "chipped": tooth(24, 25, .85) + '<path d="M30.2 12.4 27.2 18l3.4 3-3 6"/>',
+    "child": tooth(17, 24.5, .74) + tooth(38, 30.5, .46)
+             + '<path d="M38 19.5c-3.4-2.5-3-5.5-1.3-5.5.8 0 1.3.7 1.3.7s.5-.7 1.3-.7c1.7 0 2.1 3-1.3 5.5Z"/>',
+}
+
+
+def icon(name, cls):
+    return (f'<svg class="{cls}" viewBox="0 0 48 48" aria-hidden="true" focusable="false">'
+            f'{ICONS[name]}</svg>')
+
+
+# card label, icon, panel heading, two or three short sentences, safety line (or ""), related pages
+FINDER = [
+    ("r-pain", "Tooth pain or swelling", "pain", "Finding the cause of the pain",
+     "Pain when you bite, or with hot and cold, often comes from decay, a crack or an inflamed nerve. "
+     "An examination and an X-ray show which. Severe pain or swelling should be seen soon.",
+     "Go to a hospital first if swelling spreads towards your eye or neck, or if breathing or swallowing is hard.",
+     [("emergency/", "Dental emergencies"), ("problems/toothache/", "Toothache, explained"),
+      ("root-canal-treatment/", "Root canal treatment")]),
+    ("r-gap", "A gap or a missing tooth", "gap", "Filling a gap",
+     "A missing tooth can be replaced with an implant, a bridge or a denture. "
+     "A space between teeth can be closed with bonding, veneers or aligners. "
+     "Dr. Nikhil is a prosthodontist: replacing teeth is his speciality.",
+     "", [("problems/missing-tooth/", "A missing tooth, explained"), ("problems/gaps/", "Gaps, explained"),
+          ("dental-implants/", "Dental implants")]),
+    ("r-crooked", "Crooked or crowded teeth", "crooked", "Straightening your teeth",
+     "Teeth can be straightened at almost any age, with clear aligners or with braces. "
+     "Straighter teeth are also easier to keep clean.",
+     "", [("problems/crooked-teeth/", "Crooked teeth, explained"), ("invisalign/", "Clear aligners"),
+          ("orthodontics/", "Braces")]),
+    ("r-stained", "Stained or yellow teeth", "stained", "Brightening your smile",
+     "Surface stains often lift with a professional clean. Deeper colour responds to whitening, "
+     "and where whitening cannot help, bonding or veneers can.",
+     "", [("problems/stained-teeth/", "Stained teeth, explained"), ("cosmetic-dentistry/", "Cosmetic dentistry")]),
+    ("r-chipped", "A chipped or broken tooth", "chipped", "Repairing a chipped tooth",
+     "A small chip can often be rebuilt in tooth-coloured bonding. A larger break may need a crown, "
+     "a cap that protects the tooth. If it hurts, it should be seen soon.",
+     "", [("problems/chipped-tooth/", "A chipped tooth, explained"), ("crowns-bridges/", "Crowns &amp; bridges")]),
+    ("r-child", "A check-up for my child", "child", "Your child’s check-up",
+     "Gentle check-ups help children get used to the dentist. "
+     "An early check also spots bite or crowding problems while the jaws are still growing.",
+     "", [("kids-dentistry/", "Kids’ dentistry"), ("problems/child-teeth/", "Children’s teeth, explained")]),
 ]
-FINDER_FOLLOW = {
-    "q-pain": ("Which sounds closest?", [("Swelling, or pain that keeps me awake", "r-urgent"),
-                                         ("Pain when I bite, or with hot or cold", "r-toothache")]),
-    "q-gap": ("Which is it?", [("A tooth is missing, or has to come out", "r-missing"),
-                               ("A space between my teeth", "r-gaps")]),
-}
-FINDER_RESULTS = {
-    "r-urgent": ("Please don’t wait",
-                 "Severe pain or swelling should be seen soon. "
-                 "<!--if:emergency-->Call the clinic, tell us what is happening, and we’ll tell you what to do now and when to come in.<!--endif-->"
-                 "<!--if:no-emergency-->Our emergencies page has first aid for while you wait, and when to go to a hospital first.<!--endif-->",
-                 "Go to a hospital emergency department first if the swelling is spreading towards your eye or down your neck, if you find it hard to breathe or swallow, or if you have a high fever with a swollen face.",
-                 [("emergency/", "Dental emergencies: what to do now")], True),
-    "r-toothache": ("Toothache: finding the cause first",
-                    "Pain on biting, or with hot and cold, can come from worn enamel, a crack or decay near the nerve. An examination and an X-ray show which. Often a filling is enough; when the nerve is inflamed, root canal treatment saves the tooth.",
-                    "", [("problems/toothache/", "Toothache, explained"), ("root-canal-treatment/", "Root canal treatment")], False),
-    "r-missing": ("Replacing a missing tooth",
-                  "There are three usual ways: an implant (a fixed tooth on a small post in the jaw), a bridge (a fixed tooth held by the teeth either side) or a denture (removable). Dr. Nikhil is a prosthodontist: replacing teeth is his speciality.",
-                  "", [("problems/missing-tooth/", "A missing tooth, explained"), ("dental-implants/", "Dental implants")], False),
-    "r-gaps": ("Closing a gap between teeth",
-               "A gap can be closed by adding to the teeth, with tooth-coloured bonding or thin porcelain veneers, or by moving them together with clear aligners. The right choice depends on the gap and your bite.",
-               "", [("problems/gaps/", "Gaps, explained"), ("cosmetic-dentistry/", "Cosmetic dentistry")], False),
-    "r-crooked": ("Straightening crooked or crowded teeth",
-                  "Teeth can be straightened at almost any age, with clear aligners (trays you take out to eat and clean) or with braces. Straighter teeth are also easier to keep clean.",
-                  "", [("invisalign/", "Clear aligners"), ("orthodontics/", "Braces")], False),
-    "r-stained": ("Brightening stained or yellow teeth",
-                  "Surface stains often lift with a professional clean. Deeper colour responds to whitening, and where whitening cannot help, bonding or veneers can.",
-                  "", [("problems/stained-teeth/", "Stained teeth, explained"), ("cosmetic-dentistry/", "Cosmetic dentistry")], False),
-    "r-chipped": ("Repairing a chipped or broken tooth",
-                  "A small chip can often be rebuilt in tooth-coloured bonding. A larger break may need a crown, a cap that protects what is left of the tooth. If it hurts, or a piece has come away, it should be seen soon.",
-                  "", [("problems/chipped-tooth/", "A chipped tooth, explained"), ("crowns-bridges/", "Crowns &amp; bridges")], False),
-    "r-child": ("A check-up for your child",
-                "Gentle check-ups help children get used to the dentist. Sealants and fluoride protect the back teeth, and an early check spots bite or crowding problems while the jaws are still growing.",
-                "", [("kids-dentistry/", "Kids’ dentistry"), ("problems/child-teeth/", "Children’s teeth, explained")], False),
-}
+BACK = '<span aria-hidden="true">←</span> Go back'
 
 
 def finder():
-    opts = lambda items: "".join(f"""
-            <li><button class="finder__opt" type="button" data-go="{to}" aria-pressed="false">{label}</button></li>""" for label, to in items)  # noqa: E731
-    follow = "".join(f"""
-        <div class="finder__step" id="{sid}" data-step hidden>
-          <p class="finder__q" id="{sid}-q"><span class="finder__count">Question 2 of 2</span>{q}</p>
-          <ul class="finder__options finder__options--two" aria-labelledby="{sid}-q">{opts(items)}
-          </ul>
-          <button class="finder__back" type="button" data-back>Back</button>
-        </div>""" for sid, (q, items) in FINDER_FOLLOW.items())
-    results = ""
-    for rid, (title, text, urgent, links, call_first) in FINDER_RESULTS.items():
-        urgent_html = f'\n          <p class="finder__urgent">{urgent}</p>' if urgent else ""
-        link_html = "".join(f'<li><a class="link" href="{h}">{n}</a></li>' for h, n in links)
-        call = ('<a class="link" href="tel:+910000000000" data-contact="emergency" data-call="finder">Call now</a>' if call_first
-                else '<a class="link" href="tel:+910000000000" data-call="finder">Call the clinic</a>')
-        results += f"""
-        <div class="finder__result" id="{rid}" data-step tabindex="-1" hidden>
-          <p class="finder__count">What it usually means</p>
-          <h3>{title}</h3>
-          <p>{text}</p>{urgent_html}
-          <ul class="finder__links">{link_html}</ul>
-          <p class="finder__actions">{call}<a class="link" href="book/">Book an appointment</a></p>
-          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
-          <button class="finder__back" type="button" data-restart>Start again</button>
+    cards = "".join(f"""
+          <li><button class="finder__card" type="button" data-go="{rid}">{icon(ic, "finder__icon")}<span class="finder__label">{label}<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>"""
+                    for rid, label, ic, *_ in FINDER)
+    panels = ""
+    for rid, _label, ic, title, text, urgent, links in FINDER:
+        urgent_html = f'\n            <p class="finder__urgent">{urgent}</p>' if urgent else ""
+        link_html = "".join(f'<li><a href="{h}">{n}</a></li>' for h, n in links)
+        panels += f"""
+        <div class="finder__panel" id="{rid}" data-panel hidden>
+          <div class="finder__text">
+            <button class="finder__back finder__back--top" type="button" data-back>{BACK}</button>
+            <p class="finder__eyebrow">What it usually means</p>
+            <h3 tabindex="-1">{title}</h3>
+            <p>{text}</p>{urgent_html}
+            <ul class="finder__links">{link_html}</ul>
+            <p class="finder__actions"><a class="finder__book" href="book/">Book an appointment</a><!--if:phone--><a class="finder__call" href="tel:+910000000000" data-call="finder">Call the clinic</a><!--endif--></p>
+            <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+            <button class="finder__back finder__back--end" type="button" data-back>{BACK}</button>
+          </div>
+          <div class="finder__visual">{icon(ic, "finder__art")}</div>
         </div>"""
     return f"""
-    <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23) -->
+    <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23a) -->
     <section class="ah-finder" id="what-brings-you-in" aria-labelledby="finder-title">
       <div class="ah-finder__head">
         <h2 id="finder-title">What brings you in?</h2>
-        <p>Choose what sounds closest, and we’ll explain in plain English what it usually leads to.</p>
+        <p>Choose what sounds closest.</p>
       </div>
       <div class="finder" data-finder>
-        <div class="finder__step" id="q-start" data-step>
-          <p class="finder__q" id="q-start-q"><span class="finder__count">Question 1 of 2</span>What would you like help with?</p>
-          <ul class="finder__options" aria-labelledby="q-start-q">{opts(FINDER_START)}
-          </ul>
-        </div>{follow}{results}
-        <p class="visually-hidden" aria-live="polite" data-finder-live></p>
-        <noscript><p><a class="link" href="problems/">See the problems we fix</a></p></noscript>
+        <ul class="finder__grid" data-finder-grid aria-label="Choose what sounds closest">{cards}
+        </ul>{panels}
+        <noscript><p class="finder__noscript"><a class="link" href="problems/">See the problems we fix</a></p></noscript>
       </div>
     </section>
 """

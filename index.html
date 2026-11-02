@@ -271,115 +271,101 @@
       </div>
     </section>
 
-    <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23) -->
+    <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23a) -->
     <section class="ah-finder" id="what-brings-you-in" aria-labelledby="finder-title">
       <div class="ah-finder__head">
         <h2 id="finder-title">What brings you in?</h2>
-        <p>Choose what sounds closest, and we’ll explain in plain English what it usually leads to.</p>
+        <p>Choose what sounds closest.</p>
       </div>
       <div class="finder" data-finder>
-        <div class="finder__step" id="q-start" data-step>
-          <p class="finder__q" id="q-start-q"><span class="finder__count">Question 1 of 2</span>What would you like help with?</p>
-          <ul class="finder__options" aria-labelledby="q-start-q">
-            <li><button class="finder__opt" type="button" data-go="q-pain" aria-pressed="false">Tooth pain or swelling</button></li>
-            <li><button class="finder__opt" type="button" data-go="q-gap" aria-pressed="false">A gap or a missing tooth</button></li>
-            <li><button class="finder__opt" type="button" data-go="r-crooked" aria-pressed="false">Crooked or crowded teeth</button></li>
-            <li><button class="finder__opt" type="button" data-go="r-stained" aria-pressed="false">Stained or yellow teeth</button></li>
-            <li><button class="finder__opt" type="button" data-go="r-chipped" aria-pressed="false">A chipped or broken tooth</button></li>
-            <li><button class="finder__opt" type="button" data-go="r-child" aria-pressed="false">A check-up for my child</button></li>
-          </ul>
+        <ul class="finder__grid" data-finder-grid aria-label="Choose what sounds closest">
+          <li><button class="finder__card" type="button" data-go="r-pain"><svg class="finder__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(22 26) rotate(0) scale(0.8) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M35.5 10.5 39.5 6M38.5 16l5-1.5M30.5 8.5l.5-5"/></svg><span class="finder__label">Tooth pain or swelling<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>
+          <li><button class="finder__card" type="button" data-go="r-gap"><svg class="finder__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(13 24.5) rotate(0) scale(0.62) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(35 24.5) rotate(0) scale(0.62) translate(-24 -24.5)" vector-effect="non-scaling-stroke" stroke-dasharray="2.5 3"/></svg><span class="finder__label">A gap or a missing tooth<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>
+          <li><button class="finder__card" type="button" data-go="r-crooked"><svg class="finder__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(9.5 26.5) rotate(-14) scale(0.46) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(24 22) rotate(3) scale(0.46) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(38.5 27) rotate(15) scale(0.46) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/></svg><span class="finder__label">Crooked or crowded teeth<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>
+          <li><button class="finder__card" type="button" data-go="r-stained"><svg class="finder__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(21 26.5) rotate(0) scale(0.8) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M39 3.5l1.6 4.9 4.9 1.6-4.9 1.6L39 16.5l-1.6-4.9-4.9-1.6 4.9-1.6Z"/></svg><span class="finder__label">Stained or yellow teeth<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>
+          <li><button class="finder__card" type="button" data-go="r-chipped"><svg class="finder__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(24 25) rotate(0) scale(0.85) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M30.2 12.4 27.2 18l3.4 3-3 6"/></svg><span class="finder__label">A chipped or broken tooth<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>
+          <li><button class="finder__card" type="button" data-go="r-child"><svg class="finder__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(17 24.5) rotate(0) scale(0.74) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(38 30.5) rotate(0) scale(0.46) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M38 19.5c-3.4-2.5-3-5.5-1.3-5.5.8 0 1.3.7 1.3.7s.5-.7 1.3-.7c1.7 0 2.1 3-1.3 5.5Z"/></svg><span class="finder__label">A check-up for my child<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>
+        </ul>
+        <div class="finder__panel" id="r-pain" data-panel hidden>
+          <div class="finder__text">
+            <button class="finder__back finder__back--top" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+            <p class="finder__eyebrow">What it usually means</p>
+            <h3 tabindex="-1">Finding the cause of the pain</h3>
+            <p>Pain when you bite, or with hot and cold, often comes from decay, a crack or an inflamed nerve. An examination and an X-ray show which. Severe pain or swelling should be seen soon.</p>
+            <p class="finder__urgent">Go to a hospital first if swelling spreads towards your eye or neck, or if breathing or swallowing is hard.</p>
+            <ul class="finder__links"><li><a href="emergency/">Dental emergencies</a></li><li><a href="problems/toothache/">Toothache, explained</a></li><li><a href="root-canal-treatment/">Root canal treatment</a></li></ul>
+            <p class="finder__actions"><a class="finder__book" href="book/">Book an appointment</a></p>
+            <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+            <button class="finder__back finder__back--end" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+          </div>
+          <div class="finder__visual"><svg class="finder__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(22 26) rotate(0) scale(0.8) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M35.5 10.5 39.5 6M38.5 16l5-1.5M30.5 8.5l.5-5"/></svg></div>
         </div>
-        <div class="finder__step" id="q-pain" data-step hidden>
-          <p class="finder__q" id="q-pain-q"><span class="finder__count">Question 2 of 2</span>Which sounds closest?</p>
-          <ul class="finder__options finder__options--two" aria-labelledby="q-pain-q">
-            <li><button class="finder__opt" type="button" data-go="r-urgent" aria-pressed="false">Swelling, or pain that keeps me awake</button></li>
-            <li><button class="finder__opt" type="button" data-go="r-toothache" aria-pressed="false">Pain when I bite, or with hot or cold</button></li>
-          </ul>
-          <button class="finder__back" type="button" data-back>Back</button>
+        <div class="finder__panel" id="r-gap" data-panel hidden>
+          <div class="finder__text">
+            <button class="finder__back finder__back--top" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+            <p class="finder__eyebrow">What it usually means</p>
+            <h3 tabindex="-1">Filling a gap</h3>
+            <p>A missing tooth can be replaced with an implant, a bridge or a denture. A space between teeth can be closed with bonding, veneers or aligners. Dr. Nikhil is a prosthodontist: replacing teeth is his speciality.</p>
+            <ul class="finder__links"><li><a href="problems/missing-tooth/">A missing tooth, explained</a></li><li><a href="problems/gaps/">Gaps, explained</a></li><li><a href="dental-implants/">Dental implants</a></li></ul>
+            <p class="finder__actions"><a class="finder__book" href="book/">Book an appointment</a></p>
+            <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+            <button class="finder__back finder__back--end" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+          </div>
+          <div class="finder__visual"><svg class="finder__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(13 24.5) rotate(0) scale(0.62) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(35 24.5) rotate(0) scale(0.62) translate(-24 -24.5)" vector-effect="non-scaling-stroke" stroke-dasharray="2.5 3"/></svg></div>
         </div>
-        <div class="finder__step" id="q-gap" data-step hidden>
-          <p class="finder__q" id="q-gap-q"><span class="finder__count">Question 2 of 2</span>Which is it?</p>
-          <ul class="finder__options finder__options--two" aria-labelledby="q-gap-q">
-            <li><button class="finder__opt" type="button" data-go="r-missing" aria-pressed="false">A tooth is missing, or has to come out</button></li>
-            <li><button class="finder__opt" type="button" data-go="r-gaps" aria-pressed="false">A space between my teeth</button></li>
-          </ul>
-          <button class="finder__back" type="button" data-back>Back</button>
+        <div class="finder__panel" id="r-crooked" data-panel hidden>
+          <div class="finder__text">
+            <button class="finder__back finder__back--top" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+            <p class="finder__eyebrow">What it usually means</p>
+            <h3 tabindex="-1">Straightening your teeth</h3>
+            <p>Teeth can be straightened at almost any age, with clear aligners or with braces. Straighter teeth are also easier to keep clean.</p>
+            <ul class="finder__links"><li><a href="problems/crooked-teeth/">Crooked teeth, explained</a></li><li><a href="invisalign/">Clear aligners</a></li><li><a href="orthodontics/">Braces</a></li></ul>
+            <p class="finder__actions"><a class="finder__book" href="book/">Book an appointment</a></p>
+            <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+            <button class="finder__back finder__back--end" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+          </div>
+          <div class="finder__visual"><svg class="finder__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(9.5 26.5) rotate(-14) scale(0.46) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(24 22) rotate(3) scale(0.46) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(38.5 27) rotate(15) scale(0.46) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/></svg></div>
         </div>
-        <div class="finder__result" id="r-urgent" data-step tabindex="-1" hidden>
-          <p class="finder__count">What it usually means</p>
-          <h3>Please don’t wait</h3>
-          <p>Severe pain or swelling should be seen soon. Our emergencies page has first aid for while you wait, and when to go to a hospital first.</p>
-          <p class="finder__urgent">Go to a hospital emergency department first if the swelling is spreading towards your eye or down your neck, if you find it hard to breathe or swallow, or if you have a high fever with a swollen face.</p>
-          <ul class="finder__links"><li><a class="link" href="emergency/">Dental emergencies: what to do now</a></li></ul>
-          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
-          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
-          <button class="finder__back" type="button" data-restart>Start again</button>
+        <div class="finder__panel" id="r-stained" data-panel hidden>
+          <div class="finder__text">
+            <button class="finder__back finder__back--top" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+            <p class="finder__eyebrow">What it usually means</p>
+            <h3 tabindex="-1">Brightening your smile</h3>
+            <p>Surface stains often lift with a professional clean. Deeper colour responds to whitening, and where whitening cannot help, bonding or veneers can.</p>
+            <ul class="finder__links"><li><a href="problems/stained-teeth/">Stained teeth, explained</a></li><li><a href="cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
+            <p class="finder__actions"><a class="finder__book" href="book/">Book an appointment</a></p>
+            <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+            <button class="finder__back finder__back--end" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+          </div>
+          <div class="finder__visual"><svg class="finder__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(21 26.5) rotate(0) scale(0.8) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M39 3.5l1.6 4.9 4.9 1.6-4.9 1.6L39 16.5l-1.6-4.9-4.9-1.6 4.9-1.6Z"/></svg></div>
         </div>
-        <div class="finder__result" id="r-toothache" data-step tabindex="-1" hidden>
-          <p class="finder__count">What it usually means</p>
-          <h3>Toothache: finding the cause first</h3>
-          <p>Pain on biting, or with hot and cold, can come from worn enamel, a crack or decay near the nerve. An examination and an X-ray show which. Often a filling is enough; when the nerve is inflamed, root canal treatment saves the tooth.</p>
-          <ul class="finder__links"><li><a class="link" href="problems/toothache/">Toothache, explained</a></li><li><a class="link" href="root-canal-treatment/">Root canal treatment</a></li></ul>
-          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
-          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
-          <button class="finder__back" type="button" data-restart>Start again</button>
+        <div class="finder__panel" id="r-chipped" data-panel hidden>
+          <div class="finder__text">
+            <button class="finder__back finder__back--top" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+            <p class="finder__eyebrow">What it usually means</p>
+            <h3 tabindex="-1">Repairing a chipped tooth</h3>
+            <p>A small chip can often be rebuilt in tooth-coloured bonding. A larger break may need a crown, a cap that protects the tooth. If it hurts, it should be seen soon.</p>
+            <ul class="finder__links"><li><a href="problems/chipped-tooth/">A chipped tooth, explained</a></li><li><a href="crowns-bridges/">Crowns &amp; bridges</a></li></ul>
+            <p class="finder__actions"><a class="finder__book" href="book/">Book an appointment</a></p>
+            <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+            <button class="finder__back finder__back--end" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+          </div>
+          <div class="finder__visual"><svg class="finder__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(24 25) rotate(0) scale(0.85) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M30.2 12.4 27.2 18l3.4 3-3 6"/></svg></div>
         </div>
-        <div class="finder__result" id="r-missing" data-step tabindex="-1" hidden>
-          <p class="finder__count">What it usually means</p>
-          <h3>Replacing a missing tooth</h3>
-          <p>There are three usual ways: an implant (a fixed tooth on a small post in the jaw), a bridge (a fixed tooth held by the teeth either side) or a denture (removable). Dr. Nikhil is a prosthodontist: replacing teeth is his speciality.</p>
-          <ul class="finder__links"><li><a class="link" href="problems/missing-tooth/">A missing tooth, explained</a></li><li><a class="link" href="dental-implants/">Dental implants</a></li></ul>
-          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
-          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
-          <button class="finder__back" type="button" data-restart>Start again</button>
+        <div class="finder__panel" id="r-child" data-panel hidden>
+          <div class="finder__text">
+            <button class="finder__back finder__back--top" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+            <p class="finder__eyebrow">What it usually means</p>
+            <h3 tabindex="-1">Your child’s check-up</h3>
+            <p>Gentle check-ups help children get used to the dentist. An early check also spots bite or crowding problems while the jaws are still growing.</p>
+            <ul class="finder__links"><li><a href="kids-dentistry/">Kids’ dentistry</a></li><li><a href="problems/child-teeth/">Children’s teeth, explained</a></li></ul>
+            <p class="finder__actions"><a class="finder__book" href="book/">Book an appointment</a></p>
+            <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
+            <button class="finder__back finder__back--end" type="button" data-back><span aria-hidden="true">←</span> Go back</button>
+          </div>
+          <div class="finder__visual"><svg class="finder__art" viewBox="0 0 48 48" aria-hidden="true" focusable="false"><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(17 24.5) rotate(0) scale(0.74) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z" transform="translate(38 30.5) rotate(0) scale(0.46) translate(-24 -24.5)" vector-effect="non-scaling-stroke"/><path d="M38 19.5c-3.4-2.5-3-5.5-1.3-5.5.8 0 1.3.7 1.3.7s.5-.7 1.3-.7c1.7 0 2.1 3-1.3 5.5Z"/></svg></div>
         </div>
-        <div class="finder__result" id="r-gaps" data-step tabindex="-1" hidden>
-          <p class="finder__count">What it usually means</p>
-          <h3>Closing a gap between teeth</h3>
-          <p>A gap can be closed by adding to the teeth, with tooth-coloured bonding or thin porcelain veneers, or by moving them together with clear aligners. The right choice depends on the gap and your bite.</p>
-          <ul class="finder__links"><li><a class="link" href="problems/gaps/">Gaps, explained</a></li><li><a class="link" href="cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
-          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
-          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
-          <button class="finder__back" type="button" data-restart>Start again</button>
-        </div>
-        <div class="finder__result" id="r-crooked" data-step tabindex="-1" hidden>
-          <p class="finder__count">What it usually means</p>
-          <h3>Straightening crooked or crowded teeth</h3>
-          <p>Teeth can be straightened at almost any age, with clear aligners (trays you take out to eat and clean) or with braces. Straighter teeth are also easier to keep clean.</p>
-          <ul class="finder__links"><li><a class="link" href="invisalign/">Clear aligners</a></li><li><a class="link" href="orthodontics/">Braces</a></li></ul>
-          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
-          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
-          <button class="finder__back" type="button" data-restart>Start again</button>
-        </div>
-        <div class="finder__result" id="r-stained" data-step tabindex="-1" hidden>
-          <p class="finder__count">What it usually means</p>
-          <h3>Brightening stained or yellow teeth</h3>
-          <p>Surface stains often lift with a professional clean. Deeper colour responds to whitening, and where whitening cannot help, bonding or veneers can.</p>
-          <ul class="finder__links"><li><a class="link" href="problems/stained-teeth/">Stained teeth, explained</a></li><li><a class="link" href="cosmetic-dentistry/">Cosmetic dentistry</a></li></ul>
-          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
-          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
-          <button class="finder__back" type="button" data-restart>Start again</button>
-        </div>
-        <div class="finder__result" id="r-chipped" data-step tabindex="-1" hidden>
-          <p class="finder__count">What it usually means</p>
-          <h3>Repairing a chipped or broken tooth</h3>
-          <p>A small chip can often be rebuilt in tooth-coloured bonding. A larger break may need a crown, a cap that protects what is left of the tooth. If it hurts, or a piece has come away, it should be seen soon.</p>
-          <ul class="finder__links"><li><a class="link" href="problems/chipped-tooth/">A chipped tooth, explained</a></li><li><a class="link" href="crowns-bridges/">Crowns &amp; bridges</a></li></ul>
-          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
-          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
-          <button class="finder__back" type="button" data-restart>Start again</button>
-        </div>
-        <div class="finder__result" id="r-child" data-step tabindex="-1" hidden>
-          <p class="finder__count">What it usually means</p>
-          <h3>A check-up for your child</h3>
-          <p>Gentle check-ups help children get used to the dentist. Sealants and fluoride protect the back teeth, and an early check spots bite or crowding problems while the jaws are still growing.</p>
-          <ul class="finder__links"><li><a class="link" href="kids-dentistry/">Kids’ dentistry</a></li><li><a class="link" href="problems/child-teeth/">Children’s teeth, explained</a></li></ul>
-          <p class="finder__actions"><a class="link" href="book/">Book an appointment</a></p>
-          <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
-          <button class="finder__back" type="button" data-restart>Start again</button>
-        </div>
-        <p class="visually-hidden" aria-live="polite" data-finder-live></p>
-        <noscript><p><a class="link" href="problems/">See the problems we fix</a></p></noscript>
+        <noscript><p class="finder__noscript"><a class="link" href="problems/">See the problems we fix</a></p></noscript>
       </div>
     </section>
 

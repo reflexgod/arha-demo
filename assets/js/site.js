@@ -1609,38 +1609,61 @@
   });
   /* 23. Homepage finder and reviews carousel (tools/home_apa.py), first-visit steps (tools/pages/book.html).
          Vanilla, no dependencies; keyboard-accessible; nothing moves on its own with reduced motion.
-         a. What brings you in? One or two taps to a plain-English answer. Focus follows the new step.
+         a. What brings you in? One tap on a card to a plain-English answer; the cards fade out and the answer
+            fades in, focus moves to its heading, and Go back returns focus to the card.
          b. Reviews carousel: one or two tiles at a time on a scroll-snap track; advances every 7 s while on screen;
             pauses on hover, focus or touch, and with the Pause button (WCAG 2.2.2); never with reduced motion.
          c. Your first visit: tabs (arrow keys move between steps), Previous and Next. */
   document.querySelectorAll('[data-finder]').forEach((finder) => {
-    const steps = [...finder.querySelectorAll('[data-step]')];
-    const live = finder.querySelector('[data-finder-live]');
-    const history = [];
-    const show = (id, focus = true) => {
-      steps.forEach((s) => { s.hidden = s.id !== id; });
-      const step = steps.find((s) => s.id === id);
-      if (!step || !focus) return;
-      const target = step.matches('.finder__result') ? step : step.querySelector('.finder__opt');
-      target.focus({ preventScroll: true });
-      const top = finder.getBoundingClientRect().top;
-      if (top < 60 || top > window.innerHeight * 0.6) finder.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-      if (live) live.textContent = step.matches('.finder__result') ? step.querySelector('h3').textContent : step.querySelector('.finder__q').lastChild.textContent;
+    const grid = finder.querySelector('[data-finder-grid]');
+    const wait = reduceMotion ? 0 : 320;
+    const narrow = window.matchMedia('(max-width: 767px)');
+    let chosen = null;
+    let busy = false;
+    let gridScroll = 0;
+    // Fade one view out (CSS .is-out), then the other in from just below (.is-from)
+    const swap = (from, to, then) => {
+      busy = true;
+      from.classList.add('is-out');
+      setTimeout(() => {
+        from.hidden = true;
+        from.classList.remove('is-out');
+        to.classList.add('is-from');
+        to.hidden = false;
+        void to.offsetWidth;
+        to.classList.remove('is-from');
+        then();
+        setTimeout(() => { busy = false; }, wait);
+      }, wait);
+    };
+    const bringIntoView = (el) => {
+      const r = el.getBoundingClientRect();
+      if (narrow.matches || r.top < 0 || r.top > window.innerHeight * 0.5) {
+        el.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+      }
     };
     finder.addEventListener('click', (e) => {
-      const opt = e.target.closest('[data-go]');
-      if (opt) {
-        const from = opt.closest('[data-step]');
-        from.querySelectorAll('[data-go]').forEach((b) => b.setAttribute('aria-pressed', String(b === opt)));
-        history.push(from.id);
-        track('finder_choice', { choice: opt.textContent.trim() });
-        setTimeout(() => show(opt.dataset.go), reduceMotion ? 0 : 160);
-      } else if (e.target.closest('[data-back]')) {
-        show(history.pop() || 'q-start');
-      } else if (e.target.closest('[data-restart]')) {
-        history.length = 0;
-        finder.querySelectorAll('[aria-pressed="true"]').forEach((b) => b.setAttribute('aria-pressed', 'false'));
-        show('q-start');
+      if (busy) return;
+      const card = e.target.closest('[data-go]');
+      if (card) {
+        const panel = document.getElementById(card.dataset.go);
+        if (!panel) return;
+        chosen = card;
+        gridScroll = grid.scrollLeft;
+        track('finder_choice', { choice: card.textContent.replace('→', '').trim() });
+        swap(grid, panel, () => {
+          panel.querySelector('h3').focus({ preventScroll: true });
+          bringIntoView(panel);
+        });
+        return;
+      }
+      if (e.target.closest('[data-back]')) {
+        const panel = e.target.closest('[data-panel]');
+        swap(panel, grid, () => {
+          grid.scrollLeft = gridScroll;
+          if (chosen) chosen.focus({ preventScroll: true });
+          bringIntoView(finder.closest('section') || grid);
+        });
       }
     });
   });

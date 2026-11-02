@@ -7199,29 +7199,76 @@ button.link { border: 0; background: linear-gradient(currentColor, currentColor)
 button.cta { border: 0; border-bottom: 2px solid currentColor; }
 button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 
-/* 2b. What brings you in? (site.js 23a): a stone band under the hero; options as hairline rows */
-.ah-finder { padding: 60px var(--gutter) 70px; background: var(--stone); }
-.ah-finder__head { max-width: 704px; margin: 0 auto 36px; text-align: center; }
+/* 2b. What brings you in? (site.js 23a). Six tactile cards on the stone band: a line icon, a short label and an arrow.
+       Hover or press lifts the card 4px with a soft shadow and slides the arrow 4px (200 ms ease-out). Choosing one
+       fades the cards out and the answer panel in (320 ms); none of it moves with reduced motion. */
+.ah-finder { padding: 80px var(--gutter) 90px; background: var(--stone); }
+.ah-finder__head { max-width: 704px; margin: 0 auto 44px; text-align: center; }
 .ah-finder__head p { margin-top: 10px; }
-.finder { max-width: 920px; margin: 0 auto; }
-.finder__q { margin: 0 0 20px; font: 700 18px/1.3 var(--font-head); letter-spacing: 2px; text-transform: uppercase; }
-.finder .finder__count { display: block; margin-bottom: 8px; color: var(--muted); font: 600 12px/1.3 var(--font-body); letter-spacing: 1.5px; text-transform: uppercase; }
-.finder__options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--hairline-strong); }
-.finder__options li { border-bottom: 1px solid var(--hairline-strong); }
-.finder__opt { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 60px; padding: 14px 0; border: 0; background: none; color: var(--ink); font: 400 18px/1.35 var(--font-body); text-align: left; cursor: pointer; transition: color var(--t-link); }
-.finder__opt::after { content: ""; flex: none; width: 8px; height: 8px; margin-right: 4px; border-top: 1.5px solid currentColor; border-right: 1.5px solid currentColor; transform: rotate(45deg); }
-.finder__opt:hover, .finder__opt:focus-visible, .finder__opt[aria-pressed="true"] { color: var(--bronze); }
-.finder__back { margin-top: 24px; padding: 6px 0; border: 0; background: none; color: var(--muted); font: 600 13px/1.2 var(--font-body); letter-spacing: 1px; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
-.finder__back:hover, .finder__back:focus-visible { color: var(--bronze); }
-.ah-finder .finder__count, .ah-finder .finder__back { color: #57534F; } /* muted, darkened for 4.5:1 on stone */
-.ah-finder .finder__result .finder__count, .ah-finder .finder__result .finder__back, .ah-finder .finder__confirm { color: var(--muted); }
-.finder__result { padding: 36px 40px 32px; background: var(--paper); outline: none; }
-.finder__result h3 { margin: 0 0 14px; font-size: 22px; }
-.finder__result > p { max-width: 720px; }
-.finder__urgent { margin-top: 16px; padding-left: 16px; border-left: 2px solid var(--bronze); }
-.finder__links { display: flex; flex-wrap: wrap; gap: 14px 32px; margin: 24px 0 0; padding: 0; list-style: none; }
-.finder__actions { display: flex; flex-wrap: wrap; gap: 14px 32px; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--hairline); }
-.finder .finder__confirm { margin-top: 20px; color: var(--muted); font-size: 15px; }
+.finder { max-width: 1080px; margin: 0 auto; }
+.finder__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; }
+.finder__grid, .finder__panel { transition: opacity .32s ease-out, transform .32s ease-out; }
+.finder__grid[hidden], .finder__panel[hidden] { display: none; }
+.finder__grid.is-out, .finder__panel.is-out { opacity: 0; transform: translateY(-12px); }
+.finder__grid.is-from, .finder__panel.is-from { opacity: 0; transform: translateY(16px); transition: none; }
+.finder__card { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 44px; width: 100%; height: 100%; min-height: 210px; padding: 28px 28px 26px; border: 0; border-radius: 14px; background: #F2EFE9; color: var(--ink); text-align: left; cursor: pointer; transition: transform .2s ease-out, box-shadow .2s ease-out; -webkit-tap-highlight-color: transparent; }
+.finder__card:hover, .finder__card:active { transform: translateY(-4px); box-shadow: 0 16px 32px -14px rgba(37, 36, 36, .28); }
+.finder__card:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.finder__icon { width: 60px; height: 60px; }
+.finder__icon, .finder__art { fill: none; stroke: var(--charcoal); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
+.finder__icon *, .finder__art * { vector-effect: non-scaling-stroke; } /* one stroke weight at every size */
+.finder__label { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; width: 100%; font: 500 19px/1.3 var(--font-body); }
+.finder__arrow { flex: none; font-size: 20px; transition: transform .2s ease-out; }
+.finder__card:hover .finder__arrow, .finder__card:active .finder__arrow, .finder__card:focus-visible .finder__arrow { transform: translateX(4px); }
+
+.finder__panel { position: relative; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); overflow: hidden; border-radius: 14px; background: #F2EFE9; scroll-margin-top: calc(var(--header-h) + 16px); }
+.finder__text { padding: 34px 56px 48px; }
+.finder__back { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin: 0 0 18px -2px; padding: 0 2px; border: 0; background: none; color: var(--muted); font: 600 13px/1 var(--font-body); letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: color var(--t-link); }
+.finder__back span { display: inline-block; font-size: 16px; transition: transform .2s ease-out; }
+.finder__back:hover, .finder__back:focus-visible { color: var(--ink); }
+.finder__back:hover span { transform: translateX(-3px); }
+.finder__back--end { display: none; }
+.home-apa .finder__eyebrow { margin: 0 0 12px; color: var(--muted); font: 600 12px/1.3 var(--font-body); letter-spacing: 1.5px; text-transform: uppercase; }
+.home-apa .finder__panel h3 { margin: 0 0 16px; font: 700 30px/1.2 var(--font-head); letter-spacing: .3px; text-transform: none; outline: none; }
+.finder__text > p:not([class]) { max-width: 34em; }
+.finder__urgent { max-width: 34em; margin-top: 16px; padding-left: 14px; border-left: 2px solid var(--bronze); }
+.home-apa .finder__urgent { font-size: 16px; }
+.finder__links { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 22px 0 0; padding: 0; list-style: none; }
+.finder__links a, .finder__call { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color var(--t-link); }
+.finder__links a:hover, .finder__links a:focus-visible, .finder__call:hover, .finder__call:focus-visible { color: var(--bronze); }
+.finder__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 34px; }
+.finder__book { display: inline-flex; align-items: center; min-height: 52px; padding: 0 30px; border-radius: 999px; background: var(--charcoal); color: var(--paper); font: 600 15px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; transition: transform .2s ease-out, box-shadow .2s ease-out; }
+.finder__book:hover, .finder__book:active { transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(37, 36, 36, .5); }
+.finder__book:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.home-apa .finder__confirm { margin-top: 24px; color: var(--muted); font-size: 14px; }
+.finder__visual { display: grid; place-items: center; min-height: 100%; padding: 48px; }
+.finder__art { width: min(80%, 260px); height: auto; stroke-width: 1.75; stroke-opacity: .34; }
+.finder__noscript { text-align: center; }
+
+@media (max-width: 767px) {
+  .ah-finder { padding: 52px 0 60px; }
+  .ah-finder__head { margin-bottom: 20px; padding: 0 var(--gutter); }
+  /* A swipeable row, about 1.2 cards wide, so the next card shows */
+  .finder__grid { display: flex; gap: 12px; overflow-x: auto; padding: 8px var(--gutter) 24px; scroll-padding-inline: var(--gutter); scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
+  .finder__grid::-webkit-scrollbar { display: none; }
+  .finder__grid > li { flex: 0 0 76%; scroll-snap-align: start; }
+  .finder__card { min-height: 184px; padding: 24px 22px 22px; }
+  .finder__label { font-size: 18px; }
+  .finder__panel { grid-template-columns: 1fr; margin: 0 var(--gutter); scroll-margin-top: calc(var(--header-h) + 12px); }
+  .finder__visual { order: -1; min-height: 0; padding: 52px 0 20px; }
+  .finder__art { width: 120px; }
+  .finder__back--top { position: absolute; top: 6px; left: 20px; margin: 0; }
+  .finder__text { padding: 22px 22px 18px; }
+  .home-apa .finder__panel h3 { font-size: 24px; }
+  .finder__actions { margin-top: 28px; }
+  .finder__back--end { display: inline-flex; margin: 14px 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .finder__grid, .finder__panel, .finder__card, .finder__arrow, .finder__book, .finder__back span { transition: none; }
+  .finder__card:hover, .finder__card:active, .finder__book:hover, .finder__book:active { transform: none; }
+  .finder__card:hover .finder__arrow, .finder__card:active .finder__arrow, .finder__card:focus-visible .finder__arrow, .finder__back:hover span { transform: none; }
+}
 
 /* 11. Reviews carousel (site.js 23b): the same tiles, one at a time on a scroll-snap track */
 .ah-carousel { padding: 0 var(--gutter) 60px; }
@@ -7278,12 +7325,6 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .footer__directions a { text-decoration: underline; text-underline-offset: 4px; }
 
 @media (max-width: 767px) {
-  .ah-finder { padding: 44px var(--gutter) 50px; }
-  .ah-finder__head { margin-bottom: 28px; }
-  .finder__options { grid-template-columns: 1fr; }
-  .finder__opt { font-size: 17px; }
-  .finder__result { padding: 24px 20px; }
-  .finder__result h3 { font-size: 19px; }
   .ah-carousel { padding-bottom: 44px; }
   .home-apa .rv .ah-review--wide:not(.ah-review--photo) { min-height: 300px; }
   .visit-steps__tabs { display: flex; overflow-x: auto; scrollbar-width: none; }
