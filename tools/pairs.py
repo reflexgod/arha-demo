@@ -1,4 +1,7 @@
-"""Before/after simulations for the demo (v4 fixes 3, point 2): both sides are the SAME photograph, so
+"""RETIRED (Viraaj, 2 Nov 2026): no simulated or stock "results" anywhere on the site. The files this made were
+deleted; do not run it again. Kept for the record.
+
+Before/after simulations for the demo (v4 fixes 3, point 2): both sides are the SAME photograph, so
 the alignment is pixel-perfect, and every one is labelled "Simulation for demo" on the site.
 
 Usage: .venv/Scripts/python -I tools/pairs.py [name ...] [--sheet <out.jpg>]

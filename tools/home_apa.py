@@ -32,26 +32,17 @@ BAND = [("arha-dental-care-reception-south-mumbai-dental-clinic-01-lower", "50% 
         ("dental-operatory-arha-dental-care-peddar-road-01", "50% 55%", "An Arha treatment room with its chair beneath a soft light")]
 
 # The nine problems on the homepage grid (apa's grid has nine squares; all ten are on /problems/ and in the menu).
-# Each square is a problem | fix pair, stacked like apa's smile pairs: (photo, position, alt) above, then below.
+# One photograph per square, showing the problem only (Viraaj, 2 Nov 2026): (slug, photo, position, alt).
 GRID = [
-    ("missing-tooth", ("stock-implant-model", "50% 55%", "A model of an implant crown on its post between two natural teeth"),
-     ("stock-implant-crown", "50% 50%", "A single implant crown on its titanium post")),
-    ("chipped-tooth", ("stock-patient-chair", "50% 40%", "A dentist examining a patient's front teeth with a mirror"),
-     ("stock-veneer-fingertip", "50% 45%", "A thin porcelain veneer held up beside the front teeth of a model")),
-    ("gaps", ("stock-crooked", "50% 55%", "A smile with a small gap between the front teeth"),
-     ("stock-veneers-fabric", "50% 50%", "Four porcelain veneers on soft grey fabric")),
-    ("crooked-teeth", ("stock-aligner-gloved", "50% 45%", "A clear aligner held between gloved fingers"),
-     ("stock-aligner", "50% 50%", "A clear aligner on a pale background")),
-    ("stained-teeth", ("stock-stained", "50% 50%", "A smile with yellowed teeth"),
-     ("stock-shade-guide", "50% 20%", "A tooth shade guide on a dental lab table")),
-    ("toothache", ("stock-toothache-lower", "50% 50%", "A hand held against a sore cheek, the lower face only"),
-     ("stock-xray-screen", "50% 50%", "A dental X-ray of the whole mouth on a monitor beside the chair")),
-    ("bleeding-gums", ("stock-exam", "50% 45%", "A gentle gum check with a mirror and probe"),
-     ("stock-floss-hand", "50% 55%", "A coil of dental floss in an open hand")),
-    ("loose-dentures", ("stock-denture-tray", "50% 55%", "A full denture on its clean white base"),
-     ("stock-implant-overdenture", "50% 50%", "A denture on a model with the clips that hold it to implants")),
-    ("child-teeth", ("stock-child-chair", "50% 45%", "A smiling girl in the dental chair beside her dentist"),
-     ("stock-kid-dentist", "50% 40%", "A boy relaxed in the dental chair while his dentist checks his teeth")),
+    ("missing-tooth", "stock-implant-model", "50% 55%", "A model of an implant crown on its post between two natural teeth"),
+    ("chipped-tooth", "stock-patient-chair", "60% 40%", "A dentist examining a patient's front teeth with a mirror"),
+    ("gaps", "stock-crooked", "50% 55%", "A smile with a small gap between the front teeth"),
+    ("crooked-teeth", "stock-aligner-gloved", "50% 45%", "A clear aligner held between gloved fingers"),
+    ("stained-teeth", "stock-stained", "50% 50%", "A smile with yellowed teeth"),
+    ("toothache", "stock-toothache-lower", "50% 50%", "A hand held against a sore cheek, the lower face only"),
+    ("bleeding-gums", "stock-exam", "40% 45%", "A gentle gum check with a mirror and probe"),
+    ("loose-dentures", "stock-denture-tray", "50% 55%", "A full denture on its clean white base"),
+    ("child-teeth", "stock-child-chair", "50% 45%", "A smiling girl in the dental chair beside her dentist"),
 ]
 
 PROCESS = [  # apa: three photo panels, the numbered heading and two lines overlaid bottom-left
@@ -67,8 +58,8 @@ PROCESS = [  # apa: three photo panels, the numbered heading and two lines overl
 # (review index or "photo", shape, tone). Tones alternate so the mosaic reads like apa's covers: charcoal,
 # stone and paper with a hairline; the one photograph (Arha's logo wall, 3:2) shows the rating on hover, as apa's covers do.
 MOSAIC = [
-    [(0, "tall", "dark"), (2, "wide", "stone"), (4, "wide", "line"), (6, "wide", "stone")],
-    [(1, "wide", "line"), ("photo", "wide", None), (3, "tall", "dark"), (5, "wide", "stone")],
+    [(0, "tall", "dark"), (2, "wide", "stone")],
+    [(1, "wide", "line"), ("photo", "wide", None), (3, "wide", "stone")],
 ]
 STAR = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>'
 
@@ -148,16 +139,15 @@ def how(p):
 
 def grid():
     tiles = ""
-    for slug, top, bottom in GRID:
+    for slug, name, pos, alt in GRID:
         p = problems.PROBLEMS[slug]
-        halves = "".join(f"""
-            <span class="ah-tile__half">
-{pic(name, '(min-width: 900px) 330px, 300px', alt, pos, '              ')}
-            </span>""" for name, pos, alt in (top, bottom))
         tiles += f"""
         <li class="ah-tile">
           <a href="problems/{slug}/" data-colour-group>
-            <span class="ah-tile__pair">{halves}
+            <span class="ah-tile__pair">
+              <span class="ah-tile__half">
+{pic(name, '(min-width: 900px) 330px, 300px', alt, pos, '                ')}
+              </span>
             </span>
             <span class="ah-tile__hover"><span class="ah-tile__name">{p['menu']}</span><span class="ah-tile__how">{how(p)}</span><span class="ah-tile__link">See how we fix it</span></span>
           </a>
@@ -166,7 +156,7 @@ def grid():
     <!-- =================================================================== 5. COMMON PROBLEMS WE TREAT (apa: the grid of squares) -->
     <section class="ah-grid" aria-labelledby="grid-title">
       <h2 id="grid-title"><a href="problems/">Common problems we treat</a></h2>
-      <p class="ah-grid__lede">Each square shows a common problem above, and how it is usually treated below. Choose one to see how we fix it.</p>
+      <p class="ah-grid__lede">The concerns patients most often come to us with. Choose one to see how we fix it.</p>
       <ul class="ah-grid__tiles">{tiles}
       </ul>
       <p class="ah-grid__cta"><a class="link" href="treatments/">See all treatments</a></p>

@@ -107,7 +107,7 @@ def raster(svg_text, px):
 # Seal: a thin bronze ring with tracked D-DIN caps around the icon and "ESTD 1980", Arha's own
 # geometry. Letters are converted to outlines so the seal stays exact inside an <img> (no web font).
 SEAL_TEXT = "PEDDAR ROAD · MUMBAI · SPECIALIST DENTISTRY · "
-SEAL_YEAR = "ESTD 1980"  # the demo's "Since 1980"; confirm it is the founding year (notes/TO-CONFIRM.md)
+SEAL_YEAR = ""  # no year under the icon: no founding year is confirmed (Viraaj, 2 Nov 2026); add one only once Dr. Nikhil confirms it
 SEAL = 200  # viewBox side
 
 
@@ -126,7 +126,7 @@ def glyph_path(font, name, transform):
     return pen.getCommands()
 
 
-def seal_svg(colour, title="Arha Dental Care, Peddar Road, Mumbai, established 1980"):
+def seal_svg(colour, title="Arha Dental Care, Peddar Road, Mumbai"):
     import math
     from fontTools.ttLib import TTFont
     font = TTFont(ROOT / "assets" / "fonts" / "d-din-bold.woff2")
@@ -154,11 +154,11 @@ def seal_svg(colour, title="Arha Dental Care, Peddar Road, Mumbai, established 1
                      c - gw / 2 * cs + r_base * sn, c - gw / 2 * sn - r_base * cs)
         paths.append(glyph_path(font, name, transform))
     r_inner = r_base - 6
-    # Centre: the icon, with "ESTD 1980" beneath it
+    # Centre: the icon, with SEAL_YEAR beneath it when there is one (otherwise the icon is centred)
     iw = 62
     ik = iw / icon_box.width
     ih = icon_box.height * ik
-    iy = c - ih / 2 - 9
+    iy = c - ih / 2 - (9 if SEAL_YEAR else 0)
     icon_d = "".join(d for d, _ in icon)
     ysize = 10.5
     yk = ysize / upm

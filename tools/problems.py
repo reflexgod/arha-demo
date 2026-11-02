@@ -315,11 +315,16 @@ def ix_crooked():
 
 
 def ix_stained():
-    return blend("st", ("stock-sim-whiten-before", "A smile with yellowed teeth"),
-                 ("stock-sim-whiten-after", "The same smile with the teeth whitened (simulation)"),
-                 "Today", "After whitening", "Whitening simulation: slide to lighten the teeth", "Simulation",
-                 ticks=["Today", "After whitening (simulation)"], cls="blend--shade") + """
-      <p class="ix-note reveal">A simulation on a stock photograph, not a promise of a shade. How far your teeth lighten depends on your teeth; we aim for a colour that looks natural with your smile.</p>"""
+    """How whitening works, in plain words (no simulation or stock "results", Viraaj, 2 Nov 2026).
+    DOCTOR INPUT: Dr. Nikhil confirms which methods Arha offers, the usual number of sittings and the take-home timing."""
+    return """      <div class="compare2 reveal">
+        <div><h3>In the clinic</h3><p>After a check of your teeth and gums, a whitening gel is applied to the teeth with the gums protected. It is usually done in one sitting; some teeth need a second to reach the shade you want.</p></div>
+        <div><h3>At home</h3><p>We make thin trays shaped to your teeth and give you a gentle gel to wear in them for a set time each day, usually over two to three weeks. It is slower, and easy to top up later.</p></div>
+      </div>
+      <div class="compare2 reveal">
+        <div><h3>Sensitivity</h3><p>Teeth can feel sensitive for a day or two after whitening. It passes; a toothpaste for sensitive teeth helps, and we can adjust the strength of the gel.</p></div>
+        <div><h3>What whitening changes</h3><p>It lightens natural teeth only. Crowns, veneers and fillings keep their colour, so we plan around them. Dr. Nikhil will tell you which way suits your teeth.</p></div>
+      </div>"""
 
 
 def ix_toothache():
@@ -409,7 +414,7 @@ INTERACTIVES = {
     "chipped-tooth": ("Look closely", "Move the magnifier over the veneers to see how fine the porcelain is, then compare the two usual repairs.", ix_chipped),
     "gaps": ("Three ways to close a gap", "Hover or tap each one to see how it works.", ix_gaps),
     "crooked-teeth": ("From crowded to straight, planned on screen", "Slide across the screen in our treatment room to follow an aligner plan.", ix_crooked),
-    "stained-teeth": ("See what whitening can do", "Slide to lighten the teeth in this simulation.", ix_stained),
+    "stained-teeth": ("How whitening works", "Two ways to lighten natural teeth, and what to expect.", ix_stained),
     "toothache": ("What is the pain telling you?", "Tick what you feel to see the likely next step.", ix_toothache),
     "bleeding-gums": ("A gum self-check", "Three questions you can answer at home.", ix_gums),
     "metal-fillings": ("Metal or tooth-coloured?", "Switch between the two to compare.", ix_metal),

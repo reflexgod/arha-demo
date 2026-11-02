@@ -16,14 +16,14 @@ ARROW = '<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" 
 SAMPLE = "Sample case for demo"  # on every sample case (notes/TO-CONFIRM.md)
 SIMULATION = "Simulation for demo"  # on every before/after slider: both sides are one photograph (tools/pairs.py)
 
-REVIEWS = [  # real Google reviews (lines quoted as written; "grate" corrected to "great")
-    "He managed my pain and resolved the problem on the same day.",
+# Google review lines of Arha Dental Care, word for word as on Google (checked by Viraaj, 29 Oct 2026; "grate" is as
+# written). Three earlier lines with no confirmed source were removed (2 Nov 2026). Reviewers' first names: to come
+# from Viraaj (notes/TO-CONFIRM.md); never invent them.
+REVIEWS = [
     "I had a very positive experience getting my cavity treated by Dr. Nikhil Jain.",
-    "Excellent doctor and excellent service.",
     "I would highly recommend Dr. Jain to anyone considering orthodontic treatment.",
-    "He is patient, gentle and takes the time to answer all my questions.",
     "The cap procedure was absolutely painless at Arha Dental Care.",
-    "It was a smooth experience with great advice that gave her a comforting outcome.",
+    "It was a smooth experience with grate advice that gave her a comforting outcome.",
 ]
 
 # Technology (v4 fixes 3, point 3): only what sets Arha apart, each on one of Arha's own photographs.
