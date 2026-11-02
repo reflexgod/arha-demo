@@ -298,9 +298,9 @@ def work_page(site_url):
     <!-- =================================================================== TESTIMONIALS -->
     <section class="section section--stone testimonials" id="testimonials" aria-labelledby="testimonials-title">
       <div class="container">
-{head("testimonials-title", "Testimonials", "", "In patients’ own words")}
-{carousel(home.REVIEWS)}
-        <p class="section-cta"><a class="link" href="#" data-google-reviews>Read all reviews on Google</a></p>
+{head("testimonials-title", "Testimonials", "Every review is quoted word for word from Google. Where a review is longer, it ends with “…”: read it in full on Google.", "In patients’ own words")}
+{home.rcards()}
+{home.google_button()}
       </div>
     </section>
 {tp.closing("Your own result starts with a consultation")}"""

@@ -45,9 +45,9 @@ SITE = {
     "time_zone": "Asia/Kolkata",
     "riya_webhook_url": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat",
     "google_reviews_url": "https://share.google/PzhwgJ9QJMErZnk9R",
-    # Google rating: the real figures, checked on Google on 29 Oct 2026 (5.0 stars from 31 reviews)
-    "google_rating": "5.0",
-    "google_review_count": 31,
+    # No Google rating or review count anywhere on the site (Viraaj, 2 Nov 2026)
+    "google_rating": "",
+    "google_review_count": None,
     # Hero line for the technology USP: from what Arha's own photos show, until the equipment list is confirmed
     "usp_line": "In-house X-ray · Own sterilisation room · Prosthodontist-led",
 }

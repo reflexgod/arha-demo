@@ -7024,14 +7024,18 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
   background: var(--stone);
   color: var(--ink);
 }
-.ah-review--tall { aspect-ratio: 3 / 4; }
+.ah-review--tall { aspect-ratio: auto; min-height: 600px; display: flex; } /* full reviews: the tile grows with the text */
 .ah-review--wide { aspect-ratio: 3 / 2; }
+.ah-review--wide:not(.ah-review--photo) { aspect-ratio: auto; min-height: 300px; display: flex; }
+.ah-review--tall > a, .ah-review--wide:not(.ah-review--photo) > a { flex: 1; height: auto; }
+.ah-review__name { margin: 18px 0 10px; font: 600 15px/1.2 var(--font-body); }
+.ah-review blockquote { flex: 1; }
 .ah-review--dark a { background: var(--charcoal); color: var(--paper); }
 .ah-review--line a { background: var(--paper); box-shadow: inset 0 0 0 1px var(--hairline-strong); }
 .ah-review__mark { display: block; height: 56px; color: var(--bronze); font: 400 96px/1 var(--font-quote); }
 .ah-review blockquote { margin: 0; }
-.home-apa .ah-review blockquote p { font: italic 400 28px/1.3 var(--font-quote); letter-spacing: 0; }
-.home-apa .ah-review--tall blockquote p { font-size: 38px; line-height: 1.22; }
+.home-apa .ah-review blockquote p { font: italic 400 22px/1.38 var(--font-quote); letter-spacing: 0; }
+.home-apa .ah-review--tall blockquote p { font-size: 27px; line-height: 1.3; }
 .ah-review__foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 18px; border-top: 1px solid currentColor; border-color: rgba(var(--shade), .16); }
 .ah-review--dark .ah-review__foot { border-color: rgba(250, 250, 246, .22); }
 .ah-review__stars { display: inline-flex; gap: 3px; color: var(--bronze); }
@@ -7087,15 +7091,16 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
   .ah-process__text { padding: 0 45px 26px; }
   .ah-founder__text { width: 300px; max-width: calc(100% - 90px); margin: 0 auto; }
   .ah-teaser { grid-template-columns: 1fr; grid-template-rows: 260px 276px; height: auto; }
-  .ah-mosaic { flex-direction: column; align-items: center; gap: 14px; padding: 20px 70px 40px; }
-  .ah-mosaic__col { width: 100%; max-width: 250px; gap: 14px; }
+  .ah-mosaic { flex-direction: column; align-items: center; gap: 14px; padding: 20px var(--gutter) 40px; }
+  .ah-mosaic__col { width: 100%; max-width: 360px; gap: 14px; }
   /* apa shows five tiles on phones: here all five (four reviews and the photograph) */
   .ah-review a { padding: 20px 22px 18px; }
   .ah-review--wide:not(.ah-review--photo) { aspect-ratio: auto; min-height: 167px; }
   .ah-review--wide:not(.ah-review--photo) a { gap: 10px; }
   .ah-review__mark { height: 34px; font-size: 64px; }
   .home-apa .ah-review blockquote p { font-size: 19px; }
-  .home-apa .ah-review--tall blockquote p { font-size: 25px; }
+  .ah-review--tall { min-height: 0; }
+  .home-apa .ah-review--tall blockquote p { font-size: 21px; }
   .ah-review__foot { padding-top: 12px; }
   .ah-review__stars svg { width: 13px; height: 13px; }
   .ah-review__source { font-size: 10px; letter-spacing: 1px; }
@@ -7128,3 +7133,58 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 /* Common problems we treat: one line on how each problem is usually treated, under its name */
 .ah-tile__how { max-width: 260px; font: 400 16px/1.35 var(--font-body); letter-spacing: .3px; }
 @media (max-width: 767px) { .ah-tile__how { font-size: 15px; } }
+
+/* ==========================================================================
+   Testimonial cards (Our work): mobile first, one column, then two and three
+   ========================================================================== */
+.rcards { list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 16px; }
+.rcard { display: flex; }
+.rcard figure {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0;
+  padding: 28px 24px 24px;
+  background: var(--paper);
+  border: 1px solid var(--hairline);
+}
+.rcard__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 26px; }
+.rcard__stars { display: inline-flex; gap: 3px; }
+.rcard__stars svg { width: 15px; height: 15px; fill: var(--bronze); }
+.rcard__tag {
+  padding: 6px 11px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: 999px;
+  font: 600 11px/1 var(--font-body);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.rcard__quote { flex: 1; margin: 20px 0 24px; }
+.rcard__quote p { margin: 0; font: italic 400 21px/1.42 var(--font-quote); color: var(--ink); }
+.rcard__by { display: flex; align-items: center; gap: 12px; padding-top: 18px; border-top: 1px solid var(--hairline); }
+.rcard__avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--stone);
+  font: 700 16px/1 var(--font-head);
+  color: var(--ink);
+}
+.rcard__who { display: flex; flex-direction: column; gap: 4px; }
+.rcard__name { font: 600 15px/1.2 var(--font-body); }
+.rcard__src { font: 600 11px/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.rcard--dark figure { background: var(--charcoal); border-color: var(--charcoal); }
+.rcard--dark .rcard__quote p, .rcard--dark .rcard__name { color: var(--paper); }
+.rcard--dark .rcard__tag { color: var(--paper); border-color: var(--paper-16); }
+.rcard--dark .rcard__src { color: var(--paper-66); }
+.rcard--dark .rcard__by { border-color: var(--paper-16); }
+.rcard--dark .rcard__avatar { background: var(--bronze); color: var(--paper); }
+
+.rcards__cta { max-width: none; margin: 40px 0 0; text-align: center; }
+@media (min-width: 700px) { .rcards { grid-template-columns: repeat(2, 1fr); gap: 20px; } .rcard__quote p { font-size: 22px; } }
+@media (min-width: 1100px) { .rcards { grid-template-columns: repeat(3, 1fr); gap: 24px; } .rcard figure { padding: 32px 28px 26px; } }
+

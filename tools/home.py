@@ -16,15 +16,57 @@ ARROW = '<svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" 
 SAMPLE = "Sample case for demo"  # on every sample case (notes/TO-CONFIRM.md)
 SIMULATION = "Simulation for demo"  # on every before/after slider: both sides are one photograph (tools/pairs.py)
 
-# Google review lines of Arha Dental Care, word for word as on Google (checked by Viraaj, 29 Oct 2026; "grate" is as
-# written). Three earlier lines with no confirmed source were removed (2 Nov 2026). Reviewers' first names: to come
-# from Viraaj (notes/TO-CONFIRM.md); never invent them.
-REVIEWS = [
-    "I had a very positive experience getting my cavity treated by Dr. Nikhil Jain.",
-    "I would highly recommend Dr. Jain to anyone considering orthodontic treatment.",
-    "The cap procedure was absolutely painless at Arha Dental Care.",
-    "It was a smooth experience with grate advice that gave her a comforting outcome.",
+# Google reviews of Arha Dental Care for the testimonials: ONLY from notes/google-reviews-2nov.txt (copied from Google
+# Maps by Viraaj, 2 Nov 2026). Word for word, typos kept, never merged; a review cut off on Google ("… More") keeps
+# only its visible part and ends with "…". Name as Google shows it (first name + last initial; "Google reviewer" for a
+# business name). Tag only when the review itself names the treatment. Stars as on Google. Owner replies never used.
+# The nine Viraaj chose (2 Nov 2026), text as he sent it from the file. TO CONFIRM: the file itself was not in notes/
+# when this was written, so the character-for-character check against it is still to do (notes/TO-CONFIRM.md).
+# (name, tag, stars, text)
+TESTIMONIALS = [
+    ("Poorvi J.", "Cavity", 5, "I had a very positive experience getting my cavity treated by Dr. Nikhil Jain. He was calm, professional, and explained the entire procedure clearly, making the treatment smooth and comfortable. The clinic was clean and hygienic, and the staff was warm and friendly. Highly recommend!"),
+    ("Hetvi S.", "Tooth removal", 5, "Went to Arha dental care at doctor house for my mom's toothache and the whole process was so smooth! Got looked at by Dr. Nikhil ~ was the best got a quick CT figured out the 'root' cause and came up with a treatment plan all under 10 mins of being seen. Was suggested a tooth removal which was quick and pain free! 10/10 recommend 💯"),
+    ("", "Emergency", 5, "I had a sudden, severe toothache and managed to get an urgent appointment at Arha Dental care, Nikhil was incredibly accommodating and diagnosed the issue quickly. He managed my pain and resolved the problem on the same day. Thank youu!!! ❤️"),
+    ("Vidhi G.", "Implant", 5, "My mom visited the clinic for her dental implant. Dr. Nikhil took care of the treatment and provided great relief to her dental issues. The implant was done with great accumen and precision. We are thankful. Thanks to team Arha Dental Care"),
+    ("Nikhil M.", "Crown", 5, "Dr. Nikhil Jain made sure was super calm throughout my treatment. My Ceramic cap procedure was absolutely painless at Arha Dental care. Thanks again👍🙏"),
+    ("Suchita K.", "Child check-up", 5, "Took my 4-year-old son to Arha Dental Care for his annual check-up and cleaning and the experience was excellent. Dr. Nikhil was calm, gentle and quick. The entire process was smooth, and my son didn’t cry or fuss at all, which says a lot …"),
+    ("Apurva M.", "", 5, "I’ve been going to Dr. Nikhil Jain for over 15 years now, and it’s always been a great experience. He’s one of the nicest and most caring doctors I’ve met. Whether it’s a routine visit or something urgent, he’s always been available and …"),
+    ("Prerit J.", "Aligners", 5, "I started my aligner treatment about two years ago and honestly couldn’t be happier with the results. Dr. Nikhil took the time to explain every step of the process clearly before we even began, which made me feel really confident about …"),
+    ("Shefali M.", "Cleaning", 5, "I visited Arha Dental Care for a routine teeth cleaning and had a very positive experience. Dr. Nikhil Jain took the time to explain my oral health using the iTero scanner, which helped me better understand my teeth alignment and gum …"),
 ]
+REVIEWS = [t[3] for t in TESTIMONIALS]
+STAR = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>'
+
+
+def reviewer(t):
+    return t[0] or "Google reviewer"
+
+
+def stars(n, cls="rcard__stars"):
+    return f'<span class="{cls}" role="img" aria-label="{n} out of 5 stars">{STAR * n}</span>' if n else ""
+
+
+def rcards(i="        "):
+    """The testimonial cards (Our work): stars and tag, the quote, then the name and "Google review"."""
+    out = ""
+    for k, t in enumerate(TESTIMONIALS):
+        name, tag, n, text = t
+        tag_html = f'<span class="rcard__tag">{tag}</span>' if tag else ""
+        avatar = f'<span class="rcard__avatar" aria-hidden="true">{name[0].upper()}</span>' if name else ""  # no initial for "Google reviewer"
+        out += f"""
+{i}  <li class="rcard{' rcard--dark' if k % 5 == 0 else ''}">
+{i}    <figure>
+{i}      <div class="rcard__top">{stars(n)}{tag_html}</div>
+{i}      <blockquote class="rcard__quote"><p>“{html.escape(text, quote=False)}”</p></blockquote>
+{i}      <figcaption class="rcard__by">{avatar}<span class="rcard__who"><span class="rcard__name">{reviewer(t)}</span><span class="rcard__src">Google review</span></span></figcaption>
+{i}    </figure>
+{i}  </li>"""
+    return f'{i}<ul class="rcards" aria-label="Google reviews">{out}\n{i}</ul>'
+
+
+def google_button(i="        "):
+    return f'{i}<p class="rcards__cta"><a class="link" href="#" data-google-reviews>Read all reviews on Google {ARROW}</a></p>'
+
 
 # Technology (v4 fixes 3, point 3): only what sets Arha apart, each on one of Arha's own photographs.
 # (photo, alt, x, y, name, what it is, what it means for you). Positions in % of each photograph.
@@ -272,7 +314,7 @@ def main_html(visit):
         <div class="section-head reveal">
           <p class="eyebrow">What patients say</p>
           <!-- Rating and count from SITE (tools/pages.py), checked on Google on 29 Oct 2026 -->
-          <h2 id="reviews-title" class="reviews-hl__score"><span data-show="google-rating">5.0</span> · <span data-show="google-count-label">31 Google reviews</span></h2>
+          <h2 id="reviews-title" class="reviews-hl__score">What patients say on Google</h2>
         </div>
 {carousel(REVIEWS)}
         <p class="section-cta"><a class="link" href="#" data-google-reviews>Read all reviews on Google</a></p>

@@ -57,9 +57,9 @@ PROCESS = [  # apa: three photo panels, the numbered heading and two lines overl
 # Review tiles in apa's mosaic: two columns of tall (3:4) and wide (3:2) tiles, columns of equal height.
 # (review index or "photo", shape, tone). Tones alternate so the mosaic reads like apa's covers: charcoal,
 # stone and paper with a hairline; the one photograph (Arha's logo wall, 3:2) shows the rating on hover, as apa's covers do.
-MOSAIC = [
-    [(0, "tall", "dark"), (2, "wide", "stone")],
-    [(1, "wide", "line"), ("photo", "wide", None), (3, "wide", "stone")],
+MOSAIC = [  # indices into home.TESTIMONIALS: reviews 1, 2, 3 and 7 (Viraaj, 2 Nov 2026)
+    [(1, "tall", "dark"), (0, "wide", "stone")],
+    [(2, "wide", "line"), ("photo", "wide", None), (6, "wide", "stone")],
 ]
 STAR = '<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg>'
 
@@ -224,7 +224,6 @@ def teaser():
 
 
 def reviews():
-    stars = f'<span class="ah-review__stars" role="img" aria-label="5 out of 5 stars">{STAR * 5}</span>'
     cols = []
     for col in MOSAIC:
         items = ""
@@ -235,9 +234,7 @@ def reviews():
             <a href="#" data-google-reviews>
 {pic('arha-dental-care-logo-dental-clinic-peddar-road', '(min-width: 900px) 450px, 250px', 'The Arha Dental Care emblem and name on the marble wall of the practice', '50% 50%', '              ')}
               <span class="ah-review__hover ah-review__hover--score">
-                <span class="ah-review__score" data-show="google-rating">5.0</span>
-                {stars}
-                <span>Read all <span data-show="google-count-label">31 Google reviews</span></span>
+                <span>Read all reviews on Google</span>
               </span>
             </a>
           </li>"""
@@ -246,18 +243,19 @@ def reviews():
           <li class="ah-review ah-review--{shape} ah-review--{tone}">
             <a href="#" data-google-reviews>
               <span class="ah-review__mark" aria-hidden="true">“</span>
-              <blockquote><p>{html.escape(home.REVIEWS[k], quote=False)}</p></blockquote>
-              <span class="ah-review__foot">{stars}<span class="ah-review__source">Google review</span></span>
-              <span class="ah-review__hover"><span>Google review</span><span>Read on Google</span></span>
+              <blockquote><p>{html.escape(home.TESTIMONIALS[k][3], quote=False)}</p></blockquote>
+              <span class="ah-review__name">{home.reviewer(home.TESTIMONIALS[k])}</span>
+              <span class="ah-review__foot">{home.stars(home.TESTIMONIALS[k][2], "ah-review__stars")}<span class="ah-review__source">Google review</span></span>
+              <span class="ah-review__hover"><span>{home.reviewer(home.TESTIMONIALS[k])}</span><span>Read on Google</span></span>
             </a>
           </li>"""
         cols.append(items)
     return f"""
     <!-- =================================================================== 10. REVIEWS HEADING + 11. MOSAIC (apa: the media section) -->
     <section class="ah-head ah-head--reviews" aria-labelledby="reviews-title">
-      <!-- Rating and count from SITE (tools/pages.py), checked on Google on 29 Oct 2026 -->
-      <h2 id="reviews-title"><span data-show="google-rating">5.0</span> · <span data-show="google-count-label">31 Google reviews</span></h2>
-      <p>What patients say about Arha Dental Care, in their own words. Every line here is quoted as it was written on Google, where you can read each review in full.</p>
+      <!-- No rating or review count anywhere on the site (Viraaj, 2 Nov 2026) -->
+      <h2 id="reviews-title">What patients say on Google</h2>
+      <p>In patients’ own words, quoted as they wrote them on Google. Where a review is longer, it ends with “…”: read it in full on Google.</p>
       <a class="link" href="#" data-google-reviews>Read all reviews on Google</a>
     </section>
     <section class="ah-mosaic" aria-label="Google reviews">
