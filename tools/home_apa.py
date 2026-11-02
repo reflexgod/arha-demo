@@ -24,8 +24,8 @@ TRIO = [  # apa: three 2:1 images edge to edge, a linked H3 and one line under e
      "Specialist care", "Dr. Nikhil V. Jain is a prosthodontist and implantologist: implants, full mouth rehabilitation and smile design.", "doctors/"),
     ("dental-implant-equipment-arha-dental-care-mumbai", "50% 22%", "Arha's X-ray room: a panoramic X-ray unit against a marble wall",
      "Technology &amp; innovation", "An X-ray room and a sterilisation room of our own, and 3D models of your teeth on screen.", "technology/"),
-    ("arha-dental-care-exterior-dental-clinic-peddar-road", "50% 45%", "The Arha sign at suite 107 with the names of Dr. Vasant P. Jain and Dr. Nikhil V. Jain",
-     "Legacy since 1980", "A family practice begun by Dr. Vasant P. Jain in 1980, now two generations on Peddar Road.", "founder/"),
+    ("arha-dental-care-exterior-dental-clinic-peddar-road", "50% 45%", "The Arha sign at suite 107 with the names of Dr. Nikhil V. Jain and Dr. Vasant P. Jain",
+     "Dr. Nikhil’s clinic", "Arha Dental Care is Dr. Nikhil V. Jain’s practice at 107, Doctor House, 14 Peddar Road.", "founder/"),
 ]
 
 BAND = [("arha-dental-care-reception-south-mumbai-dental-clinic-01-lower", "50% 60%", "Arha's reception on Peddar Road: marble, soft light and the gold emblem"),
@@ -60,7 +60,7 @@ PROCESS = [  # apa: three photo panels, the numbered heading and two lines overl
     ("arha-dental-care-chair-window", "50% 55%", "The dental chair under its light in an Arha treatment room", "2. Your treatment",
      "Planned in detail and carried out with precision, at a pace that keeps you comfortable."),
     ("arha-dental-care-reception-wide", "50% 50%", "Arha's reception and waiting area", "3. Lifelong care",
-     "Reviews, cleanings and care that protect your result for years, at the practice that has looked after families since 1980."),
+     "Reviews and cleanings that protect your result for years, with the doctors who planned it, on Peddar Road."),
 ]
 
 # Review tiles in apa's mosaic: two columns of tall (3:4) and wide (3:2) tiles, columns of equal height.
@@ -113,7 +113,7 @@ def trio():
     <!-- =================================================================== 2. TRIO HEADING + 3. FEATURE TRIO -->
     <section class="ah-head" aria-labelledby="trio-title">
       <h2 id="trio-title"><a href="the-practice/">Crafted with precision. Given with care.</a></h2>
-      <p>Specialist restorative and cosmetic dentistry with natural results, built on a family practice that began in 1980.</p>
+      <p>Specialist restorative and cosmetic dentistry with natural results, led by prosthodontist Dr. Nikhil V. Jain on Peddar Road.</p>
     </section>
     <section class="ah-trio" aria-label="Why Arha">{cols}
     </section>
@@ -132,11 +132,18 @@ def band():
       </div>
       <div class="ah-band__text">
         <h2 id="band-title">A clinic built around calm</h2>
-        <p>Marble, soft light and quiet rooms at Doctor House on Peddar Road. An X-ray room and a sterilisation room of our own, and two generations of dentists under one roof.</p>
+        <p>Marble, soft light and quiet rooms at Doctor House on Peddar Road. An X-ray room and a sterilisation room of our own, and Dr. Nikhil V. Jain and Dr. Vasant P. Jain under one roof.</p>
         <a class="link link--light" href="founder/">About Arha</a>
       </div>
     </section>
 """
+
+
+def how(p):
+    """One line on how the problem is usually treated, from its page's three options: "An implant, a bridge or a denture." """
+    names = [f[1] for f in p["fix"]]
+    low = [n[0].lower() + n[1:] for n in names[1:]]
+    return f"{names[0]}, {low[0]} or {low[1]}."
 
 
 def grid():
@@ -152,14 +159,14 @@ def grid():
           <a href="problems/{slug}/" data-colour-group>
             <span class="ah-tile__pair">{halves}
             </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">{p['menu']}</span><span class="ah-tile__link">See how we fix it</span></span>
+            <span class="ah-tile__hover"><span class="ah-tile__name">{p['menu']}</span><span class="ah-tile__how">{how(p)}</span><span class="ah-tile__link">See how we fix it</span></span>
           </a>
         </li>"""
     return f"""
-    <!-- =================================================================== 5. COMMON PROBLEMS WE TREAT (apa: the before & after grid) -->
+    <!-- =================================================================== 5. COMMON PROBLEMS WE TREAT (apa: the grid of squares) -->
     <section class="ah-grid" aria-labelledby="grid-title">
       <h2 id="grid-title"><a href="problems/">Common problems we treat</a></h2>
-      <p class="ah-grid__lede">Each square shows a common problem above, and how it is usually put right below. Choose one to see how we fix it.</p>
+      <p class="ah-grid__lede">Each square shows a common problem above, and how it is usually treated below. Choose one to see how we fix it.</p>
       <ul class="ah-grid__tiles">{tiles}
       </ul>
       <p class="ah-grid__cta"><a class="link" href="treatments/">See all treatments</a></p>

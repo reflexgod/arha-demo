@@ -56,8 +56,8 @@ DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satur
 
 PAGES = {
     "before-after": {
-        "title": "Before &amp; After | Arha Dental Care, Peddar Road",
-        "description": "Before and after results from Arha Dental Care on Peddar Road, Mumbai: dental implants, full mouth rehabilitation, veneers and aligners.",
+        "title": "What we fix | Arha Dental Care, Peddar Road",
+        "description": "Common problems we treat at Arha Dental Care, Peddar Road, Mumbai.",
     },
     "book": {
         "title": "Book a Consultation | Arha Dental Care, Peddar Road",
@@ -292,9 +292,10 @@ def main():
         h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{meta["description"]}">', h)
         h = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{meta["title"]}">', h)
         h = h.replace(f'href="{SITE_URL}"', f'href="{SITE_URL}{slug}/"').replace(f'content="{SITE_URL}"', f'content="{SITE_URL}{slug}/"')
-        if slug == "before-after":  # the before/after index is now Our work
-            h = h.replace(f'href="{SITE_URL}before-after/"', f'href="{SITE_URL}our-work/"')
-            h = h.replace("</head>", '  <meta http-equiv="refresh" content="0; url=../our-work/">\n</head>')
+        if slug in v4_pages.moved():  # the old before/after pages forward to What we fix
+            to = v4_pages.moved()[slug]
+            h = h.replace(f'href="{SITE_URL}{slug}/"', f'href="{SITE_URL}{to}"')
+            h = h.replace("</head>", f'  <meta http-equiv="refresh" content="0; url={"../" * (slug.count("/") + 1)}{to}">\n</head>')
         if slug == "404":  # a missing page has no address of its own
             h = re.sub(r'\s*<link rel="canonical"[^>]*>', "", h)
             h = re.sub(r'\s*<meta property="og:url"[^>]*>', "", h)

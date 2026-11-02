@@ -54,6 +54,16 @@
     "url": "https://arha.svayra.com/",
     "image": "https://arha.svayra.com/assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-1280.jpg",
     "logo": "https://arha.svayra.com/assets/logo/logo-wordmark-dark.svg",
+    "founder": {
+      "@type": "Person",
+      "name": "Dr. Nikhil V. Jain",
+      "jobTitle": "Prosthodontist and Implantologist",
+      "honorificSuffix": "B.D.S., M.D.S., ITI Scholar (London)"
+    },
+    "employee": [
+      {"@type": "Person", "name": "Dr. Nikhil V. Jain", "jobTitle": "Prosthodontist and Implantologist"},
+      {"@type": "Person", "name": "Dr. Vasant P. Jain", "jobTitle": "Dental Surgeon", "honorificSuffix": "B.D.S."}
+    ],
     "telephone": "+91-00000-00000",
     "address": {
       "@type": "PostalAddress",
@@ -214,13 +224,7 @@
               <li><a href="../../gallery/">Gallery &amp; 360° tour</a></li>
             </ul>
           </li>
-          <li class="nav__item" data-dropdown>
-            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-work">Our work</button>
-            <ul class="dropdown" id="dd-work">
-              <li><a href="../../our-work/">Before &amp; after (sample cases)</a></li>
-              <li><a href="../../our-work/#testimonials">Testimonials</a></li>
-            </ul>
-          </li>
+          <li class="nav__item"><a class="nav__link" href="../../our-work/">Our work</a></li>
           <li class="nav__item"><a class="nav__link nav__link--book" href="../../book/">Book a consultation</a></li>
         </ul>
       </nav>
@@ -303,22 +307,14 @@
                 </ul>
               </div>
             </li>
-            <li class="fmenu__group">
-              <button class="fmenu__toggle" type="button" aria-expanded="false" aria-controls="fm-work">Our work<span class="plus" aria-hidden="true"></span></button>
-              <div class="fmenu__sub" id="fm-work" hidden>
-                <ul>
-                  <li><a href="../../our-work/">Before &amp; after (sample cases)</a></li>
-                  <li><a href="../../our-work/#testimonials">Testimonials</a></li>
-                </ul>
-              </div>
-            </li>
+            <li><a class="fmenu__link" href="../../our-work/">Our work</a></li>
             <li><a class="fmenu__link" href="../../technology/">Technology &amp; innovation</a></li>
             <li><a class="fmenu__link" href="../../kids-dentistry/">Kids’ dentistry</a></li>
             <li><a class="fmenu__link" href="../../dental-tourism/">Dental tourism</a></li>
         </ul>
         <a class="fmenu__book" href="../../book/">Book a consultation</a>
         <ul class="fmenu__small">
-          <li><a href="../../#visit">Visit us</a></li>
+          <li><a href="../../the-practice/#visit">Visit us</a></li>
           <li><a href="../../emergency/">Dental emergencies</a></li>
         </ul>
       </nav>
@@ -484,7 +480,7 @@
   <!-- ===================================================================== FOOTER -->
   <footer class="site-footer" data-footer>
     <div class="container">
-      <p class="footer__tagline">A family practice since 1980</p>
+      <p class="footer__tagline">Dr. Nikhil V. Jain’s clinic on Peddar Road</p>
       <img class="footer__logo" src="../../assets/logo/logo-lockup-light.svg" alt="Arha Dental Care" width="220" height="56" loading="lazy">
       <div class="footer__cols">
         <div>
@@ -546,7 +542,7 @@
   </a>
 
   <!-- =====================================================================
-       RIYA AI RECEPTIONIST (n8n Chat Trigger webhook).
+       RIYA AI RECEPTIONIST (chat webhook).
        Only the launcher is drawn on load; assets/js/riya.js (the chat window) loads on the
        first click. Opening the chat sends nothing; only a sent message calls the webhook.
        Set RIYA_ENABLED = false to switch it off.

@@ -1,7 +1,7 @@
 /* ==========================================================================
    Riya, Arha's AI receptionist: chat window. Loaded on the launcher's first click.
-   Talks to the n8n Chat Trigger webhook with the same request the @n8n/chat
-   widget sends: POST { action: 'sendMessage', sessionId, chatInput } -> { output }.
+   Talks to the chat webhook (riyaWebhookUrl in the site config) with one request:
+   POST { action: "sendMessage", sessionId, chatInput } -> { output }.
    Nothing is sent until the visitor sends a message or taps a quick reply.
    ========================================================================== */
 const WELCOME = 'Hello, I’m Riya. I can answer questions about Arha Dental Care or take an appointment request for you.';

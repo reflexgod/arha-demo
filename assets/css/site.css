@@ -7123,3 +7123,11 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 @media (max-width: 767px) {
   .footer__cols { padding-inline: 20px; }
 }
+
+/* The Arha story (founder page): signage photographs are shown whole on the section's stone, never cropped */
+.tl-card__media--contain picture.fill { background: var(--stone) !important; }
+.tl-card__media--contain picture.fill img { object-fit: contain; }
+
+/* Common problems we treat: one line on how each problem is usually treated, under its name */
+.ah-tile__how { max-width: 260px; font: 400 16px/1.35 var(--font-body); letter-spacing: .3px; }
+@media (max-width: 767px) { .ah-tile__how { font-size: 15px; } }

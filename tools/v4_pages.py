@@ -149,27 +149,6 @@ def intro(t):
 CAT_FOR = {"implants": ["implants"], "full-mouth": ["full-mouth"], "veneers": ["veneers"], "aligners": ["aligners"]}
 
 
-def results_pairs(cat, title="Sample cases"):
-    """This treatment's sample cases as quiet links to their case pages (the photographs themselves stay on
-    the homepage, Our work and each case page: v4 feedback 5)."""
-    mine = [c for c in more_pages.cases() if cat and c["cat"] == cat]
-    if not mine:
-        return ""
-    lis = "".join(f"""
-          <li><a class="more-cases__link" href="our-work/{c['slug']}/"><span>{html.escape(c['name'])}</span><span>{html.escape(c['meta'])} · Sample case for demo</span></a></li>""" for c in mine)
-    return f"""
-    <!-- =================================================================== SAMPLE CASES (links) -->
-    <section class="section results-links" aria-labelledby="results-title">
-      <div class="container">
-{head("results-title", title, "Before and after, built from stock photographs for the demo. Real, consented cases replace them before launch.")}
-        <ul class="more-cases__list reveal">{lis}
-        </ul>
-        <p class="section-cta"><a class="link" href="our-work/">See all our work{ARROW}</a></p>
-      </div>
-    </section>
-"""
-
-
 def tech_used(slug):
     items = [t for t in technology.ITEMS if not t["treatments"] or slug in t["treatments"]][:4]
     lis = "".join(f"""
@@ -217,7 +196,6 @@ def treatment_page(slug, site_url):
     kind, ix_title, ix_lede = t["interactive"]
     body += "\n    <!-- =================================================================== INTERACTIVE -->" + tp.section(
         f"section--stone ix ix--{kind}", "ix-title", ix_title, "      " + tp.INTERACTIVES[kind](), ix_lede)
-    body += results_pairs(t["cases"])
     body += problems.tech_list([x["slug"] for x in technology.ITEMS if not x["treatments"] or slug in x["treatments"]][:4])
     body += tp.faq_block(t["faq"])
     body += problems.closing_band()
@@ -288,6 +266,26 @@ def hub_page(site_url):
     return meta, f'  <main id="main" tabindex="-1">\n\n{body}\n  </main>\n'
 
 
+def moved():
+    """Pages that now forward to another: the old before/after index and the four sample case pages go to
+    What we fix (no before/after section or simulated cases on the site; real, consented cases may come later)."""
+    return {"before-after": "problems/", **{f"our-work/{c['slug']}": "problems/" for c in more_pages.cases()}}
+
+
+def moved_page(slug, to):
+    body = f"""
+    <!-- This page has moved; it forwards to {to} (meta refresh in the head, tools/pages.py) -->
+    <section class="section">
+      <div class="container prose">
+        <h1 id="page-title">What we fix</h1>
+        <p class="lede">This page has moved to <a class="link" href="{to}">Common problems we treat</a>.</p>
+      </div>
+    </section>"""
+    meta = {"title": "What we fix | Arha Dental Care, Peddar Road",
+            "description": "Common problems we treat at Arha Dental Care, Peddar Road, Mumbai."}
+    return slug, meta, f'  <main id="main" tabindex="-1">\n{body}\n  </main>\n'
+
+
 # ------------------------------------------------------------------ our work, case pages
 def work_page(site_url):
     cs = more_pages.cases()
@@ -295,19 +293,8 @@ def work_page(site_url):
                     for k, v in more_pages.cases_markup.FILTERS)
     trail = [("Home", ""), ("Our work", "our-work/")]
     body = page_hero("{{pic arha-dental-care-exterior-dental-clinic-peddar-road | 100vw | The Arha Dental Care sign at suite 107, with both doctors’ names and qualifications | pos=50% 20% | eager}}", "Our work",
-                     "Natural results, planned around each face and bite.", trail)
+                     "In patients’ own words, as they wrote them on Google.", trail)
     body += f"""
-    <!-- =================================================================== BEFORE & AFTER (filterable sliders) -->
-    <section class="section" aria-labelledby="work-title">
-      <div class="container-wide">
-{head("work-title", "Before &amp; after", "Choose a treatment, then open a case to see how it was planned.")}
-        <div class="work-filter" role="group" aria-label="Filter by treatment">{chips}</div>
-        <p class="cases-note">Sample cases for the demo: one simulation on a stock photograph, and clinical-detail photographs for the others. Real cases, shared with each patient’s written consent, replace them before launch. Results vary.</p>
-{results_grid(cs)}
-        <p class="work-empty" data-work-empty hidden>No cases for this treatment yet.</p>
-      </div>
-    </section>
-
     <!-- =================================================================== TESTIMONIALS -->
     <section class="section section--stone testimonials" id="testimonials" aria-labelledby="testimonials-title">
       <div class="container">
@@ -317,8 +304,8 @@ def work_page(site_url):
       </div>
     </section>
 {tp.closing("Your own result starts with a consultation")}"""
-    meta = {"title": "Our Work: Before &amp; After and Testimonials | Arha Dental Care, Peddar Road",
-            "description": "Before and after cases and patient testimonials from Arha Dental Care, Peddar Road, Mumbai: implants, full mouth rehabilitation, veneers and aligners. Sample images until consented cases are added.",
+    meta = {"title": "Our Work: Testimonials | Arha Dental Care, Peddar Road",
+            "description": "What patients say about Arha Dental Care, Dr. Nikhil V. Jain's clinic on Peddar Road, Mumbai, in their own words on Google.",
             "jsonld": [tp.crumbs_jsonld(site_url, trail)]}
     return meta, f'  <main id="main" tabindex="-1">\n\n{body}\n  </main>\n'
 
@@ -391,31 +378,38 @@ def case_page(site_url, n, cs):
 
 # ------------------------------------------------------------------ about: founder, doctors, practice, gallery
 QUOTE = "A good restoration should never announce itself. My aim is a result that feels natural, functions beautifully and lasts."
-TIMELINE = [("1980", "Dr. Vasant P. Jain begins a family dental practice in Mumbai.", "arha-dental-care-logo-dental-clinic-peddar-road", "50% 50%"),
-            ("The next generation", "Dr. Nikhil V. Jain joins the practice, as a prosthodontist and implantologist.", "arha-dental-care-entrance-door", "50% 60%"),
-            ("Arha", "Arha Dental Care opens at 107, Doctor House, 14 Peddar Road.", "arha-dental-care-reception-south-mumbai-dental-clinic-02", "50% 40%"),
-            ("Today", "Two generations, one standard of care.", "arha-dental-care-lounge-peddar-road", "50% 55%")]
+# The Arha story: confirmed facts only, no years (title, text, photo, position, fit). Arha Dental Care is Dr. Nikhil V.
+# Jain's clinic; Dr. Vasant P. Jain practises there as a dental surgeon. Signage photos are shown whole ("contain")
+# on the section's stone, so no letter of a sign is cut. [YEAR - confirm with Dr. Nikhil] before any date is added.
+TIMELINE = [("Arha Dental Care", "Dr. Nikhil V. Jain’s clinic for specialist restorative and cosmetic dentistry.",
+             "arha-dental-care-logo-dental-clinic-peddar-road", "50% 50%", "contain"),
+            ("107, Doctor House", "On 14 Peddar Road, opposite Jaslok Hospital, in South Mumbai.",
+             "arha-dental-care-reception-south-mumbai-dental-clinic-02", "50% 40%", "cover"),
+            ("The doctors", "Dr. Nikhil V. Jain, prosthodontist and implantologist (B.D.S., M.D.S., ITI Scholar, London), with Dr. Vasant P. Jain, dental surgeon (B.D.S.).",
+             "arha-dental-care-entrance-door", "50% 50%", "contain"),
+            ("The practice", "Marble, soft light and quiet rooms, with an X-ray room and a sterilisation room of our own.",
+             "arha-dental-care-lounge-peddar-road", "50% 55%", "cover")]
 
 
 def founder_page(site_url):
     trail = [("Home", ""), ("About", "founder/"), ("About the founder", "founder/")]
     tl = "".join(f"""
           <li class="tl-card">
-            <span class="tl-card__media media">
+            <span class="tl-card__media tl-card__media--{fit} media">
 {picture(name, '(min-width: 900px) 30vw, 78vw', '', pos=pos, indent='              ')}
             </span>
             <p class="tl-card__year">{year}</p>
             <p>{text}</p>
-          </li>""" for year, text, name, pos in TIMELINE)
+          </li>""" for year, text, name, pos, fit in TIMELINE)
     body = page_hero("{{pic arha-dental-care-reception-south-mumbai-dental-clinic-01 | 100vw | Arha's reception: a curved front desk and soft seating | pos=50% 50% | eager}}",
                      "Dr. Nikhil V. Jain", "Prosthodontist and implantologist, and the founder of Arha Dental Care on Peddar Road.", trail, "About the founder", actions=False)
     body += f"""
     <!-- =================================================================== THE LONG READ -->
-    <!-- Founder: the brief names Dr. Nikhil as Arha's founder; the family practice began with Dr. Vasant P. Jain
-         in 1980. The story in the family's own words, and the years, are placeholders (notes/TO-CONFIRM.md). -->
+    <!-- Arha Dental Care is Dr. Nikhil V. Jain's clinic. Dr. Vasant P. Jain practises there as a dental surgeon.
+         No years or milestones until the clinic confirms them ([YEAR - confirm with Dr. Nikhil], notes/TO-CONFIRM.md). -->
     <article class="section longread" aria-label="The story">
       <div class="container prose">
-        <p class="longread__lead reveal">Arha grew out of a family practice. Dr. Vasant P. Jain began seeing patients in 1980; today Dr. Nikhil V. Jain leads Arha Dental Care at Doctor House on Peddar Road, where two generations practise side by side.</p>
+        <p class="longread__lead reveal">Arha Dental Care is Dr. Nikhil V. Jain’s clinic, at 107, Doctor House, 14 Peddar Road. Dr. Vasant P. Jain, dental surgeon, is part of the team.</p>
         <p class="reveal">Dr. Nikhil is a prosthodontist: a specialist in restoring and replacing teeth. His qualifications, as on the clinic door, are B.D.S., M.D.S. and ITI Scholar (London). His work centres on dental implants, full mouth rehabilitation, smile design, and crowns and bridges.</p>
         <blockquote class="pull-quote pull-quote--big reveal">
           <p>“{QUOTE}”</p>
@@ -425,18 +419,18 @@ def founder_page(site_url):
       </div>
     </article>
 
-    <!-- =================================================================== 1980 TO TODAY (drag) -->
+    <!-- =================================================================== THE ARHA STORY (drag) -->
     <section class="section section--stone timeline-v4" aria-labelledby="tl-title">
       <div class="container">
-{head("tl-title", "From 1980 to today", "Drag to move through the years.")}
+{head("tl-title", "The Arha story", "Drag to move through the story.")}
       </div>
       <div class="container-wide">
-{drag(tl, "From 1980 to today", "drag--timeline")}
+{drag(tl, "The Arha story", "drag--timeline")}
       </div>
     </section>
-{tp.closing("Meet the doctors", "Two generations practise together at Arha on Peddar Road.").replace('<a class="cta" href="book/">Book a Consultation</a>', '<a class="cta" href="doctors/">The doctors</a>')}"""
+{tp.closing("Meet the doctors", "Dr. Nikhil V. Jain and Dr. Vasant P. Jain, at Arha on Peddar Road.").replace('<a class="cta" href="book/">Book a Consultation</a>', '<a class="cta" href="doctors/">The doctors</a>')}"""
     meta = {"title": "About the Founder: Dr. Nikhil V. Jain | Arha Dental Care, Peddar Road",
-            "description": "Dr. Nikhil V. Jain, prosthodontist and implantologist, founder of Arha Dental Care on Peddar Road, Mumbai, a family practice since 1980.",
+            "description": "Dr. Nikhil V. Jain, prosthodontist and implantologist (B.D.S., M.D.S., ITI Scholar, London), and Arha Dental Care, his clinic on Peddar Road, Mumbai.",
             "jsonld": [tp.crumbs_jsonld(site_url, trail)]}
     return meta, f'  <main id="main" tabindex="-1">\n\n{body}\n  </main>\n'
 
@@ -463,7 +457,7 @@ def doctors_page(site_url):
           <p class="doc-v4__actions"><a class="link" href="{wa}" target="_blank" rel="noopener">{cta}</a></p>
         </article>"""
     body = page_hero("{{pic dental-operatory-arha-dental-care-peddar-road-06 | 100vw | An Arha treatment room on Peddar Road | pos=50% 55% | eager}}",
-                     "The doctors", "Two generations, one standard of care, on Peddar Road.", trail, "About")
+                     "The doctors", "Dr. Nikhil V. Jain’s clinic on Peddar Road, with Dr. Vasant P. Jain on the team.", trail, "About")
     body += f"""
     <!-- Qualifications as on the clinic's door sign. Portraits, languages and Dr. Vasant's areas of focus are added when the clinic sends them (notes/TO-CONFIRM.md). -->
     <section class="section" aria-label="Our dentists">
@@ -598,7 +592,7 @@ def all_pages(site_url, visit):
     out = [(slug, *treatment_page(slug, site_url)) for slug in tp.TREATMENTS]
     out += [("kids-dentistry", *tp.kids_page(site_url)), ("treatments", *hub_page(site_url)),
             ("technology", *tp.technology_page(site_url)), ("our-work", *work_page(site_url))]
-    out += [case_page(site_url, n, cs) for n in range(len(cs))]
+    out += [moved_page(slug, to) for slug, to in moved().items() if slug.startswith("our-work/")]
     out += [("founder", *founder_page(site_url)), ("doctors", *doctors_page(site_url)),
             ("the-practice", *practice_page(site_url, visit)), ("gallery", *gallery_page(site_url)),
             ("dental-tourism", *more_pages.tourism_page(site_url))]

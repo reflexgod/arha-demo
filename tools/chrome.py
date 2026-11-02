@@ -12,7 +12,6 @@ WA = ("https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%2
 
 WHO = [("founder/", "About the founder"), ("doctors/", "The doctors"), ("the-practice/", "The practice"),
        ("gallery/", "Gallery &amp; 360° tour")]
-WORK = [("our-work/", "Before &amp; after (sample cases)"), ("our-work/#testimonials", "Testimonials")]
 
 
 def _links(items, i):
@@ -74,11 +73,7 @@ def header():
             <ul class="dropdown" id="dd-who">{_links(WHO, "              ")}
             </ul>
           </li>
-          <li class="nav__item" data-dropdown>
-            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-work">Our work</button>
-            <ul class="dropdown" id="dd-work">{_links(WORK, "              ")}
-            </ul>
-          </li>
+          <li class="nav__item"><a class="nav__link" href="our-work/">Our work</a></li>
           <li class="nav__item"><a class="nav__link nav__link--book" href="book/">Book a consultation</a></li>
         </ul>
       </nav>
@@ -129,7 +124,6 @@ def side_menu():
     fix = (f'\n                <p class="fmenu__label"><a href="problems/">Problems we fix</a></p><ul>{_links(probs, "                  ")}\n                </ul>'
            f'\n                <p class="fmenu__label"><a href="treatments/">Treatments</a></p><ul>{_links(treats, "                  ")}\n                </ul>')
     who = f'\n                <ul>{_links(WHO, "                  ")}\n                </ul>'
-    work = f'\n                <ul>{_links(WORK, "                  ")}\n                </ul>'
     return f"""
   <!-- ===================================================================== MENU (full screen, every width) -->
   <div class="side-menu" id="side-menu" role="dialog" aria-modal="true" aria-label="Menu" inert>
@@ -139,14 +133,15 @@ def side_menu():
         <button class="side-menu__close" type="button" data-close aria-label="Close menu"></button>
       </div>
       <nav class="fmenu" aria-label="Menu" data-fmenu>
-        <ul class="fmenu__list">{group("fix", "What we fix", fix)}{group("who", "Who we are", who)}{group("work", "Our work", work)}
+        <ul class="fmenu__list">{group("fix", "What we fix", fix)}{group("who", "Who we are", who)}
+            <li><a class="fmenu__link" href="our-work/">Our work</a></li>
             <li><a class="fmenu__link" href="technology/">Technology &amp; innovation</a></li>
             <li><a class="fmenu__link" href="kids-dentistry/">Kids’ dentistry</a></li>
             <li><a class="fmenu__link" href="dental-tourism/">Dental tourism</a></li>
         </ul>
         <a class="fmenu__book" href="book/">Book a consultation</a>
         <ul class="fmenu__small">
-          <li><a href="./#visit">Visit us</a></li>
+          <li><a href="the-practice/#visit">Visit us</a></li>
           <li><a href="emergency/">Dental emergencies</a></li>
         </ul>
       </nav>
@@ -169,7 +164,7 @@ def footer():
     return f"""  <!-- ===================================================================== FOOTER -->
   <footer class="site-footer" data-footer>
     <div class="container">
-      <p class="footer__tagline">A family practice since 1980</p>
+      <p class="footer__tagline">Dr. Nikhil V. Jain’s clinic on Peddar Road</p>
       <img class="footer__logo" src="assets/logo/logo-lockup-light.svg" alt="Arha Dental Care" width="220" height="56" loading="lazy">
       <div class="footer__cols">
         <div>
