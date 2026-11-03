@@ -56,7 +56,7 @@ DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Satur
 
 PAGES = {
     "before-after": {
-        "title": "What we fix | Arha Dental Care, Peddar Road",
+        "title": "What we treat | Arha Dental Care, Peddar Road",
         "description": "Common problems we treat at Arha Dental Care, Peddar Road, Mumbai.",
     },
     "book": {
@@ -359,7 +359,7 @@ def main():
         h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{meta["description"]}">', h)
         h = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{meta["title"]}">', h)
         h = h.replace(f'href="{SITE_URL}"', f'href="{SITE_URL}{slug}/"').replace(f'content="{SITE_URL}"', f'content="{SITE_URL}{slug}/"')
-        if slug in v4_pages.moved():  # the old before/after pages forward to What we fix
+        if slug in v4_pages.moved():  # the old before/after pages forward to What we treat
             to = v4_pages.moved()[slug]
             h = h.replace(f'href="{SITE_URL}{slug}/"', f'href="{SITE_URL}{to}"')
             h = h.replace("</head>", f'  <meta http-equiv="refresh" content="0; url={"../" * (slug.count("/") + 1)}{to}">\n</head>')

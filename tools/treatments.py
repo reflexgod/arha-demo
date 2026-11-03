@@ -64,7 +64,7 @@ def side_menu(indent="                  "):
     return "\n".join(out) + "\n"
 
 
-# ------------------------------------------------------------------ Common problems we fix
+# ------------------------------------------------------------------ Common problems we treat
 # Shown on the homepage and /treatments/, each with a real photograph (PHOTOS). "treat" lists treatment slugs from GROUPS.
 PROBLEMS = [
     {"slug": "missing-tooth", "name": "A missing tooth",
@@ -142,7 +142,7 @@ PHOTOS = {  # one real photograph per problem (Unsplash, tools/stock.py; Arha's 
 
 
 def problems(indent="        "):
-    """Common problems we fix: a list of problems, and for the selected one a large photograph
+    """Common problems we treat: a list of problems, and for the selected one a large photograph
     (two-thirds of the width), two lines, a link to the treatment and Ask Riya. Tabs pattern;
     the URL hash (#problem-<slug>) selects a problem, so each one can be linked to directly."""
     from urllib.parse import quote

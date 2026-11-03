@@ -278,10 +278,10 @@ def hub_page(site_url):
       </div>
     </section>
 
-    <!-- =================================================================== WHAT WE FIX (links to the problem pages) -->
+    <!-- =================================================================== WHAT WE TREAT (links to the problem pages) -->
     <section class="section section--stone problem-links" id="problems" aria-labelledby="problems-title">
       <div class="container">
-{head("problems-title", "Start with what is bothering you", "Each problem has its own page: what you may notice, and what treatment would involve.", "What we fix")}
+{head("problems-title", "Start with what is bothering you", "Each problem has its own page: what you may notice, and what treatment would involve.", "What we treat")}
         <ul class="problem-links__list reveal">{"".join(f'<li><a href="problems/{s}/">{problems.PROBLEMS[s]["menu"]}{ARROW}</a></li>' for s in problems.ORDER)}</ul>
       </div>
     </section>
@@ -294,7 +294,7 @@ def hub_page(site_url):
 
 def moved():
     """Pages that now forward to another: the old before/after index and the four sample case pages go to
-    What we fix (no before/after section or simulated cases on the site; real, consented cases may come later)."""
+    What we treat (no before/after section or simulated cases on the site; real, consented cases may come later)."""
     return {"before-after": "problems/", **{f"our-work/{c['slug']}": "problems/" for c in more_pages.cases()}}
 
 
@@ -303,11 +303,11 @@ def moved_page(slug, to):
     <!-- This page has moved; it forwards to {to} (meta refresh in the head, tools/pages.py) -->
     <section class="section">
       <div class="container prose">
-        <h1 id="page-title">What we fix</h1>
+        <h1 id="page-title">What we treat</h1>
         <p class="lede">This page has moved to <a class="link" href="{to}">Common problems we treat</a>.</p>
       </div>
     </section>"""
-    meta = {"title": "What we fix | Arha Dental Care, Peddar Road",
+    meta = {"title": "What we treat | Arha Dental Care, Peddar Road",
             "description": "Common problems we treat at Arha Dental Care, Peddar Road, Mumbai."}
     return slug, meta, f'  <main id="main" tabindex="-1">\n{body}\n  </main>\n'
 

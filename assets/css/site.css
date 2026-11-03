@@ -6942,7 +6942,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
       (above) and its fix (below), black and white until hovered; then colour and the name fade in (0.4 s) */
 .ah-grid { padding: 60px var(--gutter) 37px; text-align: center; }
 .ah-grid__lede { max-width: 704px; margin: 10px auto 0; }
-.ah-grid__tiles { display: grid; grid-template-columns: repeat(3, 330px); justify-content: center; gap: 20px; margin: 46px 0 0; padding: 0; list-style: none; }
+.ah-grid__tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 330px)); justify-content: center; gap: 20px; margin: 46px 0 0; padding: 0; list-style: none; }
 .ah-tile a { position: relative; display: block; aspect-ratio: 1 / 1; overflow: hidden; color: var(--paper); }
 .ah-tile__pair { position: absolute; inset: 0; display: grid; } /* one photograph per square */
 .ah-tile__half { position: relative; overflow: hidden; }
@@ -7036,8 +7036,8 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 .ah-review--line a { background: var(--paper); box-shadow: inset 0 0 0 1px var(--hairline-strong); }
 .ah-review__mark { display: block; height: 56px; color: var(--bronze); font: 400 96px/1 var(--font-quote); }
 .ah-review blockquote { margin: 0; }
-.home-apa .ah-review blockquote p { font: italic 400 22px/1.38 var(--font-quote); letter-spacing: 0; }
-.home-apa .ah-review--tall blockquote p { font-size: 27px; line-height: 1.3; }
+.home-apa .ah-review blockquote p { font: 400 18px/1.6 var(--font-body); letter-spacing: 0; } /* upright and readable: long quotes */
+.home-apa .ah-review--tall blockquote p { font-size: 18px; line-height: 1.6; }
 .ah-review__foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 18px; border-top: 1px solid currentColor; border-color: rgba(var(--shade), .16); }
 .ah-review--dark .ah-review__foot { border-color: rgba(250, 250, 246, .22); }
 .ah-review__stars { display: inline-flex; gap: 3px; color: var(--bronze); }
@@ -7100,9 +7100,9 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
   .ah-review--wide:not(.ah-review--photo) { aspect-ratio: auto; min-height: 167px; }
   .ah-review--wide:not(.ah-review--photo) a { gap: 10px; }
   .ah-review__mark { height: 34px; font-size: 64px; }
-  .home-apa .ah-review blockquote p { font-size: 19px; }
+  .home-apa .ah-review blockquote p { font-size: 16px; }
   .ah-review--tall { min-height: 0; }
-  .home-apa .ah-review--tall blockquote p { font-size: 21px; }
+  .home-apa .ah-review--tall blockquote p { font-size: 16px; }
   .ah-review__foot { padding-top: 12px; }
   .ah-review__stars svg { width: 13px; height: 13px; }
   .ah-review__source { font-size: 12px; letter-spacing: 1px; }
@@ -7165,7 +7165,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
   white-space: nowrap;
 }
 .rcard__quote { flex: 1; margin: 20px 0 24px; }
-.rcard__quote p { margin: 0; font: italic 400 21px/1.42 var(--font-quote); color: var(--ink); }
+.rcard__quote p { margin: 0; font: 400 16px/1.6 var(--font-body); color: var(--ink); } /* upright and readable */
 .rcard__by { display: flex; align-items: center; gap: 12px; padding-top: 18px; border-top: 1px solid var(--hairline); }
 .rcard__avatar {
   flex: none;
@@ -7189,7 +7189,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 .rcard--dark .rcard__avatar { background: var(--bronze); color: var(--paper); }
 
 .rcards__cta { max-width: none; margin: 40px 0 0; text-align: center; }
-@media (min-width: 700px) { .rcards { grid-template-columns: repeat(2, 1fr); gap: 20px; } .rcard__quote p { font-size: 22px; } }
+@media (min-width: 700px) { .rcards { grid-template-columns: repeat(2, 1fr); gap: 20px; } .rcard__quote p { font-size: 17px; } }
 @media (min-width: 1100px) { .rcards { grid-template-columns: repeat(3, 1fr); gap: 24px; } .rcard figure { padding: 32px 28px 26px; } }
 
 
@@ -7347,4 +7347,17 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
   .call-bar--two .call-bar__status { max-width: 100%; padding-left: 0; border-left: 0; overflow: hidden; font-size: 10px; line-height: 1.2; letter-spacing: .1em; text-overflow: ellipsis; }
   .call-bar__slot:active .call-bar__label::after, .call-bar__slot:focus-visible .call-bar__label::after { left: -10px; right: -10px; }
   .call-bar__slot:focus-visible { outline: 2px solid var(--bronze); outline-offset: -5px; }
+}
+
+/* ===== Alignment fixes (3 Nov 2026) ===== */
+/* Header: every nav item on one baseline (the book link's underline padding no longer pushes it down) */
+@media (min-width: 1100px) { .nav__link--book { padding-top: 6px; } } /* equal padding above and below: the text centres like the others */
+/* Mega menu: the "Also" list starts on the same line as the first links of the other two columns */
+.mega__group--more > ul { padding-top: 18px; }
+/* Review cards: the name block sits at the same height with or without an initial */
+.rcard__avatar--g { font-family: var(--font-body); }
+/* Riya's launcher sits bottom right on phones: keep the carousel arrows and the last card clear of it */
+@media (max-width: 767px) {
+  .rv__controls { padding-right: 68px; }
+  .rcards__cta { padding-bottom: 72px; }
 }

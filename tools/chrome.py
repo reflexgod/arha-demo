@@ -1,7 +1,7 @@
 """The site chrome, written into index.html by tools/pages.py and copied from there to every page:
 the header (utility line, logo, navigation, Call now and its panel), the phone menu and the footer.
 
-Built on apaaesthetic.com's system (notes/apa-study.md, notes/V4-PROBLEMS-FIRST.md): WHAT WE FIX · WHO WE ARE
+Built on apaaesthetic.com's system (notes/apa-study.md, notes/V4-PROBLEMS-FIRST.md): WHAT WE TREAT · WHO WE ARE
 · OUR WORK · BOOK A CONSULTATION centred, CALL NOW and a menu button on the right; a full-screen menu with
 + groups at every width; a calm dark footer. Contact details are placeholders, rewritten from SITE.
 """
@@ -21,7 +21,7 @@ def _links(items, i):
 
 
 def what_we_fix():
-    """WHAT WE FIX: the ten problems and every treatment, plus Technology, Kids' dentistry and Dental tourism."""
+    """WHAT WE TREAT: the ten problems and every treatment, plus Technology, Kids' dentistry and Dental tourism."""
     probs = [(f"problems/{s}/", problems.PROBLEMS[s]["menu"]) for s in problems.ORDER]
     treats = [(f'{t["slug"]}/', t["name"]) for g in treatments.GROUPS for t in g["items"] if t["slug"] != "kids-dentistry"]
     return probs, treats
@@ -48,11 +48,11 @@ def header():
       <nav class="nav" aria-label="Main">
         <ul class="nav__list">
           <li class="nav__item nav__item--mega" data-dropdown>
-            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-fix">What we fix</button>
+            <button class="nav__trigger" type="button" aria-expanded="false" aria-controls="dd-fix">What we treat</button>
             <div class="dropdown dropdown--mega" id="dd-fix">
               <div class="mega mega--fix">
                 <div class="mega__group">
-                  <p class="mega__title"><a href="problems/">Problems we fix</a></p>
+                  <p class="mega__title"><a href="problems/">Problems we treat</a></p>
                   <ul class="mega__cols">{_links(probs, "                    ")}
                   </ul>
                 </div>
@@ -123,7 +123,7 @@ def side_menu():
               <div class="fmenu__sub" id="fm-{key}" hidden>{inner}
               </div>
             </li>"""
-    fix = (f'\n                <p class="fmenu__label"><a href="problems/">Problems we fix</a></p><ul>{_links(probs, "                  ")}\n                </ul>'
+    fix = (f'\n                <p class="fmenu__label"><a href="problems/">Problems we treat</a></p><ul>{_links(probs, "                  ")}\n                </ul>'
            f'\n                <p class="fmenu__label"><a href="treatments/">Treatments</a></p><ul>{_links(treats, "                  ")}\n                </ul>')
     who = f'\n                <ul>{_links(WHO, "                  ")}\n                </ul>'
     return f"""
@@ -135,7 +135,7 @@ def side_menu():
         <button class="side-menu__close" type="button" data-close aria-label="Close menu"></button>
       </div>
       <nav class="fmenu" aria-label="Menu" data-fmenu>
-        <ul class="fmenu__list">{group("fix", "What we fix", fix)}{group("who", "Who we are", who)}
+        <ul class="fmenu__list">{group("fix", "What we treat", fix)}{group("who", "Who we are", who)}
             <li><a class="fmenu__link" href="our-work/">Our work</a></li>
             <li><a class="fmenu__link" href="technology/">Technology &amp; innovation</a></li>
             <li><a class="fmenu__link" href="kids-dentistry/">Kids’ dentistry</a></li>
@@ -159,7 +159,7 @@ def side_menu():
 
 
 def footer():
-    explore = [("problems/", "What we fix"), ("treatments/", "Treatments"), ("technology/", "Technology &amp; innovation"), ("our-work/", "Our work"),
+    explore = [("problems/", "What we treat"), ("treatments/", "Treatments"), ("technology/", "Technology &amp; innovation"), ("our-work/", "Our work"),
                ("founder/", "About the founder"), ("doctors/", "The doctors"), ("the-practice/", "The practice"),
                ("gallery/", "Gallery"), ("kids-dentistry/", "Kids’ dentistry"), ("dental-tourism/", "Dental tourism"), ("book/", "Book an appointment")]
     links = "".join(f'\n            <li><a href="{h}">{n}</a></li>' for h, n in explore)

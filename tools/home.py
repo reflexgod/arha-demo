@@ -52,7 +52,7 @@ def rcards(i="        "):
     for k, t in enumerate(TESTIMONIALS):
         name, tag, n, text = t
         tag_html = f'<span class="rcard__tag">{tag}</span>' if tag else ""
-        avatar = f'<span class="rcard__avatar" aria-hidden="true">{name[0].upper()}</span>' if name else ""  # no initial for "Google reviewer"
+        avatar = f'<span class="rcard__avatar" aria-hidden="true">{name[0].upper()}</span>' if name else '<span class="rcard__avatar rcard__avatar--g" aria-hidden="true">G</span>'  # a neutral G for "Google reviewer", so every name block lines up
         out += f"""
 {i}  <li class="rcard{' rcard--dark' if k % 5 == 0 else ''}">
 {i}    <figure>
@@ -163,7 +163,7 @@ def results_home(cases, i="        "):
 
 
 def problems_stage(prefix="", i="      "):
-    """Common problems we fix: a list of problems beside a large photo stage that crossfades."""
+    """Common problems we treat: a list of problems beside a large photo stage that crossfades."""
     tabs, panels = [], []
     for n, p in enumerate(treatments.PROBLEMS):
         sel = n == 0

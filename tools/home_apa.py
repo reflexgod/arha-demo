@@ -314,7 +314,7 @@ def finder():
       <div class="finder" data-finder>
         <ul class="finder__grid" data-finder-grid data-reveal-group aria-label="Choose what sounds closest">{cards}
         </ul>{panels}
-        <noscript><p class="finder__noscript"><a class="link" href="problems/">See the problems we fix</a></p></noscript>
+        <noscript><p class="finder__noscript"><a class="link" href="problems/">See the problems we treat</a></p></noscript>
       </div>
     </section>
 """

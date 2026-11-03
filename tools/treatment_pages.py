@@ -895,7 +895,7 @@ def hub_page(site_url, problems_html):
     <section class="section section--stone texture problems-section" id="common-problems" aria-labelledby="problems-title">
       <div class="container">
         <div class="section-head reveal">
-          <h2 id="problems-title">Common problems we fix</h2>
+          <h2 id="problems-title">Common problems we treat</h2>
           <p class="lede">Not sure which treatment you need? Start with what is bothering you.</p>
         </div>
 {problems_html}

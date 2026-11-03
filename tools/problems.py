@@ -506,9 +506,9 @@ def tech_list(slugs, title="Technology used"):
 def problem_page(slug, site_url):
     import v4_pages  # page_hero; imported here because v4_pages imports this module
     p = PROBLEMS[slug]
-    trail = [("Home", ""), ("What we fix", "problems/"), (p["name"], f"problems/{slug}/")]
+    trail = [("Home", ""), ("What we treat", "problems/"), (p["name"], f"problems/{slug}/")]
     name, alt, pos = p["hero"]
-    body = v4_pages.page_hero(f"{{{{pic {name} | 100vw | {alt} | pos={pos} | eager}}}}", p["name"], p["line"], trail, eyebrow="What we fix")
+    body = v4_pages.page_hero(f"{{{{pic {name} | 100vw | {alt} | pos={pos} | eager}}}}", p["name"], p["line"], trail, eyebrow="What we treat")
     if p.get("urgent"):
         body += """    <p class="urgent-line container">In severe pain, or swollen? <a class="link" href="emergency/">Dental emergencies</a></p>
 """
@@ -528,7 +528,7 @@ def problem_page(slug, site_url):
     body += tech_list(p["tech"])
     body += tp.faq_block(p["faq"])
     body += closing_band()
-    meta = {"title": f"{p['name'].replace('’', '&#8217;')} | What We Fix | Arha Dental Care, Peddar Road",
+    meta = {"title": f"{p['name'].replace('’', '&#8217;')} | What We Treat | Arha Dental Care, Peddar Road",
             "description": html.escape(p["line"], quote=True),
             "jsonld": [tp.faq_jsonld(p["faq"]), tp.crumbs_jsonld(site_url, trail)]}
     return f"problems/{slug}", meta, f'  <main id="main" tabindex="-1">\n\n{body}\n  </main>\n'
@@ -542,21 +542,21 @@ def closing_band(title="Begin with a conversation", text="Every plan at Arha sta
 def index_page(site_url):
     """/problems/: the ten problems as the large-type list, with the photo stage."""
     import v4_pages
-    trail = [("Home", ""), ("What we fix", "problems/")]
+    trail = [("Home", ""), ("What we treat", "problems/")]
     body = f"""
     <section class="section problems-index" aria-labelledby="page-title">
       <div class="container">
         {tp.crumbs(trail)}
-        <div class="section-head reveal"><h1 id="page-title">What we fix</h1><p class="lede">Start with what is bothering you. Each page shows what treatment would involve.</p></div>
+        <div class="section-head reveal"><h1 id="page-title">What we treat</h1><p class="lede">Start with what is bothering you. Each page shows what treatment would involve.</p></div>
       </div>
     </section>
-    <section class="section section--stone problem-links" aria-label="Problems we fix">
+    <section class="section section--stone problem-links" aria-label="Problems we treat">
       <div class="container">
         <ul class="problem-links__list reveal">{"".join(f'<li><a href="problems/{s}/">{PROBLEMS[s]["menu"]}{ARROW}</a></li>' for s in ORDER)}</ul>
       </div>
     </section>
 {closing_band()}"""
-    meta = {"title": "What We Fix: Common Dental Problems | Arha Dental Care, Peddar Road",
+    meta = {"title": "What We Treat: Common Dental Problems | Arha Dental Care, Peddar Road",
             "description": "Missing, chipped, crooked or stained teeth, gaps, toothache, bleeding gums, old fillings, loose dentures and children's teeth: how Arha Dental Care on Peddar Road usually fixes each.",
             "jsonld": [tp.crumbs_jsonld(site_url, trail)]}
     _ = v4_pages
@@ -580,7 +580,7 @@ def brings_you_in(heading=True, i="    "):
 {i}          <a class="link link--light" href="problems/{slug}/" tabindex="-1">See how we fix it{ARROW}</a>
 {i}        </div>
 {i}      </div>"""
-    head = (f'{i}      <p class="eyebrow">Common problems we fix</p>\n{i}      <h2 id="brings-title">What brings you in?</h2>\n') if heading else ""
+    head = (f'{i}      <p class="eyebrow">Common problems we treat</p>\n{i}      <h2 id="brings-title">What brings you in?</h2>\n') if heading else ""
     label = ' aria-labelledby="brings-title"' if heading else ' aria-label="What brings you in?"'
     return f"""{i}<!-- =================================================================== WHAT BRINGS YOU IN? (problems first) -->
 {i}<section class="section brings" id="what-we-fix"{label}>

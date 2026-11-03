@@ -319,19 +319,19 @@ def g_header(pg, vp, cdp):
     path = "problems/gaps/"
     go(pg, path)
     if vp == 1440:
-        for trig, dd in [("What we fix", "#dd-fix"), ("Who we are", "#dd-who"), ("Our work", "#dd-work")]:
+        for trig, dd in [("What we treat", "#dd-fix"), ("Who we are", "#dd-who"), ("Our work", "#dd-work")]:
             pg.locator(".nav__trigger", has_text=trig).hover(); pg.wait_for_timeout(450)
             vis = ev(pg, "(d) => { const el = document.querySelector(d); const s = getComputedStyle(el); return s.visibility !== 'hidden' && s.opacity > .9 && !el.inert }", dd)
             rec(path, f"Header: {trig}", vp, "hover opens dropdown", vis)
         n = ev(pg, "() => document.querySelectorAll('#dd-fix a').length")
-        rec(path, "Header: What we fix", vp, "lists problems + treatments", n >= 24, f"{n} links")
+        rec(path, "Header: What we treat", vp, "lists problems + treatments", n >= 24, f"{n} links")
         pg.mouse.move(700, 600); pg.wait_for_timeout(400)
         pg.locator(".brand").focus(); pg.keyboard.press("Tab"); pg.wait_for_timeout(400)
-        rec(path, "Header: What we fix", vp, "keyboard Tab opens", ev(pg, "() => document.querySelector('.nav__trigger[aria-controls=dd-fix]').getAttribute('aria-expanded')") == "true")
+        rec(path, "Header: What we treat", vp, "keyboard Tab opens", ev(pg, "() => document.querySelector('.nav__trigger[aria-controls=dd-fix]').getAttribute('aria-expanded')") == "true")
         pg.keyboard.press("Enter"); pg.wait_for_timeout(200)
-        rec(path, "Header: What we fix", vp, "Enter moves into the panel", ev(pg, "() => document.activeElement.closest('#dd-fix') !== null"), ev(pg, "() => document.activeElement.textContent.trim().slice(0, 30)"))
+        rec(path, "Header: What we treat", vp, "Enter moves into the panel", ev(pg, "() => document.activeElement.closest('#dd-fix') !== null"), ev(pg, "() => document.activeElement.textContent.trim().slice(0, 30)"))
         pg.keyboard.press("Escape"); pg.wait_for_timeout(300)
-        rec(path, "Header: What we fix", vp, "Escape closes, focus back", ev(pg, "() => document.querySelector('.nav__trigger[aria-controls=dd-fix]').getAttribute('aria-expanded')") == "false" and ev(pg, "() => document.activeElement.getAttribute('aria-controls')") == "dd-fix")
+        rec(path, "Header: What we treat", vp, "Escape closes, focus back", ev(pg, "() => document.querySelector('.nav__trigger[aria-controls=dd-fix]').getAttribute('aria-expanded')") == "false" and ev(pg, "() => document.activeElement.getAttribute('aria-controls')") == "dd-fix")
         book = ev(pg, "() => { const a = document.querySelector('.nav__link--book'); return getComputedStyle(a).backgroundSize }")
         rec(path, "Header: Book a consultation", vp, "underlined", "1px" in book, book)
         pg.locator(".header-call").click(); pg.wait_for_timeout(400)
@@ -350,7 +350,7 @@ def g_header(pg, vp, cdp):
     grp = pg.locator(".fmenu__toggle").first
     (grp.tap if vp == 390 else grp.click)(); pg.wait_for_timeout(500)
     n = ev(pg, "() => { const s = document.getElementById('fm-fix'); return s.hidden ? 0 : s.querySelectorAll('a').length }")
-    rec(path, "Full-screen menu", vp, "+ What we fix opens", n >= 22, f"{n} links")
+    rec(path, "Full-screen menu", vp, "+ What we treat opens", n >= 22, f"{n} links")
     tabs = ev(pg, "() => [...document.querySelectorAll('#side-menu a')].map(a => a.getAttribute('href'))")
     need = ["founder/", "treatments/", "dental-tourism/", "technology/", "the-practice/", "doctors/", "gallery/", "our-work/", "our-work/#testimonials", "kids-dentistry/", "book/", "emergency/"]
     missing = [n for n in need if not any(h and h.endswith(n) for h in tabs)]
