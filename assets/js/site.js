@@ -196,6 +196,11 @@
         });
     }, { rootMargin: '0px 0px -4% 0px' });
     reveals.forEach((el) => io.observe(el));
+    // Keyboard focus never lands on something still faded out (e.g. a link at the very bottom edge)
+    document.addEventListener('focusin', (e) => {
+      const r = e.target.closest && e.target.closest('.reveal:not(.is-in)');
+      if (r) { r.classList.add('is-in'); io.unobserve(r); }
+    });
   } else {
     reveals.forEach((el) => el.classList.add('is-in'));
   }

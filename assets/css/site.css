@@ -7626,3 +7626,22 @@ html:has(.side-menu.is-open) .site-header .brand { opacity: 0; }
 .dropdown--mega a.mega__call { display: inline-flex; flex-direction: row; align-items: center; gap: 10px; }
 .mega__call > span { display: inline; }
 .mega__call .icon-phone { flex: none; width: 15px; height: 15px; fill: currentColor; }
+
+/* JavaScript off: every tab, step and stage shows its text in full, one after another, and the controls that need
+   a script to work are left out. Pictures that crossfade keep showing the first one. */
+html:not(.js) :is(.itabs__panel, .visit-steps__panel, .hotspots__panel, .stages__text, .agedial__text, .scan__text, .xfade__panel)[hidden] { display: block; margin-top: 28px; }
+html:not(.js) :is([role="tablist"], .xfade__tabs, .visit-steps__nav, .hotspots__markers, .agedial__control, .stages__control, .scan__control, .scan__ticks, .stages__ticks, .agedial__scale, .stages__count) { display: none; }
+html:not(.js) .story__step { opacity: 1; }
+html:not(.js) .xpanel__more { grid-template-rows: 1fr; opacity: 1; }
+
+/* Phones: a link or button reached with Tab (or a scroll to an anchor) stops above the call bar, not under it */
+@media (max-width: 768px) {
+  html { scroll-padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+}
+
+/* Phones and small tablets: the footer's open status ("Closed · Opens tomorrow at 9:30 AM") wraps instead of
+   widening the page (it was 401px wide at 390, which pushed the menu button off-screen while closed) */
+@media (max-width: 767px) {
+  .footer__cols > * { min-width: 0; }
+  .footer__status, .open-status { flex-wrap: wrap; white-space: normal; }
+}

@@ -156,7 +156,7 @@ def show_values():
 
 def client_config():
     """What site.js and Riya need, written into every page as JSON (no extra request)."""
-    return {
+    config = {
         "phone": "" if missing("phone") else SITE["phone"],
         "tel": "" if missing("phone") else "+" + digits(SITE["phone"]),
         "whatsapp": "" if missing("whatsapp") else digits(SITE["whatsapp"]),
@@ -165,8 +165,10 @@ def client_config():
         "timeZone": SITE["time_zone"],
         "hours": [list(d) if d else None for d in SITE["hours"]],
         **({"riyaWebhookUrl": SITE["riya_webhook_url"]} if flags()["riya"] else {}),
-        "googleReviewsUrl": SITE["google_reviews_url"],
+        **({"googleReviewsUrl": SITE["google_reviews_url"]} if flags()["reviews"] else {}),
     }
+    # Leave out what is not set (site.js treats a missing key as empty), so no unused channel is named in a page
+    return {k: v for k, v in config.items() if v not in ("", None)}
 
 
 def apply_site(html):

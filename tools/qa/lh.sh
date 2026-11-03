@@ -1,11 +1,13 @@
 #!/bin/sh
 # Lighthouse mobile (simulated slow 4G, 4x CPU), N runs, prints each run and the median by Performance.
-#   sh tools/qa/lh.sh <outdir> <url> [runs]     e.g. sh tools/qa/lh.sh /tmp/lh http://127.0.0.1:8080/ 3
+#   sh tools/qa/lh.sh <outdir> <url> [runs] [desktop]     e.g. sh tools/qa/lh.sh /tmp/lh http://127.0.0.1:8080/ 3
+#   A fourth argument "desktop" runs Lighthouse's desktop preset instead of mobile.
 # Serve the site with tools/qa/gzserve.py first (GitHub Pages gzips; http.server does not).
-out=$1; url=$2; runs=${3:-3}
+out=$1; url=$2; runs=${3:-3}; preset=""
+[ "$4" = "desktop" ] && preset="--preset=desktop"
 mkdir -p "$out"
 for i in $(seq 1 "$runs"); do
-  npx --yes lighthouse@12 "$url" --quiet --output=json --output-path="$out/run-$i.json" \
+  npx --yes lighthouse@12 "$url" $preset --quiet --output=json --output-path="$out/run-$i.json" \
     --chrome-path="C:/Program Files/Google/Chrome/Application/chrome.exe" --chrome-flags="--headless=new" >/dev/null 2>&1
 done
 node -e '

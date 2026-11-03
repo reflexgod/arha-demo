@@ -74,7 +74,7 @@ TREATMENTS = {
         "faq": [("How long does full mouth rehabilitation take?", "It is done in phases over several months, with time to test the new bite before anything is final. You will get a personal timeline once your plan is made."),
                 ("Is it painful?", "Treatment is done with anaesthetic where needed, and in stages so each visit is manageable. We will explain what to expect at every step."),
                 ("Will my teeth look natural?", "The shape, length and colour of the new teeth are designed around your face and tried in before the final work is made, so you can see and change them first."),
-                ("Can it be done if I live abroad?", "Often, yes. It needs several visits, which we plan with you before you travel. A virtual consultation is the best first step.")],
+                ("Can it be done if I live abroad?", "Often, yes. It needs several visits, which we plan with you before you travel. A virtual consultation is a good first step.")],
         "planner": True,
     },
     "maxillofacial-prosthetics": {
@@ -142,7 +142,7 @@ TREATMENTS = {
         "hero": ("stock-crowns-soft", "Ceramic restorations, softly lit", "50% 55%"),
         "card": "Veneers, whitening and bonding, matched to the concern.",
         "intro": ("The lightest treatment that does the job",
-                  "Cosmetic dentistry improves the colour, shape and alignment of teeth. The best result often comes from the least invasive option.",
+                  "Cosmetic dentistry improves the colour, shape and alignment of teeth. A natural result often comes from the least invasive option.",
                   "Every option is explained at your consultation: what it involves, how it is looked after, and how long it can be expected to last."),
         "interactive": ("matrix", "Which fix for which concern", "Choose a concern to see which treatments usually suit it, and why."),
         "who": [("Yellow or stained teeth", "General yellowing, or stains that brushing does not shift."),
@@ -294,7 +294,7 @@ TREATMENTS = {
         "timing": ["Crown", "Bridge", "Temporary in between"],
         "faq": [("How long do crowns last?", "Crowns are long-term restorations. Care at home, habits such as grinding and regular check-ups all affect how long they last."),
                 ("Does preparing the tooth hurt?", "It is done under local anaesthetic, so you should feel pressure rather than pain."),
-                ("Which material is best?", "There is no single best one. It depends on the tooth, your bite and how it needs to look; we will recommend one and explain why."),
+                ("Which material should I choose?", "No one material suits every tooth. It depends on the tooth, your bite and how it needs to look; we will recommend one and explain why."),
                 ("Bridge or implant?", "An implant leaves the neighbouring teeth untouched; a bridge relies on them. The decider above gives the general idea, and your consultation the answer for you.")],
         "planner": False,
     },
@@ -515,7 +515,7 @@ def ix_matrix():
     opts = ["Whitening", "Bonding", "Veneers"]
     grid = {
         "stains": ("Stains", "stock-teeth-shades", "Sets of artificial teeth in a range of natural shades",
-                   [("good", "Lightens natural tooth colour; works best on general yellowing."),
+                   [("good", "Lightens natural tooth colour; works well on general yellowing."),
                     ("some", "Can cover a dark patch on a single tooth."),
                     ("some", "For deep stains that whitening cannot lift.")]),
         "chips": ("Chips", "stock-veneer-brush", "A thin veneer placed on a model with a fine brush",

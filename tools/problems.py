@@ -67,7 +67,7 @@ PROBLEMS = {
         "clinic": ("arha-dental-care-logo-wall", "The Arha Dental Care emblem in gold on the reception’s marble wall"),
         "tech": ["planning-desk", "treatment-rooms"],
         "faq": [("Will the gap come back?", "After aligners, a retainer keeps the teeth where they are. Bonding and veneers do not move, but are checked at your regular visits."),
-                ("Can a large gap be closed with bonding?", "Bonding suits small gaps best. A large gap may look better closed by moving the teeth, or with veneers, so the teeth keep natural proportions."),
+                ("Can a large gap be closed with bonding?", "Bonding suits small gaps. A large gap may look better closed by moving the teeth, or with veneers, so the teeth keep natural proportions."),
                 ("Do gaps mean gum disease?", "Usually not, but a new gap, or one that is growing, should be checked because gum problems can let teeth move.")],
     },
     "crooked-teeth": {
@@ -241,8 +241,8 @@ def ix_chipped():
           <figcaption class="loupe__hint">Move over the photograph · drag on a phone · arrow keys</figcaption>
         </figure>
         <div class="compare2">
-          <div><h3>Bonding</h3><p>Tooth-coloured material is shaped onto the chipped edge and polished, usually in one visit. Best for small chips.</p><a class="link" href="cosmetic-dentistry/">Cosmetic dentistry{ARROW}</a></div>
-          <div><h3>A crown</h3><p>A cap that covers the whole tooth, made to match. Best when a larger part of the tooth has broken.</p><a class="link" href="crowns-bridges/">Crowns &amp; bridges{ARROW}</a></div>
+          <div><h3>Bonding</h3><p>Tooth-coloured material is shaped onto the chipped edge and polished, usually in one visit. Suited to small chips.</p><a class="link" href="cosmetic-dentistry/">Cosmetic dentistry{ARROW}</a></div>
+          <div><h3>A crown</h3><p>A cap that covers the whole tooth, made to match. Suited to a larger break.</p><a class="link" href="crowns-bridges/">Crowns &amp; bridges{ARROW}</a></div>
         </div>
       </div>"""
 
