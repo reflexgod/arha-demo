@@ -176,7 +176,7 @@
   }
 
   /* 4. Reveal on scroll, once, when ~15% into the viewport: text fades up, photographs
-        settle from 1.04 to 1 (CSS). Siblings revealed together are staggered by 120ms.
+        fade in with a 12px rise over 500 ms (CSS). Siblings revealed together are staggered by 90 ms.
         window.arhaReady tells the head script that reveals are running. ------------ */
   const reveals = document.querySelectorAll('.reveal');
   if (!reduceMotion && 'IntersectionObserver' in window) {
@@ -185,9 +185,14 @@
         .filter((e) => e.isIntersecting)
         .sort((a, b) => (a.boundingClientRect.top - b.boundingClientRect.top) || (a.boundingClientRect.left - b.boundingClientRect.left))
         .forEach((e, i) => {
-          e.target.style.setProperty('--delay', `${Math.min(i, 3) * 120}ms`);
-          e.target.classList.add('is-in');
-          io.unobserve(e.target);
+          // A group (a sideways-scrolling row) reveals all at once, so cards waiting off to the side are never blank
+          const group = e.target.closest('[data-reveal-group]');
+          const items = group ? [...group.querySelectorAll('.reveal:not(.is-in)')] : [e.target];
+          items.forEach((el, k) => {
+            el.style.setProperty('--delay', `${Math.min(i + k, 4) * 90}ms`);
+            el.classList.add('is-in');
+            io.unobserve(el);
+          });
         });
     }, { rootMargin: '0px 0px -15% 0px' });
     reveals.forEach((el) => io.observe(el));

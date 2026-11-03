@@ -108,7 +108,7 @@
 
   --t-link: 100ms ease-in-out;   /* links, CTAs, menu items */
   --t-image: 400ms ease-in-out;  /* every image hover */
-  --t-reveal: 1.5s ease;         /* scroll reveals */
+  --t-reveal: 500ms cubic-bezier(.2, .7, .2, 1); /* scroll reveals: fade + 12px rise (v4-polish) */
   --ease-panel: cubic-bezier(.2, .6, .2, 1); /* side menu slide */
 }
 
@@ -374,18 +374,19 @@ p {
 /* 6. Calls to action: text + 2px underline, never a box */
 .cta {
   display: inline-block;
-  padding: 4px 6px;
-  border-bottom: 2px solid currentColor;
+  padding: 0 0 5px;
+  background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
   font: 600 15px/1.2 var(--font-body);
-  letter-spacing: .08em;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  transition: color var(--t-link), border-color var(--t-link);
+  transition: color var(--t-link), background-size .5s var(--ease);
 }
 
 .cta:hover,
 .cta:focus-visible {
   color: var(--bronze);
-  border-color: var(--bronze);
+  background-size: 0 1px;
+  background-position: right bottom;
 }
 
 /* 7. Header + dropdowns */
@@ -396,12 +397,13 @@ p {
   height: var(--header-h);
   background: var(--paper);
   border-bottom: 1px solid transparent;
-  transition: border-color 200ms ease-in-out;
+  transition: border-color 200ms ease-in-out, box-shadow 300ms ease-out;
 }
 
-/* 1px hairline only once the page has scrolled */
+/* Once the page has scrolled: the 1px hairline and a very soft shadow (v4-polish) */
 .site-header.is-scrolled {
   border-bottom-color: var(--hairline);
+  box-shadow: 0 10px 28px -20px rgba(37, 36, 36, .35);
 }
 
 .site-header__inner {
@@ -1053,7 +1055,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
     padding-top: 10px;
   }
   .case__caption .case__name { font-size: 13px; }
-  .case__caption .case__view { margin-top: 0; font-size: 11px; }
+  .case__caption .case__view { margin-top: 0; font-size: 12px; }
 }
 
 /* Homepage: the first case is a larger feature (2 x 2 from tablet up; phones keep an even
@@ -1130,7 +1132,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   z-index: 2;
   padding: 6px 9px 5px;
   background: rgba(var(--shade), .78);
-  font: 600 11px/1 var(--font-body);
+  font: 600 12px/1 var(--font-body);
   letter-spacing: .14em;
   text-transform: uppercase;
 }
@@ -1157,7 +1159,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   margin-top: 14px;
   padding: 7px 10px 6px;
   border: 1px solid var(--bronze);
-  font: 600 11px/1.3 var(--font-body);
+  font: 600 12px/1.3 var(--font-body);
   letter-spacing: .14em;
   text-transform: uppercase;
 }
@@ -1195,7 +1197,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 .sample-tag {
   display: inline-block;
   color: var(--paper-66);
-  font: 600 11px/1 var(--font-body);
+  font: 600 12px/1 var(--font-body);
   letter-spacing: .16em;
   text-transform: uppercase;
 }
@@ -1368,7 +1370,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   z-index: 2;
   padding: 6px 9px 5px;
   background: rgba(var(--shade), .78);
-  font: 600 11px/1 var(--font-body);
+  font: 600 12px/1 var(--font-body);
   letter-spacing: .14em;
   text-transform: uppercase;
   pointer-events: none;
@@ -1653,7 +1655,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
   padding: 8px 11px 7px;
   background: var(--paper);
   color: var(--ink);
-  font: 600 11px/1 var(--font-body);
+  font: 600 12px/1 var(--font-body);
   letter-spacing: .14em;
   text-transform: uppercase;
   pointer-events: none;
@@ -1903,7 +1905,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 .timing__flag {
   display: inline-block;
   color: var(--muted);
-  font: 600 11px/1 var(--font-body);
+  font: 600 12px/1 var(--font-body);
   letter-spacing: .14em;
   text-transform: uppercase;
 }
@@ -1997,6 +1999,7 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 }
 
 .faq__panel p {
+  max-width: 640px;
   padding: 0 0 26px;
 }
 
@@ -2036,9 +2039,10 @@ html:not(.js) .nav__item:focus-within > .dropdown {
 }
 
 .book__note {
+  max-width: 640px;
   margin: 48px auto 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 16px;
   text-align: center;
 }
 
@@ -2929,7 +2933,7 @@ html.is-locked .riya-launcher { visibility: hidden; }
   padding: 3px 6px 2px;
   border: 1px solid var(--bronze); /* bronze line, text in the surrounding colour (AA at 10px) */
   color: inherit;
-  font: 700 10px/1 var(--font-head);
+  font: 700 12px/1 var(--font-head);
   letter-spacing: .14em;
   text-transform: uppercase;
 }
@@ -3360,7 +3364,7 @@ html.is-locked .riya-launcher { visibility: hidden; }
 .ix-note {
   margin-top: 16px;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .ix-note a,
@@ -3942,7 +3946,7 @@ html.is-locked .riya-launcher { visibility: hidden; }
   padding: 5px 8px 4px;
   background: rgba(var(--shade), .78);
   color: var(--paper);
-  font: 600 11px/1 var(--font-body);
+  font: 600 12px/1 var(--font-body);
   letter-spacing: .14em;
   text-transform: uppercase;
 }
@@ -4847,8 +4851,8 @@ html.is-locked .riya-launcher { visibility: hidden; }
 }
 
 
-/* 13. Motion: opacity-only reveals (1.5s), once, staggered 0 / .25 / .5 / .75s.
-   The intro heading is the page's single fade-up. */
+/* 13. Motion: reveals fade in with a 12px rise over 500 ms, once, staggered by 90 ms (v4-polish; see the
+   second .reveal rule below). Never on the hero. */
 .js .reveal {
   opacity: 0;
   transition: opacity var(--t-reveal);
@@ -4929,10 +4933,11 @@ html.is-locked .riya-launcher { visibility: hidden; }
    scroll down and returns when you scroll up; the utility line stays folded once scrolled. */
 .site-header {
   height: auto;
-  transition: border-color 200ms ease-in-out, transform 450ms var(--ease);
+  transition: border-color 200ms ease-in-out, transform 450ms var(--ease), box-shadow 300ms ease-out;
 }
 
 .site-header.is-hidden {
+  box-shadow: none; /* the soft shadow (v4-polish) must not peek below a hidden header */
   transform: translateY(-100%);
 }
 
@@ -5051,23 +5056,19 @@ html.is-locked .riya-launcher { visibility: hidden; }
 /* Motion: one curve. Text fades up gently; photographs settle slowly; cards zoom very slightly */
 .js .reveal {
   transform: translateY(12px);
-  transition: opacity var(--t-reveal), transform 1.2s var(--ease);
+  transition: opacity var(--t-reveal), transform var(--t-reveal);
   transition-delay: var(--delay, 0ms);
 }
 
 .js .reveal.is-in { transform: none; }
 
 picture.fill img {
-  transition: opacity 900ms var(--ease), transform 1.6s var(--ease), filter var(--t-image);
-}
-
-.js .reveal:not(.is-in) picture.fill img {
-  transform: scale(1.03);
+  transition: opacity 900ms var(--ease), transform 400ms ease-out, filter var(--t-image);
 }
 
 .media--hover:hover picture.fill img,
 a:hover .media--hover picture.fill img {
-  transform: scale(1.025);
+  transform: scale(1.03);
 }
 
 /* Inline text links: a thin underline, with a bronze one that draws in on hover */
@@ -5155,8 +5156,9 @@ a:hover .media--hover picture.fill img {
 @media (prefers-reduced-motion: reduce) {
   @view-transition { navigation: none; }
   .site-header { transition: none; }
-  .js .reveal,
-  .js .reveal:not(.is-in) picture.fill img { transform: none; }
+  .js .reveal { transform: none; }
+  picture.fill img, .media--hover:hover picture.fill img, a:hover .media--hover picture.fill img,
+  .case-card > a:hover .case-card__media img, .ah-review--photo a:hover img { transform: none !important; }
 }
 
 /* Treatment pages: what it is and who it is for, beside one of Arha's rooms */
@@ -5415,7 +5417,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
   gap: 10px;
   padding-bottom: 5px;
   background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
-  font: 600 14px/1.2 var(--font-body);
+  font: 600 15px/1.2 var(--font-body);
   letter-spacing: 1px;
   text-transform: uppercase;
   transition: color var(--t-link), background-size .5s var(--ease);
@@ -5735,7 +5737,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
   top: 12px;
   left: 12px;
   color: var(--paper);
-  font: 600 11px/1 var(--font-body);
+  font: 600 12px/1 var(--font-body);
   letter-spacing: 1.5px;
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(var(--shade), .55);
@@ -6892,7 +6894,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
    block, measured in notes/APA-HOMEPAGE.md (1440 / 390). Built by tools/home_apa.py. Only Arha's
    content differs. Links on this page are apa's 16px; the grid's tile links are 14px.
    ========================================================================== */
-.home-apa .link { font-size: 16px; }
+.home-apa .link { font-size: 15px; } /* one action size site-wide (v4-polish) */
 .home-apa h2 { font-size: 24px; }
 .home-apa h3 { font-size: 20px; }
 .home-apa p { font-size: 18px; }
@@ -6906,7 +6908,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 
 /* 2 + 10. Centred headings: H2, one line under it, sometimes one link */
 .ah-head { padding: 40px var(--gutter) 26px; text-align: center; }
-.ah-head p { max-width: 1030px; margin: 10px auto 0; }
+.ah-head p { max-width: 704px; margin: 10px auto 0; }
 .ah-head--reviews { padding: 60px var(--gutter) 40px; }
 .ah-head--reviews p { max-width: 704px; }
 .ah-head .link { margin-top: 32px; }
@@ -6939,7 +6941,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 /* 5. Common problems we treat: apa's 3 x 3 grid of 330px squares, 20px apart. Each square is a problem
       (above) and its fix (below), black and white until hovered; then colour and the name fade in (0.4 s) */
 .ah-grid { padding: 60px var(--gutter) 37px; text-align: center; }
-.ah-grid__lede { max-width: 1030px; margin: 10px auto 0; }
+.ah-grid__lede { max-width: 704px; margin: 10px auto 0; }
 .ah-grid__tiles { display: grid; grid-template-columns: repeat(3, 330px); justify-content: center; gap: 20px; margin: 46px 0 0; padding: 0; list-style: none; }
 .ah-tile a { position: relative; display: block; aspect-ratio: 1 / 1; overflow: hidden; color: var(--paper); }
 .ah-tile__pair { position: absolute; inset: 0; display: grid; } /* one photograph per square */
@@ -6980,7 +6982,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 
 /* 6. Dark band: a centred statement and one link */
 .ah-dark { padding: 40px var(--gutter); background: var(--charcoal); color: var(--paper); text-align: center; }
-.ah-dark p { max-width: 930px; margin: 10px auto 0; }
+.ah-dark p { max-width: 704px; margin: 10px auto 0; }
 .ah-dark .link { margin-top: 32px; }
 
 /* 7. Process: three photo panels edge to edge, 650px tall, the numbered text overlaid bottom-left */
@@ -7103,7 +7105,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
   .home-apa .ah-review--tall blockquote p { font-size: 21px; }
   .ah-review__foot { padding-top: 12px; }
   .ah-review__stars svg { width: 13px; height: 13px; }
-  .ah-review__source { font-size: 10px; letter-spacing: 1px; }
+  .ah-review__source { font-size: 12px; letter-spacing: 1px; }
   .ah-review__score { font-size: 44px; }
 }
 
@@ -7120,10 +7122,12 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 .footer__bottom { flex-direction: column; align-items: center; gap: 6px; margin-top: 56px; padding-top: 0; border-top: 0; text-align: center; }
 .footer__bottom ul { justify-content: center; }
 @media (min-width: 1024px) {
-  .footer__cols { grid-template-columns: repeat(4, 1fr); }
+  .footer__cols { grid-template-columns: 1.1fr 1fr .8fr 1.4fr; } /* Explore: two short columns without wrapping; Contact is two lines (v4-polish) */
 }
+.footer__bottom { margin-top: 72px; }
 @media (max-width: 767px) {
   .footer__cols { padding-inline: 20px; }
+  .footer__bottom { margin-top: 56px; }
 }
 
 /* The Arha story (founder page): signage photographs are shown whole on the section's stone, never cropped */
@@ -7155,7 +7159,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
   padding: 6px 11px;
   border: 1px solid var(--hairline-strong);
   border-radius: 999px;
-  font: 600 11px/1 var(--font-body);
+  font: 600 12px/1 var(--font-body);
   letter-spacing: .12em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -7176,7 +7180,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
 }
 .rcard__who { display: flex; flex-direction: column; gap: 4px; }
 .rcard__name { font: 600 15px/1.2 var(--font-body); }
-.rcard__src { font: 600 11px/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.rcard__src { font: 600 12px/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
 .rcard--dark figure { background: var(--charcoal); border-color: var(--charcoal); }
 .rcard--dark .rcard__quote p, .rcard--dark .rcard__name { color: var(--paper); }
 .rcard--dark .rcard__tag { color: var(--paper); border-color: var(--paper-16); }
@@ -7196,7 +7200,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
    =========================================================================================================== */
 button.link, button.cta { border-radius: 0; background-color: transparent; color: inherit; cursor: pointer; }
 button.link { border: 0; background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat; }
-button.cta { border: 0; border-bottom: 2px solid currentColor; }
+button.cta { border: 0; }
 button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 
 /* 2b. What brings you in? (site.js 23a). Six tactile cards on the stone band: a photograph (3:2), a short label and an arrow.
@@ -7214,7 +7218,7 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .finder__grid.is-from, .finder__panel.is-from { opacity: 0; transform: translateY(16px); transition: none; }
 .finder__card { display: flex; flex-direction: column; align-items: stretch; width: 100%; height: 100%; padding: 0; overflow: hidden; border: 0; border-radius: 14px; background: #F2EFE9; color: var(--ink); text-align: left; cursor: pointer; transition: transform .2s ease-out, box-shadow .2s ease-out; -webkit-tap-highlight-color: transparent; }
 .finder__card:hover, .finder__card:active { transform: translateY(-4px); box-shadow: 0 16px 32px -14px rgba(37, 36, 36, .28); }
-.finder__card:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.finder__card:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; }
 .finder__media { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; background: var(--stone); }
 .finder__media picture.fill img, .finder__visual picture.fill img { transition: opacity 900ms var(--ease), transform .4s ease-out; }
 .finder__card:hover .finder__media img, .finder__card:active .finder__media img, .finder__card:focus-visible .finder__media img { transform: scale(1.03); }
@@ -7241,7 +7245,7 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .finder__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; margin-top: 34px; }
 .finder__book { display: inline-flex; align-items: center; min-height: 52px; padding: 0 30px; border-radius: 999px; background: var(--charcoal); color: var(--paper); font: 600 15px/1 var(--font-body); letter-spacing: .08em; text-transform: uppercase; transition: transform .2s ease-out, box-shadow .2s ease-out; }
 .finder__book:hover, .finder__book:active { transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(37, 36, 36, .5); }
-.finder__book:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+.finder__book:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; }
 .home-apa .finder__confirm { margin-top: 24px; color: var(--muted); font-size: 14px; }
 .finder__visual { position: relative; min-height: 100%; overflow: hidden; background: var(--stone); }
 .finder__noscript { text-align: center; }
@@ -7300,7 +7304,7 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .visit-steps__tab[aria-selected="true"] { border-top-color: var(--ink); color: var(--ink); }
 .visit-steps__tab:hover { color: var(--bronze); }
 .visit-steps__num { font: 600 13px/1 var(--font-body); letter-spacing: 1px; }
-.visit-steps__panel { max-width: 720px; padding: 24px 0 8px; outline-offset: 4px; }
+.visit-steps__panel { max-width: 640px; padding: 24px 0 8px; outline-offset: 4px; }
 .visit-steps__panel h3 { margin: 0 0 12px; }
 .visit-steps__nav { display: flex; gap: 32px; margin-top: 16px; }
 .visit-bring { max-width: 720px; margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--hairline-strong); }
@@ -7312,7 +7316,7 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .book .lede a:hover, .book .lede a:focus-visible { color: var(--bronze); }
 
 /* Treatment pages: before you decide */
-.glance__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; margin: 0; border-top: 1px solid var(--hairline-strong); }
+.glance__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 48px; margin: 0; border-top: 1px solid var(--hairline-strong); }
 .glance__list > div { padding: 22px 0 24px; border-bottom: 1px solid var(--hairline-strong); }
 .glance__list dt { margin-bottom: 8px; font: 700 15px/1.3 var(--font-head); letter-spacing: 1.5px; text-transform: uppercase; }
 .glance__list dd { margin: 0; }
@@ -7322,7 +7326,7 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .doc-v4__actions { display: flex; flex-wrap: wrap; gap: 14px 32px; }
 
 /* Footer: today's status and directions */
-.footer__status { margin-top: 10px; color: var(--paper-66); }
+.footer__status { margin-top: 10px; color: var(--paper-66); white-space: nowrap; }
 .footer__status.is-open { color: var(--paper); } /* on the charcoal footer: readable open or closed */
 .footer__directions { margin-top: 12px; }
 .footer__directions a { text-decoration: underline; text-underline-offset: 4px; }

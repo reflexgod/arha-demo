@@ -181,16 +181,13 @@ def glance(t):
     Visit counts are never guessed (notes/TO-CONFIRM.md); who treats you is as on the clinic door."""
     comfort = next((a for q, a in t["faq"] if any(w in q.lower() for w in PAIN_WORDS)), None)
     comfort = comfort or "Dr. Nikhil explains what you will feel, during and after treatment, at your consultation. Ask anything."
-    items = [a for a, _b in t["who"][:3]]
-    items = [w if k == 0 or w[1:2].isupper() else w[:1].lower() + w[1:] for k, w in enumerate(items)]
-    who = ", ".join(items)
+    # Who it is for is the "Is this for you?" list right above, so it is not repeated here (v4-polish)
     return f"""
     <!-- =================================================================== BEFORE YOU DECIDE (at a glance) -->
     <section class="section glance" aria-labelledby="glance-title">
       <div class="container">
 {head("glance-title", "Before you decide")}
         <dl class="glance__list reveal">
-          <div><dt>Who it is for</dt><dd>{who}.</dd></div>
           <div><dt>What it feels like</dt><dd>{comfort}</dd></div>
           <div><dt>How many visits</dt><dd>It depends on your teeth and your plan. You get a personal plan, with the number of visits, at your consultation.</dd></div>
           <div><dt>Who treats you</dt><dd>Led by Dr. Nikhil V. Jain, prosthodontist and implantologist (B.D.S., M.D.S., ITI Scholar, London). <a href="our-work/">What patients say on Google</a>.</dd></div>

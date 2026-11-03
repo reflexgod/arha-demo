@@ -93,7 +93,7 @@ def hero():
 
 def trio():
     cols = "".join(f"""
-        <article class="ah-trio__item">
+        <article class="ah-trio__item reveal">
           <a class="ah-trio__media" href="{href}" tabindex="-1" aria-hidden="true">
 {pic(name, '(min-width: 900px) 34vw, 100vw', alt, pos, '            ')}
           </a>
@@ -102,7 +102,7 @@ def trio():
         </article>""" for name, pos, alt, title, line, href in TRIO)
     return f"""
     <!-- =================================================================== 2. TRIO HEADING + 3. FEATURE TRIO -->
-    <section class="ah-head" aria-labelledby="trio-title">
+    <section class="ah-head reveal" aria-labelledby="trio-title">
       <h2 id="trio-title"><a href="the-practice/">Crafted with precision. Given with care.</a></h2>
       <p>Specialist restorative and cosmetic dentistry with natural results, led by prosthodontist Dr. Nikhil V. Jain on Peddar Road.</p>
     </section>
@@ -121,7 +121,7 @@ def band():
     <section class="ah-band" data-slideshow aria-labelledby="band-title">
       <div class="ah-band__slides">{slides}
       </div>
-      <div class="ah-band__text">
+      <div class="ah-band__text reveal">
         <h2 id="band-title">A clinic built around calm</h2>
         <p>Marble, soft light and quiet rooms at Doctor House on Peddar Road. An X-ray room and a sterilisation room of our own, and Dr. Nikhil V. Jain and Dr. Vasant P. Jain under one roof.</p>
         <a class="link link--light" href="founder/">About Arha</a>
@@ -142,7 +142,7 @@ def grid():
     for slug, name, pos, alt in GRID:
         p = problems.PROBLEMS[slug]
         tiles += f"""
-        <li class="ah-tile">
+        <li class="ah-tile reveal">
           <a href="problems/{slug}/" data-colour-group>
             <span class="ah-tile__pair">
               <span class="ah-tile__half">
@@ -155,11 +155,11 @@ def grid():
     return f"""
     <!-- =================================================================== 5. COMMON PROBLEMS WE TREAT (apa: the grid of squares) -->
     <section class="ah-grid" aria-labelledby="grid-title">
-      <h2 id="grid-title"><a href="problems/">Common problems we treat</a></h2>
-      <p class="ah-grid__lede">The concerns patients most often come to us with. Choose one to see how we fix it.</p>
+      <h2 id="grid-title" class="reveal"><a href="problems/">Common problems we treat</a></h2>
+      <p class="ah-grid__lede reveal">The concerns patients most often come to us with. Choose one to see how we fix it.</p>
       <ul class="ah-grid__tiles">{tiles}
       </ul>
-      <p class="ah-grid__cta"><a class="link" href="treatments/">See all treatments</a></p>
+      <p class="ah-grid__cta reveal"><a class="link" href="treatments/">See all treatments</a></p>
     </section>
 """
 
@@ -168,9 +168,11 @@ def dark():
     return """
     <!-- =================================================================== 6. DARK BAND (apa: centred statement, one CTA) -->
     <section class="ah-dark" aria-labelledby="dark-title">
-      <h2 id="dark-title">Dentistry, done carefully</h2>
-      <p>Arha is led by a prosthodontist, a specialist in restoring and replacing teeth. Every plan starts with listening and a careful examination, and is explained clearly before anything begins.</p>
-      <a class="link link--light" href="book/">Book an appointment</a>
+      <div class="reveal">
+        <h2 id="dark-title">Dentistry, done carefully</h2>
+        <p>Arha is led by a prosthodontist, a specialist in restoring and replacing teeth. Every plan starts with listening and a careful examination, and is explained clearly before anything begins.</p>
+        <a class="link link--light" href="book/">Book an appointment</a>
+      </div>
     </section>
 """
 
@@ -179,7 +181,7 @@ def process():
     panels = "".join(f"""
       <article class="ah-process__panel">
 {pic(name, '(min-width: 900px) 34vw, 100vw', alt, pos, '        ')}
-        <div class="ah-process__text">
+        <div class="ah-process__text reveal">
           <h3>{title}</h3>
           <p>{line}</p>
         </div>
@@ -196,7 +198,7 @@ def founder():
     <!-- =================================================================== 8. FOUNDER QUOTE (apa: full-bleed photo, centred text on the left half) -->
     <section class="ah-founder" aria-labelledby="founder-title">
 {pic('stock-dentist-hands', '100vw', '', '70% 50%', '      ')}
-      <div class="ah-founder__text">
+      <div class="ah-founder__text reveal">
         <h2 id="founder-title">From the founder</h2>
         <blockquote>
           <p>“A good restoration should never announce itself. My aim is a result that feels natural, functions beautifully and lasts.”</p>
@@ -216,8 +218,10 @@ def teaser():
 {home.tour_figure('', '        ', '(min-width: 900px) 50vw, 100vw').replace('class="tour reveal"', 'class="tour ah-teaser__tour"')}
       </div>
       <div class="ah-teaser__panel">
-        <h3 id="teaser-title">Step inside Arha</h3>
-        <a class="link" href="gallery/">See the gallery</a>
+        <div class="reveal">
+          <h3 id="teaser-title">Step inside Arha</h3>
+          <a class="link" href="gallery/">See the gallery</a>
+        </div>
       </div>
     </section>
 """
@@ -276,7 +280,7 @@ BACK = '<span aria-hidden="true">←</span> Go back'
 
 def finder():
     cards = "".join(f"""
-          <li><button class="finder__card" type="button" data-go="{rid}" data-colour-group><span class="finder__media">
+          <li class="reveal"><button class="finder__card" type="button" data-go="{rid}" data-colour-group><span class="finder__media">
 {finder_photo(ic, CARD_SIZES, "              ")}
             </span><span class="finder__label">{label}<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>"""
                     for rid, label, ic, *_ in FINDER)
@@ -303,12 +307,12 @@ def finder():
     return f"""
     <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23a) -->
     <section class="ah-finder" id="what-brings-you-in" aria-labelledby="finder-title">
-      <div class="ah-finder__head">
+      <div class="ah-finder__head reveal">
         <h2 id="finder-title">What brings you in?</h2>
         <p>Choose what sounds closest.</p>
       </div>
       <div class="finder" data-finder>
-        <ul class="finder__grid" data-finder-grid aria-label="Choose what sounds closest">{cards}
+        <ul class="finder__grid" data-finder-grid data-reveal-group aria-label="Choose what sounds closest">{cards}
         </ul>{panels}
         <noscript><p class="finder__noscript"><a class="link" href="problems/">See the problems we fix</a></p></noscript>
       </div>
@@ -345,14 +349,14 @@ def reviews():
     dots = "".join(f'<li><button class="rv__dot" type="button" aria-label="Show review {k + 1}" data-dot="{k}"></button></li>' for k in range(n))
     return f"""
     <!-- =================================================================== 10. REVIEWS HEADING + 11. CAROUSEL -->
-    <section class="ah-head ah-head--reviews" aria-labelledby="reviews-title">
+    <section class="ah-head ah-head--reviews reveal" aria-labelledby="reviews-title">
       <!-- No rating or review count anywhere on the site (Viraaj, 2 Nov 2026) -->
       <h2 id="reviews-title">What patients say on Google</h2>
       <p>In patients’ own words, quoted as they wrote them on Google. Where a review is longer, it ends with “…”: read it in full on Google.</p>
       <a class="link" href="#" data-google-reviews>Read all reviews on Google</a>
     </section>
     <section class="ah-carousel" aria-label="Google reviews">
-      <div class="rv" data-reviews aria-roledescription="carousel" aria-labelledby="reviews-title">
+      <div class="rv reveal" data-reviews aria-roledescription="carousel" aria-labelledby="reviews-title">
         <div class="rv__track" data-track>{slides}
         </div>
         <div class="rv__controls">
