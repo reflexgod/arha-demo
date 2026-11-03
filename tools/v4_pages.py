@@ -78,7 +78,7 @@ STEP_PHOTOS = [  # keyword in the step title -> one of Arha's rooms (colour) or 
     (("x-ray",), ("dental-implant-equipment-arha-dental-care-mumbai", "50% 30%", "Arha’s X-ray room with its panoramic X-ray unit")),
     (("plan", "design", "record", "impression", "analysis", "examination"),
      ("stock-xray-screen", "50% 50%", "A dental X-ray displayed on a monitor in a clinic")),
-    (("preview", "trial"), ("stock-mirror", "50% 40%", "A patient looking at their smile in a hand mirror")),
+    (("preview", "trial"), ("stock-veneer-fingertip", "50% 50%", "A thin veneer held on a fingertip")),
     (("aligner", "braces", "retainer"), ("stock-aligner", "50% 50%", "A clear aligner held between two fingers")),
     (("final", "fitting", "fitted", "crown", "temporary"), ("stock-crowns", "50% 55%", "Ceramic crowns resting on a dark surface")),
     (("heal",), ("arha-dental-care-reception-south-mumbai-dental-clinic-01-lower", "35% 70%", "Arha’s reception, calm and softly lit")),
@@ -243,7 +243,7 @@ def hub_page(site_url):
         for item in g["items"]:
             s = item["slug"]
             t = tp.TREATMENTS.get(s)
-            photo, alt, pos = (t.get("preview") or t["hero"]) if t else ("stock-parent-child", "A parent and child smiling together", "50% 40%")
+            photo, alt, pos = (t.get("preview") or t["hero"]) if t else ("stock-parent-child", "A parent helping a young child brush their teeth", "50% 40%")
             card = t["card"] if t else tp.KIDS["card"]
             links += f"""
               <li>

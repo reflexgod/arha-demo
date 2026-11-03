@@ -236,12 +236,15 @@ def teaser():
 # Each card shows a free-licence Unsplash photograph (sources: notes/IMAGE-SOURCES.md; graded with photos.stock_grade
 # like every stock photo), and the answer panel shows the same photograph larger. Decorative (alt=""): the label says it.
 # By design, a card and its panel are one appearance of the photograph (tools/photo_audit.py).
-PHOTO_POS = {"pain": "50% 38%", "gap": "45% 50%", "crooked": "42% 50%", "stained": "66% 40%",
-             "chipped": "55% 35%", "child": "58% 50%"}
+PHOTO_POS = {"pain": "50% 50%", "gap": "45% 50%", "crooked": "42% 50%", "stained": "50% 50%",
+             "chipped": "55% 35%", "child": "50% 55%"}
+# Face-free photographs for the cards whose own finder photograph showed a person's face (a stranger's face reads
+# as a patient of the clinic). The others keep their stock-finder-<name> photograph.
+FINDER_PHOTOS = {"pain": "stock-xray-screen", "stained": "stock-teeth-shades", "child": "stock-kids-brushes"}
 
 
 def finder_photo(name, sizes, i):
-    return pic(f"stock-finder-{name}", sizes, "", PHOTO_POS[name], i)
+    return pic(FINDER_PHOTOS.get(name, f"stock-finder-{name}"), sizes, "", PHOTO_POS[name], i)
 
 
 # card label, photo, panel heading, two or three short sentences, safety line (or ""), related pages

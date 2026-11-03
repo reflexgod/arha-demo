@@ -406,7 +406,7 @@ def tourism_page(site_url):
     main = f"""  <main id="main" tabindex="-1">
 
 {hero('{{pic stock-marine-drive | 100vw | Marine Drive and the South Mumbai skyline across the bay | pos=50% 50% | eager}}', "Dental tourism", "Planning dental treatment in Mumbai from abroad: one virtual consultation, a written plan, then your visits.", trail)}
-{who_split(why, 0, "Why Arha", ("stock-virtual-call", "A virtual consultation on a laptop, before the trip", "50% 50%"))}
+{who_split(why, 0, "Why Arha", ("stock-arrival", "A suitcase by the window of a quiet room, after the trip", "50% 50%"))}
 {section("section--stone texture", "how-title", "How it works", steps_block(steps))}
 {{{{planner}}}}{faq_block(faq)}
     <section class="band" aria-labelledby="closing-title">

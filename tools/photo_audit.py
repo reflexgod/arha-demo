@@ -30,6 +30,10 @@ def pages():
     yield "404", ROOT / "404.html"
 
 
+# Finder cards that use another stock photograph (home_apa.FINDER_PHOTOS): card + panel are one appearance too
+FINDER_SWAPS = {"stock-xray-screen", "stock-teeth-shades", "stock-kids-brushes"}
+
+
 def photos(html):
     """Canonical photographs on a page. The two sides of one before/after pair (stock-pair-<n>-*,
     stock-sim-whiten-*) are one appearance: a simulated pair is one photograph by design. So are a homepage
@@ -39,8 +43,8 @@ def photos(html):
     out, seen_pairs = [], set()
     for n in names:
         pair = re.match(r"(stock-pair-\d+|stock-sim-whiten)-(?:before|after)$|(stock-finder-[a-z]+)$", n)
-        if pair:
-            key = pair.group(1) or pair.group(2)
+        if pair or n in FINDER_SWAPS:
+            key = (pair.group(1) or pair.group(2)) if pair else n
             if key in seen_pairs:
                 continue
             seen_pairs.add(key)

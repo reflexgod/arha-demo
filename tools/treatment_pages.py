@@ -460,11 +460,11 @@ def ix_implants():
 def ix_phases():
     v = ""  # visits are agreed at the consultation; no placeholder line
     steps = [("Diagnose", "A full examination, X-rays, photographs and records of how your teeth meet. We start with what bothers you most.",
-              "arha-dental-care-operatory-laptop", "An Arha treatment room, where records and photographs are reviewed on screen", v),
+              "stock-loupe-teeth", "Front teeth seen close up, as in a clinical photograph", v),
              ("Design the bite &amp; smile", "Your new bite and tooth shapes are designed on models and on screen, around your face and your jaw.",
               "stock-lab", "Gloved hands holding a dental model during planning", v),
              ("Trial smile", "You try the design in temporary teeth, so you can see, speak and chew with it before anything is final.",
-              "stock-mirror", "A patient looking at his smile in a hand mirror with the dentist beside him", v),
+              "stock-restorations-set", "A full set of restorations on a dental model", v),
              ("Final restorations", "The final crowns, bridges or implant teeth are made and fitted in stages, with the bite checked at each visit.",
               "stock-lab-grind", "Gloved hands finishing a ceramic crown in the laboratory", v),
              ("Maintenance", "Regular reviews and cleaning protect the work. A night guard may be advised if you grind your teeth.",
@@ -476,7 +476,7 @@ def ix_who_we_help():
     # Calm laboratory and clinical photographs: respectful, never a patient, nothing graphic
     who = [("surgery", "After oral cancer surgery", "stock-lab", "Gloved hands holding a dental model during planning",
             "When surgery removes part of the palate or jaw, a prosthesis called an obturator can close the gap, so that eating, drinking and speaking feel more normal again. It is planned with your surgical team, sometimes before the operation."),
-           ("cleft", "Cleft palate", "stock-mirror", "A patient looking at his smile in a hand mirror with the dentist beside him",
+           ("cleft", "Cleft palate", "stock-denture-dark", "A full denture on a dark surface",
             "Some children and adults born with a cleft palate are helped by a plate that closes an opening in the roof of the mouth or supports speech. It works alongside the care of the cleft team."),
            ("injury", "Facial or jaw injury", "stock-prosthesis-model", "A prosthesis made on a stone model of the jaw",
             "After an accident, teeth and parts of the jaw can be rebuilt in stages, with prostheses that restore the bite and support the shape of the face."),
@@ -544,13 +544,13 @@ def ix_matrix():
 def ix_aligners():
     """A range that steps through the stages (site.js 19, [data-stages]), then aligners and braces compared."""
     stages = [("Your scan", "Your teeth are recorded with photographs, X-rays and a scan or impressions, and every stage is planned on screen.",
-               "arha-dental-care-scan-screen", "A screen in an Arha treatment room showing 3D scans of the upper and lower teeth"),
+               "stock-aligner-model", "A clear aligner above a model of the teeth"),
               ("Your aligners", "A series of thin, clear aligners is made for your teeth, each a small step from the last.",
                "stock-aligner-case", "A clear aligner in its case"),
               ("Wearing them", "You wear each set most of the day and night, and move to the next set when we say.",
                "stock-aligner-hands", "Hands holding a clear aligner, its case and a cleaning spray"),
               ("Straighter teeth", "When the last aligner is done, a retainer keeps the teeth in their new place.",
-               "stock-man-smile", "A young man with a natural, even smile")]
+               "stock-aligner", "A clear aligner on a plain background")]
     n = len(stages)
     imgs = "".join(f'<div class="stages__img{" is-active" if k == 0 else ""}" data-stage="{k + 1}">{picture(img, "(min-width: 900px) 55vw, 100vw", alt, indent="")}</div>'
                    for k, (_t, _x, img, alt) in enumerate(stages))
@@ -578,7 +578,7 @@ def ix_aligners():
 
 def ix_ages():
     """Child, teen or adult as expanding photo panels (hover or focus on a laptop, tap on a phone)."""
-    ages = [("stock-kid-dentist", "50% 40%", "A boy in the dental chair with the dentist beside him", "Child (7 to 11)",
+    ages = [("stock-aligner-model", "50% 50%", "A clear aligner above a model of the teeth", "Child (7 to 11)",
              "An early orthodontic check around age 7 spots problems with how the jaws and teeth are growing. Most children only need monitoring; some benefit from early treatment."),
             ("stock-braces", "50% 50%", "A smile with metal braces", "Teen (12 to 18)",
              "Most adult teeth are in, so this is the most common time for braces, or aligners where they suit."),
@@ -600,7 +600,7 @@ def ix_ages():
 
 def ix_checkup():
     """Your check-up, step by step: photo cards in the shared drag strip (swipe, drag or the arrows)."""
-    steps = [("ask", "We ask how you are", "Any pain, changes or worries since your last visit, and your medical history.", "stock-consultation", "A dentist talking a patient through a treatment model"),
+    steps = [("ask", "We ask how you are", "Any pain, changes or worries since your last visit, and your medical history.", "arha-dental-care-logo-dental-clinic-peddar-road", "The Arha wordmark and emblem in gold on marble"),
              ("exam", "Examination", "Teeth, fillings, gums, tongue and the soft tissues of the mouth, looked at carefully.", "stock-exam", "A dentist examining a patient’s teeth with a mirror and probe"),
              ("xray", "X-rays, if needed", "Only when they will show something we need to see, taken in the clinic.", "stock-xray-panoramic", "A panoramic dental X-ray of the whole mouth"),
              ("gum-care", "Gum check", "The gum line is measured gently around each tooth, to catch gum disease early.", "stock-mirror-probe", "A dental mirror and probe on a tray"),
@@ -849,7 +849,7 @@ def hub_page(site_url, problems_html):
     groups = []
 
     def card_photo(slug):  # each treatment's own hero photograph; Kids' dentistry has its own
-        name, alt, pos = TREATMENTS[slug]["hero"] if slug in TREATMENTS else ("stock-kid-dentist", "A boy in the dental chair with the dentist beside him", "50% 45%")
+        name, alt, pos = TREATMENTS[slug]["hero"] if slug in TREATMENTS else ("stock-parent-child", "A parent helping a young child brush their teeth", "50% 40%")
         return picture(name, "(min-width: 1100px) 24vw, (min-width: 768px) 45vw, 100vw", alt, pos=pos, indent="                ")
     for g in treatments.GROUPS:
         tag = '<span class="tag">Specialty</span>' if g.get("specialty") else ""

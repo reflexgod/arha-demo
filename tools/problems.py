@@ -181,7 +181,7 @@ PROBLEMS = {
         "fix": [("kids-dentistry", "Check-ups", "Gentle visits that let your child get used to the dentist."),
                 ("kids-dentistry", "Sealants and fluoride", "Protection for the grooves of the back teeth, and stronger enamel."),
                 ("orthodontics", "An early orthodontic check", "Spotting bite or crowding problems while the jaws are still growing.")],
-        "clinic": ("arha-dental-care-entrance-door", "The door of suite 107 at Doctor House, with the Arha emblem"),
+        "clinic": ("arha-dental-care-exterior-dental-clinic-peddar-road", "The door of suite 107 at Doctor House, with the Arha sign"),
         "tech": ["treatment-rooms", "panoramic-x-ray"],
         "faq": [("When should my child first see a dentist?", "Around the time the first tooth appears, or by their first birthday. Early visits are short and gentle."),
                 ("Do baby teeth need fillings?", "Often, yes. Baby teeth hold space for the adult teeth, and decay in them can hurt and spread."),
@@ -390,10 +390,10 @@ def ix_dentures():
 
 def ix_child():
     bands = [(0, 2, "Birth to 2", "stock-kid-brush-wood", "A small wooden toothbrush with soft red bristles", "The first teeth arrive. Book the first visit around the first tooth or the first birthday, and wipe or brush the teeth twice a day."),
-             (3, 5, "3 to 5 years", "stock-child-brush", "A young boy brushing his teeth", "All the baby teeth are in. Short check-ups, fluoride and help with brushing; watch for sweet drinks."),
+             (3, 5, "3 to 5 years", "stock-kid-brush-bright", "A bright toothbrush with yellow bristles", "All the baby teeth are in. Short check-ups, fluoride and help with brushing; watch for sweet drinks."),
              (6, 9, "6 to 9 years", "stock-kid-brush-electric", "A children’s electric toothbrush with a bright pattern", "The first adult molars come through. Sealants protect their grooves; an early orthodontic check spots crowding."),
              (10, 12, "10 to 12 years", "stock-aligners-shadow", "Clear aligners on a model, in soft shadow", "The last baby teeth go. A good time to plan braces or aligners if the bite needs it."),
-             (13, 18, "Teenagers", "stock-kid-brush-bright", "A bright toothbrush with yellow bristles", "Adult teeth in place. Regular cleans, sports mouthguards, and straightening if wanted.")]
+             (13, 18, "Teenagers", "stock-braces", "A smile with metal braces", "Adult teeth in place. Regular cleans, sports mouthguards, and straightening if wanted.")]
     shots = "".join(f'\n          <div class="agedial__img{" is-active" if n == 0 else ""}" data-band="{n}">{pic(p, a, "(min-width: 900px) 45vw, 100vw")}</div>' for n, (_a, _b, _l, p, a, _t) in enumerate(bands))
     texts = "".join(f'\n          <div class="agedial__text" data-band="{n}" data-min="{lo}" data-max="{hi}"{"" if n == 0 else " hidden"}><h3>{lab}</h3><p>{t}</p></div>' for n, (lo, hi, lab, _p, _a, t) in enumerate(bands))
     return f"""      <div class="agedial reveal" data-agedial>
@@ -553,7 +553,7 @@ def index_page(site_url):
         return "" if all(n in line for n in names) else f'<span class="problem-row__how">Usually: {options(slug)}</span>'
     rows = "".join(f"""
           <li><a href="problems/{s}/"><span class="problem-row__name">{PROBLEMS[s]["menu"]}{ARROW}</span><span class="problem-row__line">{PROBLEMS[s]["line"]}</span>{how(s)}</a></li>""" for s in ORDER)
-    body = v4_pages.page_hero("{{pic arha-dental-care-operatory-chair | 100vw | The dental chair and its light in an Arha treatment room | pos=50% 50% | eager}}",
+    body = v4_pages.page_hero("{{pic stock-handpieces | 100vw | Dental handpieces hanging from their holders | pos=50% 50% | eager}}",
                               "What we treat", "Start with what is bothering you. Each page explains what is usually behind it and how it is treated.",
                               trail, "Problems we treat")
     body += f"""
