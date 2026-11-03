@@ -7322,7 +7322,8 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .doc-v4__actions { display: flex; flex-wrap: wrap; gap: 14px 32px; }
 
 /* Footer: today's status and directions */
-.footer__status { margin-top: 10px; }
+.footer__status { margin-top: 10px; color: var(--paper-66); }
+.footer__status.is-open { color: var(--paper); } /* on the charcoal footer: readable open or closed */
 .footer__directions { margin-top: 12px; }
 .footer__directions a { text-decoration: underline; text-underline-offset: 4px; }
 
