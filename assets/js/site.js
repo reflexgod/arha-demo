@@ -1309,53 +1309,48 @@
     lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
   }
 
-  /* Treatments index (/treatments/). Laptops: the treatment nearest the middle of the screen, or under the
-     pointer, becomes active; its photograph wipes in over the last one (CSS). Phones: each photograph under its
-     name settles in once it scrolls into view. IntersectionObserver only, no scroll listeners. */
-  document.querySelectorAll('[data-tindex]').forEach((box) => {
-    const items = [...box.querySelectorAll('.tindex__item')];
-    const shots = [...box.querySelectorAll('.tindex__shot')];
-    const wide = matchMedia('(min-width: 900px)');
-    let current = items.find((i) => i.classList.contains('is-active')) || items[0];
-    const activate = (item) => {
-      if (!item || item === current) return;
-      const slug = item.dataset.shot;
-      shots.forEach((s) => {
-        const was = s.classList.contains('is-active');
-        s.classList.toggle('is-prev', was);
-        if (!was) s.classList.remove('is-prev');
-        s.classList.toggle('is-active', s.dataset.shot === slug);
-      });
-      items.forEach((i) => i.classList.toggle('is-active', i === item));
-      current = item;
+  /* Index preview (/treatments/, /problems/; the demo clinic's list). Laptops with a mouse: a small photograph
+     of the treatment under the pointer follows it, to the right of the cursor, easing behind it. */
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)');
+  document.querySelectorAll('[data-xindex]').forEach((section) => {
+    const preview = section.querySelector('[data-xindex-preview]');
+    if (!preview) return;
+    const imgs = [...preview.children];
+    const rows = [...section.querySelectorAll('[data-preview]')];
+    let x = 0; let y = 0; let tx = 0; let ty = 0; let raf = 0; let shown = false;
+    const place = () => { preview.style.transform = `translate3d(${x}px, ${y}px, 0)`; };
+    const tick = () => {
+      x += (tx - x) * 0.16;
+      y += (ty - y) * 0.16;
+      place();
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.3 ? requestAnimationFrame(tick) : 0;
     };
-    if ('IntersectionObserver' in window) {
-      // A thin band across the middle of the screen: whichever treatment crosses it is the active one
-      const middle = new IntersectionObserver((entries) => {
-        if (!wide.matches) return;
-        entries.filter((e) => e.isIntersecting).forEach((e) => activate(e.target));
-      }, { rootMargin: '-48% 0px -48% 0px' });
-      items.forEach((i) => middle.observe(i));
-      // The list steps back only while the section is on screen
-      new IntersectionObserver((entries) => entries.forEach((e) => box.classList.toggle('is-live', e.isIntersecting && wide.matches)),
-        { rootMargin: '-30% 0px -30% 0px' }).observe(box);
-      // Phones: photographs settle in as they arrive
-      const media = [...box.querySelectorAll('.tindex__media')];
-      if (reduceMotion) media.forEach((m) => m.classList.add('is-in'));
-      else {
-        const seen = new IntersectionObserver((entries) => entries.forEach((e) => {
-          if (e.isIntersecting) { e.target.classList.add('is-in'); seen.unobserve(e.target); }
-        }), { rootMargin: '0px 0px -12% 0px' });
-        media.forEach((m) => seen.observe(m));
-      }
-    } else {
-      box.querySelectorAll('.tindex__media').forEach((m) => m.classList.add('is-in'));
-    }
-    items.forEach((i) => {
-      const a = i.querySelector('a');
-      a.addEventListener('mouseenter', () => { if (wide.matches) activate(i); });
-      a.addEventListener('focus', () => activate(i));
+    const aim = (clientX, clientY) => {
+      const box = section.getBoundingClientRect();
+      const p = preview.getBoundingClientRect();
+      tx = Math.min(Math.max(clientX - box.left + 40, 0), box.width - p.width);
+      ty = Math.min(Math.max(clientY - box.top - p.height / 2, 0), box.height - p.height);
+      if (!shown || reduceMotion) { x = tx; y = ty; place(); } else if (!raf) raf = requestAnimationFrame(tick);
+    };
+    const show = (row) => {
+      imgs.forEach((img, n) => img.classList.toggle('is-active', n === Number(row.dataset.preview)));
+      preview.classList.add('is-visible');
+      shown = true;
+    };
+    const hide = () => { preview.classList.remove('is-visible'); shown = false; };
+    rows.forEach((row) => {
+      row.addEventListener('mouseenter', (e) => { if (!finePointer.matches) return; aim(e.clientX, e.clientY); show(row); });
+      row.addEventListener('focus', () => {
+        if (!finePointer.matches) return;
+        const name = row.querySelector('.xindex__name').getBoundingClientRect();
+        aim(name.right, name.top + name.height / 2);
+        show(row);
+      });
+      row.addEventListener('blur', hide);
     });
+    // Hide only when the pointer leaves a list, so moving between rows never flickers (as on the demo clinic)
+    section.querySelectorAll('.xindex__list').forEach((list) => list.addEventListener('mouseleave', hide));
+    section.addEventListener('mousemove', (e) => { if (shown) aim(e.clientX, e.clientY); });
   });
 
   // Case page: angle thumbnails switch the large slider's photograph

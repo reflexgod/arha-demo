@@ -38,9 +38,11 @@ def photos(html):
     """Canonical photographs on a page. The two sides of one before/after pair (stock-pair-<n>-*,
     stock-sim-whiten-*) are one appearance: a simulated pair is one photograph by design. So are a homepage
     finder card's photograph and the same photograph on its answer panel (stock-finder-*): only one shows at a time."""
-    # The treatments index has each photograph twice in its markup, beside the list (laptops) and under its name
-    # (phones); only one of the two ever shows, so the laptop copies are not counted
-    html = re.sub(r'<div class="tindex__preview".*?</section>', '', html, flags=re.S)
+    # The index lists (/treatments/, /problems/) have each photograph twice in their markup, the pointer preview
+    # (laptops) and the thumbnail (phones); only one of the two ever shows, so the preview copies are not counted
+    html = re.sub(r'<div class="xindex__preview".*?</section>', '', html, flags=re.S)
+    # The 64px thumbnails in those lists preview the page each row links to (like a menu), so they are not counted
+    html = re.sub(r'<span class="xindex__thumb">.*?</span>', '', html, flags=re.S)
     names = re.findall(r'<img\b[^>]*?\ssrc="[^"]*?assets/(?:img|video)/([a-z0-9-]+?)-\d+\.(?:jpg|webp|avif)"', html)
     canon = photo_ids.groups()
     out, seen_pairs = [], set()

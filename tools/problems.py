@@ -550,20 +550,21 @@ def index_page(site_url):
     def how(slug):  # left out where the line already names the options (no repeated information)
         line = PROBLEMS[slug]["line"].lower()
         names = [f[1].lower().removeprefix("an ").removeprefix("a ") for f in PROBLEMS[slug]["fix"]]
-        return "" if all(n in line for n in names) else f'<span class="problem-row__how">Usually: {options(slug)}</span>'
-    rows = "".join(f"""
-          <li><a href="problems/{s}/"><span class="problem-row__name">{PROBLEMS[s]["menu"]}{ARROW}</span><span class="problem-row__line">{PROBLEMS[s]["line"]}</span>{how(s)}</a></li>""" for s in ORDER)
+        return "" if all(n in line for n in names) else f'<span class="xindex__how">Usually: {options(slug)}</span>'
+    items, shots = v4_pages.xindex_list([(f"problems/{s}/", PROBLEMS[s]["menu"], PROBLEMS[s]["line"] + how(s), PROBLEMS[s]["hero"]) for s in ORDER])
     body = v4_pages.page_hero("{{pic stock-handpieces | 100vw | Dental handpieces hanging from their holders | pos=50% 50% | eager}}",
                               "What we treat", "Start with what is bothering you. Each page explains what is usually behind it and how it is treated.",
                               trail, "Problems we treat")
     body += f"""
     <!-- =================================================================== THE TEN PROBLEMS: each with one line and its usual treatments -->
-    <section class="section problem-rows" aria-labelledby="rows-title">
+    <section class="section problem-rows xindex" aria-labelledby="rows-title" data-xindex>
       <div class="container">
 {v4_pages.head("rows-title", "Ten common problems", "Choose the one closest to yours. Nothing here is a diagnosis: Dr. Nikhil confirms what is going on, and your options, at your visit.")}
-        <ul class="problem-rows__list reveal">{rows}
+        <ul class="xindex__list">{items}
         </ul>
         <p class="problem-rows__urgent reveal">In severe pain, swollen or bleeding? <a class="link" href="emergency/">Dental emergencies</a></p>
+      </div>
+      <div class="xindex__preview" aria-hidden="true" data-xindex-preview>{shots}
       </div>
     </section>
 {closing_band()}"""

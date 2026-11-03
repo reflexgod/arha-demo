@@ -251,55 +251,52 @@ INDEX_PHOTOS = {
 }
 
 
+def xindex_list(rows, start=0):
+    """The demo clinic's treatments list: one row per item (name, one line); on laptops a small photograph follows
+    the pointer beside the name (site.js "Index preview"), on phones a small photograph sits left of each name.
+    rows: (href, name, line_html, (photo, alt, pos)). Returns (list markup, preview pictures)."""
+    items, shots = "", ""
+    for n, (href, name, line, (photo, alt, pos)) in enumerate(rows, start):
+        items += f"""
+            <li><a class="xindex__row" href="{href}" data-preview="{n}">
+              <span class="xindex__thumb">
+{picture(photo, '64px', '', pos=pos, indent='                ')}
+              </span>
+              <span class="xindex__name">{name}</span>
+              <span class="xindex__line">{line}</span>
+            </a></li>"""
+        shots += "\n" + picture(photo, '(min-width: 900px) 240px, 1px', '', pos=pos, cls='xindex__img', indent='          ')
+    return items, shots
+
+
 def hub_page(site_url):
-    """Explore treatments: the names as a large serif list. On laptops one photograph stays beside the list and
-    changes to the treatment nearest the middle of the screen (or under the pointer); on phones each photograph
-    sits under its name and settles in as it scrolls into view (site.js, "Treatments index")."""
-    groups, shots = "", ""
-    first = True
-    n = 0
+    """Explore treatments: the demo clinic's list with a pointer preview, one list per group."""
+    groups, shots, n = "", "", 0
     for g in treatments.GROUPS:
-        links = ""
+        rows = []
         for item in g["items"]:
             s = item["slug"]
             t = tp.TREATMENTS.get(s)
-            photo, alt, pos = INDEX_PHOTOS[s]
-            card = t["card"] if t else tp.KIDS["card"]
-            n += 1
-            links += f"""
-              <li class="tindex__item{' is-active' if first else ''}" data-shot="{s}">
-                <a class="tindex__link" href="{s}/">
-                  <span class="tindex__num" aria-hidden="true">{n:02d}</span>
-                  <span class="tindex__name">{item['name']}</span>
-                  <span class="tindex__card">{card}</span>
-                </a>
-                <div class="tindex__media">
-{picture(photo, '(max-width: 899px) calc(100vw - 48px), 1px', alt, pos=pos, indent='                  ')}
-                </div>
-              </li>"""
-            shots += f"""
-          <div class="tindex__shot{' is-active' if first else ''}" data-shot="{s}">
-{picture(photo, '(min-width: 900px) 42vw, 1px', '', pos=pos, indent='            ')}
-          </div>"""
-            first = False
+            rows.append((f"{s}/", item["name"], t["card"] if t else tp.KIDS["card"], INDEX_PHOTOS[s]))
+        items, pics = xindex_list(rows, n)
+        n += len(rows)
+        shots += pics
         groups += f"""
-          <div class="tindex__group">
-            <h2 class="tindex__title">{g['title']}</h2>
-            <p class="tindex__sub">{tp.GROUP_CARDS[g['title']]}</p>
-            <ul>{links}
+          <div class="xindex__group">
+            <h2 class="xindex__title">{g['title']}</h2>
+            <p class="xindex__sub">{tp.GROUP_CARDS[g['title']]}</p>
+            <ul class="xindex__list">{items}
             </ul>
           </div>"""
     trail = [("Home", ""), ("Explore treatments", "treatments/")]
     body = page_hero("{{pic stock-implant-arch | 100vw | A full arch of implant-supported teeth on a model | pos=50% 50% | eager}}",
                      "Explore treatments", "Specialist care, smile and aesthetic treatment, and everyday care for the whole family.", trail)
     body += f"""
-    <!-- =================================================================== INDEX (scroll or hover swaps the photograph) -->
-    <section class="section tindex" aria-label="Treatments" data-tindex>
-      <div class="container tindex__grid">
-        <div class="tindex__list">{groups}
-        </div>
-        <div class="tindex__preview" aria-hidden="true">{shots}
-        </div>
+    <!-- =================================================================== INDEX (a photograph follows the pointer) -->
+    <section class="section xindex" aria-label="Treatments" data-xindex>
+      <div class="container">{groups}
+      </div>
+      <div class="xindex__preview" aria-hidden="true" data-xindex-preview>{shots}
       </div>
     </section>
 
