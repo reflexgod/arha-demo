@@ -62,11 +62,11 @@ def header():
                   </ul>
                 </div>
                 <div class="mega__group mega__group--more">
-                  <p class="mega__title">Also</p>
+                  <p class="mega__title"><span>Also</span></p>
                   <ul>{_links([("technology/", "Technology &amp; innovation"), ("kids-dentistry/", "Kids’ dentistry"), ("dental-tourism/", "Dental tourism")], "                    ")}
                   </ul>
-                  <a class="mega__urgent" href="emergency/">Dental emergency? Get help now</a>
                 </div>
+                <a class="mega__urgent" href="emergency/">Dental emergency? Get help now</a>
               </div>
             </div>
           </li>

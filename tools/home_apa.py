@@ -8,7 +8,7 @@ apa measured in notes/APA-HOMEPAGE.md). Only the content is Arha's. Twelve block
   10 reviews heading                          11 reviews mosaic (two staggered columns)   12 footer (chrome.py)
 
 Interactions are apa's only: link underlines, the band's slow crossfade (site.js 22), the grid tiles
-(black and white until hovered, then colour and "See how we fix it" fade in, 0.4 s) and the mosaic tiles'
+(black and white until hovered, then colour and "See how we treat it" fade in, 0.4 s) and the mosaic tiles'
 hover overlay. CSS: the "apa homepage" layer at the end of site.css.
 """
 import html
@@ -149,14 +149,14 @@ def grid():
 {pic(name, '(min-width: 900px) 330px, 300px', alt, pos, '                ')}
               </span>
             </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">{p['menu']}</span><span class="ah-tile__how">{how(p)}</span><span class="ah-tile__link">See how we fix it</span></span>
+            <span class="ah-tile__hover"><span class="ah-tile__name">{p['menu']}</span><span class="ah-tile__how">{how(p)}</span><span class="ah-tile__link">See how we treat it</span></span>
           </a>
         </li>"""
     return f"""
     <!-- =================================================================== 5. COMMON PROBLEMS WE TREAT (apa: the grid of squares) -->
     <section class="ah-grid" aria-labelledby="grid-title">
       <h2 id="grid-title" class="reveal"><a href="problems/">Common problems we treat</a></h2>
-      <p class="ah-grid__lede reveal">The concerns patients most often come to us with. Choose one to see how we fix it.</p>
+      <p class="ah-grid__lede reveal">The concerns patients most often come to us with. Choose one to see how we treat it.</p>
       <ul class="ah-grid__tiles">{tiles}
       </ul>
       <p class="ah-grid__cta reveal"><a class="link" href="treatments/">See all treatments</a></p>
