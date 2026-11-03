@@ -9,3 +9,4 @@ exclude:
   - .venv/
   - .editorconfig
   - .gitignore
+  - CREDITS.md

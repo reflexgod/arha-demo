@@ -235,26 +235,51 @@ def treatment_page(slug, site_url):
 
 
 # ------------------------------------------------------------------ explore treatments (index)
+# One stock photograph per treatment for the index (Unsplash, credits in CREDITS.md): face-free, bright, one set.
+INDEX_PHOTOS = {
+    "dental-implants": ("stock-implant-models", "Models of dental implants with crowns, on a bright clinic counter", "50% 55%"),
+    "full-mouth-rehabilitation": ("stock-denture-tray", "A full arch of teeth on a model, on a white surface", "50% 50%"),
+    "maxillofacial-prosthetics": ("stock-prosthesis-hands", "Gloved hands finishing a dental prosthesis with a fine instrument", "50% 45%"),
+    "smile-design": ("stock-veneer-fingertip", "A thin porcelain veneer held up beside the front teeth of a dental model", "50% 50%"),
+    "cosmetic-dentistry": ("stock-veneers-fabric", "Four porcelain veneers resting on soft grey fabric", "50% 50%"),
+    "invisalign": ("stock-aligner-case-hand", "A clear aligner held in a gloved hand beside its open case", "50% 50%"),
+    "orthodontics": ("stock-braces-model", "Metal braces on a model of the teeth", "50% 55%"),
+    "general-dentistry": ("stock-scalers", "Scaling instruments laid out on a white tray", "50% 50%"),
+    "root-canal-treatment": ("stock-steel-instruments", "Fine steel dental instruments laid side by side", "50% 50%"),
+    "crowns-bridges": ("stock-bridge-white", "Three tooth-coloured restorations joined as one piece", "50% 50%"),
+    "kids-dentistry": ("stock-child-chair", "A woman beside a young girl sitting in a dental chair", "50% 45%"),
+}
+
+
 def hub_page(site_url):
+    """Explore treatments: the names as a large serif list. On laptops one photograph stays beside the list and
+    changes to the treatment nearest the middle of the screen (or under the pointer); on phones each photograph
+    sits under its name and settles in as it scrolls into view (site.js, "Treatments index")."""
     groups, shots = "", ""
     first = True
+    n = 0
     for g in treatments.GROUPS:
         links = ""
         for item in g["items"]:
             s = item["slug"]
             t = tp.TREATMENTS.get(s)
-            photo, alt, pos = (t.get("preview") or t["hero"]) if t else ("stock-parent-child", "A parent helping a young child brush their teeth", "50% 40%")
+            photo, alt, pos = INDEX_PHOTOS[s]
             card = t["card"] if t else tp.KIDS["card"]
+            n += 1
             links += f"""
-              <li>
-                <a class="tindex__link" href="{s}/" data-shot="{s}">
+              <li class="tindex__item{' is-active' if first else ''}" data-shot="{s}">
+                <a class="tindex__link" href="{s}/">
+                  <span class="tindex__num" aria-hidden="true">{n:02d}</span>
                   <span class="tindex__name">{item['name']}</span>
                   <span class="tindex__card">{card}</span>
                 </a>
+                <div class="tindex__media">
+{picture(photo, '(max-width: 899px) calc(100vw - 48px), 1px', alt, pos=pos, indent='                  ')}
+                </div>
               </li>"""
             shots += f"""
           <div class="tindex__shot{' is-active' if first else ''}" data-shot="{s}">
-{picture(photo, '(min-width: 900px) 50vw, 1px', alt, pos=pos, eager=first, indent='            ')}
+{picture(photo, '(min-width: 900px) 42vw, 1px', '', pos=pos, indent='            ')}
           </div>"""
             first = False
         groups += f"""
@@ -268,8 +293,8 @@ def hub_page(site_url):
     body = page_hero("{{pic stock-implant-arch | 100vw | A full arch of implant-supported teeth on a model | pos=50% 50% | eager}}",
                      "Explore treatments", "Specialist care, smile and aesthetic treatment, and everyday care for the whole family.", trail)
     body += f"""
-    <!-- =================================================================== INDEX (hover swaps the preview) -->
-    <section class="section tindex" aria-label="Treatments" data-preview>
+    <!-- =================================================================== INDEX (scroll or hover swaps the photograph) -->
+    <section class="section tindex" aria-label="Treatments" data-tindex>
       <div class="container tindex__grid">
         <div class="tindex__list">{groups}
         </div>

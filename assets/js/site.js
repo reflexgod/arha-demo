@@ -1309,13 +1309,52 @@
     lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
   }
 
-  // Treatments index: hovering or focusing a treatment swaps the large preview photograph
-  document.querySelectorAll('[data-preview]').forEach((box) => {
+  /* Treatments index (/treatments/). Laptops: the treatment nearest the middle of the screen, or under the
+     pointer, becomes active; its photograph wipes in over the last one (CSS). Phones: each photograph under its
+     name settles in once it scrolls into view. IntersectionObserver only, no scroll listeners. */
+  document.querySelectorAll('[data-tindex]').forEach((box) => {
+    const items = [...box.querySelectorAll('.tindex__item')];
     const shots = [...box.querySelectorAll('.tindex__shot')];
-    box.querySelectorAll('[data-shot]').forEach((a) => {
-      const on = () => shots.forEach((s) => s.classList.toggle('is-active', s.dataset.shot === a.dataset.shot));
-      a.addEventListener('mouseenter', on);
-      a.addEventListener('focus', on);
+    const wide = matchMedia('(min-width: 900px)');
+    let current = items.find((i) => i.classList.contains('is-active')) || items[0];
+    const activate = (item) => {
+      if (!item || item === current) return;
+      const slug = item.dataset.shot;
+      shots.forEach((s) => {
+        const was = s.classList.contains('is-active');
+        s.classList.toggle('is-prev', was);
+        if (!was) s.classList.remove('is-prev');
+        s.classList.toggle('is-active', s.dataset.shot === slug);
+      });
+      items.forEach((i) => i.classList.toggle('is-active', i === item));
+      current = item;
+    };
+    if ('IntersectionObserver' in window) {
+      // A thin band across the middle of the screen: whichever treatment crosses it is the active one
+      const middle = new IntersectionObserver((entries) => {
+        if (!wide.matches) return;
+        entries.filter((e) => e.isIntersecting).forEach((e) => activate(e.target));
+      }, { rootMargin: '-48% 0px -48% 0px' });
+      items.forEach((i) => middle.observe(i));
+      // The list steps back only while the section is on screen
+      new IntersectionObserver((entries) => entries.forEach((e) => box.classList.toggle('is-live', e.isIntersecting && wide.matches)),
+        { rootMargin: '-30% 0px -30% 0px' }).observe(box);
+      // Phones: photographs settle in as they arrive
+      const media = [...box.querySelectorAll('.tindex__media')];
+      if (reduceMotion) media.forEach((m) => m.classList.add('is-in'));
+      else {
+        const seen = new IntersectionObserver((entries) => entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); seen.unobserve(e.target); }
+        }), { rootMargin: '0px 0px -12% 0px' });
+        media.forEach((m) => seen.observe(m));
+      }
+    } else {
+      box.querySelectorAll('.tindex__media').forEach((m) => m.classList.add('is-in'));
+    }
+    items.forEach((i) => {
+      const a = i.querySelector('a');
+      a.addEventListener('mouseenter', () => { if (wide.matches) activate(i); });
+      a.addEventListener('focus', () => activate(i));
     });
   });
 
