@@ -41,7 +41,7 @@
       }
     } catch (e) { /* storage blocked: no intro */ }
   </script>
-  <script type="application/json" id="site-config">{"phone": "", "tel": "", "whatsapp": "", "email": "", "emergency": "", "timeZone": "Asia/Kolkata", "hours": [null, ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"]], "riyaWebhookUrl": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat", "googleReviewsUrl": "https://share.google/PzhwgJ9QJMErZnk9R"}</script>
+  <script type="application/json" id="site-config">{"phone": "+91 99755 07714", "tel": "+919975507714", "whatsapp": "", "email": "", "emergency": "", "timeZone": "Asia/Kolkata", "hours": [null, ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"]], "riyaWebhookUrl": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat", "googleReviewsUrl": "https://share.google/PzhwgJ9QJMErZnk9R"}</script>
   <script src="../assets/js/site.js" defer></script>
   <!-- Seamless navigation: pages are prefetched when a link is hovered or pressed (Speculation Rules; site.js 20 elsewhere) -->
   <script type="speculationrules">{"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"not": {"selector_matches": "[target=_blank], [data-call], [data-google-reviews]"}}]}, "eagerness": "moderate"}]}</script>
@@ -64,7 +64,7 @@
       {"@type": "Person", "name": "Dr. Nikhil V. Jain", "jobTitle": "Prosthodontist and Implantologist"},
       {"@type": "Person", "name": "Dr. Vasant P. Jain", "jobTitle": "Dental Surgeon", "honorificSuffix": "B.D.S."}
     ],
-    "telephone": "",
+    "telephone": "+91-99755-07714",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "107, Doctor House, 14 Peddar Road (Dr Gopalrao Deshmukh Marg), opp. Jaslok Hospital",
@@ -168,6 +168,7 @@
   <header class="site-header" data-header>
     <div class="utility-line" data-utility>
       <ul class="utility-line__list">
+        <li><a href="tel:+919975507714" data-call="utility" data-call-pop data-label="phone" aria-label="Call Arha Dental Care, +91 99755 07714"><span data-show="phone">+91 99755 07714</span></a></li>
         <li><a href="../emergency/">Emergencies</a></li>
       </ul>
     </div>
@@ -218,7 +219,7 @@
                     <li><a href="./">Dental tourism</a></li>
                   </ul>
                 </div>
-                <a class="mega__urgent" href="../emergency/">Dental emergency? Get help now</a>
+                <p class="mega__row"><a class="mega__urgent" href="../emergency/">Dental emergency? Get help now</a><a class="mega__urgent mega__call" href="tel:+919975507714" data-call="mega" data-label="phone" aria-label="Call Arha Dental Care, +91 99755 07714"><svg class="icon-phone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span>Call the clinic <span data-show="phone">+91 99755 07714</span></span></a></p>
               </div>
             </div>
           </li>
@@ -238,13 +239,31 @@
 
       <div class="header-actions">
         <!-- One action from every page: dials on a phone, opens the call panel on a laptop -->
-        
+        <a class="header-call" href="tel:+919975507714" data-call="header" data-call-pop data-label="phone" aria-label="Call Arha Dental Care, +91 99755 07714"><svg class="icon-phone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span class="header-call__long" data-show="phone">+91 99755 07714</span><span class="header-call__short">Call</span></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="side-menu" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
 
+    <!-- Call panel (laptops): the number large, copy it, scan the QR to call from a phone, or WhatsApp -->
+    <div class="call-pop" id="call-pop" role="dialog" aria-labelledby="call-pop-title" hidden>
+      <button class="call-pop__close" type="button" aria-label="Close" data-call-pop-close></button>
+      <p class="call-pop__title" id="call-pop-title">Call reception</p>
+      <a class="call-pop__number" href="tel:+919975507714" data-call="popover" data-show="phone">+91 99755 07714</a>
+      <p class="open-status call-pop__status" data-call-pop-status></p>
+      <div class="call-pop__scan">
+        <img src="../assets/img/call-qr.svg" width="112" height="112" loading="lazy" alt="QR code that dials Arha's reception">
+        <p>Scan with your phone’s camera to call from your phone.</p>
+      </div>
+      <div class="call-pop__actions">
+        <button class="cta" type="button" data-copy-number>Copy number</button>
+        
+        <button class="cta" type="button" data-ask-riya hidden>Ask Riya</button>
+      </div>
+      <p class="call-pop__closed" data-call-pop-closed hidden>We’re closed right now. Send a WhatsApp message or ask Riya, and the team will reply once the clinic opens.</p>
+      <p class="visually-hidden" role="status" data-copy-status></p>
+    </div>
   </header>
 
   <!-- ===================================================================== MENU (full screen, every width) -->
@@ -308,7 +327,7 @@
         </ul>
       </nav>
       <div class="side-menu__foot">
-        
+        <a href="tel:+919975507714" data-call="menu" data-show="phone">+91 99755 07714</a>
         <p class="open-status" data-open-status></p>
         <p>107, Doctor House, 14 Peddar Road, Mumbai 400026</p>
       </div>
@@ -437,6 +456,7 @@
         <div>
           <h2>Contact</h2>
           <ul>
+            <li><a href="tel:+919975507714" data-call="footer" data-show="phone">+91 99755 07714</a></li>
             <li><a href="../book/">Book an appointment</a></li>
             <li><a href="../emergency/">Dental emergencies</a></li>
           </ul>
@@ -471,9 +491,9 @@
   <!-- ===================================================================== ACTION BAR (phones)
        Generated by tools/chrome.py. The Call slot appears only with a real reception number (tools/pages.py). -->
   <nav class="call-bar call-bar--two" aria-label="Call or book">
+    <a class="call-bar__slot" href="tel:+919975507714" data-call="call_bar"><span class="call-bar__label">Call now</span><span class="visually-hidden">: call Arha Dental Care, <span data-show="phone">+91 99755 07714</span>.</span><span class="call-bar__status" data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span></a>
     
-    <a class="call-bar__slot" href="../emergency/"><span class="call-bar__label">Emergency</span><span class="call-bar__status">Help and first aid</span></a>
-    <a class="call-bar__slot" href="../book/"><span class="call-bar__label">Book</span><span class="call-bar__status"><span data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span></span></a>
+    <a class="call-bar__slot" href="../book/"><span class="call-bar__label">Book appointment</span><span class="call-bar__status">In person or online</span></a>
   </nav>
 
   <!-- =====================================================================

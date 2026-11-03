@@ -35,7 +35,7 @@ SITE_URL = "https://arha.svayra.com/"
 
 # The one source of truth for contact details. Placeholders until the clinic confirms (notes/TO-CONFIRM.md).
 SITE = {
-    "phone": "+91 00000 00000",      # reception
+    "phone": "+91 99755 07714",      # reception
     "whatsapp": "+91 00000 00000",
     "email": "hello@example.com",
     "emergency": "+91 00000 00000",

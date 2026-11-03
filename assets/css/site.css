@@ -2388,7 +2388,7 @@ html.is-locked .riya-launcher { visibility: hidden; }
   line-height: 1.5;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .riya-launcher {
     right: 12px;
     bottom: calc(72px + env(safe-area-inset-bottom)); /* clear of the Call / Book bar */
@@ -2770,7 +2770,7 @@ html.is-locked .riya-launcher { visibility: hidden; }
   display: none;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   body {
     padding-bottom: calc(56px + env(safe-area-inset-bottom)); /* the footer ends above the bar */
   }
@@ -6273,7 +6273,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
 .pano__soon { font: 700 20px/1.3 var(--font-head); letter-spacing: 2px; text-transform: uppercase; }
 
 /* Riya on phones: a compact launcher and bubble, always above the CALL NOW bar */
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .riya-launcher { width: 48px; height: 48px; bottom: calc(76px + env(safe-area-inset-bottom)); }
   .riya-bubble { bottom: calc(136px + env(safe-area-inset-bottom)); width: min(272px, calc(100vw - 24px)); padding: 12px 34px 10px 12px; }
   .riya-bubble__text { font-size: 14px; }
@@ -7360,7 +7360,9 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .mega--fix .mega__group > ul { margin: 0; padding: 0; }
 .mega--fix .mega__cols { column-gap: 28px; }
 .dropdown--mega .mega--fix ul a { display: block; padding: 6px 0; line-height: 22px; white-space: nowrap; }
-.dropdown--mega .mega--fix .mega__urgent { grid-column: 1 / -1; justify-self: start; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--paper-16); width: 100%; }
+.mega--fix .mega__row { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 48px; max-width: none; margin: 24px 0 0; padding-top: 20px; border-top: 1px solid var(--paper-16); }
+.mega__call { display: inline-flex; align-items: center; gap: 8px; }
+.mega__call .icon-phone { width: 15px; height: 15px; }
 @media (max-width: 1279px) { .dropdown--mega .mega--fix ul a { font-size: 15px; } .mega--fix { column-gap: 36px; } .mega--fix .mega__cols { column-gap: 20px; } }
 /* Review cards: the name block sits at the same height with or without an initial */
 .rcard__avatar--g { font-family: var(--font-body); }
@@ -7368,4 +7370,27 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 @media (max-width: 767px) {
   .rv__controls { padding-right: 68px; }
   .rcards__cta { padding-bottom: 72px; }
+}
+
+/* Calling (3 Nov 2026), in the site's quiet apa manner: a thin outline phone, uppercase text with a 1px rule */
+.icon-phone { flex: none; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linejoin: round; }
+.header-call { display: inline-flex; align-items: center; gap: 8px; background-size: calc(100% - 23px) 1px; background-position: right bottom; }
+.header-call { padding-top: 6px; } /* equal padding above and below its rule: on the nav's line */
+.header-call .icon-phone { width: 15px; height: 15px; }
+.header-call:focus-visible, .mega__call:focus-visible, .urgent__number--reception:focus-visible, .book__call a:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; }
+.urgent__number--reception { display: inline-flex; align-items: center; gap: 14px; }
+.urgent__number--reception .icon-phone { width: .8em; height: .8em; }
+.book__call { max-width: 640px; margin: 32px auto 0; font: 400 18px/1.5 var(--font-body); text-align: center; }
+/* Phones and small tablets (<= 768px): two equal buttons in the bar; Riya's launcher floats 16px above it
+   (position only), its bubble above that; the footer ends with room for the launcher */
+@media (max-width: 768px) {
+  .call-bar--two { justify-content: stretch; gap: 0; padding: 0 0 env(safe-area-inset-bottom); }
+  .call-bar__slot { position: relative; display: flex; flex: 1 1 0; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 56px; min-width: 0; }
+  .call-bar__slot + .call-bar__slot { border-left: 1px solid var(--paper-16); }
+  .call-bar--two .call-bar__label { padding: 0 0 3px; font-size: 14px; }
+  .call-bar--two .call-bar__status { max-width: 100%; padding-left: 0; border-left: 0; overflow: hidden; font-size: 10px; line-height: 1.2; letter-spacing: .1em; text-overflow: ellipsis; }
+  .call-bar__slot:focus-visible { outline: 2px solid var(--bronze); outline-offset: -5px; }
+  .riya-launcher { right: 12px; bottom: calc(72px + env(safe-area-inset-bottom)); width: 52px; height: 52px; padding-bottom: 0; border-left: 0; border-radius: 2px; }
+  .riya-bubble { right: 12px; bottom: calc(136px + env(safe-area-inset-bottom)); }
+  .site-footer::after { content: ""; display: block; height: 84px; }
 }
