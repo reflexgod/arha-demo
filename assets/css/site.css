@@ -7611,3 +7611,18 @@ html.call-in-view .header-call:not(:focus-visible) { opacity: 0; visibility: hid
 .page-hero h1 { font-size: clamp(1.625rem, 1.2rem + 1.8vw, 2.75rem); line-height: 1.15; }
 .page-hero .hero__text { text-shadow: 0 1px 16px rgba(0, 0, 0, .25); }
 .page-hero .hero__text .link { text-shadow: none; }
+
+/* Menu polish. The full-screen menu's light logo sits exactly where the header's dark one is, at the same size,
+   and the two crossfade, so two logos never show over each other while it opens or closes. */
+.side-menu__top img { width: 160px; height: auto; }
+.side-menu__panel { transition: opacity .25s var(--ease); }
+.site-header .brand { transition: opacity .2s ease; }
+html:has(.side-menu.is-open) .site-header .brand { opacity: 0; }
+@media (max-width: 767px) { .side-menu__top img { width: 136px; } }
+
+/* Mega menu: the phone icon on the same line as "Call the clinic", level with "Dental emergency? Get help now" */
+.mega--fix .mega__row { align-items: baseline; }
+.mega__row .mega__urgent { line-height: 1.5; }
+.dropdown--mega a.mega__call { display: inline-flex; flex-direction: row; align-items: center; gap: 10px; }
+.mega__call > span { display: inline; }
+.mega__call .icon-phone { flex: none; width: 15px; height: 15px; fill: currentColor; }
