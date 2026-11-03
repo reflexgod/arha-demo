@@ -226,35 +226,18 @@ def teaser():
 # ------------------------------------------------------------------ What brings you in? (treatment finder, site.js 23a)
 # Six cards, one tap to a short plain-English answer. Every answer comes from the site's own problem and treatment
 # pages and ends "Dr. Nikhil will confirm at your visit." Nothing is stored or sent.
-# The icons are drawn here (one tooth outline, placed and combined), all with the same stroke. On the answer panel the
-# card's icon is drawn large and light: every relevant clinic photograph is already on two pages (tools/photo_audit.py).
-TOOTH = ("M16 8C11 8 8 12 8 17c0 5 2 8 3 12 1 5 2 12 5 12 3 0 3-8 5-11 1-1.5 5-1.5 6 0 2 3 2 11 5 11 3 0 4-7 5-12"
-         " 1-4 3-7 3-12 0-5-3-9-8-9-3 0-5 2-8 2s-5-2-8-2Z")
+# Each card shows a free-licence Unsplash photograph (sources: notes/IMAGE-SOURCES.md; graded with photos.stock_grade
+# like every stock photo), and the answer panel shows the same photograph larger. Decorative (alt=""): the label says it.
+# By design, a card and its panel are one appearance of the photograph (tools/photo_audit.py).
+PHOTO_POS = {"pain": "50% 38%", "gap": "45% 50%", "crooked": "42% 50%", "stained": "66% 40%",
+             "chipped": "55% 35%", "child": "58% 50%"}
 
 
-def tooth(cx, cy, s, rot=0, extra=""):
-    """The tooth outline (centred on 24, 24.5 in a 48 box) moved to cx, cy, scaled by s and turned by rot degrees."""
-    return (f'<path d="{TOOTH}" transform="translate({cx} {cy}) rotate({rot}) scale({s}) translate(-24 -24.5)"'
-            f' vector-effect="non-scaling-stroke"{extra}/>')
+def finder_photo(name, sizes, i):
+    return pic(f"stock-finder-{name}", sizes, "", PHOTO_POS[name], i)
 
 
-ICONS = {
-    "pain": tooth(22, 26, .8) + '<path d="M35.5 10.5 39.5 6M38.5 16l5-1.5M30.5 8.5l.5-5"/>',
-    "gap": tooth(13, 24.5, .62) + tooth(35, 24.5, .62, extra=' stroke-dasharray="2.5 3"'),
-    "crooked": tooth(9.5, 26.5, .46, -14) + tooth(24, 22, .46, 3) + tooth(38.5, 27, .46, 15),
-    "stained": tooth(21, 26.5, .8) + '<path d="M39 3.5l1.6 4.9 4.9 1.6-4.9 1.6L39 16.5l-1.6-4.9-4.9-1.6 4.9-1.6Z"/>',
-    "chipped": tooth(24, 25, .85) + '<path d="M30.2 12.4 27.2 18l3.4 3-3 6"/>',
-    "child": tooth(17, 24.5, .74) + tooth(38, 30.5, .46)
-             + '<path d="M38 19.5c-3.4-2.5-3-5.5-1.3-5.5.8 0 1.3.7 1.3.7s.5-.7 1.3-.7c1.7 0 2.1 3-1.3 5.5Z"/>',
-}
-
-
-def icon(name, cls):
-    return (f'<svg class="{cls}" viewBox="0 0 48 48" aria-hidden="true" focusable="false">'
-            f'{ICONS[name]}</svg>')
-
-
-# card label, icon, panel heading, two or three short sentences, safety line (or ""), related pages
+# card label, photo, panel heading, two or three short sentences, safety line (or ""), related pages
 FINDER = [
     ("r-pain", "Tooth pain or swelling", "pain", "Finding the cause of the pain",
      "Pain when you bite, or with hot and cold, often comes from decay, a crack or an inflamed nerve. "
@@ -286,12 +269,16 @@ FINDER = [
      "An early check also spots bite or crowding problems while the jaws are still growing.",
      "", [("kids-dentistry/", "Kids’ dentistry"), ("problems/child-teeth/", "Children’s teeth, explained")]),
 ]
+CARD_SIZES = "(max-width: 767px) 76vw, 347px"
+PANEL_SIZES = "(max-width: 767px) 90vw, 460px"
 BACK = '<span aria-hidden="true">←</span> Go back'
 
 
 def finder():
     cards = "".join(f"""
-          <li><button class="finder__card" type="button" data-go="{rid}">{icon(ic, "finder__icon")}<span class="finder__label">{label}<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>"""
+          <li><button class="finder__card" type="button" data-go="{rid}" data-colour-group><span class="finder__media">
+{finder_photo(ic, CARD_SIZES, "              ")}
+            </span><span class="finder__label">{label}<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>"""
                     for rid, label, ic, *_ in FINDER)
     panels = ""
     for rid, _label, ic, title, text, urgent, links in FINDER:
@@ -309,7 +296,9 @@ def finder():
             <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
             <button class="finder__back finder__back--end" type="button" data-back>{BACK}</button>
           </div>
-          <div class="finder__visual">{icon(ic, "finder__art")}</div>
+          <div class="finder__visual">
+{finder_photo(ic, PANEL_SIZES, "            ")}
+          </div>
         </div>"""
     return f"""
     <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23a) -->

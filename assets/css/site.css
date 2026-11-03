@@ -7199,8 +7199,9 @@ button.link { border: 0; background: linear-gradient(currentColor, currentColor)
 button.cta { border: 0; border-bottom: 2px solid currentColor; }
 button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 
-/* 2b. What brings you in? (site.js 23a). Six tactile cards on the stone band: a line icon, a short label and an arrow.
-       Hover or press lifts the card 4px with a soft shadow and slides the arrow 4px (200 ms ease-out). Choosing one
+/* 2b. What brings you in? (site.js 23a). Six tactile cards on the stone band: a photograph (3:2), a short label and an arrow.
+       Hover or press lifts the card 4px with a soft shadow, slides the arrow 4px (200 ms ease-out) and zooms the photo 1.03
+       (400 ms); like every stock photo it rests in black and white and turns to colour on hover (site.js 18). Choosing one
        fades the cards out and the answer panel in (320 ms); none of it moves with reduced motion. */
 .ah-finder { padding: 80px var(--gutter) 90px; background: var(--stone); }
 .ah-finder__head { max-width: 704px; margin: 0 auto 44px; text-align: center; }
@@ -7211,13 +7212,14 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .finder__grid[hidden], .finder__panel[hidden] { display: none; }
 .finder__grid.is-out, .finder__panel.is-out { opacity: 0; transform: translateY(-12px); }
 .finder__grid.is-from, .finder__panel.is-from { opacity: 0; transform: translateY(16px); transition: none; }
-.finder__card { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; gap: 44px; width: 100%; height: 100%; min-height: 210px; padding: 28px 28px 26px; border: 0; border-radius: 14px; background: #F2EFE9; color: var(--ink); text-align: left; cursor: pointer; transition: transform .2s ease-out, box-shadow .2s ease-out; -webkit-tap-highlight-color: transparent; }
+.finder__card { display: flex; flex-direction: column; align-items: stretch; width: 100%; height: 100%; padding: 0; overflow: hidden; border: 0; border-radius: 14px; background: #F2EFE9; color: var(--ink); text-align: left; cursor: pointer; transition: transform .2s ease-out, box-shadow .2s ease-out; -webkit-tap-highlight-color: transparent; }
 .finder__card:hover, .finder__card:active { transform: translateY(-4px); box-shadow: 0 16px 32px -14px rgba(37, 36, 36, .28); }
 .finder__card:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.finder__icon { width: 60px; height: 60px; }
-.finder__icon, .finder__art { fill: none; stroke: var(--charcoal); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; overflow: visible; }
-.finder__icon *, .finder__art * { vector-effect: non-scaling-stroke; } /* one stroke weight at every size */
-.finder__label { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; width: 100%; font: 500 19px/1.3 var(--font-body); }
+.finder__media { position: relative; display: block; aspect-ratio: 3 / 2; overflow: hidden; background: var(--stone); }
+.finder__media picture.fill img, .finder__visual picture.fill img { transition: opacity 900ms var(--ease), transform .4s ease-out; }
+.finder__card:hover .finder__media img, .finder__card:active .finder__media img, .finder__card:focus-visible .finder__media img { transform: scale(1.03); }
+.finder__card:focus-visible .finder__media img { filter: none !important; } /* keyboard: in colour, like the mouse (site.js 18) */
+.finder__label { display: flex; flex: 1; align-items: center; justify-content: space-between; gap: 16px; width: 100%; padding: 20px 24px 22px; font: 500 19px/1.3 var(--font-body); }
 .finder__arrow { flex: none; font-size: 20px; transition: transform .2s ease-out; }
 .finder__card:hover .finder__arrow, .finder__card:active .finder__arrow, .finder__card:focus-visible .finder__arrow { transform: translateX(4px); }
 
@@ -7241,8 +7243,7 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .finder__book:hover, .finder__book:active { transform: translateY(-2px); box-shadow: 0 12px 24px -12px rgba(37, 36, 36, .5); }
 .finder__book:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
 .home-apa .finder__confirm { margin-top: 24px; color: var(--muted); font-size: 14px; }
-.finder__visual { display: grid; place-items: center; min-height: 100%; padding: 48px; }
-.finder__art { width: min(80%, 260px); height: auto; stroke-width: 1.75; stroke-opacity: .34; }
+.finder__visual { position: relative; min-height: 100%; overflow: hidden; background: var(--stone); }
 .finder__noscript { text-align: center; }
 
 @media (max-width: 767px) {
@@ -7252,12 +7253,11 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
   .finder__grid { display: flex; gap: 12px; overflow-x: auto; padding: 8px var(--gutter) 24px; scroll-padding-inline: var(--gutter); scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; }
   .finder__grid::-webkit-scrollbar { display: none; }
   .finder__grid > li { flex: 0 0 76%; scroll-snap-align: start; }
-  .finder__card { min-height: 184px; padding: 24px 22px 22px; }
-  .finder__label { font-size: 18px; }
+  .finder__label { padding: 16px 20px 18px; font-size: 18px; }
   .finder__panel { grid-template-columns: 1fr; margin: 0 var(--gutter); scroll-margin-top: calc(var(--header-h) + 12px); }
-  .finder__visual { order: -1; min-height: 0; padding: 52px 0 20px; }
-  .finder__art { width: 120px; }
-  .finder__back--top { position: absolute; top: 6px; left: 20px; margin: 0; }
+  .finder__visual { order: -1; min-height: 0; aspect-ratio: 3 / 2; }
+  /* over the photo: a paper pill, so it stays readable */
+  .finder__back--top { position: absolute; top: 12px; left: 12px; z-index: 1; margin: 0; padding: 0 16px; border-radius: 999px; background: rgba(250, 250, 246, .94); color: var(--ink); }
   .finder__text { padding: 22px 22px 18px; }
   .home-apa .finder__panel h3 { font-size: 24px; }
   .finder__actions { margin-top: 28px; }
@@ -7268,6 +7268,8 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
   .finder__grid, .finder__panel, .finder__card, .finder__arrow, .finder__book, .finder__back span { transition: none; }
   .finder__card:hover, .finder__card:active, .finder__book:hover, .finder__book:active { transform: none; }
   .finder__card:hover .finder__arrow, .finder__card:active .finder__arrow, .finder__card:focus-visible .finder__arrow, .finder__back:hover span { transform: none; }
+  .finder__media picture.fill img, .finder__visual picture.fill img { transition: none; }
+  .finder__card:hover .finder__media img, .finder__card:active .finder__media img, .finder__card:focus-visible .finder__media img { transform: none; }
 }
 
 /* 11. Reviews carousel (site.js 23b): the same tiles, one at a time on a scroll-snap track */

@@ -32,16 +32,18 @@ def pages():
 
 def photos(html):
     """Canonical photographs on a page. The two sides of one before/after pair (stock-pair-<n>-*,
-    stock-sim-whiten-*) are one appearance: a simulated pair is one photograph by design."""
+    stock-sim-whiten-*) are one appearance: a simulated pair is one photograph by design. So are a homepage
+    finder card's photograph and the same photograph on its answer panel (stock-finder-*): only one shows at a time."""
     names = re.findall(r'<img\b[^>]*?\ssrc="[^"]*?assets/(?:img|video)/([a-z0-9-]+?)-\d+\.(?:jpg|webp|avif)"', html)
     canon = photo_ids.groups()
     out, seen_pairs = [], set()
     for n in names:
-        pair = re.match(r"(stock-pair-\d+|stock-sim-whiten)-(?:before|after)$", n)
+        pair = re.match(r"(stock-pair-\d+|stock-sim-whiten)-(?:before|after)$|(stock-finder-[a-z]+)$", n)
         if pair:
-            if pair.group(1) in seen_pairs:
+            key = pair.group(1) or pair.group(2)
+            if key in seen_pairs:
                 continue
-            seen_pairs.add(pair.group(1))
+            seen_pairs.add(key)
         out.append(canon.get(n, n))
     return out
 
