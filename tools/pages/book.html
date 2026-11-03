@@ -18,8 +18,7 @@
               <p>A full examination and a clear explanation of your options, in person, with time for every question.</p>
               <div class="path__actions">
                 <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20an%20in-person%20consultation%20at%20Peddar%20Road.">Book on WhatsApp</a>
-                <!--if:no-whatsapp--><button class="cta" type="button" data-riya-ask="I'd like to book an in-person appointment at Peddar Road.">Book with Riya, our receptionist</button><!--endif-->
-                <a class="cta" href="tel:+910000000000" data-call="book">Call <span data-show="phone">+91 00000 00000</span></a>
+                <!--flag:riya--><button class="cta" type="button" data-riya-ask="I'd like to request an in-person appointment at Peddar Road.">Request with Riya, our assistant</button><!--/flag:riya-->
               </div>
             </div>
           </article>
@@ -33,14 +32,20 @@
               <p>A video consultation to talk through your concerns, look at any X-rays or scans you already have, and plan your treatment before you travel.</p>
               <div class="path__actions">
                 <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%27d%20like%20to%20book%20a%20virtual%20consultation.">Book on WhatsApp</a>
-                <!--if:no-whatsapp--><button class="cta" type="button" data-riya-ask="I'd like to book a virtual consultation.">Book with Riya, our receptionist</button><!--endif-->
-                <a class="cta" href="tel:+910000000000" data-call="book">Call <span data-show="phone">+91 00000 00000</span></a>
+                <!--flag:riya--><button class="cta" type="button" data-riya-ask="I'd like to request a virtual consultation.">Request with Riya, our assistant</button><!--/flag:riya-->
               </div>
             </div>
           </article>
         </div>
-        <!--if:phone--><p class="book__call reveal">Prefer to talk? <a class="link" href="tel:+910000000000" data-call="book_talk" data-label="phone" aria-label="Call Arha Dental Care, +91 00000 00000">Call us</a></p><!--endif-->
-        <p class="book__note reveal"><!--if:whatsapp-->WhatsApp opens with your request already written. Nothing is sent until you press send.<!--endif--><!--if:no-whatsapp-->Riya, our online receptionist, takes your name, what you need and a time that suits you, and the clinic confirms your appointment.<!--endif--></p>
+        <!-- One way to book by phone for both kinds of visit: the page's only number (one call action per screen) -->
+        <!--if:phone--><div class="book-phone">
+          <h2 class="book-phone__title">Book by phone</h2>
+          <p class="book-phone__text">Reception books both in-person visits and virtual consultations, and answers any question first.</p>
+          <a class="book-phone__number" href="tel:+910000000000" data-call="book" data-label="phone" aria-label="Call Arha Dental Care, +91 00000 00000"><svg class="icon-phone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span data-show="phone">+91 00000 00000</span></a>
+          <p class="open-status book-phone__status" data-open-status></p>
+          <p class="book-phone__hours"><span data-show="hours-days">Monday to Saturday</span>, <span data-show="hours-time">9:30 AM to 6:30 PM</span>. <span data-show="hours-closed">Sunday closed</span>.</p>
+        </div><!--endif-->
+        <p class="book__note"><!--if:whatsapp-->WhatsApp opens with your request already written. Nothing is sent until you press send. <!--endif--><!--flag:riya-->Riya, our online assistant, takes your name, what you need and a time that suits you, and passes your request to the clinic. <!--/flag:riya-->Every appointment is confirmed by the clinic.</p>
       </div>
     </section>
 

@@ -543,16 +543,27 @@ def index_page(site_url):
     """/problems/: the ten problems as the large-type list, with the photo stage."""
     import v4_pages
     trail = [("Home", ""), ("What we treat", "problems/")]
-    body = f"""
-    <section class="section problems-index" aria-labelledby="page-title">
+    def options(slug):
+        names = [f[1] for f in PROBLEMS[slug]["fix"]]
+        low = [n[0].lower() + n[1:] for n in names[1:]]
+        return ", ".join([names[0]] + low[:-1]) + (f" or {low[-1]}" if low else "")
+    def how(slug):  # left out where the line already names the options (no repeated information)
+        line = PROBLEMS[slug]["line"].lower()
+        names = [f[1].lower().removeprefix("an ").removeprefix("a ") for f in PROBLEMS[slug]["fix"]]
+        return "" if all(n in line for n in names) else f'<span class="problem-row__how">Usually: {options(slug)}</span>'
+    rows = "".join(f"""
+          <li><a href="problems/{s}/"><span class="problem-row__name">{PROBLEMS[s]["menu"]}{ARROW}</span><span class="problem-row__line">{PROBLEMS[s]["line"]}</span>{how(s)}</a></li>""" for s in ORDER)
+    body = v4_pages.page_hero("{{pic arha-dental-care-operatory-chair | 100vw | The dental chair and its light in an Arha treatment room | pos=50% 50% | eager}}",
+                              "What we treat", "Start with what is bothering you. Each page explains what is usually behind it and how it is treated.",
+                              trail, "Problems we treat")
+    body += f"""
+    <!-- =================================================================== THE TEN PROBLEMS: each with one line and its usual treatments -->
+    <section class="section problem-rows" aria-labelledby="rows-title">
       <div class="container">
-        {tp.crumbs(trail)}
-        <div class="section-head reveal"><h1 id="page-title">What we treat</h1><p class="lede">Start with what is bothering you. Each page shows what treatment would involve.</p></div>
-      </div>
-    </section>
-    <section class="section section--stone problem-links" aria-label="Problems we treat">
-      <div class="container">
-        <ul class="problem-links__list reveal">{"".join(f'<li><a href="problems/{s}/">{PROBLEMS[s]["menu"]}{ARROW}</a></li>' for s in ORDER)}</ul>
+{v4_pages.head("rows-title", "Ten common problems", "Choose the one closest to yours. Nothing here is a diagnosis: Dr. Nikhil confirms what is going on, and your options, at your visit.")}
+        <ul class="problem-rows__list reveal">{rows}
+        </ul>
+        <p class="problem-rows__urgent reveal">In severe pain, swollen or bleeding? <a class="link" href="emergency/">Dental emergencies</a></p>
       </div>
     </section>
 {closing_band()}"""

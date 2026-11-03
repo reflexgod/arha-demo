@@ -43,7 +43,17 @@ SITE = {
     "hours": [None, ("09:30", "18:30"), ("09:30", "18:30"), ("09:30", "18:30"),
               ("09:30", "18:30"), ("09:30", "18:30"), ("09:30", "18:30")],
     "time_zone": "Asia/Kolkata",
-    "riya_webhook_url": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat",
+    # Riya, the online assistant. Off until her new webhook is live (the old one answered 404 on 3 Nov 2026).
+    # To switch her on: paste the webhook URL here, set riyaEnabled to True, run this script. Nothing else.
+    # Off: no launcher, no teaser, no chat code, no webhook URL and no "Ask Riya" button anywhere; those
+    # buttons fall back to calling the clinic (<!--flag:riya--> / <!--flag:no-riya--> blocks).
+    "riyaEnabled": False,
+    "riya_webhook_url": "",
+    # Reviews and before/after publicity stay out until the clinic decides (NMC ethical advertising guidelines,
+    # National Dental Commission advisory, Oct 2026). Off: no review sections, stars or ratings anywhere, and
+    # /our-work/ is not built and not linked (<!--flag:reviews--> and <!--flag:ourwork--> blocks). Content is kept.
+    "showReviews": False,
+    "showOurWork": False,
     "google_reviews_url": "https://share.google/PzhwgJ9QJMErZnk9R",
     # No Google rating or review count anywhere on the site (Viraaj, 2 Nov 2026)
     "google_rating": "",
@@ -51,6 +61,24 @@ SITE = {
     # Hero line for the technology USP: from what Arha's own photos show, until the equipment list is confirmed
     "usp_line": "In-house X-ray · Own sterilisation room · Prosthodontist-led",
 }
+
+RIYA_SRC = ROOT / "tools" / "riya"
+
+
+def flags():
+    """Which optional parts of the site are published (SITE above)."""
+    return {"riya": bool(SITE["riyaEnabled"] and SITE["riya_webhook_url"]),
+            "reviews": bool(SITE["showReviews"]), "ourwork": bool(SITE["showOurWork"])}
+
+
+def apply_flags(html):
+    """Keep <!--flag:name-->...<!--/flag:name--> only while the flag is on, and <!--flag:no-name-->...
+    <!--/flag:no-name--> only while it is off. Blocks of different names may nest."""
+    for name, on in flags().items():
+        html = re.sub(rf"<!--flag:{name}-->(.*?)<!--/flag:{name}-->", lambda m: m.group(1) if on else "", html, flags=re.S)
+        html = re.sub(rf"<!--flag:no-{name}-->(.*?)<!--/flag:no-{name}-->", lambda m: "" if on else m.group(1), html, flags=re.S)
+    return html
+
 
 DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
@@ -61,7 +89,7 @@ PAGES = {
     },
     "book": {
         "title": "Book an Appointment | Arha Dental Care, Peddar Road",
-        "description": "Book an in-person consultation at Arha Dental Care on Peddar Road, Mumbai, or a virtual consultation from anywhere, by WhatsApp or phone.",
+        "description": "Book an in-person consultation at Arha Dental Care on Peddar Road, Mumbai, or a virtual consultation from anywhere, by phone.",
     },
     "404": {
         "title": "Page not found | Arha Dental Care, Peddar Road",
@@ -136,7 +164,7 @@ def client_config():
         "emergency": "" if missing("emergency") else SITE["emergency"],
         "timeZone": SITE["time_zone"],
         "hours": [list(d) if d else None for d in SITE["hours"]],
-        "riyaWebhookUrl": SITE["riya_webhook_url"],
+        **({"riyaWebhookUrl": SITE["riya_webhook_url"]} if flags()["riya"] else {}),
         "googleReviewsUrl": SITE["google_reviews_url"],
     }
 
@@ -320,39 +348,52 @@ def expand_pics(html):
 
 def build_home(page):
     """index.html is the source of every page's chrome: the header, menu and footer (tools/chrome.py) and the
-    homepage's sections (tools/home.py) are written into it; the <head>, call bar and Riya stay as they are."""
+    homepage's sections (tools/home.py) are written into it; the <head> stays as it is. Riya's launcher
+    (tools/riya/launcher.html) is added only while she is switched on."""
     visit = VISIT.read_text(encoding="utf-8")
     start = page.index("  <!-- ===================================================================== HEADER -->")
-    main_at = page.index('  <main id="main"')
-    end_main = page.index("  </main>\n") + len("  </main>\n")
-    riya = page.index("RIYA AI RECEPTIONIST")
-    riya = page.rindex("  <!-- =====", 0, riya)
+    riya = (RIYA_SRC / "launcher.html").read_text(encoding="utf-8") if flags()["riya"] else ""
     return (page[:start] + chrome.header() + chrome.side_menu() + "\n" + home_apa.main_html(visit) + "\n"
-            + chrome.footer() + "\n" + chrome.call_bar() + "\n" + page[riya:])
+            + chrome.footer() + "\n" + chrome.call_bar() + "\n" + riya + "</body>\n</html>\n")
+
+
+def riya_assets():
+    """The chat window's code is published only while Riya is on."""
+    out = ROOT / "assets" / "js" / "riya.js"
+    if flags()["riya"]:
+        out.write_bytes((RIYA_SRC / "riya.js").read_bytes())
+    elif out.exists():
+        out.unlink()
 
 
 def main():
     index = ROOT / "index.html"
     original = index.read_text(encoding="utf-8")
     home_page = expand_pics(build_home(original))
-    home = finishing_head(hide_missing(apply_site(menus(home_page))), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster"))
+    home = finishing_head(hide_missing(apply_site(apply_flags(menus(home_page)))), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster"))
     finish.favicons()
     if home != original:
         index.write_text(home, encoding="utf-8", newline="\n")
         print("updated index.html (contact details, menus)")
     call_qr()
+    riya_assets()
 
     visit = VISIT.read_text(encoding="utf-8")
     planner = "" if missing("whatsapp") else (ROOT / "tools" / "pages" / "_planner.html").read_text(encoding="utf-8")
     head = home[:home.index("<body>")]
-    head = re.sub(r"\s*<!-- Hero poster is the LCP image.*?fetchpriority=\"high\">\n", "\n", head, flags=re.S)
+    head = re.sub(r"\s*<!-- Hero poster is the LCP image[^\n]*\n(?:[ \t]*<link rel=\"preload\" as=\"image\"[^>]*>\n)+", "\n", head)
     # Inner pages carry a class: their stock smiles and faces render in black and white (site.css)
     top = home[home.index("<body>"):home.index('  <main id="main"')].replace("<body>", '<body class="page-inner">', 1)
     bottom = home[home.index("  </main>") + len("  </main>\n"):]
 
     pages = dict(PAGES)
     for slug, meta, main_html in v4_pages.all_pages(SITE_URL, visit):
+        if slug.split("/")[0] == "our-work" and not flags()["ourwork"]:
+            continue
         pages[slug] = {**meta, "main": main_html}
+    if not flags()["ourwork"] and (ROOT / "our-work").exists():  # not published: take the old build away
+        import shutil
+        shutil.rmtree(ROOT / "our-work")
     for slug, meta in pages.items():
         h = re.sub(r"<title>.*?</title>", f"<title>{meta['title']}</title>", head)
         h = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{meta["description"]}">', h)
@@ -375,8 +416,10 @@ def main():
         first = re.search(r"\{\{pic ([\w-]+)|assets/img/([\w-]+?)-\d+\.(?:jpg|webp|avif)", main_html)
         photo = (first.group(1) or first.group(2)) if first else "hero-city-poster"
         main_html = expand_pics(main_html.replace("{{visit}}", visit).replace("{{planner}}", planner))
+        if slug == "emergency":  # emergency help must be readable at once: no scroll reveals on this page
+            main_html = re.sub(r'(class="[^"]*?)\s*\breveal(?![\w-])', r'\1', main_html)
         og = finish.og_image(slug.replace("/", "-"), html.unescape(meta["title"].split(" | ")[0]), photo)
-        page = relocate(hide_missing(apply_site(finishing_head(h, og) + top + main_html + bottom)), slug)
+        page = relocate(hide_missing(apply_site(apply_flags(finishing_head(h, og) + top + main_html + bottom))), slug)
         out = ROOT / ("." if slug == "404" else slug)
         out.mkdir(parents=True, exist_ok=True)
         name = "404.html" if slug == "404" else "index.html"

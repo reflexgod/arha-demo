@@ -72,12 +72,17 @@ def hero():
     return """    <!-- =================================================================== 1. HERO (apa: video, text bottom-left, one CTA) -->
     <section class="hero ah-hero" data-hero aria-labelledby="hero-title">
       <div class="hero__media">
+        <!-- The poster: the loop's first frame (an upright cut for phones held upright). It stays if the video
+             cannot play (reduced motion, data saver, autoplay blocked). -->
         <picture>
-          <source type="image/avif" srcset="assets/video/hero-city-poster-720.avif 720w, assets/video/hero-city-poster-1280.avif 1280w, assets/video/hero-city-poster-1920.avif 1920w" sizes="(orientation: portrait) 80vh, 100vw">
-          <source type="image/webp" srcset="assets/video/hero-city-poster-720.webp 720w, assets/video/hero-city-poster-1280.webp 1280w, assets/video/hero-city-poster-1920.webp 1920w" sizes="(orientation: portrait) 80vh, 100vw">
-          <img src="assets/video/hero-city-poster-1280.jpg" srcset="assets/video/hero-city-poster-720.jpg 720w, assets/video/hero-city-poster-1280.jpg 1280w, assets/video/hero-city-poster-1920.jpg 1920w" sizes="(orientation: portrait) 80vh, 100vw" width="1920" height="1080" alt="The Mumbai skyline across the bay" fetchpriority="high" decoding="async">
+          <source media="(orientation: portrait)" type="image/avif" srcset="assets/video/hero-city-poster-port-540.avif 540w, assets/video/hero-city-poster-port-810.avif 810w" sizes="100vw">
+          <source media="(orientation: portrait)" type="image/webp" srcset="assets/video/hero-city-poster-port-540.webp 540w, assets/video/hero-city-poster-port-810.webp 810w" sizes="100vw">
+          <source media="(orientation: portrait)" srcset="assets/video/hero-city-poster-port-540.jpg 540w, assets/video/hero-city-poster-port-810.jpg 810w" sizes="100vw">
+          <source type="image/avif" srcset="assets/video/hero-city-poster-720.avif 720w, assets/video/hero-city-poster-1280.avif 1280w, assets/video/hero-city-poster-1920.avif 1920w" sizes="100vw">
+          <source type="image/webp" srcset="assets/video/hero-city-poster-720.webp 720w, assets/video/hero-city-poster-1280.webp 1280w, assets/video/hero-city-poster-1920.webp 1920w" sizes="100vw">
+          <img src="assets/video/hero-city-poster-1280.jpg" srcset="assets/video/hero-city-poster-720.jpg 720w, assets/video/hero-city-poster-1280.jpg 1280w, assets/video/hero-city-poster-1920.jpg 1920w" sizes="100vw" width="1920" height="1080" alt="The Mumbai skyline across the bay" fetchpriority="high" decoding="async">
         </picture>
-        <!-- site.js adds the source after page load: 1080p on large screens, 720p otherwise -->
+        <!-- site.js adds the source after page load: an upright cut on phones held upright, else 1080p or 720p -->
         <video class="hero__video" data-base="assets/video/hero-city-" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
       </div>
       <div class="hero__content">
@@ -199,11 +204,9 @@ def founder():
     <section class="ah-founder" aria-labelledby="founder-title">
 {pic('stock-dentist-hands', '100vw', '', '70% 50%', '      ')}
       <div class="ah-founder__text reveal">
-        <h2 id="founder-title">From the founder</h2>
-        <blockquote>
-          <p>“A good restoration should never announce itself. My aim is a result that feels natural, functions beautifully and lasts.”</p>
-          <footer>Dr. Nikhil V. Jain, prosthodontist and implantologist</footer>
-        </blockquote>
+        <h2 id="founder-title">Our philosophy</h2>
+        <!-- Clinic philosophy, not a quote: no source for these words in the notes (notes/TO-CONFIRM.md) -->
+        <p class="ah-founder__line">A good restoration should never announce itself. The aim is a result that feels natural, works well and lasts.</p>
         <a class="link link--light" href="doctors/">Meet our doctors</a>
       </div>
     </section>
@@ -314,8 +317,8 @@ def finder():
       <div class="finder" data-finder>
         <ul class="finder__grid" data-finder-grid data-reveal-group aria-label="Choose what sounds closest">{cards}
         </ul>{panels}
-        <noscript><p class="finder__noscript"><a class="link" href="problems/">See the problems we treat</a></p></noscript>
       </div>
+      <p class="finder__all reveal"><a class="link" href="problems/">All the problems we treat</a></p>
     </section>
 """
 
@@ -348,7 +351,7 @@ def reviews():
           </div>"""
     dots = "".join(f'<li><button class="rv__dot" type="button" aria-label="Show review {k + 1}" data-dot="{k}"></button></li>' for k in range(n))
     return f"""
-    <!-- =================================================================== 10. REVIEWS HEADING + 11. CAROUSEL -->
+    <!--flag:reviews--><!-- =================================================================== 10. REVIEWS HEADING + 11. CAROUSEL (SITE["showReviews"]) -->
     <section class="ah-head ah-head--reviews reveal" aria-labelledby="reviews-title">
       <!-- No rating or review count anywhere on the site (Viraaj, 2 Nov 2026) -->
       <h2 id="reviews-title">What patients say on Google</h2>
@@ -368,11 +371,13 @@ def reviews():
           </div>
         </div>
       </div>
-    </section>
+    </section><!--/flag:reviews-->
 """
 
 
 def main_html(visit=None):
-    """The homepage <main>. The footer (apa's closing line, logo and columns) comes from chrome.py."""
-    return ('  <main id="main" class="home-apa" tabindex="-1">\n\n' + hero() + finder() + trio() + band() + grid() + dark() + process() + founder()
+    """The homepage <main>. The footer (apa's closing line, logo and columns) comes from chrome.py.
+    One problem picker only, "What brings you in?": the grid of problem squares (grid()) repeated it, and all ten
+    problems are one tap away on /problems/ (Demo-ready, 3 Nov 2026)."""
+    return ('  <main id="main" class="home-apa" tabindex="-1">\n\n' + hero() + finder() + trio() + band() + dark() + process() + founder()
             + teaser() + reviews() + "\n  </main>\n")

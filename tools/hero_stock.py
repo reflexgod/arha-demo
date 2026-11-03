@@ -3,6 +3,9 @@
 Usage: .venv/Scripts/python -I tools/hero_stock.py
 Sources in src-assets/stock/video/. Output in assets/video/:
   hero-city-1080.mp4, hero-city-720.mp4 (H.264 only: VP9 came out larger for this footage), hero-city-poster-{1920,1280,720}.{avif,webp,jpg}
+  hero-city-phone.mp4 + hero-city-poster-port-{540,810}.*: a 9:16 cut from the centre of the frame for phones held upright
+  (sharper and far lighter than scaling the 16:9 loop up to fill a tall screen).
+3 Nov 2026: graded slightly darker and encoded lighter (the 1080p loop was 3.8 MB), so white text reads on every frame.
 Seamless loop: the first XF seconds of shot 1 are crossfaded in at the end.
 The previous clinic-walkthrough loop (tools/video.py, hero-land-*/hero-port-*) is kept but no longer used.
 """
@@ -19,8 +22,10 @@ SHOTS = [  # (file, start, duration)
     ("16902674_2560_1440_30fps.mp4", 0.0, 19.8),   # Mumbai skyline across the bay (Pexels 39648416)
     ("13251826_2560_1440_30fps.mp4", 0.0, 9.5),    # Marine Drive, clouds over the bay (Pexels 31000790)
 ]
-GRADE = "eq=saturation=0.9:contrast=0.97,curves=master='0/0.03 0.5/0.51 1/0.98'"
-VARIANTS = {"1080": ("1920:1080", 27), "720": ("1280:720", 28)}
+GRADE = "eq=saturation=0.9:contrast=0.97,curves=master='0/0.02 0.5/0.45 1/0.9'"
+# name: (crop, scale, crf, maxrate)
+VARIANTS = {"1080": ("", "1920:1080", 30, "0.62M"), "720": ("", "1280:720", 31, "0.36M"),
+            "phone": ("crop=ih*9/16:ih,", "720:1280", 31, "0.4M")}
 
 
 def run(cmd):
@@ -31,8 +36,8 @@ def main():
     inputs = []
     for f, start, dur in SHOTS:
         inputs += ["-ss", str(start), "-t", str(dur), "-i", str(SRC / f)]
-    for name, (scale, crf) in VARIANTS.items():
-        parts = [f"[{i}:v]scale={scale}:flags=lanczos,{GRADE},fps=30,format=yuv420p,setsar=1,settb=AVTB,setpts=PTS-STARTPTS[v{i}]"
+    for name, (crop, scale, crf, rate) in VARIANTS.items():
+        parts = [f"[{i}:v]{crop}scale={scale}:flags=lanczos,{GRADE},fps=24,format=yuv420p,setsar=1,settb=AVTB,setpts=PTS-STARTPTS[v{i}]"
                  for i in range(len(SHOTS))]
         parts += ["[v0]split[a][b]", f"[a]trim=start={XF},setpts=PTS-STARTPTS[s0]", f"[b]trim=end={XF},setpts=PTS-STARTPTS[head]"]
         d0, d1 = SHOTS[0][2] - XF, SHOTS[1][2]
@@ -42,16 +47,21 @@ def main():
         mp4 = OUT / f"hero-city-{name}.mp4"
         run(["ffmpeg", "-v", "error", "-y", *inputs, "-filter_complex", ";".join(parts), "-map", "[out]", "-an",
              "-c:v", "libx264", "-preset", "slow", "-crf", str(crf), "-profile:v", "high", "-pix_fmt", "yuv420p",
-             "-g", "90", "-movflags", "+faststart", "-maxrate", "1.15M" if name == "1080" else "0.6M", "-bufsize", "2.3M",
+             "-g", "72", "-movflags", "+faststart", "-maxrate", rate, "-bufsize", "1.6M",
              str(mp4)])
-        if name == "1080":
+        if name in ("1080", "phone"):
             png = OUT / "_poster.png"
             run(["ffmpeg", "-v", "error", "-y", "-i", str(mp4), "-frames:v", "1", str(png)])
             im = Image.open(png).convert("RGB")
             png.unlink()
-            for w in (1920, 1280, 720):
+            if name == "phone":  # the poster is cut from the 1440p source frame for full sharpness
+                run(["ffmpeg", "-v", "error", "-y", "-ss", str(SHOTS[0][1]), "-i", str(SRC / SHOTS[0][0]), "-frames:v", "1",
+                     "-vf", f"crop=ih*9/16:ih,scale=810:1440:flags=lanczos,{GRADE}", str(png)])
+                im = Image.open(png).convert("RGB")
+                png.unlink()
+            for w in ((810, 540) if name == "phone" else (1920, 1280, 720)):
                 p = im.resize((w, round(im.height * w / im.width)), Image.LANCZOS)
-                base = OUT / f"hero-city-poster-{w}"
+                base = OUT / (f"hero-city-poster-port-{w}" if name == "phone" else f"hero-city-poster-{w}")
                 p.save(f"{base}.avif", "AVIF", quality=55, speed=4)
                 p.save(f"{base}.webp", "WEBP", quality=76, method=6)
                 p.save(f"{base}.jpg", "JPEG", quality=78, optimize=True, progressive=True)

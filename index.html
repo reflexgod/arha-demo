@@ -28,7 +28,8 @@
   <link rel="preload" href="assets/fonts/d-din-bold.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/cormorant-garamond-400-italic.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Hero poster is the LCP image: preload the exact file the <picture> below will pick -->
-  <link rel="preload" as="image" type="image/avif" imagesrcset="assets/video/hero-city-poster-720.avif 720w, assets/video/hero-city-poster-1280.avif 1280w, assets/video/hero-city-poster-1920.avif 1920w" imagesizes="(orientation: portrait) 90vh, 100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" media="(orientation: portrait)" imagesrcset="assets/video/hero-city-poster-port-540.avif 540w, assets/video/hero-city-poster-port-810.avif 810w" imagesizes="100vw" fetchpriority="high">
+  <link rel="preload" as="image" type="image/avif" media="(orientation: landscape)" imagesrcset="assets/video/hero-city-poster-720.avif 720w, assets/video/hero-city-poster-1280.avif 1280w, assets/video/hero-city-poster-1920.avif 1920w" imagesizes="100vw" fetchpriority="high">
 
   <link rel="stylesheet" href="assets/css/site.css">
   <script>
@@ -43,7 +44,7 @@
       }
     } catch (e) { /* storage blocked: no intro */ }
   </script>
-  <script type="application/json" id="site-config">{"phone": "+91 99755 07714", "tel": "+919975507714", "whatsapp": "", "email": "", "emergency": "", "timeZone": "Asia/Kolkata", "hours": [null, ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"]], "riyaWebhookUrl": "https://viraaj19.app.n8n.cloud/webhook/ac85a7b5-2995-4909-9988-614bba42debb/chat", "googleReviewsUrl": "https://share.google/PzhwgJ9QJMErZnk9R"}</script>
+  <script type="application/json" id="site-config">{"phone": "+91 99755 07714", "tel": "+919975507714", "whatsapp": "", "email": "", "emergency": "", "timeZone": "Asia/Kolkata", "hours": [null, ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"], ["09:30", "18:30"]], "googleReviewsUrl": "https://share.google/PzhwgJ9QJMErZnk9R"}</script>
   <script src="assets/js/site.js" defer></script>
   <!-- Seamless navigation: pages are prefetched when a link is hovered or pressed (Speculation Rules; site.js 20 elsewhere) -->
   <script type="speculationrules">{"prefetch": [{"where": {"and": [{"href_matches": "/*"}, {"not": {"selector_matches": "[target=_blank], [data-call], [data-google-reviews]"}}]}, "eagerness": "moderate"}]}</script>
@@ -87,7 +88,7 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Arha's emblem (paths from the logo PDF), used by the first-visit intro and Riya -->
+  <!-- Arha's emblem (paths from the logo PDF), used by the first-visit intro -->
   <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
     <symbol id="arha-icon" viewBox="0 0 919.25 902.15"><path d="M833.41 320.11C833.38 320.16 833.37 320.19 722.37 566.44C720.09 571.49 708.97 593.11 708.97 593.11C708.97 593.11 698.86 571.54 696.56 566.51C659.73 486.12 537.05 217.6 504.88 137.46C502.53 131.62 491.61 108.83 496.31 103.62C534.77 60.96 590.04 36.5 647.95 36.5C675.74 36.5 702.7 42.09 728.08 53.11C777.73 74.67 816.04 114.35 835.96 164.83C855.87 215.32 854.97 270.47 833.41 320.11ZM742.55 19.81C712.28 6.67 680.21 0 647.23 0C622.75 0 598.49 3.75 575.15 11.14C574.74 11.27 574.33 11.38 573.93 11.47C490.9 29.91 447.06 89.2 428.25 123.09C427.45 124.97 426.39 126.93 425.25 129.03C423.76 131.77 421.91 135.18 421.01 137.19L226.79 565.7C224.9 570.82 214.46 593.11 214.46 593.11C214.46 593.11 203.41 570.91 201.07 566L86.06 320.57C85.98 320.41 85.91 320.25 85.85 320.12C41.28 217.47 88.52 97.69 191.17 53.11C216.56 42.08 243.53 36.49 271.32 36.49C290.03 36.49 308.36 40.67 326.89 44.21C363.52 52.16 382.67 63.86 404.88 77.64C410.6 68.41 419.13 57.31 425.9 51.74C390.06 25.3 345.82 11.68 344.1 11.14C320.76 3.75 296.51 0 272.02 0C239.05 0 206.98 6.67 176.71 19.81C55.7 72.36 0 213.55 52.53 334.52C52.98 335.54 118.07 483.69 181.49 628.26L242.14 628.51L439.78 187.31C443.63 178.5 461.31 141.45 461.31 141.45C461.31 141.45 479.38 178.37 483.3 186.97L686.49 633.05C688 636.35 688.18 640.06 687.01 643.49C686.76 644.23 623.7 798.38 623.7 798.38C623.7 798.38 614.09 769.97 541.27 600.3C508.91 524.89 472.13 439.1 463.17 417.99C444.03 463.43 302.51 799.4 302.51 799.4C302.51 799.4 260.13 706.61 245.78 673.35L197.81 673.35C253.96 798.98 293.86 884.77 301.3 902.14C316.17 866.71 441.34 568.43 441.55 567.92C447.91 553.43 463.1 519.32 463.1 519.32C463.1 519.32 480.77 558.87 484.12 568.68C490.23 583.21 607.4 862.04 624.25 902.15L866.7 334.57C919.25 213.56 863.55 72.36 742.55 19.81Z"/></symbol>
   </svg>
@@ -96,16 +97,10 @@
   </div>
 
   <!-- ===================================================================== HEADER -->
-  <!-- apa's header: a thin utility line that hides on scroll; the logo left; four centred items, the last
-       underlined; CALL NOW and the menu button right. Slides away on scroll down, returns on scroll up
+  <!-- apa's header, one row: the logo left; four centred items, the last underlined; the clinic's number
+       (laptops and up; phones use the call bar) and the menu button right. Slides away on scroll down, returns on scroll up
        (site.js 1). Generated by tools/chrome.py. -->
   <header class="site-header" data-header>
-    <div class="utility-line" data-utility>
-      <ul class="utility-line__list">
-        <li><a href="tel:+919975507714" data-call="utility" data-call-pop data-label="phone" aria-label="Call Arha Dental Care, +91 99755 07714"><span data-show="phone">+91 99755 07714</span></a></li>
-        <li><a href="emergency/">Emergencies</a></li>
-      </ul>
-    </div>
     <div class="site-header__inner">
       <a class="brand" href="./"><img src="assets/logo/logo-lockup-dark.svg" alt="Arha Dental Care, home" width="160" height="41"></a>
 
@@ -163,10 +158,10 @@
               <li><a href="founder/">About the founder</a></li>
               <li><a href="doctors/">The doctors</a></li>
               <li><a href="the-practice/">The practice</a></li>
-              <li><a href="gallery/">Gallery</a></li>
+              
             </ul>
           </li>
-          <li class="nav__item"><a class="nav__link" href="our-work/">Our work</a></li>
+          <li class="nav__item"><a class="nav__link" href="gallery/">Gallery</a></li>
           <li class="nav__item"><a class="nav__link nav__link--book" href="book/">Book an appointment</a></li>
         </ul>
       </nav>
@@ -180,7 +175,7 @@
       </div>
     </div>
 
-    <!-- Call panel (laptops): the number large, copy it, scan the QR to call from a phone, or WhatsApp -->
+    <!-- Call panel (laptops): the number large, copy it, or scan the QR to call from a phone -->
     <div class="call-pop" id="call-pop" role="dialog" aria-labelledby="call-pop-title" hidden>
       <button class="call-pop__close" type="button" aria-label="Close" data-call-pop-close></button>
       <p class="call-pop__title" id="call-pop-title">Call reception</p>
@@ -193,9 +188,9 @@
       <div class="call-pop__actions">
         <button class="cta" type="button" data-copy-number>Copy number</button>
         
-        <button class="cta" type="button" data-ask-riya hidden>Ask Riya</button>
+        
       </div>
-      <p class="call-pop__closed" data-call-pop-closed hidden>We’re closed right now. Send a WhatsApp message or ask Riya, and the team will reply once the clinic opens.</p>
+      
       <p class="visually-hidden" role="status" data-copy-status></p>
     </div>
   </header>
@@ -245,11 +240,11 @@
                   <li><a href="founder/">About the founder</a></li>
                   <li><a href="doctors/">The doctors</a></li>
                   <li><a href="the-practice/">The practice</a></li>
-                  <li><a href="gallery/">Gallery</a></li>
+                  
                 </ul>
               </div>
             </li>
-            <li><a class="fmenu__link" href="our-work/">Our work</a></li>
+            <li><a class="fmenu__link" href="gallery/">Gallery</a></li>
             <li><a class="fmenu__link" href="technology/">Technology &amp; innovation</a></li>
             <li><a class="fmenu__link" href="kids-dentistry/">Kids’ dentistry</a></li>
             <li><a class="fmenu__link" href="dental-tourism/">Dental tourism</a></li>
@@ -273,12 +268,17 @@
     <!-- =================================================================== 1. HERO (apa: video, text bottom-left, one CTA) -->
     <section class="hero ah-hero" data-hero aria-labelledby="hero-title">
       <div class="hero__media">
+        <!-- The poster: the loop's first frame (an upright cut for phones held upright). It stays if the video
+             cannot play (reduced motion, data saver, autoplay blocked). -->
         <picture>
-          <source type="image/avif" srcset="assets/video/hero-city-poster-720.avif 720w, assets/video/hero-city-poster-1280.avif 1280w, assets/video/hero-city-poster-1920.avif 1920w" sizes="(orientation: portrait) 80vh, 100vw">
-          <source type="image/webp" srcset="assets/video/hero-city-poster-720.webp 720w, assets/video/hero-city-poster-1280.webp 1280w, assets/video/hero-city-poster-1920.webp 1920w" sizes="(orientation: portrait) 80vh, 100vw">
-          <img src="assets/video/hero-city-poster-1280.jpg" srcset="assets/video/hero-city-poster-720.jpg 720w, assets/video/hero-city-poster-1280.jpg 1280w, assets/video/hero-city-poster-1920.jpg 1920w" sizes="(orientation: portrait) 80vh, 100vw" width="1920" height="1080" alt="The Mumbai skyline across the bay" fetchpriority="high" decoding="async">
+          <source media="(orientation: portrait)" type="image/avif" srcset="assets/video/hero-city-poster-port-540.avif 540w, assets/video/hero-city-poster-port-810.avif 810w" sizes="100vw">
+          <source media="(orientation: portrait)" type="image/webp" srcset="assets/video/hero-city-poster-port-540.webp 540w, assets/video/hero-city-poster-port-810.webp 810w" sizes="100vw">
+          <source media="(orientation: portrait)" srcset="assets/video/hero-city-poster-port-540.jpg 540w, assets/video/hero-city-poster-port-810.jpg 810w" sizes="100vw">
+          <source type="image/avif" srcset="assets/video/hero-city-poster-720.avif 720w, assets/video/hero-city-poster-1280.avif 1280w, assets/video/hero-city-poster-1920.avif 1920w" sizes="100vw">
+          <source type="image/webp" srcset="assets/video/hero-city-poster-720.webp 720w, assets/video/hero-city-poster-1280.webp 1280w, assets/video/hero-city-poster-1920.webp 1920w" sizes="100vw">
+          <img src="assets/video/hero-city-poster-1280.jpg" srcset="assets/video/hero-city-poster-720.jpg 720w, assets/video/hero-city-poster-1280.jpg 1280w, assets/video/hero-city-poster-1920.jpg 1920w" sizes="100vw" width="1920" height="1080" alt="The Mumbai skyline across the bay" fetchpriority="high" decoding="async">
         </picture>
-        <!-- site.js adds the source after page load: 1080p on large screens, 720p otherwise -->
+        <!-- site.js adds the source after page load: an upright cut on phones held upright, else 1080p or 720p -->
         <video class="hero__video" data-base="assets/video/hero-city-" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
       </div>
       <div class="hero__content">
@@ -456,8 +456,8 @@
             </picture>
           </div>
         </div>
-        <noscript><p class="finder__noscript"><a class="link" href="problems/">See the problems we treat</a></p></noscript>
       </div>
+      <p class="finder__all reveal"><a class="link" href="problems/">All the problems we treat</a></p>
     </section>
 
     <!-- =================================================================== 2. TRIO HEADING + 3. FEATURE TRIO -->
@@ -526,141 +526,6 @@
       </div>
     </section>
 
-    <!-- =================================================================== 5. COMMON PROBLEMS WE TREAT (apa: the grid of squares) -->
-    <section class="ah-grid" aria-labelledby="grid-title">
-      <h2 id="grid-title" class="reveal"><a href="problems/">Common problems we treat</a></h2>
-      <p class="ah-grid__lede reveal">The concerns patients most often come to us with. Choose one to see how we treat it.</p>
-      <ul class="ah-grid__tiles">
-        <li class="ah-tile reveal">
-          <a href="problems/missing-tooth/" data-colour-group>
-            <span class="ah-tile__pair">
-              <span class="ah-tile__half">
-                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwUGAQQC/8QAIhAAAgICAQQDAQAAAAAAAAAAAQIAAwQRBRMhMUESFFFh/8QAFwEBAQEBAAAAAAAAAAAAAAAAAwIEAP/EABkRAAMBAQEAAAAAAAAAAAAAAAABEQIhEv/aAAwDAQACEQMRAD8AkBU/5NCkHxK2ziq0QnQia7HRcgKP2FTWmkLem5PYGOcEMlB2PUaYnGI1QYiHyMNKsdtD1J9I7WuEbmNu8wI7zu+v1csr/Y1r4P5IDEekjPKdF3KB6z3iIXl80EntuANx15gEc9UGSlCtapf4dyfXXuPEzNuQ47aPqTVeY61gAzzbmuyEEwp0TkBV2BM0nfuUlPIoKgNiRhcmzcOL3A8y9Khpw//Z); background-position: 50% 55%">
-                  <source type="image/avif" srcset="assets/img/stock-implant-model-640.avif 640w, assets/img/stock-implant-model-1280.avif 1280w, assets/img/stock-implant-model-1920.avif 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <source type="image/webp" srcset="assets/img/stock-implant-model-640.webp 640w, assets/img/stock-implant-model-1280.webp 1280w, assets/img/stock-implant-model-1920.webp 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <img src="assets/img/stock-implant-model-1280.jpg" srcset="assets/img/stock-implant-model-640.jpg 640w, assets/img/stock-implant-model-1280.jpg 1280w, assets/img/stock-implant-model-1920.jpg 1920w" sizes="(min-width: 900px) 330px, 300px" width="1280" height="853" loading="lazy" decoding="async" alt="A model of an implant crown on its post between two natural teeth" style="object-position: 50% 55%">
-                </picture>
-              </span>
-            </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">A missing tooth</span><span class="ah-tile__how">An implant, a bridge or a denture.</span><span class="ah-tile__link">See how we treat it</span></span>
-          </a>
-        </li>
-        <li class="ah-tile reveal">
-          <a href="problems/chipped-tooth/" data-colour-group>
-            <span class="ah-tile__pair">
-              <span class="ah-tile__half">
-                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAwQFBgD/xAAfEAACAgICAwEAAAAAAAAAAAABAgADBCEFERITMRT/xAAXAQADAQAAAAAAAAAAAAAAAAABAgMA/8QAHBEAAwEBAQADAAAAAAAAAAAAAAERAiFREiJB/9oADAMBAAIRAxEAPwC/VnLYNGIchYDJfG3MW2Y9lAuRF14Nn1k93ZD5AQ1HIlh4mOChDTsSTkgY9uoi8KNfo1beFBJkPNb9DHxh8y4tXowOAhdtjuZZnWbW7xGhwMAodwmf3V8jlVg71OvxxdsyqcdItVQkjLYL0YhmP7GlxsAHQgrOK73C9V2AS+OZTP2UlgAJZ4XjwR2whq+OCfYyr+jS6h1NPgMfVdP/2Q==); background-position: 60% 40%">
-                  <source type="image/avif" srcset="assets/img/stock-patient-chair-640.avif 640w, assets/img/stock-patient-chair-1280.avif 1280w, assets/img/stock-patient-chair-1920.avif 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <source type="image/webp" srcset="assets/img/stock-patient-chair-640.webp 640w, assets/img/stock-patient-chair-1280.webp 1280w, assets/img/stock-patient-chair-1920.webp 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <img src="assets/img/stock-patient-chair-1280.jpg" srcset="assets/img/stock-patient-chair-640.jpg 640w, assets/img/stock-patient-chair-1280.jpg 1280w, assets/img/stock-patient-chair-1920.jpg 1920w" sizes="(min-width: 900px) 330px, 300px" width="1280" height="853" loading="lazy" decoding="async" alt="A dentist examining a patient's front teeth with a mirror" style="object-position: 60% 40%">
-                </picture>
-              </span>
-            </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">Chipped or broken tooth</span><span class="ah-tile__how">Bonding, a crown or a veneer.</span><span class="ah-tile__link">See how we treat it</span></span>
-          </a>
-        </li>
-        <li class="ah-tile reveal">
-          <a href="problems/gaps/" data-colour-group>
-            <span class="ah-tile__pair">
-              <span class="ah-tile__half">
-                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAgYB/8QAHxAAAgICAwEBAQAAAAAAAAAAAQMAAgQRBSExEkET/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABcRAQEBAQAAAAAAAAAAAAAAAAABESH/2gAMAwEAAhEDEQA/APOVJAiuA8VPcscljC9ehJSuOsL/AEJlGo2Q2xHQgVsvvyGbYKrqwgluB8EFdaZkmtdRU7YdxkoLTvUMrG1+RFT6MquVGf5io8nPcKwlg7nT3GlAyrESpOagX7i6McAxjLbowCW7MS9M/IHQEzd1VezdTuS+V+vwwkTa/9k=); background-position: 50% 55%">
-                  <source type="image/avif" srcset="assets/img/stock-crooked-640.avif 640w, assets/img/stock-crooked-1280.avif 1280w, assets/img/stock-crooked-1920.avif 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <source type="image/webp" srcset="assets/img/stock-crooked-640.webp 640w, assets/img/stock-crooked-1280.webp 1280w, assets/img/stock-crooked-1920.webp 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <img src="assets/img/stock-crooked-1280.jpg" srcset="assets/img/stock-crooked-640.jpg 640w, assets/img/stock-crooked-1280.jpg 1280w, assets/img/stock-crooked-1920.jpg 1920w" sizes="(min-width: 900px) 330px, 300px" width="1280" height="853" loading="lazy" decoding="async" alt="A smile with a small gap between the front teeth" style="object-position: 50% 55%">
-                </picture>
-              </span>
-            </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">Gaps between teeth</span><span class="ah-tile__how">Bonding, veneers or aligners.</span><span class="ah-tile__link">See how we treat it</span></span>
-          </a>
-        </li>
-        <li class="ah-tile reveal">
-          <a href="problems/crooked-teeth/" data-colour-group>
-            <span class="ah-tile__pair">
-              <span class="ah-tile__half">
-                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAwADADASIAAhEBAxEB/8QAGQAAAgMBAAAAAAAAAAAAAAAABAYAAgMF/8QAIRAAAgICAgIDAQAAAAAAAAAAAQIAAwQRBRIhMRMyUXH/xAAZAQEAAwEBAAAAAAAAAAAAAAAEAQIFAAP/xAAbEQADAQEBAQEAAAAAAAAAAAAAAQIREgMhYf/aAAwDAQACEQMRAD8Accu9aaiSYj8vni3I0P2MfONY6FU3FJ8Nxb2cSYnXhT0rladXjs/40G53MTPW3xuLdGMSviGYqPXYIivKcCR7W6/BnDbG5NzKg7rG5cwg40soR/sJxuTwB7QTvGZugcaIlprl6RcqljFJO9fjrD8KtnbZEPyqaa/JAlcS2tjpdT2q+kHjz5rNCkHVRLSSQ4kJMox6qTNDMMk6qMlHP4hf5jLPYqDMOMyerjZ9wHlrSLz/AGZYlp7gx3K4wzXbV9DshDICJDBePtL1AGFH3AtYzRT1af/Z); background-position: 50% 45%">
-                  <source type="image/avif" srcset="assets/img/stock-aligner-gloved-640.avif 640w, assets/img/stock-aligner-gloved-1280.avif 1280w, assets/img/stock-aligner-gloved-1920.avif 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <source type="image/webp" srcset="assets/img/stock-aligner-gloved-640.webp 640w, assets/img/stock-aligner-gloved-1280.webp 1280w, assets/img/stock-aligner-gloved-1920.webp 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <img src="assets/img/stock-aligner-gloved-1280.jpg" srcset="assets/img/stock-aligner-gloved-640.jpg 640w, assets/img/stock-aligner-gloved-1280.jpg 1280w, assets/img/stock-aligner-gloved-1920.jpg 1920w" sizes="(min-width: 900px) 330px, 300px" width="1280" height="1280" loading="lazy" decoding="async" alt="A clear aligner held between gloved fingers" style="object-position: 50% 45%">
-                </picture>
-              </span>
-            </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">Crooked teeth</span><span class="ah-tile__how">Clear aligners, braces or smile design.</span><span class="ah-tile__link">See how we treat it</span></span>
-          </a>
-        </li>
-        <li class="ah-tile reveal">
-          <a href="problems/stained-teeth/" data-colour-group>
-            <span class="ah-tile__pair">
-              <span class="ah-tile__half">
-                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAjADADASIAAhEBAxEB/8QAGQAAAwEBAQAAAAAAAAAAAAAAAwQFAAIB/8QAHRAAAgMBAQEBAQAAAAAAAAAAAQIAAxEEEiExQf/EABcBAQEBAQAAAAAAAAAAAAAAAAEAAgP/xAAXEQEBAQEAAAAAAAAAAAAAAAAAAREh/9oADAMBAAIRAxEAPwCJRX6bZRUhVySqrijZKCE2Ls5u0dFx6jfPYMiBrbYxz1vDGuKDYyZI3bT5YkSjYxrXZLv6GdsyQdLxhhuTpfVJzJQVfMFcgYRAK9C/2MVdKxBqTvyGoqOyayGrSbfgEGeID6RHaawANhWUEQBZoF5ppAPPsNUPs00idT8nrTTQof/Z); background-position: 50% 50%">
-                  <source type="image/avif" srcset="assets/img/stock-stained-640.avif 640w, assets/img/stock-stained-1280.avif 1280w, assets/img/stock-stained-1920.avif 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <source type="image/webp" srcset="assets/img/stock-stained-640.webp 640w, assets/img/stock-stained-1280.webp 1280w, assets/img/stock-stained-1920.webp 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <img src="assets/img/stock-stained-1280.jpg" srcset="assets/img/stock-stained-640.jpg 640w, assets/img/stock-stained-1280.jpg 1280w, assets/img/stock-stained-1920.jpg 1920w" sizes="(min-width: 900px) 330px, 300px" width="1280" height="930" loading="lazy" decoding="async" alt="A smile with yellowed teeth" style="object-position: 50% 50%">
-                </picture>
-              </span>
-            </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">Yellow or stained teeth</span><span class="ah-tile__how">A professional clean, whitening or bonding or veneers.</span><span class="ah-tile__link">See how we treat it</span></span>
-          </a>
-        </li>
-        <li class="ah-tile reveal">
-          <a href="problems/toothache/" data-colour-group>
-            <span class="ah-tile__pair">
-              <span class="ah-tile__half">
-                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAYADADASIAAhEBAxEB/8QAGgAAAgIDAAAAAAAAAAAAAAAAAAUDBAECBv/EACEQAAICAgICAwEAAAAAAAAAAAABAgMEEQUSIUETFBUx/8QAFwEBAQEBAAAAAAAAAAAAAAAAAQMAAv/EABgRAQEBAQEAAAAAAAAAAAAAAAABESEx/9oADAMBAAIRAxEAPwBm5wj/AFmjyIvwmcpfzM5LSZe4i2V73JmtaTacWefJhPqts1lNdlEkyIqOO5b9E1/Ij/QhXLTZcpyI3LaZw+ZkT+d6fsu4HKSqWmykQvaSddjPAzPrRAAMWlybdmyTI5Zyq6bAAw7cI7n3m5GIMAFy/9k=); background-position: 50% 50%">
-                  <source type="image/avif" srcset="assets/img/stock-toothache-lower-640.avif 640w, assets/img/stock-toothache-lower-1200.avif 1200w" sizes="(min-width: 900px) 330px, 300px">
-                  <source type="image/webp" srcset="assets/img/stock-toothache-lower-640.webp 640w, assets/img/stock-toothache-lower-1200.webp 1200w" sizes="(min-width: 900px) 330px, 300px">
-                  <img src="assets/img/stock-toothache-lower-1200.jpg" srcset="assets/img/stock-toothache-lower-640.jpg 640w, assets/img/stock-toothache-lower-1200.jpg 1200w" sizes="(min-width: 900px) 330px, 300px" width="1200" height="600" loading="lazy" decoding="async" alt="A hand held against a sore cheek, the lower face only" style="object-position: 50% 50%">
-                </picture>
-              </span>
-            </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">Toothache or sensitivity</span><span class="ah-tile__how">A filling, root canal treatment or a crown.</span><span class="ah-tile__link">See how we treat it</span></span>
-          </a>
-        </li>
-        <li class="ah-tile reveal">
-          <a href="problems/bleeding-gums/" data-colour-group>
-            <span class="ah-tile__pair">
-              <span class="ah-tile__half">
-                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAkADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAAAAUCAwQBBv/EACEQAAICAQQCAwAAAAAAAAAAAAECAAMEERIhMRNBIjSB/8QAGAEBAQEBAQAAAAAAAAAAAAAAAQMCAAT/xAAcEQEBAQABBQAAAAAAAAAAAAAAARECEiExQXH/2gAMAwEAAhEDEQA/AFPk2SyqwvOeLcZalYQSOvRiSV6ODHGKQygRbT8uJqpbw8kwd9MrMfVNYutXY0005jWNtHU7lUFhqBGJ8oRowJly1l+hLMXBYtzG1GEqgEwxvqYcXH2nkQy8diw06jJ1RCAIW1bq90N7lXgY6ooJ7m5kDCLK8kI+0maxlLp3O0WIKoHQkmYheDCE2nC9rGN4GvuNx9X8hCZinLxHmcx2W86H3J1WMR3CEKfT/9k=); background-position: 40% 45%">
-                  <source type="image/avif" srcset="assets/img/stock-exam-640.avif 640w, assets/img/stock-exam-1280.avif 1280w, assets/img/stock-exam-1920.avif 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <source type="image/webp" srcset="assets/img/stock-exam-640.webp 640w, assets/img/stock-exam-1280.webp 1280w, assets/img/stock-exam-1920.webp 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <img src="assets/img/stock-exam-1280.jpg" srcset="assets/img/stock-exam-640.jpg 640w, assets/img/stock-exam-1280.jpg 1280w, assets/img/stock-exam-1920.jpg 1920w" sizes="(min-width: 900px) 330px, 300px" width="1280" height="960" loading="lazy" decoding="async" alt="A gentle gum check with a mirror and probe" style="object-position: 40% 45%">
-                </picture>
-              </span>
-            </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">Bleeding gums</span><span class="ah-tile__how">A professional clean, gum care or care at home.</span><span class="ah-tile__link">See how we treat it</span></span>
-          </a>
-        </li>
-        <li class="ah-tile reveal">
-          <a href="problems/loose-dentures/" data-colour-group>
-            <span class="ah-tile__pair">
-              <span class="ah-tile__half">
-                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAmADADASIAAhEBAxEB/8QAGwAAAgIDAQAAAAAAAAAAAAAAAAQCBgEDBQf/xAAkEAACAgEEAAcBAAAAAAAAAAAAAQIDBAURITESExQiQVFScf/EABcBAQEBAQAAAAAAAAAAAAAAAAEAAgP/xAAYEQEBAQEBAAAAAAAAAAAAAAAAARECEv/aAAwDAQACEQMRAD8AppJRk+kN4OG8ia4LBRo1cYpyC3EqyqsfwzPk2fllwhplKfSHqdIx5LpGfRxQHVYu4sj/AE9Dv0KiVb8KW5UdX014tj2XBqXQc0qvyeWjo2ZT6TMyxvAuELzpk2TrOY2xyH9jWPlyXyJ048mxr0kordBh8w9XmNvlnL1lK5cIYhTNM3+kVi9xG8zEJPc17IABySre0jpVpSit0AAU1VH6IW+3oAJa/9k=); background-position: 50% 55%">
-                  <source type="image/avif" srcset="assets/img/stock-denture-tray-640.avif 640w, assets/img/stock-denture-tray-1280.avif 1280w, assets/img/stock-denture-tray-1920.avif 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <source type="image/webp" srcset="assets/img/stock-denture-tray-640.webp 640w, assets/img/stock-denture-tray-1280.webp 1280w, assets/img/stock-denture-tray-1920.webp 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <img src="assets/img/stock-denture-tray-1280.jpg" srcset="assets/img/stock-denture-tray-640.jpg 640w, assets/img/stock-denture-tray-1280.jpg 1280w, assets/img/stock-denture-tray-1920.jpg 1920w" sizes="(min-width: 900px) 330px, 300px" width="1280" height="1022" loading="lazy" decoding="async" alt="A full denture on its clean white base" style="object-position: 50% 55%">
-                </picture>
-              </span>
-            </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">Loose dentures</span><span class="ah-tile__how">A refit or new denture, implant-retained denture or fixed implant teeth.</span><span class="ah-tile__link">See how we treat it</span></span>
-          </a>
-        </li>
-        <li class="ah-tile reveal">
-          <a href="problems/child-teeth/" data-colour-group>
-            <span class="ah-tile__pair">
-              <span class="ah-tile__half">
-                <picture class="fill" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAgADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAABAUCAwYAAf/EAB8QAAICAgMAAwAAAAAAAAAAAAABAgMEEQUTITJBcf/EABgBAAMBAQAAAAAAAAAAAAAAAAECAwQA/8QAGREAAwEBAQAAAAAAAAAAAAAAAAERAiES/9oADAMBAAIRAxEAPwDTKa+mRd0V5sAruarbYqyOQataTMkNGVR3bdFS3sJqyU4aTMtZmTkvGGcfkyn4wRoLQ2sluWwrFuSQulJsnVJxBQ+eAuc1TS9GTttlLJf6a7Oq7YNCrH4dTu2ymdISNOo7Dxu2C2g2unoYfRiKiKWinMXnhNvpS1HitTLFLaA6IuTCvicxT//Z); background-position: 50% 45%">
-                  <source type="image/avif" srcset="assets/img/stock-child-chair-640.avif 640w, assets/img/stock-child-chair-1280.avif 1280w, assets/img/stock-child-chair-1920.avif 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <source type="image/webp" srcset="assets/img/stock-child-chair-640.webp 640w, assets/img/stock-child-chair-1280.webp 1280w, assets/img/stock-child-chair-1920.webp 1920w" sizes="(min-width: 900px) 330px, 300px">
-                  <img src="assets/img/stock-child-chair-1280.jpg" srcset="assets/img/stock-child-chair-640.jpg 640w, assets/img/stock-child-chair-1280.jpg 1280w, assets/img/stock-child-chair-1920.jpg 1920w" sizes="(min-width: 900px) 330px, 300px" width="1280" height="853" loading="lazy" decoding="async" alt="A smiling girl in the dental chair beside her dentist" style="object-position: 50% 45%">
-                </picture>
-              </span>
-            </span>
-            <span class="ah-tile__hover"><span class="ah-tile__name">My child’s teeth</span><span class="ah-tile__how">Check-ups, sealants and fluoride or an early orthodontic check.</span><span class="ah-tile__link">See how we treat it</span></span>
-          </a>
-        </li>
-      </ul>
-      <p class="ah-grid__cta reveal"><a class="link" href="treatments/">See all treatments</a></p>
-    </section>
-
     <!-- =================================================================== 6. DARK BAND (apa: centred statement, one CTA) -->
     <section class="ah-dark" aria-labelledby="dark-title">
       <div class="reveal">
@@ -715,11 +580,9 @@
         <img src="assets/img/stock-dentist-hands-1280.jpg" srcset="assets/img/stock-dentist-hands-640.jpg 640w, assets/img/stock-dentist-hands-1280.jpg 1280w, assets/img/stock-dentist-hands-1920.jpg 1920w" sizes="100vw" width="1280" height="805" loading="lazy" decoding="async" alt="" style="object-position: 70% 50%">
       </picture>
       <div class="ah-founder__text reveal">
-        <h2 id="founder-title">From the founder</h2>
-        <blockquote>
-          <p>“A good restoration should never announce itself. My aim is a result that feels natural, functions beautifully and lasts.”</p>
-          <footer>Dr. Nikhil V. Jain, prosthodontist and implantologist</footer>
-        </blockquote>
+        <h2 id="founder-title">Our philosophy</h2>
+        <!-- Clinic philosophy, not a quote: no source for these words in the notes (notes/TO-CONFIRM.md) -->
+        <p class="ah-founder__line">A good restoration should never announce itself. The aim is a result that feels natural, works well and lasts.</p>
         <a class="link link--light" href="doctors/">Meet our doctors</a>
       </div>
     </section>
@@ -747,63 +610,7 @@
       </div>
     </section>
 
-    <!-- =================================================================== 10. REVIEWS HEADING + 11. CAROUSEL -->
-    <section class="ah-head ah-head--reviews reveal" aria-labelledby="reviews-title">
-      <!-- No rating or review count anywhere on the site (Viraaj, 2 Nov 2026) -->
-      <h2 id="reviews-title">What patients say on Google</h2>
-      <p>In patients’ own words, quoted as they wrote them on Google. Where a review is longer, it ends with “…”: read it in full on Google.</p>
-      <a class="link" href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>Read all reviews on Google</a>
-    </section>
-    <section class="ah-carousel" aria-label="Google reviews">
-      <div class="rv reveal" data-reviews aria-roledescription="carousel" aria-labelledby="reviews-title">
-        <div class="rv__track" data-track>
-          <div class="ah-review ah-review--wide ah-review--dark rv__slide" role="group" aria-roledescription="slide" aria-label="1 of 4" data-slide>
-            <a href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>
-              <span class="ah-review__mark" aria-hidden="true">“</span>
-              <blockquote><p>Went to Arha dental care at doctor house for my mom's toothache and the whole process was so smooth! Got looked at by Dr. Nikhil ~ was the best got a quick CT figured out the 'root' cause and came up with a treatment plan all under 10 mins of being seen. Was suggested a tooth removal which was quick and pain free! 10/10 recommend 💯</p></blockquote>
-              <span class="ah-review__name">Hetvi S.</span>
-              <span class="ah-review__foot"><span class="ah-review__stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span><span class="ah-review__source">Google review</span></span>
-              <span class="ah-review__hover"><span>Hetvi S.</span><span>Read on Google</span></span>
-            </a>
-          </div>
-          <div class="ah-review ah-review--wide ah-review--stone rv__slide" role="group" aria-roledescription="slide" aria-label="2 of 4" data-slide>
-            <a href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>
-              <span class="ah-review__mark" aria-hidden="true">“</span>
-              <blockquote><p>I had a very positive experience getting my cavity treated by Dr. Nikhil Jain. He was calm, professional, and explained the entire procedure clearly, making the treatment smooth and comfortable. The clinic was clean and hygienic, and the staff was warm and friendly. Highly recommend!</p></blockquote>
-              <span class="ah-review__name">Poorvi J.</span>
-              <span class="ah-review__foot"><span class="ah-review__stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span><span class="ah-review__source">Google review</span></span>
-              <span class="ah-review__hover"><span>Poorvi J.</span><span>Read on Google</span></span>
-            </a>
-          </div>
-          <div class="ah-review ah-review--wide ah-review--line rv__slide" role="group" aria-roledescription="slide" aria-label="3 of 4" data-slide>
-            <a href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>
-              <span class="ah-review__mark" aria-hidden="true">“</span>
-              <blockquote><p>I had a sudden, severe toothache and managed to get an urgent appointment at Arha Dental care, Nikhil was incredibly accommodating and diagnosed the issue quickly. He managed my pain and resolved the problem on the same day. Thank youu!!! ❤️</p></blockquote>
-              <span class="ah-review__name">Google reviewer</span>
-              <span class="ah-review__foot"><span class="ah-review__stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span><span class="ah-review__source">Google review</span></span>
-              <span class="ah-review__hover"><span>Google reviewer</span><span>Read on Google</span></span>
-            </a>
-          </div>
-          <div class="ah-review ah-review--wide ah-review--stone rv__slide" role="group" aria-roledescription="slide" aria-label="4 of 4" data-slide>
-            <a href="https://share.google/PzhwgJ9QJMErZnk9R" target="_blank" rel="noopener" data-google-reviews>
-              <span class="ah-review__mark" aria-hidden="true">“</span>
-              <blockquote><p>I’ve been going to Dr. Nikhil Jain for over 15 years now, and it’s always been a great experience. He’s one of the nicest and most caring doctors I’ve met. Whether it’s a routine visit or something urgent, he’s always been available and …</p></blockquote>
-              <span class="ah-review__name">Apurva M.</span>
-              <span class="ah-review__foot"><span class="ah-review__stars" role="img" aria-label="5 out of 5 stars"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 1.5l2.6 5.6 6.1.7-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6-4.5-4.2 6.1-.7z"/></svg></span><span class="ah-review__source">Google review</span></span>
-              <span class="ah-review__hover"><span>Apurva M.</span><span>Read on Google</span></span>
-            </a>
-          </div>
-        </div>
-        <div class="rv__controls">
-          <ul class="rv__dots"><li><button class="rv__dot" type="button" aria-label="Show review 1" data-dot="0"></button></li><li><button class="rv__dot" type="button" aria-label="Show review 2" data-dot="1"></button></li><li><button class="rv__dot" type="button" aria-label="Show review 3" data-dot="2"></button></li><li><button class="rv__dot" type="button" aria-label="Show review 4" data-dot="3"></button></li></ul>
-          <div class="rv__buttons">
-            <button class="rv__btn" type="button" data-pause aria-label="Pause the reviews"><span class="rv__icon-pause"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 4v12M13 4v12"/></svg></span><span class="rv__icon-play"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4l10 6-10 6z"/></svg></span></button>
-            <button class="rv__btn" type="button" data-prev aria-label="Previous review"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4 6.5 10l6 6"/></svg></button>
-            <button class="rv__btn" type="button" data-next aria-label="Next review"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="m7.5 4 6 6-6 6"/></svg></button>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
   </main>
 
@@ -842,7 +649,7 @@
             <li><a href="problems/">What we treat</a></li>
             <li><a href="treatments/">Treatments</a></li>
             <li><a href="technology/">Technology &amp; innovation</a></li>
-            <li><a href="our-work/">Our work</a></li>
+            
             <li><a href="founder/">About the founder</a></li>
             <li><a href="doctors/">The doctors</a></li>
             <li><a href="the-practice/">The practice</a></li>
@@ -866,160 +673,10 @@
   <!-- ===================================================================== ACTION BAR (phones)
        Generated by tools/chrome.py. The Call slot appears only with a real reception number (tools/pages.py). -->
   <nav class="call-bar call-bar--two" aria-label="Call or book">
-    <a class="call-bar__slot" href="tel:+919975507714" data-call="call_bar"><span class="call-bar__label">Call now</span><span class="visually-hidden">: call Arha Dental Care, <span data-show="phone">+91 99755 07714</span>.</span><span class="call-bar__status" data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span></a>
+    <a class="call-bar__slot" href="tel:+919975507714" data-call="call_bar"><span class="call-bar__label" data-call-label data-open="Call now" data-closed="Call">Call now</span><span class="visually-hidden">: call Arha Dental Care, <span data-show="phone">+91 99755 07714</span>.</span><span class="call-bar__status" data-call-status data-show="hours-short">Mon–Sat 9:30 AM–6:30 PM</span></a>
     
     <a class="call-bar__slot" href="book/"><span class="call-bar__label">Book appointment</span><span class="call-bar__status">In person or online</span></a>
   </nav>
 
-  <!-- =====================================================================
-       RIYA AI RECEPTIONIST (chat webhook).
-       Only the launcher is drawn on load; assets/js/riya.js (the chat window) loads on the
-       first click. Opening the chat sends nothing; only a sent message calls the webhook.
-       Set RIYA_ENABLED = false to switch it off.
-       ===================================================================== -->
-  <script type="module">
-    const RIYA_ENABLED = true;
-    // The webhook URL lives in SITE (tools/pages.py), written into the page's #site-config
-    const SITE_CONFIG = JSON.parse(document.getElementById('site-config').textContent);
-    const RIYA_WEBHOOK_URL = SITE_CONFIG.riyaWebhookUrl;
-    // Proactive bubble: at most once per visit, after real engagement (20 s or 40% of the page), never after the chat was opened
-    const RIYA_BUBBLE = {
-      text: 'Have a question or planning a visit? I’m Riya, Arha’s assistant.',
-      options: ['Request an appointment', 'Ask a question'],
-      delay: 20000,
-      scroll: 40,
-      hideAfter: 8000,  // it leaves on its own after 8 s, or after 600 px more scrolling
-      hideScroll: 600,
-    };
-
-    if (RIYA_ENABLED) {
-      const base = document.querySelector('link[href$="site.css"]').href.replace(/css\/site\.css$/, '');
-      const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const icon = '<svg viewBox="0 0 919.25 902.15" aria-hidden="true" focusable="false"><use href="#arha-icon"/></svg>';
-      const track = window.arhaTrack || (() => {});
-      const seen = (key) => { try { return Boolean(sessionStorage.getItem(key)); } catch (e) { return true; } };
-      const remember = (key) => { try { sessionStorage.setItem(key, '1'); } catch (e) { /* storage blocked */ } };
-
-      const launcher = document.createElement('button');
-      launcher.type = 'button';
-      launcher.className = 'riya-launcher';
-      launcher.setAttribute('aria-label', 'Ask Riya, Arha’s receptionist');
-      launcher.setAttribute('aria-expanded', 'false');
-      launcher.innerHTML = icon;
-      document.body.append(launcher);
-
-      // One load and one chat window, however many clicks arrive. The first click shows the window at
-      // once ("Connecting…") and riya.js fills it when it has loaded; clicks during loading are ignored.
-      let chat = null;
-      let chatPromise = null;
-      const getChat = () => {
-        if (!chatPromise) {
-          const panel = document.createElement('section');
-          panel.className = 'riya';
-          panel.id = 'riya';
-          panel.setAttribute('role', 'dialog');
-          panel.setAttribute('aria-label', 'Riya');
-          panel.innerHTML = '<p class="riya__loading">Connecting…</p>';
-          document.body.append(panel);
-          requestAnimationFrame(() => panel.classList.add('is-open'));
-          launcher.classList.add('is-loading');
-          launcher.setAttribute('aria-expanded', 'true');
-          chatPromise = import(`${base}js/riya.js`)
-            .then(({ mountRiya }) => { chat = mountRiya({ webhookUrl: RIYA_WEBHOOK_URL, phone: SITE_CONFIG.phone, launcher, panel }); return chat; })
-            .catch((err) => { chatPromise = null; panel.remove(); launcher.setAttribute('aria-expanded', 'false'); throw err; })
-            .finally(() => launcher.classList.remove('is-loading'));
-        }
-        return chatPromise;
-      };
-
-      let bubble = null;
-      const hideBubble = () => {
-        if (!bubble) return;
-        const el = bubble;
-        bubble = null;
-        el.classList.remove('is-visible');
-        setTimeout(() => el.remove(), reduceMotion ? 0 : 300);
-      };
-
-      launcher.addEventListener('click', async () => {
-        hideBubble();
-        remember('riya-opened');
-        if (launcher.classList.contains('is-loading')) return;
-        const first = !chat;
-        const c = await getChat();
-        if (first) c.open();
-        else c.toggle();
-      });
-
-      if (!seen('riya-bubble') && !seen('riya-opened')) {
-        let timer = 0;
-        const onScroll = () => {
-          if ((scrollY + innerHeight) / document.documentElement.scrollHeight * 100 >= RIYA_BUBBLE.scroll) showBubble();
-        };
-        function showBubble() {
-          clearTimeout(timer);
-          removeEventListener('scroll', onScroll);
-          if (chat || chatPromise || bubble || seen('riya-opened') || document.documentElement.classList.contains('is-locked')) return;
-          remember('riya-bubble');
-          bubble = document.createElement('div');
-          bubble.className = 'riya-bubble';
-          bubble.setAttribute('role', 'dialog');
-          bubble.setAttribute('aria-label', 'Message from Riya');
-          bubble.innerHTML = `<span class="riya-bubble__mark">${icon}</span><p class="riya-bubble__text"></p>
-            <p class="riya-bubble__options"></p><button class="riya-bubble__close" type="button" aria-label="Dismiss"></button>`;
-          bubble.querySelector('.riya-bubble__text').textContent = RIYA_BUBBLE.text;
-          RIYA_BUBBLE.options.forEach((label) => {
-            const option = document.createElement('button');
-            option.type = 'button';
-            option.textContent = label;
-            option.addEventListener('click', async () => {
-              track('riya_bubble_clicked', { option: label });
-              hideBubble();
-              remember('riya-opened');
-              const c = await getChat(); // the message waits until the chat is ready
-              c.open();
-              c.ask(label);
-            });
-            bubble.querySelector('.riya-bubble__options').append(option);
-          });
-          bubble.querySelector('.riya-bubble__close').addEventListener('click', hideBubble);
-          document.body.append(bubble);
-          requestAnimationFrame(() => bubble && bubble.classList.add('is-visible'));
-          track('riya_bubble_shown');
-          // Never pushy: gone after 8 s or 600 px of scrolling, unless the visitor is using it
-          const shownAt = scrollY;
-          let hideTimer = setTimeout(hideBubble, RIYA_BUBBLE.hideAfter);
-          const onAway = () => {
-            if (Math.abs(scrollY - shownAt) < RIYA_BUBBLE.hideScroll) return;
-            removeEventListener('scroll', onAway);
-            hideBubble();
-          };
-          addEventListener('scroll', onAway, { passive: true });
-          bubble.addEventListener('pointerenter', () => clearTimeout(hideTimer));
-          bubble.addEventListener('focusin', () => clearTimeout(hideTimer));
-          bubble.addEventListener('pointerleave', () => { hideTimer = setTimeout(hideBubble, 4000); });
-        }
-        timer = setTimeout(showBubble, RIYA_BUBBLE.delay);
-        addEventListener('scroll', onScroll, { passive: true });
-      }
-
-      // Other parts of the page open Riya here, optionally with a question typed in for the visitor to send
-      window.arhaRiya = {
-        open: async (prefill = '') => {
-          hideBubble();
-          remember('riya-opened');
-          const c = await getChat();
-          c.open();
-          if (prefill) c.prefill(prefill);
-        },
-      };
-
-      // ?riya=open opens the chat straight away (for showing the demo)
-      if (new URLSearchParams(location.search).get('riya') === 'open') {
-        remember('riya-opened');
-        getChat().then((c) => c.open());
-      }
-    }
-  </script>
 </body>
 </html>

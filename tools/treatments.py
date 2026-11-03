@@ -169,7 +169,7 @@ def problems(indent="        "):
 {i}      <p>{p["lines"][1]}</p>
 {i}      <a class="cta" href="{main["slug"]}/">{main["name"]}{ARROW}</a>
 {i}      {also}{urgent}
-{i}      <a class="text-link" href="{wa}" target="_blank" rel="noopener" data-riya-ask="{p["ask"]}">Ask Riya about this</a>
+{i}      <!--flag:riya--><a class="text-link" href="{wa}" target="_blank" rel="noopener" data-riya-ask="{p["ask"]}">Ask Riya about this</a><!--/flag:riya-->
 {i}    </div>
 {i}  </div>""")
     return (f'{i}<div class="problems" data-tabs data-hash>\n'

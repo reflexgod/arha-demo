@@ -393,13 +393,13 @@ def tourism_page(site_url):
            ("Close to Marine Drive", "South Mumbai has a wide choice of hotels and serviced apartments a short drive away."),
            ("Specialist-led", "Implants, full mouth rehabilitation and smile design, led by a prosthodontist."),
            ("Planned before you fly", "Your plan, visits and written estimate are agreed before you book travel.")]
-    steps = [("Virtual consultation", "On WhatsApp or video: your concerns, your photographs and any recent X-rays."),
+    steps = [("Virtual consultation", "By phone or video call: your concerns, your photographs and any recent X-rays."),
              ("Plan and written estimate", "A treatment plan with the number of visits, how long each takes, and the costs."),
              ("Arrival", "Your first appointment is fixed before you land."),
              ("Treatment visits", "Planned around the time you have in Mumbai."),
-             ("Remote follow-up", "Reviews by WhatsApp or video once you are home.")]
+             ("Remote follow-up", "Reviews by phone or video call once you are home.")]
     faq = [("How do I pay?", "Your written estimate explains the costs and how payment works. Please ask us about anything that is unclear before you travel."),
-           ("What happens with aftercare at home?", "We plan aftercare with you before you leave, and follow up by WhatsApp or video. Routine check-ups can continue with us on your next visit."),
+           ("What happens with aftercare at home?", "We plan aftercare with you before you leave, and follow up by phone or video call. Routine check-ups can continue with us on your next visit."),
            ("How far ahead should I plan?", "Start with a virtual consultation a few weeks before you hope to travel, so the plan and appointments are ready in time."),
            ("What should I bring?", "Any recent X-rays or scans, a list of your medicines, and details of past dental work."),
            ("Can someone come with me?", "Yes, you are welcome to bring someone to your appointments.")]

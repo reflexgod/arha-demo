@@ -190,7 +190,7 @@ def glance(t):
         <dl class="glance__list reveal">
           <div><dt>What it feels like</dt><dd>{comfort}</dd></div>
           <div><dt>How many visits</dt><dd>It depends on your teeth and your plan. You get a personal plan, with the number of visits, at your consultation.</dd></div>
-          <div><dt>Who treats you</dt><dd>Led by Dr. Nikhil V. Jain, prosthodontist and implantologist (B.D.S., M.D.S., ITI Scholar, London). <a href="our-work/">What patients say on Google</a>.</dd></div>
+          <div><dt>Who treats you</dt><dd>Led by Dr. Nikhil V. Jain, prosthodontist and implantologist (B.D.S., M.D.S., ITI Scholar, London).<!--flag:reviews--><!--flag:ourwork--> <a href="our-work/">What patients say on Google</a>.<!--/flag:ourwork--><!--/flag:reviews--></dd></div>
         </dl>
         <p class="glance__book reveal"><a class="link" href="book/">Book an appointment</a><a class="link" href="book/#first-visit">What happens on your first visit</a></p>
       </div>
@@ -403,7 +403,8 @@ def case_page(site_url, n, cs):
 
 
 # ------------------------------------------------------------------ about: founder, doctors, practice, gallery
-QUOTE = "A good restoration should never announce itself. My aim is a result that feels natural, functions beautifully and lasts."
+# The clinic's philosophy (unattributed: no source for a quote from Dr. Nikhil in the notes, see notes/TO-CONFIRM.md)
+QUOTE = "A good restoration should never announce itself. The aim is a result that feels natural, works well and lasts."
 # The Arha story: confirmed facts only, no years (title, text, photo, position, fit). Arha Dental Care is Dr. Nikhil V.
 # Jain's clinic; Dr. Vasant P. Jain practises there as a dental surgeon. Signage photos are shown whole ("contain")
 # on the section's stone, so no letter of a sign is cut. [YEAR - confirm with Dr. Nikhil] before any date is added.
@@ -438,8 +439,8 @@ def founder_page(site_url):
         <p class="longread__lead reveal">Arha Dental Care is Dr. Nikhil V. Jain’s clinic, at 107, Doctor House, 14 Peddar Road. Dr. Vasant P. Jain, dental surgeon, is part of the team.</p>
         <p class="reveal">Dr. Nikhil is a prosthodontist: a specialist in restoring and replacing teeth. His qualifications, as on the clinic door, are B.D.S., M.D.S. and ITI Scholar (London). His work centres on dental implants, full mouth rehabilitation, smile design, and crowns and bridges.</p>
         <blockquote class="pull-quote pull-quote--big reveal">
-          <p>“{QUOTE}”</p>
-          <footer>Dr. Nikhil V. Jain</footer>
+          <p>{QUOTE}</p>
+          <footer>The Arha approach</footer>
         </blockquote>
         <p class="reveal">Arha was designed to make specialist dentistry feel unhurried: marble, soft light, quiet treatment rooms, an X-ray room and a separate room for sterilisation, all under one roof.</p>
       </div>
@@ -462,37 +463,62 @@ def founder_page(site_url):
 
 
 def doctors_page(site_url):
-    from urllib.parse import quote
+    """The doctors: what is on the clinic door and the clinic's own site, and what those letters mean for a patient.
+    Portraits, languages and Dr. Vasant's areas of focus are added when the clinic sends them (notes/TO-CONFIRM.md)."""
     trail = [("Home", ""), ("About", "founder/"), ("The doctors", "doctors/")]
-    docs = [("nikhil", "Dr. Nikhil V. Jain", "B.D.S., M.D.S., ITI Scholar (London)", "Prosthodontist &amp; Implantologist",
-             "Dental implants, full mouth rehabilitation, smile design, crowns and bridges.", "Book with Dr. Nikhil"),
-            ("vasant", "Dr. Vasant P. Jain", "B.D.S.", "Dental Surgeon", None, "Book with Dr. Vasant")]
-    cards = ""
-    for key, name, quals, role, focus, cta in docs:
-        wa = "https://wa.me/910000000000?text=" + quote(f"Hello Arha Dental Care, I'd like to book a consultation with {name}.")
-        # Only what is known is shown: no portrait frames or "to come" rows (no visual placeholders)
-        focus_html = f"""
-          <dl class="vs">
-            <div><dt>Areas of focus</dt><dd>{focus}</dd></div>
-          </dl>""" if focus else ""
-        cards += f"""
-        <article class="doc-v4 reveal" id="{key}" aria-labelledby="{key}-name">
-          <p class="eyebrow">{role}</p>
-          <h2 id="{key}-name">{name}</h2>
-          <p class="doc-v4__quals">{quals}</p>{focus_html}
-          <p class="doc-v4__actions"><a class="link" href="{wa}" target="_blank" rel="noopener">{cta}</a><a class="link" href="book/">Book an appointment</a></p>
-        </article>"""
+    focus = [("dental-implants/", "Dental implants"), ("full-mouth-rehabilitation/", "Full mouth rehabilitation"),
+             ("smile-design/", "Smile design"), ("crowns-bridges/", "Crowns &amp; bridges")]
+    focus_links = "".join(f'<li><a href="{h}">{n}</a></li>' for h, n in focus)
     body = page_hero("{{pic dental-operatory-arha-dental-care-peddar-road-06 | 100vw | An Arha treatment room on Peddar Road | pos=50% 55% | eager}}",
                      "The doctors", "Dr. Nikhil V. Jain’s clinic on Peddar Road, with Dr. Vasant P. Jain on the team.", trail, "About")
     body += f"""
-    <!-- Qualifications as on the clinic's door sign. Portraits, languages and Dr. Vasant's areas of focus are added when the clinic sends them (notes/TO-CONFIRM.md). -->
-    <section class="section" aria-label="Our dentists">
-      <div class="container-wide docs-v4">{cards}
+    <!-- =================================================================== THE TWO DOCTORS (qualifications as on the clinic's door) -->
+    <section class="section docs-intro" aria-labelledby="docs-title">
+      <div class="container">
+{head("docs-title", "Who you will see", "Arha Dental Care is Dr. Nikhil V. Jain’s clinic, at 107, Doctor House, 14 Peddar Road. Dr. Vasant P. Jain, dental surgeon, is part of the team.")}
+      </div>
+      <div class="container-wide docs-v4">
+        <article class="doc-v4 reveal" id="nikhil" aria-labelledby="nikhil-name">
+          <p class="eyebrow">Prosthodontist &amp; Implantologist</p>
+          <h2 id="nikhil-name">Dr. Nikhil V. Jain</h2>
+          <p class="doc-v4__quals">B.D.S., M.D.S., ITI Scholar (London)</p>
+          <p class="doc-v4__text">A specialist in restoring and replacing teeth. His work centres on the treatments below.</p>
+          <ul class="doc-v4__focus">{focus_links}</ul>
+          <p class="doc-v4__actions"><a class="link" href="book/">Book an appointment</a></p>
+        </article>
+        <article class="doc-v4 reveal" id="vasant" aria-labelledby="vasant-name">
+          <p class="eyebrow">Dental Surgeon</p>
+          <h2 id="vasant-name">Dr. Vasant P. Jain</h2>
+          <p class="doc-v4__quals">B.D.S.</p>
+          <p class="doc-v4__text">A dental surgeon on the Arha team, at the same practice on Peddar Road.</p>
+          <p class="doc-v4__actions"><a class="link" href="book/">Book an appointment</a></p>
+        </article>
       </div>
     </section>
+
+    <!-- =================================================================== WHAT THE LETTERS MEAN (the door sign, explained) -->
+    <section class="section section--stone letters" aria-labelledby="letters-title">
+      <div class="container split">
+        <div class="split__media media letters__media reveal">
+{picture("arha-dental-care-entrance-door", "(min-width: 900px) 45vw, 100vw", "The Arha sign at suite 107, with the names and qualifications of Dr. Nikhil V. Jain and Dr. Vasant P. Jain", pos="50% 50%", indent="          ")}
+        </div>
+        <div class="split__text reveal">
+          <h2 id="letters-title">On the door at suite 107</h2>
+          <p class="lede">Both doctors’ names and qualifications are on the clinic door. Here is what the letters mean.</p>
+          <dl class="letters__list">
+            <div><dt>B.D.S.</dt><dd>Bachelor of Dental Surgery: the degree every dentist in India qualifies with.</dd></div>
+            <div><dt>M.D.S.</dt><dd>Master of Dental Surgery: a postgraduate degree in one specialty of dentistry.</dd></div>
+            <div><dt>Prosthodontist</dt><dd>A specialist in restoring and replacing teeth: crowns, bridges, dentures, implant-supported teeth and full mouth rehabilitation.</dd></div>
+            <div><dt>Implantologist</dt><dd>A dentist who plans and places dental implants.</dd></div>
+            <div><dt>ITI Scholar (London)</dt><dd>A scholarship of the International Team for Implantology, for further training in implant dentistry, held in London.</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
 {tp.closing()}"""
     meta = {"title": "Our Dentists: Dr. Nikhil V. Jain and Dr. Vasant P. Jain | Arha Dental Care",
-            "description": "Meet the dentists at Arha Dental Care, Peddar Road: Dr. Nikhil V. Jain, prosthodontist and implantologist, and Dr. Vasant P. Jain, dental surgeon.",
+            "description": "Meet the dentists at Arha Dental Care, Peddar Road: Dr. Nikhil V. Jain, prosthodontist and implantologist (B.D.S., M.D.S., ITI Scholar, London), and Dr. Vasant P. Jain, dental surgeon (B.D.S.).",
             "jsonld": [tp.crumbs_jsonld(site_url, trail)]}
     return meta, f'  <main id="main" tabindex="-1">\n\n{body}\n  </main>\n'
 
@@ -571,9 +597,38 @@ PANO = """    <!-- =============================================================
 """
 
 
+# The gallery in three walks through the clinic: only Arha's own photographs and stills from its own tour film
+# (tools/stills.py). (name, alt, caption)
+GAL_GROUPS = [
+    ("arrive", "Arriving at Arha",
+     "Suite 107 is on the first floor of Doctor House, opposite Jaslok Hospital. You are welcomed at reception and wait in the lounge, away from the treatment rooms.",
+     [("arha-dental-care-exterior-dental-clinic-peddar-road", "The door of suite 107, Doctor House, with the Arha sign and the doctors’ names", "Entrance, suite 107"),
+      ("arha-dental-care-reception-south-mumbai-dental-clinic-01", "Reception: a curved front desk, soft seating and a glass entrance door", "Reception"),
+      ("arha-dental-care-reception-south-mumbai-dental-clinic-02", "Reception: the gold emblem and wordmark on a marble wall above the front desk", "The emblem wall"),
+      ("arha-dental-care-lounge-peddar-road", "The patients’ lounge: a sofa, a plant and warm light", "Lounge"),
+      ("arha-dental-care-reception-wide", "The reception and waiting area, with the emblem wall and a plant", "Waiting area"),
+      ("arha-dental-care-logo-dental-clinic-peddar-road", "The Arha wordmark and emblem in gold on marble", "Reception wall")]),
+    ("rooms", "The treatment rooms",
+     "Quiet rooms with marble walls and soft light. Each has the chair under its own light, and a desk with a screen where scans and X-rays can be looked at together.",
+     [("dental-operatory-arha-dental-care-peddar-road-01", "A treatment room: the dental chair under its overhead light", "Treatment room"),
+      ("dental-operatory-arha-dental-care-peddar-road-02", "A treatment room with a desk, the chair and marble walls", "Treatment room"),
+      ("dental-operatory-arha-dental-care-peddar-road-06", "A second treatment room seen through a glass door", "Through the glass door"),
+      ("dental-operatory-arha-dental-care-peddar-road-04", "The consultation desk with a large monitor", "The desk and screen"),
+      ("arha-dental-care-chair-window", "The dental chair under its light, beside a window with a soft blind", "By the window"),
+      ("arha-dental-care-scan-screen", "A screen in a treatment room showing 3D scans of the upper and lower teeth", "3D scans on screen")]),
+    ("behind", "Behind the scenes",
+     "X-rays are taken in a room of their own. Instruments are cleaned and sterilised in a separate room, away from where you are treated.",
+     [("dental-implant-equipment-arha-dental-care-mumbai", "The X-ray room: a floor-standing panoramic X-ray unit", "X-ray room"),
+      ("autoclave-pantry-equipment-arha-dental-care-mumbai", "The sterilisation room: a benchtop steam steriliser beside a sink", "Sterilisation room"),
+      ("dental-dentistry-equipment-arha-dental-care-mumbai", "An automatic handpiece cleaning unit and a water distiller", "Instrument care")]),
+]
+
+
 def gallery_page(site_url):
     trail = [("Home", ""), ("About", "founder/"), ("Gallery", "gallery/")]
-    tiles = "".join(f"""
+
+    def tiles(items):
+        return "".join(f"""
           <li class="gal__item reveal" style="--r: {ratio(name):.3f}">
             <a href="{largest(name)}" data-full="{largest(name)}" data-caption="{cap}">
               <span class="gal__media media media--hover">
@@ -581,22 +636,32 @@ def gallery_page(site_url):
               </span>
               <span class="gal__cap">{cap}</span>
             </a>
-          </li>""" for name, alt, cap in more_pages.GALLERY)
-    body = page_hero("{{pic arha-dental-care-lounge-peddar-road | 100vw | Arha's patient lounge: soft seating and warm light | pos=50% 55% | eager}}",
-                     "Gallery", "Photographed at Arha, as it is. Open any photograph to see it large.", trail, "About", actions=False)
-    body += f"""
-    <!-- =================================================================== PHOTOGRAPHS (lightbox) -->
-    <section class="section" aria-labelledby="gal-title">
+          </li>""" for name, alt, cap in items)
+    count = sum(len(g[3]) for g in GAL_GROUPS)
+    jump = "".join(f'<li><a class="link" href="#gal-{key}">{title}</a></li>' for key, title, _l, _i in GAL_GROUPS)
+    groups = "".join(f"""
+    <section class="section gal-group{' section--stone' if n == 1 else ''}" id="gal-{key}" aria-labelledby="gal-{key}-title">
       <div class="container-wide">
-{head("gal-title", "The clinic", "Twelve photographs of Arha’s rooms.")}
-        <ul class="gal" data-lightbox>{tiles}
+{head(f"gal-{key}-title", title, lede)}
+        <ul class="gal" data-lightbox>{tiles(items)}
         </ul>
       </div>
     </section>
-
+""" for n, (key, title, lede, items) in enumerate(GAL_GROUPS))
+    body = page_hero("{{pic arha-dental-care-lounge-peddar-road | 100vw | Arha's patient lounge: soft seating and warm light | pos=50% 55% | eager}}",
+                     "Gallery", "Arha as it is: every photograph here was taken at the clinic. Open any one to see it large.", trail, "About", actions=False)
+    body += f"""
+    <!-- =================================================================== INTRO + JUMP LINKS -->
+    <section class="section gal-intro" aria-label="In this gallery">
+      <div class="container">
+        <p class="lede reveal">{count} photographs and a short film of 107, Doctor House on Peddar Road, in the order you would walk through it: from the door and reception, to the treatment rooms, to the rooms behind them.</p>
+        <ul class="gal-jump reveal">{jump}<li><a class="link" href="#film">The film</a></li></ul>
+      </div>
+    </section>
+{groups}
     <!-- =================================================================== CLINIC TOUR (film) -->
     <section class="inside inside--page" id="film" aria-labelledby="film-title">
-      {{{{pic arha-dental-care-reception-south-mumbai-dental-clinic-02 | 100vw | Arha’s reception: the gold emblem and wordmark on a marble wall | pos=50% 40%}}}}
+      {{{{pic arha-dental-care-reception-desk | 100vw | Arha’s reception: the gold emblem on the marble wall above the front desk | pos=50% 40%}}}}
       <div class="container inside__grid">
         <div class="inside__text reveal">
           <h2 id="film-title">Walk through the clinic</h2>
@@ -608,7 +673,7 @@ def gallery_page(site_url):
 
 {PANO.replace("{head}", head("tour-title", "360° tour", "Look around every room as if you were standing in it.")) if SHOW_PANO else ""}{tp.closing("Come and see it for yourself", "Book an appointment, or call us to arrange a visit.")}"""
     meta = {"title": "Gallery | Arha Dental Care, Peddar Road",
-            "description": "Photographs of Arha Dental Care on Peddar Road, Mumbai, and a short film walking through the clinic.",
+            "description": "Photographs of Arha Dental Care on Peddar Road, Mumbai: the entrance and reception, the treatment rooms, the X-ray and sterilisation rooms, and a short film walking through the clinic.",
             "jsonld": [tp.crumbs_jsonld(site_url, trail)]}
     return meta, f'  <main id="main" tabindex="-1">\n\n{body}\n  </main>\n'
 

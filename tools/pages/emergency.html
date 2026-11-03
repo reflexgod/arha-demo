@@ -7,14 +7,14 @@
         <p class="urgent__eyebrow">Dental emergencies</p>
         <h1 id="page-title"><!--if:emergency-->Dental emergency? Call now<!--endif--><!--if:no-emergency-->Dental emergency? What to do now<!--endif--></h1>
         <a class="urgent__number" href="tel:+910000000000" data-contact="emergency" data-call="emergency" data-label="emergency" aria-label="Call Arha Dental Care's emergency line, +91 00000 00000"><span data-show="emergency">+91 00000 00000</span></a>
-        <!--if:no-emergency--><!--if:phone--><a class="urgent__number urgent__number--reception" href="tel:+910000000000" data-call="emergency_reception" data-label="phone" aria-label="Call Arha Dental Care, +91 00000 00000"><svg class="icon-phone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span>Call now <span data-show="phone">+91 00000 00000</span></span></a><!--endif--><!--endif-->
+        <!--if:no-emergency--><!--if:phone--><a class="urgent__call" href="tel:+910000000000" data-call="emergency_reception" data-label="phone" aria-label="Call Arha Dental Care now, +91 00000 00000"><span class="urgent__call-label"><svg class="icon-phone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span data-call-label data-open="Call now" data-closed="Call the clinic">Call now</span></span><span class="urgent__call-number" data-show="phone">+91 00000 00000</span></a><!--endif--><!--endif-->
         <!--if:emergency--><p class="urgent__lede">Tell us what happened. We’ll tell you what to do now and when to come in.</p><!--endif-->
         <!--if:no-emergency--><p class="urgent__lede">If the swelling is spreading, or breathing or swallowing is hard, go to a hospital emergency department now or call <a href="tel:112" data-contact="fixed">112</a>. Otherwise, first aid below helps until you are seen.</p><!--endif-->
         <p class="open-status urgent__status" data-open-status></p>
         <div class="urgent__actions">
           <a class="cta" href="https://wa.me/910000000000?text=Hello%20Arha%20Dental%20Care%2C%20I%20have%20a%20dental%20emergency." target="_blank" rel="noopener">WhatsApp us a photo</a>
           <a class="cta" href="#first-aid">First aid while you wait</a>
-          <!--if:no-emergency--><button class="cta" type="button" data-riya-ask="I have a dental emergency and need to be seen soon.">Ask Riya for an appointment</button><!--endif-->
+          <!--flag:riya--><button class="cta" type="button" data-riya-ask="I have a dental emergency and need to be seen soon.">Ask Riya for an appointment</button><!--/flag:riya-->
         </div>
       </div>
     </section>
@@ -142,8 +142,9 @@
       <div class="container reveal">
         <h2 id="closing-title">Not sure if it can wait?</h2>
         <!--if:emergency--><p>Call and describe it. A two-minute conversation is better than a night of guessing.</p><!--endif-->
-        <!--if:no-emergency--><p>Tell Riya, our online receptionist, what is happening, and the clinic will arrange to see you.</p>
-        <button class="cta" type="button" data-riya-ask="I have a dental problem and I'm not sure if it can wait.">Ask Riya</button><!--endif-->
+        <!--if:no-emergency--><p>Call reception and describe it. A two-minute conversation is better than a night of guessing.</p>
+        <!--flag:riya--><button class="cta" type="button" data-riya-ask="I have a dental problem and I'm not sure if it can wait.">Ask Riya</button><!--/flag:riya-->
+        <!--if:phone--><a class="cta" href="tel:+910000000000" data-call="emergency_band_reception">Call <span data-show="phone">+91 00000 00000</span></a><!--endif--><!--endif-->
         <a class="cta" href="tel:+910000000000" data-contact="emergency" data-call="emergency_band">Call <span data-show="emergency">+91 00000 00000</span></a>
       </div>
     </section>

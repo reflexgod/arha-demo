@@ -116,7 +116,7 @@ TREATMENTS = {
         "intro": ("Planned first, then made",
                   "Smile design is the planning that comes before cosmetic treatment: the length, width, shape and colour of your teeth, considered with your lips, your face and your bite.",
                   "You see and approve the plan before any tooth is touched. The treatment that follows may be whitening, bonding, veneers, crowns or aligners, often a mix."),
-        "interactive": ("guides", "How a smile is planned", "Everything is measured, planned and previewed before work starts. Turn on the design guides to see what we look at."),
+        "interactive": ("guides", "How a smile is planned", "Everything is measured, planned and previewed before work starts. Choose one to see what we look at."),
         "who": [("Teeth of uneven length or shape", "Edges that do not follow your lip line, or teeth out of proportion."),
                 ("Gaps, chips or worn edges", "Small flaws that add up across a smile."),
                 ("A smile that shows too much or too little", "Tooth length and gum line considered together."),
@@ -488,26 +488,25 @@ def ix_who_we_help():
 
 
 def ix_guides():
-    # Midline, smile line and tooth boundaries measured on the 640 x 800 sample photograph (stock-case-3)
-    ticks = "".join(f'<path d="M{x} 322V402"/>' for x in (182, 228, 405, 450))
-    overlay = f"""<svg class="guides__overlay" viewBox="0 0 640 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-            <g class="guides__lines">
-              <path class="g-mid" d="M336 286V484"/>
-              <path class="g-curve" d="M160 368Q336 446 490 372"/>
-              <g class="g-ticks">{ticks}</g>
-              <text x="344" y="280">Midline</text><text x="470" y="436">Smile line</text><text x="120" y="312">Proportions</text>
-            </g>
-          </svg>"""
-    pic = picture("stock-case-3", "(min-width: 900px) 40vw, 100vw", "Sample photograph of a smile, used to show the design guides", pos="50% 50%", indent="")
+    """How a smile is planned: what the design measures, one tab each, beside Arha's own planning screen.
+    (The stock sample smile with drawn guide lines was removed for the demo, 3 Nov 2026.)"""
+    pic = picture("arha-dental-care-scan-screen", "(min-width: 900px) 40vw, 100vw",
+                  "A screen in an Arha treatment room, where a smile design is planned and talked through", pos="50% 50%", indent="")
+    items = [
+        ("mid", "Midline", "The line between your two front teeth is matched to the centre of your face."),
+        ("line", "Smile line", "The biting edges of the upper teeth are planned to follow the curve of your lower lip."),
+        ("prop", "Proportions", "Each tooth’s width and length are planned in relation to its neighbours, and to your face."),
+        ("preview", "Preview", "The design is previewed with a mock-up, so you can see it, and change it, before any tooth is touched."),
+    ]
+    panels = tabs("guides", [(k, n) for k, n, _t in items], lambda key: next(f"<p>{t}</p>" for k, _n, t in items if k == key),
+                  "What a smile design measures")
     return f"""<div class="guides-wrap reveal">
-        <figure class="guides" data-guides>
-          <div class="guides__frame media">{pic}{overlay}</div>
-          <figcaption><span>Sample photograph</span><button class="cta" type="button" aria-pressed="false" data-guides-toggle>Show design guides</button></figcaption>
+        <figure class="guides guides--room">
+          <div class="guides__frame media">{pic}</div>
         </figure>
         <div class="guides__text">
           <h3>Measured before anything is changed</h3>
-          <p>The <strong>midline</strong> between the front teeth is matched to the centre of your face. The <strong>smile line</strong> along the biting edges follows your lower lip. Each tooth’s <strong>proportions</strong> are planned in relation to its neighbours.</p>
-          <p>The design is then previewed so you can see it, and change it, before treatment.</p>
+          {panels}
         </div>
       </div>"""
 
@@ -743,7 +742,8 @@ CLOSING_PHOTOS = [  # Arha's own rooms, chosen by title so a page always closes 
 
 
 def closing(title="Begin with a conversation", text="Every plan at Arha starts with a consultation: a careful examination, a clear explanation and a plan made for you."):
-    """apa's dark band as punctuation: no photograph (v4 feedback 5: a photo is on two pages at most), the two actions."""
+    """apa's dark band as punctuation: no photograph (v4 feedback 5: a photo is on two pages at most), the two actions.
+    No call button here: the footer's number is just below it (one call action per screen, tools/qa/one_call.py)."""
     return f"""
     <!-- =================================================================== CALL / BOOK (a plain charcoal band) -->
     <section class="statement statement--close statement--plain band" aria-labelledby="closing-title">
@@ -752,7 +752,7 @@ def closing(title="Begin with a conversation", text="Every plan at Arha starts w
         <p>{text}</p>
         <div class="band__actions">
           <a class="cta" href="book/">Book an appointment</a>
-          <a class="cta" href="tel:+910000000000" data-call="treatment_band">Call <span data-show="phone">+91 00000 00000</span></a>
+          <a class="cta" href="book/#first-visit">Your first visit</a>
         </div>
       </div>
     </section>

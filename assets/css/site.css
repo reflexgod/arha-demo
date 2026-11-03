@@ -7394,3 +7394,220 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
   .riya-bubble { right: 12px; bottom: calc(136px + env(safe-area-inset-bottom)); }
   .site-footer::after { content: ""; display: block; height: 84px; }
 }
+
+/* ===========================================================================================================
+   Demo-ready (3 Nov 2026): one header row, one call action per screen, a readable hero, quick calm reveals.
+   =========================================================================================================== */
+
+/* Header: one row. The utility line is gone, so the header is the same height before and after scrolling. */
+:root { --utility-h: 0px; }
+@media (min-width: 768px) { :root { --utility-h: 0px; --header-h: var(--bar-h); } }
+
+/* The clinic's number sits in the header on laptops only; phones and small tablets have the call bar. */
+@media (max-width: 768px) { .header-call { display: none !important; } }
+
+/* It steps aside, in place (no layout change), while another call link is on screen (site.js 7a) */
+.header-call { transition: opacity .25s ease, visibility 0s linear 0s, background-size .3s var(--ease), color var(--t-link); }
+html.call-in-view .header-call:not(:focus-visible) { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, visibility 0s linear .2s; }
+
+/* Phone call bar: waits while the hero shows its own booking button and while another call link is on screen,
+   then slides up. Before site.js runs, pages whose hero has a button start with the bar down (no flash). */
+@media (max-width: 768px) {
+  .call-bar { transition: transform .35s var(--ease), visibility 0s linear 0s; }
+  html.bar-away .call-bar,
+  html.js:not(.bar-ready):has(main > :first-child :is(a[href$="book/"], a[href^="tel:"], [data-riya-ask])) .call-bar {
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: transform .3s var(--ease), visibility 0s linear .3s;
+  }
+}
+
+/* Emergencies: "Call now" above the number; the number on one line from 320px up */
+.urgent__call {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  max-width: 100%;
+  margin-top: 24px;
+  color: var(--paper);
+  text-decoration: none;
+}
+.urgent__call-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--paper-82);
+  font: 600 13px/1.4 var(--font-body);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.urgent__call-label .icon-phone { width: 16px; height: 16px; fill: currentColor; }
+.urgent__call-number {
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--paper-66);
+  font: 700 clamp(1.5rem, 7.4vw, 3.25rem)/1.1 var(--font-head);
+  letter-spacing: .04em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  transition: color var(--t-link), border-color var(--t-link);
+}
+.urgent__call:hover .urgent__call-number,
+.urgent__call:focus-visible .urgent__call-number { color: var(--bronze); border-color: var(--bronze); }
+.urgent__call:focus-visible { outline: 2px solid var(--bronze); outline-offset: 6px; }
+.urgent h1 { overflow-wrap: anywhere; }
+
+/* Book: one way to book by phone, for both kinds of visit */
+.book-phone {
+  max-width: 640px;
+  margin: 64px auto 0;
+  padding-top: 48px;
+  border-top: 1px solid var(--hairline);
+  text-align: center;
+}
+.book-phone__title { font-size: 22px; }
+.book-phone__text { max-width: 30em; margin: 12px auto 0; color: var(--muted); }
+.book-phone__number {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid currentColor;
+  color: var(--ink);
+  font: 700 clamp(1.5rem, 6.4vw, 2.5rem)/1.1 var(--font-head);
+  letter-spacing: .04em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  transition: color var(--t-link), border-color var(--t-link);
+}
+.book-phone__number .icon-phone { width: .62em; height: .62em; fill: currentColor; }
+.book-phone__number:hover, .book-phone__number:focus-visible { color: var(--bronze); }
+.book-phone__number:focus-visible { outline: 2px solid var(--bronze); outline-offset: 6px; }
+.book-phone__status { justify-content: center; margin-top: 18px; }
+.book-phone__hours { margin: 6px auto 0; color: var(--muted); font-size: 15px; }
+.book .book__note { margin-top: 32px; font-size: 15px; }
+
+/* Motion: reveals are quick and small (300 ms, 8px), start as soon as a block enters the screen, and never
+   hold content back for long; with JS off or reduced motion everything simply shows. */
+:root { --t-reveal: 300ms cubic-bezier(.2, .7, .2, 1); }
+.js .reveal { transform: translateY(8px); }
+.js .reveal.is-in { transform: none; }
+
+/* Photographs: fetched well before they scroll in (site.js 4b), then a short fade over the preview */
+.js picture.fill img:is([loading="lazy"], [data-early]) { transition: opacity 220ms ease-out, transform var(--t-image), filter var(--t-image); }
+.js picture.fill img[data-early]:not(.is-loaded) { opacity: 0; }
+
+/* Hero: a soft dark wash under the text, so it reads on every frame of the video (bright sky included) */
+.hero::after {
+  background:
+    linear-gradient(to top, rgba(var(--shade), .8) 0%, rgba(var(--shade), .66) 28%, rgba(var(--shade), .46) 50%, rgba(var(--shade), .16) 74%, rgba(var(--shade), 0) 90%);
+}
+@media (min-width: 768px) {
+  .hero::after {
+    background:
+      linear-gradient(to right, rgba(var(--shade), .5) 0%, rgba(var(--shade), .3) 38%, rgba(var(--shade), 0) 64%),
+      linear-gradient(to top, rgba(var(--shade), .8) 0%, rgba(var(--shade), .62) 30%, rgba(var(--shade), .36) 58%, rgba(var(--shade), 0) 84%);
+  }
+}
+.hero__text { text-shadow: 0 1px 18px rgba(0, 0, 0, .25); }
+.hero__text .link { text-shadow: none; }
+
+/* Hero heading: a confident scale, two lines at most at every width */
+.ah-hero .hero__text { max-width: min(100%, 860px); }
+.hero h1, .ah-hero h1 { font-size: clamp(1.25rem, 8vw - .375rem, 3.5rem); line-height: 1.12; letter-spacing: .1em; }
+.home-apa .ah-hero .hero__lede { margin-top: 16px; font-size: clamp(1.125rem, .9rem + .7vw, 1.5rem); max-width: 34em; }
+
+/* Very narrow phones (320–360px): nothing wider than the screen */
+@media (max-width: 360px) {
+  .site-footer .container { padding-inline: 24px; }
+  .footer__cols > * { min-width: 0; }
+  .open-status { flex-wrap: wrap; white-space: normal; }
+}
+
+/* Homepage: the clinic's philosophy (not a quote), in the quote face */
+.ah-founder__line { margin-top: 14px; font: italic 400 clamp(1.375rem, 1.1rem + 1vw, 2rem)/1.4 var(--font-quote); }
+
+/* What brings you in? on phones: every option in view, two columns, no sideways scrolling */
+.finder__all { margin: 36px auto 0; text-align: center; }
+.finder__all[hidden] { display: none; }
+@media (max-width: 767px) {
+  .ah-finder { padding: 52px var(--gutter) 56px; }
+  .ah-finder__head { padding: 0; }
+  .finder__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; overflow: visible; padding: 0; scroll-snap-type: none; }
+  .finder__grid > li { flex: none; }
+  .finder__card { border-radius: 10px; }
+  .finder__media { aspect-ratio: 4 / 3; }
+  .finder__label { align-items: flex-start; gap: 8px; padding: 12px 12px 14px; font-size: 15px; line-height: 1.3; }
+  .finder__arrow { font-size: 16px; }
+  .finder__panel { margin: 0; }
+  .finder__all { margin-top: 28px; }
+}
+
+/* The doctors */
+.docs-intro .section-head { margin-bottom: 56px; }
+.doc-v4__text { max-width: 34em; margin-top: 16px; }
+.doc-v4__focus { display: flex; flex-wrap: wrap; gap: 10px 28px; margin: 18px 0 0; padding: 0; list-style: none; }
+.doc-v4__focus a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; transition: color var(--t-link); }
+.doc-v4__focus a:hover, .doc-v4__focus a:focus-visible { color: var(--bronze); }
+.letters__media { aspect-ratio: 4 / 5; background: var(--stone); }
+.letters__media picture.fill img { object-fit: contain; }
+.letters__list { margin: 28px 0 0; }
+.letters__list > div { padding: 16px 0; border-top: 1px solid rgba(37, 36, 36, .14); }
+.letters__list dt { font: 700 14px/1.3 var(--font-head); letter-spacing: .12em; text-transform: uppercase; }
+.letters__list dd { margin: 6px 0 0; color: var(--muted); }
+.docs-next .section-head { margin-bottom: 0; }
+
+/* Gallery: three groups and jump links */
+.gal-intro { padding-bottom: 0; }
+.gal-intro .lede { max-width: 40em; }
+.gal-jump { display: flex; flex-wrap: wrap; gap: 12px 32px; margin: 28px 0 0; padding: 0; list-style: none; }
+.gal-group { scroll-margin-top: var(--header-h); }
+
+/* What we treat (/problems/): ten rows, each with one line and its usual treatments */
+.problem-rows__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(37, 36, 36, .14); }
+.problem-rows__list a { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 6px 48px; padding: 26px 0; border-bottom: 1px solid rgba(37, 36, 36, .14); color: var(--ink); text-decoration: none; }
+.problem-row__name { display: flex; align-items: center; justify-content: space-between; gap: 16px; grid-row: span 2; font: 700 18px/1.3 var(--font-head); letter-spacing: .12em; text-transform: uppercase; transition: color var(--t-link); }
+.problem-row__name .arrow { width: 12px; height: 10px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.2; }
+.problem-row__line { color: var(--ink); }
+.problem-row__how { color: var(--muted); font-size: 15px; }
+.problem-rows__list a:hover .problem-row__name, .problem-rows__list a:focus-visible .problem-row__name { color: var(--bronze); }
+.problem-rows__urgent { margin-top: 40px; }
+@media (max-width: 767px) {
+  .problem-rows__list a { grid-template-columns: 1fr; padding: 22px 0; }
+  .problem-row__name { grid-row: auto; }
+}
+
+/* Text over photographs: a deeper wash under the words (the process panels and the clinic band sit on bright rooms) */
+.ah-process__panel::after,
+.ah-band::after {
+  background: linear-gradient(to top, rgba(var(--shade), .86) 0%, rgba(var(--shade), .72) 34%, rgba(var(--shade), .34) 62%, rgba(var(--shade), 0) 82%);
+}
+.ah-process__text, .ah-band__text { text-shadow: 0 1px 16px rgba(0, 0, 0, .3); }
+.ah-process__text .link, .ah-band__text .link { text-shadow: none; }
+
+/* Phones: no full-screen bands with empty space; the page ends on the footer (no light strip below it) */
+@media (max-width: 767px) {
+  .ah-founder { height: auto; min-height: 0; padding: 120px 0 96px; }
+  .ah-founder__text { margin-inline: auto; }
+  .ah-band { height: 82svh; min-height: 560px; }
+}
+@media (max-width: 768px) {
+  body { padding-bottom: 0; }
+}
+
+/* Inner-page heroes: the same calm scale and wash as the homepage hero */
+.page-hero:not(.page-hero--plain)::after {
+  background: linear-gradient(to top, rgba(var(--shade), .84) 0%, rgba(var(--shade), .66) 30%, rgba(var(--shade), .3) 58%, rgba(var(--shade), 0) 80%);
+}
+@media (min-width: 768px) {
+  .page-hero:not(.page-hero--plain)::after {
+    background:
+      linear-gradient(to right, rgba(var(--shade), .45) 0%, rgba(var(--shade), .25) 40%, rgba(var(--shade), 0) 66%),
+      linear-gradient(to top, rgba(var(--shade), .8) 0%, rgba(var(--shade), .6) 30%, rgba(var(--shade), .26) 58%, rgba(var(--shade), 0) 80%);
+  }
+}
+.page-hero h1 { font-size: clamp(1.625rem, 1.2rem + 1.8vw, 2.75rem); line-height: 1.15; }
+.page-hero .hero__text { text-shadow: 0 1px 16px rgba(0, 0, 0, .25); }
+.page-hero .hero__text .link { text-shadow: none; }

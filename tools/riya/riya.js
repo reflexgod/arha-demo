@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Riya, Arha's AI receptionist: chat window. Loaded on the launcher's first click.
+   Riya, Arha's assistant: chat window. Loaded on the launcher's first click.
    Talks to the chat webhook (riyaWebhookUrl in the site config) with one request:
    POST { action: "sendMessage", sessionId, chatInput } -> { output }.
    Nothing is sent until the visitor sends a message or taps a quick reply.
@@ -32,7 +32,7 @@ export function mountRiya({ webhookUrl, phone = '', launcher, panel: shell = nul
       <span class="riya__mark">${ICON}</span>
       <div class="riya__id">
         <p class="riya__name" id="riya-title">Riya</p>
-        <p class="riya__status"><span class="riya__dot" aria-hidden="true"></span>Arha Dental Care · Replies instantly</p>
+        <p class="riya__status">Arha Dental Care’s online assistant</p>
       </div>
       <button class="riya__close" type="button" aria-label="Close chat"></button>
     </header>
@@ -105,7 +105,7 @@ export function mountRiya({ webhookUrl, phone = '', launcher, panel: shell = nul
       addMessage(String(reply || '…'), 'bot');
     } catch (e) {
       typing.remove();
-      addMessage(`Sorry, I couldn’t reach the clinic just now. Please call ${phone || 'the clinic'} or message us on WhatsApp.`, 'bot');
+      addMessage(`Sorry, I couldn’t reach the clinic just now. ${phone ? `Please call the clinic on ${phone}.` : 'Please call the clinic.'}`, 'bot');
     }
     busy = false;
     send.disabled = false;

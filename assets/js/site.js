@@ -35,7 +35,7 @@
   };
   window.arhaTrack = track;
 
-  /* 1. Header: hairline (and the utility line folds away) after 10px of scroll. It slides
+  /* 1. Header: one row; a hairline after 10px of scroll. It slides
         out of view when scrolling down and returns when scrolling up; it stays while a
         dropdown or the call panel is open, or while focus is inside it. ---------- */
   const header = document.querySelector('[data-header]');
@@ -175,8 +175,8 @@
     toggles.forEach((t) => t.addEventListener('click', () => groupToggles.forEach((btn) => setGroup(btn, false))));
   }
 
-  /* 4. Reveal on scroll, once, when ~15% into the viewport: text fades up, photographs
-        fade in with a 12px rise over 500 ms (CSS). Siblings revealed together are staggered by 90 ms.
+  /* 4. Reveal on scroll, once, as soon as a block enters the screen: a quick fade with an 8px rise
+        (300 ms, CSS). Siblings revealed together are staggered by 60 ms (at most 180 ms).
         window.arhaReady tells the head script that reveals are running. ------------ */
   const reveals = document.querySelectorAll('.reveal');
   if (!reduceMotion && 'IntersectionObserver' in window) {
@@ -189,20 +189,34 @@
           const group = e.target.closest('[data-reveal-group]');
           const items = group ? [...group.querySelectorAll('.reveal:not(.is-in)')] : [e.target];
           items.forEach((el, k) => {
-            el.style.setProperty('--delay', `${Math.min(i + k, 4) * 90}ms`);
+            el.style.setProperty('--delay', `${Math.min(i + k, 3) * 60}ms`);
             el.classList.add('is-in');
             io.unobserve(el);
           });
         });
-    }, { rootMargin: '0px 0px -15% 0px' });
+    }, { rootMargin: '0px 0px -4% 0px' });
     reveals.forEach((el) => io.observe(el));
   } else {
     reveals.forEach((el) => el.classList.add('is-in'));
   }
   window.arhaReady = true;
 
-  /* 4b. Images fade in over their blurred preview once loaded ------------- */
-  document.querySelectorAll('picture.fill img[loading="lazy"]').forEach((img) => {
+  /* 4b. Images fade in over their blurred preview once loaded (220 ms). They are fetched about two
+         screens ahead of the scroll (and one behind), not at the browser's last moment, so a fast scroll
+         does not land on blurred previews. ------------- */
+  const lazyImgs = document.querySelectorAll('picture.fill img[loading="lazy"]');
+  if ('IntersectionObserver' in window) {
+    const early = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.dataset.early = '';  // keeps the fade (site.css) once it is no longer loading=lazy
+        e.target.loading = 'eager';
+        early.unobserve(e.target);
+      });
+    }, { rootMargin: '100% 0px 200% 0px' });
+    lazyImgs.forEach((img) => early.observe(img));
+  }
+  lazyImgs.forEach((img) => {
     const done = () => img.classList.add('is-loaded');
     if (img.complete && img.naturalWidth) done();
     else {
@@ -219,9 +233,13 @@
   if (video && !reduceMotion && !saveData) {
     let started = false;
     const start = () => {
+      const upright = window.innerHeight > window.innerWidth;
       const large = window.innerWidth * window.devicePixelRatio > 1280;
       const source = document.createElement('source');
-      source.src = `${video.dataset.base}${large ? '1080' : '720'}.mp4`;
+      source.src = `${video.dataset.base}${upright ? 'phone' : large ? '1080' : '720'}.mp4`;
+      // The poster is the picture already on screen (no second download); if play() is refused, it simply stays
+      const still = hero.querySelector('.hero__media img');
+      if (still && still.currentSrc) video.poster = still.currentSrc;
       source.type = 'video/mp4';
       video.append(source);
       video.muted = true;
@@ -272,11 +290,37 @@
 
   /* 7. Call now. Every tel: link is tracked as call_click. On phones the call bar
         shows the live status (12). On a laptop (fine pointer) the header's Call now
-        opens a panel instead of dialling (from the utility line): number, copy, QR. */
+        opens a panel instead of dialling: number, copy, QR. */
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[href^="tel:"]');
     if (link) track('call_click', { location: link.dataset.call || 'page' });
   });
+
+  /* 7a. One call action per screen. The header's number (laptops) and the phone call bar step aside while
+         another call link is on screen (a page's own Call button, the footer), so the number never shows
+         twice at once. The phone bar also waits while the page's hero has its own booking or call button,
+         then slides in once the hero has scrolled away (site.css "Demo-ready"). */
+  const pageCalls = [...document.querySelectorAll('a[href^="tel:"]')]
+    .filter((a) => a.getAttribute('href') !== 'tel:112' && !a.closest('.site-header, .call-bar, .side-menu, .call-pop, .riya'));
+  const firstBlock = document.querySelector('main > :first-child');
+  const heroAction = firstBlock && firstBlock.querySelector('a[href$="book/"], a[href^="tel:"], [data-riya-ask]');
+  if ('IntersectionObserver' in window) {
+    const inView = new Set();
+    let heroIn = Boolean(heroAction);
+    const apply = () => {
+      root.classList.toggle('call-in-view', inView.size > 0);
+      root.classList.toggle('bar-away', heroIn || inView.size > 0);
+    };
+    const callIo = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) inView.add(e.target); else inView.delete(e.target); });
+      apply();
+    });
+    pageCalls.forEach((a) => callIo.observe(a));
+    if (heroAction) new IntersectionObserver(([e]) => { heroIn = e.isIntersecting; apply(); }).observe(firstBlock);
+    apply();
+  }
+  // From here on the classes above decide; before this ran, site.css kept the bar down on pages whose hero has a button
+  root.classList.add('bar-ready');
 
   const pop = document.getElementById('call-pop');
   const popTriggers = [...document.querySelectorAll('[data-call-pop]')];
@@ -353,7 +397,7 @@
       clearTimeout(copyTimer);
       copyTimer = setTimeout(() => { copyButton.textContent = 'Copy number'; copyStatus.textContent = ''; }, 2500);
     });
-    riyaButton.addEventListener('click', () => {
+    if (riyaButton) riyaButton.addEventListener('click', () => {
       closePop(false);
       if (window.arhaRiya) window.arhaRiya.open();
     });
@@ -579,9 +623,11 @@
   if (CLINIC_HOURS.days.length === 7) {
     const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const toMinutes = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
+    // A visitor outside India sees "IST" after each time, so "today" and "6:30 PM" are never read as their own clock
+    const away = new Date().getTimezoneOffset() !== -330 && CLINIC_HOURS.timeZone === 'Asia/Kolkata';
     const label = (hhmm) => {
       const [h, m] = hhmm.split(':').map(Number);
-      return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;
+      return `${((h + 11) % 12) + 1}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}${away ? ' IST' : ''}`;
     };
     const nowInClinic = () => {
       const parts = Object.fromEntries(new Intl.DateTimeFormat('en-GB', {
@@ -594,10 +640,11 @@
       const { day, minutes } = nowInClinic();
       const today = CLINIC_HOURS.days[day];
       if (today && minutes >= toMinutes(today[0]) && minutes < toMinutes(today[1])) return { open: true, until: label(today[1]) };
-      if (today && minutes < toMinutes(today[0])) return { open: false, opens: label(today[0]), when: '' };
+      // Away from India, "today" and "tomorrow" become the day's name (India's today may be the visitor's tomorrow)
+      if (today && minutes < toMinutes(today[0])) return { open: false, opens: label(today[0]), when: away ? DAY_NAMES[day] : '' };
       for (let i = 1; i <= 7; i += 1) {
         const next = CLINIC_HOURS.days[(day + i) % 7];
-        if (next) return { open: false, opens: label(next[0]), when: i === 1 ? 'tomorrow' : DAY_NAMES[(day + i) % 7] };
+        if (next) return { open: false, opens: label(next[0]), when: i === 1 && !away ? 'tomorrow' : DAY_NAMES[(day + i) % 7] };
       }
       return { open: false, opens: '', when: '' };
     };
@@ -607,6 +654,8 @@
       const s = status();
       const text = s.open ? `Open now · until ${s.until}` : s.opens ? `Closed · Opens ${s.when || 'today'} at ${s.opens}` : 'Closed';
       statusEls.forEach((el) => { el.textContent = text; el.classList.toggle('is-open', s.open); });
+      // "Call now" only while someone is there to answer; "Call" / "Call the clinic" otherwise
+      document.querySelectorAll('[data-call-label]').forEach((el) => { el.textContent = s.open ? el.dataset.open : el.dataset.closed; });
       // Phone call bar: "Open until 6:30 PM" / "Opens 9:30 AM" / "Opens tomorrow 9:30 AM" / "Opens Mon 9:30 AM"
       if (barStatus) {
         const when = s.when === 'tomorrow' ? 'tomorrow ' : s.when ? `${s.when.slice(0, 3)} ` : '';
@@ -614,7 +663,7 @@
       }
       // Popover: when closed, it also offers WhatsApp (always there) and Riya
       if (popStatus) {
-        popStatus.textContent = s.open ? `Open now · until ${s.until}` : `Closed now · opens ${s.when ? `${s.when} ` : ''}${s.opens}`;
+        popStatus.textContent = text;
         popStatus.classList.toggle('is-open', s.open);
         if (closedNote) closedNote.hidden = s.open;
         if (riyaOption) riyaOption.hidden = s.open || !window.arhaRiya;
