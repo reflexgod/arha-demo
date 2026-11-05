@@ -33,7 +33,6 @@ READ = """() => {
     footer: t('.footer__status'),
     menu: t('.side-menu .open-status'),
     bar: t('.call-bar [data-call-label]') + ' / ' + t('.call-bar [data-call-status]'),
-    pop: t('[data-call-pop-status]'),
   };
 }"""
 
@@ -75,17 +74,6 @@ def main():
             if out:
                 pg.screenshot(path=str(out / f"hours-{n}-emergency.png"))
             ctx.close()
-            # Desktop call panel
-            ctx = b.new_context(viewport={"width": 1440, "height": 900}, timezone_id=tz)
-            ctx.add_init_script("try { sessionStorage.setItem('arha-intro', '1'); } catch (e) {}")
-            pg = ctx.new_page()
-            pg.clock.set_fixed_time(when)
-            pg.goto(base + "doctors/", wait_until="load")
-            pg.wait_for_timeout(300)
-            pg.locator("[data-call-pop]:visible").first.click()  # the header number, or the hero's Call now while it is in view
-            pg.wait_for_timeout(300)
-            r["pop"] = pg.evaluate(READ)["pop"]
-            ctx.close()
             rows.append((label, local, r, em))
         b.close()
     srv.shutdown()
@@ -94,7 +82,6 @@ def main():
         print(f"  footer:     {r['footer']}")
         print(f"  menu:       {r['menu']}")
         print(f"  call bar:   {r['bar']}")
-        print(f"  call panel: {r['pop']}")
         print(f"  emergency:  {em}")
 
 

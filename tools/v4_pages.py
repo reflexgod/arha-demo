@@ -28,7 +28,7 @@ def page_hero(pic, title, lede, trail, eyebrow="", actions=True, i="    "):
     """apa's tall photo hero: text bottom-left over a wash; Book and Call as text links."""
     eb = f'\n{i}      <p class="eyebrow eyebrow--light">{eyebrow}</p>' if eyebrow else ""
     act = (f'\n{i}      <p class="hero__actions"><a class="link link--light" href="book/">Book an appointment</a>'
-           f'<a class="link link--light" href="tel:+910000000000" data-call="page_hero" data-call-pop>Call now</a></p>') if actions else ""
+           f'<a class="link link--light" href="tel:+910000000000" data-call="page_hero">Call now</a></p>') if actions else ""
     return f"""{i}<!-- =================================================================== HERO -->
 {i}<section class="page-hero page-hero--tall" aria-labelledby="page-title">
 {i}  {pic}

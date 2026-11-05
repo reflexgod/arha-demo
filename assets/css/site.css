@@ -2961,112 +2961,6 @@ html.is-locked .riya-launcher { visibility: hidden; }
   white-space: normal;
 }
 
-/* Desktop Call now: number, copy, QR, WhatsApp (charcoal, like the dropdowns) */
-.call-pop {
-  position: absolute;
-  top: 100%;
-  right: var(--gutter);
-  z-index: 2;
-  width: 340px;
-  padding: 28px 28px 24px;
-  background: var(--charcoal);
-  color: var(--paper);
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 200ms ease, transform 200ms ease;
-}
-
-.call-pop.is-open {
-  opacity: 1;
-  transform: none;
-}
-
-.call-pop__close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 44px;
-  height: 44px;
-  transition: color var(--t-link);
-}
-
-.call-pop__close::before,
-.call-pop__close::after {
-  content: "";
-  position: absolute;
-  top: 21px;
-  left: 14px;
-  width: 16px;
-  height: 1.5px;
-  background: currentColor;
-  transform: rotate(45deg);
-}
-
-.call-pop__close::after { transform: rotate(-45deg); }
-.call-pop__close:hover { color: var(--bronze); }
-
-.call-pop__title {
-  color: var(--paper-66);
-  font: 600 12px/1.4 var(--font-body);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-}
-
-.call-pop__number {
-  display: inline-block;
-  margin-top: 10px;
-  font: 700 30px/1.15 var(--font-head);
-  letter-spacing: .06em;
-  white-space: nowrap;
-  transition: color var(--t-link);
-}
-
-.call-pop__number:hover { color: var(--bronze); }
-
-.call-pop .open-status {
-  margin-top: 10px;
-  color: var(--paper-66);
-}
-
-.call-pop .open-status.is-open { color: var(--paper); }
-
-.call-pop__scan {
-  display: grid;
-  grid-template-columns: 112px 1fr;
-  align-items: center;
-  gap: 18px;
-  margin-top: 22px;
-  padding-top: 22px;
-  border-top: 1px solid var(--paper-16);
-}
-
-.call-pop__scan img {
-  width: 112px;
-  height: 112px;
-  image-rendering: pixelated;
-}
-
-.call-pop__scan p,
-.call-pop__closed {
-  color: var(--paper-82);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.call-pop__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px 22px;
-  margin-top: 22px;
-}
-
-.call-pop__actions .cta {
-  font-size: 13px;
-}
-
-.call-pop__closed {
-  margin-top: 16px;
-}
 
 /* Single links between the accordion groups, sized like the group titles */
 .acc__link {
@@ -4915,7 +4809,6 @@ html.is-locked .riya-launcher { visibility: hidden; }
 [data-show^="hours"],
 .open-status,
 .call-bar__status,
-.call-pop__number,
 .visit__details,
 .footer__cols {
   font-variant-numeric: tabular-nums;
@@ -5024,9 +4917,6 @@ html.is-locked .riya-launcher { visibility: hidden; }
   .header-actions .cta { display: none; }
 }
 
-.call-pop {
-  top: calc(var(--utility-h) - 4px);
-}
 
 /* Phones: the menu is a full-screen, calm overlay with large type */
 @media (max-width: 767px) {
@@ -5488,7 +5378,6 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
   .brand img { width: 136px; }
 }
 
-.call-pop { top: calc(100% + 4px); right: var(--gutter); left: auto; }
 
 /* Mega menu: a calm full-width panel, three columns */
 .dropdown--mega { left: 0; right: 0; width: auto; }
@@ -7413,12 +7302,13 @@ button.link:disabled { opacity: .38; cursor: default; background-size: 0 1px; }
 .header-call { transition: opacity .25s ease, visibility 0s linear 0s, background-size .3s var(--ease), color var(--t-link); }
 html.call-in-view .header-call:not(:focus-visible) { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, visibility 0s linear .2s; }
 
-/* Phone call bar: waits while the hero shows its own booking button and while another call link is on screen,
-   then slides up. Before site.js runs, pages whose hero has a button start with the bar down (no flash). */
+/* Phone call bar: always up from the first paint, so calling is one tap from anywhere. It steps aside only
+   while another call link is fully on screen (site.js 7a); before site.js runs, a hero with its own Call now
+   keeps it down (no flash). */
 @media (max-width: 768px) {
   .call-bar { transition: transform .35s var(--ease), visibility 0s linear 0s; }
   html.bar-away .call-bar,
-  html.js:not(.bar-ready):has(main > :first-child :is(a[href$="book/"], a[href^="tel:"], [data-riya-ask])) .call-bar {
+  html.js:not(.bar-ready):has(main > :first-child a[href^="tel:"]:not([href="tel:112"])) .call-bar {
     visibility: hidden;
     transform: translateY(100%);
     transition: transform .3s var(--ease), visibility 0s linear .3s;

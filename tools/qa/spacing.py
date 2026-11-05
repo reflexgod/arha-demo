@@ -15,7 +15,7 @@ JS = r"""() => {
   document.querySelectorAll('.reveal').forEach(e => e.classList.add('is-in'));
   const out = [];
   const visible = (el) => { const r = el.getBoundingClientRect(); const s = getComputedStyle(el); return r.width > 0 && r.height > 0 && s.visibility !== 'hidden' && s.opacity !== '0' && !el.closest('[hidden]'); };
-  const skip = 'header, footer, nav, .side-menu, .dropdown, .call-pop, .riya, [class*="riya"], .call-bar, .drag__ui, .brings__items, .problem-links__list, .more-cases__list, .techlist__list, .fmenu, .crumbs, .work-filter, .lightbox, .xfade__tabs, [role=tablist]';
+  const skip = 'header, footer, nav, .side-menu, .dropdown, .riya, [class*="riya"], .call-bar, .drag__ui, .brings__items, .problem-links__list, .more-cases__list, .techlist__list, .fmenu, .crumbs, .work-filter, .lightbox, .xfade__tabs, [role=tablist]';
   const texts = [...document.querySelectorAll('main p, main h1, main h2, main h3, main h4, main dd, main blockquote, main figcaption, main legend')]
     .filter(t => visible(t) && !t.querySelector('a.link, a.cta, .text-link') && !t.closest('a') && t.textContent.trim());
   document.querySelectorAll('main a.link, main a.cta, main button.cta, main .text-link').forEach((a) => {

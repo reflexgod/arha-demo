@@ -238,32 +238,14 @@
       </nav>
 
       <div class="header-actions">
-        <!-- One action from every page: dials on a phone, opens the call panel on a laptop -->
-        <a class="header-call" href="tel:+919975507714" data-call="header" data-call-pop data-label="phone" aria-label="Call Arha Dental Care, +91 99755 07714"><svg class="icon-phone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span class="header-call__long" data-show="phone">+91 99755 07714</span><span class="header-call__short">Call</span></a>
+        <!-- One action from every page: one click dials (the phone app, or the laptop's calling app) -->
+        <a class="header-call" href="tel:+919975507714" data-call="header" data-label="phone" aria-label="Call Arha Dental Care, +91 99755 07714"><svg class="icon-phone" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span class="header-call__long" data-show="phone">+91 99755 07714</span><span class="header-call__short">Call</span></a>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="side-menu" aria-label="Open menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
 
-    <!-- Call panel (laptops): the number large, copy it, or scan the QR to call from a phone -->
-    <div class="call-pop" id="call-pop" role="dialog" aria-labelledby="call-pop-title" hidden>
-      <button class="call-pop__close" type="button" aria-label="Close" data-call-pop-close></button>
-      <p class="call-pop__title" id="call-pop-title">Call reception</p>
-      <a class="call-pop__number" href="tel:+919975507714" data-call="popover" data-show="phone">+91 99755 07714</a>
-      <p class="open-status call-pop__status" data-call-pop-status></p>
-      <div class="call-pop__scan">
-        <img src="../assets/img/call-qr.svg" width="112" height="112" loading="lazy" alt="QR code that dials Arha's reception">
-        <p>Scan with your phone’s camera to call from your phone.</p>
-      </div>
-      <div class="call-pop__actions">
-        <button class="cta" type="button" data-copy-number>Copy number</button>
-        
-        
-      </div>
-      
-      <p class="visually-hidden" role="status" data-copy-status></p>
-    </div>
   </header>
 
   <!-- ===================================================================== MENU (full screen, every width) -->
@@ -349,7 +331,7 @@
           <p class="eyebrow eyebrow--light">Specialist care</p>
           <h1 id="page-title">Maxillofacial prosthetics</h1>
           <p class="hero__lede">Custom prostheses that help restore eating, speaking and appearance when part of the mouth or jaw is missing.</p>
-          <p class="hero__actions"><a class="link link--light" href="../book/">Book an appointment</a><a class="link link--light" href="tel:+919975507714" data-call="page_hero" data-call-pop>Call now</a></p>
+          <p class="hero__actions"><a class="link link--light" href="../book/">Book an appointment</a><a class="link link--light" href="tel:+919975507714" data-call="page_hero">Call now</a></p>
         </div>
       </div>
     </section>

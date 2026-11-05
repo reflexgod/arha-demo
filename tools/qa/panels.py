@@ -102,20 +102,9 @@ def main():
                     pg.mouse.click(w / 2, h - 40)
                     pg.wait_for_timeout(400)
                     check(f"{w}px {label}: click opens, a click outside closes", opened and not pg.evaluate(is_open))
-                # Call panel (laptops): the header number opens it
-                is_open = "!document.getElementById('call-pop').hidden"
-                pg.click(".header-call")
-                pg.wait_for_timeout(400)
-                check(f"{w}px Call panel: opens on click", pg.evaluate(is_open))
-                check(f"{w}px Call panel: focus moves to the number", focused(pg, "#call-pop"))
-                pg.keyboard.press("Escape")
-                pg.wait_for_timeout(400)
-                check(f"{w}px Call panel: Escape closes it and focus returns", not pg.evaluate(is_open) and focused(pg, ".header-call"))
-                pg.click(".header-call")
-                pg.wait_for_timeout(400)
-                pg.mouse.click(w / 2, h - 40)
-                pg.wait_for_timeout(400)
-                check(f"{w}px Call panel: a click outside closes it", not pg.evaluate(is_open))
+                # Call now (laptops): a plain tel: link, no panel in between
+                dial = pg.evaluate("() => { const a = document.querySelector('.header-call'); return a.getAttribute('href').startsWith('tel:+91') && !a.hasAttribute('data-call-pop') && !document.getElementById('call-pop') }")
+                check(f"{w}px Call now: dials straight away", dial)
             # Full-screen menu
             menu_open = "document.querySelector('.side-menu').classList.contains('is-open')"
             modal(pg, w, "Menu", ".menu-toggle", ".side-menu", menu_open, ".side-menu__close")

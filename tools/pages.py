@@ -258,7 +258,6 @@ def hide_missing(html):
     keys = "|".join(sorted(gone))
     html = re.sub(rf'(?::\s*)?<span[^>]*\bdata-show="(?:{keys})"[^>]*>[^<]*</span>', "", html)
     if "phone" in gone:
-        html = re.sub(r"\n?[ \t]*<!-- Call panel \(laptops\).*?(?=\n  </header>)", "", html, flags=re.S)
         html = re.sub(r'("telephone": )"[^"]*"', r'\1""', html)
     # Rows and wrappers left empty
     for _ in range(2):
@@ -267,16 +266,6 @@ def hide_missing(html):
         html = re.sub(r"\n?[ \t]*<p>\s*(?:·\s*)*</p>", "", html)
         html = re.sub(r'\n?[ \t]*<(p|div) class="[\w-]*__actions[^"]*">\s*</\1>', "", html)
     return html
-
-
-def call_qr():
-    """QR code that dials reception when scanned with a phone (shown in the desktop Call now popover)."""
-    if missing("phone"):
-        return
-    import segno
-    segno.make(f"tel:+{digits(SITE['phone'])}", error="m").save(
-        str(ROOT / "assets" / "img" / "call-qr.svg"), kind="svg", border=2, omitsize=True,
-        dark="#302F2F", light="#FAFAF6", xmldecl=False, nl=False)
 
 
 def menus(html):
@@ -377,7 +366,6 @@ def main():
     if home != original:
         index.write_text(home, encoding="utf-8", newline="\n")
         print("updated index.html (contact details, menus)")
-    call_qr()
     riya_assets()
 
     visit = VISIT.read_text(encoding="utf-8")

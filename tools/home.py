@@ -300,7 +300,7 @@ def main_html(visit):
           <p class="hero__lede">Your smile, designed around your face, your comfort and the way you live.</p>
           <p class="hero__actions">
             <a class="link link--light" href="book/">Book a consultation</a>
-            <a class="link link--light" href="tel:+910000000000" data-call="hero" data-call-pop>Call now</a>
+            <a class="link link--light" href="tel:+910000000000" data-call="hero">Call now</a>
           </p>
         </div>
       </div>

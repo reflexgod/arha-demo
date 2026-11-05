@@ -334,9 +334,8 @@ def g_header(pg, vp, cdp):
         rec(path, "Header: What we treat", vp, "Escape closes, focus back", ev(pg, "() => document.querySelector('.nav__trigger[aria-controls=dd-fix]').getAttribute('aria-expanded')") == "false" and ev(pg, "() => document.activeElement.getAttribute('aria-controls')") == "dd-fix")
         book = ev(pg, "() => { const a = document.querySelector('.nav__link--book'); return getComputedStyle(a).backgroundSize }")
         rec(path, "Header: Book a consultation", vp, "underlined", "1px" in book, book)
-        pg.locator(".header-call").click(); pg.wait_for_timeout(400)
-        rec(path, "Header: Call now", vp, "click opens call panel", ev(pg, "() => !document.getElementById('call-pop').hidden"))
-        pg.keyboard.press("Escape"); pg.wait_for_timeout(300)
+        dial = ev(pg, "() => { const a = document.querySelector('.header-call'); return [a.getAttribute('href'), a.hasAttribute('data-call-pop'), Boolean(document.getElementById('call-pop'))] }")
+        rec(path, "Header: Call now", vp, "click dials straight away (tel:, no panel)", dial[0].startswith("tel:+91") and not dial[1] and not dial[2], dial)
     else:
         vis = ev(pg, "() => { const c = document.querySelector('.header-call'); const m = document.querySelector('.menu-toggle'); return [getComputedStyle(c).display, getComputedStyle(m).display, c.textContent.trim()] }")
         rec(path, "Header (phone)", vp, "CALL and menu shown", vis[0] != "none" and vis[1] != "none", vis)

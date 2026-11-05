@@ -45,7 +45,7 @@
     const update = () => {
       const y = window.scrollY;
       header.classList.toggle('is-scrolled', y > 10);
-      const busy = header.contains(document.activeElement) || header.querySelector('.is-open, .call-pop:not([hidden])');
+      const busy = header.contains(document.activeElement) || header.querySelector('.is-open');
       if (y > lastY + 4 && y > 240 && !busy) header.classList.add('is-hidden');
       else if (y < lastY - 4 || y <= 240) header.classList.remove('is-hidden');
       lastY = y;
@@ -293,120 +293,36 @@
     }
   }
 
-  /* 7. Call now. Every tel: link is tracked as call_click. On phones the call bar
-        shows the live status (12). On a laptop (fine pointer) the header's Call now
-        opens a panel instead of dialling: number, copy, QR. */
+  /* 7. Call now. Every Call button is a plain tel: link: one tap or click dials, on phones, tablets and
+        laptops alike (a laptop hands the number to its calling app). Nothing intercepts it; it is tracked
+        as call_click. On phones the call bar shows the live status (12). */
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a[href^="tel:"]');
     if (link) track('call_click', { location: link.dataset.call || 'page' });
   });
 
-  /* 7a. One call action per screen. The header's number (laptops) and the phone call bar step aside while
-         another call link is on screen (a page's own Call button, the footer), so the number never shows
-         twice at once. The phone bar also waits while the page's hero has its own booking or call button,
-         then slides in once the hero has scrolled away (site.css "Demo-ready"). */
+  /* 7a. A call is always one tap away, shown once. The header's number (laptops) and the phone call bar
+         step aside only while another call link is fully on screen and clear of the header and the bar
+         (a page's own Call button, the footer). A link half under the header or the bar does not count,
+         so there is never a moment with no call button to press. */
   const pageCalls = [...document.querySelectorAll('a[href^="tel:"]')]
-    .filter((a) => a.getAttribute('href') !== 'tel:112' && !a.closest('.site-header, .call-bar, .side-menu, .call-pop, .riya'));
-  const firstBlock = document.querySelector('main > :first-child');
-  const heroAction = firstBlock && firstBlock.querySelector('a[href$="book/"], a[href^="tel:"], [data-riya-ask]');
-  if ('IntersectionObserver' in window) {
+    .filter((a) => a.getAttribute('href') !== 'tel:112' && !a.closest('.site-header, .call-bar, .side-menu, .riya'));
+  if ('IntersectionObserver' in window && pageCalls.length) {
     const inView = new Set();
-    let heroIn = Boolean(heroAction);
     const apply = () => {
       root.classList.toggle('call-in-view', inView.size > 0);
-      root.classList.toggle('bar-away', heroIn || inView.size > 0);
+      root.classList.toggle('bar-away', inView.size > 0);
     };
     const callIo = new IntersectionObserver((entries) => {
-      entries.forEach((e) => { if (e.isIntersecting) inView.add(e.target); else inView.delete(e.target); });
+      entries.forEach((e) => { if (e.isIntersecting && e.intersectionRatio > 0.99) inView.add(e.target); else inView.delete(e.target); });
       apply();
-    });
+    }, { rootMargin: '-96px 0px -96px 0px', threshold: [0, 1] });
     pageCalls.forEach((a) => callIo.observe(a));
-    if (heroAction) new IntersectionObserver(([e]) => { heroIn = e.isIntersecting; apply(); }).observe(firstBlock);
     apply();
   }
-  // From here on the classes above decide; before this ran, site.css kept the bar down on pages whose hero has a button
+  // From here on the classes above decide; before this ran, site.css kept the bar down only under a hero with its own Call now
   root.classList.add('bar-ready');
 
-  const pop = document.getElementById('call-pop');
-  const popTriggers = [...document.querySelectorAll('[data-call-pop]')];
-  const canDial = () => window.matchMedia('(pointer: coarse)').matches;
-  if (pop && popTriggers.length) {
-    let popTrigger = popTriggers[0];
-    popTriggers.forEach((t) => {
-      t.setAttribute('aria-haspopup', 'dialog');
-      t.setAttribute('aria-controls', 'call-pop');
-      t.setAttribute('aria-expanded', 'false');
-    });
-    const number = pop.querySelector('.call-pop__number');
-    const copyButton = pop.querySelector('[data-copy-number]');
-    const copyStatus = pop.querySelector('[data-copy-status]');
-    const riyaButton = pop.querySelector('[data-ask-riya]');
-    let copyTimer = 0;
-
-    const onKey = (e) => { if (e.key === 'Escape') closePop(true); };
-    const onOutside = (e) => { if (!pop.contains(e.target) && !popTriggers.some((t) => t.contains(e.target))) closePop(false); };
-    const openPop = () => {
-      window.dispatchEvent(new Event('arha:status')); // a fresh open/closed line
-      header.classList.remove('is-hidden');
-      pop.hidden = false;
-      requestAnimationFrame(() => pop.classList.add('is-open'));
-      popTrigger.setAttribute('aria-expanded', 'true');
-      document.addEventListener('keydown', onKey);
-      document.addEventListener('click', onOutside);
-      number.focus({ preventScroll: true });
-      track('call_popover_open', { location: popTrigger.dataset.call || 'page' });
-    };
-    function closePop(returnFocus) {
-      if (pop.hidden) return;
-      pop.classList.remove('is-open');
-      popTriggers.forEach((t) => t.setAttribute('aria-expanded', 'false'));
-      document.removeEventListener('keydown', onKey);
-      document.removeEventListener('click', onOutside);
-      setTimeout(() => { if (!pop.classList.contains('is-open')) pop.hidden = true; }, reduceMotion ? 0 : 200);
-      if (returnFocus) popTrigger.focus({ preventScroll: true });
-    }
-    popTriggers.forEach((t) => t.addEventListener('click', (e) => {
-      if (canDial()) return; // phones and tablets dial straight away
-      e.preventDefault();
-      if (!pop.hidden && popTrigger === t) { closePop(false); return; }
-      popTrigger = t;
-      openPop();
-    }));
-    pop.querySelector('[data-call-pop-close]').addEventListener('click', () => closePop(true));
-    // Tabbing out of the popover closes it
-    pop.addEventListener('focusout', (e) => {
-      if (e.relatedTarget && !pop.contains(e.relatedTarget) && !popTriggers.includes(e.relatedTarget)) closePop(false);
-    });
-    // Scrolling far closes it rather than leaving it floating over the page
-    let openedAt = 0;
-    window.addEventListener('scroll', () => {
-      if (pop.hidden) { openedAt = window.scrollY; return; }
-      if (Math.abs(window.scrollY - openedAt) > 320) closePop(false);
-    }, { passive: true });
-
-    copyButton.addEventListener('click', async () => {
-      const text = SITE.phone || number.textContent.trim();
-      try {
-        await navigator.clipboard.writeText(text);
-        copyButton.textContent = 'Copied';
-        copyStatus.textContent = `Number copied: ${text}`;
-      } catch (err) {
-        // Clipboard blocked: select the number so it can be copied by hand
-        const range = document.createRange();
-        range.selectNodeContents(number);
-        getSelection().removeAllRanges();
-        getSelection().addRange(range);
-        copyStatus.textContent = 'Number selected. Press Control C or Command C to copy.';
-      }
-      track('copy_number');
-      clearTimeout(copyTimer);
-      copyTimer = setTimeout(() => { copyButton.textContent = 'Copy number'; copyStatus.textContent = ''; }, 2500);
-    });
-    if (riyaButton) riyaButton.addEventListener('click', () => {
-      closePop(false);
-      if (window.arhaRiya) window.arhaRiya.open();
-    });
-  }
 
   /* 8. Map facade: Google Maps only loads after a click (privacy + speed) - */
   document.querySelectorAll('[data-map-src]').forEach((button) => {
@@ -617,14 +533,13 @@
   }
 
   /* 12. Live open status (India time). Hours come from SITE in tools/pages.py.
-         Feeds the Visit and menu status lines, the phone call bar and the popover. */
+         Feeds the Visit and menu status lines and the phone call bar. */
   const CLINIC_HOURS = {
     timeZone: SITE.timeZone || 'Asia/Kolkata',
     days: SITE.hours || [], // 0 = Sunday ... 6 = Saturday; null = closed
   };
   const statusEls = document.querySelectorAll('[data-open-status]');
   const barStatus = document.querySelector('[data-call-status]');
-  const popStatus = document.querySelector('[data-call-pop-status]');
   if (CLINIC_HOURS.days.length === 7) {
     const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const toMinutes = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
@@ -653,8 +568,6 @@
       }
       return { open: false, opens: '', when: '' };
     };
-    const closedNote = document.querySelector('[data-call-pop-closed]');
-    const riyaOption = document.querySelector('[data-ask-riya]');
     const render = () => {
       const s = status();
       const text = s.open ? `Open now · until ${s.until}` : s.opens ? `Closed · Opens ${s.when || 'today'} at ${s.opens}` : 'Closed';
@@ -665,13 +578,6 @@
       if (barStatus) {
         const when = s.when === 'tomorrow' ? 'tomorrow ' : s.when ? `${s.when.slice(0, 3)} ` : '';
         barStatus.textContent = s.open ? `Open until ${s.until}` : `Opens ${when}${s.opens}`;
-      }
-      // Popover: when closed, it also offers WhatsApp (always there) and Riya
-      if (popStatus) {
-        popStatus.textContent = text;
-        popStatus.classList.toggle('is-open', s.open);
-        if (closedNote) closedNote.hidden = s.open;
-        if (riyaOption) riyaOption.hidden = s.open || !window.arhaRiya;
       }
     };
     render();
