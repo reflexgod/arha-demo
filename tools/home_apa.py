@@ -424,5 +424,72 @@ def main_html(visit=None):
     """The homepage <main>. The footer (apa's closing line, logo and columns) comes from chrome.py.
     One problem picker only, "What brings you in?": the grid of problem squares (grid()) repeated it, and all ten
     problems are one tap away on /problems/ (Demo-ready, 3 Nov 2026)."""
-    return ('  <main id="main" class="home-apa" tabindex="-1">\n\n' + hero() + finder() + statement() + trio()
-            + "    " + SIG + "\n" + highlights() + band() + dark() + process() + "    " + SIG + "\n" + teaser() + reviews() + "\n  </main>\n")
+    return ('  <main id="main" class="home-apa" tabindex="-1">\n\n' + hero_v9() + finder() + statement() + trio()
+            + "    " + SIG + "\n" + highlights() + band() + dark() + process() + "    " + SIG + "\n" + step_inside() + reviews() + "\n  </main>\n")
+
+
+# ------------------------------------------------------------------ 7 Nov 2026 (v5-clean): the clinic walkthrough hero and
+# "Step inside", kept from the v9 upgrade and restyled in the v8 palette and type (site.css, last layer).
+def hero_v9():
+    """Full-bleed clinic walkthrough, text bottom-left over a dark gradient. The poster paints first (preloaded in
+    index.html); site.js 27 attaches the video after the load event, on screens 1024 px and wider only."""
+    from chrome import WA
+    return f"""    <!-- =================================================================== 1. HERO (the clinic walkthrough, text bottom-left) -->
+    <section class="hero-v9" data-hero-v9 aria-labelledby="hero-title">
+      <div class="hero-v9__media">
+        <picture>
+          <source media="(max-width: 1023px) and (orientation: portrait)" type="image/webp" srcset="assets/video/hero-poster-port-720.webp">
+          <source type="image/webp" srcset="assets/video/hero-poster-land-768.webp 768w, assets/video/hero-poster-land-1280.webp 1280w, assets/video/hero-poster-land-1920.webp 1920w" sizes="100vw">
+          <img src="assets/video/hero-poster-land-1280.jpg" width="1920" height="1080" alt="Arha's reception on Peddar Road, the first frame of the clinic walkthrough" fetchpriority="high" decoding="async">
+        </picture>
+        <video class="hero-v9__video" data-base="assets/video/hero-land-" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+      </div>
+      <div class="hero-v9__text">
+        <p class="hero-v9__kicker">Peddar Road, Mumbai</p>
+        <h1 id="hero-title">Implants and smile design by a prosthodontist.</h1>
+        <p class="hero-v9__lede">Dr. Nikhil V. Jain’s practice on Peddar Road, opposite Jaslok Hospital.</p>
+        <p class="hero-v9__actions"><a class="btn btn--primary" href="book/"><span>Book an appointment</span>{ARROW}</a><!--if:whatsapp--><a class="btn" href="{WA}" target="_blank" rel="noopener"><span>WhatsApp</span>{ARROW}</a><!--endif--><!--if:phone--><a class="btn" href="tel:+910000000000" data-call="hero"><span>Call <span data-show="phone">+91 00000 00000</span></span>{ARROW}</a><!--endif--></p>
+      </div>
+    </section>
+"""
+
+
+INSIDE = [  # real clinic photographs only
+    ("arha-dental-care-reception-south-mumbai-dental-clinic-01", "Arha's reception: marble, soft light and the gold emblem", "Reception"),
+    ("arha-dental-care-lounge-peddar-road", "The patients' lounge at Arha", "The lounge"),
+    ("dental-operatory-arha-dental-care-peddar-road-01", "An Arha treatment room with its chair beneath a soft light", "A treatment room"),
+    ("arha-dental-care-consultation-desk", "The consultation desk in an Arha treatment room", "Consultation"),
+    ("dental-implant-equipment-arha-dental-care-mumbai", "Arha's X-ray room with its panoramic X-ray unit", "The X-ray room"),
+    ("arha-dental-care-exterior-dental-clinic-peddar-road", "The Arha sign at suite 107, Doctor House", "Suite 107, Doctor House"),
+]
+
+
+def step_inside():
+    """Where the v8 teaser was: a swipe strip of the real rooms, and the clinic tour in a lightbox (site.js 25)."""
+    items = "".join(f"""
+        <li class="inside-strip__item">
+          <figure>
+            <div class="inside-strip__media">
+{pic(name, '(min-width: 900px) 30vw, 78vw', alt, '50% 50%', '              ')}
+            </div>
+            <figcaption>{cap}</figcaption>
+          </figure>
+        </li>""" for name, alt, cap in INSIDE)
+    return f"""
+    <!-- =================================================================== 9. STEP INSIDE (the real rooms; the tour in a lightbox) -->
+    <section class="inside-v9" aria-labelledby="inside-title">
+      <div class="inside-v9__head reveal">
+        <div>
+          <p class="eyebrow">Gallery</p>
+          <h2 id="inside-title">Step inside</h2>
+        </div>
+        <button class="btn" type="button" data-tour-open><span>Play the clinic tour</span>{ARROW}</button>
+      </div>
+      <ul class="inside-strip" role="list" tabindex="0" aria-label="Photographs of the clinic, scroll sideways">{items}
+      </ul>
+      <dialog class="tour-box" data-tour-box aria-label="Clinic tour">
+        <button class="tour-box__close" type="button" data-tour-close aria-label="Close the clinic tour"></button>
+        <video controls playsinline preload="none" poster="assets/video/tour-poster-720.jpg" data-src="assets/video/tour-720.mp4"></video>
+      </dialog>
+    </section>
+"""

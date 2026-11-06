@@ -1768,4 +1768,60 @@
     next.addEventListener('click', () => select(at + 1));
     select(0);
   });
+
+  /* 25. Clinic tour in a lightbox (homepage "Step inside"): the video loads only when opened, stops when closed. */
+  const tourBox = document.querySelector('[data-tour-box]');
+  if (tourBox && typeof tourBox.showModal === 'function') {
+    const v = tourBox.querySelector('video');
+    let opener = null;
+    document.querySelectorAll('[data-tour-open]').forEach((b) => b.addEventListener('click', () => {
+      opener = b;
+      if (!v.src) v.src = v.dataset.src;
+      tourBox.showModal();
+      v.play().catch(() => {});
+      track('tour_play', { location: 'home' });
+    }));
+    const close = () => { v.pause(); if (tourBox.open) tourBox.close(); };
+    tourBox.querySelector('[data-tour-close]').addEventListener('click', close);
+    tourBox.addEventListener('click', (e) => { if (e.target === tourBox) close(); });
+    tourBox.addEventListener('close', () => { v.pause(); if (opener) opener.focus(); });
+  } else if (tourBox) {
+    tourBox.remove();
+    document.querySelectorAll('[data-tour-open]').forEach((b) => b.remove());
+  }
+
+  /* 27. Homepage hero and its slim header (7 Nov 2026).
+        Header: transparent over the video, paper after 80 px (colours only, so nothing moves).
+        Video: the poster paints first; the walkthrough is attached after the load event, when the browser is idle
+        (1 s at most), on screens 1024 px and wider only; never with reduced motion or Save-Data. 720p below
+        1440 px, 1080p above; WebM (VP9) first, MP4 (H.264) as the fallback. It pauses off screen. */
+  const slim = document.querySelector('.site-header--slim');
+  if (slim) {
+    const solid = () => slim.classList.toggle('is-solid', window.scrollY > 80);
+    window.addEventListener('scroll', solid, { passive: true });
+    solid();
+  }
+  const heroV9 = document.querySelector('[data-hero-v9]');
+  const heroVideo = heroV9 && heroV9.querySelector('video');
+  if (heroVideo && !reduceMotion && !saveData && window.matchMedia('(min-width: 1024px)').matches) {
+    const attach = () => {
+      const size = window.innerWidth >= 1440 ? '1080' : '720';
+      [['webm', 'video/webm; codecs="vp9"'], ['mp4', 'video/mp4']].forEach(([ext, type]) => {
+        const source = document.createElement('source');
+        source.src = `${heroVideo.dataset.base}${size}.${ext}`;
+        source.type = type;
+        heroVideo.append(source);
+      });
+      heroVideo.muted = true;
+      heroVideo.addEventListener('playing', () => heroV9.classList.add('is-playing'), { once: true });
+      heroVideo.load();
+      new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) heroVideo.play().catch(() => {});
+        else heroVideo.pause();
+      }).observe(heroV9);
+    };
+    const later = () => ('requestIdleCallback' in window ? window.requestIdleCallback(attach, { timeout: 1000 }) : setTimeout(attach, 1000));
+    if (document.readyState === 'complete') later();
+    else window.addEventListener('load', later, { once: true });
+  }
 })();

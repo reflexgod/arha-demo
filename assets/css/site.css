@@ -8015,3 +8015,147 @@ a:focus-visible img.bw-photo, [data-colour-group]:focus-within img.bw-photo, a:h
 .dropdown .mega__title a { font: inherit; letter-spacing: inherit; text-transform: inherit; }
 .mega__title { text-transform: uppercase; }
 #dark-title { color: var(--headline); }
+
+/* ===========================================================================================================
+   v5-clean (7 Nov 2026): the homepage's clinic walkthrough hero, its slim header and "Step inside", kept from the v9
+   upgrade and drawn in the v8 palette and type (Instrument Serif, Jost, Sofia Sans Condensed labels, paper, ink,
+   brand-deep, bronze). Every rule is scoped to .site-header--slim, .hero-v9 or .inside-v9: nothing else changes.
+   Hero text is cream #F7F3EC over a warm dark overlay; contrast is measured on the brightest frames
+   (tools/qa/hero_frames.py).
+   =========================================================================================================== */
+.site-header--slim, .hero-v9 { --hero-cream: #F7F3EC; --hero-ink: var(--brand-deep); }
+
+/* ---------------------------------------------------------------- slim header (homepage only) */
+.site-header.site-header--slim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 72px;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  color: var(--paper);
+  transition: background-color 250ms ease-out, border-color 250ms ease-out, color 250ms ease-out, transform 300ms var(--ease);
+}
+.slim__inner { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 100%; padding-inline: var(--gutter); }
+.site-header--slim .brand { display: block; flex: none; }
+.site-header--slim .slim__logo { display: block; width: auto; height: 36px; }
+.site-header--slim .slim__logo--dark { display: none; }
+.site-header--slim .nav { display: none; }
+.site-header--slim .header-actions { display: flex; align-items: center; gap: 16px; margin: 0; }
+.site-header--slim .header-call { color: inherit; }
+.site-header--slim .header-call:hover, .site-header--slim .header-call:focus-visible { color: inherit; text-decoration: underline; text-decoration-color: var(--bronze); text-underline-offset: 6px; }
+.site-header--slim .header-call__long, .site-header--slim .header-mail { display: none; }
+.site-header--slim .header-book { display: none; min-height: 44px; }
+.site-header--slim .menu-toggle { display: grid; color: inherit; }
+.site-header--slim .menu-toggle span { background: currentColor; }
+.site-header--slim:not(.is-solid):not(:has(.is-open)) .btn {
+  --btn-fg: var(--paper);
+  --btn-line: rgba(250, 250, 246, .7);
+  --btn-fill: var(--paper);
+  --btn-on-fill: var(--brand-deep);
+  --btn-arrow: var(--eyebrow-light);
+}
+/* After 80 px, or while a menu is open: paper with a hairline (colours only, so nothing shifts) */
+.site-header--slim.is-solid, .site-header--slim:has(.is-open) { background: var(--paper); border-bottom-color: var(--hairline-strong); color: var(--ink); }
+.site-header--slim:is(.is-solid, :has(.is-open)) .slim__logo--light { display: none; }
+.site-header--slim:is(.is-solid, :has(.is-open)) .slim__logo--dark { display: block; }
+@media (min-width: 768px) { .site-header--slim .header-book { display: inline-flex; } }
+@media (min-width: 1024px) {
+  .site-header--slim.is-hidden { transform: none; }
+  .site-header--slim .menu-toggle { display: none; }
+  .site-header--slim .nav { display: block; align-self: stretch; }
+  .site-header--slim .nav__list { display: flex; align-items: center; gap: 36px; height: 100%; margin: 0; padding: 0; list-style: none; }
+  .site-header--slim .nav__item { display: flex; align-items: center; height: 100%; }
+  .site-header--slim .nav__item--mega { position: static; }
+  .site-header--slim :is(.nav__link, .nav__trigger) { color: inherit; background-color: transparent; padding-block: 8px; }
+  .site-header--slim :is(.nav__link, .nav__trigger):is(:hover, :focus-visible),
+  .site-header--slim .nav__trigger[aria-expanded="true"] { color: inherit; background: linear-gradient(var(--bronze), var(--bronze)) left bottom / 100% 1px no-repeat; }
+}
+@media (min-width: 1360px) { .site-header--slim .header-call__long { display: inline; } }
+@media (max-width: 767px) { .site-header.site-header--slim { height: 60px; } .site-header--slim .slim__logo { height: 30px; } .site-header--slim .header-actions { gap: 4px; } }
+@media (prefers-reduced-motion: reduce) { .site-header.site-header--slim { transition: none; } }
+
+/* ---------------------------------------------------------------- hero: the clinic walkthrough, text bottom-left */
+.hero-v9 { position: relative; height: 100vh; height: 100svh; min-height: 560px; max-height: 1000px; overflow: hidden; background: var(--brand-deep); color: var(--hero-cream); }
+.hero-v9__media, .hero-v9__media picture, .hero-v9__media img, .hero-v9__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-v9__media img { filter: none; }
+.hero-v9__video { opacity: 0; transition: opacity 600ms var(--ease); }
+.hero-v9.is-playing .hero-v9__video { opacity: 1; }
+/* The overlay: a warm dim over everything, a short top shade for the header, and the reading gradient behind the words
+   (left to right on laptops, bottom to top on phones and tablets) */
+.hero-v9::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(30, 20, 15, .45) 0, rgba(30, 20, 15, 0) 140px),
+    linear-gradient(to top, rgba(30, 20, 15, .85) 0%, rgba(30, 20, 15, .65) 55%, rgba(30, 20, 15, 0) 90%),
+    linear-gradient(rgba(30, 20, 15, .35), rgba(30, 20, 15, .35));
+}
+@media (min-width: 1024px) {
+  .hero-v9::before {
+    background:
+      linear-gradient(to bottom, rgba(30, 20, 15, .45) 0, rgba(30, 20, 15, 0) 140px),
+      linear-gradient(to right, rgba(30, 20, 15, .75) 0%, rgba(30, 20, 15, .45) 55%, rgba(30, 20, 15, 0) 85%),
+      linear-gradient(rgba(30, 20, 15, .35), rgba(30, 20, 15, .35));
+  }
+}
+/* 1440 px and wider, the words sit in the left 45%: the brief's own stops */
+@media (min-width: 1440px) {
+  .hero-v9::before {
+    background:
+      linear-gradient(to bottom, rgba(30, 20, 15, .45) 0, rgba(30, 20, 15, 0) 140px),
+      linear-gradient(to right, rgba(30, 20, 15, .75) 0%, rgba(30, 20, 15, .45) 45%, rgba(30, 20, 15, 0) 75%),
+      linear-gradient(rgba(30, 20, 15, .35), rgba(30, 20, 15, .35));
+  }
+}
+.hero-v9__text { position: absolute; z-index: 2; left: 0; bottom: clamp(48px, 9vh, 104px); width: 100%; max-width: calc(720px + 2 * var(--gutter)); padding-inline: var(--gutter); }
+.hero-v9__kicker { margin: 0 0 20px; color: var(--hero-cream); font: 500 var(--fs-eyebrow)/1 var(--font-label); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; }
+.hero-v9 h1 { max-width: 12em; margin: 0; color: var(--hero-cream); font-family: var(--font-display); font-size: var(--fs-h1); font-weight: 400; line-height: var(--lh-h1); letter-spacing: var(--ls-display); text-shadow: 0 1px 12px rgba(0, 0, 0, .35); }
+.hero-v9__lede { max-width: 36ch; margin: 20px 0 0; color: var(--hero-cream); font: 400 var(--fs-lede)/1.5 var(--font-body); text-shadow: 0 1px 12px rgba(0, 0, 0, .35); }
+.hero-v9__actions { display: flex; flex-wrap: wrap; gap: 12px 16px; margin: 32px 0 0; }
+/* Buttons, v8 shape and labels: the primary solid cream with brand-deep text; the others a cream outline that fills */
+.hero-v9 .btn {
+  --btn-fg: var(--hero-cream);
+  --btn-line: var(--hero-cream);
+  --btn-fill: var(--hero-cream);
+  --btn-on-fill: var(--hero-ink);
+  --btn-arrow: var(--hero-cream);
+  border-color: var(--btn-line);
+  background: transparent;
+  color: var(--btn-fg);
+}
+.hero-v9 .btn .arrow { stroke: var(--btn-arrow); }
+.hero-v9 .btn--primary { --btn-fg: var(--hero-ink); --btn-arrow: var(--hero-ink); background: var(--hero-cream); }
+.hero-v9 .btn:focus-visible { outline: 2px solid var(--hero-cream); outline-offset: 3px; }
+@media (hover: hover) {
+  .hero-v9 .btn:hover { border-color: var(--hero-cream); background: var(--hero-cream); color: var(--hero-ink); }
+  .hero-v9 .btn:hover .arrow { stroke: var(--hero-ink); }
+  .hero-v9 .btn--primary:hover { border-color: #fff; background: #fff; }
+}
+@media (max-width: 599px) {
+  .hero-v9 { height: 92vh; height: 92svh; }
+  .hero-v9__actions .btn { flex: 1 1 100%; justify-content: center; }
+}
+
+/* ---------------------------------------------------------------- Step inside: the real rooms, the tour in a lightbox */
+.inside-v9 { padding-block: var(--section-y); background: var(--paper); }
+.inside-v9__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 20px 32px; max-width: var(--max); margin: 0 auto clamp(32px, 4vw, 56px); padding-inline: var(--gutter); }
+.inside-v9__head h2 { margin: 0; }
+.inside-strip { display: flex; gap: 16px; margin: 0; padding: 0 var(--gutter) 12px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); list-style: none; scrollbar-width: thin; scrollbar-color: var(--stone) transparent; overscroll-behavior-x: contain; }
+@media (min-width: 1440px) { .inside-strip { padding-inline: calc((100vw - var(--max)) / 2 + var(--gutter)); scroll-padding-inline: calc((100vw - var(--max)) / 2 + var(--gutter)); } }
+.inside-strip:focus-visible { outline: 2px solid var(--bronze); outline-offset: 4px; }
+.inside-strip__item { flex: 0 0 clamp(260px, 30vw, 400px); scroll-snap-align: start; }
+.inside-strip figure { margin: 0; }
+.inside-strip__media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--stone); }
+.inside-strip figcaption { margin-top: 12px; color: var(--muted); font-size: var(--fs-small); }
+.tour-box { width: min(92vw, 520px); max-height: 92vh; padding: 0; border: 0; background: var(--charcoal); overflow: visible; }
+.tour-box::backdrop { background: rgba(var(--shade), .9); }
+.tour-box video { display: block; width: 100%; max-height: 88vh; aspect-ratio: 9 / 16; background: #000; }
+.tour-box__close { position: absolute; top: -52px; right: 0; width: 44px; height: 44px; border: 1px solid rgba(250, 250, 246, .6); border-radius: 50%; background: transparent; color: var(--paper); cursor: pointer; }
+.tour-box__close::before, .tour-box__close::after { content: ""; position: absolute; top: 50%; left: 50%; width: 16px; height: 1px; background: currentColor; transform: translate(-50%, -50%) rotate(45deg); }
+.tour-box__close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+@media (max-height: 640px) { .tour-box__close { top: 8px; right: 8px; z-index: 2; background: rgba(var(--shade), .6); } }

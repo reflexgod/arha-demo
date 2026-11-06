@@ -97,6 +97,33 @@ def header():
 """
 
 
+def header_slim():
+    """Homepage only (7 Nov 2026): one slim row over the hero video, transparent with light text, paper with a
+    hairline after 80 px of scroll (site.js 27). The nav, mega menu and phone link are the v8 header's own markup;
+    inner pages keep the v8 header (tools/pages.py builds their chrome from header())."""
+    full = header()
+    a = full.index('      <nav class="nav" aria-label="Main">')
+    nav = full[a:full.index("      </nav>", a) + len("      </nav>")]
+    a = full.index('<!--if:phone--><a class="header-call"')
+    call = full[a:full.index("<!--endif-->", a) + len("<!--endif-->")]
+    return f"""  <!-- ===================================================================== HEADER -->
+  <!-- Homepage header (tools/chrome.py header_slim): logo | nav | phone, Book. Inner pages keep the v8 header. -->
+  <header class="site-header site-header--slim" data-header>
+    <div class="slim__inner">
+      <a class="brand" href="./" aria-label="Arha Dental Care, home"><img class="slim__logo slim__logo--light" src="assets/logo/logo-lockup-light.svg" alt="" width="140" height="36"><img class="slim__logo slim__logo--dark" src="assets/logo/logo-lockup-dark.svg" alt="" width="140" height="36"></a>
+{nav}
+      <div class="header-actions">
+        {call}
+        <a class="btn header-book" href="book/"><span>Book an appointment</span>{ARROW}</a>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="side-menu" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+"""
+
+
 def side_menu():
     """apa's full-screen menu (every width): large items, a + opens a group in place (site.js 3).
     Lists every tab Neha ma'am asked for, the ten problems and every treatment."""

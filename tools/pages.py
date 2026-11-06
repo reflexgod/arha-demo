@@ -369,14 +369,14 @@ def expand_pics(html):
     return re.sub(r"^([ \t]*)\{\{pic (.+?)\}\}$", repl, html, flags=re.M)
 
 
-def build_home(page):
+def build_home(page, slim=True):
     """index.html is the source of every page's chrome: the header, menu and footer (tools/chrome.py) and the
     homepage's sections (tools/home.py) are written into it; the <head> stays as it is. Riya's launcher
     (tools/riya/launcher.html) is added only while she is switched on."""
     visit = VISIT.read_text(encoding="utf-8")
     start = page.index("  <!-- ===================================================================== HEADER -->")
     riya = (RIYA_SRC / "launcher.html").read_text(encoding="utf-8") if flags()["riya"] else ""
-    return (page[:start] + chrome.header() + chrome.side_menu() + "\n" + home_apa.main_html(visit) + "\n"
+    return (page[:start] + (chrome.header_slim() if slim else chrome.header()) + chrome.side_menu() + "\n" + home_apa.main_html(visit) + "\n"
             + chrome.footer() + "\n" + chrome.call_bar() + "\n" + riya + "</body>\n</html>\n")
 
 
@@ -405,7 +405,10 @@ def main():
     head = home[:home.index("<body>")]
     head = re.sub(r"\s*<!-- Hero poster is the LCP image[^\n]*\n(?:[ \t]*<link rel=\"preload\" as=\"image\"[^>]*>\n)+", "\n", head)
     # Inner pages carry a class: their stock smiles and faces render in black and white (site.css)
-    top = home[home.index("<body>"):home.index('  <main id="main"')].replace("<body>", '<body class="page-inner">', 1)
+    # The slim header and the hero's font preload are the homepage's alone: inner pages keep the v8 header and Jost 300
+    head = head.replace('href="assets/fonts/jost-400.woff2"', 'href="assets/fonts/jost-300.woff2"', 1)
+    v8 = buttons(hide_missing(apply_site(apply_flags(menus(expand_pics(build_home(original, slim=False)))))))
+    top = v8[v8.index("<body>"):v8.index('  <main id="main"')].replace("<body>", '<body class="page-inner">', 1)
     bottom = home[home.index("  </main>") + len("  </main>\n"):]
 
     pages = dict(PAGES)
