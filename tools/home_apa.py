@@ -446,7 +446,7 @@ def hero_v9():
       </div>
       <div class="hero-v9__text">
         <p class="hero-v9__kicker">Peddar Road, Mumbai</p>
-        <h1 id="hero-title">Implants and smile design by a prosthodontist.</h1>
+        <h1 id="hero-title">Implants and smile design by a <em class="accent">prosthodontist</em>.</h1>
         <p class="hero-v9__lede">Dr. Nikhil V. Jain’s practice on Peddar Road, opposite Jaslok Hospital.</p>
         <p class="hero-v9__actions"><a class="btn btn--primary" href="book/"><span>Book an appointment</span>{ARROW}</a><!--if:whatsapp--><a class="btn" href="{WA}" target="_blank" rel="noopener"><span>WhatsApp</span>{ARROW}</a><!--endif--><!--if:phone--><a class="btn" href="tel:+910000000000" data-call="hero"><span>Call <span data-show="phone">+91 00000 00000</span></span>{ARROW}</a><!--endif--></p>
       </div>

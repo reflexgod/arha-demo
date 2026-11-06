@@ -389,11 +389,25 @@ def riya_assets():
         out.unlink()
 
 
+def no_orphans(page):
+    """Headlines never end on one short word alone (v5-fonts): in a plain H1/H2 of three words or more, the last two
+    words are joined by a no-break space when together they are short enough (16 characters) to fit on a phone."""
+    def fix(m):
+        inner = m.group(2)
+        if "<" in inner or "&nbsp;" in inner:
+            return m.group(0)
+        t = re.match(r"(?s)(.*\S)(\s+)(\S+)(\s*)$", inner)
+        if not t or len(t.group(1).split()) < 2 or len(t.group(1).split()[-1]) + len(t.group(3)) + 1 > 16:
+            return m.group(0)
+        return m.group(1) + t.group(1) + "&nbsp;" + t.group(3) + t.group(4) + m.group(3)
+    return re.sub(r"(<h[12]\b[^>]*>)([^<]*)(</h[12]>)", fix, page)
+
+
 def main():
     index = ROOT / "index.html"
     original = index.read_text(encoding="utf-8")
     home_page = expand_pics(build_home(original))
-    home = finishing_head(buttons(hide_missing(apply_site(apply_flags(menus(home_page))))), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster"))
+    home = no_orphans(finishing_head(buttons(hide_missing(apply_site(apply_flags(menus(home_page))))), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster")))
     finish.favicons()
     if home != original:
         index.write_text(home, encoding="utf-8", newline="\n")
@@ -405,8 +419,7 @@ def main():
     head = home[:home.index("<body>")]
     head = re.sub(r"\s*<!-- Hero poster is the LCP image[^\n]*\n(?:[ \t]*<link rel=\"preload\" as=\"image\"[^>]*>\n)+", "\n", head)
     # Inner pages carry a class: their stock smiles and faces render in black and white (site.css)
-    # The slim header and the hero's font preload are the homepage's alone: inner pages keep the v8 header and Jost 300
-    head = head.replace('href="assets/fonts/jost-400.woff2"', 'href="assets/fonts/jost-300.woff2"', 1)
+    # The slim header is the homepage's alone: inner pages keep the v8 header
     v8 = buttons(hide_missing(apply_site(apply_flags(menus(expand_pics(build_home(original, slim=False)))))))
     top = v8[v8.index("<body>"):v8.index('  <main id="main"')].replace("<body>", '<body class="page-inner">', 1)
     bottom = home[home.index("  </main>") + len("  </main>\n"):]
@@ -444,7 +457,7 @@ def main():
         if slug == "emergency":  # emergency help must be readable at once: no scroll reveals on this page
             main_html = re.sub(r'(class="[^"]*?)\s*\breveal(?![\w-])', r'\1', main_html)
         og = finish.og_image(slug.replace("/", "-"), html.unescape(meta["title"].split(" | ")[0]), photo)
-        page = relocate(nav_current(buttons(hide_missing(apply_site(apply_flags(finishing_head(h, og) + top + main_html + bottom)))), slug), slug)
+        page = no_orphans(relocate(nav_current(buttons(hide_missing(apply_site(apply_flags(finishing_head(h, og) + top + main_html + bottom)))), slug), slug))
         out = ROOT / ("." if slug == "404" else slug)
         out.mkdir(parents=True, exist_ok=True)
         name = "404.html" if slug == "404" else "index.html"

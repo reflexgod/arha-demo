@@ -13,80 +13,39 @@
    (the v5 layer at the end of this file; notes/POLISH-REVIEW.md).
    ========================================================================== */
 
-/* 1. Fonts: self-hosted WOFF2, SIL Open Font License (see assets/fonts) */
-/* Sofia Sans Condensed (SIL OFL): small uppercase labels and buttons only. 500 for eyebrows, 600 for buttons
-   (older rules that still ask for 700 get the 600 file, never a synthesised bold) */
+/* 1. Fonts: self-hosted WOFF2 from Google Fonts (latin), SIL Open Font License (see assets/fonts). Two families:
+   Cormorant Garamond for headings, large quotes and the doctors' names (500, 600, italic 500 for the hero's one accent word);
+   Jost for everything else (400, 500). Older rules that ask for other weights get the nearest file, never a synthesised one. */
 @font-face {
-  font-family: "Sofia Sans Condensed";
-  src: url("../fonts/sofia-sans-condensed-500.woff2") format("woff2");
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-500-600.woff2") format("woff2");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../fonts/cormorant-garamond-italic-500.woff2") format("woff2");
   font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Sofia Sans Condensed";
-  src: url("../fonts/sofia-sans-condensed-600.woff2") format("woff2");
-  font-weight: 600 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Jost";
-  src: url("../fonts/jost-400.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Jost";
-  src: url("../fonts/jost-400-italic.woff2") format("woff2");
-  font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 @font-face {
   font-family: "Jost";
-  src: url("../fonts/jost-600.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Jost 300 for reading, 500 for card titles */
-@font-face {
-  font-family: "Jost";
-  src: url("../fonts/jost-300.woff2") format("woff2");
-  font-weight: 300;
+  src: url("../fonts/jost-400.woff2") format("woff2");
+  font-weight: 300 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: "Jost";
   src: url("../fonts/jost-500.woff2") format("woff2");
-  font-weight: 500;
+  font-weight: 500 700;
   font-style: normal;
   font-display: swap;
 }
 
-/* Instrument Serif (SIL OFL), H1, H2 and pull quotes only */
-@font-face {
-  font-family: "Instrument Serif";
-  src: url("../fonts/instrument-serif-400.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Metric-matched fallbacks (local Arial and Georgia, measured against these fonts): no visible jump when
-   the web fonts arrive */
-@font-face {
-  font-family: "Instrument Serif Fallback";
-  src: local("Georgia"), local("Noto Serif");
-  size-adjust: 76.5%;
-  ascent-override: 129.4%;
-  descent-override: 40.5%;
-  line-gap-override: 0%;
-}
+/* Metric-matched fallbacks (local Georgia and Arial, measured against these fonts): the swap moves nothing */
 @font-face {
   font-family: "Jost Fallback";
   src: local("Arial");
@@ -98,22 +57,30 @@
 @font-face {
   font-family: "Jost Fallback";
   src: local("Arial Bold"), local("Arial-BoldMT");
-  font-weight: 600;
+  font-weight: 500 700;
   size-adjust: 98.2%;
   ascent-override: 109%;
   descent-override: 38.2%;
   line-gap-override: 0%;
 }
 @font-face {
-  font-family: "Sofia Sans Condensed Fallback";
-  src: local("Arial Bold"), local("Arial-BoldMT");
-  size-adjust: 67.1%;
-  ascent-override: 134.1%;
-  descent-override: 44.7%;
+  font-family: "Cormorant Garamond Fallback";
+  src: local("Georgia"), local("Noto Serif");
+  size-adjust: 88.9%;
+  ascent-override: 103.9%;
+  descent-override: 32.3%;
+  line-gap-override: 0%;
+}
+@font-face {
+  font-family: "Cormorant Garamond Fallback";
+  src: local("Georgia Italic"), local("Georgia-Italic");
+  font-style: italic;
+  size-adjust: 79.2%;
+  ascent-override: 116.7%;
+  descent-override: 36.2%;
   line-gap-override: 0%;
 }
 
-/* 2. Tokens */
 :root {
   --paper: #FAFAF6;     /* page background */
   --ink: #252424;       /* text on light */
@@ -130,8 +97,8 @@
   --paper-16: rgba(250, 250, 246, .16);
   --shade: 48, 47, 47; /* charcoal as RGB for overlays */
 
-  --font-display: "Instrument Serif", "Instrument Serif Fallback", Georgia, serif; /* H1, H2 and large pull quotes, upright only */
-  --font-label: "Sofia Sans Condensed", "Sofia Sans Condensed Fallback", "Arial Narrow", Arial, sans-serif; /* small uppercase labels only: eyebrows, buttons, tags, the utility bar */
+  --font-display: "Cormorant Garamond", "Cormorant Garamond Fallback", Georgia, serif; /* headings, large quotes, the doctors' names */
+  --font-label: "Jost", "Jost Fallback", "Futura", "Century Gothic", sans-serif; /* buttons and small uppercase lines: Jost 500 */
   --font-head: var(--font-label);
   --font-body: "Jost", "Jost Fallback", "Futura", "Century Gothic", sans-serif;
   --font-quote: var(--font-display);
@@ -8099,7 +8066,7 @@ a:focus-visible img.bw-photo, [data-colour-group]:focus-within img.bw-photo, a:h
   .hero-v9::before {
     background:
       linear-gradient(to bottom, rgba(30, 20, 15, .45) 0, rgba(30, 20, 15, 0) 140px),
-      linear-gradient(to right, rgba(30, 20, 15, .75) 0%, rgba(30, 20, 15, .45) 55%, rgba(30, 20, 15, 0) 85%),
+      linear-gradient(to right, rgba(30, 20, 15, .75) 0%, rgba(30, 20, 15, .5) 60%, rgba(30, 20, 15, .2) 100%),
       linear-gradient(rgba(30, 20, 15, .35), rgba(30, 20, 15, .35));
   }
 }
@@ -8161,3 +8128,66 @@ a:focus-visible img.bw-photo, [data-colour-group]:focus-within img.bw-photo, a:h
 @media (max-height: 640px) { .tour-box__close { top: 8px; right: 8px; z-index: 2; background: rgba(var(--shade), .6); } }
 /* The homepage below the hero is rendered when it nears the screen, so the first paint (the hero poster) waits for less */
 .home-apa > section:not(.hero-v9):not(:first-child) { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+
+/* ===========================================================================================================
+   v5-fonts (7 Nov 2026): Cormorant Garamond + Jost, site-wide. Typography only: no layout, colour or spacing changes.
+   Headings, large quotes, the doctors' names: Cormorant Garamond 500, -0.5% tracking, 1.08 (H1) and 1.15 (H2, H3).
+   Body, nav, forms, footer: Jost 400 (nav 500), 17 px, 1.65. Buttons and small capitals lines: Jost 500, 0.14em, 13 px.
+   The one italic is the hero's accent word. Audit: tools/qa/type_check.py.
+   =========================================================================================================== */
+:root {
+  --font-display: "Cormorant Garamond", "Cormorant Garamond Fallback", Georgia, serif;
+  --font-label: var(--font-body);
+  --font-head: var(--font-body);
+  --font-quote: var(--font-display);
+  --lh-h1: 1.08;
+  --lh-display: 1.15;
+  --lh-h3: 1.15;
+  --lh-body: 1.65;
+  --ls-display: -.005em;
+  --ls-label: .14em;
+  --ls-eyebrow: .14em;
+  --fs-label: .8125rem;
+  --fs-eyebrow: .8125rem;
+}
+body { font-family: var(--font-body); font-weight: 400; line-height: var(--lh-body); font-variant-numeric: lining-nums; }
+:is(h1, h2, h3):not(.site-footer h2) {
+  font-family: var(--font-display) !important;
+  font-weight: 500 !important;
+  font-style: normal;
+  letter-spacing: -.005em !important;
+  text-transform: none;
+}
+h1:not(.site-footer h2) { line-height: 1.08 !important; }
+:is(h2, h3):not(.site-footer h2) { line-height: 1.15 !important; }
+blockquote, [class*="quote"]:not(.quote-mark) { font-style: normal; }
+/* Body copy, forms and the footer: Jost 400 at 1.65 (older layers asked for Jost 300) */
+:where(p, li, dd, dt, td, th, label, input, select, textarea, figcaption, address) { font-weight: 400; }
+:where(main p:not([class]):not(blockquote p), main li:not([class])) { line-height: 1.65; }
+[class*="quote"] p { font-weight: 500; }  /* the large quotes (already Cormorant): 500 like the headings */
+/* Nav: Jost 500 */
+.nav__link, .nav__trigger, .fmenu__link, .fmenu__toggle { font-family: var(--font-body); font-weight: 500; }
+/* Buttons and the small capitals lines: Jost 500, uppercase, 0.14em, 13 px */
+.btn, .eyebrow, .hero-v9__kicker, .site-footer h2, .utility-bar {
+  font-family: var(--font-body) !important;
+  font-weight: 500 !important;
+  letter-spacing: .14em !important;
+}
+.btn, .eyebrow, .hero-v9__kicker, .site-footer h2 { font-size: .8125rem !important; text-transform: uppercase; }
+/* Numbers line up: step numbers, phone numbers, hours and the open status */
+[class*="__num"], [class*="number"], [data-show="phone"], [data-show="emergency"], [data-open-status], time, .stat {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+/* No italics anywhere but the hero's accent word */
+em, i, cite, .ph-inline { font-style: normal; }
+.hero-v9 h1 em.accent { font-style: italic; font-weight: 500; }
+/* The hero headline: Cormorant runs smaller than the condensed serif it replaces, so 12% larger */
+.hero-v9 h1 { font-size: calc(var(--fs-h1) * 1.12); max-width: 13em; }
+/* No lonely last words in headlines */
+h1, h2 { text-wrap: balance; }
+/* Laptops: Cormorant sets wider than the condensed serif it replaced, so headlines get a little more room and stay
+   on one or two lines (hero: two lines at most) */
+@media (min-width: 1024px) {
+  .hero-v9__text { max-width: calc(860px + 2 * var(--gutter)); }
+  .page-hero .hero__text h1 { width: min(820px, calc(100vw - 2 * var(--gutter))); max-width: none; }
+}
