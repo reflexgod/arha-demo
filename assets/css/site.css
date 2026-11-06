@@ -5872,7 +5872,7 @@ img[src*="tour-poster"] { filter: sepia(.1) saturate(1.04) brightness(1.02) cont
   justify-content: center;
   min-height: 86vh;
   max-width: 520px;
-  opacity: .3;
+  opacity: .75; /* the steps not in view: ink at .75 is about 6:1 on paper (AA); .3 was 1.7:1 */
   transition: opacity .8s var(--ease);
 }
 
@@ -8184,7 +8184,7 @@ em, i, cite, .ph-inline { font-style: normal; }
 /* The hero headline: Cormorant runs smaller than the condensed serif it replaces, so 12% larger */
 .hero-v9 h1 { font-size: calc(var(--fs-h1) * 1.12); max-width: 13em; }
 /* No lonely last words in headlines */
-h1, h2 { text-wrap: balance; }
+h1, h2, h3 { text-wrap: balance; }  /* the build's no_orphans() joins short last pairs where balance is not supported */
 /* Laptops: Cormorant sets wider than the condensed serif it replaced, so headlines get a little more room and stay
    on one or two lines (hero: two lines at most) */
 @media (min-width: 1024px) {
