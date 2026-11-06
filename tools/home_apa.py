@@ -212,34 +212,50 @@ def statement():
 
 # Two treatments, each a full-bleed photograph with its serif name over it and a light card under it with the line from
 # its own page (the page hero's line). (slug, name, photo, position, alt, line)
-HIGHLIGHTS = [
-    ("dental-implants", "Dental implants", "stock-implant-hero", "50% 50%", "",
-     "Replacing missing teeth with results that look, feel and work like your own."),
-    ("smile-design", "Smile design", "dental-operatory-arha-dental-care-peddar-road-04", "50% 50%", "",
-     "Your new smile, planned around your face and previewed before any work begins."),
+TREATMENT_ROWS = [  # every treatment page: its own title, a line from its own intro, its own hero photograph
+    ("dental-implants", "Dental implants", "Replacing missing teeth, made to feel your own.", "stock-implant-hero", "30% 50%"),
+    ("smile-design", "Smile design", "A new smile, previewed before work begins.", "dental-operatory-arha-dental-care-peddar-road-04", "50% 50%"),
+    ("invisalign", "Invisalign clear aligners", "Straightening teeth with clear, removable aligners.", "stock-aligner-case-hand", "50% 50%"),
+    ("full-mouth-rehabilitation", "Full mouth rehabilitation", "Rebuilding worn or broken teeth, and the bite.", "stock-crowns", "50% 55%"),
+    ("maxillofacial-prosthetics", "Maxillofacial prosthetics", "Restoring eating, speaking and appearance.", "stock-prosthesis-hands", "50% 45%"),
+    ("cosmetic-dentistry", "Cosmetic dentistry", "Veneers, whitening and bonding.", "stock-crowns-soft", "50% 55%"),
+    ("crowns-bridges", "Crowns &amp; bridges", "Restoring broken teeth and replacing missing ones.", "stock-gloved-hands", "60% 40%"),
+    ("root-canal-treatment", "Root canal treatment", "Saving a tooth whose nerve is infected.", "stock-mirror-tray", "50% 50%"),
+    ("orthodontics", "Orthodontics (braces)", "Braces and aligners for children, teens and adults.", "stock-braces-model", "50% 55%"),
+    ("general-dentistry", "General dentistry &amp; cleaning", "Check-ups, cleaning and fillings.", "dental-operatory-arha-dental-care-peddar-road-02", "50% 55%"),
+    ("kids-dentistry", "Kids’ dentistry", "Gentle care for babies, children and teens.", "stock-parent-child", "50% 40%"),
 ]
 
 
 def highlights():
-    cards = "".join(f"""
-      <article class="hl-card reveal">
-        <div class="hl-card__media" data-colour-group>
-{pic(photo, '(min-width: 900px) 50vw, 100vw', alt, pos, '          ')}
-          <h3 class="hl-card__title"><a href="{slug}/">{name}</a></h3>
-        </div>
-        <div class="hl-card__body">
-          <p>{line}</p>
-          <a class="hl-card__more" href="{slug}/" tabindex="-1" aria-hidden="true">Read more<span class="hl-card__arrow">→</span></a>
-        </div>
-      </article>""" for slug, name, photo, pos, alt, line in HIGHLIGHTS)
+    """Explore treatments (7 Nov 2026), after the demo clinic's index: laptops, big serif names on the left, one line
+    each on the right and the row's photograph in the centre, crossfading as a row is hovered or focused (site.js 28);
+    phones and tablets, a plain list with a small photograph beside each row. Only the first photograph loads at once."""
+    rows = "".join(f"""
+        <li><a class="tx__row" href="{slug}/" data-tx-row="{n}">
+          <span class="tx__thumb">
+{pic(photo, '64px', '', pos, '            ')}
+          </span>
+          <span class="tx__name">{name}</span>
+          <span class="tx__line">{line}</span>
+        </a></li>""" for n, (slug, name, line, photo, pos) in enumerate(TREATMENT_ROWS))
+    previews = "".join(
+        pic(photo, '(min-width: 1024px) 300px, 1px', '', pos, '        ', eager=(n == 0))
+        .replace('<picture class="fill"', f'<picture class="fill tx__img{" is-active" if n == 0 else ""}"', 1)
+        .replace(' fetchpriority="high"', '')
+        for n, (slug, name, line, photo, pos) in enumerate(TREATMENT_ROWS))
     return f"""
-    <!-- =================================================================== TREATMENT HIGHLIGHTS (v8: two photo cards) -->
-    <section class="ah-highlights" aria-labelledby="hl-title">
+    <!-- =================================================================== EXPLORE TREATMENTS (the demo clinic's hover list) -->
+    <section class="ah-highlights tx" aria-labelledby="hl-title" data-tx>
       <div class="ah-highlights__head reveal">
-        <p class="eyebrow">Treatments</p>
         <h2 id="hl-title">Explore treatments</h2>
       </div>
-      <div class="ah-highlights__grid">{cards}
+      <div class="tx__wrap">
+        <ul class="tx__list" role="list">{rows}
+        </ul>
+        <div class="tx__preview" aria-hidden="true">
+{previews}
+        </div>
       </div>
     </section>
 """

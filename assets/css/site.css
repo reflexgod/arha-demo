@@ -8191,3 +8191,38 @@ h1, h2, h3 { text-wrap: balance; }  /* the build's no_orphans() joins short last
   .hero-v9__text { max-width: calc(860px + 2 * var(--gutter)); }
   .page-hero .hero__text h1 { width: min(820px, calc(100vw - 2 * var(--gutter))); max-width: none; }
 }
+
+/* ---------------------------------------------------------------- Explore treatments (7 Nov 2026): the demo clinic's
+   hover list in Arha's type. Phones and tablets: a list with a small photograph per row. Laptops: names left, a line
+   right, the hovered row's photograph in the centre (site.js 28). */
+.tx__wrap { position: relative; max-width: var(--max); margin: 0 auto; padding-inline: var(--gutter); }
+.tx__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--hairline-strong); }
+.tx__list li { border-bottom: 1px solid var(--hairline-strong); }
+.tx__row { display: grid; grid-template-columns: 64px minmax(0, 1fr); grid-template-rows: auto auto; column-gap: 16px; align-items: center; min-height: 44px; padding-block: 14px; color: var(--ink); text-decoration: none; }
+.tx__thumb { position: relative; grid-row: 1 / 3; width: 64px; aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper); }
+.tx__name { align-self: end; font-family: var(--font-display); font-weight: 500; font-size: 1.5rem; line-height: 1.15; letter-spacing: -.005em; }
+.tx__line { align-self: start; margin-top: 4px; color: var(--muted); font-size: var(--fs-small); line-height: 1.5; }
+.tx__row:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+.tx__preview { display: none; }
+@media (min-width: 1024px) {
+  .tx__list { border: 0; }
+  .tx__list li { border: 0; }
+  .tx__row { grid-template-columns: minmax(0, 1.2fr) 300px minmax(0, 1fr); column-gap: 24px; grid-template-rows: auto; padding-block: 10px; }
+  .tx__thumb { display: none; }
+  .tx__name { grid-column: 1; align-self: center; font-size: clamp(1.75rem, 2.3vw, 2.125rem); transition: transform 500ms var(--ease); }
+  .tx__line { grid-column: 3; align-self: center; margin: 0; text-align: right; transition: color 300ms ease-out; }
+  .tx__row:is(:hover, :focus-visible, .is-current) .tx__line { color: var(--ink); }
+  .tx__row:is(:hover, :focus-visible) .tx__name { transform: translateX(8px); }
+  .tx__preview { position: absolute; top: 0; left: 50%; z-index: 1; display: block; width: 280px; aspect-ratio: 4 / 5; overflow: hidden; background: var(--paper); pointer-events: none; transform: translate(-50%, 0); transition: transform 500ms var(--ease); }
+  .tx__img { position: absolute; inset: 0; opacity: 0; transition: opacity 400ms ease-out; }
+  .tx__img.is-active { opacity: 1; }
+  .tx__img img { filter: none !important; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tx__row { grid-template-columns: minmax(0, 1.2fr) 200px minmax(0, 1fr); }
+  .tx__preview { width: 200px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tx__name, .tx__line, .tx__preview, .tx__img { transition: none !important; }
+  .tx__row:is(:hover, :focus-visible) .tx__name { transform: none; }
+}

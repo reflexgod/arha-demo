@@ -1824,4 +1824,43 @@
     if (document.readyState === 'complete') later();
     else window.addEventListener('load', later, { once: true });
   }
+
+  /* 28. Explore treatments (homepage): on laptops the centre photograph follows the hovered or focused row and
+        crossfades to its picture; the first row shows by default. The others load once the section is near.
+        Phones and tablets keep the plain list. Reduced motion: instant swaps (site.css). */
+  document.querySelectorAll('[data-tx]').forEach((box) => {
+    const rows = [...box.querySelectorAll('[data-tx-row]')];
+    const preview = box.querySelector('.tx__preview');
+    const pics = [...preview.querySelectorAll('.tx__img')];
+    const list = box.querySelector('.tx__list');
+    const wide = window.matchMedia('(min-width: 1024px)');
+    let at = 0;
+    const place = () => {
+      if (!wide.matches) return;
+      const r = rows[at];
+      const y = list.offsetTop + r.offsetTop + r.offsetHeight / 2 - preview.offsetHeight / 2;
+      const max = list.offsetTop + list.offsetHeight - preview.offsetHeight;
+      preview.style.transform = `translate(-50%, ${Math.max(list.offsetTop, Math.min(max, y))}px)`;
+    };
+    const show = (i) => {
+      at = i;
+      pics.forEach((p, k) => p.classList.toggle('is-active', k === i));
+      rows.forEach((r, k) => r.classList.toggle('is-current', k === i));
+      place();
+    };
+    rows.forEach((r, i) => {
+      r.addEventListener('mouseenter', () => { if (wide.matches) show(i); });
+      r.addEventListener('focus', () => show(i));
+    });
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting) return;
+        pics.forEach((p) => { const img = p.querySelector('img'); if (img) img.loading = 'eager'; });
+        io.disconnect();
+      }, { rootMargin: '50% 0px' });
+      io.observe(box);
+    }
+    window.addEventListener('resize', place, { passive: true });
+    show(0);
+  });
 })();
