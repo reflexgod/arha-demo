@@ -41,7 +41,7 @@ CLS_INIT = """window.__cls = 0; try { new PerformanceObserver((l) => { for (cons
   .observe({type: 'layout-shift', buffered: true}); } catch (e) {}
   try { sessionStorage.setItem('arha-intro', '1'); } catch (e) {}"""
 
-HIDDEN = """() => [...document.querySelectorAll('main h1, main h2, main h3, main p, main li, main img, main .cta, main a.link')].filter(e => {
+HIDDEN = """() => [...document.querySelectorAll('main h1, main h2, main h3, main p, main li, main img, main .cta, main .btn, main a.link')].filter(e => {
   if (e.closest('[hidden], noscript, .visually-hidden, [aria-hidden="true"], template, dialog:not([open])')) return false;
   // by design: the answer of a quiz or picker (needs a script), and the stacked pictures of a crossfade (the first shows)
   if (e.closest('.picker__result, .quiz__result, .xfade__img, .agedial__img, .stages__img, .ah-band__slide')) return false;

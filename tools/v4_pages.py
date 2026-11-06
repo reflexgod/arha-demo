@@ -25,7 +25,7 @@ IMG = ROOT / "assets" / "img"
 
 # ------------------------------------------------------------------ shared page parts
 def page_hero(pic, title, lede, trail, eyebrow="", actions=True, i="    "):
-    """apa's tall photo hero: text bottom-left over a wash; Book and Call as text links."""
+    """apa's tall photo hero: text bottom-left over a wash; Book and Call as buttons (pages.buttons)."""
     eb = f'\n{i}      <p class="eyebrow eyebrow--light">{eyebrow}</p>' if eyebrow else ""
     act = (f'\n{i}      <p class="hero__actions"><a class="link link--light" href="book/">Book an appointment</a>'
            f'<a class="link link--light" href="tel:+910000000000" data-call="page_hero">Call now</a></p>') if actions else ""
@@ -117,7 +117,7 @@ def process(t, slug):
     <!-- =================================================================== HOW IT WORKS (sticky story) -->
     <section class="section section--flush process" aria-labelledby="process-title">
       <div class="container">
-{head("process-title", "How it works", "Step by step, from the first conversation to the care that follows.")}
+{head("process-title", "How it works", "Step by step, from the first conversation to the care that follows.", "Your treatment")}
       </div>
 {story(steps, label="How it works, step by step")}
     </section>
@@ -132,6 +132,7 @@ def intro(t):
     <section class="section intro-v4" aria-labelledby="intro-title">
       <div class="container intro-v4__grid">
         <div class="intro-v4__text reveal">
+          <p class="eyebrow">What it is</p>
           <h2 id="intro-title">{title}</h2>
           <p class="lede">{lede}</p>
           <p>{more}</p>
@@ -184,9 +185,9 @@ def glance(t):
     # Who it is for is the "Is this for you?" list right above, so it is not repeated here (v4-polish)
     return f"""
     <!-- =================================================================== BEFORE YOU DECIDE (at a glance) -->
-    <section class="section glance" aria-labelledby="glance-title">
+    <section class="section{" section--stone" if t["steps"] else ""} glance" aria-labelledby="glance-title">
       <div class="container">
-{head("glance-title", "Before you decide")}
+{head("glance-title", "Before you decide", "", "At a glance")}
         <dl class="glance__list reveal">
           <div><dt>What it feels like</dt><dd>{comfort}</dd></div>
           <div><dt>How many visits</dt><dd>It depends on your teeth and your plan. You get a personal plan, with the number of visits, at your consultation.</dd></div>

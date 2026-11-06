@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from home import ARROW  # noqa: E402
 from picture import picture  # noqa: E402
 import chrome  # noqa: E402
 import finish  # noqa: E402
@@ -283,6 +284,37 @@ def menus(html):
     return html
 
 
+# ---------------------------------------------------------------- one button style, one current nav item
+def buttons(html):
+    """Every primary action is a real button, the same everywhere: Book an appointment (filled) and Call (outlined), each
+    with a small arrow (site.css .btn). Other links, such as "Your first visit", stay underlined text. The call links
+    stay plain tel: links: nothing here touches what a click does."""
+    def fix(m):
+        classes, href, rest, inner = m.group(1).split(), m.group(2), m.group(3), m.group(4)
+        book = href.startswith("book/") and "#first-visit" not in href
+        call = href.startswith("tel:")
+        if not ({"link", "cta"} & set(classes)) or not (book or call):
+            return m.group(0)
+        cls = ["btn"] + (["btn--solid"] if book else []) + (["btn--light"] if "link--light" in classes else [])
+        return f'<a class="{" ".join(cls)}" href="{href}"{rest}><span>{inner}</span>{ARROW}</a>'
+    return re.sub(r'<a class="([^"]*)" href="([^"]*)"([^>]*)>(.*?)</a>', fix, html, flags=re.S)
+
+
+WHO_SLUGS = ("founder", "doctors", "the-practice")
+
+
+def nav_current(html, slug):
+    """The header item this page belongs to carries aria-current (a bronze underline, site.css)."""
+    top = slug.split("/")[0]
+    if top in ("404", "before-after", "emergency"):
+        return html
+    if top == "book" or top == "gallery":
+        href = f'{top}/'
+        return re.sub(rf'(<a class="[^"]*\b(?:nav__link|nav__book)\b[^"]*" href="{href}")', r'\1 aria-current="page"', html, count=1)
+    control = "dd-who" if top in WHO_SLUGS else "dd-fix"
+    return html.replace(f'aria-expanded="false" aria-controls="{control}">', f'aria-expanded="false" aria-controls="{control}" aria-current="true">', 1)
+
+
 # ---------------------------------------------------------------- inner pages
 def relocate(html, slug):
     """Move root-relative paths down to the page's folder (one or two levels); links to this page become ./
@@ -361,7 +393,7 @@ def main():
     index = ROOT / "index.html"
     original = index.read_text(encoding="utf-8")
     home_page = expand_pics(build_home(original))
-    home = finishing_head(hide_missing(apply_site(apply_flags(menus(home_page)))), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster"))
+    home = finishing_head(buttons(hide_missing(apply_site(apply_flags(menus(home_page))))), finish.og_image("home", "Specialist dentistry on Peddar Road", "hero-city-poster"))
     finish.favicons()
     if home != original:
         index.write_text(home, encoding="utf-8", newline="\n")
@@ -409,7 +441,7 @@ def main():
         if slug == "emergency":  # emergency help must be readable at once: no scroll reveals on this page
             main_html = re.sub(r'(class="[^"]*?)\s*\breveal(?![\w-])', r'\1', main_html)
         og = finish.og_image(slug.replace("/", "-"), html.unescape(meta["title"].split(" | ")[0]), photo)
-        page = relocate(hide_missing(apply_site(apply_flags(finishing_head(h, og) + top + main_html + bottom))), slug)
+        page = relocate(nav_current(buttons(hide_missing(apply_site(apply_flags(finishing_head(h, og) + top + main_html + bottom)))), slug), slug)
         out = ROOT / ("." if slug == "404" else slug)
         out.mkdir(parents=True, exist_ok=True)
         name = "404.html" if slug == "404" else "index.html"

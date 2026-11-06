@@ -2,29 +2,19 @@
 
 Usage: .venv/Scripts/python -I tools/picture.py <name> "<sizes>" "<alt>" [--eager] [--pos "50% 40%"]
 Widths and intrinsic dimensions are read from the files in assets/img. The <picture> fills its
-(fixed aspect-ratio) box and carries a ~1 KB blurred preview as its background, so the slot is
-never empty and nothing shifts; site.js fades the real image in once it has loaded.
+(fixed aspect-ratio) box over a solid stone background, so nothing shifts and there is never a
+blurred preview to see mid-scroll; site.js fades the real image in once it has loaded and decoded.
 """
 import argparse
-import base64
-import io
 import re
 from pathlib import Path
 
-from PIL import Image, ImageFilter
+from PIL import Image
 
 IMG = Path(__file__).resolve().parent.parent / "assets" / "img"
 
-
-def lqip(name):
-    """Tiny blurred preview as a data URI."""
-    im = Image.open(IMG / f"{name}-640.jpg").convert("RGB")
-    h = round(12 * im.height / im.width)
-    small = im.resize((12, max(h, 1)), Image.LANCZOS).resize((48, max(round(48 * im.height / im.width), 1)), Image.BICUBIC)
-    small = small.filter(ImageFilter.GaussianBlur(2))
-    buf = io.BytesIO()
-    small.save(buf, "JPEG", quality=50, optimize=True)
-    return "data:image/jpeg;base64," + base64.b64encode(buf.getvalue()).decode()
+# The signature divider between major sections: a bronze hairline and Arha's emblem on the seam (site.css). No height.
+SIG = '<div class="sig" aria-hidden="true"><span></span></div>'
 
 
 def picture(name, sizes, alt, eager=False, cls=None, pos=None, indent="  "):
@@ -33,12 +23,10 @@ def picture(name, sizes, alt, eager=False, cls=None, pos=None, indent="  "):
     w, h = Image.open(IMG / f"{name}-{base}.jpg").size
     src = lambda ext: ", ".join(f"assets/img/{name}-{x}.{ext} {x}w" for x in widths)  # noqa: E731
     attrs = f'width="{w}" height="{h}"' + (' fetchpriority="high"' if eager else ' loading="lazy"') + ' decoding="async"'
-    position = pos or "50% 50%"
-    pic_style = f' style="background-image: url({lqip(name)}); background-position: {position}"'
-    img_style = f' style="object-position: {position}"' if pos else ""
+    img_style = f' style="object-position: {pos}"' if pos else ""
     classes = " ".join(c for c in ["fill", cls] if c)
     return "\n".join([
-        f'{indent}<picture class="{classes}"{pic_style}>',
+        f'{indent}<picture class="{classes}">',
         f'{indent}  <source type="image/avif" srcset="{src("avif")}" sizes="{sizes}">',
         f'{indent}  <source type="image/webp" srcset="{src("webp")}" sizes="{sizes}">',
         f'{indent}  <img src="assets/img/{name}-{base}.jpg" srcset="{src("jpg")}" sizes="{sizes}" {attrs} alt="{alt}"{img_style}>',

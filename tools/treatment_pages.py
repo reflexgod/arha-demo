@@ -14,7 +14,7 @@ from pathlib import Path
 
 import technology
 import treatments
-from picture import picture
+from picture import SIG, picture
 
 ROOT = Path(__file__).resolve().parent.parent
 ARROW = technology.ARROW
@@ -721,9 +721,11 @@ def faq_block(faq):
             <div class="faq__panel" id="faq-{n + 1}"><div class="acc__clip"><p>{a}</p></div></div>
           </div>""" for n, (q, a) in enumerate(faq))
     return f"""
+    {SIG}
     <section class="section section--stone texture" aria-labelledby="faq-title">
       <div class="container">
         <div class="section-head reveal">
+          <p class="eyebrow">FAQ</p>
           <h2 id="faq-title">Questions, answered</h2>
         </div>
         <div class="faq reveal" data-accordion>{items}
@@ -746,8 +748,10 @@ def closing(title="Begin with a conversation", text="Every plan at Arha starts w
     No call button here: the footer's number is just below it (one call action per screen, tools/qa/one_call.py)."""
     return f"""
     <!-- =================================================================== CALL / BOOK (a plain charcoal band) -->
+    {SIG}
     <section class="statement statement--close statement--plain band" aria-labelledby="closing-title">
       <div class="container statement__content reveal">
+        <p class="eyebrow eyebrow--light">Next step</p>
         <h2 id="closing-title">{title}</h2>
         <p>{text}</p>
         <div class="band__actions">

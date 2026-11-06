@@ -175,11 +175,15 @@
     toggles.forEach((t) => t.addEventListener('click', () => groupToggles.forEach((btn) => setGroup(btn, false))));
   }
 
-  /* 4. Reveal on scroll, once, as soon as a block enters the screen: a quick fade with an 8px rise
-        (300 ms, CSS). Siblings revealed together are staggered by 60 ms (at most 180 ms).
-        window.arhaReady tells the head script that reveals are running. ------------ */
+  /* 4. Reveal on scroll, once, a little before a block reaches the screen: a 450 ms fade with a 12px rise
+        (CSS). Up to four siblings revealed together are staggered by 60 ms each. Nothing is hidden until this
+        runs, and only blocks still below the screen are hidden at all, so what is on screen at load (or above it,
+        after a reload or a back button) simply stays. window.arhaReady tells the head script that reveals run. --- */
   const reveals = document.querySelectorAll('.reveal');
   if (!reduceMotion && 'IntersectionObserver' in window) {
+    const below = [...reveals].filter((el) => el.getBoundingClientRect().top >= window.innerHeight);
+    below.forEach((el) => el.classList.add('is-armed'));
+    reveals.forEach((el) => { if (!el.classList.contains('is-armed')) el.classList.add('is-in'); });
     const io = new IntersectionObserver((entries) => {
       entries
         .filter((e) => e.isIntersecting)
@@ -194,8 +198,8 @@
             io.unobserve(el);
           });
         });
-    }, { rootMargin: '0px 0px -4% 0px' });
-    reveals.forEach((el) => io.observe(el));
+    }, { rootMargin: '0px 0px 12% 0px', threshold: 0.1 });
+    below.forEach((el) => io.observe(el));
     // Keyboard focus never lands on something still faded out (e.g. a link at the very bottom edge)
     document.addEventListener('focusin', (e) => {
       const r = e.target.closest && e.target.closest('.reveal:not(.is-in)');
@@ -206,9 +210,8 @@
   }
   window.arhaReady = true;
 
-  /* 4b. Images fade in over their blurred preview once loaded (220 ms). They are fetched about two
-         screens ahead of the scroll (and one behind), not at the browser's last moment, so a fast scroll
-         does not land on blurred previews. ------------- */
+  /* 4b. Photographs sit on solid stone and fade in (200 ms) once loaded and decoded, so one never paints in
+         halves. They are fetched two screens ahead of the scroll (and one behind), not at the browser's last moment. */
   const lazyImgs = document.querySelectorAll('picture.fill img[loading="lazy"]');
   if ('IntersectionObserver' in window) {
     const early = new IntersectionObserver((entries) => {
@@ -222,26 +225,32 @@
     lazyImgs.forEach((img) => early.observe(img));
   }
   lazyImgs.forEach((img) => {
-    const done = () => img.classList.add('is-loaded');
-    if (img.complete && img.naturalWidth) done();
+    const show = () => img.classList.add('is-loaded');
+    const done = () => { if (img.decode) img.decode().then(show, show); else show(); };
+    if (img.complete && img.naturalWidth) show();
     else {
       img.addEventListener('load', done, { once: true });
-      img.addEventListener('error', done, { once: true });
+      img.addEventListener('error', show, { once: true });
     }
   });
 
-  /* 5. Hero video: the poster shows instantly; the loop is fetched after the
-        page has loaded and crossfades in only once it is actually playing ----- */
+  /* 5. Hero video: the poster shows instantly; the loop is fetched after the page has loaded, only while the
+        hero is on screen, and crossfades in only once it is actually playing. Phones get the light cuts
+        (under 800 KB, 720p). It pauses whenever the hero is off screen. ----- */
   const hero = document.querySelector('[data-hero]');
   const video = hero && hero.querySelector('video');
   const saveData = navigator.connection && navigator.connection.saveData;
   if (video && !reduceMotion && !saveData) {
     let started = false;
+    let loaded = document.readyState === 'complete';
+    let inView = false;
     const start = () => {
+      started = true;
       const upright = window.innerHeight > window.innerWidth;
+      const phone = Math.min(window.innerWidth, window.innerHeight) <= 600;
       const large = window.innerWidth * window.devicePixelRatio > 1280;
       const source = document.createElement('source');
-      source.src = `${video.dataset.base}${upright ? 'phone' : large ? '1080' : '720'}.mp4`;
+      source.src = `${video.dataset.base}${upright ? 'phone' : phone ? '720-light' : large ? '1080' : '720'}.mp4`;
       // The poster is the picture already on screen (no second download); if play() is refused, it simply stays
       const still = hero.querySelector('.hero__media img');
       if (still && still.currentSrc) video.poster = still.currentSrc;
@@ -250,17 +259,16 @@
       video.muted = true;
       video.addEventListener('playing', () => hero.classList.add('is-playing'), { once: true });
       video.load();
-      started = true;
       video.play().catch(() => {});
     };
-    if (document.readyState === 'complete') start();
-    else window.addEventListener('load', start, { once: true });
-    // Pause while the hero is off screen
-    new IntersectionObserver(([entry]) => {
-      if (!started) return;
-      if (entry.isIntersecting) video.play().catch(() => {});
+    const sync = () => {
+      if (!loaded) return;
+      if (!started) { if (inView) start(); return; }
+      if (inView) video.play().catch(() => {});
       else video.pause();
-    }).observe(hero);
+    };
+    if (!loaded) window.addEventListener('load', () => { loaded = true; sync(); }, { once: true });
+    new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; sync(); }).observe(hero);
   }
 
   /* 6. Before & After on touch: the tile nearest the viewport centre colours */

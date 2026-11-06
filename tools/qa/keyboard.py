@@ -81,7 +81,7 @@ def walk(pg, path, w, problems):
         s = pg.evaluate(PROBE)
         if s.get("body"):
             break
-        key = (label(s), round(s["top"] + pg.evaluate("scrollY")))
+        key = (label(s), round(s["top"] + pg.evaluate("scrollY")), round(s["left"]))
         if seen and key == seen[0]:
             break  # back at the start
         if prev and key == prev:

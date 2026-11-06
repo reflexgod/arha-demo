@@ -8,7 +8,11 @@ Sources in src-assets/stock/video/. Output in assets/video/:
 3 Nov 2026: graded slightly darker and encoded lighter (the 1080p loop was 3.8 MB), so white text reads on every frame.
 Seamless loop: the first XF seconds of shot 1 are crossfaded in at the end.
 The previous clinic-walkthrough loop (tools/video.py, hero-land-*/hero-port-*) is kept but no longer used.
+6 Nov 2026 (--light): the phone cuts, 720p and under 800 KB. A shorter loop of the same two shots from the same first
+frame keeps the poster and the picture quality; squeezing the full 27 s into 800 KB would have smeared the water.
+  .venv/Scripts/python -I tools/hero_stock.py --light   writes hero-city-phone.mp4 (9:16) and hero-city-720-light.mp4 (16:9)
 """
+import sys
 import subprocess
 from pathlib import Path
 
@@ -32,7 +36,33 @@ def run(cmd):
     subprocess.run(cmd, check=True)
 
 
+def light():
+    """Same grade and first frame as the full loop: 11 s of the skyline and 6 s of Marine Drive, two-pass to about 420 kbit/s."""
+    cuts = ((SHOTS[0][0], 0.0, 11.0), (SHOTS[1][0], 0.0, 6.0))
+    inputs = []
+    for f, start, dur in cuts:
+        inputs += ["-ss", str(start), "-t", str(dur), "-i", str(SRC / f)]
+    for name, crop, scale in (("phone", "crop=ih*9/16:ih,", "720:1280"), ("720-light", "", "1280:720")):
+        parts = [f"[{i}:v]{crop}scale={scale}:flags=lanczos,{GRADE},fps=24,format=yuv420p,setsar=1,settb=AVTB,setpts=PTS-STARTPTS[v{i}]" for i in range(2)]
+        parts += ["[v0]split[a][b]", f"[a]trim=start={XF},setpts=PTS-STARTPTS[s0]", f"[b]trim=end={XF},setpts=PTS-STARTPTS[head]"]
+        d0, d1 = cuts[0][2] - XF, cuts[1][2]
+        parts.append(f"[s0][v1]xfade=transition=fade:duration={XF}:offset={d0 - XF:.3f}[x1]")
+        total = d0 - XF + d1
+        parts.append(f"[x1][head]xfade=transition=fade:duration={XF}:offset={total - XF:.3f}[out]")
+        mp4 = OUT / f"hero-city-{name}.mp4"
+        log = str(OUT / f"_2pass-{name}")
+        common = ["-filter_complex", ";".join(parts), "-map", "[out]", "-an", "-c:v", "libx264", "-preset", "slow", "-b:v", "420k",
+                  "-profile:v", "high", "-pix_fmt", "yuv420p", "-g", "72", "-passlogfile", log]
+        run(["ffmpeg", "-v", "error", "-y", *inputs, *common, "-pass", "1", "-f", "null", "NUL"])
+        run(["ffmpeg", "-v", "error", "-y", *inputs, *common, "-pass", "2", "-movflags", "+faststart", str(mp4)])
+        for f in OUT.glob(f"_2pass-{name}*"):
+            f.unlink()
+        print(f"{mp4.name}: {total:.1f}s {mp4.stat().st_size / 1024:.0f} KB")
+
+
 def main():
+    if "--light" in sys.argv:
+        return light()
     inputs = []
     for f, start, dur in SHOTS:
         inputs += ["-ss", str(start), "-t", str(dur), "-i", str(SRC / f)]

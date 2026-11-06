@@ -15,7 +15,7 @@ import html
 
 import home
 import problems
-from picture import picture
+from picture import SIG, picture
 
 ARROW = home.ARROW
 
@@ -83,7 +83,7 @@ def hero():
           <img src="assets/video/hero-city-poster-1280.jpg" srcset="assets/video/hero-city-poster-720.jpg 720w, assets/video/hero-city-poster-1280.jpg 1280w, assets/video/hero-city-poster-1920.jpg 1920w" sizes="100vw" width="1920" height="1080" alt="The Mumbai skyline across the bay" fetchpriority="high" decoding="async">
         </picture>
         <!-- site.js adds the source after page load: an upright cut on phones held upright, else 1080p or 720p -->
-        <video class="hero__video" data-base="assets/video/hero-city-" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+        <video class="hero__video" data-base="assets/video/hero-city-" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
       </div>
       <div class="hero__content">
         <div class="hero__text">
@@ -107,7 +107,9 @@ def trio():
         </article>""" for name, pos, alt, title, line, href in TRIO)
     return f"""
     <!-- =================================================================== 2. TRIO HEADING + 3. FEATURE TRIO -->
+    {SIG}
     <section class="ah-head reveal" aria-labelledby="trio-title">
+      <p class="eyebrow">Why Arha</p>
       <h2 id="trio-title"><a href="the-practice/">Crafted with precision. Given with care.</a></h2>
       <p>Specialist restorative and cosmetic dentistry with natural results, led by prosthodontist Dr. Nikhil V. Jain on Peddar Road.</p>
     </section>
@@ -127,6 +129,7 @@ def band():
       <div class="ah-band__slides">{slides}
       </div>
       <div class="ah-band__text reveal">
+        <p class="eyebrow eyebrow--light">The practice</p>
         <h2 id="band-title">A clinic built around calm</h2>
         <p>Marble, soft light and quiet rooms at Doctor House on Peddar Road. An X-ray room and a sterilisation room of our own, and Dr. Nikhil V. Jain and Dr. Vasant P. Jain under one roof.</p>
         <a class="link link--light" href="founder/">About Arha</a>
@@ -170,10 +173,12 @@ def grid():
 
 
 def dark():
-    return """
+    return f"""
     <!-- =================================================================== 6. DARK BAND (apa: centred statement, one CTA) -->
+    {SIG}
     <section class="ah-dark" aria-labelledby="dark-title">
       <div class="reveal">
+        <p class="eyebrow eyebrow--light">Specialist care</p>
         <h2 id="dark-title">Dentistry, done carefully</h2>
         <p>Arha is led by a prosthodontist, a specialist in restoring and replacing teeth. Every plan starts with listening and a careful examination, and is explained clearly before anything begins.</p>
         <a class="link link--light" href="book/">Book an appointment</a>
@@ -204,6 +209,7 @@ def founder():
     <section class="ah-founder" aria-labelledby="founder-title">
 {pic('stock-dentist-hands', '100vw', '', '70% 50%', '      ')}
       <div class="ah-founder__text reveal">
+        <p class="eyebrow eyebrow--light">The Arha approach</p>
         <h2 id="founder-title">Our philosophy</h2>
         <!-- Clinic philosophy, not a quote: no source for these words in the notes (notes/TO-CONFIRM.md) -->
         <p class="ah-founder__line">A good restoration should never announce itself. The aim is a result that feels natural, works well and lasts.</p>
@@ -222,7 +228,8 @@ def teaser():
       </div>
       <div class="ah-teaser__panel">
         <div class="reveal">
-          <h3 id="teaser-title">Step inside Arha</h3>
+          <p class="eyebrow">Gallery</p>
+          <h2 id="teaser-title">Step inside Arha</h2>
           <a class="link" href="gallery/">See the gallery</a>
         </div>
       </div>
@@ -237,14 +244,14 @@ def teaser():
 # like every stock photo), and the answer panel shows the same photograph larger. Decorative (alt=""): the label says it.
 # By design, a card and its panel are one appearance of the photograph (tools/photo_audit.py).
 PHOTO_POS = {"pain": "50% 50%", "gap": "45% 50%", "crooked": "42% 50%", "stained": "50% 50%",
-             "chipped": "55% 35%", "child": "50% 55%"}
+             "chipped": "55% 35%", "child": "50% 24%"}
 # Face-free photographs for the cards whose own finder photograph showed a person's face (a stranger's face reads
 # as a patient of the clinic). The others keep their stock-finder-<name> photograph.
 FINDER_PHOTOS = {"pain": "stock-xray-screen", "stained": "stock-teeth-shades", "child": "stock-kids-brushes"}
 
 
-def finder_photo(name, sizes, i):
-    return pic(FINDER_PHOTOS.get(name, f"stock-finder-{name}"), sizes, "", PHOTO_POS[name], i)
+def finder_photo(name, sizes, i, eager=False):
+    return pic(FINDER_PHOTOS.get(name, f"stock-finder-{name}"), sizes, "", PHOTO_POS[name], i, eager)
 
 
 # card label, photo, panel heading, two or three short sentences, safety line (or ""), related pages
@@ -287,9 +294,9 @@ BACK = '<span aria-hidden="true">←</span> Go back'
 def finder():
     cards = "".join(f"""
           <li class="reveal"><button class="finder__card" type="button" data-go="{rid}" data-colour-group><span class="finder__media">
-{finder_photo(ic, CARD_SIZES, "              ")}
+{finder_photo(ic, CARD_SIZES, "              ", eager=n < 3)}
             </span><span class="finder__label">{label}<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>"""
-                    for rid, label, ic, *_ in FINDER)
+                    for n, (rid, label, ic, *_) in enumerate(FINDER))
     panels = ""
     for rid, _label, ic, title, text, urgent, links in FINDER:
         urgent_html = f'\n            <p class="finder__urgent">{urgent}</p>' if urgent else ""
@@ -302,7 +309,7 @@ def finder():
             <h3 tabindex="-1">{title}</h3>
             <p>{text}</p>{urgent_html}
             <ul class="finder__links">{link_html}</ul>
-            <p class="finder__actions"><a class="finder__book" href="book/">Book an appointment</a><!--if:phone--><a class="finder__call" href="tel:+910000000000" data-call="finder">Call the clinic</a><!--endif--></p>
+            <p class="finder__actions"><a class="link" href="book/">Book an appointment</a><!--if:phone--><a class="link" href="tel:+910000000000" data-call="finder">Call the clinic</a><!--endif--></p>
             <p class="finder__confirm">General information, not a diagnosis. Dr. Nikhil will confirm at your visit.</p>
             <button class="finder__back finder__back--end" type="button" data-back>{BACK}</button>
           </div>
@@ -314,6 +321,7 @@ def finder():
     <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23a) -->
     <section class="ah-finder" id="what-brings-you-in" aria-labelledby="finder-title">
       <div class="ah-finder__head reveal">
+        <p class="eyebrow">What we treat</p>
         <h2 id="finder-title">What brings you in?</h2>
         <p>Choose what sounds closest.</p>
       </div>
