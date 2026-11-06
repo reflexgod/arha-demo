@@ -320,7 +320,7 @@ BACK = '<span aria-hidden="true">←</span> Go back'
 def finder():
     cards = "".join(f"""
           <li class="reveal"><button class="finder__card" type="button" data-go="{rid}" data-colour-group><span class="finder__media">
-{finder_photo(ic, CARD_SIZES, "              ", eager=n < 3)}
+{finder_photo(ic, CARD_SIZES, "              ")}
             </span><span class="finder__label">{label}<span class="finder__arrow" aria-hidden="true">→</span></span></button></li>"""
                     for n, (rid, label, ic, *_) in enumerate(FINDER))
     panels = ""
@@ -440,7 +440,7 @@ def hero_v9():
         <picture>
           <source media="(max-width: 1023px) and (orientation: portrait)" type="image/webp" srcset="assets/video/hero-poster-port-720.webp">
           <source type="image/webp" srcset="assets/video/hero-poster-land-768.webp 768w, assets/video/hero-poster-land-1280.webp 1280w, assets/video/hero-poster-land-1920.webp 1920w" sizes="100vw">
-          <img src="assets/video/hero-poster-land-1280.jpg" width="1920" height="1080" alt="Arha's reception on Peddar Road, the first frame of the clinic walkthrough" fetchpriority="high" decoding="async">
+          <img src="assets/video/hero-poster-land-1280.jpg" width="1920" height="1080" alt="Arha's reception on Peddar Road, the first frame of the clinic walkthrough" fetchpriority="high">
         </picture>
         <video class="hero-v9__video" data-base="assets/video/hero-land-" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
       </div>
@@ -489,7 +489,7 @@ def step_inside():
       </ul>
       <dialog class="tour-box" data-tour-box aria-label="Clinic tour">
         <button class="tour-box__close" type="button" data-tour-close aria-label="Close the clinic tour"></button>
-        <video controls playsinline preload="none" poster="assets/video/tour-poster-720.jpg" data-src="assets/video/tour-720.mp4"></video>
+        <video controls playsinline preload="none" data-poster="assets/video/tour-poster-720.jpg" data-src="assets/video/tour-720.mp4"></video>
       </dialog>
     </section>
 """

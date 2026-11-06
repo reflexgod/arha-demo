@@ -1776,7 +1776,7 @@
     let opener = null;
     document.querySelectorAll('[data-tour-open]').forEach((b) => b.addEventListener('click', () => {
       opener = b;
-      if (!v.src) v.src = v.dataset.src;
+      if (!v.src) { v.poster = v.dataset.poster; v.src = v.dataset.src; }  // nothing downloads until the tour is opened
       tourBox.showModal();
       v.play().catch(() => {});
       track('tour_play', { location: 'home' });
