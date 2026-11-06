@@ -46,11 +46,11 @@
     const wide = window.matchMedia('(min-width: 900px)');
     const update = () => {
       const y = window.scrollY;
-      header.classList.toggle('is-scrolled', y > 10);
+      header.classList.toggle('is-scrolled', y > 80);
       // v8: the utility bar and brand row scroll away (sticky header, negative top); the strip then becomes the compact bar
       header.classList.toggle('is-compact', !!strip && wide.matches && strip.getBoundingClientRect().top <= 0.5);
       const busy = header.contains(document.activeElement) || header.querySelector('.is-open');
-      if (y > lastY + 4 && y > 240 && !busy && !wide.matches) header.classList.add('is-hidden');
+      if (false && y > lastY + 4 && y > 240 && !busy) header.classList.add('is-hidden'); // v9: the slim header stays
       else if (y < lastY - 4 || y <= 240) header.classList.remove('is-hidden');
       lastY = y;
       ticking = false;
@@ -214,6 +214,43 @@
   }
   window.arhaReady = true;
 
+  /* 25. Clinic tour in a lightbox (homepage "Step inside"): the video loads only when opened, stops when closed. */
+  const tourBox = document.querySelector('[data-tour-box]');
+  if (tourBox && typeof tourBox.showModal === 'function') {
+    const v = tourBox.querySelector('video');
+    let opener = null;
+    document.querySelectorAll('[data-tour-open]').forEach((b) => b.addEventListener('click', () => {
+      opener = b;
+      if (!v.src) v.src = v.dataset.src;
+      tourBox.showModal();
+      v.play().catch(() => {});
+      track('tour_play', { location: 'home' });
+    }));
+    const close = () => { v.pause(); if (tourBox.open) tourBox.close(); };
+    tourBox.querySelector('[data-tour-close]').addEventListener('click', close);
+    tourBox.addEventListener('click', (e) => { if (e.target === tourBox) close(); });
+    tourBox.addEventListener('close', () => { v.pause(); if (opener) opener.focus(); });
+  } else if (tourBox) {
+    tourBox.remove();
+    document.querySelectorAll('[data-tour-open]').forEach((b) => b.remove());
+  }
+
+  /* 26. Whitening shade slider (smile-design): an illustrated tooth row moves from A3 to B1. Nothing is stored. */
+  document.querySelectorAll('[data-shade]').forEach((box) => {
+    const SHADES = [['A3', '#E3CDA0'], ['A2', '#EAD8B2'], ['B2', '#EFE2C2'], ['A1', '#F3EAD3'], ['B1', '#F8F3E6']];
+    const range = box.querySelector('[data-shade-range]');
+    const out = box.querySelector('[data-shade-out]');
+    const row = box.querySelector('.shade__row');
+    const paint = () => {
+      const [name, colour] = SHADES[Number(range.value)];
+      row.style.fill = colour;
+      out.textContent = name;
+      range.setAttribute('aria-valuetext', `Shade ${name}`);
+    };
+    range.addEventListener('input', paint);
+    paint();
+  });
+
   /* 4b. Photographs sit on solid stone and fade in (200 ms) once loaded and decoded, so one never paints in
          halves. They are fetched two screens ahead of the scroll (and one behind), not at the browser's last moment. */
   const lazyImgs = document.querySelectorAll('picture.fill img[loading="lazy"]');
@@ -244,7 +281,7 @@
   const hero = document.querySelector('[data-hero]');
   const video = hero && hero.querySelector('video');
   const saveData = navigator.connection && navigator.connection.saveData;
-  if (video && !reduceMotion && !saveData) {
+  if (video && !reduceMotion && !saveData && window.matchMedia('(min-width: 900px)').matches) {
     let started = false;
     let loaded = document.readyState === 'complete';
     let inView = false;
@@ -254,7 +291,8 @@
       const phone = Math.min(window.innerWidth, window.innerHeight) <= 600;
       const large = window.innerWidth * window.devicePixelRatio > 1280;
       const source = document.createElement('source');
-      source.src = `${video.dataset.base}${upright ? 'phone' : phone ? '720-light' : large ? '1080' : '720'}.mp4`;
+      source.src = video.dataset.base.includes('hero-land-') ? `${video.dataset.base}${large ? '1080' : '720'}.mp4`
+        : `${video.dataset.base}${upright ? 'phone' : phone ? '720-light' : large ? '1080' : '720'}.mp4`;
       // The poster is the picture already on screen (no second download); if play() is refused, it simply stays
       const still = hero.querySelector('.hero__media img');
       if (still && still.currentSrc) video.poster = still.currentSrc;
@@ -605,11 +643,12 @@
   const PLANNER = {
     whatsapp: SITE.whatsapp || '',
     // No visit counts or days on the site until Dr. Nikhil confirms them (the old samples are in notes/TO-CONFIRM.md)
+    // TODO-CONFIRM: every number below is a typical placeholder (v9 brief), shown as "typical" with Dr. Nikhil's confirmation line
     treatments: {
-      implants: { name: 'Dental implants', detail: 'Dr. Nikhil confirms the number of visits and days after your virtual consultation.' },
-      'full-mouth': { name: 'Full mouth rehabilitation', detail: 'Dr. Nikhil confirms the number of visits and days after your virtual consultation.' },
-      veneers: { name: 'Smile design & veneers', detail: 'Dr. Nikhil confirms the number of visits and days after your virtual consultation.' },
-      aligners: { name: 'Aligners', detail: 'Dr. Nikhil confirms the number of visits and days after your virtual consultation.' },
+      implants: { name: 'Dental implants', detail: 'Typically 2 visits to Mumbai: about 5–7 days for the consultation and implant placement, then about 5 days for the final crown, 3 to 6 months later.' },
+      'full-mouth': { name: 'Full mouth rehabilitation', detail: 'Typically 2 to 3 visits to Mumbai of about 7–10 days each, planned around healing time.' },
+      veneers: { name: 'Smile design', detail: 'Typically 1 visit to Mumbai of about 7–10 days: planning, a preview of your new smile, then the final work.' },
+      aligners: { name: 'Invisalign', detail: 'Typically 1 visit to Mumbai of about 3–5 days to start, then check-ins by video and occasional visits.' },
       unsure: { name: 'A consultation', detail: 'We will recommend the right treatment and timeline after a virtual consultation.' },
     },
     minDays: 1,
@@ -1639,11 +1678,18 @@
     const swap = (from, to, then) => {
       busy = true;
       from.classList.add('is-out');
+      const h0 = finder.offsetHeight;
       setTimeout(() => {
         from.hidden = true;
         from.classList.remove('is-out');
         to.classList.add('is-from');
         to.hidden = false;
+        const h1 = finder.offsetHeight;
+        if (!reduceMotion && h0 !== h1 && finder.animate) {
+          finder.style.overflow = 'hidden';
+          finder.animate([{ height: `${h0}px` }, { height: `${h1}px` }], { duration: 420, easing: 'cubic-bezier(.2,.7,.2,1)' })
+            .finished.then(() => { finder.style.overflow = ''; }, () => { finder.style.overflow = ''; });
+        }
         void to.offsetWidth;
         to.classList.remove('is-from');
         then();

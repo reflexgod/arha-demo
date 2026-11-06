@@ -22,7 +22,8 @@ from picture import picture  # noqa: E402
 import chrome  # noqa: E402
 import finish  # noqa: E402
 import home  # noqa: E402
-import home_apa  # noqa: E402
+import home_apa
+import v9  # noqa: E402
 import more_pages  # noqa: E402
 import technology  # noqa: E402
 import treatment_pages  # noqa: E402
@@ -37,7 +38,7 @@ SITE_URL = "https://arha.svayra.com/"
 # The one source of truth for contact details. Placeholders until the clinic confirms (notes/TO-CONFIRM.md).
 SITE = {
     "phone": "+91 99755 07714",      # reception
-    "whatsapp": "+91 00000 00000",
+    "whatsapp": "+91 99755 07714",   # TODO-CONFIRM: the reception number, until the clinic confirms its WhatsApp line
     "email": "hello@example.com",
     "emergency": "+91 00000 00000",
     # 0 = Sunday ... 6 = Saturday; None = closed. India time. From Riya's answers; Google shows 9:00 AM.
@@ -438,6 +439,7 @@ def main():
         first = re.search(r"\{\{pic ([\w-]+)|assets/img/([\w-]+?)-\d+\.(?:jpg|webp|avif)", main_html)
         photo = (first.group(1) or first.group(2)) if first else "hero-city-poster"
         main_html = expand_pics(main_html.replace("{{visit}}", visit).replace("{{planner}}", planner))
+        main_html = v9.inject(slug, main_html)
         if slug == "emergency":  # emergency help must be readable at once: no scroll reveals on this page
             main_html = re.sub(r'(class="[^"]*?)\s*\breveal(?![\w-])', r'\1', main_html)
         og = finish.og_image(slug.replace("/", "-"), html.unescape(meta["title"].split(" | ")[0]), photo)

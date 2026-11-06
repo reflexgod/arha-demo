@@ -426,3 +426,221 @@ def main_html(visit=None):
     problems are one tap away on /problems/ (Demo-ready, 3 Nov 2026)."""
     return ('  <main id="main" class="home-apa" tabindex="-1">\n\n' + hero() + finder() + statement() + trio()
             + "    " + SIG + "\n" + highlights() + band() + dark() + process() + "    " + SIG + "\n" + teaser() + reviews() + "\n  </main>\n")
+
+
+# ======================================================================================================================
+# v9 design upgrade (6 Nov 2026): the homepage in a new order. Hero (clinic video) + trust strip, What brings you in?
+# (icon cards), Meet Dr. Nikhil, Signature treatments, Smile results (samples), Your journey, Step inside, Reviews
+# (placeholder), closing band. The footer comes from chrome.py.
+# ======================================================================================================================
+import v9 as _v9
+from chrome import WA, WA_ICON
+
+# Thin-line icons, one stroke style (1.25, round joins), drawn for Arha. A tooth outline is the base of each.
+_T = "M14 9c3.5-2.2 7-2 10 .4 3-2.4 6.5-2.6 10-.4 3.4 2.2 4.2 7 3.2 12.2-.9 4.6-2 8.6-3.2 12.6-.9 3-2 5.2-3.8 5.2-2.2 0-2.5-3.4-3.4-6.6-.7-2.5-1.6-3.6-2.8-3.6s-2.1 1.1-2.8 3.6c-.9 3.2-1.2 6.6-3.4 6.6-1.8 0-2.9-2.2-3.8-5.2C11 30.8 9.9 26.8 9 22.2 8 17 8.6 11.2 14 9Z"
+ICONS = {
+    "pain": f'<path d="{_T}"/><path d="M40 6l3-3M42 12h4M8 6 5 3M6 12H2"/>',
+    "gap": '<path d="M5 12c2-2 6-2 8 0v14c0 4-1.5 8-4 8s-4-4-4-8Z"/><path d="M35 12c2-2 6-2 8 0v14c0 4-1.5 8-4 8s-4-4-4-8Z"/><path d="M19 24h10" stroke-dasharray="2 2.5"/>',
+    "crooked": '<path d="M6 14c2-2 6-2 8 0v14c0 4-1.5 7-4 7s-4-3-4-7Z"/><path d="M19.5 11.5c2.2-1.6 6.2-1 7.6 1.4l-1.6 14c-.5 4-2.4 6.8-4.8 6.4-2.4-.4-3.4-3.6-2.9-7.6Z"/><path d="M34 14c2-2 6-2 8 0v14c0 4-1.5 7-4 7s-4-3-4-7Z"/>',
+    "stained": f'<path d="{_T}"/><path d="M19 19c1.5-.8 3-.8 4.5 0M26 23c1.2-.6 2.4-.6 3.6 0"/>',
+    "chipped": '<path d="M14 9c3.5-2.2 7-2 10 .4 2.2-1.8 4.6-2.4 7-1.8l-3 5 5 1-2 4 6 1.6c-.9 4.6-2 8.6-3.2 12.6-.9 3-2 5.2-3.8 5.2-2.2 0-2.5-3.4-3.4-6.6-.7-2.5-1.6-3.6-2.8-3.6s-2.1 1.1-2.8 3.6c-.9 3.2-1.2 6.6-3.4 6.6-1.8 0-2.9-2.2-3.8-5.2C11 30.8 9.9 26.8 9 22.2 8 17 8.6 11.2 14 9Z"/>',
+    "child": '<path d="M17 15c2.6-1.6 5.2-1.5 7.5.3 2.2-1.8 4.9-1.9 7.5-.3 2.6 1.6 3.1 5.2 2.4 9-.7 3.4-1.5 6.4-2.4 9.4-.7 2.2-1.5 3.9-2.8 3.9-1.6 0-1.9-2.5-2.5-4.9-.5-1.9-1.2-2.7-2.2-2.7s-1.7.8-2.2 2.7c-.6 2.4-.9 4.9-2.5 4.9-1.3 0-2.1-1.7-2.8-3.9-.9-3-1.7-6-2.4-9.4-.7-3.8-.2-7.4 2.4-9Z"/><path d="M38 6l1 2.4 2.6.3-2 1.7.6 2.6-2.2-1.4-2.2 1.4.6-2.6-2-1.7 2.6-.3Z"/>',
+}
+
+
+def icon(name):
+    return f'<svg class="finder__icon" viewBox="0 0 48 48" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">{ICONS[name]}</svg>'
+
+
+def hero_v9():
+    """Full-bleed clinic walkthrough (desktop only; phones keep the poster), text bottom-left over a gradient."""
+    return f"""    <!-- =================================================================== 1. HERO (v9: the clinic walkthrough, text bottom-left) -->
+    <section class="hero-v9" data-hero aria-labelledby="hero-title">
+      <div class="hero-v9__media">
+        <picture>
+          <source media="(orientation: portrait)" type="image/avif" srcset="assets/video/hero-poster-port-720.avif" >
+          <source media="(orientation: portrait)" type="image/webp" srcset="assets/video/hero-poster-port-720.webp">
+          <source type="image/avif" srcset="assets/video/hero-poster-land-1280.avif 1280w, assets/video/hero-poster-land-1920.avif 1920w" sizes="100vw">
+          <source type="image/webp" srcset="assets/video/hero-poster-land-1280.webp 1280w, assets/video/hero-poster-land-1920.webp 1920w" sizes="100vw">
+          <img src="assets/video/hero-poster-land-1280.jpg" width="1920" height="1080" alt="Arha's reception on Peddar Road, the first frame of the clinic walkthrough" fetchpriority="high" decoding="async">
+        </picture>
+        <!-- site.js 5 adds the source on laptops only, after load: hero-land-1080 or -720. Phones keep the poster. -->
+        <video class="hero__video" data-base="assets/video/hero-land-" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+      </div>
+      <div class="hero-v9__text">
+        <p class="hero-v9__kicker">Peddar Road, Mumbai</p>
+        <h1 id="hero-title">Implants and smile design by a prosthodontist.</h1>
+        <p class="hero-v9__lede">Dr. Nikhil V. Jain’s practice on Peddar Road, opposite Jaslok Hospital.</p>
+        <p class="hero-v9__actions"><a class="btn btn--primary btn--on-dark" href="book/"><span>Book an appointment</span>{ARROW}</a><!--if:whatsapp--><a class="btn btn--on-dark" href="{WA}" target="_blank" rel="noopener"><span>WhatsApp</span>{ARROW}</a><!--endif--><!--if:phone--><a class="hero-v9__call" href="tel:+910000000000" data-call="hero">Call <span data-show="phone">+91 00000 00000</span></a><!--endif--></p>
+      </div>
+    </section>
+    <div class="trust-strip">
+      <ul>
+        <li>Prosthodontist &amp; implantologist</li>
+        <li>Opposite Jaslok Hospital</li>
+        <li>Google rating: coming soon</li><!-- TODO-CONFIRM: the clinic's Google rating, once they agree to show it -->
+      </ul>
+    </div>
+"""
+
+
+def meet_doctor():
+    return f"""
+    <!-- =================================================================== MEET DR. NIKHIL (placeholder portrait, no stock face) -->
+    <section class="meet marble" aria-labelledby="meet-title">
+      <div class="meet__inner">
+        <div class="meet__frame reveal">
+        {_v9.doctor_frame()}
+        </div>
+        <div class="meet__text reveal">
+          <h2 id="meet-title">Meet Dr. Nikhil V. Jain</h2>
+          <p class="meet__line">A prosthodontist and implantologist: a specialist in restoring and replacing teeth.</p>
+          <dl class="meet__facts">
+            <div><dt>Specialty</dt><dd>Prosthodontics</dd></div>
+            <div><dt>Years in dentistry</dt><dd>17</dd></div><!-- TODO-CONFIRM: 17 years (from the brief), not yet confirmed by the clinic -->
+            <div><dt>Focus</dt><dd>Implants, full mouth rehabilitation, smile design</dd></div>
+          </dl>
+          <a class="link" href="doctors/">Meet our doctors</a>
+        </div>
+      </div>
+    </section>
+"""
+
+
+SIGNATURE = [  # slug, name, photo, position, alt, line (each page's own hero line)
+    ("dental-implants", "Dental implants", "stock-implant-hero", "50% 50%", "A model of an implant crown on its post",
+     "Replacing missing teeth with results that look, feel and work like your own."),
+    ("smile-design", "Smile design", "dental-operatory-arha-dental-care-peddar-road-04", "50% 50%", "An Arha treatment room",
+     "Your new smile, planned around your face and previewed before any work begins."),
+    ("invisalign", "Invisalign", "stock-aligner-case-hand", "50% 50%", "A clear aligner in its case",
+     "Straightening teeth with a series of clear, removable aligners."),
+]
+
+
+def signature():
+    cards = "".join(f"""
+        <li class="sig-card sig-card--{k} reveal">
+          <a class="sig-card__media" href="{slug}/" tabindex="-1" aria-hidden="true">
+{pic(photo, '(min-width: 900px) ' + ('58vw' if k == 0 else '40vw') + ', 82vw', alt, pos, '            ')}
+          </a>
+          <div class="sig-card__body">
+            <h3><a href="{slug}/">{name}</a></h3>
+            <p>{line}</p>
+            <a class="link" href="{slug}/" tabindex="-1" aria-hidden="true">Learn more</a>
+          </div>
+        </li>""" for k, (slug, name, photo, pos, alt, line) in enumerate(SIGNATURE))
+    return f"""
+    <!-- =================================================================== SIGNATURE TREATMENTS (1 large + 2 stacked; a swipe row on phones) -->
+    <section class="signature" aria-labelledby="sig-title">
+      <div class="v9-head reveal">
+        <h2 id="sig-title">Signature treatments</h2>
+      </div>
+      <ul class="signature__grid" role="list">{cards}
+      </ul>
+      <p class="signature__more"><a class="link" href="treatments/">See all treatments</a></p>
+    </section>
+"""
+
+
+def journey():
+    steps = "".join(f"""
+        <li class="journey__step">
+          <span class="journey__dot" aria-hidden="true"></span>
+          <h3>{title.split('. ', 1)[1]}</h3>
+          <p>{line}</p>
+        </li>""" for _n, _p, _a, title, line in PROCESS)
+    return f"""
+    <!-- =================================================================== YOUR JOURNEY (gold dots, a hairline that draws itself) -->
+    <section class="journey" aria-labelledby="journey-title">
+      <div class="v9-head reveal">
+        <h2 id="journey-title">Your journey</h2>
+      </div>
+      <ol class="journey__line reveal">{steps}
+      </ol>
+    </section>
+"""
+
+
+INSIDE = [  # real clinic photographs only
+    ("arha-dental-care-reception-south-mumbai-dental-clinic-01", "Arha's reception: marble, soft light and the gold emblem", "Reception"),
+    ("arha-dental-care-lounge-peddar-road", "The patients' lounge at Arha", "The lounge"),
+    ("dental-operatory-arha-dental-care-peddar-road-01", "An Arha treatment room with its chair beneath a soft light", "A treatment room"),
+    ("arha-dental-care-consultation-desk", "The consultation desk in an Arha treatment room", "Consultation"),
+    ("dental-implant-equipment-arha-dental-care-mumbai", "Arha's X-ray room with its panoramic X-ray unit", "The X-ray room"),
+    ("arha-dental-care-exterior-dental-clinic-peddar-road", "The Arha sign at suite 107, Doctor House", "Suite 107, Doctor House"),
+]
+
+
+def step_inside():
+    items = "".join(f"""
+        <li class="inside-strip__item">
+          <figure>
+            <div class="inside-strip__media">
+{pic(name, '(min-width: 900px) 30vw, 78vw', alt, '50% 50%', '              ')}
+            </div>
+            <figcaption>{cap}</figcaption>
+          </figure>
+        </li>""" for name, alt, cap in INSIDE)
+    return f"""
+    <!-- =================================================================== STEP INSIDE (a swipe strip of the real rooms; the tour in a lightbox) -->
+    <section class="inside-v9" aria-labelledby="inside-title">
+      <div class="v9-head v9-head--row reveal">
+        <h2 id="inside-title">Step inside</h2>
+        <button class="btn" type="button" data-tour-open><span>Play the clinic tour</span>{ARROW}</button>
+      </div>
+      <ul class="inside-strip" role="list" tabindex="0" aria-label="Photographs of the clinic, scroll sideways">{items}
+      </ul>
+      <dialog class="tour-box" data-tour-box aria-label="Clinic tour">
+        <button class="tour-box__close" type="button" data-tour-close aria-label="Close the clinic tour"></button>
+        <video controls playsinline preload="none" poster="assets/video/tour-poster-720.jpg" data-src="assets/video/tour-720.mp4"></video>
+      </dialog>
+    </section>
+"""
+
+
+def reviews_placeholder():
+    cards = "".join("""
+        <li class="rv-ph__card"><span class="rv-ph__mark" aria-hidden="true">“</span><p>A patient’s Google review will appear here, quoted exactly as written.</p><span class="rv-ph__who">Coming soon</span></li>""" for _ in range(3))
+    return f"""
+    <!-- =================================================================== REVIEWS (placeholder layout; no review, name, rating or count is invented) -->
+    <section class="rv-ph" aria-labelledby="rv-ph-title">
+      <div class="v9-head reveal">
+        <h2 id="rv-ph-title">What patients say</h2>
+        <p class="rv-ph__rating">Google rating: coming soon</p><!-- TODO-CONFIRM: rating and three reviews, with the clinic's go-ahead -->
+      </div>
+      <ul class="rv-ph__grid reveal" role="list">{cards}
+      </ul>
+    </section>
+"""
+
+
+def closing():
+    return f"""
+    <!-- =================================================================== CLOSING BAND -->
+    <section class="closing-v9" aria-labelledby="closing-v9-title">
+      <div class="closing-v9__inner reveal">
+        <h2 id="closing-v9-title">Your first visit starts with a conversation.</h2>
+        <p class="closing-v9__actions"><a class="btn btn--primary btn--on-dark" href="book/"><span>Book an appointment</span>{ARROW}</a><!--if:whatsapp--><a class="btn btn--on-dark" href="{WA}" target="_blank" rel="noopener"><span>WhatsApp</span>{ARROW}</a><!--endif--></p>
+        <p class="closing-v9__hours"><span data-show="hours-days">Monday to Saturday</span>, <span data-show="hours-time">9:30 AM to 6:30 PM</span> · <span data-show="hours-closed">Sunday closed</span></p>
+      </div>
+    </section>
+"""
+
+
+def finder_v9():
+    """The selector as a 3 x 2 grid of marble cards with Arha's own line icons; the answer panels are unchanged."""
+    html = finder()
+    for rid, _label, ic, *_ in FINDER:
+        start = html.index(f'data-go="{rid}" data-colour-group><span class="finder__media">')
+        a = html.index('<span class="finder__media">', start)
+        b = html.index("</span>", html.index("</picture>", a)) + len("</span>")
+        html = html[:a] + f'<span class="finder__media finder__media--icon">{icon(ic)}</span>' + html[b:]
+    html = html.replace(' data-colour-group><span class="finder__media finder__media--icon">', '><span class="finder__media finder__media--icon">')
+    html = html.replace('        <p class="eyebrow">What we treat</p>\n', '')
+    return html
+
+
+def main_html(visit=None):  # noqa: F811  (v9 replaces the earlier order)
+    sig = "    " + SIG + "\n"
+    return ('  <main id="main" class="home-apa home-v9" tabindex="-1">\n\n' + hero_v9() + finder_v9() + meet_doctor() + signature()
+            + _v9.smile_results(3) + journey() + step_inside() + sig + reviews_placeholder() + closing() + "\n  </main>\n")
