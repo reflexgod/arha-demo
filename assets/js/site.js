@@ -324,7 +324,7 @@
     const callIo = new IntersectionObserver((entries) => {
       entries.forEach((e) => { if (e.isIntersecting && e.intersectionRatio > 0.99) inView.add(e.target); else inView.delete(e.target); });
       apply();
-    }, { rootMargin: '-96px 0px -96px 0px', threshold: [0, 1] });
+    }, { rootMargin: window.matchMedia('(max-width: 768px)').matches ? '-72px 0px -64px 0px' : '-96px 0px 0px 0px', threshold: [0, 1] }); // clear of the header, and of the bar on phones
     pageCalls.forEach((a) => callIo.observe(a));
     apply();
   }

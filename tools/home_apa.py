@@ -317,6 +317,7 @@ def finder():
 {finder_photo(ic, PANEL_SIZES, "            ")}
           </div>
         </div>"""
+    from home import ARROW
     return f"""
     <!-- =================================================================== WHAT BRINGS YOU IN? (treatment finder, site.js 23a) -->
     <section class="ah-finder" id="what-brings-you-in" aria-labelledby="finder-title">
@@ -329,7 +330,14 @@ def finder():
         <ul class="finder__grid" data-finder-grid data-reveal-group aria-label="Choose what sounds closest">{cards}
         </ul>{panels}
       </div>
-      <p class="finder__all reveal"><a class="link" href="problems/">All the problems we treat</a></p>
+      <div class="finder__all finder__else reveal">
+        <div>
+          <h3>Something else, or not sure?</h3>
+          <p>Tell us what's bothering you and we'll guide you to the right care.</p>
+        </div>
+        <div class="finder__else-actions"><!--if:phone--><a class="btn btn--solid" href="tel:+910000000000" data-call="finder_else"><span>Call <span data-show="phone">+91 00000 00000</span></span>{ARROW}</a><!--endif--><a class="btn" href="book/"><span>Book an appointment</span>{ARROW}</a></div>
+        <a class="link" href="problems/">All the problems we treat</a>
+      </div>
     </section>
 """
 

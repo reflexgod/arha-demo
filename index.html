@@ -24,8 +24,8 @@
   <meta property="og:locale" content="en_IN">
   <meta name="twitter:card" content="summary_large_image">
 
-  <link rel="preload" href="assets/fonts/jost-400.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jost-300.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-serif-400.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/d-din-bold.woff2" as="font" type="font/woff2" crossorigin>
   <!-- Hero poster is the LCP image: preload the exact file the <picture> below will pick -->
   <link rel="preload" as="image" type="image/avif" media="(orientation: portrait)" imagesrcset="assets/video/hero-city-poster-port-540.avif 540w, assets/video/hero-city-poster-port-810.avif 810w" imagesizes="100vw" fetchpriority="high">
@@ -440,7 +440,14 @@
           </div>
         </div>
       </div>
-      <p class="finder__all reveal"><a class="link" href="problems/">All the problems we treat</a></p>
+      <div class="finder__all finder__else reveal">
+        <div>
+          <h3>Something else, or not sure?</h3>
+          <p>Tell us what's bothering you and we'll guide you to the right care.</p>
+        </div>
+        <div class="finder__else-actions"><a class="btn btn--solid" href="tel:+919975507714" data-call="finder_else"><span>Call <span data-show="phone">+91 99755 07714</span></span><svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a><a class="btn" href="book/"><span>Book an appointment</span><svg class="arrow arrow--right" viewBox="0 0 12 10" aria-hidden="true" focusable="false"><path d="M1 5h10M7 1l4 4-4 4"/></svg></a></div>
+        <a class="link" href="problems/">All the problems we treat</a>
+      </div>
     </section>
 
     <!-- =================================================================== 2. TRIO HEADING + 3. FEATURE TRIO -->

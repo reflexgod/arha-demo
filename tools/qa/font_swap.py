@@ -1,4 +1,4 @@
-"""Does the headline font shift anything when it arrives? Holds fraunces-var.woff2 back until the page has painted in the fallback,
+"""Does the headline font shift anything when it arrives? Holds instrument-serif-400.woff2 back until the page has painted in the fallback,
 then lets it through, measures the layout shift of the swap and compares headline line counts before and after. Starts its own server.
 Usage: .venv/Scripts/python tools/qa/font_swap.py <port> [path ...]
 """
@@ -16,7 +16,7 @@ BASE = f"http://127.0.0.1:{PORT}/"
 INIT = """try{sessionStorage.setItem('arha-intro','1')}catch(e){}
 window.__cls=0;try{new PerformanceObserver(l=>{for(const e of l.getEntries())if(!e.hadRecentInput)window.__cls+=e.value}).observe({type:'layout-shift',buffered:true})}catch(e){}"""
 LINES = """() => [...document.querySelectorAll('main h1, main h2')].filter((e) => e.getBoundingClientRect().height).map((e) => Math.round(e.getBoundingClientRect().height / parseFloat(getComputedStyle(e).lineHeight)))"""
-FONT = "document.fonts.check('500 40px Fraunces')"
+FONT = "document.fonts.check('400 40px \"Instrument Serif\"')"
 
 
 def main():
@@ -32,7 +32,7 @@ def main():
                     pg = ctx.new_page()
                     held = []
                     open_gate = []
-                    pg.route("**/fraunces-var.woff2", lambda route: route.continue_() if open_gate else held.append(route))
+                    pg.route("**/instrument-serif-400.woff2", lambda route: route.continue_() if open_gate else held.append(route))
                     pg.goto(BASE + path, wait_until="commit")
                     pg.wait_for_selector("main h1")
                     pg.wait_for_timeout(1200)  # headlines have painted in the fallback

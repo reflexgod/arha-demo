@@ -1,6 +1,6 @@
 """The v5 type rules on every built page, at 390 and 1440 (starts its own server). Prints problems, and the rhythm of section tones.
 
- - H1, H2 (headlines): Fraunces, sentence case, -0.01em, line-height about 1.1, on the scale. The footer column labels are the one exception.
+ - H1, H2 (headlines): Instrument Serif, sentence case, -0.01em, line-height about 1.1, on the scale. The footer column labels are the one exception.
  - H3: Jost 600, on the scale. D-DIN only at 15 px or below. Anything in capitals is D-DIN, and at 15 px or below.
  - Long headlines on 390: no word alone on its last line, no overflow, and how many lines (--lines prints them).
 
@@ -34,7 +34,7 @@ AUDIT = """(w) => {
     const tag = e.tagName.toLowerCase();
     if (e.closest('.footer__cols')) continue;
     if (tag !== 'h3') {
-      if (!fam.includes('Fraunces')) out.bad.push(`${tag} family ${fam.slice(0, 20)}: ${e.textContent.trim().slice(0, 40)}`);
+      if (!fam.includes('Instrument Serif')) out.bad.push(`${tag} family ${fam.slice(0, 20)}: ${e.textContent.trim().slice(0, 40)}`);
       if (s.textTransform !== 'none') out.bad.push(`${tag} ${s.textTransform}: ${e.textContent.trim().slice(0, 40)}`);
       if (Math.abs(lh - 1.1) > .03) out.bad.push(`${tag} line-height ${lh.toFixed(2)}: ${e.textContent.trim().slice(0, 40)}`);
       if (Math.abs(ls + .01) > .004) out.bad.push(`${tag} letter-spacing ${ls.toFixed(3)}em: ${e.textContent.trim().slice(0, 40)}`);
