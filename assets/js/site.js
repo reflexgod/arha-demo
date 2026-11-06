@@ -42,11 +42,15 @@
   if (header) {
     let ticking = false;
     let lastY = window.scrollY;
+    const strip = header.querySelector('.nav-strip');
+    const wide = window.matchMedia('(min-width: 900px)');
     const update = () => {
       const y = window.scrollY;
       header.classList.toggle('is-scrolled', y > 10);
+      // v8: the utility bar and brand row scroll away (sticky header, negative top); the strip then becomes the compact bar
+      header.classList.toggle('is-compact', !!strip && wide.matches && strip.getBoundingClientRect().top <= 0.5);
       const busy = header.contains(document.activeElement) || header.querySelector('.is-open');
-      if (y > lastY + 4 && y > 240 && !busy) header.classList.add('is-hidden');
+      if (y > lastY + 4 && y > 240 && !busy && !wide.matches) header.classList.add('is-hidden');
       else if (y < lastY - 4 || y <= 240) header.classList.remove('is-hidden');
       lastY = y;
       ticking = false;
@@ -198,7 +202,7 @@
             io.unobserve(el);
           });
         });
-    }, { rootMargin: '0px 0px 12% 0px', threshold: 0.1 });
+    }, { rootMargin: '0px 0px 18% 0px', threshold: 0.05 });
     below.forEach((el) => io.observe(el));
     // Keyboard focus never lands on something still faded out (e.g. a link at the very bottom edge)
     document.addEventListener('focusin', (e) => {
@@ -576,8 +580,11 @@
       }
       return { open: false, opens: '', when: '' };
     };
+    const todayEls = document.querySelectorAll('[data-today]');
     const render = () => {
       const s = status();
+      const today = new Intl.DateTimeFormat('en-GB', { timeZone: CLINIC_HOURS.timeZone, weekday: 'long', day: 'numeric', month: 'long' }).format(new Date());
+      todayEls.forEach((el) => { el.textContent = today; });
       const text = s.open ? `Open now · until ${s.until}` : s.opens ? `Closed · Opens ${s.when || 'today'} at ${s.opens}` : 'Closed';
       statusEls.forEach((el) => { el.textContent = text; el.classList.toggle('is-open', s.open); });
       // "Call now" only while someone is there to answer; "Call" / "Call the clinic" otherwise
@@ -1277,9 +1284,9 @@
     }));
   });
 
-  /* 18. Colour on hover: every black and white photograph turns to full colour (600 ms, site.css).
+  /* 18. Colour on hover: every black and white photograph turns to full colour (400 ms ease-out, site.css).
          With a mouse, under the pointer, even beneath overlays, hotspots and captions;
-         on touch, while the photograph is mostly in view. */
+         on touch, while at least half of the photograph is in view. */
   const greyPhotos = [...document.querySelectorAll('img')].filter((img) => /grayscale\(1\)|saturate\(0\)/.test(getComputedStyle(img).filter));
   greyPhotos.forEach((img) => {
     img.classList.add('bw-photo');
@@ -1293,7 +1300,7 @@
     const own = props.map((prop, i) => ({ prop, dur: durs[i % durs.length], ease: ease[i % ease.length], delay: delays[i % delays.length] }))
       .filter((x) => x.prop !== 'filter' && x.prop !== 'all' && parseFloat(x.dur) > 0)
       .map((x) => `${x.prop} ${x.dur} ${x.ease} ${x.delay}`);
-    img.style.transition = own.concat('filter .6s ease').join(', ');
+    img.style.transition = own.concat('filter .4s ease-out').join(', ');
   });
   if (greyPhotos.length && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     const grey = new Set(greyPhotos);
@@ -1327,7 +1334,7 @@
     const io = new IntersectionObserver((entries) => entries.forEach((e) => {
       const tall = e.boundingClientRect.height > window.innerHeight;
       const shown = tall ? e.intersectionRect.height / window.innerHeight : e.intersectionRatio;
-      e.target.classList.toggle('in-colour', e.isIntersecting && shown >= 0.6);
+      e.target.classList.toggle('in-colour', e.isIntersecting && shown >= 0.5);
     }), { threshold: [0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 1] });
     // A slider or a pair is watched as one (half of a slider's photograph is clipped by the line)
     new Set(greyPhotos.map((img) => img.closest('[data-colour-group]') || img)).forEach((el) => io.observe(el));

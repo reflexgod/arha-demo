@@ -54,5 +54,5 @@ Stock photography comes from the official Unsplash API through `tools/stock.py` 
 
 There are no illustrations; every interactive uses photography.
 
-Fonts: Instrument Serif, Jost and D-DIN (SIL Open Font License, licences in `assets/fonts`).
+Fonts: Instrument Serif, Jost and Sofia Sans Condensed (SIL Open Font License, licences in `assets/fonts`).
 Demo imagery includes licensed stock photography and video (Unsplash, Pexels).

@@ -69,28 +69,19 @@ def pic(name, sizes, alt, pos, i, eager=False):
 
 
 def hero():
-    return """    <!-- =================================================================== 1. HERO (apa: video, text bottom-left, one CTA) -->
-    <section class="hero ah-hero" data-hero aria-labelledby="hero-title">
-      <div class="hero__media">
-        <!-- The poster: the loop's first frame (an upright cut for phones held upright). It stays if the video
-             cannot play (reduced motion, data saver, autoplay blocked). -->
-        <picture>
-          <source media="(orientation: portrait)" type="image/avif" srcset="assets/video/hero-city-poster-port-540.avif 540w, assets/video/hero-city-poster-port-810.avif 810w" sizes="100vw">
-          <source media="(orientation: portrait)" type="image/webp" srcset="assets/video/hero-city-poster-port-540.webp 540w, assets/video/hero-city-poster-port-810.webp 810w" sizes="100vw">
-          <source media="(orientation: portrait)" srcset="assets/video/hero-city-poster-port-540.jpg 540w, assets/video/hero-city-poster-port-810.jpg 810w" sizes="100vw">
-          <source type="image/avif" srcset="assets/video/hero-city-poster-720.avif 720w, assets/video/hero-city-poster-1280.avif 1280w, assets/video/hero-city-poster-1920.avif 1920w" sizes="100vw">
-          <source type="image/webp" srcset="assets/video/hero-city-poster-720.webp 720w, assets/video/hero-city-poster-1280.webp 1280w, assets/video/hero-city-poster-1920.webp 1920w" sizes="100vw">
-          <img src="assets/video/hero-city-poster-1280.jpg" srcset="assets/video/hero-city-poster-720.jpg 720w, assets/video/hero-city-poster-1280.jpg 1280w, assets/video/hero-city-poster-1920.jpg 1920w" sizes="100vw" width="1920" height="1080" alt="The Mumbai skyline across the bay" fetchpriority="high" decoding="async">
-        </picture>
-        <!-- site.js adds the source after page load: an upright cut on phones held upright, else 1080p or 720p -->
-        <video class="hero__video" data-base="assets/video/hero-city-" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1"></video>
+    """v8: split hero on paper. Left, the reception photograph in colour (the one photograph the black and white rule
+    leaves alone), edge to edge, with a slow 8 s zoom (none with reduced motion). Right, the eyebrow, H1, line and two
+    buttons. Phones: the photograph on top, the words below. The skyline video files stay in assets/video, unused."""
+    return f"""    <!-- =================================================================== 1. HERO (v8: reception photograph | words) -->
+    <section class="hero-split" aria-labelledby="hero-title">
+      <div class="hero-split__media">
+{pic('arha-dental-care-reception-south-mumbai-dental-clinic-01', '(min-width: 900px) 50vw, 100vw', "Arha's reception on Peddar Road: marble, soft light and the gold emblem", '50% 50%', '        ', eager=True)}
       </div>
-      <div class="hero__content">
-        <div class="hero__text">
-          <h1 id="hero-title">Specialist dentistry on Peddar Road</h1>
-          <p class="hero__lede">Your smile, designed around your face, your comfort and the way you live.</p>
-          <p class="hero__actions"><a class="link link--light" href="book/">Book an appointment</a></p>
-        </div>
+      <div class="hero-split__text">
+        <p class="eyebrow">Peddar Road, Mumbai</p>
+        <h1 id="hero-title">Specialist dentistry on Peddar Road</h1>
+        <p class="hero-split__lede">Your smile, designed around your face, your comfort and the way you live.</p>
+        <p class="hero-split__actions"><a class="btn" href="book/"><span>Book an appointment</span>{ARROW}</a><a class="btn" href="book/#first-visit"><span>Your first visit</span>{ARROW}</a></p>
       </div>
     </section>
 """
@@ -107,7 +98,6 @@ def trio():
         </article>""" for name, pos, alt, title, line, href in TRIO)
     return f"""
     <!-- =================================================================== 2. TRIO HEADING + 3. FEATURE TRIO -->
-    {SIG}
     <section class="ah-head reveal" aria-labelledby="trio-title">
       <p class="eyebrow">Why Arha</p>
       <h2 id="trio-title"><a href="the-practice/">Crafted with precision. Given with care.</a></h2>
@@ -174,14 +164,13 @@ def grid():
 
 def dark():
     return f"""
-    <!-- =================================================================== 6. DARK BAND (apa: centred statement, one CTA) -->
-    {SIG}
+    <!-- =================================================================== 6. DARK BAND (v8: on paper, centred statement, one CTA) -->
     <section class="ah-dark" aria-labelledby="dark-title">
       <div class="reveal">
-        <p class="eyebrow eyebrow--light">Specialist care</p>
+        <p class="eyebrow">Specialist care</p>
         <h2 id="dark-title">Dentistry, done carefully</h2>
         <p>Arha is led by a prosthodontist, a specialist in restoring and replacing teeth. Every plan starts with listening and a careful examination, and is explained clearly before anything begins.</p>
-        <a class="link link--light" href="book/">Book an appointment</a>
+        <a class="link" href="book/">Book an appointment</a>
       </div>
     </section>
 """
@@ -203,17 +192,54 @@ def process():
 """
 
 
-def founder():
+def statement():
+    """v8: the clinic philosophy as a large serif pull quote on deep brown (the words were the founder band's line)."""
     return f"""
-    <!-- =================================================================== 8. FOUNDER QUOTE (apa: full-bleed photo, centred text on the left half) -->
-    <section class="ah-founder" aria-labelledby="founder-title">
-{pic('stock-dentist-hands', '100vw', '', '70% 50%', '      ')}
-      <div class="ah-founder__text reveal">
+    <!-- =================================================================== STATEMENT (v8: deep brown, the philosophy as a pull quote) -->
+    <section class="ah-statement" aria-labelledby="statement-title">
+      <div class="ah-statement__inner reveal">
         <p class="eyebrow eyebrow--light">The Arha approach</p>
-        <h2 id="founder-title">Our philosophy</h2>
+        <h2 id="statement-title" class="visually-hidden">Our philosophy</h2>
         <!-- Clinic philosophy, not a quote: no source for these words in the notes (notes/TO-CONFIRM.md) -->
-        <p class="ah-founder__line">A good restoration should never announce itself. The aim is a result that feels natural, works well and lasts.</p>
+        <blockquote class="ah-statement__quote"><p>A good restoration should never announce itself.</p></blockquote>
+        <span class="ah-statement__rule" aria-hidden="true"></span>
+        <p class="ah-statement__line">The aim is a result that feels natural, works well and lasts.</p>
         <a class="link link--light" href="doctors/">Meet our doctors</a>
+      </div>
+    </section>
+"""
+
+
+# Two treatments, each a full-bleed photograph with its serif name over it and a light card under it with the line from
+# its own page (the page hero's line). (slug, name, photo, position, alt, line)
+HIGHLIGHTS = [
+    ("dental-implants", "Dental implants", "stock-implant-hero", "50% 50%", "",
+     "Replacing missing teeth with results that look, feel and work like your own."),
+    ("smile-design", "Smile design", "dental-operatory-arha-dental-care-peddar-road-04", "50% 50%", "",
+     "Your new smile, planned around your face and previewed before any work begins."),
+]
+
+
+def highlights():
+    cards = "".join(f"""
+      <article class="hl-card reveal">
+        <div class="hl-card__media" data-colour-group>
+{pic(photo, '(min-width: 900px) 50vw, 100vw', alt, pos, '          ')}
+          <h3 class="hl-card__title"><a href="{slug}/">{name}</a></h3>
+        </div>
+        <div class="hl-card__body">
+          <p>{line}</p>
+          <a class="hl-card__more" href="{slug}/" tabindex="-1" aria-hidden="true">Read more<span class="hl-card__arrow">→</span></a>
+        </div>
+      </article>""" for slug, name, photo, pos, alt, line in HIGHLIGHTS)
+    return f"""
+    <!-- =================================================================== TREATMENT HIGHLIGHTS (v8: two photo cards) -->
+    <section class="ah-highlights" aria-labelledby="hl-title">
+      <div class="ah-highlights__head reveal">
+        <p class="eyebrow">Treatments</p>
+        <h2 id="hl-title">Explore treatments</h2>
+      </div>
+      <div class="ah-highlights__grid">{cards}
       </div>
     </section>
 """
@@ -398,5 +424,5 @@ def main_html(visit=None):
     """The homepage <main>. The footer (apa's closing line, logo and columns) comes from chrome.py.
     One problem picker only, "What brings you in?": the grid of problem squares (grid()) repeated it, and all ten
     problems are one tap away on /problems/ (Demo-ready, 3 Nov 2026)."""
-    return ('  <main id="main" class="home-apa" tabindex="-1">\n\n' + hero() + finder() + trio() + band() + dark() + process() + founder()
-            + teaser() + reviews() + "\n  </main>\n")
+    return ('  <main id="main" class="home-apa" tabindex="-1">\n\n' + hero() + finder() + statement() + trio()
+            + "    " + SIG + "\n" + highlights() + band() + dark() + process() + "    " + SIG + "\n" + teaser() + reviews() + "\n  </main>\n")
