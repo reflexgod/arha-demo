@@ -1,18 +1,23 @@
-"""Which stock photograph of people each treatment and problem page shows (Viraaj, 7 Nov 2026: "stock photos for
-trust, clinic photos only where they belong").
+"""Which stock photograph each treatment and problem page shows (Viraaj, 7 Nov 2026).
+
+Round 2, "rebalance" (7 Nov 2026): faces appear in four places only (FACES): the homepage "Specialist care" card (a
+family at home), and the heroes of full mouth rehabilitation (grandparents with their grandchild), Invisalign (a young
+woman) and kids' dentistry (a mother and daughter). Everywhere else a photograph is a close-up of a smile (lips and teeth
+only) or a detail (aligner, implant model, crowns, veneers, toothbrush, dental mirror, linen); all are in
+tools/people.json, graded alike. The homepage "Explore treatments" list and the treatments index use TREATMENT_ROW,
+which is the page's hero except on the three pages whose hero is a face (no faces in the list).
 
 Arha's own photographs stay only in the homepage hero, "A clinic built around calm", "Step inside", the gallery,
 the "Technology & innovation" card (the real X-ray room) and the "Dr. Nikhil's clinic" card (the door sign), and on
-the pages about the clinic itself (doctors, founder, the practice, technology, book, dental tourism).
-Everywhere on the treatment and problem pages, every photograph is one of tools/people.json, except three
-interactives that only work with their own photograph (KEEP): the numbered parts of an implant on the implant model,
-the focus ring that moves across the 3D arches on Arha's planning screen, and the magnifier over porcelain veneers.
+the pages about the clinic itself (doctors, founder, the practice, technology, dental tourism). Three interactives
+keep their own photograph (KEEP): the numbered parts of an implant on the implant model, the focus ring that moves
+across the 3D arches on Arha's planning screen, and the magnifier over porcelain veneers.
 
-PAGES maps a page to {photograph the builders put there: the people photograph shown instead}. apply() runs on each
-built page (tools/pages.py) and rebuilds each matching <picture> with the new photograph, its plain alt text (from
-people.json; decorative images stay alt="") and its face position, keeping sizes, loading and classes. Page heroes are
-the first photograph (eager, not lazy); everything else stays lazy. No photograph appears twice on one page
-(check: tools/qa/people_check.py).
+PAGES maps a page to {photograph the builders put there: the photograph shown instead}. apply() runs on each built
+page (tools/pages.py) and rebuilds each matching <picture> with the new photograph, its plain alt text (from
+people.json; decorative images stay alt="") and its position, keeping sizes, loading and classes. Page heroes are the
+first photograph (eager, not lazy); everything else stays lazy. No photograph appears twice on one page, and faces only
+in their four places (check: tools/qa/people_check.py).
 """
 import json
 import re
@@ -22,105 +27,114 @@ from picture import picture
 
 PEOPLE = json.loads(Path(__file__).with_name("people.json").read_text(encoding="utf-8"))
 
-# The photograph of each treatment page's hero; the homepage's "Explore treatments" rows and the treatments index use it too.
+# The only photographs with faces, and the one place each may appear: (page, section class, or "hero").
+FACES = {"family-at-home": ("index.html", "ah-trio"), "grandparents-grandchild": ("full-mouth-rehabilitation/index.html", "hero"),
+         "young-woman-at-table": ("invisalign/index.html", "hero"), "mother-daughter-laughing": ("kids-dentistry/index.html", "hero")}
+
+# The photograph of each treatment page's hero.
 TREATMENT_HERO = {
-    "dental-implants": "couple-laughing-outdoors",
-    "full-mouth-rehabilitation": "grandfather-grandson",
-    "smile-design": "woman-laughing-closeup",
+    "dental-implants": "detail-implant-hero",
+    "full-mouth-rehabilitation": "grandparents-grandchild",
+    "smile-design": "smile-wide",
     "invisalign": "young-woman-at-table",
-    "crowns-bridges": "young-man-smile-closeup",
-    "cosmetic-dentistry": "woman-smile-nath",
-    "root-canal-treatment": "woman-relaxed-cafe",
-    "orthodontics": "teen-smiling",
-    "general-dentistry": "family-outdoors",
+    "crowns-bridges": "smile-soft",
+    "cosmetic-dentistry": "smile-natural",
+    "root-canal-treatment": "detail-crowns-soft",
+    "orthodontics": "smile-braces",
+    "general-dentistry": "detail-toothbrush",
     "kids-dentistry": "mother-daughter-laughing",
-    "maxillofacial-prosthetics": "couple-on-sofa",
+    "maxillofacial-prosthetics": "detail-prosthesis-model",
 }
+# The homepage "Explore treatments" rows and the treatments index: the hero, but never a face.
+TREATMENT_ROW = dict(TREATMENT_HERO, **{"full-mouth-rehabilitation": "detail-restorations",
+                                        "invisalign": "detail-aligners-shadow", "kids-dentistry": "detail-kids-brush"})
 # The photograph of each problem page's hero; the homepage's "What brings you in?" cards and the problems index use it too.
 PROBLEM_HERO = {
-    "missing-tooth": "older-man-smiling",
-    "chipped-tooth": "young-man-scarf",
-    "gaps": "woman-glasses-laughing",
-    "crooked-teeth": "young-woman-smiling",
-    "stained-teeth": "woman-with-cup",
-    "toothache": "man-with-mug",
-    "bleeding-gums": "woman-smiling-orange",
-    "metal-fillings": "young-man-glasses",
-    "loose-dentures": "older-woman-smiling",
-    "child-teeth": "mother-daughter-portrait",
+    "missing-tooth": "detail-bridge",
+    "chipped-tooth": "detail-veneers-fabric",
+    "gaps": "detail-aligners-shadow",
+    "crooked-teeth": "detail-aligner",
+    "stained-teeth": "detail-teeth-shades",
+    "toothache": "detail-mirror",
+    "bleeding-gums": "detail-floss",
+    "metal-fillings": "smile-bright",
+    "loose-dentures": "detail-denture",
+    "child-teeth": "detail-kids-brush-wood",
 }
-H, P = TREATMENT_HERO, PROBLEM_HERO
+H, R, P = TREATMENT_HERO, TREATMENT_ROW, PROBLEM_HERO
 
 PAGES = {
     "treatments": {
-        "stock-implant-arch": "friends-on-lawn",
-        "stock-implant-models": H["dental-implants"], "stock-denture-tray": H["full-mouth-rehabilitation"],
-        "stock-prosthesis-hands": H["maxillofacial-prosthetics"], "stock-veneer-fingertip": H["smile-design"],
-        "stock-veneers-fabric": H["cosmetic-dentistry"], "stock-aligner-case-hand": H["invisalign"],
-        "stock-braces-model": H["orthodontics"], "stock-scalers": H["general-dentistry"],
-        "stock-steel-instruments": H["root-canal-treatment"], "stock-bridge-white": H["crowns-bridges"],
-        "stock-child-chair": H["kids-dentistry"],
+        "stock-implant-arch": "detail-texture-linen",
+        "stock-implant-models": R["dental-implants"], "stock-denture-tray": R["full-mouth-rehabilitation"],
+        "stock-prosthesis-hands": R["maxillofacial-prosthetics"], "stock-veneer-fingertip": R["smile-design"],
+        "stock-veneers-fabric": R["cosmetic-dentistry"], "stock-aligner-case-hand": R["invisalign"],
+        "stock-braces-model": R["orthodontics"], "stock-scalers": R["general-dentistry"],
+        "stock-steel-instruments": R["root-canal-treatment"], "stock-bridge-white": R["crowns-bridges"],
+        "stock-child-chair": R["kids-dentistry"],
     },
     "problems": {
-        "stock-handpieces": "friends-two-women",
+        "stock-handpieces": "detail-veneers",
         "stock-implant-crown": P["missing-tooth"], "stock-veneer-fingertip": P["chipped-tooth"],
         "stock-veneers-fabric": P["gaps"], "stock-aligner": P["crooked-teeth"], "stock-shade-guide": P["stained-teeth"],
         "stock-xray-screen": P["toothache"], "stock-floss-hand": P["bleeding-gums"],
         "stock-steel-instruments": P["metal-fillings"], "stock-denture-dark": P["loose-dentures"],
         "stock-kids-brushes": P["child-teeth"],
     },
+    "book": {"stock-virtual-call": "detail-laptop"},
     # ---------------------------------------------------------------- treatment pages
-    "dental-implants": {"stock-implant-hero": H["dental-implants"], "arha-dental-care-operatory-chair": "older-man-smiling"},
-    "full-mouth-rehabilitation": {"stock-crowns": H["full-mouth-rehabilitation"], "stock-loupe-teeth": "couple-talking",
-                                  "stock-lab": "couple-on-sofa", "stock-restorations-set": "grandmother-baby",
-                                  "stock-lab-grind": "older-woman-smiling", "stock-brushes-grey": "grandparents-grandchild"},
-    "smile-design": {"dental-operatory-arha-dental-care-peddar-road-04": H["smile-design"], "stock-dentist-hands": "woman-laughing",
-                     "arha-dental-care-scan-screen": "young-woman-smiling"},
-    "invisalign": {"stock-aligner-case-hand": H["invisalign"], "arha-dental-care-operatory-chair": "young-man-suit",
-                   "stock-aligner-model": "friends-two-men", "stock-aligner-case": "young-woman-smiling",
-                   "stock-aligner-hands": "young-man-glasses", "stock-aligner": "friends-two-women"},
-    "crowns-bridges": {"stock-gloved-hands": H["crowns-bridges"], "arha-dental-care-delivery-unit": "woman-smiling-orange",
-                       "stock-lab-grind": "young-man-scarf", "stock-zirconia": "older-woman-smiling", "stock-pfm": "couple-reading"},
-    "cosmetic-dentistry": {"stock-crowns-soft": H["cosmetic-dentistry"], "arha-dental-care-operatory-laptop": "woman-with-cup",
-                           "stock-teeth-shades": "woman-laughing", "stock-veneer-brush": "young-man-scarf",
-                           "stock-veneers-grey": "woman-glasses-laughing", "stock-veneers": "woman-laughing-closeup"},
-    "root-canal-treatment": {"stock-mirror-tray": H["root-canal-treatment"], "stock-xray-panoramic": "man-with-mug",
-                             "stock-endo-files": "man-relaxed-smiling", "stock-mirror-probe": "couple-reading",
-                             "stock-lab-model": "older-man-smiling"},
-    "orthodontics": {"stock-braces-model": H["orthodontics"], "arha-dental-care-planning-room": "young-man-suit",
-                     "stock-aligner-model": "boy-smiling", "stock-braces": "girl-smiling", "stock-aligners-shadow": "friends-two-men"},
+    "dental-implants": {"stock-implant-hero": H["dental-implants"], "arha-dental-care-operatory-chair": "detail-lab-model"},
+    "full-mouth-rehabilitation": {"stock-crowns": H["full-mouth-rehabilitation"], "stock-loupe-teeth": "detail-crowns",
+                                  "stock-lab": "detail-denture", "stock-restorations-set": "detail-restorations",
+                                  "stock-lab-grind": "detail-bridge", "stock-brushes-grey": "detail-toothbrush"},
+    "smile-design": {"dental-operatory-arha-dental-care-peddar-road-04": H["smile-design"], "stock-dentist-hands": "smile-side",
+                     "arha-dental-care-scan-screen": "smile-bright"},
+    "invisalign": {"stock-aligner-case-hand": H["invisalign"], "arha-dental-care-operatory-chair": "smile-bright",
+                   "stock-aligner-model": "detail-aligner-model", "stock-aligner-case": "detail-aligner-case",
+                   "stock-aligner-hands": "detail-aligners-shadow", "stock-aligner": "detail-aligner"},
+    "crowns-bridges": {"stock-gloved-hands": H["crowns-bridges"], "arha-dental-care-delivery-unit": "detail-crowns-soft",
+                       "stock-lab-grind": "detail-bridge", "stock-zirconia": "detail-zirconia", "stock-pfm": "detail-pfm"},
+    "cosmetic-dentistry": {"stock-crowns-soft": H["cosmetic-dentistry"], "arha-dental-care-operatory-laptop": "smile-bright",
+                           "stock-teeth-shades": "detail-teeth-shades", "stock-veneer-brush": "detail-veneers-fabric",
+                           "stock-veneers-grey": "detail-crowns", "stock-veneers": "detail-veneers"},
+    "root-canal-treatment": {"stock-mirror-tray": H["root-canal-treatment"], "stock-xray-panoramic": "detail-mirror",
+                             "stock-endo-files": "detail-texture-linen", "stock-mirror-probe": "detail-toothpaste",
+                             "stock-lab-model": "detail-lab-model"},
+    "orthodontics": {"stock-braces-model": H["orthodontics"], "arha-dental-care-planning-room": "detail-aligner",
+                     "stock-aligner-model": "detail-aligner-model", "stock-braces": "detail-braces-model",
+                     "stock-aligners-shadow": "detail-aligners-shadow"},
     "general-dentistry": {"dental-operatory-arha-dental-care-peddar-road-02": H["general-dentistry"],
-                          "stock-instrument-tray": "couple-reading", "arha-dental-care-logo-dental-clinic-peddar-road": "woman-smiling-orange",
-                          "stock-exam": "older-man-smiling", "stock-xray-panoramic": "friends-two-women",
-                          "stock-mirror-probe": "young-man-glasses", "stock-scalers": "grandmother-baby"},
-    "kids-dentistry": {"stock-parent-child": H["kids-dentistry"], "stock-kid-brush-wood": "toddler",
-                       "stock-kid-brush-bright": "little-girl", "stock-kid-brush-electric": "boy-smiling",
-                       "stock-aligner-hands": "teen-boy-kurta"},
-    "maxillofacial-prosthetics": {"stock-prosthesis-hands": H["maxillofacial-prosthetics"], "arha-dental-care-planning-room": "couple-talking",
-                                  "stock-lab": "older-woman-scarf", "stock-denture-dark": "young-man-scarf",
-                                  "stock-prosthesis-model": "man-relaxed-smiling", "stock-zirconia": "girl-bright-smile"},
+                          "stock-instrument-tray": "detail-mirror", "arha-dental-care-logo-dental-clinic-peddar-road": "smile-soft",
+                          "stock-exam": "detail-floss", "stock-xray-panoramic": "detail-texture-linen",
+                          "stock-mirror-probe": "detail-toothpaste", "stock-scalers": "smile-bright"},
+    "kids-dentistry": {"stock-parent-child": H["kids-dentistry"], "stock-kid-brush-wood": "detail-kids-brush-wood",
+                       "stock-kid-brush-bright": "detail-kids-brush", "stock-kid-brush-electric": "detail-toothbrush",
+                       "stock-aligner-hands": "detail-aligners-shadow"},
+    "maxillofacial-prosthetics": {"stock-prosthesis-hands": H["maxillofacial-prosthetics"], "arha-dental-care-planning-room": "detail-texture-linen",
+                                  "stock-lab": "detail-lab-model", "stock-denture-dark": "detail-denture",
+                                  "stock-prosthesis-model": "detail-restorations", "stock-zirconia": "detail-zirconia"},
     # ---------------------------------------------------------------- problem pages
-    "problems/bleeding-gums": {"stock-floss-hand": P["bleeding-gums"], "stock-brushes-grey": "couple-reading",
-                               "arha-dental-care-steriliser": "grandmother-baby"},
-    "problems/child-teeth": {"stock-kids-brushes": P["child-teeth"], "stock-kid-brush-wood": "toddler",
-                             "stock-kid-brush-bright": "little-girl", "stock-kid-brush-electric": "boy-smiling",
-                             "stock-aligners-shadow": "girl-smiling", "stock-braces": "teen-boy-kurta",
-                             "arha-dental-care-exterior-dental-clinic-peddar-road": "mother-daughter-laughing"},
-    "problems/chipped-tooth": {"stock-veneer-fingertip": P["chipped-tooth"], "arha-dental-care-reception-desk": "woman-with-cup"},
+    "problems/bleeding-gums": {"stock-floss-hand": P["bleeding-gums"], "stock-brushes-grey": "detail-toothbrush",
+                               "arha-dental-care-steriliser": "detail-toothpaste"},
+    "problems/child-teeth": {"stock-kids-brushes": P["child-teeth"], "stock-kid-brush-wood": "detail-kids-brush",
+                             "stock-kid-brush-bright": "detail-toothbrush", "stock-kid-brush-electric": "detail-toothpaste",
+                             "stock-aligners-shadow": "detail-aligners-shadow", "stock-braces": "detail-braces-model",
+                             "arha-dental-care-exterior-dental-clinic-peddar-road": "detail-texture-linen"},
+    "problems/chipped-tooth": {"stock-veneer-fingertip": P["chipped-tooth"], "arha-dental-care-reception-desk": "smile-soft"},
     "problems/crooked-teeth": {"stock-aligner": P["crooked-teeth"]},
-    "problems/gaps": {"stock-veneers-fabric": P["gaps"], "stock-veneer-placing": "woman-laughing-closeup",
-                      "stock-veneers": "woman-smile-nath", "stock-aligner-gloved": "young-woman-at-table",
-                      "arha-dental-care-logo-wall": "friends-two-women"},
-    "problems/loose-dentures": {"stock-denture-dark": P["loose-dentures"], "stock-denture-hand": "older-woman-scarf",
-                                "stock-implant-overdenture": "couple-laughing-outdoors",
-                                "arha-dental-care-reception-desk": "grandparents-grandchild"},
-    "problems/metal-fillings": {"stock-steel-instruments": P["metal-fillings"], "stock-handpieces-dark": "young-man-suit",
-                                "stock-bridge-white": "woman-laughing", "arha-dental-care-equipment-counter": "friends-on-lawn"},
-    "problems/missing-tooth": {"stock-implant-crown": P["missing-tooth"], "stock-implant-hand": "couple-laughing-outdoors",
-                               "stock-implant-bridge": "couple-talking", "stock-denture-hand": "couple-on-sofa",
-                               "arha-dental-care-operatory-glass-door": "grandfather-grandson"},
-    "problems/stained-teeth": {"stock-shade-guide": P["stained-teeth"], "arha-dental-care-reception-wide": "woman-laughing"},
-    "problems/toothache": {"stock-xray-screen": P["toothache"], "arha-dental-care-xray-room": "woman-relaxed-cafe"},
+    "problems/gaps": {"stock-veneers-fabric": P["gaps"], "stock-veneer-placing": "smile-side",
+                      "stock-veneers": "detail-veneers", "stock-aligner-gloved": "detail-aligner",
+                      "arha-dental-care-logo-wall": "smile-bright"},
+    "problems/loose-dentures": {"stock-denture-dark": P["loose-dentures"], "stock-denture-hand": "detail-denture-hand",
+                                "stock-implant-overdenture": "detail-implant-hero",
+                                "arha-dental-care-reception-desk": "detail-texture-linen"},
+    "problems/metal-fillings": {"stock-steel-instruments": P["metal-fillings"], "stock-handpieces-dark": "detail-mirror",
+                                "stock-bridge-white": "detail-bridge", "arha-dental-care-equipment-counter": "smile-soft"},
+    "problems/missing-tooth": {"stock-implant-crown": P["missing-tooth"], "stock-implant-hand": "detail-implant-hero",
+                               "stock-implant-bridge": "detail-restorations", "stock-denture-hand": "detail-denture-hand",
+                               "arha-dental-care-operatory-glass-door": "detail-texture-linen"},
+    "problems/stained-teeth": {"stock-shade-guide": P["stained-teeth"], "arha-dental-care-reception-wide": "smile-soft"},
+    "problems/toothache": {"stock-xray-screen": P["toothache"], "arha-dental-care-xray-room": "detail-texture-linen"},
 }
 
 KEEP = {"dental-implants": {"stock-implant-model"}, "problems/crooked-teeth": {"arha-dental-care-scan-screen"},
@@ -130,7 +144,7 @@ PIC = re.compile(r'(?P<indent>[ \t]*)<picture class="(?P<cls>[^"]*)">\n(?P<body>
 
 
 def swap_name(slug, name):
-    """The people photograph that replaces `name` on this page (for the Open Graph image), or `name` itself."""
+    """The photograph that replaces `name` on this page (for the Open Graph image), or `name` itself."""
     return PAGES.get(slug, {}).get(name, name)
 
 
