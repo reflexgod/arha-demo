@@ -313,5 +313,80 @@
   },
   "upright": "pitch -5.0 deg, roll -0.24 deg, 44/85 edges, kept 97%",
   "tone": "wb gains [0.9980000257492065, 0.984000027179718, 1.0190000534057617], levels black 3.0 white 255"
+ },
+ "arha-dental-care-sign-board-wide": {
+  "size": [
+   4757,
+   2378
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 12,
+    "webp": 14,
+    "jpg": 27
+   },
+   "1280": {
+    "avif": 65,
+    "webp": 112,
+    "jpg": 129
+   },
+   "1920": {
+    "avif": 178,
+    "webp": 267,
+    "jpg": 314
+   }
+  },
+  "upright": "pitch -1.6 deg, roll -0.61 deg, 19/21 edges, kept 96%",
+  "tone": "wb gains [0.9739999771118164, 0.9789999723434448, 1.0509999990463257], levels black 2.5 white 255"
+ },
+ "arha-dental-care-sign-board-square": {
+  "size": [
+   3630,
+   3629
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 21,
+    "webp": 25,
+    "jpg": 44
+   },
+   "1280": {
+    "avif": 155,
+    "webp": 260,
+    "jpg": 276
+   },
+   "1920": {
+    "avif": 372,
+    "webp": 517,
+    "jpg": 628
+   }
+  },
+  "upright": "pitch -1.6 deg, roll -0.61 deg, 19/21 edges, kept 96%",
+  "tone": "wb gains [0.972000002861023, 0.9789999723434448, 1.0540000200271606], levels black 3.0 white 255"
+ },
+ "arha-dental-care-sign-board-phone": {
+  "size": [
+   3964,
+   2973
+  ],
+  "files_kb": {
+   "640": {
+    "avif": 16,
+    "webp": 19,
+    "jpg": 36
+   },
+   "1280": {
+    "avif": 115,
+    "webp": 200,
+    "jpg": 211
+   },
+   "1920": {
+    "avif": 285,
+    "webp": 420,
+    "jpg": 491
+   }
+  },
+  "upright": "pitch -1.6 deg, roll -0.61 deg, 19/21 edges, kept 96%",
+  "tone": "wb gains [0.9729999899864197, 0.9789999723434448, 1.0520000457763672], levels black 2.7 white 255"
  }
 }

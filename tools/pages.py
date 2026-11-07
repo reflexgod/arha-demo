@@ -25,6 +25,7 @@ import home  # noqa: E402
 import home_apa  # noqa: E402
 import more_pages  # noqa: E402
 import technology  # noqa: E402
+import people_slots  # noqa: E402
 import treatment_pages  # noqa: E402
 import treatments  # noqa: E402
 import v4_pages  # noqa: E402
@@ -452,8 +453,8 @@ def main():
         main_html = main_html.replace("{{problems}}", treatments.problems())
         # The page's own photograph (its first one) for its Open Graph image
         first = re.search(r"\{\{pic ([\w-]+)|assets/img/([\w-]+?)-\d+\.(?:jpg|webp|avif)", main_html)
-        photo = (first.group(1) or first.group(2)) if first else "hero-city-poster"
-        main_html = expand_pics(main_html.replace("{{visit}}", visit).replace("{{planner}}", planner))
+        photo = people_slots.swap_name(slug, (first.group(1) or first.group(2)) if first else "hero-city-poster")
+        main_html = people_slots.apply(slug, expand_pics(main_html.replace("{{visit}}", visit).replace("{{planner}}", planner)))
         if slug == "emergency":  # emergency help must be readable at once: no scroll reveals on this page
             main_html = re.sub(r'(class="[^"]*?)\s*\breveal(?![\w-])', r'\1', main_html)
         og = finish.og_image(slug.replace("/", "-"), html.unescape(meta["title"].split(" | ")[0]), photo)

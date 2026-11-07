@@ -6962,7 +6962,7 @@ a, button, input, label, summary, [data-xpanel], [data-ba], [data-loupe] { -webk
   .ah-head { padding: 40px 45px 36px; }
   .ah-head--reviews { padding: 60px 45px 40px; }
   .ah-trio { grid-template-columns: 1fr; gap: 26px; padding-bottom: 25px; }
-  .ah-trio__media { aspect-ratio: 1 / 1; margin: 0 25px; }
+  .ah-trio__media { aspect-ratio: 4 / 3; margin: 0 25px; }  /* 4:3 so the whole door sign fits its own crop */
   .ah-trio h3 { margin: 20px 45px 0; }
   .ah-trio p { margin: 10px 45px 0; }
   .ah-band__text { left: 45px; width: 300px; max-width: calc(100% - 90px); }
@@ -7920,8 +7920,10 @@ h2 { font-size: var(--fs-h2); line-height: var(--lh-display); }
 @media (prefers-reduced-motion: reduce) { .hero-split__media picture.fill img { animation: none; } }
 
 /* ---------------------------------------------------------------- photographs: black and white, colour on hover/focus (site.js 18) */
-img[src*="img/arha"], img[src*="img/dental-"], img[src*="img/autoclave"], img[src*="tour-poster"], img[src*="img/stock-"] { filter: grayscale(1) contrast(1.04); }
+img[src*="img/arha"], img[src*="img/dental-"], img[src*="img/autoclave"], img[src*="tour-poster"], img[src*="img/stock-"], img[src*="assets/stock/"] { filter: grayscale(1) contrast(1.04); }
 .page-hero img:is([src*="img/arha"], [src*="img/dental-"], [src*="img/autoclave"]) { filter: sepia(.1) saturate(1.04) brightness(1.02) contrast(1.02); }
+/* Stock photographs of people carry their own warm grade (tools/people.py): in colour as page heroes */
+.page-hero img[src*="assets/stock/"] { filter: none; }
 a:focus-visible img.bw-photo, [data-colour-group]:focus-within img.bw-photo, a:hover img.bw-photo { filter: none !important; }
 
 /* ---------------------------------------------------------------- section rhythm (home): paper, stone, deep, paper, stone */
@@ -8225,4 +8227,27 @@ h1, h2, h3 { text-wrap: balance; }  /* the build's no_orphans() joins short last
 @media (prefers-reduced-motion: reduce) {
   .tx__name, .tx__line, .tx__preview, .tx__img { transition: none !important; }
   .tx__row:is(:hover, :focus-visible) .tx__name { transform: none; }
+}
+
+/* Text over the people photographs (7 Nov 2026). Over a photo hero the eyebrow is paper-white: the tan only reaches
+   4.5:1 on near-black, and these photographs have faces and daylight behind the text. The text block also carries its
+   own wash (from just above the crumbs or eyebrow to the bottom; on wider screens it fades out to the right, away from
+   the faces), so small text never sits on a bright face or a high-key background, whatever the length of the heading
+   or the photograph behind it (checked: every treatment and problem hero, 375 and 1440, 4.5:1 or more). */
+.page-hero:not(.page-hero--plain) .eyebrow { color: var(--paper); }
+.page-hero:not(.page-hero--plain) .page-hero__content { isolation: isolate; }
+.page-hero:not(.page-hero--plain) .page-hero__content::before {
+  content: "";
+  position: absolute;
+  inset: -88px 0 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(var(--shade), .3) 0%, rgba(var(--shade), .58) calc(100% - 120px), rgba(var(--shade), 0) 100%);
+}
+@media (min-width: 768px) {
+  .page-hero:not(.page-hero--plain) .page-hero__content::before {
+    background: linear-gradient(to right, rgba(var(--shade), .34) 0%, rgba(var(--shade), .26) 40%, rgba(var(--shade), 0) 62%);
+    -webkit-mask-image: linear-gradient(to top, #000 calc(100% - 88px), transparent);
+    mask-image: linear-gradient(to top, #000 calc(100% - 88px), transparent);
+  }
 }

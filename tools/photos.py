@@ -43,6 +43,12 @@ PHOTOS = {
     # top edge and would otherwise show cut off at some widths)
     "arha-dental-care-reception-south-mumbai-dental-clinic-01-lower": {
         "src": "arha-dental-care-reception-south-mumbai-dental-clinic-01.jpg", "crop": (0, 0.36, 0, 0)},
+    # The door sign alone, for the homepage "Dr. Nikhil's clinic" card (7 Nov 2026): the full board (emblem, ARHA DENTAL
+    # CARE, both doctors' names and degrees) inside the card's 2:1 frame (laptops, tablets) and its 4:3 frame (phones).
+    "arha-dental-care-sign-board-wide": {"src": "arha-dental-care-exterior-dental-clinic-peddar-road.jpg", "wb": (0.9, 0.14),
+                                         "crop": (0, 0.0068, 0, 0.3379)},
+    "arha-dental-care-sign-board-phone": {"src": "arha-dental-care-exterior-dental-clinic-peddar-road.jpg", "wb": (0.9, 0.14),
+                                          "crop": (0.0729, 0, 0.09375, 0.1809)},  # 4:3, phones
     # Still from the walkthrough video (IMG_2303.MOV @ ~76-78.6 s, sharpest frame, HLG tone-mapped)
     "arha-dental-care-lounge-peddar-road": {"src": "derived/arha-dental-care-lounge-peddar-road.png", "upright": False},
 }
