@@ -12,24 +12,28 @@ Interactions are apa's only: link underlines, the band's slow crossfade (site.js
 hover overlay. CSS: the "apa homepage" layer at the end of site.css.
 """
 import html
+import re
 
 import home
+import people_slots
 import problems
 from picture import SIG, picture
 
 ARROW = home.ARROW
 
-TRIO = [  # apa: three 2:1 images edge to edge, a linked H3 and one line under each
-    ("arha-dental-care-delivery-unit", "50% 45%", "The instrument holder at an Arha chair, with its handpieces ready",
+TRIO = [  # apa: three 2:1 images edge to edge (4:3 on phones), a linked H3 and one line under each.
+    # 7 Nov 2026: "Specialist care" is a stock family (it must not look like the doctor); the X-ray room and the door sign
+    # are Arha's own. The sign has its own crops so the whole board shows: 2:1 here, 4:3 on phones (trio()).
+    ("family-at-home", "50% 25%", "A smiling family of four at home",
      "Specialist care", "Dr. Nikhil V. Jain is a prosthodontist and implantologist: implants, full mouth rehabilitation and smile design.", "doctors/"),
-    ("dental-implant-equipment-arha-dental-care-mumbai", "50% 22%", "Arha's X-ray room: a panoramic X-ray unit against a marble wall",
+    ("arha-dental-care-xray-room", "50% 24%", "Arha's X-ray room: a panoramic X-ray unit against a marble wall",
      "Technology &amp; innovation", "An X-ray room and a sterilisation room of our own, and 3D models of your teeth on screen.", "technology/"),
-    ("arha-dental-care-exterior-dental-clinic-peddar-road", "50% 45%", "The Arha sign at suite 107 with the names of Dr. Nikhil V. Jain and Dr. Vasant P. Jain",
+    ("arha-dental-care-sign-board-wide", "50% 50%", "The Arha Dental Care sign at suite 107, with the names and degrees of Dr. Vasant P. Jain and Dr. Nikhil V. Jain",
      "Dr. Nikhil’s clinic", "Arha Dental Care is Dr. Nikhil V. Jain’s practice at 107, Doctor House, 14 Peddar Road.", "founder/"),
 ]
 
 BAND = [("arha-dental-care-reception-south-mumbai-dental-clinic-01-lower", "50% 60%", "Arha's reception on Peddar Road: marble, soft light and the gold emblem"),
-        ("dental-operatory-arha-dental-care-peddar-road-01", "50% 55%", "An Arha treatment room with its chair beneath a soft light")]
+        ("arha-dental-care-chair-window", "50% 55%", "The dental chair under its light, beside a window with a soft blind")]
 
 # The nine problems on the homepage grid (apa's grid has nine squares; all ten are on /problems/ and in the menu).
 # One photograph per square, showing the problem only (Viraaj, 2 Nov 2026): (slug, photo, position, alt).
@@ -45,12 +49,12 @@ GRID = [
     ("child-teeth", "stock-child-chair", "50% 45%", "A smiling girl in the dental chair beside her dentist"),
 ]
 
-PROCESS = [  # apa: three photo panels, the numbered heading and two lines overlaid bottom-left
-    ("arha-dental-care-consultation-desk", "50% 50%", "The consultation desk in an Arha treatment room", "1. Consultation",
+PROCESS = [  # apa: three photo panels, the numbered heading and two lines overlaid bottom-left (stock people, 7 Nov 2026)
+    ("couple-talking", "50% 20%", "A couple chatting outdoors", "1. Consultation",
      "We listen first, then examine carefully and explain your options clearly, so you can decide calmly."),
-    ("arha-dental-care-chair-window", "50% 55%", "The dental chair under its light in an Arha treatment room", "2. Your treatment",
+    ("man-relaxed-smiling", "40% 40%", "A man in a turban, relaxed and smiling", "2. Your treatment",
      "Planned in detail and carried out with precision, at a pace that keeps you comfortable."),
-    ("arha-dental-care-reception-wide", "50% 50%", "Arha's reception and waiting area", "3. Lifelong care",
+    ("grandparents-grandchild", "50% 18%", "Grandparents with their grandchild", "3. Lifelong care",
      "Reviews and cleanings that protect your result for years, with the doctors who planned it, on Peddar Road."),
 ]
 
@@ -87,11 +91,28 @@ def hero():
 """
 
 
+PHONE_CROP = {"arha-dental-care-sign-board-wide": "arha-dental-care-sign-board-phone"}
+
+
+def trio_pic(name, alt, pos):
+    """The card's photograph; the door sign swaps to its 4:3 crop on phones, so the whole board shows at every width."""
+    markup = pic(name, '(min-width: 768px) 34vw, 100vw', alt, pos, '            ')
+    phone = PHONE_CROP.get(name)
+    if phone:
+        small = pic(phone, '100vw', alt, pos, '            ')
+        sources = "".join(f'\n              <source media="(max-width: 767px)" type="image/{ext}" srcset="{srcset}" sizes="100vw">'
+                          for ext, srcset in re.findall(r'<source type="image/(\w+)" srcset="([^"]+)"', small))
+        jpg = re.search(r'<img src="[^"]+" srcset="([^"]+)"', small).group(1)
+        sources += f'\n              <source media="(max-width: 767px)" srcset="{jpg}" sizes="100vw">'
+        markup = markup.replace('<picture class="fill">', '<picture class="fill">' + sources, 1)
+    return markup
+
+
 def trio():
     cols = "".join(f"""
         <article class="ah-trio__item reveal">
           <a class="ah-trio__media" href="{href}" tabindex="-1" aria-hidden="true">
-{pic(name, '(min-width: 900px) 34vw, 100vw', alt, pos, '            ')}
+{trio_pic(name, alt, pos)}
           </a>
           <h3><a href="{href}">{title}</a></h3>
           <p>{line}</p>
@@ -213,24 +234,27 @@ def statement():
 # Two treatments, each a full-bleed photograph with its serif name over it and a light card under it with the line from
 # its own page (the page hero's line). (slug, name, photo, position, alt, line)
 TREATMENT_ROWS = [  # every treatment page: its own title, a line from its own intro, its own hero photograph
-    ("dental-implants", "Dental implants", "Replacing missing teeth, made to feel your own.", "stock-implant-hero", "30% 50%"),
-    ("smile-design", "Smile design", "A new smile, previewed before work begins.", "dental-operatory-arha-dental-care-peddar-road-04", "50% 50%"),
-    ("invisalign", "Invisalign clear aligners", "Straightening teeth with clear, removable aligners.", "stock-aligner-case-hand", "50% 50%"),
-    ("full-mouth-rehabilitation", "Full mouth rehabilitation", "Rebuilding worn or broken teeth, and the bite.", "stock-crowns", "50% 55%"),
-    ("maxillofacial-prosthetics", "Maxillofacial prosthetics", "Restoring eating, speaking and appearance.", "stock-prosthesis-hands", "50% 45%"),
-    ("cosmetic-dentistry", "Cosmetic dentistry", "Veneers, whitening and bonding.", "stock-crowns-soft", "50% 55%"),
-    ("crowns-bridges", "Crowns &amp; bridges", "Restoring broken teeth and replacing missing ones.", "stock-gloved-hands", "60% 40%"),
-    ("root-canal-treatment", "Root canal treatment", "Saving a tooth whose nerve is infected.", "stock-mirror-tray", "50% 50%"),
-    ("orthodontics", "Orthodontics (braces)", "Braces and aligners for children, teens and adults.", "stock-braces-model", "50% 55%"),
-    ("general-dentistry", "General dentistry &amp; cleaning", "Check-ups, cleaning and fillings.", "dental-operatory-arha-dental-care-peddar-road-02", "50% 55%"),
-    ("kids-dentistry", "Kids’ dentistry", "Gentle care for babies, children and teens.", "stock-parent-child", "50% 40%"),
+    (slug, name, line, people_slots.TREATMENT_HERO[slug], people_slots.PEOPLE[people_slots.TREATMENT_HERO[slug]]["pos"])
+    for slug, name, line in [
+        ("dental-implants", "Dental implants", "Replacing missing teeth, made to feel your own."),
+        ("smile-design", "Smile design", "A new smile, previewed before work begins."),
+        ("invisalign", "Invisalign clear aligners", "Straightening teeth with clear, removable aligners."),
+        ("full-mouth-rehabilitation", "Full mouth rehabilitation", "Rebuilding worn or broken teeth, and the bite."),
+        ("maxillofacial-prosthetics", "Maxillofacial prosthetics", "Restoring eating, speaking and appearance."),
+        ("cosmetic-dentistry", "Cosmetic dentistry", "Veneers, whitening and bonding."),
+        ("crowns-bridges", "Crowns &amp; bridges", "Restoring broken teeth and replacing missing ones."),
+        ("root-canal-treatment", "Root canal treatment", "Saving a tooth whose nerve is infected."),
+        ("orthodontics", "Orthodontics (braces)", "Braces and aligners for children, teens and adults."),
+        ("general-dentistry", "General dentistry &amp; cleaning", "Check-ups, cleaning and fillings."),
+        ("kids-dentistry", "Kids’ dentistry", "Gentle care for babies, children and teens."),
+    ]
 ]
 
 
 def highlights():
     """Explore treatments (7 Nov 2026), after the demo clinic's index: laptops, big serif names on the left, one line
     each on the right and the row's photograph in the centre, crossfading as a row is hovered or focused (site.js 28);
-    phones and tablets, a plain list with a small photograph beside each row. Only the first photograph loads at once."""
+    phones and tablets, a plain list with a small photograph beside each row. All lazy (only page heroes load at once)."""
     rows = "".join(f"""
         <li><a class="tx__row" href="{slug}/" data-tx-row="{n}">
           <span class="tx__thumb">
@@ -240,9 +264,8 @@ def highlights():
           <span class="tx__line">{line}</span>
         </a></li>""" for n, (slug, name, line, photo, pos) in enumerate(TREATMENT_ROWS))
     previews = "".join(
-        pic(photo, '(min-width: 1024px) 300px, 1px', '', pos, '        ', eager=(n == 0))
+        pic(photo, '(min-width: 1024px) 300px, 1px', '', pos, '        ')
         .replace('<picture class="fill"', f'<picture class="fill tx__img{" is-active" if n == 0 else ""}"', 1)
-        .replace(' fetchpriority="high"', '')
         for n, (slug, name, line, photo, pos) in enumerate(TREATMENT_ROWS))
     return f"""
     <!-- =================================================================== EXPLORE TREATMENTS (the demo clinic's hover list) -->
@@ -285,15 +308,14 @@ def teaser():
 # Each card shows a free-licence Unsplash photograph (sources: notes/IMAGE-SOURCES.md; graded with photos.stock_grade
 # like every stock photo), and the answer panel shows the same photograph larger. Decorative (alt=""): the label says it.
 # By design, a card and its panel are one appearance of the photograph (tools/photo_audit.py).
-PHOTO_POS = {"pain": "50% 50%", "gap": "45% 50%", "crooked": "42% 50%", "stained": "50% 50%",
-             "chipped": "55% 35%", "child": "50% 24%"}
-# Face-free photographs for the cards whose own finder photograph showed a person's face (a stranger's face reads
-# as a patient of the clinic). The others keep their stock-finder-<name> photograph.
-FINDER_PHOTOS = {"pain": "stock-xray-screen", "stained": "stock-teeth-shades", "child": "stock-kids-brushes"}
+# 7 Nov 2026: each card shows its problem page's hero photograph (stock people, tools/people_slots.py).
+FINDER_PROBLEM = {"pain": "toothache", "gap": "missing-tooth", "crooked": "crooked-teeth", "stained": "stained-teeth",
+                  "chipped": "chipped-tooth", "child": "child-teeth"}
 
 
 def finder_photo(name, sizes, i, eager=False):
-    return pic(FINDER_PHOTOS.get(name, f"stock-finder-{name}"), sizes, "", PHOTO_POS[name], i, eager)
+    photo = people_slots.PROBLEM_HERO[FINDER_PROBLEM[name]]
+    return pic(photo, sizes, "", people_slots.PEOPLE[photo]["pos"], i, eager)
 
 
 # card label, photo, panel heading, two or three short sentences, safety line (or ""), related pages

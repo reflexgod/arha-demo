@@ -47,7 +47,8 @@ def _tracked(draw, xy, text, font, fill, tracking):
 def og_image(key, title, photo):
     """Write assets/og/<key>.jpg and return its site-relative path."""
     OG.mkdir(parents=True, exist_ok=True)
-    src = next((IMG / f"{photo}-{w}.jpg" for w in (1280, 1920, 1080, 800, 640) if (IMG / f"{photo}-{w}.jpg").exists()), None)
+    src = next((d / f"{photo}-{w}.jpg" for d in (IMG, IMG.parent / "stock") for w in (1280, 1920, 1080, 800, 640)
+                if (d / f"{photo}-{w}.jpg").exists()), None)
     if src is None:
         src = ROOT / "assets" / "video" / "hero-city-poster-1280.jpg"
     im = ImageOps.fit(Image.open(src).convert("RGB"), (1200, 630), centering=(0.5, 0.45))
