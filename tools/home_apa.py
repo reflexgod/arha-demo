@@ -49,12 +49,12 @@ GRID = [
     ("child-teeth", "stock-child-chair", "50% 45%", "A smiling girl in the dental chair beside her dentist"),
 ]
 
-PROCESS = [  # apa: three photo panels, the numbered heading and two lines overlaid bottom-left (stock people, 7 Nov 2026)
-    ("couple-talking", "50% 20%", "A couple chatting outdoors", "1. Consultation",
+PROCESS = [  # apa: three photo panels, the numbered heading and two lines overlaid bottom-left (details, no faces: 7 Nov 2026)
+    ("detail-texture-linen", "50% 50%", "Soft beige linen", "1. Consultation",
      "We listen first, then examine carefully and explain your options clearly, so you can decide calmly."),
-    ("man-relaxed-smiling", "40% 40%", "A man in a turban, relaxed and smiling", "2. Your treatment",
+    ("detail-zirconia", "50% 50%", "Zirconia crowns on a model", "2. Your treatment",
      "Planned in detail and carried out with precision, at a pace that keeps you comfortable."),
-    ("grandparents-grandchild", "50% 18%", "Grandparents with their grandchild", "3. Lifelong care",
+    ("detail-floss", "50% 50%", "A length of dental floss in an open hand", "3. Lifelong care",
      "Reviews and cleanings that protect your result for years, with the doctors who planned it, on Peddar Road."),
 ]
 
@@ -233,8 +233,8 @@ def statement():
 
 # Two treatments, each a full-bleed photograph with its serif name over it and a light card under it with the line from
 # its own page (the page hero's line). (slug, name, photo, position, alt, line)
-TREATMENT_ROWS = [  # every treatment page: its own title, a line from its own intro, its own hero photograph
-    (slug, name, line, people_slots.TREATMENT_HERO[slug], people_slots.PEOPLE[people_slots.TREATMENT_HERO[slug]]["pos"])
+TREATMENT_ROWS = [  # every treatment page: its own title, a line from its own intro, its hero photograph (never a face: TREATMENT_ROW)
+    (slug, name, line, people_slots.TREATMENT_ROW[slug], people_slots.PEOPLE[people_slots.TREATMENT_ROW[slug]]["pos"])
     for slug, name, line in [
         ("dental-implants", "Dental implants", "Replacing missing teeth, made to feel your own."),
         ("smile-design", "Smile design", "A new smile, previewed before work begins."),

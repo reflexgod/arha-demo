@@ -1,36 +1,25 @@
 {
- "couple-laughing-outdoors": {
+ "family-at-home": {
   "source": "unsplash",
-  "id": "EMKM2qkIzRg",
-  "page": "https://unsplash.com/photos/a-man-and-a-woman-sitting-next-to-each-other-EMKM2qkIzRg",
-  "author": "Ranjana Rajput",
-  "profile": "https://unsplash.com/@ranjanaphotography",
-  "raw": "https://images.unsplash.com/photo-1677054699687-8afb7c00169c?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjF8fGluZGlhbiUyMHNlbmlvciUyMGNvdXBsZSUyMHNtaWxpbmd8ZW58MXx8fHwxNzk0MDI2OTEzfDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/EMKM2qkIzRg/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjF8fGluZGlhbiUyMHNlbmlvciUyMGNvdXBsZSUyMHNtaWxpbmd8ZW58MXx8fHwxNzk0MDI2OTEzfDA",
-  "alt": "Smiling couple sitting outdoors",
-  "pos": "50% 12%"
+  "id": "yCAP8lEBjPw",
+  "page": "https://unsplash.com/photos/a-family-posing-for-a-picture-yCAP8lEBjPw",
+  "author": "Subash Than",
+  "profile": "https://unsplash.com/@subashthan",
+  "raw": "https://images.unsplash.com/photo-1652404796149-b63ebbfe61aa?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA&ixlib=rb-4.1.0",
+  "download": "https://api.unsplash.com/photos/yCAP8lEBjPw/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA",
+  "alt": "A smiling family of four at home",
+  "pos": "50% 25%"
  },
- "grandfather-grandson": {
+ "grandparents-grandchild": {
   "source": "unsplash",
-  "id": "Wpjdzp6IYRk",
-  "page": "https://unsplash.com/photos/a-boy-and-man-smile-together-for-a-photo-Wpjdzp6IYRk",
-  "author": "Sai Nigham",
-  "profile": "https://unsplash.com/@sainigham73",
-  "raw": "https://images.unsplash.com/photo-1749234771295-ab5d2a2c63f0?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8N3x8aW5kaWFuJTIwZ3JhbmRwYXJlbnRzJTIwd2l0aCUyMGdyYW5kY2hpbGRyZW58ZW58MXx8fHwxNzk0MDI2OTEyfDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/Wpjdzp6IYRk/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8N3x8aW5kaWFuJTIwZ3JhbmRwYXJlbnRzJTIwd2l0aCUyMGdyYW5kY2hpbGRyZW58ZW58MXx8fHwxNzk0MDI2OTEyfDA",
-  "alt": "A boy and his grandfather smiling together",
-  "pos": "50% 35%"
- },
- "woman-laughing-closeup": {
-  "source": "unsplash",
-  "id": "VG32kWGiSQo",
-  "page": "https://unsplash.com/photos/a-young-woman-with-eyes-closed-smiling-broadly-smiling-VG32kWGiSQo",
-  "author": "Aatik Tasneem",
-  "profile": "https://unsplash.com/@aatiktasneem",
-  "raw": "https://images.unsplash.com/photo-1594932932930-b94355371d1f?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NXx8aW5kaWFuJTIwd29tYW4lMjBsYXVnaGluZyUyMGNsb3NlJTIwdXB8ZW58MXx8fHwxNzk0MDI3MjI5fDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/VG32kWGiSQo/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NXx8aW5kaWFuJTIwd29tYW4lMjBsYXVnaGluZyUyMGNsb3NlJTIwdXB8ZW58MXx8fHwxNzk0MDI3MjI5fDA",
-  "alt": "A young woman laughing with her eyes closed",
-  "pos": "50% 40%"
+  "id": "77ooeCGz8J4",
+  "page": "https://unsplash.com/photos/man-in-blue-dress-shirt-and-woman-in-yellow-and-green-sari-dress-77ooeCGz8J4",
+  "author": "rajat sarki",
+  "profile": "https://unsplash.com/@rajat_sarki",
+  "raw": "https://images.unsplash.com/photo-1621176313593-89976c1f1bed?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NXx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA&ixlib=rb-4.1.0",
+  "download": "https://api.unsplash.com/photos/77ooeCGz8J4/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NXx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA",
+  "alt": "Grandparents with their grandchild",
+  "pos": "50% 8%"
  },
  "young-woman-at-table": {
   "source": "unsplash",
@@ -43,50 +32,6 @@
   "alt": "A young woman smiling at a table",
   "pos": "50% 35%"
  },
- "young-man-smile-closeup": {
-  "source": "unsplash",
-  "id": "0OIdQOWiFww",
-  "page": "https://unsplash.com/photos/a-person-smiling-for-the-camera-0OIdQOWiFww",
-  "author": "Pratik Mohapatra",
-  "profile": "https://unsplash.com/@sipunpratik",
-  "raw": "https://images.unsplash.com/photo-1669773793594-e8d4615deb7c?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjN8fGluZGlhbiUyMHlvdW5nJTIwbWFuJTIwc21pbGluZyUyMGNsb3NlJTIwdXB8ZW58MXx8fHwxNzk0MDI3MjM2fDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/0OIdQOWiFww/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjN8fGluZGlhbiUyMHlvdW5nJTIwbWFuJTIwc21pbGluZyUyMGNsb3NlJTIwdXB8ZW58MXx8fHwxNzk0MDI3MjM2fDA",
-  "alt": "A young man with a gentle smile",
-  "pos": "50% 30%"
- },
- "woman-smile-nath": {
-  "source": "unsplash",
-  "id": "VHTZ4x8TmKE",
-  "page": "https://unsplash.com/photos/woman-wearing-traditional-nose-ring-VHTZ4x8TmKE",
-  "author": "manish_ jadhav_photography05",
-  "profile": "https://unsplash.com/@mjphotography05",
-  "raw": "https://images.unsplash.com/photo-1786299811172-618ec9e24b24?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjJ8fGluZGlhbiUyMHdvbWFuJTIwc21pbGluZyUyMHBvcnRyYWl0fGVufDF8fHx8MTc5NDAyNjkxM3ww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/VHTZ4x8TmKE/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjJ8fGluZGlhbiUyMHdvbWFuJTIwc21pbGluZyUyMHBvcnRyYWl0fGVufDF8fHx8MTc5NDAyNjkxM3ww",
-  "alt": "A smiling woman wearing a nose ring",
-  "pos": "50% 30%"
- },
- "woman-relaxed-cafe": {
-  "source": "unsplash",
-  "id": "Wkp0U_iHF5g",
-  "page": "https://unsplash.com/photos/a-woman-sitting-at-a-table-looking-at-her-cell-phone-Wkp0U_iHF5g",
-  "author": "Rupinder Singh",
-  "profile": "https://unsplash.com/@singhrupinder",
-  "raw": "https://images.unsplash.com/photo-1633099795938-c06a0c65d5be?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTF8fGluZGlhbiUyMHdvbWFuJTIwZHJpbmtpbmclMjB0ZWElMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzNHww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/Wkp0U_iHF5g/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTF8fGluZGlhbiUyMHdvbWFuJTIwZHJpbmtpbmclMjB0ZWElMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzNHww",
-  "alt": "A woman smiling at her phone at a café table",
-  "pos": "50% 38%"
- },
- "family-outdoors": {
-  "source": "unsplash",
-  "id": "qK5b779Xdrc",
-  "page": "https://unsplash.com/photos/a-couple-of-people-that-are-sitting-on-the-ground-qK5b779Xdrc",
-  "author": "Anil Sharma",
-  "profile": "https://unsplash.com/@anil_sharma_india",
-  "raw": "https://images.unsplash.com/photo-1639979511572-ff346bc5b3b7?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8OHx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/qK5b779Xdrc/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8OHx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA",
-  "alt": "A smiling family sitting together outdoors",
-  "pos": "50% 30%"
- },
  "mother-daughter-laughing": {
   "source": "unsplash",
   "id": "a-_1PPjnbUg",
@@ -98,328 +43,325 @@
   "alt": "A mother and daughter laughing together",
   "pos": "60% 30%"
  },
- "couple-on-sofa": {
+ "smile-bright": {
   "source": "unsplash",
-  "id": "yvl5Nb7pHK0",
-  "page": "https://unsplash.com/photos/a-man-and-a-woman-sitting-on-a-couch-yvl5Nb7pHK0",
-  "author": "PRATEEK JAISWAL",
-  "profile": "https://unsplash.com/@prateekjaiswal",
-  "raw": "https://images.unsplash.com/photo-1640745690743-4599f8212b87?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8OHx8aW5kaWFuJTIwc2VuaW9yJTIwY291cGxlJTIwc21pbGluZ3xlbnwxfHx8fDE3OTQwMjY5MTN8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/yvl5Nb7pHK0/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8OHx8aW5kaWFuJTIwc2VuaW9yJTIwY291cGxlJTIwc21pbGluZ3xlbnwxfHx8fDE3OTQwMjY5MTN8MA",
-  "alt": "A smiling couple on a sofa",
-  "pos": "50% 25%"
+  "local": "straight-smile.jpg",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-persons-mouth-with-a-missing-tooth-WuwTeOLLMZ0",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Even, natural teeth in a smile, close up",
+  "pos": "50% 50%"
  },
- "friends-on-lawn": {
+ "smile-natural": {
   "source": "unsplash",
-  "id": "eq6EJSdpHUQ",
-  "page": "https://unsplash.com/photos/man-in-maroon-dress-shirt-lying-on-green-grass-field-eq6EJSdpHUQ",
-  "author": "Ashwini Chaudhary(Monty)",
-  "profile": "https://unsplash.com/@suicide_chewbacca",
-  "raw": "https://images.unsplash.com/photo-1534235187448-833893dfe3e0?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8N3x8aW5kaWFuJTIwZnJpZW5kcyUyMGxhdWdoaW5nfGVufDF8fHx8MTc5NDAyNjkxNXww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/eq6EJSdpHUQ/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8N3x8aW5kaWFuJTIwZnJpZW5kcyUyMGxhdWdoaW5nfGVufDF8fHx8MTc5NDAyNjkxNXww",
-  "alt": "Friends laughing on a lawn",
-  "pos": "50% 35%"
- },
- "older-man-smiling": {
-  "source": "unsplash",
-  "id": "tXNjCm4bN8Y",
-  "page": "https://unsplash.com/photos/close-up-photo-of-man-in-white-shirt-smiling-while-taking-photo-tXNjCm4bN8Y",
-  "author": "Wilfred Sequeira",
-  "profile": "https://unsplash.com/@wilfredsequeira",
-  "raw": "https://images.unsplash.com/photo-1531339413195-cc6c17163974?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mjh8fGluZGlhbiUyMG1hbiUyMHNtaWxpbmclMjBwb3J0cmFpdHxlbnwxfHx8fDE3OTQwMjY5MTR8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/tXNjCm4bN8Y/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mjh8fGluZGlhbiUyMG1hbiUyMHNtaWxpbmclMjBwb3J0cmFpdHxlbnwxfHx8fDE3OTQwMjY5MTR8MA",
-  "alt": "An older man smiling",
-  "pos": "50% 40%"
- },
- "young-man-scarf": {
-  "source": "unsplash",
-  "id": "tD6fOGWessk",
-  "page": "https://unsplash.com/photos/man-wearing-blue-and-yellow-floral-scarf-tD6fOGWessk",
-  "author": "Naim Ahmed",
-  "profile": "https://unsplash.com/@naim_13",
-  "raw": "https://images.unsplash.com/photo-1577860756464-3e84ec40c04c?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8M3x8aW5kaWFuJTIweW91bmclMjBtYW4lMjBzbWlsaW5nJTIwY2xvc2UlMjB1cHxlbnwxfHx8fDE3OTQwMjcyMzZ8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/tD6fOGWessk/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8M3x8aW5kaWFuJTIweW91bmclMjBtYW4lMjBzbWlsaW5nJTIwY2xvc2UlMjB1cHxlbnwxfHx8fDE3OTQwMjcyMzZ8MA",
-  "alt": "A young man in a scarf, smiling",
-  "pos": "50% 25%"
- },
- "woman-glasses-laughing": {
-  "source": "unsplash",
-  "id": "WWa5JkR6HaU",
-  "page": "https://unsplash.com/photos/a-woman-wearing-glasses-is-smiling-and-holding-a-cell-phone-WWa5JkR6HaU",
-  "author": "Athul Krishna",
-  "profile": "https://unsplash.com/@athul_artistry",
-  "raw": "https://images.unsplash.com/photo-1636007549777-72ffbb4b94df?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjF8fGluZGlhbiUyMHRlZW5hZ2VyJTIwc21pbGluZ3xlbnwxfHx8fDE3OTQwMjcyMzR8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/WWa5JkR6HaU/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjF8fGluZGlhbiUyMHRlZW5hZ2VyJTIwc21pbGluZ3xlbnwxfHx8fDE3OTQwMjcyMzR8MA",
-  "alt": "A young woman in glasses laughing",
-  "pos": "50% 25%"
- },
- "young-woman-smiling": {
-  "source": "unsplash",
-  "id": "DmGzwwuLPG8",
-  "page": "https://unsplash.com/photos/woman-in-black-leather-jacket-smiling-DmGzwwuLPG8",
-  "author": "Pargat Dhillon",
-  "profile": "https://unsplash.com/@ipargatdhillon",
-  "raw": "https://images.unsplash.com/photo-1624610806209-82a4cbb4339a?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8aW5kaWFuJTIwdGVlbmFnZXIlMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzM3ww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/DmGzwwuLPG8/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8aW5kaWFuJTIwdGVlbmFnZXIlMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzNHww",
-  "alt": "A young woman smiling outdoors",
-  "pos": "50% 20%"
- },
- "woman-with-cup": {
-  "source": "unsplash",
-  "id": "OChyCX07S8Q",
-  "page": "https://unsplash.com/photos/a-woman-holding-a-cup-OChyCX07S8Q",
-  "author": "Shaikh Musaddik",
-  "profile": "https://unsplash.com/@shaikhmusaddik_9420862_sink",
-  "raw": "https://images.unsplash.com/photo-1650603696556-748adfd2d982?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NHx8aW5kaWFuJTIwd29tYW4lMjBkcmlua2luZyUyMHRlYSUyMHNtaWxpbmd8ZW58MXx8fHwxNzk0MDI3MjM0fDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/OChyCX07S8Q/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NHx8aW5kaWFuJTIwd29tYW4lMjBkcmlua2luZyUyMHRlYSUyMHNtaWxpbmd8ZW58MXx8fHwxNzk0MDI3MjM0fDA",
-  "alt": "A smiling woman holding a cup",
-  "pos": "50% 25%"
- },
- "man-with-mug": {
-  "source": "unsplash",
-  "id": "7i259TkrXW4",
-  "page": "https://unsplash.com/photos/young-man-holding-a-mug-looking-away-outdoors-7i259TkrXW4",
-  "author": "Bruno Dias",
-  "profile": "https://unsplash.com/@onurbdias",
-  "raw": "https://images.unsplash.com/photo-1781715779208-ab50f0a9b0a7?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTJ8fGluZGlhbiUyMG1hbiUyMHJlbGF4ZWQlMjBhdCUyMGhvbWV8ZW58MXx8fHwxNzk0MDI3MjMyfDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/7i259TkrXW4/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTJ8fGluZGlhbiUyMG1hbiUyMHJlbGF4ZWQlMjBhdCUyMGhvbWV8ZW58MXx8fHwxNzk0MDI3MjMyfDA",
-  "alt": "A man holding a mug, relaxed",
-  "pos": "45% 30%"
- },
- "woman-smiling-orange": {
-  "source": "unsplash",
-  "id": "afve0fsW7Fw",
-  "page": "https://unsplash.com/photos/selective-focus-photography-of-smiling-woman-wearing-red-shirt-afve0fsW7Fw",
-  "author": "Pranav Kumar Jain",
-  "profile": "https://unsplash.com/@peejayvisual",
-  "raw": "https://images.unsplash.com/photo-1528082414335-adbd64f18d12?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTV8fGluZGlhbiUyMHdvbWFuJTIwbGF1Z2hpbmclMjBjbG9zZSUyMHVwfGVufDF8fHx8MTc5NDAyNzIyOXww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/afve0fsW7Fw/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTV8fGluZGlhbiUyMHdvbWFuJTIwbGF1Z2hpbmclMjBjbG9zZSUyMHVwfGVufDF8fHx8MTc5NDAyNzIyOXww",
-  "alt": "A smiling woman in orange",
-  "pos": "55% 40%"
- },
- "young-man-glasses": {
-  "source": "unsplash",
-  "id": "cZxNs7ZS1O0",
-  "page": "https://unsplash.com/photos/a-man-wearing-glasses-and-a-plaid-shirt-cZxNs7ZS1O0",
-  "author": "Mahir Velani",
-  "profile": "https://unsplash.com/@mahir009",
-  "raw": "https://images.unsplash.com/photo-1680525021501-ddea41969892?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MzB8fGluZGlhbiUyMHlvdW5nJTIwcHJvZmVzc2lvbmFscyUyMG9mZmljZSUyMHNtaWxpbmd8ZW58MXx8fHwxNzk0MDI3MjI5fDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/cZxNs7ZS1O0/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MzB8fGluZGlhbiUyMHlvdW5nJTIwcHJvZmVzc2lvbmFscyUyMG9mZmljZSUyMHNtaWxpbmd8ZW58MXx8fHwxNzk0MDI3MjI5fDA",
-  "alt": "A young man in glasses, smiling",
-  "pos": "50% 25%"
- },
- "older-woman-smiling": {
-  "source": "unsplash",
-  "id": "UB3W9g-bJLM",
-  "page": "https://unsplash.com/photos/a-man-smiling-for-the-camera-UB3W9g-bJLM",
-  "author": "Massimo Zanardi Landi",
-  "profile": "https://unsplash.com/@cerberus44233",
-  "raw": "https://images.unsplash.com/photo-1668650975845-4ae807520375?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTd8fGluZGlhbiUyMHdvbWFuJTIwbGF1Z2hpbmclMjBjbG9zZSUyMHVwfGVufDF8fHx8MTc5NDAyNzIyOXww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/UB3W9g-bJLM/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTd8fGluZGlhbiUyMHdvbWFuJTIwbGF1Z2hpbmclMjBjbG9zZSUyMHVwfGVufDF8fHx8MTc5NDAyNzIyOXww",
-  "alt": "An older woman smiling",
-  "pos": "50% 22%"
- },
- "mother-daughter-portrait": {
-  "source": "unsplash",
-  "id": "gNfnHkU2n_k",
-  "page": "https://unsplash.com/photos/a-woman-holding-a-little-girl-in-her-arms-gNfnHkU2n_k",
-  "author": "Anil Sharma",
-  "profile": "https://unsplash.com/@anil_sharma_india",
-  "raw": "https://images.unsplash.com/photo-1639979511096-e3fa0348eb16?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8OXx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/gNfnHkU2n_k/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8OXx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA",
-  "alt": "A mother hugging her daughter, both smiling",
-  "pos": "50% 35%"
- },
- "friends-two-women": {
-  "source": "unsplash",
-  "id": "k83qsiDlAb8",
-  "page": "https://unsplash.com/photos/woman-in-black-and-white-floral-dress-beside-woman-in-red-dress-k83qsiDlAb8",
-  "author": "Ashwini Chaudhary(Monty)",
-  "profile": "https://unsplash.com/@suicide_chewbacca",
-  "raw": "https://images.unsplash.com/photo-1580471260419-99745668af23?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjB8fGluZGlhbiUyMGZyaWVuZHMlMjBsYXVnaGluZ3xlbnwxfHx8fDE3OTQwMjY5MTV8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/k83qsiDlAb8/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MjB8fGluZGlhbiUyMGZyaWVuZHMlMjBsYXVnaGluZ3xlbnwxfHx8fDE3OTQwMjY5MTV8MA",
-  "alt": "Two friends smiling outdoors",
-  "pos": "40% 35%"
- },
- "family-at-home": {
-  "source": "unsplash",
-  "id": "yCAP8lEBjPw",
-  "page": "https://unsplash.com/photos/a-family-posing-for-a-picture-yCAP8lEBjPw",
-  "author": "Subash Than",
-  "profile": "https://unsplash.com/@subashthan",
-  "raw": "https://images.unsplash.com/photo-1652404796149-b63ebbfe61aa?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/yCAP8lEBjPw/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA",
-  "alt": "A smiling family of four at home",
-  "pos": "50% 25%"
- },
- "couple-talking": {
-  "source": "unsplash",
-  "id": "Xcg9mkJRwpU",
-  "page": "https://unsplash.com/photos/man-with-hand-on-womens-shoulder-Xcg9mkJRwpU",
-  "author": "Calvin christian",
-  "profile": "https://unsplash.com/@calvinchristian",
-  "raw": "https://images.unsplash.com/photo-1553781603-5dd23889c9cf?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTJ8fGluZGlhbiUyMHNlbmlvciUyMGNvdXBsZSUyMHNtaWxpbmd8ZW58MXx8fHwxNzk0MDI2OTEzfDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/Xcg9mkJRwpU/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTJ8fGluZGlhbiUyMHNlbmlvciUyMGNvdXBsZSUyMHNtaWxpbmd8ZW58MXx8fHwxNzk0MDI2OTEzfDA",
-  "alt": "A couple chatting outdoors",
+  "local": "natural-smile.jpg",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-womans-mouth-with-white-teeth-glPVwPr1FKo",
+  "author": "Tony Litvyak",
+  "profile": "https://unsplash.com/@justatony",
+  "alt": "A natural smile, close up",
+  "pos": "50% 50%",
   "crop": [
    0,
+   0.3,
    0,
+   0
+  ]
+ },
+ "smile-braces": {
+  "source": "unsplash",
+  "local": "braces.jpg",
+  "page": "https://unsplash.com/photos/close-up-of-a-persons-mouth-YKqYvUYzw0w",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "A smile with braces, close up",
+  "pos": "50% 50%"
+ },
+ "smile-soft": {
+  "source": "unsplash",
+  "local": "stained.jpg",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-persons-mouth-X7smMpe1CDE",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "A natural smile, close up",
+  "pos": "50% 50%"
+ },
+ "detail-implant-hero": {
+  "source": "unsplash",
+  "local": "implant-hero.jpg",
+  "page": "https://unsplash.com/photos/white-candle-on-black-textile-q1KLbswF70Y",
+  "author": "Bogdan condr",
+  "profile": "https://unsplash.com/@bogdan_condr",
+  "alt": "An implant crown on a dark model",
+  "pos": "50% 50%"
+ },
+ "detail-lab-model": {
+  "source": "unsplash",
+  "local": "lab-model.jpg",
+  "page": "https://unsplash.com/photos/a-pile-of-chocolate-kL6LP2olEds",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Porcelain crowns on a plaster model",
+  "pos": "50% 50%"
+ },
+ "detail-crowns": {
+  "source": "unsplash",
+  "local": "crowns.jpg",
+  "page": "https://unsplash.com/photos/a-group-of-white-stones-kCZplVq084c",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Four porcelain veneers on dark leather",
+  "pos": "50% 50%"
+ },
+ "detail-denture": {
+  "source": "unsplash",
+  "local": "denture-dark.jpg",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-tooth-with-gumpaste-on-it-13xqZDnYH-o",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "A full denture on a dark background",
+  "pos": "50% 50%"
+ },
+ "detail-restorations": {
+  "source": "unsplash",
+  "local": "restorations-set.jpg",
+  "page": "https://unsplash.com/photos/a-model-of-a-tooth-with-a-missing-tooth-u5Sw-xxk26o",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "A full set of restorations on a model",
+  "pos": "50% 50%"
+ },
+ "detail-bridge": {
+  "source": "unsplash",
+  "local": "bridge-white.jpg",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-hand-eflzixCX9Zg",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "A dental bridge against a white background",
+  "pos": "50% 50%"
+ },
+ "detail-toothbrush": {
+  "source": "unsplash",
+  "local": "brushes-grey.jpg",
+  "page": "https://unsplash.com/photos/a-couple-of-toothbrushes-sitting-on-top-of-a-table-qz9QwrSUv9A",
+  "author": "François Hurtaud",
+  "profile": "https://unsplash.com/@francoishurtaud",
+  "alt": "Toothbrushes on a soft grey surface",
+  "pos": "50% 50%"
+ },
+ "detail-aligner-model": {
+  "source": "unsplash",
+  "local": "aligner-model.jpg",
+  "page": "https://unsplash.com/photos/2-red-heart-shaped-decors-HW_JkekHenA",
+  "author": "Enis Yavuz",
+  "profile": "https://unsplash.com/@enisyavuz",
+  "alt": "A clear aligner above a model of the teeth",
+  "pos": "50% 50%"
+ },
+ "detail-aligner-case": {
+  "source": "unsplash",
+  "local": "aligner-case.jpg",
+  "page": "https://unsplash.com/photos/a-blue-bowl-with-a-white-background-VuN-RYI4XU4",
+  "author": "Aurela Redenica",
+  "profile": "https://unsplash.com/@aureler",
+  "alt": "A clear aligner in its case",
+  "pos": "50% 60%"
+ },
+ "detail-aligners-shadow": {
+  "source": "unsplash",
+  "local": "aligners-shadow.jpg",
+  "page": "https://unsplash.com/photos/a-blue-ice-cream-cone-kEbwxfC33qY",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Clear aligners on a patterned cloth",
+  "pos": "50% 50%"
+ },
+ "detail-aligner": {
+  "source": "unsplash",
+  "local": "aligner.jpg",
+  "page": "https://unsplash.com/photos/white-spiral-lace-on-white-surface-irPpXQF5bSI",
+  "author": "Geniova Technologies",
+  "profile": "https://unsplash.com/@geniovatechnologies",
+  "alt": "A clear aligner on a white surface",
+  "pos": "50% 50%"
+ },
+ "detail-crowns-soft": {
+  "source": "unsplash",
+  "local": "crowns-soft.jpg",
+  "page": "https://unsplash.com/photos/a-pile-of-potatoes-LfbjQ7lF_QA",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Porcelain molars in soft focus",
+  "pos": "50% 50%"
+ },
+ "detail-zirconia": {
+  "source": "unsplash",
+  "local": "zirconia.jpg",
+  "page": "https://unsplash.com/photos/a-group-of-white-eggs-yINtt2T-2kE",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Zirconia crowns on a model",
+  "pos": "50% 50%"
+ },
+ "detail-pfm": {
+  "source": "unsplash",
+  "local": "pfm.jpg",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-snowman-j-9ThYuNIHM",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Porcelain-fused-to-metal crowns on a model",
+  "pos": "50% 50%"
+ },
+ "detail-teeth-shades": {
+  "source": "unsplash",
+  "local": "teeth-shades.jpg",
+  "page": "https://unsplash.com/photos/four-sets-of-artificial-teeth-in-black-cases-X0aedXQOvwk",
+  "author": "engin akyurt",
+  "profile": "https://unsplash.com/@enginakyurt",
+  "alt": "A set of tooth shades in a case",
+  "pos": "50% 50%"
+ },
+ "detail-veneers-fabric": {
+  "source": "unsplash",
+  "local": "veneers-fabric.jpg",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-white-pill-FN1RmdsIy4M",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Porcelain veneers on grey fabric",
+  "pos": "50% 50%"
+ },
+ "detail-veneers": {
+  "source": "unsplash",
+  "local": "veneers.jpg",
+  "page": "https://unsplash.com/photos/a-group-of-white-objects-WvVW7mRaZE8",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Porcelain veneers on a dark background",
+  "pos": "50% 50%"
+ },
+ "detail-floss": {
+  "source": "unsplash",
+  "local": "floss-hand.jpg",
+  "page": "https://unsplash.com/photos/a-hand-holding-a-white-tube-of-toothpaste-LN1N5x8dICs",
+  "author": "Otto Jonas",
+  "profile": "https://unsplash.com/@oj_photography",
+  "alt": "A length of dental floss in an open hand",
+  "pos": "50% 50%"
+ },
+ "detail-kids-brush-wood": {
+  "source": "unsplash",
+  "local": "kid-brush-wood.jpg",
+  "page": "https://unsplash.com/photos/a-red-toothbrush-sitting-on-top-of-a-wooden-holder-j6uqrTX6EVc",
+  "author": "Raghavendra V. Konkathi",
+  "profile": "https://unsplash.com/@rangokonk",
+  "alt": "A small wooden toothbrush",
+  "pos": "50% 50%"
+ },
+ "detail-kids-brush": {
+  "source": "unsplash",
+  "local": "kid-brush-bright.jpg",
+  "page": "https://unsplash.com/photos/yellow-and-red-plastic-straw-caqnfuEnF0E",
+  "author": "Glen Carrie",
+  "profile": "https://unsplash.com/@glencarrie",
+  "alt": "A bright children's toothbrush",
+  "pos": "50% 50%"
+ },
+ "detail-braces-model": {
+  "source": "unsplash",
+  "local": "braces-model.jpg",
+  "page": "https://unsplash.com/photos/dental-model-with-metal-braces-on-teeth-cx3JCL5PDew",
+  "author": "Harold Hisona",
+  "profile": "https://unsplash.com/@harold_angus",
+  "alt": "A model of teeth with braces",
+  "pos": "50% 50%"
+ },
+ "detail-prosthesis-model": {
+  "source": "unsplash",
+  "local": "prosthesis-model.jpg",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-tooth-model-on-a-table-qkx-vLxgF8Y",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "alt": "Teeth on a plaster model",
+  "pos": "50% 50%"
+ },
+ "detail-denture-hand": {
+  "source": "unsplash",
+  "local": "denture-hand.jpg",
+  "page": "https://unsplash.com/photos/person-holding-pink-plastic-hair-clip-4nUZl0FZM3U",
+  "author": "Diana Polekhina",
+  "profile": "https://unsplash.com/@diana_pole",
+  "alt": "A hand holding a partial denture",
+  "pos": "50% 50%"
+ },
+ "smile-wide": {
+  "source": "unsplash",
+  "id": "7Mut2WMWttA",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-persons-mouth-7Mut2WMWttA",
+  "author": "Ozkan Guner",
+  "profile": "https://unsplash.com/@dentistozkanguner",
+  "raw": "https://images.unsplash.com/photo-1663182234283-28941e7612da?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NHx8c21pbGUlMjBjbG9zZSUyMHVwJTIwbGlwcyUyMHRlZXRoJTIwbmF0dXJhbHxlbnwxfHx8fDE3OTQwMzMwMTV8MA&ixlib=rb-4.1.0",
+  "download": "https://api.unsplash.com/photos/7Mut2WMWttA/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NHx8c21pbGUlMjBjbG9zZSUyMHVwJTIwbGlwcyUyMHRlZXRoJTIwbmF0dXJhbHxlbnwxfHx8fDE3OTQwMzMwMTV8MA",
+  "alt": "A natural smile, close up",
+  "pos": "50% 60%",
+  "crop": [
    0,
-   0.3
-  ],
-  "pos": "50% 20%"
+   0.22,
+   0,
+   0
+  ]
  },
- "man-relaxed-smiling": {
+ "smile-side": {
   "source": "unsplash",
-  "id": "eoMCmOmW0SI",
-  "page": "https://unsplash.com/photos/a-man-with-a-red-turban-is-posing-for-a-picture-eoMCmOmW0SI",
-  "author": "Ajay Thakur",
-  "profile": "https://unsplash.com/@creativesaarthi22",
-  "raw": "https://images.unsplash.com/photo-1639116123812-515f32a01175?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8OHx8aW5kaWFuJTIwbWFuJTIwcmVsYXhlZCUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjcyMzJ8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/eoMCmOmW0SI/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8OHx8aW5kaWFuJTIwbWFuJTIwcmVsYXhlZCUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjcyMzJ8MA",
-  "alt": "A man in a turban, relaxed and smiling",
-  "pos": "40% 40%"
+  "id": "RCQnbyQsnUg",
+  "page": "https://unsplash.com/photos/a-close-up-of-a-womans-mouth-with-white-teeth-RCQnbyQsnUg",
+  "author": "Kamal Hoseinianzade",
+  "profile": "https://unsplash.com/@teravis_sk",
+  "raw": "https://images.unsplash.com/photo-1677026010083-78ec7f1b84ed?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8M3x8c21pbGUlMjBjbG9zZSUyMHVwJTIwbGlwcyUyMHRlZXRoJTIwbmF0dXJhbHxlbnwxfHx8fDE3OTQwMzMwMTV8MA&ixlib=rb-4.1.0",
+  "download": "https://api.unsplash.com/photos/RCQnbyQsnUg/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8M3x8c21pbGUlMjBjbG9zZSUyMHVwJTIwbGlwcyUyMHRlZXRoJTIwbmF0dXJhbHxlbnwxfHx8fDE3OTQwMzMwMTV8MA",
+  "alt": "A smile in profile, close up",
+  "pos": "50% 50%"
  },
- "grandmother-baby": {
+ "detail-laptop": {
   "source": "unsplash",
-  "id": "m2wHjaS4j0Y",
-  "page": "https://unsplash.com/photos/grandmother-smiling-at-a-baby-on-a-bed-m2wHjaS4j0Y",
-  "author": "Rohit Dey",
-  "profile": "https://unsplash.com/@rohit16dey",
-  "raw": "https://images.unsplash.com/photo-1768657891765-2c5619ba1914?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTV8fGluZGlhbiUyMGZhbWlseSUyMHNtaWxpbmclMjBhdCUyMGhvbWV8ZW58MXx8fHwxNzk0MDI2OTExfDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/m2wHjaS4j0Y/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTV8fGluZGlhbiUyMGZhbWlseSUyMHNtaWxpbmclMjBhdCUyMGhvbWV8ZW58MXx8fHwxNzk0MDI2OTExfDA",
-  "alt": "A grandmother smiling at a baby",
-  "pos": "60% 45%"
+  "id": "ZWfOEaNfelY",
+  "page": "https://unsplash.com/photos/a-laptop-computer-sitting-on-top-of-a-wooden-table-ZWfOEaNfelY",
+  "author": "Clay Banks",
+  "profile": "https://unsplash.com/@claybanks",
+  "raw": "https://images.unsplash.com/photo-1645021785273-140b720bb63f?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTR8fGxhcHRvcCUyMG9uJTIwZGVzayUyMGF0JTIwaG9tZSUyMHNvZnQlMjBsaWdodHxlbnwxfHx8fDE3OTQwMzI0ODR8MA&ixlib=rb-4.1.0",
+  "download": "https://api.unsplash.com/photos/ZWfOEaNfelY/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTR8fGxhcHRvcCUyMG9uJTIwZGVzayUyMGF0JTIwaG9tZSUyMHNvZnQlMjBsaWdodHxlbnwxfHx8fDE3OTQwMzI0ODR8MA",
+  "alt": "A laptop on a wooden table",
+  "pos": "50% 50%"
  },
- "couple-reading": {
+ "detail-mirror": {
   "source": "unsplash",
-  "id": "6UUIsN2hIGA",
-  "page": "https://unsplash.com/photos/couple-reading-a-book-together-on-a-couch-6UUIsN2hIGA",
-  "author": "Abrar Mohd",
-  "profile": "https://unsplash.com/@mdabraredit",
-  "raw": "https://images.unsplash.com/photo-1776078171070-415416f027ed?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTZ8fGluZGlhbiUyMGZhbWlseSUyMHNtaWxpbmclMjBhdCUyMGhvbWV8ZW58MXx8fHwxNzk0MDI2OTExfDA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/6UUIsN2hIGA/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTZ8fGluZGlhbiUyMGZhbWlseSUyMHNtaWxpbmclMjBhdCUyMGhvbWV8ZW58MXx8fHwxNzk0MDI2OTExfDA",
-  "alt": "A couple laughing at home with a book",
-  "pos": "50% 25%"
- },
- "grandparents-grandchild": {
-  "source": "unsplash",
-  "id": "77ooeCGz8J4",
-  "page": "https://unsplash.com/photos/man-in-blue-dress-shirt-and-woman-in-yellow-and-green-sari-dress-77ooeCGz8J4",
-  "author": "rajat sarki",
-  "profile": "https://unsplash.com/@rajat_sarki",
-  "raw": "https://images.unsplash.com/photo-1621176313593-89976c1f1bed?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NXx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/77ooeCGz8J4/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NXx8aW5kaWFuJTIwZmFtaWx5JTIwc21pbGluZyUyMGF0JTIwaG9tZXxlbnwxfHx8fDE3OTQwMjY5MTF8MA",
-  "alt": "Grandparents with their grandchild",
-  "pos": "50% 18%"
- },
- "friends-two-men": {
-  "source": "unsplash",
-  "id": "mIGMzFXZnOo",
-  "page": "https://unsplash.com/photos/a-couple-of-men-sitting-next-to-each-other-mIGMzFXZnOo",
-  "author": "MOHAMMED ASHIF P P",
-  "profile": "https://unsplash.com/@ashf02",
-  "raw": "https://images.unsplash.com/photo-1672487729377-210da0b40bc0?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8aW5kaWFuJTIwZnJpZW5kcyUyMGxhdWdoaW5nfGVufDF8fHx8MTc5NDAyNjkxNXww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/mIGMzFXZnOo/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8aW5kaWFuJTIwZnJpZW5kcyUyMGxhdWdoaW5nfGVufDF8fHx8MTc5NDAyNjkxNXww",
-  "alt": "Two friends laughing",
-  "pos": "50% 30%"
- },
- "young-man-suit": {
-  "source": "unsplash",
-  "id": "HrpYHchKb5Y",
-  "page": "https://unsplash.com/photos/man-in-black-suit-jacket-smiling-HrpYHchKb5Y",
-  "author": "Yogendra Singh",
-  "profile": "https://unsplash.com/@yogendras31",
-  "raw": "https://images.unsplash.com/photo-1589386417686-0d34b5903d23?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MXx8aW5kaWFuJTIweW91bmclMjBwcm9mZXNzaW9uYWxzJTIwb2ZmaWNlJTIwc21pbGluZ3xlbnwxfHx8fDE3OTQwMjcyMjl8MA&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/HrpYHchKb5Y/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MXx8aW5kaWFuJTIweW91bmclMjBwcm9mZXNzaW9uYWxzJTIwb2ZmaWNlJTIwc21pbGluZ3xlbnwxfHx8fDE3OTQwMjcyMjl8MA",
-  "alt": "A young man in a jacket, smiling",
-  "pos": "55% 30%"
- },
- "little-girl": {
-  "source": "unsplash",
-  "id": "GSD4TabtXQg",
-  "page": "https://unsplash.com/photos/girl-in-pink-and-blue-crew-neck-t-shirt-eating-ice-cream-GSD4TabtXQg",
-  "author": "Ajin K S",
-  "profile": "https://unsplash.com/@ajinks",
-  "raw": "https://images.unsplash.com/photo-1624434350526-0ad3a4f3c1cb?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8M3x8aW5kaWFuJTIwbW90aGVyJTIwYW5kJTIwY2hpbGQlMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzMXww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/GSD4TabtXQg/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8M3x8aW5kaWFuJTIwbW90aGVyJTIwYW5kJTIwY2hpbGQlMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzMXww",
-  "alt": "A little girl with a finger on her lips",
-  "pos": "50% 30%"
- },
- "boy-smiling": {
-  "source": "unsplash",
-  "id": "aho7nVdauuc",
-  "page": "https://unsplash.com/photos/boy-in-black-and-white-striped-shirt-aho7nVdauuc",
-  "author": "Nehal Patel",
-  "profile": "https://unsplash.com/@nneehhaall_13",
-  "raw": "https://images.unsplash.com/photo-1603185030522-05d4497bb180?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NHx8aW5kaWFuJTIwdGVlbmFnZXIlMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzNHww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/aho7nVdauuc/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8NHx8aW5kaWFuJTIwdGVlbmFnZXIlMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzNHww",
-  "alt": "A boy smiling",
-  "pos": "45% 35%"
- },
- "girl-smiling": {
-  "source": "unsplash",
-  "id": "jhu22nvxxCw",
-  "page": "https://unsplash.com/photos/smiling-girl-standing-near-wall-jhu22nvxxCw",
-  "author": "LJ",
-  "profile": "https://unsplash.com/@lorenmary",
-  "raw": "https://images.unsplash.com/photo-1497486443155-158cceb6629a?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MXx8aW5kaWFuJTIwdGVlbmFnZXIlMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzM3ww&ixlib=rb-4.1.0",
-  "download": "https://api.unsplash.com/photos/jhu22nvxxCw/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MXx8aW5kaWFuJTIwdGVlbmFnZXIlMjBzbWlsaW5nfGVufDF8fHx8MTc5NDAyNzIzM3ww",
-  "alt": "A girl smiling",
-  "pos": "60% 35%"
- },
- "toddler": {
-  "source": "unsplash",
-  "local": "toddler.jpg",
-  "page": "https://unsplash.com/photos/a-little-girl-with-a-smile-on-her-face-fThGa5d1Ri0",
-  "author": "Mohammed Nabeel",
-  "profile": "https://unsplash.com/@nabeeluk",
-  "alt": "A toddler laughing",
+  "id": "rubu_NvklJE",
+  "page": "https://unsplash.com/photos/dental-mirror-in-clinical-office-rubu_NvklJE",
+  "author": "Katarzyna Zygnerska",
+  "profile": "https://unsplash.com/@katasha",
+  "raw": "https://images.unsplash.com/photo-1698749778813-ad5f2814e50f?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8ZGVudGFsJTIwbWlycm9yfGVufDF8fHx8MTc5NDAzMjQ4NXww&ixlib=rb-4.1.0",
+  "download": "https://api.unsplash.com/photos/rubu_NvklJE/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8Mnx8ZGVudGFsJTIwbWlycm9yfGVufDF8fHx8MTc5NDAzMjQ4NXww",
+  "alt": "A dental mirror in soft focus",
   "pos": "50% 40%"
  },
- "teen-boy-kurta": {
+ "detail-toothpaste": {
   "source": "unsplash",
-  "local": "teen-boy.jpg",
-  "page": "https://unsplash.com/photos/a-person-smiling-for-the-camera-sfIVnC-OSts",
-  "author": "Pratik Mohapatra",
-  "profile": "https://unsplash.com/@sipunpratik",
-  "alt": "A teenage boy smiling",
-  "pos": "50% 30%"
+  "id": "1_zGZzEAYRo",
+  "page": "https://unsplash.com/photos/a-toothbrush-with-a-toothpaste-on-top-of-it-1_zGZzEAYRo",
+  "author": "syahmi syahir",
+  "profile": "https://unsplash.com/@subspace_stills",
+  "raw": "https://images.unsplash.com/photo-1719887732247-d75a3ddced8a?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTV8fGRlbnRhbCUyMG1pcnJvcnxlbnwxfHx8fDE3OTQwMzI0ODV8MA&ixlib=rb-4.1.0",
+  "download": "https://api.unsplash.com/photos/1_zGZzEAYRo/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTV8fGRlbnRhbCUyMG1pcnJvcnxlbnwxfHx8fDE3OTQwMzI0ODV8MA",
+  "alt": "A toothbrush with toothpaste, in soft focus",
+  "pos": "50% 50%"
  },
- "teen-smiling": {
+ "detail-texture-linen": {
   "source": "unsplash",
-  "local": "teen.jpg",
-  "page": "https://unsplash.com/photos/a-person-smiling-for-the-camera-MxnZmq8tiNA",
-  "author": "Pratik Mohapatra",
-  "profile": "https://unsplash.com/@sipunpratik",
-  "alt": "A smiling teenager in a purple shirt",
-  "pos": "50% 25%"
- },
- "girl-bright-smile": {
-  "source": "unsplash",
-  "local": "kid-face.jpg",
-  "page": "https://unsplash.com/photos/a-young-girl-with-a-smile-on-her-face-sdWDdEEigXw",
-  "author": "OMAR FARUK",
-  "profile": "https://unsplash.com/@designdefines",
-  "alt": "A young girl with a big smile",
-  "pos": "50% 45%"
- },
- "older-woman-scarf": {
-  "source": "unsplash",
-  "local": "face-7.jpg",
-  "page": "https://unsplash.com/photos/woman-in-red-and-white-hijab-OlGXwIB-egQ",
-  "author": "Yogendra Singh",
-  "profile": "https://unsplash.com/@yogendras31",
-  "alt": "An older woman in a red scarf, smiling",
-  "pos": "55% 35%"
- },
- "woman-laughing": {
-  "source": "unsplash",
-  "local": "face-8.jpg",
-  "page": "https://unsplash.com/photos/smiling-woman-7Y4cfbggraE",
-  "author": "Yogendra Singh",
-  "profile": "https://unsplash.com/@yogendras31",
-  "alt": "A woman laughing",
-  "pos": "50% 30%"
+  "id": "qUWPSUiw1rU",
+  "page": "https://unsplash.com/photos/close-up-of-beige-textured-fabric-folded-into-a-swirl-qUWPSUiw1rU",
+  "author": "EZcurtain Life",
+  "profile": "https://unsplash.com/@ezcurtainlife",
+  "raw": "https://images.unsplash.com/photo-1757382603782-839864de55d7?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTd8fGJlaWdlJTIwbGluZW4lMjB0ZXh0dXJlfGVufDF8fHx8MTc5NDAzMjQ4Nnww&ixlib=rb-4.1.0",
+  "download": "https://api.unsplash.com/photos/qUWPSUiw1rU/download?ixid=M3wxMTE2MTY3fDB8MXxzZWFyY2h8MTd8fGJlaWdlJTIwbGluZW4lMjB0ZXh0dXJlfGVufDF8fHx8MTc5NDAzMjQ4Nnww",
+  "alt": "Soft beige linen",
+  "pos": "50% 50%"
  }
 }
