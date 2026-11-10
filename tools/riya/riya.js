@@ -1,14 +1,15 @@
 /* ==========================================================================
    Riya, Arha's assistant: chat window. Loaded on the launcher's first click.
    Talks to the chat webhook (riyaWebhookUrl in the site config) with one request:
-   POST { action: "sendMessage", sessionId, chatInput } -> { output }.
+   With clinicId (Riya v2): POST { clinic_id, session_id, message, page } -> { reply }.
+   Without it (older service): POST { action: "sendMessage", sessionId, chatInput } -> { output }.
    Nothing is sent until the visitor sends a message or taps a quick reply.
    ========================================================================== */
 const WELCOME = 'Hello, I’m Riya. I can answer questions about Arha Dental Care or take an appointment request for you.';
 const QUICK = ['Clinic timings', 'Dental implants', 'Request an appointment', 'Visiting from abroad'];
 const ICON = '<svg viewBox="0 0 919.25 902.15" aria-hidden="true" focusable="false"><use href="#arha-icon"/></svg>';
 
-export function mountRiya({ webhookUrl, phone = '', launcher, panel: shell = null }) {
+export function mountRiya({ webhookUrl, clinicId = '', phone = '', launcher, panel: shell = null }) {
   const root = document.documentElement;
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isPhone = () => window.matchMedia('(max-width: 767px)').matches;
@@ -91,14 +92,16 @@ export function mountRiya({ webhookUrl, phone = '', launcher, panel: shell = nul
       const res = await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'sendMessage', sessionId, chatInput: text }),
+        body: JSON.stringify(clinicId
+          ? { clinic_id: clinicId, session_id: sessionId, message: text, page: (document.title || location.pathname).slice(0, 80) }
+          : { action: 'sendMessage', sessionId, chatInput: text }),
       });
       const raw = await res.text();
       let reply = raw;
       try {
         const data = JSON.parse(raw);
         const item = Array.isArray(data) ? data[0] : data;
-        reply = item.output ?? item.text ?? item.message ?? raw;
+        reply = item.reply ?? item.output ?? item.text ?? item.message ?? raw;
       } catch (e) { /* plain-text reply */ }
       if (!res.ok) throw new Error(res.status);
       typing.remove();

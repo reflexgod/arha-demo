@@ -51,7 +51,7 @@
           launcher.classList.add('is-loading');
           launcher.setAttribute('aria-expanded', 'true');
           chatPromise = import(`${base}js/riya.js`)
-            .then(({ mountRiya }) => { chat = mountRiya({ webhookUrl: RIYA_WEBHOOK_URL, phone: SITE_CONFIG.phone, launcher, panel }); return chat; })
+            .then(({ mountRiya }) => { chat = mountRiya({ webhookUrl: RIYA_WEBHOOK_URL, clinicId: SITE_CONFIG.riyaClinicId || '', phone: SITE_CONFIG.phone, launcher, panel }); return chat; })
             .catch((err) => { chatPromise = null; panel.remove(); launcher.setAttribute('aria-expanded', 'false'); throw err; })
             .finally(() => launcher.classList.remove('is-loading'));
         }

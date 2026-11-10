@@ -45,12 +45,15 @@ SITE = {
     "hours": [None, ("09:30", "18:30"), ("09:30", "18:30"), ("09:30", "18:30"),
               ("09:30", "18:30"), ("09:30", "18:30"), ("09:30", "18:30")],
     "time_zone": "Asia/Kolkata",
-    # Riya, the online assistant. Off until her new webhook is live (the old one answered 404 on 3 Nov 2026).
-    # To switch her on: paste the webhook URL here, set riyaEnabled to True, run this script. Nothing else.
+    # Riya, the online assistant, on Svayra's Riya v2 service (one service for every clinic; Arha is the
+    # "arha" row of the Riya Clinics sheet). The old n8n cloud webhook answered 404 on 3 Nov 2026.
+    # To switch her on: add the "arha" row (allowed_domains: arha.svayra.com), set riyaEnabled to True,
+    # run this script. Nothing else.
     # Off: no launcher, no teaser, no chat code, no webhook URL and no "Ask Riya" button anywhere; those
     # buttons fall back to calling the clinic (<!--flag:riya--> / <!--flag:no-riya--> blocks).
     "riyaEnabled": False,
-    "riya_webhook_url": "",
+    "riya_webhook_url": "https://chat.svayra.com/webhook/riya-v2",
+    "riya_clinic_id": "arha",
     # Reviews and before/after publicity stay out until the clinic decides (NMC ethical advertising guidelines,
     # National Dental Commission advisory, Oct 2026). Off: no review sections, stars or ratings anywhere, and
     # /our-work/ is not built and not linked (<!--flag:reviews--> and <!--flag:ourwork--> blocks). Content is kept.
@@ -166,7 +169,7 @@ def client_config():
         "emergency": "" if missing("emergency") else SITE["emergency"],
         "timeZone": SITE["time_zone"],
         "hours": [list(d) if d else None for d in SITE["hours"]],
-        **({"riyaWebhookUrl": SITE["riya_webhook_url"]} if flags()["riya"] else {}),
+        **({"riyaWebhookUrl": SITE["riya_webhook_url"], "riyaClinicId": SITE["riya_clinic_id"]} if flags()["riya"] else {}),
         **({"googleReviewsUrl": SITE["google_reviews_url"]} if flags()["reviews"] else {}),
     }
     # Leave out what is not set (site.js treats a missing key as empty), so no unused channel is named in a page
