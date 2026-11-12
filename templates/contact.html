@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon, book_href, form %}
+{% from "_macros.html" import icon, book_href, form, landmark %}
 {% block body_class %}page-contact{% endblock %}
 {% block main %}
 <section class="wrap chero">
@@ -7,7 +7,7 @@
   <div class="chero__text">
     <h1>Book an appointment at Arha Dental Care, Peddar Road</h1>
     <p>Send us a request below and we'll call or WhatsApp you to agree a time. If you'd rather talk now, call <a href="{{ tel(site.phone) }}">{{ site.phone_display }}</a> or <a href="{{ wa(site.whatsapp, site.whatsapp_text) }}" target="_blank" rel="noopener">message us on WhatsApp</a>.</p>
-    <p>We're at {{ address_one_line() }}, {{ site.address.landmark[0] | lower }}{{ site.address.landmark[1:] }}, within easy reach of Kemps Corner, Breach Candy and Malabar Hill.</p>
+    <p>We're at {{ address_one_line() }}, {{ landmark() }}, within easy reach of Kemps Corner, Breach Candy and Malabar Hill.</p>
     <p>Open {% for day, text in hours_rows() %}{% if loop.first %}{{ day }}{% endif %}{% if loop.index == 6 %} to {{ day }}, {{ text }}{% endif %}{% endfor %}; closed on Sunday. {{ "[[TBC: opening time and lunch break]]" | tbc }}</p>
   </div>
 </section>
@@ -24,13 +24,13 @@
   <div class="wrap">
     <h2 id="git-h">Other ways to reach us</h2>
     <p>Our reception team can answer questions about appointments, fees and treatments. For dental emergencies, please call.</p>
-    <h4>Call us</h4>
+    <h3 class="h4">Call us</h3>
     <a class="pill" href="{{ tel(site.phone) }}">{{ site.phone_display }}</a>
-    <h4>WhatsApp</h4>
+    <h3 class="h4">WhatsApp</h3>
     <a class="pill" href="{{ wa(site.whatsapp, site.whatsapp_text) }}" target="_blank" rel="noopener">Start a chat</a>
-    <h4>Email</h4>
+    <h3 class="h4">Email</h3>
     {% if site.email %}<a class="pill" href="mailto:{{ site.email }}">{{ site.email }}</a>{% else %}<span class="pill">{{ "[[TBC: clinic email]]" | tbc }}</span>{% endif %}
-    <h4>Visit</h4>
+    <h3 class="h4">Visit</h3>
     <a class="pill" href="{{ maps_dir() }}" target="_blank" rel="noopener">{{ site.address.line1 }}, {{ site.address.line2 }}</a>
   </div>
 </section>

@@ -1,4 +1,4 @@
-{% from "_macros.html" import icon, book_href %}
+{% from "_macros.html" import icon, book_href, landmark %}
 {% include "_reviews.html" %}
 <section class="visit" id="visit" aria-labelledby="visit-h">
   <div class="visit__panel">
@@ -19,7 +19,7 @@
     <details class="acc">
       <summary><h4>Getting here and parking</h4><span class="acc__ico" aria-hidden="true"></span></summary>
       <div class="acc__body">
-        <p>We are at {{ site.address.line1 }}, {{ site.address.line2 }}, {{ site.address.landmark[0] | lower }}{{ site.address.landmark[1:] }}. Doctor House is a short drive from Kemps Corner, Breach Candy and Malabar Hill. {{ "[[TBC: floor, lift access and where patients can park]]" | tbc }}</p>
+        <p>We are at {{ site.address.line1 }}, {{ site.address.line2 }}, {{ landmark() }}. Doctor House is a short drive from Kemps Corner, Breach Candy and Malabar Hill. {{ "[[TBC: floor, lift access and where patients can park]]" | tbc }}</p>
         <a class="tlink" href="{{ maps_dir() }}" target="_blank" rel="noopener">Get directions {{ icon("right") }}</a>
       </div>
     </details>

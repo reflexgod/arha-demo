@@ -1,5 +1,7 @@
 {% macro icon(name, cls="") %}<svg class="ico {{ cls }}" aria-hidden="true" focusable="false"><use href="#i-{{ name }}"></use></svg>{% endmacro %}
 
+{% macro landmark() %}{% if site.address.landmark %}{{ site.address.landmark[0] | lower }}{{ site.address.landmark[1:] }}{% else %}{{ "[[TBC: landmark]]" | tbc }}{% endif %}{% endmacro %}
+
 {% macro book_href(treatment="") %}/contact/{% if treatment %}?treatment={{ treatment }}{% endif %}#book{% endmacro %}
 
 {% macro logo(cls="logo", href="/") %}

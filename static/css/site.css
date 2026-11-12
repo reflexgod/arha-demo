@@ -9,7 +9,7 @@
 
 :root {
   --ink: #0F1B27; --navy: #1E2C44; --stone: #F4F3F1; --paper: #FDFDFD; --white: #FFFFFF; --sand: #D9D7CF;
-  --blush: #FCF7F5; --slate: #333F48; --gold: #B08154; --gold-text: #8C6440; --gold-light: #C4976A; --sea: #6A8E9B; --sea-dark: #557A88; --sea-band: #557A88; --go: #AED688;
+  --blush: #FCF7F5; --slate: #333F48; --gold: #B08154; --gold-text: #8C6440; --gold-light: #C4976A; --sea: #6A8E9B; --sea-dark: #4A6E7C; --sea-band: #557A88; --go: #AED688;
   --serif: "Libre Caslon Display", "Caslon Fallback", Georgia, serif;
   --sans: "Inter", "Inter Fallback", Arial, sans-serif;
   --label: "Barlow Condensed", "Barlow Fallback", "Arial Narrow", Arial, sans-serif;
@@ -31,6 +31,8 @@ html { font-size: 17.6px; -webkit-text-size-adjust: 100%; scroll-behavior: smoot
 body { margin: 0; background: var(--paper); color: var(--ink); font: 300 var(--body)/var(--body-lh) var(--sans); -webkit-font-smoothing: antialiased; }
 img, video, svg { display: block; max-width: 100%; }
 picture { display: block; }
+/* pictures inside fixed-ratio slots fill the slot (img uses object-fit: cover) */
+.hero__media picture, .thero__img picture, .card__media picture, .commit__media picture, .phero__media picture, .chero__media picture, .member__photo picture { height: 100%; }
 a { color: inherit; }
 h1, h2, h3, h4, h5, h6, p, ul, ol, figure { margin: 0; }
 h1 { font: 400 var(--h1)/var(--h1-lh) var(--serif); color: var(--navy); letter-spacing: -.01em; }
@@ -158,7 +160,9 @@ body.no-scroll { overflow: hidden; }
   .logo { width: 218px; }
   .ubar__in { flex-direction: column; justify-content: center; gap: 12px; min-height: 104px; padding-top: 14px; padding-bottom: 14px; }
   .ubar a, .ubar span { font-size: 1rem; }
+  .ubar__clock { white-space: nowrap; }
   .ubar__status { margin-left: 8px; }
+  .ubar__status small { display: none; }
 }
 
 /* ---------------------------------------------------------------- home: hero */
@@ -369,14 +373,23 @@ body.no-scroll { overflow: hidden; }
 .cookie-reopen { position: fixed; left: 12px; bottom: 12px; z-index: 70; width: 40px; height: 40px; display: grid; place-items: center; border: 0; background: #FDFDFD;
                  box-shadow: 0 1px 6px rgba(15, 27, 39, .18); color: var(--gold); cursor: pointer; }
 .cookie-reopen[hidden] { display: none; }
+@media (max-width: 991px) { .cookie-reopen, .cookie-reopen[hidden] { display: none; } }  /* phones: footer link instead, so nothing floats over text */
+.ftr__cookie { padding: 0; border: 0; background: none; color: inherit; cursor: pointer; font: 400 .9rem/1.3 var(--sans); text-align: left; }
+.ftr__cookie:hover { color: var(--gold); }
 .cookie-reopen svg { width: 22px; height: 22px; }
+@media (max-width: 359px) { .ubar a, .ubar span { font-size: .92rem; letter-spacing: 1px; } }
 @media (max-width: 767px) { .cookie { top: 0; bottom: auto; width: 100%; padding: 20px var(--pad); } }
 .callfab { display: none; }
+/* Phones and tablets: call bar docked to the bottom edge. It stays hidden while the page's first section (which has its
+   own call button) or the footer (which lists the number) is on screen, so it never sits on top of the hero text. */
 @media (max-width: 991px) {
-  .callfab { position: fixed; right: 16px; bottom: 16px; z-index: 75; display: inline-flex; align-items: center; gap: 8px; padding: 14px 20px; border-radius: 999px;
-             background: var(--ink); color: #FDFDFD; text-decoration: none; box-shadow: 0 4px 16px rgba(15, 27, 39, .3);
-             font: 500 1rem/1 var(--label); letter-spacing: 1.5px; text-transform: uppercase; }
+  .callfab { position: fixed; left: 0; right: 0; bottom: 0; z-index: 75; display: flex; justify-content: center; align-items: center; gap: 10px;
+             padding: 14px 16px calc(14px + env(safe-area-inset-bottom)); background: var(--ink); color: #FDFDFD; border-top: 1px solid var(--gold);
+             text-decoration: none; font: 500 1.1rem/1 var(--label); letter-spacing: 1.5px; text-transform: uppercase;
+             transform: translateY(110%); transition: transform .3s var(--ease); }
+  .callfab.is-shown { transform: none; }
   .callfab .ico { width: 16px; height: 16px; color: var(--gold); }
+  .callfab__num { color: var(--gold-light); }
   .drawer.is-open ~ .callfab { display: none; }
 }
 
@@ -512,7 +525,7 @@ body.no-scroll { overflow: hidden; }
 .getintouch { background: var(--sea-band); color: #FDFDFD; padding: 64px 0; text-align: center; }
 .getintouch h2 { color: #FDFDFD; }
 .getintouch > .wrap > p { max-width: 1170px; margin: 32px auto 0; }
-.getintouch h4 { color: #FDFDFD; margin-top: 40px; }
+.getintouch .h4 { color: #FDFDFD; margin-top: 40px; }
 .getintouch .pill { margin-top: 12px; color: #FDFDFD; border-color: #FDFDFD; text-decoration: none; }
 .getintouch .pill:hover { background: #FDFDFD; color: var(--ink); }
 .feedback { padding: 64px 0; text-align: center; }

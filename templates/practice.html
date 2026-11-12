@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon, book_href %}
+{% from "_macros.html" import icon, book_href, landmark %}
 {% block preload %}<link rel="preload" as="image" href="/static/img/practice-hero-800.avif" type="image/avif" imagesrcset="/static/img/practice-hero-480.avif 480w, /static/img/practice-hero-800.avif 800w, /static/img/practice-hero-1440.avif 1440w" imagesizes="(min-width: 992px) 50vw, 100vw">{% endblock %}
 {% block body_class %}page-practice{% endblock %}
 {% block crumbs %}{% endblock %}
@@ -24,7 +24,7 @@
       </div>
       <div>
         <h2 id="story-h">Our story</h2>
-        <p class="story__lead">Arha Dental Care is at 107 Doctor House, {{ site.address.line2 }}, {{ site.address.landmark[0] | lower }}{{ site.address.landmark[1:] }}.{% if site.established %} We opened in {{ site.established }}.{% endif %}</p>
+        <p class="story__lead">Arha Dental Care is at 107 Doctor House, {{ site.address.line2 }}, {{ landmark() }}.{% if site.established %} We opened in {{ site.established }}.{% endif %}</p>
         <div class="story__cols">
           <p>The practice is led by Dr. Nikhil V. Jain, who holds an MDS in prosthodontics, the specialty that restores and replaces teeth, and is an ITI Scholar (London). Dr. Vasant P. Jain, a dental surgeon, is part of the team.</p>
           <p>Our patients range from young children at their first visit to adults who need crowns, root canal treatment, implants or a full-mouth rehabilitation. Whatever the treatment, we start with a proper examination and explain the options before anything is done.</p>

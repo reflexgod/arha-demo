@@ -25,5 +25,5 @@ images:
   - {name: contact-photo, kind: real, src: src-assets/dental-operatory-arha-dental-care-peddar-road-04.jpeg, ratio: [616, 552], focus: [0.42, 0.55], widths: [480, 800, 1232], alt: "Consultation desk in a treatment room at Arha Dental Care"}
 
 videos:
-  - {name: home-hero-tour, kind: real, src: src-assets/hero-land-master.mp4, start: 0, duration: 12.7, crop: [1152, 1080], focus: [0.3, 0.5], sizes: [[768, 720], [1152, 1080]], poster_widths: [768, 1152]}
+  - {name: home-hero-tour, kind: real, src: src-assets/hero-land-master.mp4, start: 0, duration: 12.7, crop: [1152, 1080], zoom: 1.15, focus: [0.438, 0.5], grade: "eq=contrast=1.22:brightness=-0.07:saturation=1.3:gamma=0.84,colorbalance=rs=0.06:gs=0.02:bs=-0.07:rm=0.07:gm=0.02:bm=-0.07:rh=0.03:bh=-0.04,vignette=angle=PI/4", sizes: [[768, 720], [1152, 1080]], poster_widths: [768, 1152]}
   - {name: home-card-walkthrough, kind: real, src: src-assets/IMG_2303.MOV, start: 26, duration: 14, crop: [1080, 608], focus: [0.5, 0.42], sizes: [[640, 360], [1080, 608]], poster_widths: [640, 1080]}

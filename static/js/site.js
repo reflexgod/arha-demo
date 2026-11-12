@@ -59,7 +59,9 @@
         else if (gaLoaded) gtag("consent", "update", { analytics_storage: "denied" });
       });
     });
-    if (reopen) reopen.addEventListener("click", function () { banner.hidden = false; reopen.hidden = true; });
+    var openBanner = function () { banner.hidden = false; if (reopen) reopen.hidden = true; };
+    if (reopen) reopen.addEventListener("click", openBanner);
+    $$("[data-cookie-open]").forEach(function (b) { b.addEventListener("click", openBanner); });
   }
 
   /* ---------------------------------------------------------- live clock and open / closed status (clinic time) */
@@ -181,6 +183,20 @@
       var mio = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { loadMap(); mio.disconnect(); } }, { rootMargin: "400px" });
       mio.observe(map);
     } else loadMap();
+  }
+
+  /* ---------------------------------------------------------- phone call bar: hidden over the first section and the footer */
+  var callbar = $("[data-callbar]");
+  if (callbar) {
+    var first = $("#main > section"), foot = $(".ftr"), seen = {};
+    if (!("IntersectionObserver" in window) || !first) callbar.classList.add("is-shown");
+    else {
+      var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { seen[en.target === foot ? "foot" : "first"] = en.isIntersecting; });
+        callbar.classList.toggle("is-shown", !seen.first && !seen.foot);
+      });
+      cio.observe(first); if (foot) cio.observe(foot);
+    }
   }
 
   /* ---------------------------------------------------------- reviews carousel (only rendered when switched on) */

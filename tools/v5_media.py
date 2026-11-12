@@ -102,6 +102,9 @@ def do_video(spec):
     src = ROOT / spec["src"]
     W, H = probe_size(src)
     cw, ch = spec["crop"]
+    zoom = spec.get("zoom", 1.0)            # > 1 = tighter crop (scaled back up to the output sizes)
+    cw, ch = round(cw / zoom), round(ch / zoom)
+    grade = ("," + spec["grade"]) if spec.get("grade") else ""   # ffmpeg filters, e.g. eq=contrast=1.1
     if cw > W or ch > H:
         raise SystemExit(f"{spec['name']}: crop {cw}x{ch} larger than source {W}x{H}")
     fx, fy = spec.get("focus", [0.5, 0.5])
@@ -111,7 +114,7 @@ def do_video(spec):
     trim = ["-ss", str(spec["start"]), "-t", str(spec["duration"]), "-i", str(src)]
     sizes = []
     for w, h in spec["sizes"]:
-        vf = f"crop={cw}:{ch}:{x}:{y},scale={w}:{h}:flags=lanczos,fps=30,format=yuv420p"
+        vf = f"crop={cw}:{ch}:{x}:{y}{grade},scale={w}:{h}:flags=lanczos,fps=30,format=yuv420p"
         base = VID / f"{spec['name']}-{w}"
         ffmpeg(*trim, "-an", "-vf", vf, "-c:v", "libx264", "-preset", "slow", "-crf", "27", "-profile:v", "high",
                "-movflags", "+faststart", f"{base}.mp4")
@@ -120,11 +123,12 @@ def do_video(spec):
         sizes.append([w, h])
     # Poster = the first frame of the cut, so the video starts without a jump.
     tmp = VID / f"_{spec['name']}-poster.png"
-    ffmpeg(*trim, "-frames:v", "1", "-vf", f"crop={cw}:{ch}:{x}:{y}", str(tmp))
+    big = spec["sizes"][-1]
+    ffmpeg(*trim, "-frames:v", "1", "-vf", f"crop={cw}:{ch}:{x}:{y}{grade},scale={big[0]}:{big[1]}:flags=lanczos", str(tmp))
     poster = Image.open(tmp).convert("RGB")
     tmp.unlink()
     pw = save_set(poster, f"{spec['name']}-poster", spec["poster_widths"])
-    return {"kind": spec["kind"], "sizes": sizes, "poster_widths": pw, "ratio": [cw, ch], "src": spec["src"]}
+    return {"kind": spec["kind"], "sizes": sizes, "poster_widths": pw, "ratio": list(spec["crop"]), "src": spec["src"]}
 
 
 def main():

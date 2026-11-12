@@ -100,7 +100,6 @@ def main():
             for width, height in WIDTHS.items():
                 ctx = browser.new_context(viewport={"width": width, "height": height}, device_scale_factor=1,
                                           is_mobile=width < 500, has_touch=width < 500)
-                ctx.add_init_script("try{localStorage.setItem('arha-consent','denied')}catch(e){}")
                 page = ctx.new_page()
                 for name in names:
                     path, ref = PAGES[name]

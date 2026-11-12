@@ -3,7 +3,7 @@
 <html lang="en-IN">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{ page.title }}</title>
 <meta name="description" content="{{ page.description }}">
 {% if site.preview or page.get("noindex") %}<meta name="robots" content="noindex, nofollow">{% endif %}
@@ -148,7 +148,7 @@
   </div>
 </div>
 <button class="cookie-reopen" type="button" aria-label="Cookie settings" data-cookie-reopen hidden><svg aria-hidden="true"><use href="#i-cookie"></use></svg></button>
-<a class="callfab" href="{{ tel(site.phone) }}" aria-label="Call us on {{ site.phone_display }}">{{ icon("phone") }}Call us</a>
+<a class="callfab" href="{{ tel(site.phone) }}" data-callbar>{{ icon("phone") }}Call us <span class="callfab__num">{{ site.phone_display }}</span></a>
 
 <script id="cfg" type="application/json">{{ client_config() }}</script>
 <script src="/static/js/site.js?v={{ js_v }}" defer></script>
