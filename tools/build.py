@@ -257,7 +257,24 @@ def static_pages():
 
 
 def faq_node(faqs):
-    return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": qa["q"], "acceptedAnswer": {"@type": "Answer", "text": strip_tbc(qa["a"])}} for qa in faqs]} if faqs else None
+    """FAQPage schema. Questions whose answer is still only a [[TBC]] stay on the page but out of the schema."""
+    qs = [{"@type": "Question", "name": qa["q"], "acceptedAnswer": {"@type": "Answer", "text": strip_tbc(qa["a"])}}
+          for qa in faqs if strip_tbc(qa["a"])]
+    return {"@type": "FAQPage", "mainEntity": qs} if qs else None
+
+
+def international_page():
+    """International & NRI hub: noindex, kept out of menus and the sitemap until approved."""
+    i = load("international.yaml")
+    plans = load("travel-plans.yaml")
+    data = {"plans": plans, "countries": i["countries"], "general": i["general"], "hours": SITE["hours"],
+            "clinicTz": SITE["time_zone"], "whatsapp": re.sub(r"\D", "", SITE["whatsapp"]), "phone": SITE["phone"]}
+    plan_json = Markup(json.dumps(data, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/"))
+    crumbs = [("Home", "/"), ("International patients", "/international-patients/")]
+    return [{"path": "/international-patients/", "template": "international.html", "title": i["title"],
+             "description": i["description"], "crumbs": crumbs, "noindex": True, "i": i, "plans": plans,
+             "plan_json": plan_json, "og_image": "/static/img/practice-story-800.jpg",
+             "schema": [org_node(), breadcrumb_node(crumbs), faq_node(i["faqs"])]}]
 
 
 def fill_tokens(text):
@@ -359,7 +376,7 @@ def main():
                       trim_blocks=True, lstrip_blocks=True)
     env.globals.update(site=SITE, nav=NAV, reviews=REVIEWS or [], picture=picture, video=video, embed=embed, tel=tel, wa=wa, maps_dir=maps_dir,
                        maps_embed=maps_embed, address_one_line=address_one_line, hours_rows=hours_rows,
-                       client_config=client_config, css_v=asset_version("css/site.css"), js_v=asset_version("js/site.js"),
+                       client_config=client_config, css_v=asset_version("css/site.css"), js_v=asset_version("js/site.js"), planner_v=asset_version("js/planner.js"),
                        year=TODAY.year, updated=TODAY.strftime("%-d %B %Y") if sys.platform != "win32" else TODAY.strftime("%#d %B %Y"))
     env.filters["tbc"] = tbc
     env.filters["strip_tbc"] = strip_tbc
@@ -368,12 +385,12 @@ def main():
     treatments = {t["t"]["slug"]: t["t"] for t in treatment_pages()}
     env.globals["built_treatments"] = treatments
 
-    pages = static_pages() + treatment_pages() + more_pages() + blog_pages()
+    pages = static_pages() + treatment_pages() + more_pages() + blog_pages() + international_page()
     rendered = {}
     for p in pages:
         schema = p["schema_fn"](p) if "schema_fn" in p else p.get("schema", [])
         ctx = {"page": p, "schema": jsonld(*schema) if schema else "", "canonical": SITE["domain"] + (p["path"] if p["path"] != "/404.html" else "/"),
-               **{k: p[k] for k in ("t", "h", "fp", "pol", "blog", "post", "posts") if k in p}}
+               **{k: p[k] for k in ("t", "h", "fp", "pol", "blog", "post", "posts", "i", "plans", "plan_json") if k in p}}
         out = env.get_template(p["template"]).render(**ctx)
         rendered[p["path"]] = out
         target = DIST / (p["path"].lstrip("/") or "index.html")

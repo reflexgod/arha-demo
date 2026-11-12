@@ -1,0 +1,106 @@
+# International & NRI patients hub (/international-patients/). noindex and not in the main menu until approved;
+# then link it from the footer and the treatments hub. Rules: no prices, no price comparisons or savings claims, no
+# guarantees or medical promises, no before/after. Anything clinical or travel-related that isn't confirmed is [[TBC]].
+title: "International and NRI Dental Patients | Arha Dental Care"
+description: "Planning dental treatment in Mumbai from the UK, UAE, US or elsewhere? Plan your visits, share X-rays before you fly and know your aftercare."
+h1: "Dental treatment in Mumbai, planned around your trip."
+sub: "For patients flying in from the UK, UAE, US and beyond: your plan, your visits and your aftercare, explained before you book a flight."
+whatsapp_text: "Hello Arha Dental Care, I live abroad and I'd like to plan dental treatment during a visit to Mumbai."
+
+how:
+  heading: "How it works"
+  steps:
+    - {h: "Tell us what you need", p: "Use the trip planner below, or send us a WhatsApp message with your dates."}
+    - {h: "Share your X-rays", p: "Upload recent X-rays, scans or photos securely, so the dentist can look before you travel."}
+    - {h: "Talk it through", p: "A video consultation to discuss your options and a sample visit plan. [[TBC: video consultation availability and how it's booked]]"}
+    - {h: "Visit and follow up", p: "Your appointments are booked around your dates, with clear aftercare for when you fly home."}
+
+# Countries for the planner and the tabs. zones: first one is the default; label shown when there is more than one.
+countries:
+  - id: uk
+    name: "United Kingdom"
+    short: "UK"
+    zones: [{label: "London", tz: "Europe/London"}]
+    flight: "[[TBC: typical direct flight time to Mumbai]]"
+    reach: "WhatsApp is the easiest way to reach us. Messages can be sent any time; we reply during clinic hours."
+    pay: "[[TBC: payment methods for visitors (international cards, Indian bank accounts or UPI for NRIs)]]"
+  - id: uae
+    name: "United Arab Emirates"
+    short: "UAE"
+    zones: [{label: "Dubai / Abu Dhabi", tz: "Asia/Dubai"}]
+    flight: "[[TBC: typical direct flight time to Mumbai]]"
+    reach: "WhatsApp messages work well. WhatsApp voice and video calls may not connect from the UAE, so we can hold the video consultation another way. [[TBC: video platform the clinic uses]]"
+    pay: "[[TBC: payment methods for visitors]]"
+  - id: usa
+    name: "United States"
+    short: "USA"
+    zones: [{label: "New York (Eastern)", tz: "America/New_York"}, {label: "Chicago (Central)", tz: "America/Chicago"}, {label: "Denver (Mountain)", tz: "America/Denver"}, {label: "Los Angeles (Pacific)", tz: "America/Los_Angeles"}]
+    flight: "[[TBC: typical flight time to Mumbai, usually with a connection]]"
+    reach: "WhatsApp is the easiest way to reach us. Because of the time difference, a message sent in your evening is usually answered by your morning."
+    pay: "[[TBC: payment methods for visitors]]"
+  - id: canada
+    name: "Canada"
+    short: "Canada"
+    zones: [{label: "Toronto (Eastern)", tz: "America/Toronto"}, {label: "Calgary (Mountain)", tz: "America/Edmonton"}, {label: "Vancouver (Pacific)", tz: "America/Vancouver"}]
+    flight: "[[TBC: typical flight time to Mumbai, usually with a connection]]"
+    reach: "WhatsApp is the easiest way to reach us. Because of the time difference, a message sent in your evening is usually answered by your morning."
+    pay: "[[TBC: payment methods for visitors]]"
+  - id: australia
+    name: "Australia"
+    short: "Australia"
+    zones: [{label: "Sydney / Melbourne", tz: "Australia/Sydney"}, {label: "Brisbane", tz: "Australia/Brisbane"}, {label: "Adelaide", tz: "Australia/Adelaide"}, {label: "Perth", tz: "Australia/Perth"}]
+    flight: "[[TBC: typical flight time to Mumbai]]"
+    reach: "WhatsApp is the easiest way to reach us. Clinic hours fall in your afternoon and evening."
+    pay: "[[TBC: payment methods for visitors]]"
+  - id: singapore
+    name: "Singapore"
+    short: "Singapore"
+    zones: [{label: "Singapore", tz: "Asia/Singapore"}]
+    flight: "[[TBC: typical direct flight time to Mumbai]]"
+    reach: "WhatsApp is the easiest way to reach us; clinic hours fall in your working day."
+    pay: "[[TBC: payment methods for visitors]]"
+  - id: other
+    name: "Somewhere else"
+    short: "Other"
+    zones: []          # uses the visitor's own time zone from the browser
+    flight: "[[TBC: depends on where you fly from]]"
+    reach: "WhatsApp is the easiest way to reach us from most countries. Messages can be sent any time; we reply during clinic hours."
+    pay: "[[TBC: payment methods for visitors]]"
+
+general:
+  before: ["Check your passport and visa requirements with official sources well before you travel", "Send us recent X-rays, scans or photos", "Tell us about your health and the medicines you take", "Keep a day or two spare at the end of your trip"]
+  here: ["Arrive a little early for your first appointment", "Bring your medicines and any dental records", "Keep some days free of long excursions after surgery"]
+  after: ["Follow the written aftercare you are given", "Message us on WhatsApp if anything worries you", "Book a check-up with your home dentist"]
+
+area:
+  heading: "Getting to Peddar Road"
+  intro: "Arha Dental Care is at 107 Doctor House, 14 Peddar Road, in South Mumbai. These are rough guides only. We don't recommend hotels or travel companies."
+  items:
+    - {h: "From Mumbai airport (CSMIA)", p: "[[TBC: approximate distance and usual travel time by road]]"}
+    - {h: "Nearby areas", p: "Kemps Corner, Breach Candy, Cumballa Hill and Malabar Hill are close by. [[TBC: distances]]"}
+    - {h: "Getting around", p: "Taxis and app-based cabs are the simplest way to reach us. [[TBC: parking and drop-off at Doctor House]]"}
+
+practical:
+  heading: "Practical information"
+  items:
+    - {h: "Visas and documents", p: "Visa rules depend on your passport and the reason for your visit. Check the official Government of India visa website before you book. We can provide an appointment letter if you need one. [[TBC: whether the clinic issues appointment letters]]"}
+    - {h: "Flying after treatment", p: "Some treatments, such as implant surgery or extractions, need a few days before flying. Your dentist will tell you how long to allow. [[TBC: Arha's advice on flying after surgery]]"}
+    - {h: "Medicines and health", p: "Bring a list of your medicines and any medical letters. Tell us about blood thinners, diabetes, heart conditions or bone medicines before treatment is planned."}
+    - {h: "Travel insurance", p: "Check what your travel insurance covers. Many policies don't cover planned treatment abroad."}
+    - {h: "Records to take home", p: "You leave with a summary of the treatment done and copies of your X-rays, for your home dentist. [[TBC: what records the clinic provides]]"}
+    - {h: "If something feels wrong after you fly home", p: "Message us on WhatsApp with a photo and a description. For severe pain, swelling or bleeding, see a local dentist or doctor straight away."}
+
+faq_heading: "Questions international patients ask"
+faqs:
+  - q: "Can I have dental implants during one visit to Mumbai?"
+    a: "Implant treatment usually needs two trips: one to place the implant and one, after healing, for the final tooth. The healing time depends on your bone and your health. [[TBC: Arha's typical healing time]]"
+  - q: "Can the dentist look at my X-rays before I travel?"
+    a: "Yes. Upload recent X-rays, scans or photos through the secure form on this page and the dentist will look before your consultation. A full plan is confirmed only after an examination."
+  - q: "Do you offer video consultations?"
+    a: "[[TBC: whether video consultations are offered, and how they are booked]]"
+  - q: "How long should I plan to stay?"
+    a: "It depends on the treatment. Use the trip planner above for a sample timeline, then we confirm your exact plan after a consultation."
+  - q: "What happens if I need help after I go home?"
+    a: "Message us on WhatsApp. We can advise you, and talk to your home dentist if needed. For severe pain, swelling or bleeding, see a local dentist or doctor straight away."
+  - q: "Do you treat children visiting with their parents?"
+    a: "Yes, we see children for check-ups and treatment. Let us know their ages when you plan your visit."

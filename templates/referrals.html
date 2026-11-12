@@ -73,7 +73,7 @@
         <div><label for="f-ref-msg">Anything else we should know?</label><textarea id="f-ref-msg" name="message" rows="3"></textarea></div>
         <div>
           <label for="f-ref-files">Attach X-rays, scans or reports</label>
-          <input type="file" id="f-ref-files" name="files" multiple accept=".pdf,.jpg,.jpeg,.png" aria-describedby="f-ref-files-note">
+          <input type="file" id="f-ref-files" name="files" multiple accept=".pdf,.jpg,.jpeg,.png" data-max="3" data-mb="4" data-ext="pdf|jpe?g|png" aria-describedby="f-ref-files-note">
           <p class="form__note" id="f-ref-files-note">Up to 3 files (PDF, JPG or PNG), 4 MB each.</p>
         </div>
       </fieldset>

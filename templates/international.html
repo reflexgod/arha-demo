@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, book_href %}
+{% block preload %}<link rel="preload" as="image" href="/static/img/practice-story-800.avif" type="image/avif" imagesrcset="/static/img/practice-story-480.avif 480w, /static/img/practice-story-800.avif 800w" imagesizes="(min-width: 992px) 50vw, 100vw">{% endblock %}
+{% block body_class %}page-intl{% endblock %}
+{% block main %}
+<section class="ihero">
+  <div class="ihero__media">{{ picture("practice-story", "(min-width: 992px) 50vw, 100vw", eager=True) }}</div>
+  <div class="ihero__text">
+    <p class="pill">International &amp; NRI patients</p>
+    <h1>{{ i.h1 }}</h1>
+    <p class="ihero__sub">{{ i.sub }}</p>
+    <div class="btns">
+      <a class="btn btn--solid" href="#planner" data-plan-start>Plan my trip {{ icon("right") }}</a>
+      <a class="btn" href="{{ wa(site.whatsapp, i.whatsapp_text) }}" target="_blank" rel="noopener">WhatsApp us {{ icon("arrow") }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="ihow" aria-labelledby="ihow-h">
+  <div class="wrap">
+    <h2 id="ihow-h" data-reveal>{{ i.how.heading }}</h2>
+    <ol class="ihow__steps">
+      {% for s in i.how.steps %}<li data-reveal><h3 class="h4">{{ s.h }}</h3><p>{{ s.p | tbc }}</p></li>{% endfor %}
+    </ol>
+  </div>
+</section>
+
+<section class="iplan" id="planner" aria-labelledby="plan-h">
+  <div class="wrap">
+    <p class="label">Trip planner</p>
+    <h2 id="plan-h">Plan your visits in five steps</h2>
+    <p class="iplan__intro">A sample plan in about a minute. Nothing is sent to us until you choose to share it. {{ plans.note }}</p>
+    <noscript><p class="iplan__noscript">The planner needs JavaScript. You can <a href="{{ wa(site.whatsapp, i.whatsapp_text) }}">WhatsApp us your dates</a> instead.</p></noscript>
+    <div class="planner" data-planner data-callbar-hide hidden>
+      <div class="planner__head">
+        <p class="planner__count" aria-live="polite">Step <b data-pstep-n>1</b> of 5</p>
+        <div class="planner__bar" role="progressbar" aria-label="Planner progress" aria-valuemin="1" aria-valuemax="5" aria-valuenow="1"><span></span></div>
+      </div>
+      <form class="pform" novalidate>
+        <fieldset class="pstep" data-step="1">
+          <legend><span class="pstep__h" tabindex="-1">Which treatments are you thinking about?</span></legend>
+          <p class="pstep__hint">Choose one or more.</p>
+          <div class="pchips">
+            {% for t in plans.treatments %}<label class="pchip"><input type="checkbox" name="t" value="{{ t.id }}"><span>{{ t.label }}</span></label>{% endfor %}
+          </div>
+        </fieldset>
+        <fieldset class="pstep" data-step="2" hidden>
+          <legend><span class="pstep__h" tabindex="-1">Where will you be travelling from?</span></legend>
+          <div class="pchips pchips--2">
+            {% for c in i.countries %}<label class="pchip"><input type="radio" name="c" value="{{ c.id }}"><span>{{ c.name }}</span></label>{% endfor %}
+          </div>
+          <div class="pzone" data-pzone hidden>
+            <label for="pz">Your city or time zone</label>
+            <select id="pz" name="z"></select>
+          </div>
+          <div class="ptime" data-ptime aria-live="polite"></div>
+        </fieldset>
+        <fieldset class="pstep" data-step="3" hidden>
+          <legend><span class="pstep__h" tabindex="-1">When are you coming, and for how long?</span></legend>
+          <div class="pdates">
+            <div>
+              <label for="pd">Arrival date in Mumbai</label>
+              <input type="date" id="pd" name="d">
+            </div>
+            <div>
+              <span class="flabel" id="pn-l">Days in Mumbai</span>
+              <div class="pstepper" role="group" aria-labelledby="pn-l">
+                <button type="button" data-pn="-1" aria-label="One day fewer">−</button>
+                <input type="number" id="pn" name="n" min="1" max="120" value="14" inputmode="numeric" aria-labelledby="pn-l">
+                <button type="button" data-pn="1" aria-label="One day more">+</button>
+              </div>
+            </div>
+          </div>
+          <label class="check pnodate"><input type="checkbox" name="nd" value="1"> <span>I don't have dates yet</span></label>
+        </fieldset>
+        <fieldset class="pstep" data-step="4" hidden>
+          <legend><span class="pstep__h" tabindex="-1">Do you have recent dental X-rays or scans?</span></legend>
+          <div class="pchips pchips--3">
+            <label class="pchip"><input type="radio" name="x" value="yes"><span>Yes, I can upload them</span></label>
+            <label class="pchip"><input type="radio" name="x" value="no"><span>No</span></label>
+            <label class="pchip"><input type="radio" name="x" value="unsure"><span>Not sure</span></label>
+          </div>
+          <p class="pstep__hint" data-xnote hidden>Great. After your plan, upload them with the secure form further down this page.</p>
+        </fieldset>
+        <fieldset class="pstep" data-step="5" hidden>
+          <legend><span class="pstep__h" tabindex="-1">How should we contact you?</span></legend>
+          <div class="pchips pchips--2">
+            <label class="pchip"><input type="radio" name="m" value="WhatsApp" checked><span>WhatsApp</span></label>
+            <label class="pchip"><input type="radio" name="m" value="Phone call"><span>Phone call</span></label>
+            <label class="pchip"><input type="radio" name="m" value="Email"><span>Email</span></label>
+            <label class="pchip"><input type="radio" name="m" value="Video call"><span>Video call</span></label>
+          </div>
+          <div class="pcontact">
+            <div><label for="pname">Your name</label><input type="text" id="pname" name="name" autocomplete="name"></div>
+            <div><label for="pnum">Number or email, with country code</label><input type="text" id="pnum" name="num" autocomplete="tel"></div>
+          </div>
+          <p class="pstep__hint">Used only to fill in your message. Nothing is sent until you press "WhatsApp my plan".</p>
+        </fieldset>
+        <p class="planner__err" role="alert" data-perr></p>
+        <div class="planner__nav">
+          <button class="btn" type="button" data-pback hidden>{{ icon("right", "ico--back") }} Back</button>
+          <button class="btn btn--solid" type="submit" data-pnext>Next {{ icon("right") }}</button>
+        </div>
+      </form>
+      <div class="presult" data-presult hidden tabindex="-1"></div>
+    </div>
+  </div>
+</section>
+
+<section class="iupload" id="upload" aria-labelledby="up-h">
+  <div class="wrap">
+    <p class="label">Before you fly</p>
+    <h2 id="up-h" data-reveal>Send us your X-rays securely</h2>
+    <p class="iupload__intro">The dentist can look at recent X-rays, scans or photos before your consultation. Files go to a private folder that only the clinic can open. A full plan is confirmed only after an examination.</p>
+    <form class="form" id="f-xray" data-form="xray" novalidate>
+      <input type="hidden" name="form" value="xray">
+      <input type="hidden" name="page" value="">
+      <div class="hp" aria-hidden="true"><label for="f-xray-company">Company</label><input type="text" id="f-xray-company" name="company" tabindex="-1" autocomplete="off"></div>
+      <div class="form__2">
+        <div><label for="f-xray-name">Full name *</label><input type="text" id="f-xray-name" name="name" autocomplete="name" required></div>
+        <div><label for="f-xray-email">Email address *</label><input type="email" id="f-xray-email" name="email" autocomplete="email" required></div>
+        <div><label for="f-xray-phone">WhatsApp or phone, with country code *</label><input type="tel" id="f-xray-phone" name="phone" autocomplete="tel" inputmode="tel" required></div>
+        <div>
+          <label for="f-xray-country">Travelling from</label>
+          <select id="f-xray-country" name="country">
+            {% for c in i.countries %}<option value="{{ c.name }}">{{ c.name }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+      <div>
+        <label for="f-xray-files">X-rays, scans or photos *</label>
+        <input type="file" id="f-xray-files" name="files" multiple required accept=".pdf,.jpg,.jpeg,.png,.zip" data-max="3" data-mb="10" data-ext="pdf|jpe?g|png|zip" aria-describedby="f-xray-files-note">
+        <p class="form__note" id="f-xray-files-note">Up to 3 files: PDF, JPG, PNG, or a ZIP of DICOM scan files. 10 MB each. For a larger 3D scan, WhatsApp us and we'll send a link. {{ "[[TBC: large-scan route]]" | tbc }}</p>
+      </div>
+      <div>
+        <label for="f-xray-msg">Anything we should know? (optional)</label>
+        <textarea id="f-xray-msg" name="message" rows="3" placeholder="Your travel dates, or the treatment you're asking about"></textarea>
+      </div>
+      <label class="check"><input type="checkbox" name="consent" value="yes" required> <span>I agree that Arha Dental Care may store these files and details to plan my treatment and contact me about it, as set out in the <a href="/policies/privacy/">privacy policy</a>. *</span></label>
+      <label class="check"><input type="checkbox" name="marketing" value="yes"> <span>I'd like to hear about news and check-up reminders from Arha Dental Care.</span></label>
+      <div class="cf-turnstile" data-sitekey="{{ site.turnstile_site_key }}"></div>
+      <button class="btn btn--solid" type="submit">Upload securely {{ icon("arrow") }}</button>
+      <p class="form__status" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section class="icountry" aria-labelledby="ic-h">
+  <div class="wrap">
+    <h2 id="ic-h" data-reveal>Travelling from…</h2>
+    <div class="itabs" role="tablist" aria-label="Countries">
+      {% for c in i.countries %}<button class="itab" role="tab" id="tab-{{ c.id }}" aria-controls="panel-{{ c.id }}" aria-selected="{{ 'true' if loop.first else 'false' }}" tabindex="{{ '0' if loop.first else '-1' }}" data-tab>{{ c.short }}</button>{% endfor %}
+    </div>
+    {% for c in i.countries %}
+    <div class="ipanel" role="tabpanel" id="panel-{{ c.id }}" aria-labelledby="tab-{{ c.id }}" tabindex="0"{% if not loop.first %} hidden{% endif %}>
+      <h3>{{ c.name }}</h3>
+      <dl>
+        <div><dt>Time difference</dt><dd data-tzdiff="{{ c.zones | map(attribute='tz') | join(',') }}" data-tzlabels="{{ c.zones | map(attribute='label') | join('|') }}">Mumbai is on India Standard Time (UTC+5:30), with no daylight saving.</dd></div>
+        <div><dt>Flight time</dt><dd>{{ c.flight | tbc }}</dd></div>
+        <div><dt>How to reach us</dt><dd>{{ c.reach | tbc }} <a class="tlink" href="{{ wa(site.whatsapp, i.whatsapp_text) }}" target="_blank" rel="noopener">WhatsApp us {{ icon("arrow") }}</a></dd></div>
+        <div><dt>Paying</dt><dd>{{ c.pay | tbc }}</dd></div>
+      </dl>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="iarea" aria-labelledby="ia-h">
+  <div class="wrap">
+    <h2 id="ia-h" data-reveal>{{ i.area.heading }}</h2>
+    <p class="iarea__intro">{{ i.area.intro }}</p>
+    <div class="iarea__grid">
+      {% for a in i.area["items"] %}<div class="iarea__item" data-reveal><h3 class="h4">{{ a.h }}</h3><p>{{ a.p | tbc }}</p></div>{% endfor %}
+    </div>
+    <a class="tlink" href="{{ maps_dir() }}" target="_blank" rel="noopener">Directions to the clinic {{ icon("arrow") }}</a>
+  </div>
+</section>
+
+<section class="ipract" aria-labelledby="ip-h">
+  <div class="wrap">
+    <h2 id="ip-h" data-reveal>{{ i.practical.heading }}</h2>
+    <div class="ipract__list">
+      {% for it in i.practical["items"] %}
+      <details class="acc">
+        <summary><h3>{{ it.h }}</h3><span class="acc__ico" aria-hidden="true"></span></summary>
+        <div class="acc__body"><p>{{ it.p | tbc }}</p></div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="itrust" aria-labelledby="it-h">
+  <div class="wrap">
+    <img class="team__mark" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="">
+    <h2 id="it-h" data-reveal>Who will look after you</h2>
+    <div class="itrust__grid">
+      {% for d in site.doctors %}
+      <article class="itrust__card" data-reveal>
+        <h3>{{ d.name }}</h3>
+        <p class="pill">{{ d.role }}</p>
+        <p class="member__cred">{{ d.credentials }}</p>
+        <p>{{ d.bio[0] }}</p>
+        <a class="tlink" href="/the-practice/#meet-the-team">Meet the team {{ icon("right") }}</a>
+      </article>
+      {% endfor %}
+      <article class="itrust__card" data-reveal>
+        <h3>A clean, safe clinic</h3>
+        <p>Every room is cleaned and every instrument sterilised between patients. {{ "[[TBC: sterilisation process and equipment, as the clinic describes it]]" | tbc }}</p>
+        <a class="tlink" href="/the-practice/#technology">Rooms and equipment {{ icon("right") }}</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="faqband" aria-labelledby="faq-h">
+  <div class="wrap">
+    <img class="faqband__mark" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="">
+    <h2 id="faq-h">{{ i.faq_heading }}</h2>
+    <div class="faqband__list">
+      {% for qa in i.faqs %}
+      <details class="acc">
+        <summary><h3 class="h4">{{ qa.q }}</h3><span class="acc__ico" aria-hidden="true"></span></summary>
+        <div class="acc__body"><p>{{ qa.a | tbc }}</p></div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script id="plan-data" type="application/json">{{ plan_json }}</script>
+<script src="/static/js/planner.js?v={{ planner_v }}" defer></script>
+{% include "_visit.html" %}
+{% endblock %}

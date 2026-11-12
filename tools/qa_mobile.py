@@ -28,7 +28,8 @@ JS_STATE = """() => {
     .map(e => ({name: e.id || 'callbar', rect: r(e)})).filter(o => o.rect.bottom > 0 && o.rect.top < vh);
   const covers = fixed.filter(o => h1 && h1.bottom > o.rect.top && h1.top < o.rect.bottom && h1.top < vh).map(o => o.name);
   const onScreen = e => { const b = r(e); return !!b && b.bottom > 0 && b.top < vh; };
-  const shouldShow = !onScreen(document.querySelector('[data-callbar-first]') || document.querySelector('#main > section')) && !onScreen(document.querySelector('.ftr'));
+  const shouldShow = !onScreen(document.querySelector('[data-callbar-first]') || document.querySelector('#main > section')) && !onScreen(document.querySelector('.ftr'))
+    && ![...document.querySelectorAll('[data-callbar-hide]')].some(onScreen);
   const icoVisible = !!ico && getComputedStyle(ico).display !== 'none';
   return {icoVisible, shouldShow, barShown: !!bar && bar.classList.contains('is-shown'), cookie: !!ck && !ck.hidden, h1Covered: covers,
           overflow: document.documentElement.scrollWidth - innerWidth};

@@ -32,6 +32,7 @@
     document.head.appendChild(s);
   }
   function track(name, params) { if (gaLoaded) gtag("event", name, params || {}); }
+  window.arhaTrack = track; // used by planner.js on the international page
 
   document.addEventListener("click", function (e) {
     var a = e.target.closest && e.target.closest("a");
@@ -277,14 +278,16 @@
   /* ---------------------------------------------------------- phone call bar: hidden over the first section and the footer */
   var callbar = $("[data-callbar]");
   if (callbar) {
-    var first = $("[data-callbar-first]") || $("#main > section"), foot = $(".ftr"), seen = {};
+    // also hidden over [data-callbar-hide] blocks (the trip planner has its own buttons at the bottom of the screen)
+    var first = $("[data-callbar-first]") || $("#main > section"), foot = $(".ftr"), seen = [];
+    var watched = [first, foot].concat($$("[data-callbar-hide]")).filter(Boolean);
     if (!("IntersectionObserver" in window) || !first) callbar.classList.add("is-shown");
     else {
       var cio = new IntersectionObserver(function (entries) {
-        entries.forEach(function (en) { seen[en.target === foot ? "foot" : "first"] = en.isIntersecting; });
-        callbar.classList.toggle("is-shown", !seen.first && !seen.foot);
+        entries.forEach(function (en) { seen[watched.indexOf(en.target)] = en.isIntersecting; });
+        callbar.classList.toggle("is-shown", !seen.some(Boolean));
       });
-      cio.observe(first); if (foot) cio.observe(foot);
+      watched.forEach(function (w) { cio.observe(w); });
     }
   }
 
@@ -332,11 +335,18 @@
           var el = f.elements[need[n][0]];
           if (!el.value.trim()) { say(need[n][1]); el.focus(); return; }
         }
-        files = Array.prototype.slice.call(f.elements.files.files || []);
-        if (files.length > 3) { say("Please attach up to 3 files."); f.elements.files.focus(); return; }
+      }
+      if (kind === "xray" && !f.elements.email.value.trim()) { say("Please add your email address."); f.elements.email.focus(); return; }
+      if (f.elements.files) {
+        // limits come from the input: data-max (files), data-mb (MB each), data-ext (allowed extensions)
+        var fin = f.elements.files, maxN = +fin.getAttribute("data-max") || 3, maxMb = +fin.getAttribute("data-mb") || 4;
+        var extRe = new RegExp("\\.(" + (fin.getAttribute("data-ext") || "pdf|jpe?g|png") + ")$", "i");
+        files = Array.prototype.slice.call(fin.files || []);
+        if (fin.required && !files.length) { say("Please choose at least one file to upload."); fin.focus(); return; }
+        if (files.length > maxN) { say("Please attach up to " + maxN + " files."); fin.focus(); return; }
         for (var k = 0; k < files.length; k++) {
-          if (!/\.(pdf|jpe?g|png)$/i.test(files[k].name)) { say("Please attach PDF, JPG or PNG files only."); f.elements.files.focus(); return; }
-          if (files[k].size > 4 * 1024 * 1024) { say(files[k].name + " is larger than 4 MB. Please attach a smaller file."); f.elements.files.focus(); return; }
+          if (!extRe.test(files[k].name)) { say("That file type isn't accepted: " + files[k].name); fin.focus(); return; }
+          if (files[k].size > maxMb * 1024 * 1024) { say(files[k].name + " is larger than " + maxMb + " MB. Please attach a smaller file."); fin.focus(); return; }
         }
       }
       if (!f.elements.consent.checked) { say(kind === "referral" ? "Please confirm the patient has agreed to this referral." : "Please tick the box so we can contact you about your request."); f.elements.consent.focus(); return; }
@@ -344,6 +354,13 @@
 
       var data = new URLSearchParams();
       new FormData(f).forEach(function (v, key) { if (typeof v === "string") data.append(key, v); });
+      if (!cfg.formsEndpoint && kind === "xray") {
+        // Preview without a forms backend: files can't travel over WhatsApp links, so ask for a secure link instead.
+        track("form_submit", { form: kind, method: "whatsapp_fallback" });
+        say("Secure uploads aren't switched on in this preview. Opening WhatsApp so we can send you a secure upload link.", true);
+        window.open("https://wa.me/" + cfg.phone.replace(/\D/g, "") + "?text=" + encodeURIComponent("Hello Arha Dental Care, I'd like to send my X-rays before my visit. Name: " + name), "_blank", "noopener");
+        return;
+      }
       if (!cfg.formsEndpoint && kind === "referral") {
         var rmsg = ["Hello Arha Dental Care, I'd like to refer a patient.",
           "Referring dentist: " + name + ", " + f.elements.practice.value.trim(), "Phone: " + phone, "Email: " + f.elements.email.value.trim(),
@@ -372,7 +389,8 @@
       Promise.all(files.map(function (file) {
         return new Promise(function (ok, bad) {
           var rd = new FileReader();
-          rd.onload = function () { ok({ name: file.name, type: file.type, data: String(rd.result).split(",")[1] || "" }); };
+          var type = file.type || (/\.zip$/i.test(file.name) ? "application/zip" : /\.dcm$/i.test(file.name) ? "application/dicom" : "application/octet-stream");
+          rd.onload = function () { ok({ name: file.name, type: type, data: String(rd.result).split(",")[1] || "" }); };
           rd.onerror = bad; rd.readAsDataURL(file);
         });
       })).then(function (enc) {
@@ -383,8 +401,10 @@
         .then(function (j) {
           if (!j || !j.ok) throw new Error((j && j.error) || "failed");
           track("form_submit", { form: f.getAttribute("data-form") });
+          if (kind === "xray") track("xray_upload_submit", { files: files.length });
           f.reset(); started = Date.now();
-          say(kind === "referral" ? "Thank you. We've received the referral and will confirm by email or phone." : "Thank you. We've received your request and will call or WhatsApp you during opening hours.", true);
+          say(kind === "referral" ? "Thank you. We've received the referral and will confirm by email or phone." :
+            kind === "xray" ? "Thank you. Your files are with us securely; we'll be in touch on WhatsApp or by email." : "Thank you. We've received your request and will call or WhatsApp you during opening hours.", true);
           if (window.turnstile) try { turnstile.reset(); } catch (e) {}
         })
         .catch(function () { say("Sorry, that didn't go through. Please call us on " + cfg.phone + " or WhatsApp us."); })

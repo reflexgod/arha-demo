@@ -1,0 +1,150 @@
+# Sample visit plans for the International & NRI trip planner (/international-patients/).
+# EVERY timing here is a sample until Dr. Nikhil V. Jain confirms it: keep the [[TBC]] marks until then.
+# No prices, no guarantees, no promises about results. The page always says the exact plan is confirmed after a consultation.
+#
+# fit:  one   = can usually be done in one trip of at least min_days
+#       two   = needs a second trip after healing (gap)
+#       video = depends on the examination: best confirmed after a video consultation
+note: "Sample timings. Your exact plan is confirmed after a consultation."
+treatments:
+  - id: implants
+    label: "Dental implants"
+    fit: two
+    min_days: 7
+    trips:
+      - title: "Trip 1: consultation and implant"
+        visits:
+          - {day: "Day 1", what: "Consultation, examination and 3D scan or X-rays; your written plan", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 2–3", what: "Implant placed under local anaesthetic", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 7–10", what: "Review of healing before you fly", tbc: "[[TBC: confirm]]"}
+    gap: "Healing while the implant bonds with the bone: often about 3 to 6 months, longer with bone grafting [[TBC: Arha's usual healing time]]"
+    trips_after:
+      - title: "Trip 2: your final tooth"
+        visits:
+          - {day: "Day 1", what: "Scan or impressions for the crown, bridge or denture", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 5–7", what: "Final tooth fitted and checked against your bite", tbc: "[[TBC: confirm]]"}
+    before: ["Send recent X-rays or a 3D scan if you have one", "Ask your doctor before flying if you take blood thinners"]
+    here: ["Soft food for a few days after the implant", "No smoking while it heals"]
+    after: ["Keep the area clean as shown", "Your home dentist can check healing between trips [[TBC: Arha's remote follow-up]]"]
+  - id: crowns
+    label: "Crowns and bridges"
+    fit: one
+    min_days: 7
+    trips:
+      - title: "One trip"
+        visits:
+          - {day: "Day 1", what: "Consultation, X-rays and plan", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 2", what: "Teeth prepared, scan or impressions, temporary crowns", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 6–7", what: "Final crowns or bridge fitted and adjusted", tbc: "[[TBC: confirm lab time]]"}
+    before: ["Send recent X-rays if you have them"]
+    here: ["Go gently with temporary crowns: avoid sticky food"]
+    after: ["Brush and clean between the teeth daily", "Regular check-ups with your home dentist"]
+  - id: fmr
+    label: "Full-mouth rehabilitation"
+    fit: video
+    min_days: 14
+    trips:
+      - title: "Planned around your examination"
+        visits:
+          - {day: "Video call", what: "First conversation and a look at your X-rays or photos", tbc: "[[TBC: confirm]]"}
+          - {day: "Trip 1", what: "Examination, records and trial teeth; length depends on your plan", tbc: "[[TBC: confirm]]"}
+    gap: "Often staged over more than one trip [[TBC: typical staging]]"
+    before: ["Send a full set of recent X-rays or a 3D scan", "A video consultation first, so we can plan the stages"]
+    here: ["Several visits in a row; keep your days flexible"]
+    after: ["Follow-up reviews; some can be arranged with your home dentist [[TBC]]"]
+  - id: rct
+    label: "Root canal treatment"
+    fit: one
+    min_days: 5
+    trips:
+      - title: "One trip"
+        visits:
+          - {day: "Day 1", what: "Examination, X-ray and the first stage of treatment", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 2–4", what: "Root canal completed; the tooth sealed", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 5–7", what: "Crown to protect the tooth, if needed", tbc: "[[TBC: confirm]]"}
+    before: ["Send an X-ray of the tooth if you have one"]
+    here: ["Avoid chewing hard food on that side until the crown is fitted"]
+    after: ["Any tenderness usually settles within a few days; contact us if it doesn't"]
+  - id: dentures
+    label: "Dentures"
+    fit: one
+    min_days: 14
+    trips:
+      - title: "One trip"
+        visits:
+          - {day: "Day 1", what: "Consultation and first impressions", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 3–8", what: "Bite records and a try-in of the teeth", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 10–14", what: "Dentures fitted, then an adjustment visit", tbc: "[[TBC: confirm]]"}
+    before: ["Bring your current denture, if you have one"]
+    here: ["Allow time for an adjustment visit before you fly"]
+    after: ["Small adjustments can be needed as your mouth settles"]
+  - id: whitening
+    label: "Teeth whitening"
+    fit: one
+    min_days: 2
+    trips:
+      - title: "One trip"
+        visits:
+          - {day: "Day 1", what: "Check-up and cleaning first, then whitening or trays made", tbc: "[[TBC: in-clinic or home whitening at Arha]]"}
+          - {day: "Day 2", what: "Whitening session or trays handed over with instructions", tbc: "[[TBC: confirm]]"}
+    before: ["Tell us about any sensitive teeth"]
+    here: ["Avoid strongly coloured food and drinks for a day or two"]
+    after: ["Crowns and fillings don't whiten; we explain this first"]
+  - id: smile
+    label: "Smile design"
+    fit: video
+    min_days: 7
+    trips:
+      - title: "Planned around your examination"
+        visits:
+          - {day: "Video call", what: "What you'd like to change, with photos of your smile", tbc: "[[TBC: confirm]]"}
+          - {day: "Trip 1", what: "Examination, records and a trial of the changes", tbc: "[[TBC: confirm]]"}
+    before: ["Send clear photos of your smile and recent X-rays"]
+    here: ["Several visits; keep your days flexible"]
+    after: ["Regular check-ups to look after bonding or veneers"]
+  - id: aligners
+    label: "Clear aligners"
+    fit: video
+    min_days: 3
+    trips:
+      - title: "Planned around your examination"
+        visits:
+          - {day: "Trip 1", what: "Examination, X-rays and scan for the aligner plan", tbc: "[[TBC: aligner treatment at Arha]]"}
+    gap: "Aligners need regular reviews while teeth move [[TBC: how reviews work for patients abroad]]"
+    before: ["Send recent X-rays and photos of your teeth"]
+    here: ["Allow time for the scan and records"]
+    after: ["Wear aligners as instructed; reviews as agreed [[TBC]]"]
+  - id: gums
+    label: "Gum care"
+    fit: one
+    min_days: 3
+    trips:
+      - title: "One trip"
+        visits:
+          - {day: "Day 1", what: "Gum examination and X-rays", tbc: "[[TBC: confirm]]"}
+          - {day: "Day 1–3", what: "Deep cleaning, in one or more visits", tbc: "[[TBC: confirm]]"}
+    before: ["Tell us if your gums bleed or teeth feel loose"]
+    here: ["Use the cleaning routine we show you"]
+    after: ["Regular cleaning with your home dentist keeps gums stable"]
+  - id: checkup
+    label: "Check-up and cleaning"
+    fit: one
+    min_days: 1
+    trips:
+      - title: "One trip"
+        visits:
+          - {day: "Day 1", what: "Examination, any X-rays needed, and a professional clean", tbc: "[[TBC: confirm]]"}
+    before: ["Bring any recent dental records"]
+    here: ["If treatment is needed, we explain the options before anything is done"]
+    after: ["Keep up regular check-ups wherever you live"]
+  - id: unsure
+    label: "I'm not sure yet"
+    fit: video
+    min_days: 1
+    trips:
+      - title: "Start with a conversation"
+        visits:
+          - {day: "Video call", what: "Tell us what's bothering you; share photos or X-rays", tbc: "[[TBC: video consultation availability]]"}
+    before: ["Photos of your teeth and any recent X-rays help a lot"]
+    here: ["We'll suggest how long to plan for once we've seen you"]
+    after: []
