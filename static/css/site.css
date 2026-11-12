@@ -553,3 +553,128 @@ body.no-scroll { overflow: hidden; }
 .nf li + li { margin: 0; }
 @media (max-width: 767px) { .nf { padding: 72px 0 96px; } .nf .btns { align-items: center; } }
 
+
+/* ---------------------------------------------------------------- treatments hub */
+.hubhead { padding: 88px 0 56px; text-align: center; }
+.hubhead h1 { max-width: 1100px; margin: 0 auto; }
+.hubhead p { max-width: 1000px; margin: 32px auto 0; }
+.hubhead p + p { margin-top: 16px; }
+.hubhead .btns { justify-content: center; margin-top: 40px; }
+.hubcats { padding: 0 0 24px; }
+.hubcats .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.hubcats .label { color: var(--ink); }
+.hubcats ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.hubcats li + li { margin: 0; }
+.hubcats .pill { text-decoration: none; }
+.hubcats .pill:hover { background: var(--gold); color: #fff; }
+.hubcat { padding: 64px 0 0; scroll-margin-top: 16px; }
+.hubcat h2 { color: var(--ink); }
+.hubcat__img { margin-top: 32px; aspect-ratio: 1312 / 600; overflow: hidden; background: var(--stone); }
+.hubcat__img picture { height: 100%; }
+.hubcat__img img { width: 100%; height: 100%; object-fit: cover; }
+.hubcat__cards { display: grid; gap: 24px; margin-top: 24px; }
+.hubcard { background: var(--stone); padding: 40px 48px; }
+.hubcard .label { color: var(--sea-dark); font-size: .8rem; padding-bottom: 14px; border-bottom: 1px solid var(--sand); }
+.hubcard h3 { margin-top: 20px; font-size: var(--h3s); line-height: var(--h3s-lh); }
+.hubcard p:not(.label) { margin-top: 16px; max-width: 1100px; }
+.hubcard .btn { margin-top: 24px; padding: 12px 20px; }
+.faqband { background: var(--sea-band); color: #FDFDFD; padding: 80px 0 96px; margin-top: 96px; text-align: center; }
+.faqband__mark, .tech__mark { width: 90px; height: 88px; margin: 0 auto; }
+.faqband h2 { color: #FDFDFD; margin-top: 24px; }
+.faqband__list { max-width: 1000px; margin: 40px auto 0; text-align: left; }
+.faqband .acc { border-color: rgba(253, 253, 253, .35); }
+.faqband .acc summary h3 { color: #FDFDFD; }
+.faqband .acc__ico { color: #FDFDFD; }
+.faqband a { color: #FDFDFD; }
+@media (max-width: 767px) {
+  .hubhead { padding: 48px 0 40px; }
+  .hubhead .btns { flex-direction: column; align-items: center; }
+  .hubcard { padding: 28px 24px; }
+  .hubcat { padding-top: 48px; }
+  .faqband { padding: 56px 0 64px; margin-top: 64px; }
+}
+
+/* ---------------------------------------------------------------- for patients */
+.newpt { padding: 72px 0 80px; scroll-margin-top: 16px; }
+.newpt__lead { margin-top: 24px; max-width: 1000px; }
+.newpt__grid { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 64px; margin-top: 48px; align-items: start; }
+.newpt__steps { list-style: none; padding: 0; counter-reset: step; display: grid; gap: 28px; }
+.newpt__steps li { counter-increment: step; position: relative; padding-left: 64px; margin: 0; }
+.newpt__steps li::before { content: counter(step, decimal-leading-zero); position: absolute; left: 0; top: 0; font: 400 1.8rem/1 var(--serif); color: var(--gold-text); }
+.newpt__steps p { margin-top: 8px; }
+.newpt__steps .h4 { color: var(--sea-dark); }
+.newpt__bring { background: var(--stone); padding: 36px; }
+.newpt__bring .label { color: var(--sea-dark); }
+.newpt__bring ul { list-style: none; padding: 0; margin-top: 16px; }
+.newpt__bring li { position: relative; padding-left: 16px; }
+.newpt__bring li::before { content: ""; position: absolute; left: 0; top: .55em; width: 5px; height: 5px; border-radius: 50%; background: var(--ink); }
+.newpt__bring li + li { margin-top: 8px; }
+.newpt__note { margin-top: 20px; font-size: .9rem; }
+.newpt__bring .btn { margin-top: 24px; }
+.payband { background: var(--navy); color: #FDFDFD; padding: 80px 0; }
+.payband__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; }
+.payband__col { scroll-margin-top: 16px; }
+.payband .pill { color: var(--gold-light); border-color: var(--gold-light); }
+.payband h2 { color: #FDFDFD; font-family: var(--serif); font-weight: 400; margin-top: 24px; }
+.payband p:not(.pill) { margin-top: 20px; }
+.payband .btn { margin-top: 32px; }
+.fees { background: var(--stone); padding: 80px 0 96px; scroll-margin-top: 16px; }
+.fees h2 { color: var(--ink); }
+.fees__intro { margin-top: 20px; max-width: 1000px; }
+.fees__grid { margin-top: 40px; }
+.feecard { background: var(--white); padding: 16px 48px 48px; }
+.feegroup { padding-top: 36px; }
+.feegroup .label { color: var(--sea-dark); font-size: .8rem; }
+.feegroup h3 { margin-top: 10px; font-size: var(--h3s); line-height: var(--h3s-lh); }
+.feegroup dl { margin: 16px 0 0; }
+.feerow { display: flex; justify-content: space-between; gap: 24px; padding: 14px 0; border-bottom: 1px solid var(--sand); }
+.feerow dt { font-weight: 300; }
+.feerow dd { margin: 0; text-align: right; color: var(--sea-dark); }
+.tech { padding: 80px 0 96px; text-align: center; scroll-margin-top: 16px; }
+.tech h2 { color: var(--ink); margin-top: 24px; }
+.tech__intro { max-width: 900px; margin: 24px auto 0; }
+.tech__list { max-width: 1000px; margin: 40px auto 0; text-align: left; }
+@media (max-width: 991px) {
+  .newpt__grid { grid-template-columns: 1fr; gap: 40px; }
+  .payband__grid { grid-template-columns: 1fr; gap: 56px; }
+}
+@media (max-width: 767px) {
+  .newpt { padding: 48px 0 56px; }
+  .newpt__steps li { padding-left: 48px; }
+  .newpt__bring { padding: 28px 24px; }
+  .payband, .fees, .tech { padding: 56px 0 64px; }
+  .feecard { padding: 8px 20px 32px; }
+  .feerow { flex-direction: column; gap: 4px; }
+  .feerow dd { text-align: left; }
+}
+
+/* ---------------------------------------------------------------- referrals */
+.refform { background: var(--stone); padding: 72px 0 96px; }
+.refform h2 { color: var(--ink); }
+.refform .form { max-width: 1233px; margin-top: 32px; gap: 28px; }
+.refform fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 22px; }
+.refform legend { font: 400 var(--h3s)/var(--h3s-lh) var(--serif); color: var(--ink); padding: 0; margin: 20px 0 22px; }
+.refform input[type=file] { font: 300 .95rem/1.4 var(--sans); }
+.refform input[type=file]::file-selector-button { font: 500 .85rem/1 var(--label); letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 16px; margin-right: 14px; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); cursor: pointer; }
+
+/* ---------------------------------------------------------------- policies */
+.policy__head { padding: 64px 0 0; }
+.policy__body { padding: 0 0 96px; }
+.policy .wrap > * { max-width: 1100px; }
+.policy__sub { font: 300 var(--h2)/var(--h2-lh) var(--sans); color: var(--ink); margin-top: 24px; }
+.policy__date { margin-top: 16px; font-style: italic; font-size: .9rem; }
+.policy__intro { margin-top: 24px; }
+.policy__intro p + p { margin-top: 16px; }
+.policy__sec { margin-top: 56px; }
+.policy__sec h2 { font: 400 var(--h3)/var(--h3-lh) var(--serif); color: var(--ink); }
+.policy__sec p, .policy__sec ul { margin-top: 16px; }
+.policy__sec ul { padding-left: 0; list-style: none; }
+.policy__sec li { position: relative; padding-left: 16px; }
+.policy__sec li::before { content: ""; position: absolute; left: 0; top: .55em; width: 5px; height: 5px; border-radius: 50%; background: var(--ink); }
+.policy__sec a, .policy__intro a { color: var(--sea-dark); }
+.policy code { font-size: .9em; }
+.policy__more { margin-top: 64px; padding-top: 32px; border-top: 1px solid var(--sand); }
+.policy__more .label { color: var(--sea-dark); }
+.policy__more ul { list-style: none; padding: 0; margin-top: 16px; display: flex; flex-wrap: wrap; gap: 12px 32px; }
+.policy__more li + li { margin: 0; }
+@media (max-width: 767px) { .policy__head { padding-top: 40px; } .policy__body { padding-bottom: 64px; } .policy__sec { margin-top: 40px; } }

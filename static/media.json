@@ -209,6 +209,287 @@
     552
    ],
    "src": "src-assets/dental-operatory-arha-dental-care-peddar-road-04.jpeg"
+  },
+  "hero-dentures": {
+   "kind": "stock",
+   "alt": "Woman smiling",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/people/woman-smiling-orange.jpg"
+  },
+  "hero-missing-teeth": {
+   "kind": "stock",
+   "alt": "Young man in a suit smiling",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/people/young-man-suit.jpg"
+  },
+  "hero-teeth-whitening": {
+   "kind": "stock",
+   "alt": "Woman laughing",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/people/woman-laughing-closeup.jpg"
+  },
+  "hero-smile-design": {
+   "kind": "stock",
+   "alt": "Two friends smiling outdoors",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/people/friends-two-women.jpg"
+  },
+  "hero-gum-care": {
+   "kind": "stock",
+   "alt": "Young man holding a mug",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/people/man-with-mug.jpg"
+  },
+  "hero-aligners": {
+   "kind": "stock",
+   "alt": "Boy smiling",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/people/boy-smiling.jpg"
+  },
+  "hero-emergency": {
+   "kind": "real",
+   "alt": "A treatment room at Arha Dental Care, ready for patients",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/dental-operatory-arha-dental-care-peddar-road-02.jpeg"
+  },
+  "cta-dentures": {
+   "kind": "stock",
+   "alt": "Older couple talking",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/couple-talking.jpg"
+  },
+  "cta-missing-teeth": {
+   "kind": "stock",
+   "alt": "Two friends smiling",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/friends-two-men.jpg"
+  },
+  "cta-teeth-whitening": {
+   "kind": "stock",
+   "alt": "Woman holding a cup of tea",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/woman-with-cup.jpg"
+  },
+  "cta-smile-design": {
+   "kind": "stock",
+   "alt": "Couple laughing outdoors",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/couple-laughing-outdoors.jpg"
+  },
+  "cta-gum-care": {
+   "kind": "stock",
+   "alt": "Couple reading together",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/couple-reading.jpg"
+  },
+  "cta-aligners": {
+   "kind": "stock",
+   "alt": "Woman relaxing in a cafe",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/woman-relaxed-cafe.jpg"
+  },
+  "cta-emergency": {
+   "kind": "stock",
+   "alt": "Friends relaxing on a lawn",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/friends-on-lawn.jpg"
+  },
+  "hub-implants": {
+   "kind": "stock",
+   "alt": "Three generations of a family smiling",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    600
+   ],
+   "src": "src-assets/stock/people/family-at-home.jpg"
+  },
+  "hub-restorative": {
+   "kind": "stock",
+   "alt": "Older man smiling",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    600
+   ],
+   "src": "src-assets/stock/people/older-man-smiling.jpg"
+  },
+  "hub-cosmetic": {
+   "kind": "stock",
+   "alt": "Close-up of a broad smile",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    600
+   ],
+   "src": "src-assets/stock/people/smile-wide.jpg"
+  },
+  "hub-children": {
+   "kind": "stock",
+   "alt": "Young girl smiling",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    600
+   ],
+   "src": "src-assets/stock/kid-face.jpg"
+  },
+  "hub-general": {
+   "kind": "stock",
+   "alt": "Family sitting together outdoors",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    600
+   ],
+   "src": "src-assets/stock/people/family-outdoors.jpg"
+  },
+  "hero-for-patients": {
+   "kind": "real",
+   "alt": "A treatment room at Arha Dental Care, Peddar Road",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/dental-operatory-arha-dental-care-peddar-road-01.jpeg"
   }
  },
  "videos": {

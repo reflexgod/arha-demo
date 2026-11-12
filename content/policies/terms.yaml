@@ -1,0 +1,48 @@
+slug: terms
+nav_label: Terms of use
+title: "Terms of Use | Arha Dental Care, Peddar Road"
+description: "The terms that apply when you use the Arha Dental Care website, including medical information, appointment requests, links and copyright."
+h1: "Terms of use"
+subtitle: "Using this website"
+updated: "12 November 2026"
+intro: |
+  <p>These terms apply to your use of this website, run by Arha Dental Care, {address}. By using the site you accept
+  them. [[TBC: terms reviewed by the clinic's legal adviser]]</p>
+sections:
+  - heading: "Information, not advice"
+    body: |
+      <p>The information on this website is general information about dental treatment. It is not a diagnosis or a
+      substitute for an examination. Every mouth is different: the right treatment for you can only be decided after a
+      consultation. Results of treatment vary from person to person.</p>
+      <p>In an emergency, call us on {phone} or go to the nearest hospital emergency department.</p>
+  - heading: "Appointment requests"
+    body: |
+      <p>Sending a form on this website is a request, not a confirmed appointment. We will call or WhatsApp you to
+      agree a time. Please don't send detailed medical information through the website forms.</p>
+  - heading: "Fees"
+    body: |
+      <p>Fees shown on this website are a guide. Your fee depends on your treatment and is confirmed in your treatment
+      plan before treatment begins.</p>
+  - heading: "Photographs"
+    body: |
+      <p>Some photographs on this website are licensed stock images used for illustration. The people shown are models,
+      not our patients or staff, unless the caption says otherwise.</p>
+  - heading: "Links to other websites"
+    body: |
+      <p>We link to other websites, such as maps and regulators, for your convenience. We are not responsible for their
+      content or their privacy practices.</p>
+  - heading: "Copyright"
+    body: |
+      <p>The text, logo and photographs of the practice on this website belong to Arha Dental Care or are used under
+      licence. Please don't copy them without our permission.</p>
+  - heading: "Availability and accuracy"
+    body: |
+      <p>We work to keep this website accurate and available, but information can change and the site may sometimes be
+      unavailable. Please call us to confirm anything important, such as opening hours.</p>
+  - heading: "Law"
+    body: |
+      <p>These terms are governed by the laws of India, and the courts of Mumbai have jurisdiction.
+      [[TBC: governing law clause]]</p>
+  - heading: "Contact"
+    body: |
+      <p>Arha Dental Care, {address}. Phone {phone}. Email {email}.</p>

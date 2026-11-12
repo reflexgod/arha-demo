@@ -1,0 +1,83 @@
+# Written for India's Digital Personal Data Protection Act, 2023 (DPDP Act) and its Rules. Needs legal review before launch.
+slug: privacy
+nav_label: Privacy policy
+title: "Privacy Policy | Arha Dental Care, Peddar Road"
+description: "How Arha Dental Care collects, uses and protects your personal data, under India's Digital Personal Data Protection Act, 2023, and how to use your rights."
+h1: "Privacy policy"
+subtitle: "How we look after your personal data"
+updated: "12 November 2026"
+intro: |
+  <p>Arha Dental Care ("we", "us") respects your privacy. This notice explains what personal data we collect through
+  this website and at the practice, why we use it, who we share it with, and the rights you have under the Digital
+  Personal Data Protection Act, 2023. [[TBC: notice reviewed by the clinic's legal adviser]]</p>
+sections:
+  - heading: "Who we are"
+    body: |
+      <p>Arha Dental Care, {address}, is responsible for your personal data (the "Data Fiduciary" under the Act).
+      Phone {phone}, email {email}.</p>
+  - heading: "What we collect"
+    body: |
+      <p><strong>When you contact us or request an appointment:</strong> your name, phone or WhatsApp number, email if
+      you give it, the treatment you're asking about, your preferred time and your message.</p>
+      <p><strong>When a dentist refers you to us:</strong> the details your dentist sends, which can include your name,
+      date of birth, contact details, dental history and X-rays or other records.</p>
+      <p><strong>When you are our patient:</strong> your medical and dental history, examination notes, X-rays,
+      photographs, treatment plans and payment records.</p>
+      <p><strong>When you use this website:</strong> if you accept analytics cookies, information about how you use the
+      site (pages visited, device and browser type, approximate location). See our <a href="/policies/cookies/">cookie policy</a>.</p>
+  - heading: "Why we use it"
+    body: |
+      <ul>
+        <li>To reply to your enquiry and arrange appointments.</li>
+        <li>To provide, plan and record your dental care, and to communicate with a dentist who referred you.</li>
+        <li>To take payment and keep accounts.</li>
+        <li>To meet our legal and professional duties, including keeping clinical records.</li>
+        <li>With your consent, to understand how the website is used so we can improve it.</li>
+      </ul>
+      <p>We process your data with your consent, which you give when you submit a form or agree to treatment, or for
+      other purposes the Act allows, such as complying with the law or responding to a medical emergency.
+      We don't sell your data, and we don't use it for marketing without your consent.</p>
+  - heading: "Who we share it with"
+    body: |
+      <p>We share personal data only when we need to:</p>
+      <ul>
+        <li>Service providers who process data for us: Google (forms, email and file storage), Cloudflare (website
+        hosting and spam protection) and, if you accept analytics cookies, Google Analytics. [[TBC: confirm providers at launch]]</li>
+        <li>Dental laboratories that make crowns, bridges, dentures and aligners, with only the information they need.</li>
+        <li>Your own dentist or a specialist, when you are referred or ask us to.</li>
+        <li>Authorities, where the law requires it.</li>
+      </ul>
+      <p>If you message us on WhatsApp, your messages are also handled under WhatsApp's own terms.</p>
+  - heading: "How long we keep it"
+    body: |
+      <p>We keep enquiries only as long as we need them to deal with your request. Clinical records are kept for as long
+      as professional and legal rules require. [[TBC: retention periods for enquiries and clinical records]]</p>
+  - heading: "How we protect it"
+    body: |
+      <p>We use reasonable security safeguards: access to records is limited to the people who need it, website forms
+      are sent over an encrypted connection, and our service providers keep data in secured systems.</p>
+  - heading: "Your rights"
+    body: |
+      <p>Under the Act you can:</p>
+      <ul>
+        <li>ask for a summary of the personal data we hold about you and how we use it;</li>
+        <li>ask us to correct, complete or update it;</li>
+        <li>ask us to erase it, unless we need to keep it by law, for example as part of your clinical records;</li>
+        <li>withdraw your consent at any time (this does not affect what we did before);</li>
+        <li>nominate someone to use these rights on your behalf;</li>
+        <li>raise a grievance with us.</li>
+      </ul>
+      <p>To use any of these rights, contact our Grievance Officer below.</p>
+  - heading: "Children"
+    body: |
+      <p>For patients under 18, we ask a parent or legal guardian to give consent and to fill in any forms on their
+      behalf.</p>
+  - heading: "Grievance Officer"
+    body: |
+      <p>[[TBC: name and contact of the person who handles data requests]]<br>
+      Arha Dental Care, {address}<br>Phone {phone} · Email {email}</p>
+      <p>We will reply within the time the law sets. If you are not satisfied with our reply, you can complain to the
+      Data Protection Board of India.</p>
+  - heading: "Changes to this notice"
+    body: |
+      <p>We may update this notice. The date at the top shows when it last changed.</p>

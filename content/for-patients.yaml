@@ -1,0 +1,83 @@
+# /for-patients/: new patients, care plans, payment options, fee guide, technology.
+# Never invent a fee: every price is a [[TBC]] until the clinic sends its fee list (or says "on consultation").
+title: "Patient Information, Fees and Payment | Arha Dental Care"
+description: "New to Arha Dental Care? Your first visit, what to bring, payment options and our fee guide, plus the equipment we use at our Peddar Road practice."
+h1: "Patient information and fees"
+answer: >-
+  Everything you need before your first visit: how an appointment works, what to bring, how to pay, and a guide to our
+  fees. If you have a question that isn't answered here, call or WhatsApp us.
+hero: hero-for-patients
+
+new_patients:
+  heading: "Your first visit to Arha Dental Care"
+  lead: >-
+    A first visit is a conversation as much as an examination. You meet the dentist, tell us what you'd like to
+    change or what's been bothering you, and leave with a clear idea of your options.
+  steps:
+    - {h: "Arrive and settle in", p: "Come to 107 Doctor House, Peddar Road, and wait in the patients' lounge."}
+    - {h: "Talk first", p: "The dentist asks about your teeth, your health and what you would like from treatment."}
+    - {h: "Examination", p: "A check of your teeth, gums and bite, with an X-ray in our own X-ray room if needed."}
+    - {h: "Your plan", p: "We explain what we found, the options and their costs, before any treatment begins."}
+    - {h: "Next steps", p: "You decide in your own time. Nothing starts until you're ready."}
+  bring_heading: "What to bring"
+  bring:
+    - "Any recent dental X-rays or reports"
+    - "A list of the medicines you take"
+    - "Your questions, written down if that helps"
+    - "For a child or an older parent, someone they trust"
+  note: "[[TBC: confirm the first-visit steps, the usual length of a first appointment and anything else to bring]]"
+
+care_plans:
+  label: "Care plans"
+  heading: "Regular care, planned with you"
+  body:
+    - "Regular check-ups and cleaning are the simplest way to keep your teeth and gums healthy, and to find problems while they are small."
+    - "[[TBC: whether Arha offers a care or membership plan, what it includes and its monthly fee]]"
+  button: {label: "Book a check-up", href: "/contact/#book"}
+
+payment:
+  label: "Payment options"
+  heading: "Simple ways to pay"
+  body:
+    - "You can pay by UPI, debit card or credit card. [[TBC: payment methods accepted, including cash]]"
+    - "For longer treatment, such as implants or full-mouth rehabilitation, we explain the cost of each stage before it begins, so you know what to expect. [[TBC: whether payment is taken per stage]]"
+    - "[[TBC: EMI or instalment options, only if the clinic offers them]]"
+  button: {label: "Ask about payment", href: "/contact/#book"}
+
+fees:
+  heading: "Arha Dental Care fee guide"
+  intro: "Fees depend on what your treatment involves. We explain the cost of your plan before anything begins. [[TBC: fee list from the clinic]]"
+  groups:
+    - heading: "Consultations and examinations"
+      rows: ["New patient consultation", "Check-up (existing patients)", "Emergency appointment", "Intraoral X-ray", "Panoramic X-ray"]
+    - heading: "Cleaning and gum care"
+      rows: ["Scale and polish", "Deep cleaning (per quadrant)"]
+    - heading: "Fillings and root canal treatment"
+      rows: ["Tooth-coloured filling", "Root canal treatment, front tooth", "Root canal treatment, back tooth"]
+    - heading: "Crowns and bridges"
+      rows: ["Metal-ceramic crown", "All-ceramic crown", "Bridge (per unit)"]
+    - heading: "Dentures"
+      rows: ["Complete denture (per jaw)", "Partial denture", "Implant-retained denture"]
+    - heading: "Implants"
+      rows: ["Implant consultation and planning", "Single implant with crown", "Bone grafting, if needed"]
+    - heading: "Cosmetic"
+      rows: ["Teeth whitening", "Composite bonding (per tooth)", "Porcelain veneer (per tooth)"]
+    - heading: "Children"
+      rows: ["Child check-up", "Fissure sealants (per tooth)", "Fluoride application"]
+  ctas:
+    - {image: cta-implants, heading: "Thinking about implants?", text: "Book a consultation to see if they suit you.", href: "/treatments/dental-implants/"}
+    - {image: cta-kids, heading: "Bringing your child?", text: "Gentle first visits for children.", href: "/treatments/kids-dentistry/"}
+    - {image: cta-smile-design, heading: "Changing your smile?", text: "Options planned around your face.", href: "/treatments/smile-design/"}
+
+technology:
+  heading: "The rooms and equipment behind your treatment"
+  intro: "Planning and safety depend on the right equipment. These are the parts of the practice you may see during your visit."
+  items:
+    - h: "X-ray room"
+      p: "Our own X-ray room with a panoramic X-ray unit, so most X-rays are taken during your visit rather than at another centre. [[TBC: unit model, and whether it takes 3D (CBCT) scans]]"
+    - h: "Sterilisation room"
+      p: "Instruments are cleaned and sterilised in a separate room with a steam steriliser. [[TBC: steriliser class and the cleaning steps to describe]]"
+    - h: "A screen beside the chair"
+      p: "X-rays and photographs are shown on a screen beside the chair, so you can see what the dentist sees as your plan is explained."
+    - h: "Treatment rooms"
+      p: "Fully adjustable chairs and overhead lights, with handpieces cleaned and oiled by an automatic unit after each use. [[TBC: confirm each item]]"

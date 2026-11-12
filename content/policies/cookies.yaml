@@ -1,0 +1,34 @@
+slug: cookies
+nav_label: Cookie policy
+title: "Cookie Policy | Arha Dental Care, Peddar Road"
+description: "Which cookies and similar storage the Arha Dental Care website uses, why, and how to accept, refuse or change your choice at any time."
+h1: "Cookie policy"
+subtitle: "Cookies and similar storage on this website"
+updated: "12 November 2026"
+intro: |
+  <p>Cookies are small files a website stores in your browser. This website uses as few as possible. Analytics cookies
+  are only set if you choose "Accept" in the cookie banner.</p>
+sections:
+  - heading: "Necessary storage"
+    body: |
+      <p><strong>Your cookie choice</strong> (<code>arha-consent</code>, kept in your browser's local storage): remembers
+      whether you accepted or refused analytics, so we don't ask on every page. It never leaves your device.</p>
+      <p><strong>Spam protection</strong> (Cloudflare Turnstile): when you use a form, Cloudflare may check that the
+      request comes from a person, not a bot. This can use browser storage to work.</p>
+  - heading: "Analytics cookies (only if you accept)"
+    body: |
+      <p><strong>Google Analytics</strong> (<code>_ga</code>, <code>_ga_*</code>, up to 2 years): counts visits and shows us
+      which pages are useful, so we can improve the site. It records pages viewed, device and browser type, and
+      approximate location. [[TBC: Google Analytics goes live at launch]]</p>
+  - heading: "Third-party content"
+    body: |
+      <p><strong>Google Maps:</strong> the map on our pages is provided by Google, which may set its own cookies when
+      the map loads. Google's privacy policy applies.</p>
+      <p><strong>WhatsApp:</strong> if you click a WhatsApp link, WhatsApp's own terms and privacy policy apply.</p>
+  - heading: "Changing your choice"
+    body: |
+      <p>You can change your choice at any time with the "Cookie settings" link at the bottom of every page. You can
+      also delete or block cookies in your browser's settings.</p>
+  - heading: "More information"
+    body: |
+      <p>See our <a href="/policies/privacy/">privacy policy</a> for how we handle personal data, or contact us on {phone}.</p>

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block body_class %}page-policy{% endblock %}
+{% block main %}
+<section class="policy policy__head">
+  <div class="wrap">
+    <h1>{{ pol.h1 }}</h1>
+    <p class="policy__sub">{{ pol.subtitle }}</p>
+    <p class="policy__date">{{ site.name }}: last updated {{ pol.updated }}</p>
+  </div>
+</section>
+<article class="policy policy__body">
+  <div class="wrap">
+    <div class="policy__intro">{{ pol.intro | tbc }}</div>
+    {% for s in pol.sections %}
+    <section class="policy__sec">
+      <h2>{{ s.heading }}</h2>
+      {{ s.body | tbc }}
+    </section>
+    {% endfor %}
+    <nav class="policy__more" aria-label="Other policies">
+      <p class="label">Other policies</p>
+      <ul>{% for l in nav.legal if l.href != page.path %}<li><a class="tlink" href="{{ l.href }}">{{ l.label }}</a></li>{% endfor %}</ul>
+    </nav>
+  </div>
+</article>
+{% include "_visit.html" %}
+{% endblock %}

@@ -1,0 +1,75 @@
+# Treatments hub (/treatments/). Cards link to a treatment page when one exists ("href"); otherwise no button.
+title: "Dental Treatments on Peddar Road, Mumbai | Arha Dental Care"
+description: "Every treatment at Arha Dental Care, Peddar Road: implants, crowns and full-mouth rehabilitation, root canal treatment, children's dentistry and more."
+h1: "Dental treatments on Peddar Road, planned for lasting results"
+intro:
+  - >-
+    At Arha Dental Care we look after adults and children, from routine check-ups to complex treatment that rebuilds a
+    whole mouth. The practice is led by Dr. Nikhil V. Jain, a prosthodontist: a dentist with a specialist degree in
+    replacing and restoring teeth.
+  - >-
+    Every treatment starts with a consultation, an examination and a plan you can read before anything begins. Choose a
+    category below, or book a consultation and we'll talk you through the options.
+categories:
+  - id: implants
+    heading: "Implants and rehabilitation"
+    image: hub-implants
+    cards:
+      - {label: "Dental implants", heading: "Dental implants", href: /treatments/dental-implants/,
+         text: "A titanium post in the jaw holds a crown, a bridge or a denture. Implants replace missing teeth without touching the teeth beside the gap."}
+      - {label: "Missing teeth", heading: "Implant, bridge or denture?", href: /treatments/missing-teeth/,
+         text: "Three ways to replace a missing tooth, compared side by side, so you can decide what suits you."}
+      - {label: "Full-mouth rehabilitation", heading: "Full-mouth rehabilitation", href: /treatments/crowns-bridges-full-mouth-rehabilitation/,
+         text: "For worn, broken or missing teeth throughout the mouth: a planned rebuild of the bite with crowns, bridges or implants."}
+  - id: restorative
+    heading: "Restorative dentistry"
+    image: hub-restorative
+    cards:
+      - {label: "Crowns and bridges", heading: "Crowns and bridges", href: /treatments/crowns-bridges-full-mouth-rehabilitation/,
+         text: "A crown covers and protects a weakened tooth; a bridge replaces a missing tooth using the teeth either side."}
+      - {label: "Root canal treatment", heading: "Root canal treatment", href: /treatments/root-canal-treatment/,
+         text: "Treats infection or inflammation inside a tooth, relieves the pain and lets you keep the tooth."}
+      - {label: "Dentures", heading: "Dentures", href: /treatments/dentures/,
+         text: "Complete and partial dentures, made to fit your mouth and your bite, including dentures held by implants."}
+      - {label: "Fillings", heading: "Tooth-coloured fillings",
+         text: "Decay is removed and the tooth rebuilt with a filling matched to its colour. [[TBC: filling materials Arha uses]]"}
+  - id: cosmetic
+    heading: "Cosmetic dentistry"
+    image: hub-cosmetic
+    cards:
+      - {label: "Smile design", heading: "Smile design", href: /treatments/smile-design/,
+         text: "Bonding, veneers, crowns and whitening planned together around your face and your bite."}
+      - {label: "Teeth whitening", heading: "Teeth whitening", href: /treatments/teeth-whitening/,
+         text: "Lightens the natural colour of your teeth, with your teeth and gums checked first."}
+      - {label: "Clear aligners", heading: "Clear aligners", href: /treatments/aligners/,
+         text: "Removable clear trays that straighten teeth a little at a time. [[TBC: aligner treatment at Arha]]"}
+  - id: children
+    heading: "Children's dentistry"
+    image: hub-children
+    cards:
+      - {label: "Kids' dentistry", heading: "Dentistry for children", href: /treatments/kids-dentistry/,
+         text: "Gentle first visits, check-ups, fluoride and fissure sealants, and treatment explained at your child's pace."}
+  - id: general
+    heading: "General dentistry"
+    image: hub-general
+    cards:
+      - {label: "Check-ups", heading: "Check-ups and cleaning",
+         text: "An examination of your teeth, gums and mouth, with X-rays when needed, and a professional clean. [[TBC: recommended check-up interval]]"}
+      - {label: "Gum care", heading: "Gum care", href: /treatments/gum-care/,
+         text: "Bleeding or swollen gums are usually a sign of gum disease. Cleaning and the right routine keep it under control."}
+      - {label: "Extractions", heading: "Tooth extraction",
+         text: "When a tooth can't be saved, it is removed under local anaesthetic, and we talk through how to replace it. [[TBC: whether surgical extractions are done in-house]]"}
+      - {label: "Emergencies", heading: "Emergency dental care", href: /treatments/emergency-dentistry/,
+         text: "Severe toothache, swelling or a broken tooth: what to do now, and when to call us."}
+faq_heading: "Questions we are often asked"
+faqs:
+  - q: "How do I know which treatment I need?"
+    a: "You don't need to know before you come. At a consultation we examine your teeth, take any X-rays needed and explain the options, with their costs, before anything begins."
+  - q: "Do you see children?"
+    a: "Yes. We see children for check-ups and treatment. Read about our dentistry for children, or call us to book their first visit."
+  - q: "Will I get a written estimate?"
+    a: "We explain the plan and its cost before treatment begins. [[TBC: written estimates as standard]]"
+  - q: "Can my dentist refer me to you?"
+    a: "Yes. Dentists can refer patients to Dr. Nikhil V. Jain for implants, crowns, bridges, dentures and full-mouth rehabilitation through our referral form."
+  - q: "What should I do in a dental emergency?"
+    a: "Call us during opening hours. If swelling affects your breathing, swallowing or eye, go to a hospital emergency department straight away."

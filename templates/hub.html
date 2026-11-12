@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, book_href %}
+{% block body_class %}page-hub{% endblock %}
+{% block main %}
+<section class="hubhead">
+  <div class="wrap">
+    <h1>{{ h.h1 }}</h1>
+    {% for p in h.intro %}<p>{{ p | tbc }}</p>{% endfor %}
+    <div class="btns">
+      <a class="btn btn--solid" href="{{ book_href() }}" data-event="booking_click">Book a consultation {{ icon("right") }}</a>
+      <a class="btn" href="{{ tel(site.phone) }}">Call us now {{ icon("right") }}</a>
+    </div>
+  </div>
+</section>
+
+<nav class="hubcats" aria-label="Treatment categories">
+  <div class="wrap">
+    <p class="label">Treatment categories:</p>
+    <ul>{% for c in h.categories %}<li><a class="pill" href="#{{ c.id }}">{{ c.heading }}</a></li>{% endfor %}</ul>
+  </div>
+</nav>
+
+{% for c in h.categories %}
+<section class="hubcat" id="{{ c.id }}" aria-labelledby="{{ c.id }}-h">
+  <div class="wrap">
+    <h2 id="{{ c.id }}-h">{{ c.heading }}</h2>
+    <div class="hubcat__img">{{ picture(c.image, "(min-width: 1440px) 1312px, 100vw") }}</div>
+    <div class="hubcat__cards">
+      {% for card in c.cards %}
+      <article class="hubcard">
+        <p class="label">{{ card.label }}</p>
+        <h3>{{ card.heading }}</h3>
+        <p>{{ card.text | tbc }}</p>
+        {% if card.get("href") %}<a class="btn" href="{{ card.href }}">Learn more<span class="sr-only"> about {{ card.heading | lower }}</span> {{ icon("right") }}</a>{% endif %}
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<section class="faqband" aria-labelledby="faq-h">
+  <div class="wrap">
+    <img class="faqband__mark" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="">
+    <h2 id="faq-h">{{ h.faq_heading }}</h2>
+    <div class="faqband__list">
+      {% for qa in h.faqs %}
+      <details class="acc">
+        <summary><h3 class="h4">{{ qa.q }}</h3><span class="acc__ico" aria-hidden="true"></span></summary>
+        <div class="acc__body"><p>{{ qa.a | tbc }}</p></div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "_visit.html" %}
+{% endblock %}

@@ -1,0 +1,91 @@
+slug: emergency-dentistry
+nav_label: Emergency dentistry
+title: "Emergency Dentist in South Mumbai | Arha Dental Care"
+description: "Toothache, a broken tooth or swelling? What to do now, when to call Arha Dental Care on Peddar Road, and when to go straight to a hospital."
+h1: "Emergency dental care in South Mumbai"
+answer: >-
+  If you have severe toothache, a broken or knocked-out tooth, or swelling, call us during opening hours and we will try
+  to see you as soon as we can. If swelling affects your breathing, swallowing or eye, or you have a high fever, go to a
+  hospital emergency department straight away.
+hero: hero-emergency
+statement_h2: "Calm, practical help when something goes wrong with your teeth."
+statement_p: >-
+  Dental emergencies rarely happen at a convenient time. Many can be managed simply once we have seen you: pain can be
+  relieved, infection treated and a broken tooth protected until it can be repaired properly. Call us first, so we can
+  advise you and find a time. [[TBC: same-day emergency appointments, and whether the phone is answered outside opening
+  hours]]
+procedure:
+  type: TherapeuticProcedure
+  body_location: Teeth and mouth
+  how_performed: "Assessment and X-ray, pain relief, and the first stage of treatment, such as dressing a tooth, smoothing a break or draining an infection."
+  preparation: "Call the clinic; bring a list of your medicines."
+  followup: "A follow-up visit to complete treatment."
+sections:
+  - label: about
+    heading: "What counts as a dental emergency?"
+    body: |
+      <ul>
+        <li>Severe toothache, or pain that keeps you awake.</li>
+        <li>Swelling of the gum or face.</li>
+        <li>A broken, cracked or knocked-out tooth.</li>
+        <li>A lost filling or crown that is painful or sharp.</li>
+        <li>Bleeding that won't stop after an extraction.</li>
+      </ul>
+  - label: benefits
+    heading: "Why get help quickly?"
+    body: |
+      <ul>
+        <li>Early treatment relieves pain sooner.</li>
+        <li>A knocked-out adult tooth is more likely to be saved if it is put back within the hour.</li>
+        <li>Infections treated early are less likely to spread.</li>
+      </ul>
+  - label: who is it for?
+    heading: "When to go to a hospital instead"
+    body: |
+      <p>Go to a hospital emergency department, or call 112, if you have swelling that affects your breathing,
+      swallowing or eye, a high fever with facial swelling, heavy bleeding that won't stop, or an injury to the face or
+      jaw after an accident.</p>
+  - label: process
+    heading: "What to do now"
+    body: |
+      <h4>Toothache</h4>
+      <p>Rinse with warm salt water and take a painkiller you normally use, following the packet. Don't put aspirin on
+      the gum. Call us.</p>
+      <h4>Knocked-out adult tooth</h4>
+      <p>Hold it by the crown, not the root. If it is dirty, rinse it briefly in milk or cold water. Push it gently back
+      into its socket and bite on a clean cloth, or keep it in milk. Come to us, or to the nearest dentist, straight
+      away. Don't put a baby tooth back.</p>
+      <h4>Broken tooth or lost filling</h4>
+      <p>Keep any pieces, rinse your mouth, and avoid chewing on that side. Call us.</p>
+      <h4>Swelling</h4>
+      <p>Call us the same day. If it spreads quickly or affects breathing or swallowing, go to a hospital.</p>
+  - label: aftercare
+    heading: "After emergency treatment"
+    body: |
+      <p>Emergency treatment often relieves pain first and completes the repair at a second visit. Take any medicines as
+      prescribed, follow the instructions we give you, and keep the follow-up appointment.</p>
+  - label: related treatments
+    heading: "Treatment that often follows"
+    body: |
+      <p>Severe toothache often needs <a href="/treatments/root-canal-treatment/">root canal treatment</a>; a broken
+      tooth may need a <a href="/treatments/crowns-bridges-full-mouth-rehabilitation/">crown</a>; a lost tooth can be
+      replaced: see <a href="/treatments/missing-teeth/">replacing missing teeth</a>.</p>
+  - label: faqs
+    heading: "Questions we are often asked about emergencies"
+    faqs:
+      - q: "Can I be seen the same day?"
+        a: "Call us and we will try to see you as soon as we can. [[TBC: same-day policy]]"
+      - q: "What should I do about toothache at night?"
+        a: "Take a painkiller you normally use, following the packet, rinse with warm salt water, and call us when we open. If you have swelling affecting your breathing or swallowing, go to a hospital."
+      - q: "My child has knocked out a tooth. What should I do?"
+        a: "Don't put a baby tooth back, as it can damage the adult tooth underneath. Keep your child calm, press a clean cloth on the gum and call us. An adult tooth should be put back or kept in milk and seen straight away."
+glance:
+  time: "Usually one visit, sometimes with a follow-up"
+  fee: "[[TBC: emergency appointment fee]]"
+  payment: "UPI, debit and credit cards [[TBC: payment methods]]"
+cta:
+  image: cta-emergency
+  heading: "In pain? Call us and we'll help."
+  text: "During opening hours, call the clinic first."
+form_heading: "Not urgent? Send us a question."
+related: [root-canal-treatment, crowns-bridges-full-mouth-rehabilitation, missing-teeth]

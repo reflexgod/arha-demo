@@ -1,0 +1,83 @@
+slug: teeth-whitening
+nav_label: Teeth whitening
+title: "Teeth Whitening in South Mumbai | Arha Dental Care"
+description: "Teeth whitening on Peddar Road, Mumbai: how professional whitening works, whether it is safe, how long results last and who it suits."
+h1: "Teeth whitening in South Mumbai"
+answer: >-
+  Professional teeth whitening lightens the natural colour of your teeth with a whitening gel, applied by the dentist or
+  in custom trays at home. It is safe when supervised by a dentist, but it does not change the colour of crowns,
+  veneers or fillings.
+hero: hero-teeth-whitening
+statement_h2: "A brighter, natural-looking smile, with your teeth checked before anything begins."
+statement_p: >-
+  Teeth darken over time with age and with tea, coffee, red wine, turmeric-rich food and smoking. Whitening gels
+  release oxygen into the enamel and lift these stains, making the teeth several shades lighter. Before whitening, we
+  examine your teeth and gums, because decay, gum problems or exposed roots need treating first, and because some
+  discolouration, such as a single dark tooth, responds better to other treatments.
+  [[TBC: whitening methods Arha offers (in-clinic, take-home or both)]]
+procedure:
+  type: NoninvasiveProcedure
+  body_location: Teeth
+  how_performed: "A peroxide-based whitening gel is applied to the teeth, in the clinic or at home in custom-made trays."
+  preparation: "Examination, and a scale and polish if needed."
+  followup: "A review of the shade, and occasional top-ups."
+sections:
+  - label: about
+    heading: "How does teeth whitening work?"
+    body: |
+      <p>The active ingredient, usually hydrogen or carbamide peroxide, breaks down the stain molecules inside the
+      enamel. In-clinic whitening uses a stronger gel with the gums protected; take-home whitening uses a milder gel in
+      thin trays made to fit your teeth, worn for a set time each day.</p>
+  - label: benefits
+    heading: "Why choose professional whitening?"
+    body: |
+      <ul>
+        <li>It lightens your own teeth without drilling or covering them.</li>
+        <li>The gel strength and the trays are matched to your teeth, which helps limit sensitivity.</li>
+        <li>Your teeth and gums are checked first, so problems are not hidden under a brighter shade.</li>
+      </ul>
+  - label: who is it for?
+    heading: "Is teeth whitening right for me?"
+    body: |
+      <p>Whitening suits yellowish teeth stained by age, food and drink. It is not suitable during pregnancy or
+      breastfeeding, for young teenagers, or while there is untreated decay or gum disease. Crowns, veneers and
+      tooth-coloured fillings will not change colour, so they may need replacing to match afterwards.</p>
+  - label: process
+    heading: "What happens during whitening?"
+    body: |
+      <ol>
+        <li><strong>Check-up.</strong> We examine your teeth and record the starting shade.</li>
+        <li><strong>Preparation.</strong> A clean, and impressions or scans if trays are needed.</li>
+        <li><strong>Whitening.</strong> In the clinic, at home, or both. [[TBC: Arha's method and number of sittings]]</li>
+        <li><strong>Review.</strong> We check the new shade and your gums.</li>
+      </ol>
+  - label: aftercare
+    heading: "Keeping your teeth white"
+    body: |
+      <p>For a day or two after whitening, avoid strongly coloured food and drinks such as tea, coffee, red wine and
+      turmeric-based curries. Brush twice a day and keep up regular cleaning. Some sensitivity is common for a few days
+      and settles on its own; a toothpaste for sensitive teeth can help.</p>
+  - label: related treatments
+    heading: "When whitening is not enough"
+    body: |
+      <p>Chipped, worn or misshapen teeth, or a single dark tooth, may suit bonding, veneers or a crown instead. Read
+      about <a href="/treatments/smile-design/">smile design</a>.</p>
+  - label: faqs
+    heading: "Questions we are often asked about whitening"
+    faqs:
+      - q: "Is teeth whitening safe?"
+        a: "Whitening with products used or supervised by a dentist is considered safe for the enamel. The most common side effect is temporary sensitivity. Whitening is not advised during pregnancy or breastfeeding."
+      - q: "Is teeth whitening permanent?"
+        a: "No. Results usually last from several months to a few years, depending on your diet and habits. Occasional top-ups keep the shade."
+      - q: "Will whitening work on my crowns or fillings?"
+        a: "No. Whitening only lightens natural tooth. Crowns, veneers and fillings stay the same colour and may need replacing to match."
+glance:
+  time: "[[TBC: number of sittings]]"
+  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  payment: "UPI, debit and credit cards [[TBC: payment methods]]"
+cta:
+  image: cta-teeth-whitening
+  heading: "A brighter smile, with your teeth checked first."
+  text: "Book a whitening consultation."
+form_heading: "Ask us about teeth whitening."
+related: [smile-design, gum-care, aligners]

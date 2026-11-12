@@ -1,0 +1,63 @@
+# Tokens {phone}, {address} and {email} are filled from content/site.yaml at build time.
+slug: complaints
+nav_label: Complaints policy
+title: "Complaints Policy | Arha Dental Care, Peddar Road"
+description: "How to raise a concern or complaint with Arha Dental Care, how we respond and what to do if you are still unhappy with our response."
+h1: "Complaints policy"
+subtitle: "How to raise a concern or complaint"
+updated: "12 November 2026"
+intro: |
+  <p>We want every patient to be well looked after. If something has gone wrong, or you're unhappy with any part of
+  your care or our service, please tell us. We take every concern seriously and we would rather hear about it than not.</p>
+  <p>This policy explains how to raise a complaint, how we will handle it, and what you can do if you are not satisfied
+  with our response. [[TBC: policy reviewed by the clinic and its legal adviser]]</p>
+sections:
+  - heading: "Our commitment to you"
+    body: |
+      <p>We will treat your complaint with respect and in confidence, look into it fairly, and reply as quickly as we
+      can. Raising a concern will never affect the care you receive from us.</p>
+  - heading: "How to make a complaint"
+    body: |
+      <p>You can raise a concern in whichever way suits you:</p>
+      <p><strong>In person:</strong> speak to our reception team or ask to speak to the dentist in charge.</p>
+      <p><strong>By phone:</strong> call us on {phone} during opening hours.</p>
+      <p><strong>In writing:</strong> Arha Dental Care, {address}.</p>
+      <p><strong>By email:</strong> {email}</p>
+      <p>Please include your name, contact details and a description of your concern, with any dates and the treatment
+      involved. If you are complaining on behalf of another patient, please confirm that they have agreed.</p>
+  - heading: "Time limits"
+    body: |
+      <p>Please raise a complaint as soon as you can, ideally within 12 months of the event or of becoming aware of it.
+      We will still consider a later complaint where it is possible to look into it fairly.
+      [[TBC: time limit the clinic wants to state]]</p>
+  - heading: "What happens after you complain"
+    body: |
+      <p>We will acknowledge your complaint within 3 working days and aim to send you a full reply within 20 working
+      days. If we need longer, we will tell you why and keep you updated. [[TBC: response times]]</p>
+      <p>Our reply will explain what we found, what we have done or will do about it, and any changes we will make. We
+      are always happy to meet you to talk it through.</p>
+  - heading: "If you are not satisfied"
+    body: |
+      <p>If you are not happy with our response, you can take your concern further:</p>
+      <p><strong>Maharashtra State Dental Council:</strong> for concerns about the professional conduct of a dentist
+      registered in Maharashtra. [[TBC: council contact details]]</p>
+      <p><strong>Dental Council of India:</strong> the national body for dental education and professional standards.
+      <a href="https://dciindia.gov.in/" target="_blank" rel="noopener">dciindia.gov.in</a>
+      [[TBC: check whether the National Dental Commission now handles these concerns]]</p>
+      <p><strong>Consumer commissions:</strong> under the Consumer Protection Act, 2019, you can contact the National
+      Consumer Helpline (1915, <a href="https://consumerhelpline.gov.in/" target="_blank" rel="noopener">consumerhelpline.gov.in</a>)
+      or file a complaint with the District Consumer Disputes Redressal Commission.</p>
+      <p>[[TBC: wording of this section checked by the clinic's legal adviser]]</p>
+  - heading: "Learning from complaints"
+    body: |
+      <p>We review every complaint and its outcome, and use what we learn to improve our care and our service.</p>
+  - heading: "Confidentiality"
+    body: |
+      <p>Complaints are handled in confidence. Information about your complaint is shared only with the people who
+      need it to look into and resolve it, or where the law requires it. See our
+      <a href="/policies/privacy/">privacy policy</a>.</p>
+  - heading: "Contact"
+    body: |
+      <p><strong>Post:</strong> Arha Dental Care, {address}</p>
+      <p><strong>Phone:</strong> {phone}</p>
+      <p><strong>Email:</strong> {email}</p>

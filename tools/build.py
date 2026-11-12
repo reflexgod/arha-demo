@@ -214,7 +214,7 @@ def treatment_pages():
                 "bodyLocation": t["procedure"]["body_location"], "howPerformed": t["procedure"]["how_performed"],
                 "preparation": t["procedure"]["preparation"], "followup": t["procedure"]["followup"],
                 "provider": {"@id": SITE["domain"] + "/#clinic"}}
-        faq = {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": qa["q"], "acceptedAnswer": {"@type": "Answer", "text": strip_tbc(qa["a"])}} for qa in faqs]} if faqs else None
+        faq = faq_node(faqs)
         pages.append({"path": path, "template": "treatment.html", "title": t["title"], "description": t["description"],
                       "crumbs": crumbs, "t": t, "schema": [org_node(), breadcrumb_node(crumbs), proc, faq],
                       "og_image": f"/static/img/{t['hero']}-1080.jpg", "noindex": t.get("noindex", False)})
@@ -238,6 +238,45 @@ def static_pages():
          "description": "This page has moved or no longer exists. Find treatments, book an appointment or call Arha Dental Care on Peddar Road, Mumbai.",
          "crumbs": None, "schema": [], "noindex": True, "og_image": "/static/img/practice-hero-800.jpg"},
     ]
+
+
+def faq_node(faqs):
+    return {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": qa["q"], "acceptedAnswer": {"@type": "Answer", "text": strip_tbc(qa["a"])}} for qa in faqs]} if faqs else None
+
+
+def fill_tokens(text):
+    """Policy text: {phone}, {address}, {email} come from site.yaml so they never drift."""
+    email = f'<a href="mailto:{SITE["email"]}">{SITE["email"]}</a>' if SITE["email"] else "[[TBC: clinic email]]"
+    return (text.replace("{phone}", f'<a href="{tel(SITE["phone"])}">{SITE["phone_display"]}</a>')
+                .replace("{address}", html.escape(address_one_line())).replace("{email}", email))
+
+
+def more_pages():
+    hub = load("hub.yaml")
+    fp = load("for-patients.yaml")
+    pages = [
+        {"path": "/treatments/", "template": "hub.html", "title": hub["title"], "description": hub["description"],
+         "crumbs": [("Home", "/"), ("Treatments", "/treatments/")], "h": hub, "og_image": "/static/img/hub-implants-1080.jpg",
+         "schema_fn": lambda p: [org_node(), breadcrumb_node(p["crumbs"]), faq_node(p["h"]["faqs"])]},
+        {"path": "/for-patients/", "template": "for_patients.html", "title": fp["title"], "description": fp["description"],
+         "crumbs": [("Home", "/"), ("For patients", "/for-patients/")], "fp": fp, "og_image": f"/static/img/{fp['hero']}-1080.jpg",
+         "schema_fn": lambda p: [org_node(), breadcrumb_node(p["crumbs"])]},
+        {"path": "/referrals/", "template": "referrals.html", "title": "Dental Referrals to a Prosthodontist | Arha Dental Care",
+         "description": "Refer a patient to prosthodontist Dr. Nikhil V. Jain at Arha Dental Care, Peddar Road: implants, crowns, bridges, dentures and full-mouth rehabilitation.",
+         "crumbs": [("Home", "/"), ("Dental referrals", "/referrals/")], "og_image": "/static/img/practice-hero-800.jpg",
+         "schema_fn": lambda p: [org_node(), breadcrumb_node(p["crumbs"])]},
+    ]
+    for f in sorted((CONTENT / "policies").glob("*.yaml")):
+        pol = yaml.safe_load(f.read_text(encoding="utf-8"))
+        pol["intro"] = fill_tokens(pol["intro"])
+        for sec in pol["sections"]:
+            sec["body"] = fill_tokens(sec["body"])
+        path = f"/policies/{pol['slug']}/"
+        pages.append({"path": path, "template": "policy.html", "title": pol["title"], "description": pol["description"],
+                      "crumbs": [("Home", "/"), (pol["nav_label"], path)], "pol": pol,
+                      "og_image": "/static/img/practice-hero-800.jpg", "noindex": pol.get("noindex", False),
+                      "schema_fn": lambda p: [org_node(), breadcrumb_node(p["crumbs"])]})
+    return pages
 
 
 # ------------------------------------------------------------------------------------------------ checks
@@ -287,12 +326,12 @@ def main():
     treatments = {t["t"]["slug"]: t["t"] for t in treatment_pages()}
     env.globals["built_treatments"] = treatments
 
-    pages = static_pages() + treatment_pages()
+    pages = static_pages() + treatment_pages() + more_pages()
     rendered = {}
     for p in pages:
         schema = p["schema_fn"](p) if "schema_fn" in p else p.get("schema", [])
         ctx = {"page": p, "schema": jsonld(*schema) if schema else "", "canonical": SITE["domain"] + (p["path"] if p["path"] != "/404.html" else "/"),
-               **({"t": p["t"]} if "t" in p else {})}
+               **{k: p[k] for k in ("t", "h", "fp", "pol") if k in p}}
         out = env.get_template(p["template"]).render(**ctx)
         rendered[p["path"]] = out
         target = DIST / (p["path"].lstrip("/") or "index.html")

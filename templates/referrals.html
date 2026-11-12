@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon %}
+{% block body_class %}page-referrals{% endblock %}
+{% block main %}
+<section class="hubhead refhead">
+  <div class="wrap">
+    <h1>Dental referrals to a prosthodontist on Peddar Road</h1>
+    <p>Dr. Nikhil V. Jain, prosthodontist and ITI Scholar, accepts referrals for dental implants, crowns and bridges,
+    dentures and full-mouth rehabilitation. {{ "[[TBC: full list of treatments Arha accepts referrals for]]" | tbc }}</p>
+    <p>We keep you informed at each stage, send you a report when treatment is complete, and return your patient to
+    you for their continuing care. {{ "[[TBC: confirm the reporting the clinic offers referring dentists]]" | tbc }}
+    To discuss a case first, call <a href="{{ tel(site.phone) }}">{{ site.phone_display }}</a>.</p>
+  </div>
+</section>
+
+<section class="refform" aria-labelledby="ref-h">
+  <div class="wrap">
+    <h2 id="ref-h">Treatment referral form</h2>
+    <form class="form" id="f-ref" data-form="referral" novalidate>
+      <input type="hidden" name="form" value="referral">
+      <input type="hidden" name="page" value="">
+      <div class="hp" aria-hidden="true"><label for="f-ref-company">Company</label><input type="text" id="f-ref-company" name="company" tabindex="-1" autocomplete="off"></div>
+
+      <fieldset>
+        <legend>Referring dentist</legend>
+        <div><label for="f-ref-name">Name of practitioner *</label><input type="text" id="f-ref-name" name="name" autocomplete="name" required></div>
+        <div><label for="f-ref-practice">Practice name *</label><input type="text" id="f-ref-practice" name="practice" autocomplete="organization" required></div>
+        <div><label for="f-ref-practice-address">Practice address</label><input type="text" id="f-ref-practice-address" name="practice_address" autocomplete="street-address"></div>
+        <div><label for="f-ref-email">Practitioner email *</label><input type="email" id="f-ref-email" name="email" autocomplete="email" required></div>
+        <div><label for="f-ref-phone">Practitioner phone *</label><input type="tel" id="f-ref-phone" name="phone" autocomplete="tel" inputmode="tel" required></div>
+        <div><label for="f-ref-reg">State Dental Council registration number</label><input type="text" id="f-ref-reg" name="registration"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Patient details</legend>
+        <div><label for="f-ref-pname">Patient name *</label><input type="text" id="f-ref-pname" name="patient_name" autocomplete="off" required></div>
+        <div><label for="f-ref-pdob">Patient date of birth *</label><input type="text" id="f-ref-pdob" name="patient_dob" placeholder="DD / MM / YYYY" inputmode="numeric" autocomplete="off" required></div>
+        <div><label for="f-ref-pphone">Patient phone *</label><input type="tel" id="f-ref-pphone" name="patient_phone" inputmode="tel" autocomplete="off" required></div>
+        <div><label for="f-ref-pemail">Patient email</label><input type="email" id="f-ref-pemail" name="patient_email" autocomplete="off"></div>
+        <div>
+          <label for="f-ref-treatment">Referral for *</label>
+          <select id="f-ref-treatment" name="treatment" required>
+            <option value="">Select one…</option>
+            <option value="dental-implants">Dental implants</option>
+            <option value="crowns-bridges-full-mouth-rehabilitation">Crowns, bridges or full-mouth rehabilitation</option>
+            <option value="dentures">Dentures</option>
+            <option value="root-canal-treatment">Root canal treatment</option>
+            <option value="assessment">Assessment and treatment plan only</option>
+            <option value="other">Other (please say below)</option>
+          </select>
+        </div>
+        <div>
+          <label for="f-ref-urgent">Is the treatment urgent? *</label>
+          <select id="f-ref-urgent" name="urgent" required>
+            <option value="">Select one…</option>
+            <option>Routine</option>
+            <option>Soon (within 2 weeks)</option>
+            <option>Urgent</option>
+          </select>
+        </div>
+        <div><label for="f-ref-purpose">Purpose of referral</label><input type="text" id="f-ref-purpose" name="purpose"></div>
+        <div><label for="f-ref-complaint">Patient's main complaint</label><input type="text" id="f-ref-complaint" name="complaint"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Patient history</legend>
+        <div><label for="f-ref-history">Brief history *</label><textarea id="f-ref-history" name="history" rows="4" placeholder="Chief complaint, periodontal status and relevant medical history" required></textarea></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Other information</legend>
+        <div><label for="f-ref-self">Would you like to carry out any of the treatment yourself?</label><textarea id="f-ref-self" name="self_treat" rows="2" placeholder="For example, the final restorations"></textarea></div>
+        <div><label for="f-ref-msg">Anything else we should know?</label><textarea id="f-ref-msg" name="message" rows="3"></textarea></div>
+        <div>
+          <label for="f-ref-files">Attach X-rays, scans or reports</label>
+          <input type="file" id="f-ref-files" name="files" multiple accept=".pdf,.jpg,.jpeg,.png" aria-describedby="f-ref-files-note">
+          <p class="form__note" id="f-ref-files-note">Up to 3 files (PDF, JPG or PNG), 4 MB each.</p>
+        </div>
+      </fieldset>
+
+      <label class="check"><input type="checkbox" name="consent" value="yes" required> <span>I confirm the patient has agreed to this referral and to their details being shared with Arha Dental Care, who will use them to arrange and provide their care, as set out in the <a href="/policies/privacy/">privacy policy</a>.</span></label>
+      <div class="cf-turnstile" data-sitekey="{{ site.turnstile_site_key }}"></div>
+      <button class="btn btn--solid" type="submit">Send referral {{ icon("arrow") }}</button>
+      <p class="form__status" role="status" aria-live="polite"></p>
+      <p class="form__note">We'll confirm we've received the referral by email or phone. For an urgent case, please also call us on <a href="{{ tel(site.phone) }}">{{ site.phone_display }}</a>.</p>
+    </form>
+  </div>
+</section>
+
+{% include "_visit.html" %}
+{% endblock %}

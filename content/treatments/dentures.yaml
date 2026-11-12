@@ -1,0 +1,99 @@
+slug: dentures
+nav_label: Dentures
+title: "Dentures in Mumbai | Arha Dental Care, Peddar Road"
+description: "Dentures on Peddar Road, planned by a prosthodontist: complete, partial, flexible and implant-retained dentures, how they are made and how to care for them"
+h1: "Dentures in Mumbai, made to fit"
+answer: >-
+  A denture is a removable set of replacement teeth. Complete dentures replace all the teeth in a jaw; partial dentures
+  fill gaps between your own teeth. At Arha, dentures are planned by Dr. Nikhil V. Jain, a prosthodontist, and can be
+  held more firmly with dental implants.
+hero: hero-dentures
+statement_h2: "Comfortable, natural-looking dentures, made for your mouth and your bite."
+statement_p: >-
+  Making a denture is a specialist job: it has to look natural, let you speak and chew, and stay in place. Prosthodontics,
+  Dr. Nikhil V. Jain's specialty, is the branch of dentistry that restores and replaces teeth, and dentures are a core part
+  of that training. We take careful impressions and bite records, let you see and try the teeth before the denture is
+  finished, and adjust it after fitting until it feels right. If an existing denture is loose, we can often reline it, or
+  hold it in place with two or more implants.
+procedure:
+  type: NoninvasiveProcedure
+  body_location: Jaw
+  how_performed: "Impressions and bite records are taken, the teeth are set up and tried in, and the finished denture is fitted and adjusted."
+  preparation: "Examination and, if needed, X-rays; any extractions or gum treatment are done first."
+  followup: "Review visits for adjustments, then regular check-ups; relining when the gums change shape."
+sections:
+  - label: about
+    heading: "What types of dentures are there?"
+    body: |
+      <ul>
+        <li><strong>Complete dentures</strong> replace all the teeth in the upper or lower jaw.</li>
+        <li><strong>Partial dentures</strong> replace some teeth and clip onto your remaining teeth. They can have a metal
+        framework or be made in a flexible material.</li>
+        <li><strong>Implant-retained dentures</strong> click onto two or more dental implants, so they stay firmly in place
+        when you eat and speak.</li>
+      </ul>
+      <p>[[TBC: which denture types and materials Arha offers]]</p>
+  - label: benefits
+    heading: "Why replace missing teeth with a denture?"
+    body: |
+      <ul>
+        <li>You can chew a wider range of food and speak more clearly.</li>
+        <li>Your lips and cheeks are supported, which affects how your face looks.</li>
+        <li>A partial denture stops neighbouring teeth drifting into the gap.</li>
+        <li>Dentures usually cost less than implants or bridges and need no surgery.</li>
+      </ul>
+  - label: who is it for?
+    heading: "Is a denture right for me?"
+    body: |
+      <p>Dentures suit people who have lost several or all of their teeth, people who are not able or ready to have
+      implants, and people who want a removable option. If your current denture is loose, sore or breaking, it may need
+      a reline, a repair or a new denture. We also explain the alternatives, such as
+      <a href="/treatments/dental-implants/">implants</a> and bridges, so you can compare them; see
+      <a href="/treatments/missing-teeth/">replacing missing teeth</a>.</p>
+  - label: process
+    heading: "How is a denture made?"
+    body: |
+      <ol>
+        <li><strong>Consultation.</strong> We examine your mouth, discuss what you want and plan the denture.</li>
+        <li><strong>Impressions and bite.</strong> Accurate moulds of your gums and records of how your jaws meet.</li>
+        <li><strong>Try-in.</strong> You see and try the teeth set in wax, so the shape, shade and bite can be changed.</li>
+        <li><strong>Fitting.</strong> The finished denture is fitted and adjusted.</li>
+        <li><strong>Review.</strong> Short follow-up visits to ease any sore spots while you get used to it.</li>
+      </ol>
+      <p>[[TBC: Arha's usual number of visits and timeline]]</p>
+  - label: aftercare
+    heading: "Looking after your dentures"
+    body: |
+      <p>Clean your dentures every day with a soft brush and denture cleaner, not toothpaste, which can scratch them.
+      Take them out at night unless we advise otherwise, and keep them in water so they don't dry out. Brush your gums
+      and any remaining teeth. Your gums slowly change shape over the years, so come for regular check-ups: a denture
+      that starts to feel loose can often be relined.</p>
+  - label: related treatments
+    heading: "Holding a denture in place with implants"
+    body: |
+      <p>A lower denture in particular can move when you eat. Two or more implants placed in the jaw can hold it firmly
+      in place, and the denture still comes out for cleaning. Read about
+      <a href="/treatments/dental-implants/">dental implants</a>, or about
+      <a href="/treatments/crowns-bridges-full-mouth-rehabilitation/">full-mouth rehabilitation</a> if you are
+      considering fixed teeth.</p>
+  - label: faqs
+    heading: "Questions we are often asked about dentures"
+    faqs:
+      - q: "How long does it take to get used to new dentures?"
+        a: "Most people need a few weeks to get used to eating and speaking with new dentures. Start with soft food cut into small pieces, and come back if anything feels sore: small adjustments make a big difference."
+      - q: "Can loose dentures be tightened?"
+        a: "Often, yes. A loose denture can usually be relined so that it fits your gums again. If a denture is still loose after relining, implants can hold it in place."
+      - q: "What do dentures cost in Mumbai?"
+        a: "The cost depends on the type of denture, the materials and whether implants are involved. You receive an estimate after your consultation."
+      - q: "Can dentures be fixed permanently?"
+        a: "A standard denture is removable. If you want fixed teeth, a bridge or teeth fixed on implants may be possible. We explain the options at your consultation."
+glance:
+  time: "Usually several visits over a few weeks [[TBC: confirm]]"
+  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  payment: "UPI, debit and credit cards [[TBC: payment methods]]"
+cta:
+  image: cta-dentures
+  heading: "Dentures that look natural and stay comfortable."
+  text: "Book a denture consultation."
+form_heading: "Ask us about dentures."
+related: [dental-implants, missing-teeth, crowns-bridges-full-mouth-rehabilitation]

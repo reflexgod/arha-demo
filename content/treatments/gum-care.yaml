@@ -1,0 +1,89 @@
+slug: gum-care
+nav_label: Gum care
+title: "Gum Treatment in South Mumbai | Arha Dental Care"
+description: "Bleeding or swollen gums? Gum care on Peddar Road, Mumbai: check-ups, scaling, deep cleaning and advice to keep gum disease under control."
+h1: "Gum care and bleeding gums treatment"
+answer: >-
+  Bleeding, swollen or receding gums are usually signs of gum disease, caused by plaque at the gum line. Early gum
+  disease can be reversed with professional cleaning and better brushing; more advanced disease needs deep cleaning and
+  regular follow-up to keep it under control.
+hero: hero-gum-care
+statement_h2: "Healthy gums are the foundation for every tooth, crown and implant."
+statement_p: >-
+  Gum disease is very common and often causes no pain, so many people don't notice it until the gums bleed when they brush,
+  the teeth feel loose or the gums start to shrink back. Left alone, it can destroy the bone that holds the teeth. The
+  good news is that it can usually be controlled. We measure your gums, explain what we find and clean the teeth
+  thoroughly, above and below the gum line, then show you the cleaning routine that keeps them healthy.
+  [[TBC: who provides gum treatment at Arha, and whether complex cases are referred]]
+procedure:
+  type: NoninvasiveProcedure
+  body_location: Gums
+  how_performed: "Scaling and polishing, and root surface debridement (deep cleaning) under local anaesthetic where needed."
+  preparation: "Gum examination, measurements and X-rays."
+  followup: "Re-assessment after a few weeks, then regular maintenance cleaning."
+sections:
+  - label: about
+    heading: "What is gum disease?"
+    body: |
+      <p>Plaque, a sticky film of bacteria, builds up where the teeth meet the gums. The gums react by becoming red,
+      swollen and prone to bleeding: this is <strong>gingivitis</strong>, and it is reversible. If plaque and hardened
+      tartar stay in place, the inflammation can spread to the bone around the teeth. This is
+      <strong>periodontitis</strong>, which can lead to receding gums, loose teeth and, eventually, tooth loss.</p>
+  - label: benefits
+    heading: "Why treat your gums?"
+    body: |
+      <ul>
+        <li>Treatment stops bleeding and bad breath caused by gum disease.</li>
+        <li>It protects the bone that holds your teeth, crowns and implants.</li>
+        <li>Healthy gums are needed before crowns, bridges, implants or cosmetic treatment.</li>
+      </ul>
+  - label: who is it for?
+    heading: "Signs your gums need attention"
+    body: |
+      <ul>
+        <li>Gums that bleed when you brush or floss.</li>
+        <li>Red, swollen or tender gums.</li>
+        <li>Bad breath or a bad taste that doesn't go away.</li>
+        <li>Gums shrinking back, or teeth that look longer or feel loose.</li>
+      </ul>
+      <p>Smokers and people with diabetes are at higher risk and should have their gums checked regularly.</p>
+  - label: process
+    heading: "How is gum disease treated?"
+    body: |
+      <ol>
+        <li><strong>Assessment.</strong> We measure the space between gum and tooth around each tooth and take X-rays.</li>
+        <li><strong>Cleaning.</strong> A scale and polish for early disease; deep cleaning below the gum line, with local
+        anaesthetic, for deeper pockets.</li>
+        <li><strong>Home care.</strong> We show you how to brush and clean between your teeth effectively.</li>
+        <li><strong>Review.</strong> We re-measure after a few weeks and agree how often you need cleaning.</li>
+      </ol>
+  - label: aftercare
+    heading: "Keeping your gums healthy"
+    body: |
+      <p>Brush twice a day for two minutes with a fluoride toothpaste, and clean between your teeth every day with floss
+      or small interdental brushes. Stop smoking if you can. Gum disease can return, so keep to the cleaning visits we
+      recommend. [[TBC: Arha's usual maintenance interval]]</p>
+  - label: related treatments
+    heading: "Gums, implants and other treatment"
+    body: |
+      <p>Implants need healthy gums too: see <a href="/treatments/dental-implants/">dental implants</a>. Read about
+      <a href="/treatments/missing-teeth/">replacing teeth</a> lost to gum disease.</p>
+  - label: faqs
+    heading: "Questions we are often asked about gums"
+    faqs:
+      - q: "Why do my gums bleed when I brush?"
+        a: "Bleeding is usually a sign of inflammation from plaque at the gum line. Keep brushing gently and book a check-up; bleeding that is ignored can lead to gum disease."
+      - q: "Is deep cleaning painful?"
+        a: "Deep cleaning is done with local anaesthetic where needed, so most people feel little during treatment. The gums can be tender for a few days afterwards."
+      - q: "Can gum disease be cured?"
+        a: "Gingivitis can be reversed. Periodontitis can't be fully reversed, but it can usually be controlled with treatment and regular cleaning, so you keep your teeth."
+glance:
+  time: "One or more visits, then maintenance [[TBC: confirm]]"
+  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  payment: "UPI, debit and credit cards [[TBC: payment methods]]"
+cta:
+  image: cta-gum-care
+  heading: "Bleeding gums? Let's get them healthy again."
+  text: "Book a gum check-up."
+form_heading: "Ask us about your gums."
+related: [dental-implants, missing-teeth, teeth-whitening]

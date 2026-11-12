@@ -1,0 +1,37 @@
+slug: accessibility
+nav_label: Accessibility
+title: "Accessibility | Arha Dental Care, Peddar Road"
+description: "How we make the Arha Dental Care website and practice accessible, known limitations, and how to ask for help or tell us about a problem."
+h1: "Accessibility"
+subtitle: "Making our website and practice easy to use"
+updated: "12 November 2026"
+intro: |
+  <p>We want everyone to be able to use this website and to visit the practice comfortably. This statement explains
+  what we have done, what we know still needs work, and how to ask for help.</p>
+sections:
+  - heading: "This website"
+    body: |
+      <p>We aim to meet the Web Content Accessibility Guidelines (WCAG) 2.2 at level AA. The site is designed so that
+      you can:</p>
+      <ul>
+        <li>use it with a keyboard alone, with a visible focus outline;</li>
+        <li>use it with a screen reader: headings, landmarks and form labels are marked up, and images have text alternatives;</li>
+        <li>zoom up to 200% without losing content;</li>
+        <li>read text with enough colour contrast;</li>
+        <li>turn off animation through your device's "reduce motion" setting.</li>
+      </ul>
+  - heading: "Known limitations"
+    body: |
+      <ul>
+        <li>The Google map is provided by Google and may not be fully accessible. The address and directions are also
+        given as text on every page.</li>
+        <li>The background video on the home page has no sound and no information that isn't also in the text.</li>
+      </ul>
+  - heading: "At the practice"
+    body: |
+      <p>[[TBC: lift access to the first floor, step-free entrance, parking or drop-off, and any other access details]]</p>
+      <p>If you need extra time, a longer appointment or someone with you during treatment, please tell us when you book.</p>
+  - heading: "Ask for help or report a problem"
+    body: |
+      <p>If you find part of this website hard to use, or need information in another format, please call us on
+      {phone} or email {email}. We'll do what we can to help.</p>

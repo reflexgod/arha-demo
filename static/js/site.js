@@ -233,10 +233,38 @@
       if (!name) { say("Please tell us your name."); f.elements.name.focus(); return; }
       if (phone.replace(/\D/g, "").length < 8) { say("Please enter a phone or WhatsApp number we can reach you on."); f.elements.phone.focus(); return; }
       if (f.elements.email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.elements.email.value)) { say("Please check your email address."); f.elements.email.focus(); return; }
-      if (!f.elements.consent.checked) { say("Please tick the box so we can contact you about your request."); f.elements.consent.focus(); return; }
+      var kind = f.getAttribute("data-form"), files = [];
+      if (kind === "referral") {
+        var need = [["practice", "Please add the practice name."], ["email", "Please add your email address."], ["patient_name", "Please add the patient's name."],
+          ["patient_dob", "Please add the patient's date of birth."], ["patient_phone", "Please add the patient's phone number."],
+          ["treatment", "Please choose what the referral is for."], ["urgent", "Please say how urgent the treatment is."], ["history", "Please add a brief patient history."]];
+        for (var n = 0; n < need.length; n++) {
+          var el = f.elements[need[n][0]];
+          if (!el.value.trim()) { say(need[n][1]); el.focus(); return; }
+        }
+        files = Array.prototype.slice.call(f.elements.files.files || []);
+        if (files.length > 3) { say("Please attach up to 3 files."); f.elements.files.focus(); return; }
+        for (var k = 0; k < files.length; k++) {
+          if (!/\.(pdf|jpe?g|png)$/i.test(files[k].name)) { say("Please attach PDF, JPG or PNG files only."); f.elements.files.focus(); return; }
+          if (files[k].size > 4 * 1024 * 1024) { say(files[k].name + " is larger than 4 MB. Please attach a smaller file."); f.elements.files.focus(); return; }
+        }
+      }
+      if (!f.elements.consent.checked) { say(kind === "referral" ? "Please confirm the patient has agreed to this referral." : "Please tick the box so we can contact you about your request."); f.elements.consent.focus(); return; }
       if (Date.now() - started < 3000) { say("Please try again in a moment."); return; }
 
-      var data = new URLSearchParams(new FormData(f));
+      var data = new URLSearchParams();
+      new FormData(f).forEach(function (v, key) { if (typeof v === "string") data.append(key, v); });
+      if (!cfg.formsEndpoint && kind === "referral") {
+        var rmsg = ["Hello Arha Dental Care, I'd like to refer a patient.",
+          "Referring dentist: " + name + ", " + f.elements.practice.value.trim(), "Phone: " + phone, "Email: " + f.elements.email.value.trim(),
+          "Patient: " + f.elements.patient_name.value.trim(),
+          "Referral for: " + f.elements.treatment.options[f.elements.treatment.selectedIndex].text, "Urgency: " + f.elements.urgent.value]
+          .concat(files.length ? ["I'll send the X-rays and reports separately."] : []).join(String.fromCharCode(10));
+        track("form_submit", { form: kind, method: "whatsapp_fallback" });
+        say("Opening WhatsApp with the referral details. If it doesn't open, please call us on " + cfg.phone + ".", true);
+        window.open("https://wa.me/" + cfg.phone.replace(/\D/g, "") + "?text=" + encodeURIComponent(rmsg), "_blank", "noopener");
+        return;
+      }
       if (!cfg.formsEndpoint) {
         // Preview without a forms backend: hand the request over to WhatsApp instead of losing it.
         var t = f.elements.treatment && f.elements.treatment.value ? f.elements.treatment.options ? f.elements.treatment.options[f.elements.treatment.selectedIndex].text : f.elements.treatment.value : "";
@@ -249,14 +277,24 @@
         return;
       }
       var btn = $("button[type=submit]", f); btn.disabled = true;
-      say("Sending…", true);
-      fetch(cfg.formsEndpoint, { method: "POST", body: data })
+      say(files.length ? "Uploading files and sending…" : "Sending…", true);
+      // Files go as base64 fields (Apps Script can't read multipart uploads): file1_name, file1_type, file1_data, …
+      Promise.all(files.map(function (file) {
+        return new Promise(function (ok, bad) {
+          var rd = new FileReader();
+          rd.onload = function () { ok({ name: file.name, type: file.type, data: String(rd.result).split(",")[1] || "" }); };
+          rd.onerror = bad; rd.readAsDataURL(file);
+        });
+      })).then(function (enc) {
+        enc.forEach(function (x, i) { data.append("file" + (i + 1) + "_name", x.name); data.append("file" + (i + 1) + "_type", x.type); data.append("file" + (i + 1) + "_data", x.data); });
+        return fetch(cfg.formsEndpoint, { method: "POST", body: data });
+      })
         .then(function (r) { return r.json(); })
         .then(function (j) {
           if (!j || !j.ok) throw new Error((j && j.error) || "failed");
           track("form_submit", { form: f.getAttribute("data-form") });
           f.reset(); started = Date.now();
-          say("Thank you. We've received your request and will call or WhatsApp you during opening hours.", true);
+          say(kind === "referral" ? "Thank you. We've received the referral and will confirm by email or phone." : "Thank you. We've received your request and will call or WhatsApp you during opening hours.", true);
           if (window.turnstile) try { turnstile.reset(); } catch (e) {}
         })
         .catch(function () { say("Sorry, that didn't go through. Please call us on " + cfg.phone + " or WhatsApp us."); })

@@ -24,6 +24,30 @@ images:
   # ---- Contact
   - {name: contact-photo, kind: real, src: src-assets/dental-operatory-arha-dental-care-peddar-road-04.jpeg, ratio: [616, 552], focus: [0.42, 0.55], widths: [480, 800, 1232], alt: "Consultation desk in a treatment room at Arha Dental Care"}
 
+  # ---- Step 3: treatment heroes (subject left of the text card) and sidebar cards
+  - {name: hero-dentures, kind: stock, src: src-assets/stock/people/woman-smiling-orange.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [1.0, 0.45], alt: "Woman smiling"}
+  - {name: hero-missing-teeth, kind: stock, src: src-assets/stock/people/young-man-suit.jpg, flip: true, extend_right: 0.3, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.0, 0.4], alt: "Young man in a suit smiling"}
+  - {name: hero-teeth-whitening, kind: stock, src: src-assets/stock/people/woman-laughing-closeup.jpg, extend_right: 0.35, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.0, 0.5], alt: "Woman laughing"}
+  - {name: hero-smile-design, kind: stock, src: src-assets/stock/people/friends-two-women.jpg, zoom: 1.15, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.3, 0.55], alt: "Two friends smiling outdoors"}
+  - {name: hero-gum-care, kind: stock, src: src-assets/stock/people/man-with-mug.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [1.0, 0.4], alt: "Young man holding a mug"}
+  - {name: hero-aligners, kind: stock, src: src-assets/stock/people/boy-smiling.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [1.0, 0.4], alt: "Boy smiling"}
+  - {name: hero-emergency, kind: real, src: src-assets/dental-operatory-arha-dental-care-peddar-road-02.jpeg, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.5, 0.5], alt: "A treatment room at Arha Dental Care, ready for patients"}
+  - {name: cta-dentures, kind: stock, src: src-assets/stock/people/couple-talking.jpg, ratio: [3, 5], focus: [0.5, 0.4], widths: [400, 780], alt: "Older couple talking"}
+  - {name: cta-missing-teeth, kind: stock, src: src-assets/stock/people/friends-two-men.jpg, ratio: [3, 5], focus: [0.5, 0.45], widths: [400, 780], alt: "Two friends smiling"}
+  - {name: cta-teeth-whitening, kind: stock, src: src-assets/stock/people/woman-with-cup.jpg, ratio: [3, 5], focus: [0.5, 0.4], widths: [400, 780], alt: "Woman holding a cup of tea"}
+  - {name: cta-smile-design, kind: stock, src: src-assets/stock/people/couple-laughing-outdoors.jpg, ratio: [3, 5], focus: [0.5, 0.4], widths: [400, 780], alt: "Couple laughing outdoors"}
+  - {name: cta-gum-care, kind: stock, src: src-assets/stock/people/couple-reading.jpg, ratio: [3, 5], focus: [0.5, 0.4], widths: [400, 780], alt: "Couple reading together"}
+  - {name: cta-aligners, kind: stock, src: src-assets/stock/people/woman-relaxed-cafe.jpg, ratio: [3, 5], focus: [0.5, 0.4], widths: [400, 780], alt: "Woman relaxing in a cafe"}
+  - {name: cta-emergency, kind: stock, src: src-assets/stock/people/friends-on-lawn.jpg, ratio: [3, 5], focus: [0.45, 0.4], widths: [400, 780], alt: "Friends relaxing on a lawn"}
+  # ---- Treatments hub: one image per category
+  - {name: hub-implants, kind: stock, src: src-assets/stock/people/family-at-home.jpg, ratio: [1312, 600], focus: [0.5, 0.35], widths: [640, 1080, 1312], alt: "Three generations of a family smiling"}
+  - {name: hub-restorative, kind: stock, src: src-assets/stock/people/older-man-smiling.jpg, ratio: [1312, 600], focus: [0.5, 0.46], widths: [640, 1080, 1312], alt: "Older man smiling"}
+  - {name: hub-cosmetic, kind: stock, src: src-assets/stock/people/smile-wide.jpg, ratio: [1312, 600], focus: [0.5, 0.5], widths: [640, 1080, 1312], alt: "Close-up of a broad smile"}
+  - {name: hub-children, kind: stock, src: src-assets/stock/kid-face.jpg, ratio: [1312, 600], focus: [0.5, 0.62], widths: [640, 1080, 1312], alt: "Young girl smiling"}
+  - {name: hub-general, kind: stock, src: src-assets/stock/people/family-outdoors.jpg, ratio: [1312, 600], focus: [0.55, 0.45], widths: [640, 1080, 1312], alt: "Family sitting together outdoors"}
+  # ---- For patients (Arha's own treatment room)
+  - {name: hero-for-patients, kind: real, src: src-assets/dental-operatory-arha-dental-care-peddar-road-01.jpeg, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.5, 0.5], alt: "A treatment room at Arha Dental Care, Peddar Road"}
+
 videos:
   - {name: home-hero-tour, kind: real, src: src-assets/hero-land-master.mp4, start: 0, duration: 12.7, crop: [1152, 1080], zoom: 1.15, focus: [0.438, 0.5], grade: "eq=contrast=1.22:brightness=-0.07:saturation=1.3:gamma=0.84,colorbalance=rs=0.06:gs=0.02:bs=-0.07:rm=0.07:gm=0.02:bm=-0.07:rh=0.03:bh=-0.04,vignette=angle=PI/4", sizes: [[768, 720], [1152, 1080]], poster_widths: [768, 1152]}
   - {name: home-card-walkthrough, kind: real, src: src-assets/IMG_2303.MOV, start: 26, duration: 14, crop: [1080, 608], focus: [0.5, 0.42], sizes: [[640, 360], [1080, 608]], poster_widths: [640, 1080]}
