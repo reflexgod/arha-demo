@@ -68,8 +68,8 @@ show_reviews: false                         # OFF until the clinic agrees in wri
 established: ""                             # TBC: year Arha opened. Empty = no year shown.
 
 # Forms: Google Apps Script web app (tools/forms/arha-forms.gs). Empty = forms show the call / WhatsApp fallback.
-forms_endpoint: ""
-turnstile_site_key: "1x00000000000000000000AA"   # Cloudflare's public TEST key (always passes). Real key before launch.
+forms_endpoint: "https://script.google.com/macros/s/AKfycbxY834EC27PvYL_2eaJ2vvRuAc1x9L_FoKYktAT1A_SGNkJMcD3flKyo9-m132jiwjEQg/exec"
+turnstile_site_key: "0x4AAAAAAF-qTg8zUDYYxTkC"   # live site key (public by design; the secret is only in Apps Script properties)
 
 # Analytics: GA4 loads only after the visitor accepts cookies. Empty = no GA4 at all.
-ga4_id: ""
+ga4_id: "G-J6TW5GWFYL"

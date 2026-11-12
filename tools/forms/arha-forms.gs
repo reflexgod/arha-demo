@@ -7,6 +7,8 @@
  *       NOTIFY_TO            email address(es) that receive each enquiry (comma separated)
  *       TURNSTILE_SECRET     Cloudflare Turnstile secret key (leave empty only while testing)
  *       REFERRALS_FOLDER_ID  ID of a private Drive folder for referral attachments (the part after /folders/ in its URL)
+ *       SHEET_ID             ID of the "Arha website enquiries" Sheet (the part after /d/ in its URL). Used by ss_();
+ *                            falls back to the spreadsheet the script is bound to.
  *       XRAY_FOLDER_ID       ID of a private Drive folder for X-rays sent by international patients (falls back to
  *                            REFERRALS_FOLDER_ID if empty)
  *  3. Deploy > New deployment > Web app. Execute as: Me. Who has access: Anyone. Copy the /exec URL
@@ -76,7 +78,7 @@ function referral_(p, props) {
   notify_(props, 'New referral from ' + clean_(p.name) + (p.urgent === 'Urgent' ? ' (URGENT)' : ''),
     'Referring dentist: ' + clean_(p.name) + ', ' + clean_(p.practice) + '\nPhone: ' + clean_(p.phone) + '\nEmail: ' + clean_(p.email) +
     '\nReferral for: ' + clean_(p.treatment) + '\nUrgency: ' + clean_(p.urgent) + '\nFiles: ' + links.length +
-    '\n\nFull details are in the "' + REF_SHEET + '" tab: ' + SpreadsheetApp.getActiveSpreadsheet().getUrl(), p.email);
+    '\n\nFull details are in the "' + REF_SHEET + '" tab: ' + ss_().getUrl(), p.email);
   return json_({ ok: true });
 }
 
@@ -104,12 +106,18 @@ function xray_(p, props) {
   notify_(props, 'International patient upload: ' + clean_(p.name),
     'From: ' + clean_(p.name) + ' (' + clean_(p.country) + ')\nPhone: ' + clean_(p.phone) + '\nEmail: ' + clean_(p.email) +
     '\nFiles: ' + links.length + '\n\nDetails and file links are in the "' + XRAY_SHEET + '" tab: ' +
-    SpreadsheetApp.getActiveSpreadsheet().getUrl(), p.email);
+    ss_().getUrl(), p.email);
   return json_({ ok: true });
 }
 
+// The leads spreadsheet: SHEET_ID from Script properties (works for a standalone script too), else the bound one.
+function ss_() {
+  var id = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
+  return id ? SpreadsheetApp.openById(id) : SpreadsheetApp.getActiveSpreadsheet();
+}
+
 function sheet_(name, header) {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = ss_();
   var sh = ss.getSheetByName(name) || ss.insertSheet(name);
   if (sh.getLastRow() === 0) sh.appendRow(header);
   return sh;
