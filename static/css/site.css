@@ -1152,3 +1152,13 @@ body.no-scroll { overflow: hidden; }
 .relt__card--text p { margin-top: 14px; flex: 1; font-size: .95rem; }
 .relt__card--text .tlink { margin-top: 20px; }
 @media (max-width: 991px) { .phero__media.dhero__ph { aspect-ratio: 16 / 9; } .phero__media.dhero__ph img { width: 22%; } }
+/* reviews band: reference "community" heading (sans + italic serif), controls */
+.reviews h2 { font: 300 var(--h2)/var(--h2-lh) var(--sans); }
+.reviews h2 em { font: italic 400 1.05em/1 var(--serif); color: var(--gold-text); }
+.reviews__track { min-height: 9rem; }
+.review blockquote { max-width: 980px; margin: 0 auto; }
+.reviews__ctrl { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 28px; }
+.reviews__btn { min-width: 44px; height: 44px; padding: 0 12px; border: 1px solid var(--sand); border-radius: var(--radius); background: none; color: var(--ink); cursor: pointer; font: 500 var(--lab)/1 var(--label); letter-spacing: 1.5px; text-transform: uppercase; }
+.reviews__btn svg { width: 14px; height: 14px; transform: rotate(90deg); }
+.reviews__next svg { transform: rotate(-90deg); }
+.reviews__btn:hover { border-color: var(--ink); }

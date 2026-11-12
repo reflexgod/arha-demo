@@ -1,21 +1,29 @@
 {#
-  Google reviews carousel. OFF until the clinic agrees in writing (site.yaml: show_reviews).
-  Text comes only from content/reviews.yaml, copied character for character from the reviews the owner pasted.
+  Google reviews band (the reference's "community" band, on every page that includes the visit block).
+  OFF until the clinic agrees in writing (site.yaml: show_reviews). Text only from content/reviews.yaml, copied
+  character for character from the clinic's Google Business Profile. No rating or review schema: nothing self-serving.
 #}
 {% from "_macros.html" import icon %}
 {% if site.show_reviews and reviews %}
-<section class="reviews" aria-labelledby="reviews-h">
+<section class="reviews" aria-labelledby="reviews-h" aria-roledescription="carousel">
   <div class="wrap">
     <img class="reviews__mark" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="">
-    <h2 id="reviews-h">What our patients say on Google</h2>
-    <div class="reviews__track" data-carousel>
+    <h2 id="reviews-h">Kind words, <em>on Google</em></h2>
+    <div class="reviews__track" data-carousel aria-live="polite">
       {% for r in reviews %}
-      <figure class="review{% if loop.first %} is-active{% endif %}">
+      <figure class="review{% if loop.first %} is-active{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}"{% if not loop.first %} hidden{% endif %}>
         <blockquote>{{ r.text }}</blockquote>
-        <figcaption><cite>{{ r.name }}</cite><span class="pill">Google review{% if r.date %}, {{ r.date }}{% endif %}</span></figcaption>
+        <figcaption><cite>{{ r.name }}</cite><span class="pill">{{ r.treatment or "Google review" }}{% if r.date %}, {{ r.date }}{% endif %}</span></figcaption>
       </figure>
       {% endfor %}
     </div>
+    {% if reviews | length > 1 %}
+    <div class="reviews__ctrl">
+      <button class="reviews__btn" type="button" data-carousel-prev aria-label="Previous review"><svg aria-hidden="true"><use href="#i-chev"></use></svg></button>
+      <button class="reviews__btn reviews__pause" type="button" data-carousel-pause aria-pressed="false">Pause</button>
+      <button class="reviews__btn reviews__next" type="button" data-carousel-next aria-label="Next review"><svg aria-hidden="true"><use href="#i-chev"></use></svg></button>
+    </div>
+    {% endif %}
     <a class="btn reviews__link" href="{{ site.google_reviews_url }}" target="_blank" rel="noopener">Read all reviews on Google {{ icon("arrow") }}</a>
   </div>
 </section>

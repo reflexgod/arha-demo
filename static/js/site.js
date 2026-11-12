@@ -294,9 +294,25 @@
 
   /* ---------------------------------------------------------- reviews carousel (only rendered when switched on) */
   $$("[data-carousel]").forEach(function (track) {
-    var items = $$(".review", track), i = 0;
+    var items = $$(".review", track), i = 0, box = track.parentNode;
     if (items.length < 2) return;
-    setInterval(function () { items[i].classList.remove("is-active"); i = (i + 1) % items.length; items[i].classList.add("is-active"); }, 8000);
+    var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var pauseBtn = $("[data-carousel-pause]", box), paused = still, hover = false;
+    function show(n) {
+      items[i].classList.remove("is-active"); items[i].hidden = true;
+      i = (n + items.length) % items.length;
+      items[i].hidden = false; items[i].classList.add("is-active");
+    }
+    function setPaused(p) { paused = p; if (pauseBtn) { pauseBtn.setAttribute("aria-pressed", p ? "true" : "false"); pauseBtn.textContent = p ? "Play" : "Pause"; } }
+    setPaused(paused);
+    setInterval(function () { if (!paused && !hover) show(i + 1); }, 8000);
+    $("[data-carousel-prev]", box).addEventListener("click", function () { show(i - 1); });
+    $("[data-carousel-next]", box).addEventListener("click", function () { show(i + 1); });
+    if (pauseBtn) pauseBtn.addEventListener("click", function () { setPaused(!paused); });
+    box.addEventListener("mouseenter", function () { hover = true; });
+    box.addEventListener("mouseleave", function () { hover = false; });
+    box.addEventListener("focusin", function () { hover = true; });
+    box.addEventListener("focusout", function () { hover = false; });
   });
 
   /* ---------------------------------------------------------- forms */
