@@ -1,23 +1,22 @@
-# Built like the reference's long-form "aligners for children" page. noindex and kept out of every menu and the sitemap
-# until the clinic confirms who provides orthodontic treatment at Arha and which appliances are used.
+# Built like the reference's long-form "aligners for children" page. Indexable since 13 Nov 2026 (clinic confirmed:
+# metal braces and clear aligners for children, teens and adults). Still TBC: who carries out orthodontic treatment.
 slug: childrens-orthodontics
 nav_label: Children's orthodontics
-noindex: true
 layout: article
 title: "Orthodontics for Children in South Mumbai | Arha Dental Care"
 description: "Orthodontic care for children and teenagers at Arha Dental Care, Peddar Road: when to have a first check, the options, and what treatment involves."
 h1: "Orthodontics for children and teenagers in South Mumbai"
 answer: >-
   Crooked, crowded or protruding teeth are common as children grow. An orthodontic check helps you understand whether
-  your child needs treatment, when to start it, and which option suits them. [[TBC: who provides orthodontic
-  treatment at Arha, and which appliances]]
+  your child needs treatment, when to start it, and which option suits them. At Arha we offer metal braces and
+  clear aligners for children, teenagers and adults.
 hero: hero-childrens-orthodontics
 statement_h2: "Orthodontic care for children in South Mumbai, planned around a growing smile."
 statement_p: >-
   Children's teeth and jaws change quickly between the ages of about seven and fifteen. Some problems with the bite are
   easier to guide while a child is still growing; others are better treated once the adult teeth have come through.
   We examine your child, take the X-rays needed, and explain what we see in words they understand, so the whole family
-  can decide together. [[TBC: orthodontic services offered at Arha]]
+  can decide together. We offer metal braces and clear aligners, including Invisalign®.
 procedure:
   type: TherapeuticProcedure
   body_location: Teeth and jaws
@@ -30,7 +29,7 @@ sections:
     body: |
       <p>Orthodontic treatment moves teeth, and sometimes guides how the jaws grow, so that the teeth meet properly
       and are easier to keep clean. For children and teenagers it is usually done with fixed braces or with a series of
-      removable clear aligners. [[TBC: appliances offered at Arha]]</p>
+      removable clear aligners. Arha offers both: metal braces and clear aligners.</p>
   - label: who is it for?
     heading: "Who is it suitable for?"
     body: |
@@ -109,7 +108,7 @@ sections:
         a: "Yes. Teeth tend to drift back after treatment, so retainers are worn afterwards to hold them in place. We explain how long and how often."
 glance:
   time: "Often 1 to 2 years [[TBC: typical duration]]"
-  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  fee: "[[TBC: from-price, or \"on consultation\" || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-childrens-orthodontics

@@ -55,6 +55,20 @@
   </div>
 </section>
 
+<section class="gallery" id="inside-the-practice" aria-labelledby="gallery-h">
+  <div class="wrap">
+    <h2 id="gallery-h" data-reveal>Inside the practice</h2>
+    <p class="gallery__intro" data-reveal>Photos and a short walk-through filmed at Arha Dental Care, 107 Doctor House, Peddar Road.</p>
+    {% set g_sizes = "(min-width: 992px) 320px, (min-width: 768px) 33vw, 50vw" %}
+    <div class="gallery__grid">
+      <figure class="gallery__tour">{{ embed("practice-tour", "A walk through Arha Dental Care, 1 minute 24 seconds", "(min-width: 992px) 320px, (min-width: 768px) 33vw, 50vw") }}<figcaption>Walk-through (1:24)</figcaption></figure>
+      {% for name, cap in [("gallery-reception", "Reception"), ("gallery-lounge", "Waiting lounge"), ("gallery-operatory", "Treatment room"), ("gallery-scan", "Digital scans"), ("gallery-chair-window", "Treatment room"), ("gallery-xray", "X-ray room"), ("gallery-glass-door", "Treatment room"), ("gallery-steriliser", "Steriliser"), ("gallery-sterilisation", "Sterilisation area"), ("gallery-unit", "Dental unit")] %}
+      <figure>{{ picture(name, g_sizes) }}<figcaption>{{ cap }}</figcaption></figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 <section class="tech" id="technology" aria-labelledby="tech-h">
   <div class="wrap">
     <img class="tech__mark" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="">

@@ -190,12 +190,13 @@
     btn.addEventListener("click", function () {
       var v = document.createElement("video");
       v.src = box.getAttribute("data-embed"); v.controls = true; v.playsInline = true; v.autoplay = true;
+      if (box.hasAttribute("data-muted")) { v.muted = true; v.loop = false; }
       v.setAttribute("aria-label", btn.getAttribute("aria-label").replace("Play video: ", ""));
       box.appendChild(v); btn.remove();
       var pic = $(".vid__poster", box); if (pic) pic.remove();
       var p = v.play(); if (p && p.catch) p.catch(function () {});
       v.focus();
-      track("video_play", { video: "clinic_tour", page_path: location.pathname });
+      track("video_play", { video: box.getAttribute("data-name") || "film", page_path: location.pathname });
     });
   });
   function startVideo(box) {

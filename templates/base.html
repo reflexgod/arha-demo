@@ -1,8 +1,9 @@
 {% from "_macros.html" import icon, logo, book_href, crumbs %}
 <!doctype html>
-<html lang="en-IN">
+<html lang="en-IN"{% if review_build %} class="review"{% endif %}>
 <head>
 <meta charset="utf-8">
+<script>/* review mode: ?review=1 shows the clinic's to-confirm tags for this browser session, ?review=0 hides them */try{var q=location.search;if(/[?&]review=1/.test(q))sessionStorage.setItem("arha-review","1");if(/[?&]review=0/.test(q))sessionStorage.removeItem("arha-review");if(sessionStorage.getItem("arha-review"))document.documentElement.classList.add("review")}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{ page.title }}</title>
 <meta name="description" content="{{ page.description }}">
@@ -32,11 +33,12 @@
   <symbol id="i-right" viewBox="0 0 16 16"><path d="M2 8h11M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-up" viewBox="0 0 16 16"><path d="M8 14V3M4 7l4-4 4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
   <symbol id="i-chev" viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></symbol>
-  <symbol id="i-phone" viewBox="0 0 16 16"><path d="M5.6 1.5 3.4 1.8C2.5 2 1.9 2.8 2 3.7c.6 5.6 4.7 9.7 10.3 10.3.9.1 1.7-.5 1.9-1.4l.3-2.2-3-1.4-1.5 1.6C8 9.8 6.2 8 5.4 6l1.6-1.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
-  <symbol id="i-mail" viewBox="0 0 16 16"><rect x="1.5" y="3" width="13" height="10" rx="1" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="m2 4 6 5 6-5" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
-  <symbol id="i-wa" viewBox="0 0 16 16"><path d="M8 1.6a6.4 6.4 0 0 0-5.5 9.7L1.6 14.4l3.2-.9A6.4 6.4 0 1 0 8 1.6z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5.6 5c.2-.3.6-.3.8 0l.6 1.2c.1.2 0 .4-.1.6l-.4.4c.4.9 1.2 1.7 2.1 2.1l.4-.4c.2-.1.4-.2.6-.1l1.2.6c.3.2.3.6 0 .8-.5.5-1.2.7-1.9.4A6 6 0 0 1 5.2 6.9c-.3-.7-.1-1.4.4-1.9z" fill="currentColor"/></symbol>
-  <symbol id="i-info" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 7v4.5M8 4.6v.1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></symbol>
-  <symbol id="i-pin" viewBox="0 0 16 16"><path d="M8 14.5s4.8-4.6 4.8-8.1a4.8 4.8 0 0 0-9.6 0c0 3.5 4.8 8.1 4.8 8.1z" fill="none" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.4" r="1.7" fill="none" stroke="currentColor" stroke-width="1.3"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><mask id="i-wa-m"><rect width="24" height="24" fill="#fff"/><path fill="#000" transform="translate(6.6 6.6) scale(.45)" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></mask><path fill="currentColor" mask="url(#i-wa-m)" d="M12 2a10 10 0 0 0-8.7 14.9L2 22l5.2-1.3A10 10 0 1 0 12 2z"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm1 15h-2v-2h2zm0-4h-2V7h2z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path fill="currentColor" d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></symbol>
   <symbol id="i-sun" viewBox="0 0 16 16"><circle cx="8" cy="8" r="3" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M3 13l1.4-1.4M11.6 4.4 13 3" stroke="currentColor" stroke-width="1.3"/></symbol>
   <symbol id="i-moon" viewBox="0 0 16 16"><path d="M13.5 10A6 6 0 0 1 6 2.5a6 6 0 1 0 7.5 7.5z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="1.6"/></symbol>
@@ -59,7 +61,7 @@
     {{ logo() }}
     <div class="hdr__right">
       <ul class="hdr__links">
-        <li><a href="{{ tel(site.phone) }}">{{ icon("phone") }}Phone</a></li>
+        <li><a href="{{ tel(site.phone) }}">{{ icon("phone") }}<span class="sr-only">Phone </span>{{ site.phone_display }}</a></li>
         <li>{% if site.email %}<a href="mailto:{{ site.email }}">{{ icon("mail") }}Email</a>{% else %}<a href="/contact/#enquiry">{{ icon("mail") }}Email</a>{% endif %}</li>
         <li><a href="{{ wa(site.whatsapp, site.whatsapp_text) }}" target="_blank" rel="noopener">{{ icon("wa") }}WhatsApp</a></li>
         <li><a href="/emergency-dentist-south-mumbai/">{{ icon("info") }}Emergencies</a></li>
@@ -79,64 +81,9 @@
 {% set emergency = "/emergency-dentist-south-mumbai/" %}
 <nav class="navstrip" aria-label="Main">
   <ul>
-    <li><a class="nav__a" href="/"{% if here == "/" %} aria-current="page"{% endif %}>Home</a></li>
-    <li class="has-dd">
-      <button class="nav__a" type="button" aria-expanded="false" aria-controls="dd-treatments" data-dd>Treatments {{ icon("chev") }}</button>
-      <ul class="dd" id="dd-treatments">
-        {% for t in nav.treatments %}<li><a href="{{ t.href }}"{% if here == t.href %} aria-current="page"{% endif %}>{{ t.get("short") or t.label }}</a></li>{% endfor %}
-        <li><a class="dd__all" href="/treatments/">All treatments</a></li>
-      </ul>
-    </li>
-    <li><a class="nav__a" href="/the-practice/"{% if here == "/the-practice/" %} aria-current="page"{% endif %}>The Practice</a></li>
-    <li><a class="nav__a" href="/for-patients/"{% if here == "/for-patients/" %} aria-current="page"{% endif %}>For Patients</a></li>
-    <li class="has-dd has-mega">
-      <button class="nav__a" type="button" aria-expanded="false" aria-controls="dd-discover" data-dd>Discover {{ icon("chev") }}</button>
-      <div class="dd mega" id="dd-discover">
-        <div class="wrap mega__in">
-          <div class="mega__media">{{ video("mega-dental", "mega__vid", label="A dentist showing a patient a dental X-ray (stock footage)", manual=True, sizes="320px") }}</div>
-          <div class="mega__col">
-            <p class="mega__h">Featured treatments</p>
-            <ul>
-              {% for t in nav.treatments[:5] %}<li><a href="{{ t.href }}">{{ t.get("short") or t.label }}</a></li>{% endfor %}
-              <li><a class="mega__all" href="/treatments/">All treatments {{ icon("right") }}</a></li>
-            </ul>
-          </div>
-          <div class="mega__col">
-            <p class="mega__h">The practice</p>
-            <ul>{% for l in nav.practice %}<li><a href="{{ l.href }}">{{ l.label }}</a></li>{% endfor %}</ul>
-          </div>
-          <div class="mega__col">
-            <p class="mega__h">Patient desk</p>
-            <ul>
-              <li><a href="/for-patients/">For patients</a></li>
-              {% for l in nav.patients %}<li><a href="{{ l.href }}">{{ l.label }}</a></li>{% endfor %}
-            </ul>
-          </div>
-          <div class="mega__col">
-            <p class="mega__h">Connect</p>
-            <ul>
-              <li>{% if site.email %}<a href="mailto:{{ site.email }}">{{ icon("mail") }}{{ site.email }}</a>{% else %}<a href="/contact/#book">{{ icon("mail") }}Email us</a>{% endif %}</li>
-              <li><a href="{{ tel(site.phone) }}">{{ icon("phone") }}{{ site.phone_display }}</a></li>
-              <li><a href="{{ wa(site.whatsapp, site.whatsapp_text) }}" target="_blank" rel="noopener">{{ icon("wa") }}WhatsApp</a></li>
-              {% for s in site.same_as %}<li><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.label }}</a></li>{% endfor %}
-            </ul>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li><a class="nav__a" href="/blog/"{% if here.startswith("/blog/") %} aria-current="page"{% endif %}>Blog</a></li>
-    <li><a class="nav__a" href="/referrals/"{% if here == "/referrals/" %} aria-current="page"{% endif %}>Referrals</a></li>
-    <li class="has-dd">
-      <button class="nav__a" type="button" aria-expanded="false" aria-controls="dd-contact" data-dd{% if here == "/contact/" %} aria-current="page"{% endif %}>Contact {{ icon("chev") }}</button>
-      <ul class="dd dd--right" id="dd-contact">
-        <li><a href="/contact/#book">Make an enquiry</a></li>
-        <li><a href="{{ tel(site.phone) }}">Call {{ site.phone_display }}</a></li>
-        <li>{% if site.email %}<a href="mailto:{{ site.email }}">Email {{ site.email }}</a>{% else %}<a href="/contact/#book">Email us</a>{% endif %}</li>
-        <li><a href="{{ wa(site.whatsapp, site.whatsapp_text) }}" target="_blank" rel="noopener">WhatsApp us</a></li>
-        {% for s in site.same_as %}<li><a href="{{ s.url }}" target="_blank" rel="noopener">{{ s.label }}</a></li>{% endfor %}
-        <li><a class="dd__all" href="{{ emergency }}">Dental emergency</a></li>
-      </ul>
-    </li>
+    {% for href, label in [("/", "Home"), ("/treatments/", "Treatments"), ("/the-practice/", "The Practice"), ("/for-patients/", "For Patients"), ("/blog/", "Blog"), ("/referrals/", "Referrals"), ("/contact/", "Contact")] %}
+    <li><a class="nav__a" href="{{ href }}"{% if here == href or (href != "/" and here.startswith(href)) %} aria-current="page"{% endif %}>{{ label }}</a></li>
+    {% endfor %}
   </ul>
 </nav>
 

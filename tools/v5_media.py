@@ -22,19 +22,19 @@ MANIFEST = ROOT / "static" / "media.json"
 
 
 def stock_grade(im):
-    """One grade for all stock so it sits with the clinic photos: slightly muted, a touch warm, soft contrast."""
+    """One grade for all stock (the studio look): slightly muted, slightly cool neutral, soft contrast."""
     x = np.asarray(im.convert("RGB")).astype(np.float32) / 255
     lum = (x @ np.array([0.2126, 0.7152, 0.0722], np.float32))[..., None]
-    x = lum + (x - lum) * 0.86
-    x = x * np.array([1.02, 1.0, 0.965], np.float32)
-    x = 0.5 + (x - 0.5) * 0.96
+    x = lum + (x - lum) * 0.88
+    x = x * np.array([0.985, 1.0, 1.025], np.float32)
+    x = 0.5 + (x - 0.5) * 0.97
     x = 0.035 + x * (0.975 - 0.035)
     return Image.fromarray(np.clip(x * 255, 0, 255).astype(np.uint8))
 
 
-def crop_to(im, ratio, focus, zoom=1.0):
-    """Largest crop of ratio (w, h) that keeps the focus point as central as the edges allow.
-    zoom > 1 takes a tighter crop, which leaves room to move the subject (e.g. clear of a text card)."""
+def crop_to(im, ratio, focus, zoom=1.0, place=(0.5, 0.5)):
+    """Largest crop of ratio (w, h) that puts the focus point at `place` in the frame (centre by default), as far as
+    the edges allow. zoom > 1 takes a tighter crop, which leaves room to move the subject (e.g. clear of a text card)."""
     rw, rh = ratio
     W, H = im.size
     if W / H > rw / rh:
@@ -43,8 +43,8 @@ def crop_to(im, ratio, focus, zoom=1.0):
         w, h = W, round(W * rh / rw)
     w, h = round(w / zoom), round(h / zoom)
     cx, cy = focus[0] * W, focus[1] * H
-    left = min(max(0, round(cx - w / 2)), W - w)
-    top = min(max(0, round(cy - h / 2)), H - h)
+    left = min(max(0, round(cx - w * place[0])), W - w)
+    top = min(max(0, round(cy - h * place[1])), H - h)
     return im.crop((left, top, left + w, top + h))
 
 
@@ -81,7 +81,7 @@ def do_image(spec):
         wide = Image.new("RGB", (round(im.width * (1 + spec["extend_right"])), im.height), tuple(int(c) for c in edge))
         wide.paste(im, (0, 0))
         im = wide
-    im = crop_to(im, spec["ratio"], spec.get("focus", [0.5, 0.5]), spec.get("zoom", 1.0))
+    im = crop_to(im, spec["ratio"], spec.get("focus", [0.5, 0.5]), spec.get("zoom", 1.0), spec.get("place", [0.5, 0.5]))
     if spec["kind"] == "stock":
         im = stock_grade(im)
     if spec.get("grade"):
@@ -143,10 +143,12 @@ def do_video(spec):
             ffmpeg(*trim, "-an", "-vf", vf, "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", str(int(crf) + 11), "-row-mt", "1",
                    "-deadline", "good", "-cpu-used", "2", f"{base}.webm")
         sizes.append([w, h])
-    # Poster = the first frame of the cut, so the video starts without a jump.
+    # Poster = the first frame of the cut, so the video starts without a jump; poster_at (seconds into the cut) picks
+    # another frame for click-to-play embeds, where the poster is removed when the film starts.
     tmp = VID / f"_{spec['name']}-poster.png"
     big = spec["sizes"][-1]
-    ffmpeg(*trim, "-frames:v", "1", "-vf", f"crop={cw}:{ch}:{x}:{y}{grade},scale={big[0]}:{big[1]}:flags=lanczos", str(tmp))
+    ptrim = ["-ss", str(spec["start"] + spec["poster_at"]), "-i", str(src)] if spec.get("poster_at") else trim
+    ffmpeg(*ptrim, "-frames:v", "1", "-vf", f"crop={cw}:{ch}:{x}:{y}{grade},scale={big[0]}:{big[1]}:flags=lanczos", str(tmp))
     poster = Image.open(tmp).convert("RGB")
     tmp.unlink()
     pw = save_set(poster, f"{spec['name']}-poster", spec["poster_widths"])

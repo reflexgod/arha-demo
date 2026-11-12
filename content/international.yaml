@@ -21,51 +21,51 @@ countries:
     name: "United Kingdom"
     short: "UK"
     zones: [{label: "London", tz: "Europe/London"}]
-    flight: "[[TBC: typical direct flight time to Mumbai]]"
+    flight: "[[TBC: typical direct flight time to Mumbai || Varies with your route and airline]]"
     reach: "WhatsApp is the easiest way to reach us. Messages can be sent any time; we reply during clinic hours."
-    pay: "[[TBC: payment methods for visitors (international cards, Indian bank accounts or UPI for NRIs)]]"
+    pay: "[[TBC: payment methods for visitors (international cards, Indian bank accounts or UPI for NRIs) || Please ask us when you plan your visit]]"
   - id: uae
     name: "United Arab Emirates"
     short: "UAE"
     zones: [{label: "Dubai / Abu Dhabi", tz: "Asia/Dubai"}]
-    flight: "[[TBC: typical direct flight time to Mumbai]]"
+    flight: "[[TBC: typical direct flight time to Mumbai || Varies with your route and airline]]"
     reach: "WhatsApp messages work well. WhatsApp voice and video calls may not connect from the UAE, so we can hold the video consultation another way. [[TBC: video platform the clinic uses]]"
-    pay: "[[TBC: payment methods for visitors]]"
+    pay: "[[TBC: payment methods for visitors || Please ask us when you plan your visit]]"
   - id: usa
     name: "United States"
     short: "USA"
     zones: [{label: "New York (Eastern)", tz: "America/New_York"}, {label: "Chicago (Central)", tz: "America/Chicago"}, {label: "Denver (Mountain)", tz: "America/Denver"}, {label: "Los Angeles (Pacific)", tz: "America/Los_Angeles"}]
-    flight: "[[TBC: typical flight time to Mumbai, usually with a connection]]"
+    flight: "[[TBC: typical flight time to Mumbai, usually with a connection || Varies with your route and airline]]"
     reach: "WhatsApp is the easiest way to reach us. Because of the time difference, a message sent in your evening is usually answered by your morning."
-    pay: "[[TBC: payment methods for visitors]]"
+    pay: "[[TBC: payment methods for visitors || Please ask us when you plan your visit]]"
   - id: canada
     name: "Canada"
     short: "Canada"
     zones: [{label: "Toronto (Eastern)", tz: "America/Toronto"}, {label: "Calgary (Mountain)", tz: "America/Edmonton"}, {label: "Vancouver (Pacific)", tz: "America/Vancouver"}]
-    flight: "[[TBC: typical flight time to Mumbai, usually with a connection]]"
+    flight: "[[TBC: typical flight time to Mumbai, usually with a connection || Varies with your route and airline]]"
     reach: "WhatsApp is the easiest way to reach us. Because of the time difference, a message sent in your evening is usually answered by your morning."
-    pay: "[[TBC: payment methods for visitors]]"
+    pay: "[[TBC: payment methods for visitors || Please ask us when you plan your visit]]"
   - id: australia
     name: "Australia"
     short: "Australia"
     zones: [{label: "Sydney / Melbourne", tz: "Australia/Sydney"}, {label: "Brisbane", tz: "Australia/Brisbane"}, {label: "Adelaide", tz: "Australia/Adelaide"}, {label: "Perth", tz: "Australia/Perth"}]
-    flight: "[[TBC: typical flight time to Mumbai]]"
+    flight: "[[TBC: typical flight time to Mumbai || Varies with your route and airline]]"
     reach: "WhatsApp is the easiest way to reach us. Clinic hours fall in your afternoon and evening."
-    pay: "[[TBC: payment methods for visitors]]"
+    pay: "[[TBC: payment methods for visitors || Please ask us when you plan your visit]]"
   - id: singapore
     name: "Singapore"
     short: "Singapore"
     zones: [{label: "Singapore", tz: "Asia/Singapore"}]
-    flight: "[[TBC: typical direct flight time to Mumbai]]"
+    flight: "[[TBC: typical direct flight time to Mumbai || Varies with your route and airline]]"
     reach: "WhatsApp is the easiest way to reach us; clinic hours fall in your working day."
-    pay: "[[TBC: payment methods for visitors]]"
+    pay: "[[TBC: payment methods for visitors || Please ask us when you plan your visit]]"
   - id: other
     name: "Somewhere else"
     short: "Other"
     zones: []          # uses the visitor's own time zone from the browser
-    flight: "[[TBC: depends on where you fly from]]"
+    flight: "[[TBC: depends on where you fly from || Depends on where you fly from]]"
     reach: "WhatsApp is the easiest way to reach us from most countries. Messages can be sent any time; we reply during clinic hours."
-    pay: "[[TBC: payment methods for visitors]]"
+    pay: "[[TBC: payment methods for visitors || Please ask us when you plan your visit]]"
 
 general:
   before: ["Check your passport and visa requirements with official sources well before you travel", "Send us recent X-rays, scans or photos", "Tell us about your health and the medicines you take", "Keep a day or two spare at the end of your trip"]
@@ -76,7 +76,7 @@ area:
   heading: "Getting to Peddar Road"
   intro: "Arha Dental Care is at 107 Doctor House, 14 Peddar Road, in South Mumbai. These are rough guides only. We don't recommend hotels or travel companies."
   items:
-    - {h: "From Mumbai airport (CSMIA)", p: "[[TBC: approximate distance and usual travel time by road]]"}
+    - {h: "From Mumbai airport (CSMIA)", p: "[[TBC: approximate distance and usual travel time by road || We share directions from the airport when you plan your visit.]]"}
     - {h: "Nearby areas", p: "Kemps Corner, Breach Candy, Cumballa Hill and Malabar Hill are close by. [[TBC: distances]]"}
     - {h: "Getting around", p: "Taxis and app-based cabs are the simplest way to reach us. [[TBC: parking and drop-off at Doctor House]]"}
 

@@ -2,7 +2,7 @@
  "images": {
   "home-card-fmr": {
    "kind": "stock",
-   "alt": "Older man smiling in his living room",
+   "alt": "Woman with long grey hair laughing against a white background",
    "widths": [
     480,
     800,
@@ -16,7 +16,7 @@
   },
   "home-card-rct": {
    "kind": "stock",
-   "alt": "A hygienist preparing to check a patient's teeth",
+   "alt": "A dentist talking with a patient in the dental chair",
    "widths": [
     480,
     800,
@@ -30,7 +30,7 @@
   },
   "home-card-kids": {
    "kind": "stock",
-   "alt": "Little boy brushing his teeth",
+   "alt": "A dentist checking a young child's teeth in a dental chair",
    "widths": [
     480,
     800,
@@ -58,7 +58,7 @@
   },
   "hero-implants": {
    "kind": "stock",
-   "alt": "A dentist showing a patient a dental scan on a tablet",
+   "alt": "Smiling older man against a grey background",
    "widths": [
     640,
     1080,
@@ -73,7 +73,7 @@
   },
   "hero-fmr": {
    "kind": "stock",
-   "alt": "Older man smiling",
+   "alt": "Smiling woman against a white background",
    "widths": [
     640,
     1080,
@@ -88,7 +88,7 @@
   },
   "hero-rct": {
    "kind": "stock",
-   "alt": "Man smiling as he relaxes in a dental chair",
+   "alt": "A dentist pointing to an X-ray on a screen while a patient sits in the chair",
    "widths": [
     640,
     1080,
@@ -103,7 +103,7 @@
   },
   "hero-kids": {
    "kind": "stock",
-   "alt": "A mother brushing her daughter's teeth",
+   "alt": "A dentist examining a child in a dental chair",
    "widths": [
     640,
     1080,
@@ -118,7 +118,7 @@
   },
   "cta-implants": {
    "kind": "stock",
-   "alt": "Woman smiling",
+   "alt": "Older man with glasses laughing",
    "widths": [
     400,
     780
@@ -131,10 +131,9 @@
   },
   "cta-fmr": {
    "kind": "stock",
-   "alt": "Older man in glasses smiling",
+   "alt": "Smiling man against a light grey background",
    "widths": [
-    400,
-    780
+    400
    ],
    "ratio": [
     3,
@@ -144,7 +143,7 @@
   },
   "cta-rct": {
    "kind": "stock",
-   "alt": "Woman smiling in a dental chair",
+   "alt": "A dentist showing a patient a scan on a screen",
    "widths": [
     400,
     780
@@ -157,7 +156,7 @@
   },
   "cta-kids": {
    "kind": "stock",
-   "alt": "Little girl brushing her teeth",
+   "alt": "A girl in a dental chair giving a thumbs-up beside her dentist",
    "widths": [
     400,
     780
@@ -227,7 +226,7 @@
   },
   "hero-missing-teeth": {
    "kind": "stock",
-   "alt": "Woman smiling",
+   "alt": "A dentist talking with a relaxed patient in a treatment room",
    "widths": [
     640,
     1080,
@@ -242,7 +241,7 @@
   },
   "hero-teeth-whitening": {
    "kind": "stock",
-   "alt": "Woman with a bright, natural smile",
+   "alt": "Close-up of a natural, bright smile",
    "widths": [
     640,
     1080,
@@ -257,7 +256,7 @@
   },
   "hero-smile-design": {
    "kind": "stock",
-   "alt": "Young woman smiling",
+   "alt": "Close-up of a smile",
    "widths": [
     640,
     1080,
@@ -272,7 +271,7 @@
   },
   "hero-gum-care": {
    "kind": "stock",
-   "alt": "Close-up of a dental check of the teeth and gums",
+   "alt": "A dental hygienist checking a smiling patient's teeth",
    "widths": [
     640,
     1080,
@@ -317,7 +316,7 @@
   },
   "cta-dentures": {
    "kind": "stock",
-   "alt": "Older man smiling outdoors",
+   "alt": "Smiling older man in a red jumper",
    "widths": [
     400,
     780
@@ -330,7 +329,7 @@
   },
   "cta-missing-teeth": {
    "kind": "stock",
-   "alt": "Close-up of a woman smiling",
+   "alt": "Smiling older man with a grey beard against a light background",
    "widths": [
     400,
     780
@@ -343,7 +342,7 @@
   },
   "cta-teeth-whitening": {
    "kind": "stock",
-   "alt": "Woman laughing",
+   "alt": "Close-up of a woman's natural smile",
    "widths": [
     400,
     780
@@ -356,7 +355,7 @@
   },
   "cta-smile-design": {
    "kind": "stock",
-   "alt": "Woman laughing",
+   "alt": "Woman smiling and looking down",
    "widths": [
     400,
     780
@@ -369,7 +368,7 @@
   },
   "cta-gum-care": {
    "kind": "stock",
-   "alt": "Woman brushing her teeth",
+   "alt": "Close-up of a healthy smile",
    "widths": [
     400,
     780
@@ -395,7 +394,7 @@
   },
   "cta-emergency": {
    "kind": "stock",
-   "alt": "A dentist examining a patient",
+   "alt": "Smiling man against a grey background",
    "widths": [
     400,
     780
@@ -408,7 +407,7 @@
   },
   "hub-implants": {
    "kind": "stock",
-   "alt": "A modern dental treatment room",
+   "alt": "Smiling older woman with short dark hair",
    "widths": [
     640,
     1080,
@@ -422,7 +421,7 @@
   },
   "hub-restorative": {
    "kind": "stock",
-   "alt": "Older man in glasses smiling",
+   "alt": "Couple smiling against a light wall",
    "widths": [
     640,
     1080,
@@ -436,7 +435,7 @@
   },
   "hub-cosmetic": {
    "kind": "stock",
-   "alt": "Close-up of a natural smile",
+   "alt": "Close-up of a bright smile",
    "widths": [
     640,
     1080,
@@ -450,7 +449,7 @@
   },
   "hub-children": {
    "kind": "stock",
-   "alt": "A girl at a dental check-up",
+   "alt": "A dentist showing a dental mirror to a smiling girl in a dental chair",
    "widths": [
     640,
     1080,
@@ -464,7 +463,7 @@
   },
   "hub-general": {
    "kind": "stock",
-   "alt": "A dentist in a bright treatment room",
+   "alt": "A dentist with a patient in a bright treatment room",
    "widths": [
     640,
     1080,
@@ -493,7 +492,7 @@
   },
   "hero-childrens-orthodontics": {
    "kind": "stock",
-   "alt": "Boy with a big smile",
+   "alt": "A smiling boy in a dental chair",
    "widths": [
     640,
     1080,
@@ -508,7 +507,7 @@
   },
   "cta-childrens-orthodontics": {
    "kind": "stock",
-   "alt": "Girl laughing as she holds her toothbrush",
+   "alt": "Close-up of a smile with braces",
    "widths": [
     400,
     780
@@ -535,7 +534,7 @@
   },
   "blog-implant-vs-bridge": {
    "kind": "stock",
-   "alt": "Woman smiling",
+   "alt": "Smiling man against a light grey background",
    "widths": [
     640,
     1080,
@@ -563,7 +562,7 @@
   },
   "blog-implants-right-for-me": {
    "kind": "stock",
-   "alt": "Woman smiling",
+   "alt": "Older couple smiling together",
    "widths": [
     640,
     1080,
@@ -577,60 +576,205 @@
   },
   "home-hero": {
    "kind": "real",
-   "alt": "The Arha Dental Care sign above reception at 107 Doctor House, Peddar Road",
+   "alt": "The Arha Dental Care logo on the marble wall at reception, 107 Doctor House, Peddar Road",
    "widths": [
     480,
     720,
+    960,
     1080,
     1440
    ],
    "ratio": [
-    720,
-    675
+    1092,
+    1000
    ],
    "src": "src-assets/arha-dental-care-reception-south-mumbai-dental-clinic-01.jpg"
+  },
+  "gallery-reception": {
+   "kind": "real",
+   "alt": "Reception at Arha Dental Care, with the Arha logo on the marble wall",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "assets/img/arha-dental-care-reception-wide-1080.jpg"
+  },
+  "gallery-lounge": {
+   "kind": "real",
+   "alt": "The waiting lounge at Arha Dental Care, seen through the doorway",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "assets/img/arha-dental-care-lounge-peddar-road-1080.jpg"
+  },
+  "gallery-operatory": {
+   "kind": "real",
+   "alt": "A treatment room at Arha Dental Care with the dental chair and glass partition",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "src-assets/dental-operatory-arha-dental-care-peddar-road-06.jpeg"
+  },
+  "gallery-chair-window": {
+   "kind": "real",
+   "alt": "Dental chair by the window in a treatment room at Arha Dental Care",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "assets/img/arha-dental-care-chair-window-1080.jpg"
+  },
+  "gallery-glass-door": {
+   "kind": "real",
+   "alt": "Treatment room at Arha Dental Care with a wall screen beside the chair",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "assets/img/arha-dental-care-operatory-glass-door-1080.jpg"
+  },
+  "gallery-xray": {
+   "kind": "real",
+   "alt": "The X-ray room at Arha Dental Care",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "assets/img/arha-dental-care-xray-room-1080.jpg"
+  },
+  "gallery-steriliser": {
+   "kind": "real",
+   "alt": "The steriliser used for instruments at Arha Dental Care",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "assets/img/arha-dental-care-steriliser-1080.jpg"
+  },
+  "gallery-scan": {
+   "kind": "real",
+   "alt": "A digital dental scan shown on a screen in a treatment room at Arha Dental Care",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "assets/img/arha-dental-care-scan-screen-1080.jpg"
+  },
+  "gallery-sterilisation": {
+   "kind": "real",
+   "alt": "The sterilisation area at Arha Dental Care",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "assets/img/autoclave-pantry-equipment-arha-dental-care-mumbai-1920.jpg"
+  },
+  "gallery-unit": {
+   "kind": "real",
+   "alt": "Instruments on the dental unit in a treatment room at Arha Dental Care",
+   "widths": [
+    400,
+    800
+   ],
+   "ratio": [
+    1,
+    1
+   ],
+   "src": "assets/img/arha-dental-care-delivery-unit-1080.jpg"
+  },
+  "visit-door": {
+   "kind": "real",
+   "alt": "The entrance to Arha Dental Care at 107, Doctor House, with the doctors' names beside the door",
+   "widths": [
+    480,
+    800
+   ],
+   "ratio": [
+    4,
+    3
+   ],
+   "src": "assets/img/arha-dental-care-entrance-door-1080.jpg"
   }
  },
  "videos": {
-  "home-tour": {
+  "home-film": {
    "kind": "real",
    "sizes": [
     [
-     1280,
-     720
+     1080,
+     608
     ]
    ],
    "poster_widths": [
     640,
-    1280
-   ],
-   "ratio": [
-    1920,
+    960,
     1080
    ],
-   "src": "src-assets/arha-dental-care-peddar-road-mumbai-clinic-tour.mp4",
-   "audio": true,
-   "alt": "A walk through reception and the treatment rooms at Arha Dental Care"
+   "ratio": [
+    1080,
+    608
+   ],
+   "src": "src-assets/IMG_2303.MOV",
+   "audio": false,
+   "alt": "A treatment room at Arha Dental Care, Peddar Road, with the dental chair and a screen showing a digital dental scan"
   },
-  "mega-dental": {
-   "kind": "stock",
+  "practice-tour": {
+   "kind": "real",
    "sizes": [
     [
-     960,
-     540
+     720,
+     1280
     ]
    ],
    "poster_widths": [
-    480,
-    960
+    360,
+    720
    ],
    "ratio": [
-    1920,
-    1080
+    1080,
+    1920
    ],
-   "src": "src-assets/stock/v5video/mixkit-12140-checking-dental-x-rays.mp4",
+   "src": "src-assets/IMG_2303.MOV",
    "audio": false,
-   "alt": "A dentist showing a patient a dental X-ray"
+   "alt": "A walk through Arha Dental Care, from reception to the treatment rooms"
   }
  }
 }

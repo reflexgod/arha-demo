@@ -8,7 +8,7 @@
     <h1>Book an appointment at Arha Dental Care, Peddar Road</h1>
     <p>Send us a request below and we'll call or WhatsApp you to agree a time. If you'd rather talk now, call <a href="{{ tel(site.phone) }}">{{ site.phone_display }}</a> or <a href="{{ wa(site.whatsapp, site.whatsapp_text) }}" target="_blank" rel="noopener">message us on WhatsApp</a>.</p>
     <p>We're at {{ address_one_line() }}, {{ landmark() }}, within easy reach of Kemps Corner, Breach Candy and Malabar Hill.</p>
-    <p>Open {% for day, text in hours_rows() %}{% if loop.first %}{{ day }}{% endif %}{% if loop.index == 6 %} to {{ day }}, {{ text }}{% endif %}{% endfor %}; closed on Sunday. {{ "[[TBC: opening time and lunch break]]" | tbc }}</p>
+    <p>Open {% for day, text in hours_rows() %}{% if loop.first %}{{ day }}{% endif %}{% if loop.index == 6 %} to {{ day }}, {{ text }}{% endif %}{% endfor %}; closed on Sunday.</p>
   </div>
 </section>
 
@@ -31,7 +31,7 @@
       </div>
       <div class="git__card" data-reveal>
         <h3 class="h4">Email us</h3>
-        {% if site.email %}<a class="pill" href="mailto:{{ site.email }}">{{ site.email }}</a>{% else %}<span class="pill">{{ "[[TBC: clinic email]]" | tbc }}</span>{% endif %}
+        {% if site.email %}<a class="pill" href="mailto:{{ site.email }}">{{ site.email }}</a>{% else %}<a class="pill" href="#enquiry">Use the enquiry form</a>{{ "[[TBC: clinic email]]" | tbc }}{% endif %}
       </div>
       <div class="git__card" data-reveal>
         <h3 class="h4">Call us</h3>

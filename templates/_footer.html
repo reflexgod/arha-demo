@@ -7,11 +7,9 @@
         <li><a href="{{ tel(site.phone) }}">{{ icon("phone") }}{{ site.phone_display }}</a></li>
         <li>{% if site.email %}<a href="mailto:{{ site.email }}">{{ icon("mail") }}{{ site.email }}</a>{% else %}<a href="/contact/#enquiry">{{ icon("mail") }}Send us an enquiry</a>{% endif %}</li>
         <li><a href="{{ wa(site.whatsapp, site.whatsapp_text) }}" target="_blank" rel="noopener">{{ icon("wa") }}WhatsApp us</a></li>
-        <li><a href="{{ maps_dir() }}" target="_blank" rel="noopener">{{ icon("pin") }}{{ address_one_line() }}</a></li>
+        <li><a href="{{ maps_dir() }}" target="_blank" rel="noopener">{{ icon("pin") }}{{ address_full() }}</a></li>
       </ul>
       <a class="btn btn--sand" href="{{ book_href() }}" data-event="booking_click">Book appointment {{ icon("arrow") }}</a>
-      <p class="ftr__small">Caring for families in Peddar Road, Kemps Corner, Breach Candy, Malabar Hill, Cumballa Hill and Tardeo.</p>
-      <p class="ftr__small">© {{ year }} {{ site.legal_name }}. Information on this website is general and does not replace an examination. Site last updated {{ updated }}.</p>
       {# Riya placeholder: the AI receptionist widget is not part of v5 yet. When it is approved, include it here. #}
     </div>
     <div class="ftr__cols">
@@ -36,6 +34,10 @@
           <li><button class="ftr__cookie" type="button" data-cookie-open>Cookie settings</button></li>
         </ul>
       </div>
+    </div>
+    <div class="ftr__legal">
+      <p class="ftr__small">Caring for families in Peddar Road, Kemps Corner, Breach Candy, Malabar Hill, Cumballa Hill and Tardeo.</p>
+      <p class="ftr__small">© {{ year }} {{ site.legal_name }}. Information on this website is general and does not replace an examination. Photos of people, other than our dentists, are licensed stock images of models, not our patients or staff. Site last updated {{ updated }}.</p>
     </div>
     <a class="btn ftr__top" href="#top">Back to top {{ icon("up") }}</a>
   </div>

@@ -81,7 +81,7 @@ sections:
         a: "Early gum disease (gingivitis) can usually be reversed with professional cleaning and careful brushing and cleaning between the teeth at home. More advanced gum disease (periodontitis) can be controlled, with regular reviews and cleaning to keep it stable."
 glance:
   time: "One or more visits, then maintenance [[TBC: confirm]]"
-  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  fee: "[[TBC: from-price, or \"on consultation\" || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-gum-care

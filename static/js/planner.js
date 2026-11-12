@@ -12,8 +12,11 @@
   var NL = String.fromCharCode(10);
   var track = function (n, p) { if (window.arhaTrack) window.arhaTrack(n, p || {}); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-  var tbc = function (s) { return esc(s).replace(/\[\[TBC:?\s*([^\]]*)\]\]/g, '<mark class="tbc" title="To be confirmed by the clinic">[[TBC: $1]]</mark>'); };
-  var strip = function (s) { return String(s).replace(/\s*\[\[TBC:?[^\]]*\]\]/g, "").trim(); };
+  // [[TBC: note || fallback]]: the tag shows only in review mode (html.review); visitors see the fallback, if any.
+  var split = function (b) { var i = b.indexOf("||"); return i < 0 ? [b.trim(), ""] : [b.slice(0, i).trim(), b.slice(i + 2).trim()]; };
+  var tbc = function (s) { return esc(s).replace(/\[\[TBC:?\s*([^\]]*)\]\]/g, function (_, b) { var x = split(b);
+    return '<mark class="tbc" title="To be confirmed by the clinic">[[TBC: ' + x[0] + ']]</mark>' + (x[1] ? '<span class="tbc-fb">' + x[1] + "</span>" : ""); }); };
+  var strip = function (s) { return String(s).replace(/\s*\[\[TBC:?([^\]]*)\]\]/g, function (_, b) { var f = split(b)[1]; return f ? " " + f : ""; }).trim(); };
   var T = {}, C = {};
   D.plans.treatments.forEach(function (t) { T[t.id] = t; });
   D.countries.forEach(function (c) { C[c.id] = c; });

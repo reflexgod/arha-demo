@@ -1,6 +1,6 @@
 """Screenshot the built site (dist/) and place each page next to its reference capture.
 
-Usage:  .venv/Scripts/python -I tools/compare.py [page ...]
+Usage:  .venv/Scripts/python -I tools/compare.py [--w=1920,390] [page ...]   (default widths 1440 and 390)
 
 Reference captures live in review/compare/reference/<stem>-<width>.png (git-ignored, made in Phase 1).
 Output: review/compare/v5/<page>-<width>.png (our page) and review/compare/<page>-<width>.png (side by side,
@@ -49,9 +49,11 @@ PAGES = {
     "policy-terms": ("/policies/terms/", "policy-website-terms-of-use"),
     "policy-cookies": ("/policies/cookies/", "policy-cookie-policy"),
     "policy-accessibility": ("/policies/accessibility/", "policy-accessibility-statement"),
+    "international": ("/international-patients/", None),
     "404": ("/404.html", None),
 }
 WIDTHS = {1440: 900, 390: 844}
+HEIGHTS = {1920: 1080, 1680: 1050, 1536: 864, 1440: 900, 1280: 800, 1024: 768, 390: 844}
 
 
 def serve():
@@ -109,13 +111,18 @@ def side_by_side(ref, ours, out, scale):
 
 
 def main():
-    names = sys.argv[1:] or list(PAGES)
+    args = sys.argv[1:]
+    widths = WIDTHS
+    for a in [a for a in args if a.startswith("--w=")]:
+        widths = {int(w): HEIGHTS.get(int(w), 900) for w in a[4:].split(",")}
+        args.remove(a)
+    names = args or list(PAGES)
     (OUT / "v5").mkdir(parents=True, exist_ok=True)
     httpd = serve()
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch(channel="chrome", headless=True)
-            for width, height in WIDTHS.items():
+            for width, height in widths.items():
                 ctx = browser.new_context(viewport={"width": width, "height": height}, device_scale_factor=1,
                                           is_mobile=width < 500, has_touch=width < 500)
                 page = ctx.new_page()

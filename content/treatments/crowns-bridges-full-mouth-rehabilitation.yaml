@@ -79,7 +79,7 @@ sections:
         a: "We plan the stages so that you have provisional teeth whenever they are needed. Ask us about your case at the consultation."
 glance:
   time: "Several visits over weeks to months [[TBC: typical timeline]]"
-  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  fee: "[[TBC: from-price, or \"on consultation\" || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-fmr

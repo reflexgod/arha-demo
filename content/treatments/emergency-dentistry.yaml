@@ -85,7 +85,7 @@ sections:
         a: "The clinic is closed on Sunday. [[TBC: what patients should do out of hours]] If swelling affects your breathing or swallowing, go to a hospital emergency department straight away."
 glance:
   time: "Usually one visit, sometimes with a follow-up"
-  fee: "[[TBC: emergency appointment fee]]"
+  fee: "[[TBC: emergency appointment fee || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-emergency

@@ -86,7 +86,7 @@ sections:
         a: "It depends on the option you choose and how the area heals. A temporary replacement can often be made in the meantime. We explain the timing at your consultation."
 glance:
   time: "Depends on the option chosen [[TBC: typical timelines]]"
-  fee: "[[TBC: from-prices, or \"on consultation\"]]"
+  fee: "[[TBC: from-prices, or \"on consultation\" || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-missing-teeth

@@ -78,7 +78,7 @@ sections:
         a: "Yes. A tooth whose earlier root canal treatment has failed can often be treated again. We assess it with an X-ray first."
 glance:
   time: "Usually one or two visits [[TBC: confirm]]"
-  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  fee: "[[TBC: from-price, or \"on consultation\" || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-rct

@@ -83,7 +83,7 @@ sections:
         a: "Where it suits the treatment, changes can be planned with photographs and tried in the mouth before anything is final. [[TBC: whether Arha uses digital smile previews or trial mock-ups]]"
 glance:
   time: "Depends on the plan [[TBC: typical timeline]]"
-  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  fee: "[[TBC: from-price, or \"on consultation\" || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-smile-design

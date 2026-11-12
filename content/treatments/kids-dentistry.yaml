@@ -74,7 +74,7 @@ sections:
         a: "Many children are seen every six months, but the right interval depends on your child's teeth. We advise you after their first visit. [[TBC: Arha's usual recall interval for children]]"
 glance:
   time: "A check-up visit is short [[TBC: typical length]]"
-  fee: "[[TBC: check-up fee, or \"on consultation\"]]"
+  fee: "[[TBC: check-up fee, or \"on consultation\" || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-kids

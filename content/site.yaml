@@ -7,25 +7,26 @@ legal_name: Arha Dental Care
 domain: https://arhadentalcare.com          # canonical host at launch
 preview: true                               # true = noindex on every page + robots.txt disallow (until "launch")
 
-phone: "+91 99755 07714"                    # TBC: confirm it is the reception line
+phone: "+91 99755 07714"                    # confirmed 13 Nov 2026 (phone + WhatsApp)
 phone_display: "99755 07714"
-whatsapp: "+91 99755 07714"                 # TBC: clinic WhatsApp number (reception number until confirmed)
+whatsapp: "+91 99755 07714"
 whatsapp_text: "Hello Arha Dental Care, I would like to ask about an appointment."
 email: ""                                   # TBC: clinic email. Empty = "Email" links go to the enquiry form instead.
 
 address:
   line1: "107, Doctor House"
   line2: "14 Peddar Road"
+  road: "Dr Gopalrao Deshmukh Marg"            # official name of Peddar Road (confirmed 13 Nov 2026)
   locality: "Mumbai"
   region: "Maharashtra"
   postcode: "400026"
   country: "IN"
-  landmark: ""                              # TBC: exact landmark, as the clinic wants it worded. Empty = [[TBC: landmark]] shown
+  landmark: "Opposite Jaslok Hospital"      # confirmed 13 Nov 2026 ("Opp. Jaslok Hospital")
 geo: {lat: 18.9647, lng: 72.8089}           # TBC: check against the Google Business Profile pin
 maps_query: "Arha Dental Care, Doctor House, 14 Peddar Road, Mumbai 400026"
 
 time_zone: Asia/Kolkata
-# 0 = Sunday ... 6 = Saturday. null = closed. TBC: 9:00 or 9:30 opening; lunch break.
+# 0 = Sunday ... 6 = Saturday. null = closed. Confirmed 13 Nov 2026: Monday to Saturday 9:30 AM to 6:30 PM, Sunday closed.
 hours:
   - null
   - ["09:30", "18:30"]
@@ -39,7 +40,7 @@ doctors:
   - id: dr-nikhil-jain
     name: "Dr. Nikhil V. Jain"
     role: "Prosthodontist & Implantologist"
-    credentials: "B.D.S., M.D.S. (Prosthodontics), ITI Scholar (London)"
+    credentials: "B.D.S., M.D.S., ITI Scholar (London)"   # confirmed 13 Nov 2026
     registration: ""                        # TBC: State Dental Council registration number
     bio:
       - "Dr. Nikhil V. Jain is a prosthodontist: a dental specialist in restoring and replacing teeth with crowns, bridges, dentures and implants. He holds an MDS in prosthodontics and is an ITI Scholar (London)."
@@ -48,7 +49,7 @@ doctors:
   - id: dr-vasant-jain
     name: "Dr. Vasant P. Jain"
     role: "Dental Surgeon"
-    credentials: "B.D.S."
+    credentials: "B.D.S."                   # confirmed 13 Nov 2026
     registration: ""                        # TBC
     bio:
       - "Dr. Vasant P. Jain is a dental surgeon (B.D.S.) at Arha Dental Care, looking after patients' everyday dental care, from check-ups to fillings."

@@ -42,7 +42,7 @@ categories:
       - {label: "Teeth whitening", heading: "Teeth whitening", href: /treatments/teeth-whitening/,
          text: "Lightens the natural colour of your teeth, with your teeth and gums checked first."}
       - {label: "Clear aligners", heading: "Clear aligners", href: /treatments/aligners/,
-         text: "Removable clear trays that straighten teeth a little at a time. [[TBC: aligner treatment at Arha]]"}
+         text: "Removable clear trays that straighten teeth a little at a time. Arha offers Invisalign® clear aligners."}
   - id: children
     heading: "Children's dentistry"
     image: hub-children

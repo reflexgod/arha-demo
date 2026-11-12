@@ -109,7 +109,7 @@ treatments:
     trips:
       - title: "Planned around your examination"
         visits:
-          - {day: "Trip 1", what: "Examination, X-rays and scan for the aligner plan", tbc: "[[TBC: aligner treatment at Arha]]"}
+          - {day: "Trip 1", what: "Examination, X-rays and scan for the aligner plan",}
     gap: "Aligners need regular reviews while teeth move [[TBC: how reviews work for patients abroad]]"
     before: ["Send recent X-rays and photos of your teeth"]
     here: ["Allow time for the scan and records"]

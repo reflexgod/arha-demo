@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% from "_macros.html" import icon, book_href %}
-{% block preload %}<link rel="preload" as="image" href="/static/img/home-hero-720.avif" type="image/avif" fetchpriority="high" imagesrcset="/static/img/home-hero-480.avif 480w, /static/img/home-hero-720.avif 720w, /static/img/home-hero-1080.avif 1080w, /static/img/home-hero-1440.avif 1440w" imagesizes="(min-width: 1200px) 720px, (min-width: 768px) 50vw, 100vw">{% endblock %}
+{% block preload %}<link rel="preload" as="image" href="/static/img/home-hero-720.avif" type="image/avif" fetchpriority="high" imagesrcset="/static/img/home-hero-480.avif 480w, /static/img/home-hero-720.avif 720w, /static/img/home-hero-960.avif 960w, /static/img/home-hero-1080.avif 1080w, /static/img/home-hero-1440.avif 1440w" imagesizes="(min-width: 992px) 50vw, 100vw">{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block main %}
 <section class="hero">
-  <div class="hero__media">{{ picture("home-hero", "(min-width: 1200px) 720px, (min-width: 768px) 50vw, 100vw", eager=True) }}</div>
+  <div class="hero__media">{{ picture("home-hero", "(min-width: 992px) 50vw, 100vw", eager=True) }}</div>
   <div class="hero__text">
     <h1>Your Peddar Road dental practice, led by a prosthodontist.</h1>
     <p class="hero__lead">Dr. Nikhil V. Jain and Dr. Vasant P. Jain look after families from across South Mumbai, from a first check-up to implants and full-mouth rehabilitation. We explain every option clearly, so you can decide at your own pace.</p>
@@ -39,7 +39,7 @@
 <section class="cards" aria-label="Headline treatments">
   <div class="wrap cards__grid">
     <article class="card" data-reveal>
-      <div class="card__media card__media--video">{{ embed("home-tour", "A walk through Arha Dental Care") }}</div>
+      <div class="card__media card__media--video">{{ embed("home-film", "A walk through a treatment room at Arha Dental Care", "(min-width: 768px) 45vw, 100vw") }}</div>
       <h3>Dental implants on Peddar Road</h3>
       <p>Dr. Nikhil V. Jain is an MDS prosthodontist and an ITI Scholar (London). He plans the final tooth first and places the implant to suit it, so the result looks and works like your own teeth.</p>
       <p>Whether you are missing one tooth or several, we explain the options, the timeline and the care involved before anything begins.</p>

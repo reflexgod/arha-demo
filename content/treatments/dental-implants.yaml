@@ -108,7 +108,7 @@ sections:
         a: "Bone loss does not always rule implants out. Once we have seen your X-rays or scan, we explain the options that suit you."
 glance:
   time: "Usually a few months [[TBC: typical timeline]]"
-  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  fee: "[[TBC: from-price, or \"on consultation\" || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-implants

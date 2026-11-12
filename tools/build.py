@@ -9,6 +9,7 @@ on: duplicate or over-long titles/descriptions, a page without exactly one <h1>,
 import hashlib
 import html
 import json
+import os
 import re
 import shutil
 import sys
@@ -51,15 +52,47 @@ def asset_version(rel):
     return hashlib.md5((STATIC / rel).read_bytes()).hexdigest()[:10]
 
 
+TBC_RE = re.compile(r"\[\[TBC:?\s*([^\]]*)\]\]")
+REVIEW_BUILD = os.environ.get("ARHA_REVIEW") == "1"   # ARHA_REVIEW=1 builds with every [[TBC]] tag visible
+
+
+def _tbc_split(body):
+    """[[TBC: note || fallback]] -> (note, fallback). The fallback is the neutral text visitors see until confirmed."""
+    note, _, fb = body.partition("||")
+    return note.strip(), fb.strip()
+
+
 def tbc(text):
-    """Visible placeholder for facts the clinic still has to confirm: [[TBC: …]] -> <mark class="tbc">."""
-    s = str(text)
-    return Markup(re.sub(r"\[\[TBC:?\s*([^\]]*)\]\]",
-                         lambda m: f'<mark class="tbc" title="To be confirmed by the clinic">[[TBC: {html.escape(m.group(1))}]]</mark>', s))
+    """Facts the clinic still has to confirm. Public pages show only the fallback text (or nothing); the yellow
+    <mark class="tbc"> tag shows with ?review=1 (site.js / head script) or an ARHA_REVIEW=1 build."""
+    def rep(m):
+        note, fb = _tbc_split(m.group(1))
+        out = f'<mark class="tbc" title="To be confirmed by the clinic">[[TBC: {html.escape(note)}]]</mark>'
+        return out + (f'<span class="tbc-fb">{html.escape(fb)}</span>' if fb else "")
+    return Markup(TBC_RE.sub(rep, str(text)))
 
 
 def strip_tbc(text):
-    return re.sub(r"\s*\[\[TBC:?[^\]]*\]\]", "", str(text)).strip()
+    """Plain-text contexts (titles, alt text, schema): the fallback if there is one, else nothing."""
+    def rep(m):
+        fb = _tbc_split(m.group(1))[1]
+        return (" " + fb) if fb else ""
+    return re.sub(r"\s*\[\[TBC:?([^\]]*)\]\]", rep, str(text)).strip()
+
+
+TBC_ONLY_RE = re.compile(r'<(p|li|dd|dt|h[1-6]|span|td)((?:\s[^>]*)?)>(\s*<mark class="tbc"[^>]*>[^<]*</mark>\s*)</\1>')
+
+
+def mark_tbc_only(out):
+    """An element whose whole content is a [[TBC]] with no fallback gets class tbc-only (hidden on public pages)."""
+    def rep(m):
+        tag, attrs, inner = m.groups()
+        if 'class="' in attrs:
+            attrs = attrs.replace('class="', 'class="tbc-only ', 1)
+        else:
+            attrs += ' class="tbc-only"'
+        return f"<{tag}{attrs}>{inner}</{tag}>"
+    return TBC_ONLY_RE.sub(rep, out)
 
 
 def picture(name, sizes, cls="", eager=False, alt=None, pos=None):
@@ -100,12 +133,15 @@ def video(name, cls="", eager_poster=False, label="", manual=False, sizes="(min-
         f'>{"".join(srcs)}</video></div>')
 
 
-def embed(name, title, sizes="(min-width: 768px) 45vw, 100vw"):
-    """Click-to-play film with sound (the reference's embedded-video card). Nothing loads until the visitor presses play."""
+def embed(name, title, sizes="(min-width: 768px) 45vw, 100vw", caption=""):
+    """Click-to-play film with controls (the reference's embedded-video card). Nothing loads until the visitor presses
+    play. Clips without a soundtrack play muted. caption = small text on the frame (none used at present)."""
     v = MEDIA["videos"][name]
     w = v["sizes"][-1][0]
+    muted = "" if v.get("audio") else " data-muted"
+    cap = f'<span class="embed__cap">{html.escape(caption)}</span>' if caption else ""
     return Markup(
-        f'<div class="embed" data-embed="/static/video/{name}-{w}.mp4">{picture_poster(name, False, sizes)}'
+        f'<div class="embed" data-embed="/static/video/{name}-{w}.mp4" data-name="{name}"{muted}>{picture_poster(name, False, sizes)}{cap}'
         f'<button class="embed__play" type="button" aria-label="Play video: {html.escape(title, quote=True)}">'
         f'<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="rgba(15,27,39,.55)" stroke="#FDFDFD" stroke-width="1.5"/>'
         f'<path d="M26 21v22l17-11z" fill="#FDFDFD"/></svg><span>{html.escape(title)}</span></button></div>')
@@ -149,7 +185,16 @@ def hours_rows():
 
 def address_one_line():
     a = SITE["address"]
-    return f"{a['line1']}, {a['line2']}, {a['locality']} {a['postcode']}"
+    road = f" ({a['road']})" if a.get("road") else ""
+    return f"{a['line1']}, {a['line2']}{road}, {a['locality']} {a['postcode']}"
+
+
+def address_full():
+    """Postal address as the clinic writes it, with the landmark: footer and schema."""
+    a = SITE["address"]
+    road = f" ({a['road']})" if a.get("road") else ""
+    near = ", Opp. " + a["landmark"].removeprefix("Opposite ") if a.get("landmark", "").startswith("Opposite ") else (f", {a['landmark']}" if a.get("landmark") else "")
+    return f"{a['line1']}, {a['line2']}{road}{near}, {a['locality']} {a['postcode']}"
 
 
 def maps_dir():
@@ -179,7 +224,7 @@ def org_node():
         "url": SITE["domain"] + "/", "telephone": SITE["phone"].replace(" ", ""),
         "image": SITE["domain"] + "/static/img/practice-hero-1440.jpg",
         "logo": SITE["domain"] + "/static/brand/logo-lockup-dark.svg",
-        "address": {"@type": "PostalAddress", "streetAddress": f"{a['line1']}, {a['line2']}", "addressLocality": a["locality"],
+        "address": {"@type": "PostalAddress", "streetAddress": address_full().rsplit(", " + a["locality"], 1)[0], "addressLocality": a["locality"],
                     "addressRegion": a["region"], "postalCode": a["postcode"], "addressCountry": a["country"]},
         "geo": {"@type": "GeoCoordinates", "latitude": SITE["geo"]["lat"], "longitude": SITE["geo"]["lng"]},
         "hasMap": "https://www.google.com/maps?q=" + quote(SITE["maps_query"]),
@@ -279,7 +324,7 @@ def international_page():
 
 def fill_tokens(text):
     """Policy text: {phone}, {address}, {email} come from site.yaml so they never drift."""
-    email = f'<a href="mailto:{SITE["email"]}">{SITE["email"]}</a>' if SITE["email"] else "[[TBC: clinic email]]"
+    email = f'<a href="mailto:{SITE["email"]}">{SITE["email"]}</a>' if SITE["email"] else "[[TBC: clinic email || the enquiry form on our contact page]]"
     return (text.replace("{phone}", f'<a href="{tel(SITE["phone"])}">{SITE["phone_display"]}</a>')
                 .replace("{address}", html.escape(address_one_line())).replace("{email}", email))
 
@@ -374,8 +419,8 @@ def main():
 
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=True, undefined=StrictUndefined,
                       trim_blocks=True, lstrip_blocks=True)
-    env.globals.update(site=SITE, nav=NAV, reviews=REVIEWS or [], picture=picture, video=video, embed=embed, tel=tel, wa=wa, maps_dir=maps_dir,
-                       maps_embed=maps_embed, address_one_line=address_one_line, hours_rows=hours_rows,
+    env.globals.update(review_build=REVIEW_BUILD, site=SITE, nav=NAV, reviews=REVIEWS or [], picture=picture, video=video, embed=embed, tel=tel, wa=wa, maps_dir=maps_dir,
+                       maps_embed=maps_embed, address_one_line=address_one_line, address_full=address_full, hours_rows=hours_rows,
                        client_config=client_config, css_v=asset_version("css/site.css"), js_v=asset_version("js/site.js"), planner_v=asset_version("js/planner.js"),
                        year=TODAY.year, updated=TODAY.strftime("%-d %B %Y") if sys.platform != "win32" else TODAY.strftime("%#d %B %Y"))
     env.filters["tbc"] = tbc
@@ -391,7 +436,7 @@ def main():
         schema = p["schema_fn"](p) if "schema_fn" in p else p.get("schema", [])
         ctx = {"page": p, "schema": jsonld(*schema) if schema else "", "canonical": SITE["domain"] + (p["path"] if p["path"] != "/404.html" else "/"),
                **{k: p[k] for k in ("t", "h", "fp", "pol", "blog", "post", "posts", "i", "plans", "plan_json") if k in p}}
-        out = env.get_template(p["template"]).render(**ctx)
+        out = mark_tbc_only(env.get_template(p["template"]).render(**ctx))
         rendered[p["path"]] = out
         target = DIST / (p["path"].lstrip("/") or "index.html")
         if p["path"].endswith("/"):

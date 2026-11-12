@@ -74,8 +74,8 @@ sections:
       - q: "Is whitening safe for my teeth?"
         a: "Whitening supervised by a dentist, after your teeth and gums have been checked, is a well-established treatment. Some people notice short-lived sensitivity, which usually settles. Whitening does not change the colour of crowns, veneers or fillings."
 glance:
-  time: "[[TBC: number of sittings]]"
-  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  time: "[[TBC: number of sittings || Discussed at your consultation]]"
+  fee: "[[TBC: from-price, or \"on consultation\" || Written estimate after your consultation]]"
   payment: "UPI, debit and credit cards [[TBC: payment methods]]"
 cta:
   image: cta-teeth-whitening
