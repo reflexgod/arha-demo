@@ -230,7 +230,7 @@ def org_node():
         "hasMap": "https://www.google.com/maps?q=" + quote(SITE["maps_query"]),
         "openingHoursSpecification": spec,
         "areaServed": ["Peddar Road", "Kemps Corner", "Breach Candy", "Malabar Hill", "Cumballa Hill", "Tardeo", "South Mumbai"],
-        "employee": [{"@id": f"{SITE['domain']}/the-practice/#{d['id']}"} for d in SITE["doctors"]],
+        "employee": [{"@id": person_id(d)} for d in SITE["doctors"]],
         "priceRange": "₹₹",
     }
     if SITE.get("email"):
@@ -240,15 +240,30 @@ def org_node():
     return node
 
 
+def doctor_path(d):
+    return f"/doctors/{d['slug']}/"
+
+
+def person_id(d):
+    return SITE["domain"] + doctor_path(d) + "#person"
+
+
+def person_node(d, full=False):
+    """Person for a doctor. The full node (on the doctor's own page) adds credentials, description and specialties."""
+    n = {"@type": "Person", "@id": person_id(d), "name": d["name"], "jobTitle": d["role"], "honorificSuffix": d["credentials"],
+         "url": SITE["domain"] + doctor_path(d), "worksFor": {"@id": SITE["domain"] + "/#clinic"}}
+    if d.get("registration"):
+        n["identifier"] = d["registration"]
+    if full:
+        n.update({"honorificPrefix": "Dr.", "description": d["description"], "knowsAbout": d["knows_about"],
+                  "hasOccupation": {"@type": "Occupation", "name": d["role"]},
+                  "hasCredential": [{"@type": "EducationalOccupationalCredential", "name": q["full"],
+                                     "alternateName": q["name"], "credentialCategory": q["category"]} for q in d["qualifications"]]})
+    return n
+
+
 def person_nodes():
-    out = []
-    for d in SITE["doctors"]:
-        n = {"@type": "Person", "@id": f"{SITE['domain']}/the-practice/#{d['id']}", "name": d["name"], "jobTitle": d["role"],
-             "honorificSuffix": d["credentials"], "worksFor": {"@id": SITE["domain"] + "/#clinic"}}
-        if d.get("registration"):
-            n["identifier"] = d["registration"]
-        out.append(n)
-    return out
+    return [person_node(d) for d in SITE["doctors"]]
 
 
 def breadcrumb_node(crumbs):
@@ -361,9 +376,16 @@ def blog_pages():
     """Blog index + posts (content/blog/*.yaml). Article schema; the clinical reviewer stays [[TBC]] until a doctor signs off."""
     idx = load("blog.yaml")
     posts = []
+    doctors = {d["id"]: d for d in SITE["doctors"]}
+    by_slug = {t["slug"]: t for t in NAV["treatments"]}
     for f in sorted((CONTENT / "blog").glob("*.yaml")):
         b = yaml.safe_load(f.read_text(encoding="utf-8"))
         b["path"] = f"/blog/{b['slug']}/"
+        b["author"] = doctors[b.get("author", "dr-nikhil-jain")]
+        text = " ".join([b["lead"], b["body"]] + [qa["q"] + " " + qa["a"] for qa in b.get("faqs", [])])
+        b["words"] = len(TBC_RE.sub(" ", re.sub(r"<[^>]+>", " ", text)).split())
+        b["minutes"] = max(1, round(b["words"] / 200))
+        b["related_t"] = [by_slug[x] for x in b.get("related", [])]
         posts.append(b)
     posts.sort(key=lambda b: (str(b["date"]), b["slug"]), reverse=True)
     pages = [{"path": "/blog/", "template": "blog.html", "title": idx["title"], "description": idx["description"],
@@ -372,13 +394,41 @@ def blog_pages():
               "schema_fn": lambda p: [org_node(), breadcrumb_node(p["crumbs"])]}]
     for b in posts:
         crumbs = [("Home", "/"), ("Blog", "/blog/"), (b["nav_label"], b["path"])]
-        art = {"@type": "Article", "headline": b["h1"], "description": b["description"], "datePublished": str(b["date"]),
-               "dateModified": str(b.get("updated", b["date"])), "image": SITE["domain"] + f"/static/img/{b['image']}-1080.jpg",
-               "author": {"@type": "Organization", "name": SITE["name"], "@id": SITE["domain"] + "/#clinic"},
-               "publisher": {"@id": SITE["domain"] + "/#clinic"}, "mainEntityOfPage": SITE["domain"] + b["path"]}
+        author = b["author"]
+        url = SITE["domain"] + b["path"]
+        art = {"@type": "Article", "@id": url + "#article", "headline": strip_tbc(b["h1"]), "description": b["description"],
+               "datePublished": str(b["date"]), "dateModified": str(b.get("updated") or b["date"]),
+               "image": SITE["domain"] + f"/static/img/{b['image']}-1080.jpg", "articleSection": b["category"],
+               "wordCount": b["words"], "inLanguage": "en-IN", "author": person_node(author),
+               "publisher": {"@id": SITE["domain"] + "/#clinic"}, "mainEntityOfPage": {"@id": url}}
+        page = {"@type": "WebPage", "@id": url, "url": url, "name": b["title"], "isPartOf": {"@id": SITE["domain"] + "/#website"},
+                "breadcrumb": breadcrumb_node(crumbs), "inLanguage": "en-IN"}
+        if b.get("reviewed"):  # only once the doctor has actually read and signed off the article
+            page.update({"@type": "MedicalWebPage", "reviewedBy": {"@id": person_id(author)}, "lastReviewed": str(b["reviewed"])})
         pages.append({"path": b["path"], "template": "post.html", "title": b["title"], "description": b["description"],
                       "crumbs": crumbs, "post": b, "posts": posts, "og_image": f"/static/img/{b['image']}-1080.jpg",
-                      "schema": [org_node(), breadcrumb_node(crumbs), art, faq_node(b.get("faqs", []))]})
+                      "schema": [org_node(), website_node(), page, art, faq_node(b.get("faqs", []))]})
+    return pages
+
+
+def website_node():
+    return {"@type": "WebSite", "@id": SITE["domain"] + "/#website", "url": SITE["domain"] + "/", "name": SITE["name"],
+            "publisher": {"@id": SITE["domain"] + "/#clinic"}, "inLanguage": "en-IN"}
+
+
+def doctor_pages(posts):
+    """One profile page per doctor (/doctors/<slug>/): ProfilePage + full Person schema. Portrait = logo placeholder."""
+    pages = []
+    for d in SITE["doctors"]:
+        path = doctor_path(d)
+        crumbs = [("Home", "/"), ("The practice", "/the-practice/"), (d["name"], path)]
+        prof = {"@type": "ProfilePage", "@id": SITE["domain"] + path, "url": SITE["domain"] + path, "name": f"{d['name']}, {d['role']}",
+                "mainEntity": {"@id": person_id(d)}, "isPartOf": {"@id": SITE["domain"] + "/#website"}, "inLanguage": "en-IN",
+                "breadcrumb": breadcrumb_node(crumbs)}
+        pages.append({"path": path, "template": "doctor.html", "title": d["page_title"], "description": d["description"],
+                      "crumbs": crumbs, "doc": d, "doc_posts": [b for b in posts if b["author"]["id"] == d["id"]],
+                      "og_image": "/static/img/practice-hero-800.jpg",
+                      "schema": [org_node(), website_node(), prof, person_node(d, full=True)]})
     return pages
 
 
@@ -404,6 +454,8 @@ def check(pages, rendered):
             if not re.search(r'\balt="', img):
                 errors.append(f"{p['path']}: img without alt: {img[:80]}")
         visible = re.sub(r"<script\b.*?</script>|<style\b.*?</style>", "", out, flags=re.S)
+        if "[[TBC" in re.sub(r'<mark class="tbc"[^>]*>.*?</mark>|<[^>]+>', "", visible, flags=re.S):
+            errors.append(f"{p['path']}: raw [[TBC]] marker in the page (missing | tbc filter)")
         for pat in BANNED:
             if re.search(pat, visible, re.I):
                 errors.append(f"{p['path']}: banned word /{pat}/")
@@ -429,13 +481,16 @@ def main():
 
     treatments = {t["t"]["slug"]: t["t"] for t in treatment_pages()}
     env.globals["built_treatments"] = treatments
+    env.globals["doctor_path"] = doctor_path
 
-    pages = static_pages() + treatment_pages() + more_pages() + blog_pages() + international_page()
+    blog = blog_pages()
+    pages = (static_pages() + treatment_pages() + more_pages() + blog
+             + doctor_pages([p["post"] for p in blog if "post" in p]) + international_page())
     rendered = {}
     for p in pages:
         schema = p["schema_fn"](p) if "schema_fn" in p else p.get("schema", [])
         ctx = {"page": p, "schema": jsonld(*schema) if schema else "", "canonical": SITE["domain"] + (p["path"] if p["path"] != "/404.html" else "/"),
-               **{k: p[k] for k in ("t", "h", "fp", "pol", "blog", "post", "posts", "i", "plans", "plan_json") if k in p}}
+               **{k: p[k] for k in ("t", "h", "fp", "pol", "blog", "post", "posts", "i", "plans", "plan_json", "doc", "doc_posts") if k in p}}
         out = mark_tbc_only(env.get_template(p["template"]).render(**ctx))
         rendered[p["path"]] = out
         target = DIST / (p["path"].lstrip("/") or "index.html")

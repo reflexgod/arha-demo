@@ -520,7 +520,7 @@
   },
   "blog-implant-timeline": {
    "kind": "stock",
-   "alt": "A dentist looking at dental X-rays",
+   "alt": "Models of a dental implant with its crown, in the bone and in the jaw",
    "widths": [
     640,
     1080,
@@ -732,6 +732,48 @@
     3
    ],
    "src": "assets/img/arha-dental-care-entrance-door-1080.jpg"
+  },
+  "blog-root-canal": {
+   "kind": "stock",
+   "alt": "A tooth cut in half, showing the pulp and the root canals inside",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    656
+   ],
+   "src": "src-assets/stock/v5/blog-root-canal.jpg"
+  },
+  "blog-child-first-visit": {
+   "kind": "stock",
+   "alt": "Pastel toothbrushes on a pale blue table",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    656
+   ],
+   "src": "src-assets/stock/v5/blog-child-first-visit.jpg"
+  },
+  "blog-implant-cost": {
+   "kind": "stock",
+   "alt": "A dental model showing an implant and crown between two natural teeth",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    656
+   ],
+   "src": "src-assets/stock/v5/blog-implant-cost.jpg"
   }
  },
  "videos": {

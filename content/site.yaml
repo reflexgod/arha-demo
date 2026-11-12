@@ -38,18 +38,38 @@ hours:
 
 doctors:
   - id: dr-nikhil-jain
+    slug: dr-nikhil-v-jain                  # profile page /doctors/dr-nikhil-v-jain/
     name: "Dr. Nikhil V. Jain"
     role: "Prosthodontist & Implantologist"
     credentials: "B.D.S., M.D.S., ITI Scholar (London)"   # confirmed 13 Nov 2026
+    degrees: "B.D.S., M.D.S."
+    qualifications:                         # profile page + Person schema (hasCredential)
+      - {name: "B.D.S.", full: "Bachelor of Dental Surgery", category: "degree"}
+      - {name: "M.D.S.", full: "Master of Dental Surgery (Prosthodontics)", category: "degree"}
+      - {name: "ITI Scholar (London)", full: "ITI Scholar (London)", category: "scholarship"}
+    knows_about: ["Prosthodontics", "Dental implants", "Crowns and bridges", "Full-mouth rehabilitation", "Dentures"]
+    treatments: [dental-implants, crowns-bridges-full-mouth-rehabilitation, dentures, missing-teeth]
+    intro: "Dr. Nikhil V. Jain leads Arha Dental Care. He is a prosthodontist, the dental specialist who restores and replaces teeth, and plans every implant, crown and full-mouth treatment at the practice."
+    page_title: "Dr. Nikhil V. Jain, Prosthodontist | Arha Dental Care"
+    description: "Dr. Nikhil V. Jain, B.D.S., M.D.S., prosthodontist and implantologist and ITI Scholar (London), leads Arha Dental Care on Peddar Road, Mumbai."
     registration: ""                        # TBC: State Dental Council registration number
     bio:
       - "Dr. Nikhil V. Jain is a prosthodontist: a dental specialist in restoring and replacing teeth with crowns, bridges, dentures and implants. He holds an MDS in prosthodontics and is an ITI Scholar (London)."
       - "He leads implant, crown and full-mouth treatment at Arha, planning the final teeth first and explaining each option before treatment begins."
       - "[[TBC: training, special interests, memberships, in the doctor's own words]]"
   - id: dr-vasant-jain
+    slug: dr-vasant-p-jain                  # profile page /doctors/dr-vasant-p-jain/
     name: "Dr. Vasant P. Jain"
     role: "Dental Surgeon"
     credentials: "B.D.S."                   # confirmed 13 Nov 2026
+    degrees: "B.D.S."
+    qualifications:
+      - {name: "B.D.S.", full: "Bachelor of Dental Surgery", category: "degree"}
+    knows_about: ["General dentistry"]
+    treatments: []                          # TBC: which treatments Dr. Vasant provides
+    intro: "Dr. Vasant P. Jain is a dental surgeon at Arha Dental Care, looking after patients' everyday dental care."
+    page_title: "Dr. Vasant P. Jain, Dental Surgeon | Arha Dental Care"
+    description: "Dr. Vasant P. Jain, B.D.S., is a dental surgeon at Arha Dental Care on Peddar Road, Mumbai, looking after patients' everyday dental care."
     registration: ""                        # TBC
     bio:
       - "Dr. Vasant P. Jain is a dental surgeon (B.D.S.) at Arha Dental Care, looking after patients' everyday dental care, from check-ups to fillings."

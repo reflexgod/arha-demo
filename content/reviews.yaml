@@ -1,0 +1,5 @@
+# Google reviews shown in the reviews band (templates/_reviews.html) when site.yaml show_reviews is true.
+# ONLY real reviews from the Google Business Profile, copied character for character, and only after the clinic agrees
+# in writing. Never edit, shorten or invent. Format:
+#   - {name: "Reviewer name as shown on Google", text: "Exact review text", date: "Month YYYY", treatment: "optional label"}
+[]

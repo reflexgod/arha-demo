@@ -2,11 +2,13 @@ slug: dental-implant-aftercare
 nav_label: "Implant aftercare"
 category: "Dental implants"
 date: 2026-10-29
+reviewed: ""          # date Dr. Nikhil V. Jain signs the article off (YYYY-MM-DD)
 image: blog-implant-aftercare
 title: "Dental Implant Aftercare: The First Week and Beyond"
 description: "How to look after a new dental implant: the first 24 hours, the first week, and the daily cleaning and check-ups that keep it healthy for years."
 h1: "Looking after your dental implant: the first week and the years after"
 excerpt: "What to expect after an implant is placed, and the simple habits that protect it over the long term."
+related: [dental-implants, gum-care, missing-teeth]
 lead: >-
   An implant can't decay, but the gum and bone around it can become inflamed if plaque is left behind. Good care in the
   first week helps it heal; good habits after that help it last.
@@ -42,4 +44,3 @@ body: |
   clean areas that are hard to reach at home. [[TBC: Arha's recommended review interval after implant treatment]]</p>
   <p>These are general instructions. Always follow the written aftercare advice you are given after your own treatment.
   Read more on our <a href="/treatments/dental-implants/">dental implants</a> page.</p>
-reviewer: "[[TBC: reviewed by Dr. Nikhil V. Jain, MDS (Prosthodontics)]]"

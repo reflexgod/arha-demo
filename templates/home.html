@@ -95,7 +95,7 @@
         <p class="pill">{{ d.role }}</p>
         <p class="member__cred">{{ d.credentials }}</p>
         <p class="member__reg">{% if d.registration %}Reg. no. {{ d.registration }}{% else %}{{ "[[TBC: registration no.]]" | tbc }}{% endif %}</p>
-        <a class="btn" href="/the-practice/#{{ d.id }}">Learn more<span class="sr-only"> about {{ d.name }}</span> {{ icon("right") }}</a>
+        <a class="btn" href="{{ doctor_path(d) }}">View profile<span class="sr-only"> about {{ d.name }}</span> {{ icon("right") }}</a>
       </article>
       {% endfor %}
     </div>

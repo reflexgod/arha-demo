@@ -2,11 +2,13 @@ slug: are-dental-implants-right-for-me
 nav_label: "Are implants right for me?"
 category: "Dental implants"
 date: 2026-10-22
+reviewed: ""          # date Dr. Nikhil V. Jain signs the article off (YYYY-MM-DD)
 image: blog-implants-right-for-me
 title: "Are Dental Implants Right for Me? | Arha Dental Care"
 description: "Who dental implants suit, what can affect whether you can have one, and the questions to ask at an implant consultation on Peddar Road."
 h1: "Are dental implants right for me?"
 excerpt: "Most adults with missing teeth can be considered. These are the things that decide whether an implant suits you."
+related: [dental-implants, missing-teeth, dentures]
 lead: >-
   Dental implants can replace one tooth, several, or a whole arch. Most adults who have lost teeth can be considered,
   but an implant is not the right choice for everyone. These are the things a dentist looks at.
@@ -46,4 +48,3 @@ body: |
   prosthodontist, who explains your options and gives you a written plan. Read about the
   <a href="/blog/dental-implant-timeline/">implant timeline</a>, or <a href="/contact/?treatment=dental-implants#book">book
   a consultation</a>.</p>
-reviewer: "[[TBC: reviewed by Dr. Nikhil V. Jain, MDS (Prosthodontics)]]"

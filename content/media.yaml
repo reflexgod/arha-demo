@@ -51,10 +51,13 @@ images:
   # ---- Phase 2 parity pass: children's orthodontics page (noindex) and blog posts
   - {name: hero-childrens-orthodontics, kind: stock, src: src-assets/stock/v5/hero-childrens-orthodontics.jpg, zoom: 1.4, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.58, 0.4], place: [0.3, 0.45], alt: "A smiling boy in a dental chair"}
   - {name: cta-childrens-orthodontics, kind: stock, src: src-assets/stock/v5/cta-childrens-orthodontics.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.5], alt: "Close-up of a smile with braces"}
-  - {name: blog-implant-timeline, kind: stock, src: src-assets/stock/v5/blog-implant-timeline.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.45], alt: "A dentist looking at dental X-rays"}
+  - {name: blog-implant-timeline, kind: stock, src: src-assets/stock/v5/blog-implant-timeline.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.5], alt: "Models of a dental implant with its crown, in the bone and in the jaw"}
   - {name: blog-implant-vs-bridge, kind: stock, src: src-assets/stock/v5/blog-implant-vs-bridge.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.42, 0.35], alt: "Smiling man against a light grey background"}
   - {name: blog-implant-aftercare, kind: stock, src: src-assets/stock/v5/blog-implant-aftercare.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.3], alt: "A toothbrush in a glass"}
   - {name: blog-implants-right-for-me, kind: stock, src: src-assets/stock/v5/blog-implants-right-for-me.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.58, 0.42], alt: "Older couple smiling together"}
+  - {name: blog-root-canal, kind: stock, src: src-assets/stock/v5/blog-root-canal.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.45], alt: "A tooth cut in half, showing the pulp and the root canals inside"}
+  - {name: blog-child-first-visit, kind: stock, src: src-assets/stock/v5/blog-child-first-visit.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.55], alt: "Pastel toothbrushes on a pale blue table"}
+  - {name: blog-implant-cost, kind: stock, src: src-assets/stock/v5/blog-implant-cost.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.6], alt: "A dental model showing an implant and crown between two natural teeth"}
   # ---- Home hero still (reference layout: photo left, text right), graded like the old hero film
   - {name: home-hero, kind: real, src: src-assets/arha-dental-care-reception-south-mumbai-dental-clinic-01.jpg, box: [0.6954, 0.088, 1.0, 0.46], ratio: [1092, 1000], widths: [480, 720, 960, 1080, 1440], focus: [0.5, 0.5], grade: "eq=contrast=1.05:saturation=1.04:gamma=0.97", alt: "The Arha Dental Care logo on the marble wall at reception, 107 Doctor House, Peddar Road"}
 

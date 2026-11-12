@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, book_href %}
+{% block body_class %}page-doctor{% endblock %}
+{% block crumbs %}{% endblock %}
+{% block main %}
+{% set d = doc %}
+<section class="phero dhero">
+  <div class="phero__panel">
+    <div class="phero__card">
+      <p class="label dhero__role">{{ d.role }}</p>
+      <h1>{{ d.name }}</h1>
+      <p class="dhero__cred">{{ d.credentials }}</p>
+      <p>{{ d.intro }}</p>
+      <div class="dhero__btns">
+        <a class="btn btn--solid" href="{{ book_href() }}" data-event="booking_click">Book an appointment {{ icon("arrow") }}</a>
+        <a class="btn" href="{{ tel(site.phone) }}" data-event="call_click">Call us now {{ icon("arrow") }}</a>
+      </div>
+    </div>
+  </div>
+  <div class="phero__media dhero__ph">
+    <img src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="Portrait of {{ d.name }} to follow">
+  </div>
+</section>
+{% from "_macros.html" import crumbs %}{{ crumbs(page.crumbs) }}
+
+<section class="dprof" aria-labelledby="about-h">
+  <div class="wrap dprof__grid">
+    <div class="dprof__bio">
+      <h2 id="about-h" data-reveal>About {{ d.name }}</h2>
+      {% for para in d.bio %}<p data-reveal>{{ para | tbc }}</p>{% endfor %}
+      {% if d.id == "dr-nikhil-jain" %}
+      <h3 data-reveal>What does a prosthodontist do?</h3>
+      <p data-reveal>Prosthodontics is the dental specialty concerned with restoring and replacing teeth: crowns, bridges, dentures and the teeth that sit on dental implants. A prosthodontist's training covers how the teeth, the bite and the jaw work together, which matters most when several teeth need treatment at once.</p>
+      <p data-reveal>That is why implant and full-mouth treatment at Arha starts from the final teeth. Dr. Nikhil plans how they should look, bite and be cleaned, and the treatment is planned to support them.</p>
+      {% endif %}
+    </div>
+    <aside class="dprof__card" aria-labelledby="qual-h">
+      <h2 id="qual-h" class="h4">Qualifications</h2>
+      <dl>
+        {% for q in d.qualifications %}
+        <div><dt>{{ q.name }}</dt><dd>{{ q.full if q.full != q.name else "" }}</dd></div>
+        {% endfor %}
+        {% if d.registration %}<div><dt>Registration</dt><dd>{{ d.registration }}</dd></div>
+        {% else %}<div class="tbc-only"><dt>Registration</dt><dd>{{ "[[TBC: State Dental Council registration no.]]" | tbc }}</dd></div>{% endif %}
+        <div class="tbc-only"><dt>Languages</dt><dd>{{ "[[TBC: languages spoken]]" | tbc }}</dd></div>
+      </dl>
+      <a class="tlink" href="/the-practice/#meet-the-team">Meet the whole team {{ icon("right") }}</a>
+    </aside>
+  </div>
+</section>
+
+{% if d.treatments %}
+<section class="relt relt--stone" aria-labelledby="treat-h">
+  <div class="wrap">
+    <h2 id="treat-h" data-reveal>Treatments Dr. {{ d.name.split()[1] }} leads</h2>
+    <div class="relt__grid relt__grid--4">
+      {% for slug in d.treatments %}{% set t = built_treatments[slug] %}{% set r = nav.treatments | selectattr("slug", "equalto", slug) | first %}
+      {# text-only cards: no stock photo next to a doctor's name (stock people are never presented as Arha staff) #}
+      <article class="relt__card relt__card--text" data-reveal>
+        <h3><a href="{{ r.href }}">{{ r.label }}</a></h3>
+        <p>{{ t.answer | strip_tbc | truncate(150, killwords=False, end="…") }}</p>
+        <a class="tlink" href="{{ r.href }}">Learn more<span class="sr-only"> about {{ r.label | lower }}</span> {{ icon("right") }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% else %}
+<section class="relt relt--stone" aria-labelledby="treat-h">
+  <div class="wrap dprof__more">
+    <h2 id="treat-h" data-reveal>Everyday dental care at Arha</h2>
+    <p data-reveal>From check-ups to fillings, most of your care happens under one roof, with one team that knows your history. {{ "[[TBC: the treatments Dr. Vasant P. Jain provides]]" | tbc }}</p>
+    <a class="btn" href="/treatments/" data-reveal>Explore treatments {{ icon("arrow") }}</a>
+  </div>
+</section>
+{% endif %}
+
+{% if doc_posts %}
+<section class="morepost morepost--paper" aria-labelledby="posts-h">
+  <div class="wrap">
+    <h2 id="posts-h" data-reveal>Articles by {{ d.name }}</h2>
+    <div class="morepost__grid">
+      {% for b in doc_posts[:3] %}
+      <article class="postcard" data-reveal>
+        <a class="postcard__img" href="{{ b.path }}" tabindex="-1" aria-hidden="true">{{ picture(b.image, "(min-width: 992px) 400px, 100vw", alt="") }}</a>
+        <p class="label">{{ b.category }} · {{ b.minutes }} min read</p>
+        <h3><a href="{{ b.path }}">{{ b.h1 }}</a></h3>
+        <a class="tlink" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span> {{ icon("right") }}</a>
+      </article>
+      {% endfor %}
+    </div>
+    <a class="btn morepost__all" href="/blog/" data-reveal>All articles {{ icon("arrow") }}</a>
+  </div>
+</section>
+{% endif %}
+
+<section class="team team--other" aria-labelledby="other-h">
+  <div class="wrap">
+    <h2 id="other-h" data-reveal>Also at Arha Dental Care</h2>
+    <div class="team__grid team__grid--one">
+      {% for o in site.doctors if o.id != d.id %}
+      <article class="member" data-reveal>
+        <div class="member__photo"><img class="member__ph" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="Portrait of {{ o.name }} to follow"></div>
+        <h3>{{ o.name }}</h3>
+        <p class="pill">{{ o.role }}</p>
+        <p class="member__cred">{{ o.credentials }}</p>
+        <a class="btn" href="{{ doctor_path(o) }}">View profile<span class="sr-only"> of {{ o.name }}</span> {{ icon("right") }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% include "_visit.html" %}
+{% endblock %}

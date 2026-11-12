@@ -9,7 +9,7 @@
 <meta name="description" content="{{ page.description }}">
 {% if site.preview or page.get("noindex") %}<meta name="robots" content="noindex, nofollow">{% endif %}
 <link rel="canonical" href="{{ canonical }}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{{ "article" if page.get("post") else ("profile" if page.get("doc") else "website") }}">
 <meta property="og:site_name" content="{{ site.name }}">
 <meta property="og:title" content="{{ page.title }}">
 <meta property="og:description" content="{{ page.description }}">

@@ -3,27 +3,85 @@
 {% block preload %}<link rel="preload" as="image" href="/static/img/{{ post.image }}-1312.avif" type="image/avif" imagesrcset="/static/img/{{ post.image }}-640.avif 640w, /static/img/{{ post.image }}-1080.avif 1080w, /static/img/{{ post.image }}-1312.avif 1312w" imagesizes="(min-width: 1440px) 1312px, 100vw">{% endblock %}
 {% block body_class %}page-post{% endblock %}
 {% block main %}
+{% set a = post.author %}
 <article class="post">
   <div class="wrap">
     <div class="post__img" data-callbar-first>{{ picture(post.image, "(min-width: 1440px) 1312px, 100vw", eager=True) }}</div>
     <div class="post__in">
-      <p class="label post__meta"><span>{{ post.category }}</span> · <time datetime="{{ post.date }}">{{ post.date | nicedate }}</time></p>
+      <p class="label post__meta"><span>{{ post.category }}</span> · <time datetime="{{ post.date }}">{{ post.date | nicedate }}</time> · <span>{{ post.minutes }} min read</span></p>
       <h1>{{ post.h1 }}</h1>
       <p class="post__lead">{{ post.lead }}</p>
+      <div class="byline">
+        <a class="byline__ph" href="{{ doctor_path(a) }}" tabindex="-1" aria-hidden="true"><img src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt=""></a>
+        <div>
+          <p class="byline__by">Written by <a href="{{ doctor_path(a) }}">{{ a.name }}</a>, {{ a.degrees }}, {{ a.role }}</p>
+          {% if post.reviewed %}
+          <p class="byline__rev">Medically reviewed by <a href="{{ doctor_path(a) }}">{{ a.name }}</a> on <time datetime="{{ post.reviewed }}">{{ post.reviewed | nicedate }}</time></p>
+          {% else %}
+          <p class="byline__rev">{{ ("[[TBC: Medically reviewed by " ~ a.name ~ " on DATE: shows once he has read and approved this article (reviewed: in the post file)]]") | tbc }}</p>
+          {% endif %}
+          {% if post.get("updated") and post.updated != post.date %}<p class="byline__upd">Updated <time datetime="{{ post.updated }}">{{ post.updated | nicedate }}</time></p>{% endif %}
+        </div>
+      </div>
       <div class="post__body">{{ post.body | tbc }}</div>
-      <p class="post__by">Written by the {{ site.name }} team. {{ post.reviewer | tbc }}</p>
-      <p class="post__note">This article is general information and doesn't replace an examination. If you're worried about your teeth, <a href="{{ book_href() }}" data-event="booking_click">book an appointment</a> or call <a href="{{ tel(site.phone) }}">{{ site.phone_display }}</a>.</p>
+      {% if post.get("faqs") %}
+      <section class="post__faq" aria-labelledby="faq-h">
+        <h2 id="faq-h">Frequently asked questions</h2>
+        {% for qa in post.faqs %}
+        <details class="acc">
+          <summary><h3>{{ qa.q }}</h3><span class="acc__ico" aria-hidden="true"></span></summary>
+          <div class="acc__body"><p>{{ qa.a | tbc }}</p></div>
+        </details>
+        {% endfor %}
+      </section>
+      {% endif %}
+      <p class="post__note">This article is general information and doesn't replace an examination. If you're worried about your teeth, <a href="{{ book_href() }}" data-event="booking_click">book an appointment</a> or call <a href="{{ tel(site.phone) }}" data-event="call_click">{{ site.phone_display }}</a>.</p>
     </div>
   </div>
 </article>
+
+<section class="postcta" aria-labelledby="postcta-h">
+  <div class="wrap postcta__in">
+    <div>
+      <p class="label">Arha Dental Care, Peddar Road</p>
+      <h2 id="postcta-h">Talk to us about your own teeth.</h2>
+      <p>An article can explain the options; an examination tells you which one suits you. We explain what we find, the choices and the cost before anything begins.</p>
+    </div>
+    <div class="postcta__btns">
+      <a class="btn btn--sand" href="{{ book_href(post.related[0] if post.get('related') else '') }}" data-event="booking_click">Book an appointment {{ icon("arrow") }}</a>
+      <a class="btn btn--light" href="{{ wa(site.whatsapp) }}" target="_blank" rel="noopener" data-event="whatsapp_click">WhatsApp us {{ icon("arrow") }}</a>
+      <a class="btn btn--light" href="{{ tel(site.phone) }}" data-event="call_click">Call {{ site.phone_display }} {{ icon("arrow") }}</a>
+    </div>
+  </div>
+</section>
+
+{% if post.related_t %}
+<section class="relt" aria-labelledby="relt-h">
+  <div class="wrap">
+    <h2 id="relt-h" data-reveal>Related treatments</h2>
+    <div class="relt__grid">
+      {% for r in post.related_t %}{% set t = built_treatments[r.slug] %}
+      <article class="relt__card" data-reveal>
+        <a class="relt__img" href="{{ r.href }}" tabindex="-1" aria-hidden="true">{{ picture(t.hero, "(min-width: 992px) 400px, 100vw", alt="") }}</a>
+        <h3><a href="{{ r.href }}">{{ r.label }}</a></h3>
+        <a class="tlink" href="{{ r.href }}">Learn more<span class="sr-only"> about {{ r.label | lower }}</span> {{ icon("right") }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <section class="morepost" aria-labelledby="more-h">
   <div class="wrap">
-    <h2 id="more-h" data-reveal>More about dental implants</h2>
+    <h2 id="more-h" data-reveal>More from the blog</h2>
     <div class="morepost__grid">
-      {% for b in posts if b.slug != post.slug %}
+      {% set same = posts | selectattr("category", "equalto", post.category) | rejectattr("slug", "equalto", post.slug) | list %}
+      {% set other = posts | rejectattr("category", "equalto", post.category) | list %}
+      {% for b in (same + other)[:3] %}
       <article class="postcard" data-reveal>
         <a class="postcard__img" href="{{ b.path }}" tabindex="-1" aria-hidden="true">{{ picture(b.image, "(min-width: 992px) 400px, 100vw", alt="") }}</a>
-        <p class="label">{{ b.category }}</p>
+        <p class="label">{{ b.category }} · {{ b.minutes }} min read</p>
         <h3><a href="{{ b.path }}">{{ b.h1 }}</a></h3>
         <a class="tlink" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span> {{ icon("right") }}</a>
       </article>

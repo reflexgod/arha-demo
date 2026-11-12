@@ -104,7 +104,10 @@
           <h3 id="bio-{{ d.id }}-h">{{ d.name | tbc }}</h3>
           {% if d.get("credentials") %}<p class="member__cred">{{ d.credentials }}</p>{% endif %}
           {% for para in d.bio %}<p>{{ para | tbc }}</p>{% endfor %}
-          <a class="btn btn--solid" href="{{ book_href() }}" data-event="booking_click">Book an appointment {{ icon("right") }}</a>
+          <div class="bio__btns">
+            {% if d.get("slug") %}<a class="btn" href="{{ doctor_path(d) }}">Full profile {{ icon("right") }}</a>{% endif %}
+            <a class="btn btn--solid" href="{{ book_href() }}" data-event="booking_click">Book an appointment {{ icon("right") }}</a>
+          </div>
         </dialog>
       </article>
       {% endfor %}
