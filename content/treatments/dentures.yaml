@@ -8,7 +8,7 @@ answer: >-
   fill gaps between your own teeth. At Arha, dentures are planned by Dr. Nikhil V. Jain, a prosthodontist, and can be
   held more firmly with dental implants.
 hero: hero-dentures
-statement_h2: "Comfortable, natural-looking dentures, made for your mouth and your bite."
+statement_h2: "Dentures in South Mumbai, made by a prosthodontist for your mouth and your bite."
 statement_p: >-
   Making a denture is a specialist job: it has to look natural, let you speak and chew, and stay in place. Prosthodontics,
   Dr. Nikhil V. Jain's specialty, is the branch of dentistry that restores and replaces teeth, and dentures are a core part
@@ -23,7 +23,7 @@ procedure:
   followup: "Review visits for adjustments, then regular check-ups; relining when the gums change shape."
 sections:
   - label: about
-    heading: "What types of dentures are there?"
+    heading: "What are dentures?"
     body: |
       <ul>
         <li><strong>Complete dentures</strong> replace all the teeth in the upper or lower jaw.</li>
@@ -34,7 +34,7 @@ sections:
       </ul>
       <p>[[TBC: which denture types and materials Arha offers]]</p>
   - label: benefits
-    heading: "Why replace missing teeth with a denture?"
+    heading: "Why we recommend dentures"
     body: |
       <ul>
         <li>You can chew a wider range of food and speak more clearly.</li>
@@ -43,7 +43,7 @@ sections:
         <li>Dentures usually cost less than implants or bridges and need no surgery.</li>
       </ul>
   - label: who is it for?
-    heading: "Is a denture right for me?"
+    heading: "Am I a candidate for dentures?"
     body: |
       <p>Dentures suit people who have lost several or all of their teeth, people who are not able or ready to have
       implants, and people who want a removable option. If your current denture is loose, sore or breaking, it may need
@@ -51,7 +51,7 @@ sections:
       <a href="/treatments/dental-implants/">implants</a> and bridges, so you can compare them; see
       <a href="/treatments/missing-teeth/">replacing missing teeth</a>.</p>
   - label: process
-    heading: "How is a denture made?"
+    heading: "Explaining denture treatment"
     body: |
       <ol>
         <li><strong>Consultation.</strong> We examine your mouth, discuss what you want and plan the denture.</li>
@@ -62,7 +62,7 @@ sections:
       </ol>
       <p>[[TBC: Arha's usual number of visits and timeline]]</p>
   - label: aftercare
-    heading: "Looking after your dentures"
+    heading: "Caring for your dentures"
     body: |
       <p>Clean your dentures every day with a soft brush and denture cleaner, not toothpaste, which can scratch them.
       Take them out at night unless we advise otherwise, and keep them in water so they don't dry out. Brush your gums
@@ -77,7 +77,7 @@ sections:
       <a href="/treatments/crowns-bridges-full-mouth-rehabilitation/">full-mouth rehabilitation</a> if you are
       considering fixed teeth.</p>
   - label: faqs
-    heading: "Questions we are often asked about dentures"
+    heading: "Find answers to popular denture questions below"
     faqs:
       - q: "How long does it take to get used to new dentures?"
         a: "Most people need a few weeks to get used to eating and speaking with new dentures. Start with soft food cut into small pieces, and come back if anything feels sore: small adjustments make a big difference."

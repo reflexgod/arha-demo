@@ -1,5 +1,7 @@
 slug: emergency-dentistry
-nav_label: Emergency dentistry
+nav_label: Emergency dentist
+path: /emergency-dentist-south-mumbai/
+template: emergency.html
 title: "Emergency Dentist in South Mumbai | Arha Dental Care"
 description: "Toothache, a broken tooth or swelling? What to do now, when to call Arha Dental Care on Peddar Road, and when to go straight to a hospital."
 h1: "Emergency dental care in South Mumbai"
@@ -8,7 +10,7 @@ answer: >-
   to see you as soon as we can. If swelling affects your breathing, swallowing or eye, or you have a high fever, go to a
   hospital emergency department straight away.
 hero: hero-emergency
-statement_h2: "Calm, practical help when something goes wrong with your teeth."
+statement_h2: "Emergency dental care in South Mumbai, when something goes wrong with your teeth."
 statement_p: >-
   Dental emergencies rarely happen at a convenient time. Many can be managed simply once we have seen you: pain can be
   relieved, infection treated and a broken tooth protected until it can be repaired properly. Call us first, so we can
@@ -79,6 +81,8 @@ sections:
         a: "Take a painkiller you normally use, following the packet, rinse with warm salt water, and call us when we open. If you have swelling affecting your breathing or swallowing, go to a hospital."
       - q: "My child has knocked out a tooth. What should I do?"
         a: "Don't put a baby tooth back, as it can damage the adult tooth underneath. Keep your child calm, press a clean cloth on the gum and call us. An adult tooth should be put back or kept in milk and seen straight away."
+      - q: "Can I be seen on a Sunday?"
+        a: "The clinic is closed on Sunday. [[TBC: what patients should do out of hours]] If swelling affects your breathing or swallowing, go to a hospital emergency department straight away."
 glance:
   time: "Usually one visit, sometimes with a follow-up"
   fee: "[[TBC: emergency appointment fee]]"

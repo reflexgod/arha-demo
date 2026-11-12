@@ -12,7 +12,7 @@
       <a class="btn" href="{{ tel(site.phone) }}">Call {{ site.phone_display }} {{ icon("right") }}</a>
     </div>
     <ul>
-      {% for t in nav.treatments[:4] %}<li><a class="tlink" href="/treatments/{{ t.slug }}/">{{ t.label }} {{ icon("right") }}</a></li>{% endfor %}
+      {% for t in nav.treatments[:4] %}<li><a class="tlink" href="{{ t.href }}">{{ t.label }} {{ icon("right") }}</a></li>{% endfor %}
       <li><a class="tlink" href="/the-practice/">The practice {{ icon("right") }}</a></li>
     </ul>
   </div>

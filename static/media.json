@@ -2,7 +2,7 @@
  "images": {
   "home-card-fmr": {
    "kind": "stock",
-   "alt": "Older man smiling",
+   "alt": "Older man smiling in his living room",
    "widths": [
     480,
     800,
@@ -12,11 +12,11 @@
     624,
     400
    ],
-   "src": "src-assets/stock/people/older-man-smiling.jpg"
+   "src": "src-assets/stock/v5/home-card-fmr.jpg"
   },
   "home-card-rct": {
    "kind": "stock",
-   "alt": "Young man smiling",
+   "alt": "A hygienist preparing to check a patient's teeth",
    "widths": [
     480,
     800,
@@ -26,11 +26,11 @@
     624,
     400
    ],
-   "src": "src-assets/stock/man-smile.jpg"
+   "src": "src-assets/stock/v5/home-card-rct.jpg"
   },
   "home-card-kids": {
    "kind": "stock",
-   "alt": "Mother and daughter laughing together",
+   "alt": "Little boy brushing his teeth",
    "widths": [
     480,
     800,
@@ -40,7 +40,7 @@
     624,
     400
    ],
-   "src": "src-assets/stock/people/mother-daughter-laughing.jpg"
+   "src": "src-assets/stock/v5/home-card-kids.jpg"
   },
   "home-commitment": {
    "kind": "real",
@@ -58,7 +58,7 @@
   },
   "hero-implants": {
    "kind": "stock",
-   "alt": "Close-up of a natural smile",
+   "alt": "A dentist showing a patient a dental scan on a tablet",
    "widths": [
     640,
     1080,
@@ -69,11 +69,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/smile-side.jpg"
+   "src": "src-assets/stock/v5/hero-implants.jpg"
   },
   "hero-fmr": {
    "kind": "stock",
-   "alt": "Grandmother smiling at a baby",
+   "alt": "Older man smiling",
    "widths": [
     640,
     1080,
@@ -84,11 +84,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/grandmother-baby.jpg"
+   "src": "src-assets/stock/v5/hero-fmr.jpg"
   },
   "hero-rct": {
    "kind": "stock",
-   "alt": "Young man laughing",
+   "alt": "Man smiling as he relaxes in a dental chair",
    "widths": [
     640,
     1080,
@@ -99,11 +99,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/portrait-1.jpg"
+   "src": "src-assets/stock/v5/hero-rct.jpg"
   },
   "hero-kids": {
    "kind": "stock",
-   "alt": "Young girl smiling",
+   "alt": "A mother brushing her daughter's teeth",
    "widths": [
     640,
     1080,
@@ -114,11 +114,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/girl-smiling.jpg"
+   "src": "src-assets/stock/v5/hero-kids.jpg"
   },
   "cta-implants": {
    "kind": "stock",
-   "alt": "Grandparents smiling with their grandchild",
+   "alt": "Woman smiling",
    "widths": [
     400,
     780
@@ -127,11 +127,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/grandparents-grandchild.jpg"
+   "src": "src-assets/stock/v5/cta-implants.jpg"
   },
   "cta-fmr": {
    "kind": "stock",
-   "alt": "Older man smiling",
+   "alt": "Older man in glasses smiling",
    "widths": [
     400,
     780
@@ -140,11 +140,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/grandfather-grandson.jpg"
+   "src": "src-assets/stock/v5/cta-fmr.jpg"
   },
   "cta-rct": {
    "kind": "stock",
-   "alt": "Young woman smiling",
+   "alt": "Woman smiling in a dental chair",
    "widths": [
     400,
     780
@@ -153,11 +153,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/young-woman-smiling.jpg"
+   "src": "src-assets/stock/v5/cta-rct.jpg"
   },
   "cta-kids": {
    "kind": "stock",
-   "alt": "Mother and daughter smiling",
+   "alt": "Little girl brushing her teeth",
    "widths": [
     400,
     780
@@ -166,7 +166,7 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/mother-daughter-portrait.jpg"
+   "src": "src-assets/stock/v5/cta-kids.jpg"
   },
   "practice-hero": {
    "kind": "real",
@@ -212,6 +212,21 @@
   },
   "hero-dentures": {
    "kind": "stock",
+   "alt": "Older man laughing",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/v5/hero-dentures.jpg"
+  },
+  "hero-missing-teeth": {
+   "kind": "stock",
    "alt": "Woman smiling",
    "widths": [
     640,
@@ -223,26 +238,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/woman-smiling-orange.jpg"
-  },
-  "hero-missing-teeth": {
-   "kind": "stock",
-   "alt": "Young man in a suit smiling",
-   "widths": [
-    640,
-    1080,
-    1440,
-    1920
-   ],
-   "ratio": [
-    1440,
-    770
-   ],
-   "src": "src-assets/stock/people/young-man-suit.jpg"
+   "src": "src-assets/stock/v5/hero-missing-teeth.jpg"
   },
   "hero-teeth-whitening": {
    "kind": "stock",
-   "alt": "Woman laughing",
+   "alt": "Woman with a bright, natural smile",
    "widths": [
     640,
     1080,
@@ -253,11 +253,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/woman-laughing-closeup.jpg"
+   "src": "src-assets/stock/v5/hero-teeth-whitening.jpg"
   },
   "hero-smile-design": {
    "kind": "stock",
-   "alt": "Two friends smiling outdoors",
+   "alt": "Young woman smiling",
    "widths": [
     640,
     1080,
@@ -268,11 +268,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/friends-two-women.jpg"
+   "src": "src-assets/stock/v5/hero-smile-design.jpg"
   },
   "hero-gum-care": {
    "kind": "stock",
-   "alt": "Young man holding a mug",
+   "alt": "Close-up of a dental check of the teeth and gums",
    "widths": [
     640,
     1080,
@@ -283,11 +283,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/man-with-mug.jpg"
+   "src": "src-assets/stock/v5/hero-gum-care.jpg"
   },
   "hero-aligners": {
    "kind": "stock",
-   "alt": "Boy smiling",
+   "alt": "Woman fitting a clear aligner",
    "widths": [
     640,
     1080,
@@ -298,7 +298,7 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/boy-smiling.jpg"
+   "src": "src-assets/stock/v5/hero-aligners.jpg"
   },
   "hero-emergency": {
    "kind": "real",
@@ -317,7 +317,7 @@
   },
   "cta-dentures": {
    "kind": "stock",
-   "alt": "Older couple talking",
+   "alt": "Older man smiling outdoors",
    "widths": [
     400,
     780
@@ -326,11 +326,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/couple-talking.jpg"
+   "src": "src-assets/stock/v5/cta-dentures.jpg"
   },
   "cta-missing-teeth": {
    "kind": "stock",
-   "alt": "Two friends smiling",
+   "alt": "Close-up of a woman smiling",
    "widths": [
     400,
     780
@@ -339,11 +339,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/friends-two-men.jpg"
+   "src": "src-assets/stock/v5/cta-missing-teeth.jpg"
   },
   "cta-teeth-whitening": {
    "kind": "stock",
-   "alt": "Woman holding a cup of tea",
+   "alt": "Woman laughing",
    "widths": [
     400,
     780
@@ -352,11 +352,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/woman-with-cup.jpg"
+   "src": "src-assets/stock/v5/cta-teeth-whitening.jpg"
   },
   "cta-smile-design": {
    "kind": "stock",
-   "alt": "Couple laughing outdoors",
+   "alt": "Woman laughing",
    "widths": [
     400,
     780
@@ -365,11 +365,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/couple-laughing-outdoors.jpg"
+   "src": "src-assets/stock/v5/cta-smile-design.jpg"
   },
   "cta-gum-care": {
    "kind": "stock",
-   "alt": "Couple reading together",
+   "alt": "Woman brushing her teeth",
    "widths": [
     400,
     780
@@ -378,11 +378,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/couple-reading.jpg"
+   "src": "src-assets/stock/v5/cta-gum-care.jpg"
   },
   "cta-aligners": {
    "kind": "stock",
-   "alt": "Woman relaxing in a cafe",
+   "alt": "A clear aligner held in an open hand",
    "widths": [
     400,
     780
@@ -391,11 +391,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/woman-relaxed-cafe.jpg"
+   "src": "src-assets/stock/v5/cta-aligners.jpg"
   },
   "cta-emergency": {
    "kind": "stock",
-   "alt": "Friends relaxing on a lawn",
+   "alt": "A dentist examining a patient",
    "widths": [
     400,
     780
@@ -404,11 +404,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/friends-on-lawn.jpg"
+   "src": "src-assets/stock/v5/cta-emergency.jpg"
   },
   "hub-implants": {
    "kind": "stock",
-   "alt": "Three generations of a family smiling",
+   "alt": "A modern dental treatment room",
    "widths": [
     640,
     1080,
@@ -418,11 +418,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/people/family-at-home.jpg"
+   "src": "src-assets/stock/v5/hub-implants.jpg"
   },
   "hub-restorative": {
    "kind": "stock",
-   "alt": "Older man smiling",
+   "alt": "Older man in glasses smiling",
    "widths": [
     640,
     1080,
@@ -432,11 +432,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/people/older-man-smiling.jpg"
+   "src": "src-assets/stock/v5/hub-restorative.jpg"
   },
   "hub-cosmetic": {
    "kind": "stock",
-   "alt": "Close-up of a broad smile",
+   "alt": "Close-up of a natural smile",
    "widths": [
     640,
     1080,
@@ -446,11 +446,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/people/smile-wide.jpg"
+   "src": "src-assets/stock/v5/hub-cosmetic.jpg"
   },
   "hub-children": {
    "kind": "stock",
-   "alt": "Young girl smiling",
+   "alt": "A girl at a dental check-up",
    "widths": [
     640,
     1080,
@@ -460,11 +460,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/kid-face.jpg"
+   "src": "src-assets/stock/v5/hub-children.jpg"
   },
   "hub-general": {
    "kind": "stock",
-   "alt": "Family sitting together outdoors",
+   "alt": "A dentist in a bright treatment room",
    "widths": [
     640,
     1080,
@@ -474,7 +474,7 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/people/family-outdoors.jpg"
+   "src": "src-assets/stock/v5/hub-general.jpg"
   },
   "hero-for-patients": {
    "kind": "real",
@@ -490,52 +490,147 @@
     770
    ],
    "src": "src-assets/dental-operatory-arha-dental-care-peddar-road-01.jpeg"
+  },
+  "hero-childrens-orthodontics": {
+   "kind": "stock",
+   "alt": "Boy with a big smile",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/v5/hero-childrens-orthodontics.jpg"
+  },
+  "cta-childrens-orthodontics": {
+   "kind": "stock",
+   "alt": "Girl laughing as she holds her toothbrush",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/v5/cta-childrens-orthodontics.jpg"
+  },
+  "blog-implant-timeline": {
+   "kind": "stock",
+   "alt": "A dentist looking at dental X-rays",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    656
+   ],
+   "src": "src-assets/stock/v5/blog-implant-timeline.jpg"
+  },
+  "blog-implant-vs-bridge": {
+   "kind": "stock",
+   "alt": "Woman smiling",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    656
+   ],
+   "src": "src-assets/stock/v5/blog-implant-vs-bridge.jpg"
+  },
+  "blog-implant-aftercare": {
+   "kind": "stock",
+   "alt": "A toothbrush in a glass",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    656
+   ],
+   "src": "src-assets/stock/v5/blog-implant-aftercare.jpg"
+  },
+  "blog-implants-right-for-me": {
+   "kind": "stock",
+   "alt": "Woman smiling",
+   "widths": [
+    640,
+    1080,
+    1312
+   ],
+   "ratio": [
+    1312,
+    656
+   ],
+   "src": "src-assets/stock/v5/blog-implants-right-for-me.jpg"
+  },
+  "home-hero": {
+   "kind": "real",
+   "alt": "The Arha Dental Care sign above reception at 107 Doctor House, Peddar Road",
+   "widths": [
+    480,
+    720,
+    1080,
+    1440
+   ],
+   "ratio": [
+    720,
+    675
+   ],
+   "src": "src-assets/arha-dental-care-reception-south-mumbai-dental-clinic-01.jpg"
   }
  },
  "videos": {
-  "home-hero-tour": {
+  "home-tour": {
    "kind": "real",
    "sizes": [
     [
-     768,
+     1280,
      720
-    ],
-    [
-     1152,
-     1080
-    ]
-   ],
-   "poster_widths": [
-    768,
-    1152
-   ],
-   "ratio": [
-    1152,
-    1080
-   ],
-   "src": "src-assets/hero-land-master.mp4"
-  },
-  "home-card-walkthrough": {
-   "kind": "real",
-   "sizes": [
-    [
-     640,
-     360
-    ],
-    [
-     1080,
-     608
     ]
    ],
    "poster_widths": [
     640,
-    1080
+    1280
    ],
    "ratio": [
-    1080,
-    608
+    1920,
+    1080
    ],
-   "src": "src-assets/IMG_2303.MOV"
+   "src": "src-assets/arha-dental-care-peddar-road-mumbai-clinic-tour.mp4",
+   "audio": true,
+   "alt": "A walk through reception and the treatment rooms at Arha Dental Care"
+  },
+  "mega-dental": {
+   "kind": "stock",
+   "sizes": [
+    [
+     960,
+     540
+    ]
+   ],
+   "poster_widths": [
+    480,
+    960
+   ],
+   "ratio": [
+    1920,
+    1080
+   ],
+   "src": "src-assets/stock/v5video/mixkit-12140-checking-dental-x-rays.mp4",
+   "audio": false,
+   "alt": "A dentist showing a patient a dental X-ray"
   }
  }
 }

@@ -23,11 +23,11 @@
 {% for c in h.categories %}
 <section class="hubcat" id="{{ c.id }}" aria-labelledby="{{ c.id }}-h">
   <div class="wrap">
-    <h2 id="{{ c.id }}-h">{{ c.heading }}</h2>
-    <div class="hubcat__img">{{ picture(c.image, "(min-width: 1440px) 1312px, 100vw") }}</div>
+    <h2 id="{{ c.id }}-h" data-reveal>{{ c.heading }}</h2>
+    <div class="hubcat__img" data-reveal>{{ picture(c.image, "(min-width: 1440px) 1312px, 100vw") }}</div>
     <div class="hubcat__cards">
       {% for card in c.cards %}
-      <article class="hubcard">
+      <article class="hubcard" data-reveal>
         <p class="label">{{ card.label }}</p>
         <h3>{{ card.heading }}</h3>
         <p>{{ card.text | tbc }}</p>

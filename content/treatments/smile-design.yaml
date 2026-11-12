@@ -8,7 +8,7 @@ answer: >-
   with your bite. It can combine whitening, bonding, veneers, crowns or aligners, and you see the plan before any
   treatment begins.
 hero: hero-smile-design
-statement_h2: "Changes planned around your face, your bite and what you want, never a one-size-fits-all smile."
+statement_h2: "Smile design in South Mumbai, planned around your face and your bite."
 statement_p: >-
   People ask about smile design for chipped or worn teeth, gaps, uneven edges, old dark fillings or a colour they
   don't like. A good result looks natural and lasts, which means it has to fit how your teeth meet as well as how they
@@ -22,7 +22,7 @@ procedure:
   followup: "Review of the bite, then regular check-ups."
 sections:
   - label: about
-    heading: "What can smile design include?"
+    heading: "What is smile design?"
     body: |
       <ul>
         <li><strong>Whitening</strong> to lighten the natural colour of your teeth.</li>
@@ -35,7 +35,7 @@ sections:
       </ul>
       <p>[[TBC: which of these Arha offers]]</p>
   - label: benefits
-    heading: "Why plan the whole smile?"
+    heading: "Why we recommend planning the whole smile"
     body: |
       <ul>
         <li>Each change is chosen to suit your face, lips and gum line, so the result looks like you.</li>
@@ -43,13 +43,13 @@ sections:
         <li>Starting with the least invasive option keeps more of your natural teeth.</li>
       </ul>
   - label: who is it for?
-    heading: "Is smile design right for me?"
+    heading: "Am I a candidate for smile design?"
     body: |
       <p>It suits adults with healthy gums who would like to change the look of their teeth: chipped, worn, uneven or
       discoloured teeth, gaps, or old fillings and crowns that no longer match. Decay and gum disease are treated
       first. If you grind your teeth, we plan for it, as grinding can damage new restorations.</p>
   - label: process
-    heading: "How does smile design work?"
+    heading: "Explaining smile design treatment"
     body: |
       <ol>
         <li><strong>Consultation.</strong> You tell us what you would like to change; we examine your teeth, gums and bite.</li>
@@ -59,7 +59,7 @@ sections:
         bonding so the new resin matches.</li>
       </ol>
   - label: aftercare
-    heading: "Looking after your new smile"
+    heading: "Caring for your new smile"
     body: |
       <p>Brush twice a day, clean between your teeth, and come for regular check-ups and cleaning. Avoid biting very
       hard things such as ice or nuts in their shells with bonded or veneered teeth. If you grind your teeth at night,
@@ -71,7 +71,7 @@ sections:
       <a href="/treatments/aligners/">clear aligners</a> and
       <a href="/treatments/crowns-bridges-full-mouth-rehabilitation/">crowns and full-mouth rehabilitation</a>.</p>
   - label: faqs
-    heading: "Questions we are often asked about smile design"
+    heading: "Find answers to popular smile design questions below"
     faqs:
       - q: "Do veneers damage your teeth?"
         a: "Porcelain veneers usually need a thin layer of enamel to be removed, which cannot be undone. Composite bonding often needs little or none. We explain how much each option changes your teeth before you decide."
@@ -79,6 +79,8 @@ sections:
         a: "It varies with your bite, habits and care. Bonding may need polishing or repair over the years; porcelain veneers are more resistant to staining and chipping. We discuss the expected maintenance at your consultation."
       - q: "Can I see what my smile will look like?"
         a: "We go through the plan with you before treatment. [[TBC: mock-up or digital preview, if offered]]"
+      - q: "Can I see what my new smile will look like first?"
+        a: "Where it suits the treatment, changes can be planned with photographs and tried in the mouth before anything is final. [[TBC: whether Arha uses digital smile previews or trial mock-ups]]"
 glance:
   time: "Depends on the plan [[TBC: typical timeline]]"
   fee: "[[TBC: from-price, or \"on consultation\"]]"

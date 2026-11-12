@@ -6,8 +6,10 @@
 /book/                         /contact/#book                                      301
 /doctors/                      /the-practice/#meet-the-team                        301
 /founder/                      /the-practice/#our-story                            301
-/technology/                   /for-patients/#technology                           301
-/emergency/                    /treatments/emergency-dentistry/                    301
+/technology/                   /the-practice/#technology                           301
+/emergency/                    /emergency-dentist-south-mumbai/                    301
+/treatments/emergency-dentistry/   /emergency-dentist-south-mumbai/                301
+/treatments/emergency-dentistry    /emergency-dentist-south-mumbai/                301
 /gallery/                      /the-practice/                                      301
 /before-after/                 /treatments/                                        301
 /problems/*                    /treatments/                                        301

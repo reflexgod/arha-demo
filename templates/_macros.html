@@ -24,8 +24,9 @@
 {% endmacro %}
 
 {#
-  Enquiry / booking form. Posts to the forms endpoint in content/site.yaml (Google Apps Script -> Sheet + email).
-  kind: "enquiry" (short, sidebar) or "booking" (contact page: treatment + preferred time).
+  Enquiry / contact form. Posts to the forms endpoint in content/site.yaml (Google Apps Script -> Sheet + email).
+  kind: "enquiry" (treatment-page sidebar) or "booking" (contact page: concern + treatment). Every form has a honeypot
+  ("company") and a Cloudflare Turnstile check; the Turnstile script only loads once someone starts filling the form in.
 #}
 {% macro form(id, kind="enquiry", treatment="", heading="") %}
 <form class="form" id="{{ id }}" data-form="{{ kind }}" novalidate>
@@ -38,48 +39,46 @@
     <input type="text" id="{{ id }}-name" name="name" autocomplete="name" required>
   </div>
   <div>
-    <label for="{{ id }}-phone">Phone or WhatsApp number *</label>
-    <input type="tel" id="{{ id }}-phone" name="phone" autocomplete="tel" inputmode="tel" required>
+    <label for="{{ id }}-email">Email address</label>
+    <input type="email" id="{{ id }}-email" name="email" autocomplete="email">
   </div>
   <div>
-    <label for="{{ id }}-email">Email (optional)</label>
-    <input type="email" id="{{ id }}-email" name="email" autocomplete="email">
+    <label for="{{ id }}-phone">Contact number (phone or WhatsApp) *</label>
+    <input type="tel" id="{{ id }}-phone" name="phone" autocomplete="tel" inputmode="tel" required>
   </div>
   {% if kind == "booking" %}
   <div>
-    <label for="{{ id }}-patient">Have you visited us before?</label>
-    <select id="{{ id }}-patient" name="patient">
-      <option value="new">No, I'm a new patient</option>
-      <option value="existing">Yes, I'm an existing patient</option>
+    <label for="{{ id }}-concern">What is your query or concern about? *</label>
+    <select id="{{ id }}-concern" name="concern" required>
+      <option value="">Select one…</option>
+      <option>Booking an appointment</option>
+      <option>A question about a treatment</option>
+      <option>Fees and payment</option>
+      <option>An existing appointment</option>
+      <option>A referral from my dentist</option>
+      <option>Feedback or a complaint</option>
+      <option>Something else</option>
     </select>
   </div>
   <div>
-    <label for="{{ id }}-treatment">What would you like to see us about?</label>
+    <label for="{{ id }}-treatment">Treatment (if you know)</label>
     <select id="{{ id }}-treatment" name="treatment">
       <option value="">A check-up, or I'm not sure</option>
       {% for t in nav.treatments %}<option value="{{ t.slug }}"{% if t.slug == treatment %} selected{% endif %}>{{ t.label }}</option>{% endfor %}
-    </select>
-  </div>
-  <div>
-    <label for="{{ id }}-when">Preferred day and time</label>
-    <select id="{{ id }}-when" name="when">
-      <option value="">Any time</option>
-      <option>Weekday morning</option>
-      <option>Weekday afternoon</option>
-      <option>Saturday</option>
     </select>
   </div>
   {% else %}
   <input type="hidden" name="treatment" value="{{ treatment }}">
   {% endif %}
   <div>
-    <label for="{{ id }}-msg">{% if kind == "booking" %}Anything we should know?{% else %}Your question{% endif %}</label>
-    <textarea id="{{ id }}-msg" name="message" rows="4"></textarea>
+    <label for="{{ id }}-msg">{% if kind == "booking" %}Message{% else %}Any additional comments or concerns?{% endif %}</label>
+    <textarea id="{{ id }}-msg" name="message" rows="4" placeholder="{% if kind == "booking" %}Tell us what you need, and a good day and time to call you{% endif %}"></textarea>
   </div>
   <p class="form__note">Please don't include detailed medical information. In a dental emergency, call us on <a href="{{ tel(site.phone) }}">{{ site.phone_display }}</a>.</p>
-  <label class="check"><input type="checkbox" name="consent" value="yes" required> <span>I agree that Arha Dental Care may contact me about this request by phone, WhatsApp or email, as set out in the <a href="/policies/privacy/">privacy policy</a>.</span></label>
+  <label class="check"><input type="checkbox" name="consent" value="yes" required> <span>I agree that Arha Dental Care may store these details and contact me about this request by phone, WhatsApp or email. Read our <a href="/policies/privacy/">privacy policy</a>. *</span></label>
+  <label class="check"><input type="checkbox" name="marketing" value="yes"> <span>I'd like to hear about news and check-up reminders from Arha Dental Care. You can opt out at any time.</span></label>
   <div class="cf-turnstile" data-sitekey="{{ site.turnstile_site_key }}"></div>
-  <button class="btn btn--solid" type="submit">{% if kind == "booking" %}Request appointment{% else %}Send enquiry{% endif %} {{ icon("arrow") }}</button>
+  <button class="btn btn--solid" type="submit">{% if kind == "booking" %}Send my request{% else %}Send enquiry{% endif %} {{ icon("arrow") }}</button>
   <p class="form__status" role="status" aria-live="polite"></p>
   {% if kind == "booking" %}<p class="form__note">This is a request, not a confirmed booking. We'll call or WhatsApp you to agree a time.</p>{% endif %}
 </form>

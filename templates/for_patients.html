@@ -20,7 +20,7 @@
 {% set np = fp.new_patients %}
 <section class="newpt" id="new-patients" aria-labelledby="np-h">
   <div class="wrap">
-    <h2 id="np-h">{{ np.heading }}</h2>
+    <h2 id="np-h" data-reveal>{{ np.heading }}</h2>
     <p class="newpt__lead">{{ np.lead }}</p>
     <div class="newpt__grid">
       <ol class="newpt__steps">
@@ -39,7 +39,7 @@
 <section class="payband" aria-label="Care plans and payment options">
   <div class="wrap payband__grid">
     {% for key, block in [("care-plans", fp.care_plans), ("payment-options", fp.payment)] %}
-    <div class="payband__col" id="{{ key }}">
+    <div class="payband__col" id="{{ key }}" data-reveal>
       <p class="pill">{{ block.label }}</p>
       <h2>{{ block.heading }}</h2>
       {% for p in block.body %}<p>{{ p | tbc }}</p>{% endfor %}
@@ -51,47 +51,35 @@
 
 <section class="fees" id="fee-guide" aria-labelledby="fees-h">
   <div class="wrap">
-    <h2 id="fees-h">{{ fp.fees.heading }}</h2>
-    <p class="fees__intro">{{ fp.fees.intro | tbc }}</p>
-    <div class="tbody__grid fees__grid">
-      <div class="feecard">
-        {% for g in fp.fees.groups %}
-        <div class="feegroup">
-          <p class="label">Fees</p>
-          <h3>{{ g.heading }}</h3>
-          <dl>
-            {% for r in g.rows %}<div class="feerow"><dt>{{ r }}</dt><dd>{{ "[[TBC: fee]]" | tbc }}</dd></div>{% endfor %}
-          </dl>
+    <h2 id="fees-h" data-reveal>{{ fp.fees.heading }}</h2>
+    <p class="fees__intro" data-reveal>{{ fp.fees.intro | tbc }}</p>
+    <div class="feecard" data-reveal>
+      {% for g in fp.fees.groups %}
+      <div class="feegroup">
+        <p class="label">Fees</p>
+        <h3>{{ g.heading }}</h3>
+        <div class="feelist">
+          {% for r in g.rows %}<div class="feerow"><h4>{{ r }}</h4><p>{{ "[[TBC: fee]]" | tbc }}</p></div>{% endfor %}
         </div>
-        {% endfor %}
       </div>
-      <aside class="tside" aria-label="Treatments">
-        {% for c in fp.fees.ctas %}
-        <div class="ctacard">
-          {{ picture(c.image, "(min-width: 992px) 389px, 480px", alt="") }}
-          <div class="ctacard__in">
-            <h3>{{ c.heading }}</h3>
-            <p>{{ c.text }}</p>
-            <a class="btn" href="{{ c.href }}">Find out more {{ icon("right") }}</a>
-          </div>
-        </div>
-        {% endfor %}
-      </aside>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="tech" id="technology" aria-labelledby="tech-h">
+<section class="fpctas" aria-labelledby="fpctas-h">
   <div class="wrap">
-    <img class="tech__mark" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="">
-    <h2 id="tech-h">{{ fp.technology.heading }}</h2>
-    <p class="tech__intro">{{ fp.technology.intro }}</p>
-    <div class="tech__list">
-      {% for it in fp.technology["items"] %}
-      <details class="acc">
-        <summary><h3>{{ it.h }}</h3><span class="acc__ico" aria-hidden="true"></span></summary>
-        <div class="acc__body"><p>{{ it.p | tbc }}</p></div>
-      </details>
+    <h2 id="fpctas-h" class="sr-only">Popular treatments</h2>
+    <div class="fpctas__grid">
+      {% for c in fp.fees.ctas %}
+      <div class="ctacard" data-reveal>
+        {{ picture(c.image, "(min-width: 992px) 400px, 480px", alt="") }}
+        <div class="ctacard__in">
+          <h3>{{ c.heading }}</h3>
+          <p>{{ c.text }}</p>
+          <a class="btn" href="{{ c.href }}">Find out more {{ icon("right") }}</a>
+        </div>
+      </div>
       {% endfor %}
     </div>
   </div>

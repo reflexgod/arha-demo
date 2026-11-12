@@ -1,7 +1,7 @@
 {% from "_macros.html" import icon, book_href, landmark %}
 {% include "_reviews.html" %}
 <section class="visit" id="visit" aria-labelledby="visit-h">
-  <div class="visit__panel">
+  <div class="visit__panel" data-reveal>
     <h3 id="visit-h">Visit our Peddar Road dental practice</h3>
     <p class="pill">Get in touch</p>
     <ul>
@@ -15,9 +15,9 @@
       <li><a href="{{ maps_dir() }}" target="_blank" rel="noopener">{{ icon("pin") }}{{ site.address.line1 }}, {{ site.address.line2 }} {{ icon("right", "ico--after") }}</a></li>
     </ul>
   </div>
-  <div class="visit__acc">
+  <div class="visit__acc" data-reveal>
     <details class="acc">
-      <summary><h4>Getting here and parking</h4><span class="acc__ico" aria-hidden="true"></span></summary>
+      <summary><h4>Getting here &amp; parking</h4><span class="acc__ico" aria-hidden="true"></span></summary>
       <div class="acc__body">
         <p>We are at {{ site.address.line1 }}, {{ site.address.line2 }}, {{ landmark() }}. Doctor House is a short drive from Kemps Corner, Breach Candy and Malabar Hill. {{ "[[TBC: floor, lift access and where patients can park]]" | tbc }}</p>
         <a class="tlink" href="{{ maps_dir() }}" target="_blank" rel="noopener">Get directions {{ icon("right") }}</a>
@@ -34,14 +34,14 @@
       </div>
     </details>
     <details class="acc">
-      <summary><h4>Toothache or a dental emergency</h4><span class="acc__ico" aria-hidden="true"></span></summary>
+      <summary><h4>Same-day emergency appointments</h4><span class="acc__ico" aria-hidden="true"></span></summary>
       <div class="acc__body">
         <p>If you have severe toothache, swelling or a broken tooth, call us and we will try to see you as soon as we can. {{ "[[TBC: same-day emergency policy]]" | tbc }} If you have swelling that affects your breathing or swallowing, go to a hospital emergency department straight away.</p>
-        <a class="tlink" href="{{ tel(site.phone) }}">Call {{ site.phone_display }} {{ icon("right") }}</a>
+        <a class="tlink" href="/emergency-dentist-south-mumbai/">What to do in an emergency {{ icon("right") }}</a>
       </div>
     </details>
     <details class="acc">
-      <summary><h4>Payment options and care plans</h4><span class="acc__ico" aria-hidden="true"></span></summary>
+      <summary><h4>Payment options &amp; care plans</h4><span class="acc__ico" aria-hidden="true"></span></summary>
       <div class="acc__body">
         <p>You can pay by UPI, debit or credit card. {{ "[[TBC: payment methods, cash, and whether EMI is offered]]" | tbc }} You receive a written estimate before any course of treatment begins.</p>
         <a class="tlink" href="/for-patients/#payment-options">Payment options {{ icon("right") }}</a>
@@ -55,7 +55,7 @@
       </div>
     </details>
     <details class="acc">
-      <summary><h4>Referrals from dentists</h4><span class="acc__ico" aria-hidden="true"></span></summary>
+      <summary><h4>Dental referrals</h4><span class="acc__ico" aria-hidden="true"></span></summary>
       <div class="acc__body">
         <p>Dentists can refer patients to Dr. Nikhil V. Jain for implant and prosthodontic treatment. We keep you informed and send the patient back to you for their routine care.</p>
         <a class="tlink" href="/referrals/">Refer a patient {{ icon("right") }}</a>

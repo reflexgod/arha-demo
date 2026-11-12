@@ -41,13 +41,26 @@ doctors:
     role: "Prosthodontist & Implantologist"
     credentials: "B.D.S., M.D.S. (Prosthodontics), ITI Scholar (London)"
     registration: ""                        # TBC: State Dental Council registration number
+    bio:
+      - "Dr. Nikhil V. Jain is a prosthodontist: a dental specialist in restoring and replacing teeth with crowns, bridges, dentures and implants. He holds an MDS in prosthodontics and is an ITI Scholar (London)."
+      - "He leads implant, crown and full-mouth treatment at Arha, planning the final teeth first and explaining each option before treatment begins."
+      - "[[TBC: training, special interests, memberships, in the doctor's own words]]"
   - id: dr-vasant-jain
     name: "Dr. Vasant P. Jain"
     role: "Dental Surgeon"
     credentials: "B.D.S."
     registration: ""                        # TBC
+    bio:
+      - "Dr. Vasant P. Jain is a dental surgeon (B.D.S.) at Arha Dental Care, looking after patients' everyday dental care, from check-ups to fillings."
+      - "[[TBC: short bio in the doctor's own words]]"
 
-same_as: []                                 # TBC: Google Business Profile, Instagram, Facebook
+# Other team members: cards are built but hidden until the clinic sends names, roles and photos (set hidden: false).
+team_tbc:
+  - {id: team-hygienist, name: "[[TBC: name]]", role: "[[TBC: dental hygienist?]]", hidden: true, bio: ["[[TBC: short bio]]"]}
+  - {id: team-assistant, name: "[[TBC: name]]", role: "[[TBC: dental assistant?]]", hidden: true, bio: ["[[TBC: short bio]]"]}
+  - {id: team-reception, name: "[[TBC: name]]", role: "[[TBC: practice manager / reception?]]", hidden: true, bio: ["[[TBC: short bio]]"]}
+
+same_as: []                                 # TBC: [{label: Instagram, url: "https://..."}, Google Business Profile, Facebook]. Shown in the menus + schema sameAs
 google_reviews_url: "https://share.google/PzhwgJ9QJMErZnk9R"
 
 # Switches

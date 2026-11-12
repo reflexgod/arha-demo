@@ -1,0 +1,119 @@
+# Built like the reference's long-form "aligners for children" page. noindex and kept out of every menu and the sitemap
+# until the clinic confirms who provides orthodontic treatment at Arha and which appliances are used.
+slug: childrens-orthodontics
+nav_label: Children's orthodontics
+noindex: true
+layout: article
+title: "Orthodontics for Children in South Mumbai | Arha Dental Care"
+description: "Orthodontic care for children and teenagers at Arha Dental Care, Peddar Road: when to have a first check, the options, and what treatment involves."
+h1: "Orthodontics for children and teenagers in South Mumbai"
+answer: >-
+  Crooked, crowded or protruding teeth are common as children grow. An orthodontic check helps you understand whether
+  your child needs treatment, when to start it, and which option suits them. [[TBC: who provides orthodontic
+  treatment at Arha, and which appliances]]
+hero: hero-childrens-orthodontics
+statement_h2: "Orthodontic care for children in South Mumbai, planned around a growing smile."
+statement_p: >-
+  Children's teeth and jaws change quickly between the ages of about seven and fifteen. Some problems with the bite are
+  easier to guide while a child is still growing; others are better treated once the adult teeth have come through.
+  We examine your child, take the X-rays needed, and explain what we see in words they understand, so the whole family
+  can decide together. [[TBC: orthodontic services offered at Arha]]
+procedure:
+  type: TherapeuticProcedure
+  body_location: Teeth and jaws
+  how_performed: "Teeth are moved gradually with fixed braces or removable clear aligners, depending on the child's teeth and age."
+  preparation: "Orthodontic examination, X-rays and photographs, and a written plan."
+  followup: "Regular reviews during treatment, then retainers to hold the teeth in place."
+sections:
+  - label: about
+    heading: "What is orthodontic treatment for children?"
+    body: |
+      <p>Orthodontic treatment moves teeth, and sometimes guides how the jaws grow, so that the teeth meet properly
+      and are easier to keep clean. For children and teenagers it is usually done with fixed braces or with a series of
+      removable clear aligners. [[TBC: appliances offered at Arha]]</p>
+  - label: who is it for?
+    heading: "Who is it suitable for?"
+    body: |
+      <p>An orthodontic check is worth having if you notice any of the following:</p>
+      <ul>
+        <li><strong>Crowding:</strong> teeth that overlap because there is not enough room.</li>
+        <li><strong>Spacing:</strong> gaps between teeth.</li>
+        <li><strong>Overbite or overjet:</strong> upper front teeth that sit well in front of the lower teeth.</li>
+        <li><strong>Underbite:</strong> lower front teeth that sit in front of the upper teeth.</li>
+        <li><strong>Crossbite:</strong> some upper teeth biting inside the lower teeth.</li>
+        <li><strong>Open bite:</strong> front teeth that don't meet when the back teeth bite together.</li>
+      </ul>
+      <h3 class="h4">When should my child have a first check?</h3>
+      <p>Many dentists suggest a first orthodontic check at around seven years old, when the first adult teeth are
+      coming through. Most children who need braces start treatment later, often between eleven and fourteen.</p>
+  - label: benefits
+    heading: "Benefits of treatment at the right age"
+    body: |
+      <ul>
+        <li><strong>Easier cleaning:</strong> straight teeth are easier to brush and clean between.</li>
+        <li><strong>A comfortable bite:</strong> teeth that meet properly wear more evenly.</li>
+        <li><strong>Protection:</strong> correcting protruding front teeth can make them less likely to be injured.</li>
+        <li><strong>Confidence:</strong> many children feel happier about their smile once treatment is complete.</li>
+      </ul>
+  - label: why arha
+    heading: "Why parents choose Arha Dental Care"
+    body: |
+      <p>Children are seen in a calm clinic on Peddar Road, and every step is explained to both parent and child before
+      it happens. Because Arha is led by a prosthodontist, the bite is planned as a whole, not tooth by tooth.
+      [[TBC: who carries out orthodontic treatment, and their qualifications]]</p>
+  - label: process
+    heading: "What to expect during treatment"
+    body: |
+      <ol>
+        <li><strong>Consultation.</strong> An examination, X-rays and photographs, and a chat with you and your child.</li>
+        <li><strong>Your plan.</strong> We explain the options, how long each takes and the cost, in writing.</li>
+        <li><strong>Fitting.</strong> Braces are fitted, or the first aligners are given with instructions.</li>
+        <li><strong>Reviews.</strong> Regular visits to check progress and make adjustments. [[TBC: usual review interval]]</li>
+        <li><strong>Retainers.</strong> Once the teeth are in place, retainers hold them there.</li>
+      </ol>
+  - label: timeline
+    heading: "How long does treatment take?"
+    body: |
+      <p>It depends on how much the teeth need to move and how well appliances are worn. Many courses of treatment
+      for teenagers take between one and two years, followed by retainers. You receive your child's own estimate after
+      the consultation. [[TBC: typical durations at Arha]]</p>
+  - label: comparison
+    heading: "Fixed braces or clear aligners?"
+    body: |
+      <div class="ctable__wrap"><table class="ctable">
+        <thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">Fixed braces</th><th scope="col">Clear aligners</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Appearance</th><td>Brackets and a wire on the teeth</td><td>Clear trays, hard to notice</td></tr>
+          <tr><th scope="row">Removable</th><td>No, fixed until treatment ends</td><td>Yes, taken out to eat and clean</td></tr>
+          <tr><th scope="row">Wearing</th><td>Works all the time</td><td>Must be worn for most of the day and night</td></tr>
+          <tr><th scope="row">Cleaning</th><td>Needs extra care around brackets</td><td>Brush and floss as usual</td></tr>
+          <tr><th scope="row">Suits</th><td>Most bite problems</td><td>Many, but not all, bite problems</td></tr>
+        </tbody>
+      </table></div>
+      <p>Which suits your child depends on their teeth and on how reliably they will wear removable trays.</p>
+  - label: book
+    heading: "Book an orthodontic check"
+    body: |
+      <p>Call or WhatsApp us, or send an enquiry, and we'll find a time that works around school.
+      <a href="/contact/?treatment=kids-dentistry#book">Book a consultation</a>.</p>
+  - label: faqs
+    heading: "Find answers to popular questions about children's orthodontics"
+    faqs:
+      - q: "What is the right age for braces?"
+        a: "There is no single right age. A first check at around seven helps spot problems early; most treatment starts once more adult teeth have come through, often between eleven and fourteen."
+      - q: "Do braces hurt?"
+        a: "Teeth often feel tender for a few days after braces are fitted or adjusted, or when a new aligner starts. This usually settles quickly, and we explain how to manage it."
+      - q: "Can my child play sport with braces?"
+        a: "Yes. A mouthguard is recommended for contact sports. Aligners are usually taken out for sport and put back in afterwards."
+      - q: "Will my child need a retainer?"
+        a: "Yes. Teeth tend to drift back after treatment, so retainers are worn afterwards to hold them in place. We explain how long and how often."
+glance:
+  time: "Often 1 to 2 years [[TBC: typical duration]]"
+  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  payment: "UPI, debit and credit cards [[TBC: payment methods]]"
+cta:
+  image: cta-childrens-orthodontics
+  heading: "Questions about your child's teeth?"
+  text: "Book an orthodontic check."
+form_heading: "Ask us about orthodontics for your child."
+related: [kids-dentistry, aligners, smile-design]

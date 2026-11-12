@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, book_href %}
+{% block preload %}<link rel="preload" as="image" href="/static/img/{{ post.image }}-1312.avif" type="image/avif" imagesrcset="/static/img/{{ post.image }}-640.avif 640w, /static/img/{{ post.image }}-1080.avif 1080w, /static/img/{{ post.image }}-1312.avif 1312w" imagesizes="(min-width: 1440px) 1312px, 100vw">{% endblock %}
+{% block body_class %}page-post{% endblock %}
+{% block main %}
+<article class="post">
+  <div class="wrap">
+    <div class="post__img" data-callbar-first>{{ picture(post.image, "(min-width: 1440px) 1312px, 100vw", eager=True) }}</div>
+    <div class="post__in">
+      <p class="label post__meta"><span>{{ post.category }}</span> · <time datetime="{{ post.date }}">{{ post.date | nicedate }}</time></p>
+      <h1>{{ post.h1 }}</h1>
+      <p class="post__lead">{{ post.lead }}</p>
+      <div class="post__body">{{ post.body | tbc }}</div>
+      <p class="post__by">Written by the {{ site.name }} team. {{ post.reviewer | tbc }}</p>
+      <p class="post__note">This article is general information and doesn't replace an examination. If you're worried about your teeth, <a href="{{ book_href() }}" data-event="booking_click">book an appointment</a> or call <a href="{{ tel(site.phone) }}">{{ site.phone_display }}</a>.</p>
+    </div>
+  </div>
+</article>
+<section class="morepost" aria-labelledby="more-h">
+  <div class="wrap">
+    <h2 id="more-h" data-reveal>More about dental implants</h2>
+    <div class="morepost__grid">
+      {% for b in posts if b.slug != post.slug %}
+      <article class="postcard" data-reveal>
+        <a class="postcard__img" href="{{ b.path }}" tabindex="-1" aria-hidden="true">{{ picture(b.image, "(min-width: 992px) 400px, 100vw", alt="") }}</a>
+        <p class="label">{{ b.category }}</p>
+        <h3><a href="{{ b.path }}">{{ b.h1 }}</a></h3>
+        <a class="tlink" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span> {{ icon("right") }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% include "_visit.html" %}
+{% endblock %}

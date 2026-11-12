@@ -19,16 +19,27 @@
 
 <section class="tstate">
   <div class="wrap">
-    <h2>{{ t.statement_h2 }}</h2>
-    <p>{{ t.statement_p | tbc }}</p>
+    <h2 data-reveal>{{ t.statement_h2 }}</h2>
+    <p data-reveal>{{ t.statement_p | tbc }}</p>
   </div>
 </section>
 
 <section class="tbody">
   <div class="wrap tbody__grid">
     <div>
-      <div class="tcard">
-        {% for s in t.sections %}
+      {% if t.get("layout") == "article" %}
+      <div class="tcard tarticle" data-reveal>
+        {% for s in t.sections if not s.get("faqs") %}
+        <section class="tart">
+          <p class="label">{{ s.label }}</p>
+          <h2>{{ s.heading }}</h2>
+          {{ s.body | tbc }}
+        </section>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div class="tcard" data-reveal>
+        {% for s in t.sections if t.get("layout") != "article" or s.get("faqs") %}
         <details class="acc tacc"{% if loop.first %} open{% endif %}>
           <summary><span class="label">{{ s.label }}</span><h3>{{ s.heading }}</h3><span class="acc__ico" aria-hidden="true"></span></summary>
           <div class="acc__body">
@@ -42,26 +53,26 @@
         {% endfor %}
       </div>
       {% if t.related %}
-      <div class="related">
+      <div class="related" data-reveal>
         <h2>Related treatments</h2>
         <ul>
-          {% for slug in t.related %}{% for n in nav.treatments if n.slug == slug %}<li><a class="btn" href="/treatments/{{ slug }}/">{{ n.label }} {{ icon("right") }}</a></li>{% endfor %}{% endfor %}
+          {% for slug in t.related %}{% for n in nav.treatments if n.slug == slug %}<li><a class="btn" href="{{ n.href }}">{{ n.label }} {{ icon("right") }}</a></li>{% endfor %}{% endfor %}
         </ul>
       </div>
       {% endif %}
     </div>
-    <aside class="tside" aria-label="At a glance and enquiries">
-      <div class="glance">
-        <p class="label">At a glance</p>
-        <h3>{{ t.nav_label }}</h3>
+    <aside class="tside" aria-label="Investment and enquiries">
+      <div class="glance" data-reveal>
+        <p class="label">Cost</p>
+        <h3>Investment</h3>
         <dl>
           <dt>Time</dt><dd>{{ t.glance.time | tbc }}</dd>
-          <dt>Fee</dt><dd>{{ t.glance.fee | tbc }}</dd>
-          <dt>Payment</dt><dd>{{ t.glance.payment | tbc }}</dd>
+          <dt>Price</dt><dd>{{ t.glance.fee | tbc }}</dd>
+          <dt>Payment options</dt><dd>{{ t.glance.payment | tbc }}</dd>
         </dl>
         <a class="btn" href="/for-patients/#fee-guide">See the fee guide {{ icon("right") }}</a>
       </div>
-      <div class="ctacard">
+      <div class="ctacard" data-reveal>
         {{ picture(t.cta.image, "(min-width: 992px) 389px, 480px", alt="") }}
         <div class="ctacard__in">
           <h3>{{ t.cta.heading }}</h3>

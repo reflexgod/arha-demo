@@ -7,7 +7,7 @@ answer: >-
   A dental implant is a small titanium post placed in the jaw to hold a replacement tooth. At Arha, Dr. Nikhil V. Jain,
   a prosthodontist, plans the final tooth first and places the implant to suit it.
 hero: hero-implants
-statement_h2: "Prosthodontist-led implant care on Peddar Road, with every step explained before it begins."
+statement_h2: "Prosthodontist-led dental implant care in South Mumbai, with every step explained before it begins."
 statement_p: >-
   An implant replaces the root of a missing tooth, so the new tooth is held firmly in the jaw instead of resting on the
   gum or relying on the teeth beside it. A single implant can carry one crown, two or more can carry a bridge, and a
@@ -22,14 +22,14 @@ procedure:
   followup: "Healing reviews, then regular check-ups and professional cleaning."
 sections:
   - label: about
-    heading: "What is a dental implant?"
+    heading: "What are dental implants?"
     body: |
       <p>A dental implant has three parts: the implant itself, a small titanium post that sits in the jawbone where the
       root used to be; an abutment, a connector at the gum line; and the crown, bridge or denture you see.</p>
       <p>Over the healing period, the bone bonds with the implant's surface. Once it has settled, the final tooth is
       fixed on top and works much like a natural one when you bite and chew.</p>
   - label: benefits
-    heading: "Why choose an implant?"
+    heading: "Why we recommend dental implants"
     body: |
       <ul>
         <li>The healthy teeth on either side are left untouched, unlike a conventional bridge.</li>
@@ -45,7 +45,7 @@ sections:
       <p>Before any treatment, we examine your mouth and take the X-rays or scans needed to see the bone. If there is
       not enough bone, there may still be options, and we explain them at your consultation.</p>
   - label: process
-    heading: "How long does a dental implant take?"
+    heading: "Explaining implant treatment"
     body: |
       <p>From the first consultation to the final tooth usually takes a few months, because the bone needs time to bond
       with the implant. Treatment that needs bone grafting takes longer. You receive your own timeline after the
@@ -57,7 +57,7 @@ sections:
         <li><strong>The final tooth.</strong> Your crown, bridge or denture is made, fitted and checked against your bite.</li>
       </ol>
   - label: aftercare
-    heading: "How do I care for my dental implant?"
+    heading: "Caring for your dental implants"
     body: |
       <p>Clean around an implant as carefully as around your natural teeth: brush twice a day and clean between the
       teeth with floss or small interdental brushes. Regular check-ups and professional cleaning help protect the gum
@@ -65,11 +65,38 @@ sections:
   - label: implant-related treatments
     heading: "Implant-retained dentures"
     body: |
-      <p>A full denture can clip onto a small number of implants, so it stays in place when you eat and speak. It can
-      be removable for cleaning or fixed. Read more about <a href="/treatments/dentures/">dentures</a> and
+      <h4>What they are</h4>
+      <p>An implant-retained denture is a full denture held in place by a small number of implants, instead of
+      resting on the gum alone. It can be removable for cleaning, or fixed so that only the dentist takes it out.</p>
+      <h4>How they work</h4>
+      <p>The implants are placed in the jaw and allowed to heal. Attachments on the implants then match fittings
+      inside the denture, so it clips firmly into place. The number of implants depends on your jaw and whether
+      the denture is removable or fixed. [[TBC: the implant-retained denture options Arha offers]]</p>
+      <h4>Benefits</h4>
+      <ul>
+        <li>The denture stays in place when you eat, speak and laugh.</li>
+        <li>Many people find they can eat a wider range of food.</li>
+        <li>An upper denture held by implants may need less coverage of the palate. [[TBC: confirm with Dr. Nikhil V. Jain]]</li>
+      </ul>
+      <p>Read more about <a href="/treatments/dentures/">dentures</a> and
       <a href="/treatments/missing-teeth/">replacing missing teeth</a>.</p>
+  - label: implant-related treatments
+    heading: "Bone grafting and sinus lift surgery"
+    body: |
+      <p>An implant needs enough healthy bone around it. When the jaw has shrunk after a tooth was lost, the bone can
+      sometimes be built up first. Not everyone needs this: your X-rays or scan show whether you do.
+      [[TBC: whether bone grafting and sinus lifts are done at Arha]]</p>
+      <h4>Bone grafting</h4>
+      <p>Graft material is placed where the jaw is too thin or too low, either before the implant or at the same time.
+      Over the healing period, your own bone grows into it.</p>
+      <h4>Sinus lift</h4>
+      <p>In the upper back jaw, the sinus can sit close to where an implant needs to go. A sinus lift gently raises the
+      lining of the sinus and adds bone beneath it, to make room for the implant.</p>
+      <h4>What it means for your timeline</h4>
+      <p>Grafting usually adds healing time before the final tooth is fitted. We include it in your written plan, so
+      you know the timeline before treatment begins.</p>
   - label: faqs
-    heading: "Questions we are often asked about dental implants"
+    heading: "Find answers to popular implant questions below"
     faqs:
       - q: "Does getting an implant hurt?"
         a: "The area is numbed with local anaesthetic before the implant is placed, so you should feel pressure rather than pain. Some swelling or tenderness for a few days afterwards is common, and we explain how to manage it."

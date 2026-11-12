@@ -8,7 +8,7 @@ answer: >-
   are fixed to the teeth beside the gap, and dentures are removable. The right choice depends on your teeth, your
   gums, your health and your budget.
 hero: hero-missing-teeth
-statement_h2: "Three ways to fill a gap, explained side by side so you can choose with confidence."
+statement_h2: "Replacing missing teeth in South Mumbai: implants, bridges and dentures compared."
 statement_p: >-
   Losing a tooth affects more than your smile. The teeth either side can drift into the space, the opposite tooth can
   over-erupt, and chewing on one side puts extra load on the rest of your teeth. Replacing teeth is the heart of
@@ -23,7 +23,7 @@ procedure:
   followup: "Regular check-ups and cleaning, with care specific to the option chosen."
 sections:
   - label: about
-    heading: "How do the three options compare?"
+    heading: "What are the options for missing teeth?"
     body: |
       <h4>Dental implant</h4>
       <p>A titanium post in the jaw holds a crown. It stands on its own, so the neighbouring teeth are not touched.
@@ -35,7 +35,7 @@ sections:
       <p>A removable plate with one or more teeth. It is the least invasive and usually the least costly, and it can
       replace many teeth at once, but it feels less like your own teeth and comes out for cleaning.</p>
   - label: benefits
-    heading: "Why replace a missing tooth?"
+    heading: "Why we recommend replacing a missing tooth"
     body: |
       <ul>
         <li>It keeps the neighbouring and opposite teeth from moving out of position.</li>
@@ -43,7 +43,7 @@ sections:
         <li>It restores your smile and, for front teeth, the way you speak.</li>
       </ul>
   - label: who is it for?
-    heading: "Which option suits me?"
+    heading: "Which option am I a candidate for?"
     body: |
       <ul>
         <li><strong>An implant</strong> often suits a single missing tooth with healthy teeth either side, when the bone
@@ -53,7 +53,7 @@ sections:
       </ul>
       <p>Smoking, uncontrolled diabetes and gum disease affect every option, so we check these first.</p>
   - label: process
-    heading: "What happens at the consultation?"
+    heading: "Explaining your consultation"
     body: |
       <ol>
         <li><strong>Examination.</strong> We look at the gap, the teeth either side, your gums and your bite.</li>
@@ -74,7 +74,7 @@ sections:
       <a href="/treatments/crowns-bridges-full-mouth-rehabilitation/">crowns and bridges</a> and
       <a href="/treatments/dentures/">dentures</a>.</p>
   - label: faqs
-    heading: "Questions we are often asked about missing teeth"
+    heading: "Find answers to popular questions about missing teeth"
     faqs:
       - q: "Is an implant better than a bridge?"
         a: "Neither is better for everyone. An implant leaves the neighbouring teeth untouched; a bridge is quicker and needs no surgery. We recommend what suits your teeth after an examination."
@@ -82,6 +82,8 @@ sections:
         a: "It depends on the option and on how the area heals. Sometimes a temporary tooth can be fitted straight away; implants usually wait for some healing. We plan the timing with you."
       - q: "What if I leave the gap?"
         a: "Some gaps, especially at the very back, cause few problems. Others let teeth tip and drift, which can affect your bite. We explain what is likely in your case."
+      - q: "How soon after an extraction can a tooth be replaced?"
+        a: "It depends on the option you choose and how the area heals. A temporary replacement can often be made in the meantime. We explain the timing at your consultation."
 glance:
   time: "Depends on the option chosen [[TBC: typical timelines]]"
   fee: "[[TBC: from-prices, or \"on consultation\"]]"

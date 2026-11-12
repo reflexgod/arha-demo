@@ -28,7 +28,7 @@ JS_STATE = """() => {
     .map(e => ({name: e.id || 'callbar', rect: r(e)})).filter(o => o.rect.bottom > 0 && o.rect.top < vh);
   const covers = fixed.filter(o => h1 && h1.bottom > o.rect.top && h1.top < o.rect.bottom && h1.top < vh).map(o => o.name);
   const onScreen = e => { const b = r(e); return !!b && b.bottom > 0 && b.top < vh; };
-  const shouldShow = !onScreen(document.querySelector('#main > section')) && !onScreen(document.querySelector('.ftr'));
+  const shouldShow = !onScreen(document.querySelector('[data-callbar-first]') || document.querySelector('#main > section')) && !onScreen(document.querySelector('.ftr'));
   const icoVisible = !!ico && getComputedStyle(ico).display !== 'none';
   return {icoVisible, shouldShow, barShown: !!bar && bar.classList.contains('is-shown'), cookie: !!ck && !ck.hidden, h1Covered: covers,
           overflow: document.documentElement.scrollWidth - innerWidth};
@@ -63,7 +63,7 @@ def main():
                     problems.append(f"{path}: H1 covered on load by {top['h1Covered']}")
                 if top["overflow"] > 0:
                     problems.append(f"{path}: sideways scroll {top['overflow']}px")
-                pg.click("[data-consent=granted]")
+                pg.click("[data-consent=all]")
                 h = pg.evaluate("document.documentElement.scrollHeight")
                 pg.evaluate(f"window.scrollTo(0, {h // 2})"); pg.wait_for_timeout(500)
                 mid = pg.evaluate(JS_STATE)

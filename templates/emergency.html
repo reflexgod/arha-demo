@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, book_href %}
+{% block preload %}<link rel="preload" as="image" href="/static/img/{{ t.hero }}-1440.avif" type="image/avif" imagesrcset="/static/img/{{ t.hero }}-640.avif 640w, /static/img/{{ t.hero }}-1080.avif 1080w, /static/img/{{ t.hero }}-1440.avif 1440w, /static/img/{{ t.hero }}-1920.avif 1920w" imagesizes="100vw">{% endblock %}
+{% block body_class %}page-emergency{% endblock %}
+{% block crumbs %}{% endblock %}
+{% block main %}
+<section class="ehero">
+  <div class="wrap">
+    <p class="pill">Emergency dentist</p>
+    <h1>{{ t.h1 }}</h1>
+    <p class="ehero__sub">{{ t.answer | tbc }}</p>
+    <div class="btns">
+      <a class="btn btn--sand" href="{{ tel(site.phone) }}">Call {{ site.phone_display }} {{ icon("arrow") }}</a>
+      <a class="btn btn--light" href="{{ wa(site.whatsapp, site.whatsapp_text) }}" target="_blank" rel="noopener">WhatsApp us {{ icon("arrow") }}</a>
+    </div>
+  </div>
+</section>
+<div class="eimg">{{ picture(t.hero, "100vw", eager=True) }}</div>
+{% from "_macros.html" import crumbs %}{{ crumbs(page.crumbs) }}
+
+<section class="eabout" aria-labelledby="eabout-h">
+  <div class="wrap">
+    <p class="label">About the treatment</p>
+    <h2 id="eabout-h" data-reveal>{{ t.statement_h2 }}</h2>
+    <p data-reveal>{{ t.statement_p | tbc }}</p>
+  </div>
+</section>
+
+<section class="ebody">
+  <div class="wrap">
+    <div class="tcard ecard" data-reveal>
+      {% for s in t.sections %}
+      <details class="acc tacc"{% if loop.first %} open{% endif %}>
+        <summary><span class="label">{{ s.label }}</span><h3>{{ s.heading }}</h3><span class="acc__ico" aria-hidden="true"></span></summary>
+        <div class="acc__body">
+          {% if s.get("faqs") %}
+            {% for qa in s.faqs %}<h4 class="efaq">{{ qa.q }}</h4><p>{{ qa.a | tbc }}</p>{% endfor %}
+          {% else %}
+            {{ s.body | tbc }}
+          {% endif %}
+        </div>
+      </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="ecta" aria-labelledby="ecta-h">
+  <div class="wrap">
+    <h2 id="ecta-h" data-reveal>We're here when you need us</h2>
+    <p data-reveal>Call during opening hours and we will try to see you as soon as we can. {{ "[[TBC: same-day emergency appointments]]" | tbc }}</p>
+    <div class="btns">
+      <a class="btn btn--sand" href="{{ tel(site.phone) }}">Call {{ site.phone_display }} {{ icon("arrow") }}</a>
+      <a class="btn btn--light" href="{{ book_href(t.slug) }}" data-event="booking_click">Book an appointment {{ icon("arrow") }}</a>
+    </div>
+  </div>
+</section>
+
+{% include "_visit.html" %}
+{% endblock %}

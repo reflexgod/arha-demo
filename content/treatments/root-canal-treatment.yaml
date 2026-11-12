@@ -7,7 +7,7 @@ answer: >-
   Root canal treatment removes infected or inflamed tissue from inside a tooth, cleans the canals and seals them, so you
   can keep the tooth. It is done under local anaesthetic, and the tooth is usually protected with a crown afterwards.
 hero: hero-rct
-statement_h2: "Saving a painful tooth calmly and carefully, with the crown that protects it planned from the start."
+statement_h2: "Root canal treatment in South Mumbai, done calmly and carefully to save your tooth."
 statement_p: >-
   When decay, a crack or an old deep filling lets bacteria reach the nerve inside a tooth, the tissue becomes inflamed
   or infected. This can cause toothache, sensitivity to hot or cold, or swelling, though sometimes there are no symptoms
@@ -28,7 +28,7 @@ sections:
       root canal treatment, the infected or inflamed pulp is removed, the canals are cleaned and shaped, and then they
       are filled and sealed to stop bacteria getting back in.</p>
   - label: benefits
-    heading: "Why save the tooth?"
+    heading: "Why we recommend saving the tooth"
     body: |
       <ul>
         <li>You keep your own tooth, which usually works and feels better than a replacement.</li>
@@ -36,14 +36,14 @@ sections:
         <li>It avoids the gap, and the cost of replacing a tooth, that an extraction would leave.</li>
       </ul>
   - label: who is it for?
-    heading: "Do I need a root canal?"
+    heading: "Am I a candidate for root canal treatment?"
     body: |
       <p>Signs include toothache that lingers or wakes you at night, pain when biting, sensitivity to hot or cold that
       lasts after the drink has gone, a darkened tooth, or swelling of the gum. Only an examination and an X-ray can
       tell whether a tooth needs root canal treatment, or whether a filling is enough. If you have swelling or severe
       pain, call us the same day.</p>
   - label: process
-    heading: "How many visits does a root canal take?"
+    heading: "Explaining root canal treatment"
     body: |
       <p>Many root canal treatments are finished in one or two visits. Infected or complex teeth can need more, with
       a dressing placed in the tooth between visits. [[TBC: Arha's usual number of visits]]</p>
@@ -54,7 +54,7 @@ sections:
         <li><strong>Protecting.</strong> Usually a crown, fitted once the tooth has settled.</li>
       </ol>
   - label: aftercare
-    heading: "What happens after a root canal?"
+    heading: "Caring for your tooth afterwards"
     body: |
       <p>The tooth may feel tender for a few days, especially when biting; this usually settles on its own. Avoid
       chewing hard food on that side until the tooth has its permanent filling or crown. Then care for it like your other
@@ -66,7 +66,7 @@ sections:
       <a href="/treatments/crowns-bridges-full-mouth-rehabilitation/">crowns and bridges</a>, or, if a tooth cannot be
       saved, about <a href="/treatments/dental-implants/">dental implants</a>.</p>
   - label: faqs
-    heading: "Questions we are often asked about root canal treatment"
+    heading: "Find answers to popular root canal questions below"
     faqs:
       - q: "Is root canal treatment painful?"
         a: "The tooth is numbed with local anaesthetic before we start, so most people feel pressure rather than pain during treatment. It is often the toothache before treatment that hurts; some tenderness for a few days afterwards is common."

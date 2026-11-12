@@ -1,0 +1,9 @@
+# Blog index (/blog/). Posts live in content/blog/*.yaml. Every post is general information and is reviewed by
+# Dr. Nikhil V. Jain before launch ([[TBC]] reviewer line on each post until he has).
+title: "Dental Blog: Implants and Oral Health | Arha Dental Care"
+description: "Plain-English articles from Arha Dental Care, Peddar Road: dental implant timelines, implants versus bridges, aftercare and whether implants suit you."
+h1: "The Arha Dental Care blog"
+intro: >-
+  Clear, practical articles about the treatments we provide on Peddar Road, written to help you understand your
+  options before your consultation. They are general information, not a diagnosis.
+categories: ["Dental implants"]

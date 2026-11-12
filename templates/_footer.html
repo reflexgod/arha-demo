@@ -18,7 +18,7 @@
       <div>
         <p class="pill">Treatments</p>
         <ul>
-          {% for t in nav.treatments[:4] %}<li><a href="/treatments/{{ t.slug }}/">{{ t.get("short") or t.label }}</a></li>{% endfor %}
+          {% for t in nav.treatments[:4] %}<li><a href="{{ t.href }}">{{ t.get("short") or t.label }}</a></li>{% endfor %}
           <li><a href="/treatments/">All treatments</a></li>
         </ul>
       </div>

@@ -16,7 +16,7 @@
  * and at launch move both to an account the clinic owns.
  */
 var SHEET_NAME = 'Enquiries';
-var FIELDS = ['form', 'name', 'phone', 'email', 'patient', 'treatment', 'when', 'message', 'page'];
+var FIELDS = ['form', 'name', 'phone', 'email', 'concern', 'treatment', 'message', 'marketing', 'page'];
 var REF_SHEET = 'Referrals';
 var REF_FIELDS = ['name', 'practice', 'practice_address', 'email', 'phone', 'registration', 'patient_name', 'patient_dob',
   'patient_phone', 'patient_email', 'treatment', 'urgent', 'purpose', 'complaint', 'history', 'self_treat', 'message', 'page'];

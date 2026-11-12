@@ -7,7 +7,7 @@ answer: >-
   Full-mouth rehabilitation restores worn, broken or missing teeth as one plan, so your bite works in balance again. It
   combines crowns, bridges, implants and fillings, and at Arha it is planned by a prosthodontist.
 hero: hero-fmr
-statement_h2: "When many teeth need care, one plan for the whole mouth lasts longer than repairing them one at a time."
+statement_h2: "Crowns, bridges and full-mouth rehabilitation in South Mumbai, planned by a prosthodontist."
 statement_p: >-
   Teeth that are worn down, cracked, heavily filled or missing change the way the jaws meet. Repairing them one by one
   can leave the bite uneven, so new work chips or fails. Full-mouth rehabilitation looks at every tooth and at how your
@@ -22,7 +22,7 @@ procedure:
   followup: "Bite checks, reviews and regular cleaning."
 sections:
   - label: about
-    heading: "What is full-mouth rehabilitation?"
+    heading: "What are crowns, bridges and full-mouth rehabilitation?"
     body: |
       <p>Full-mouth rehabilitation, sometimes called full-mouth reconstruction, is a planned course of treatment that
       restores most or all of the teeth in both jaws. It can include crowns to protect weakened teeth, bridges or
@@ -30,7 +30,7 @@ sections:
       <p>A <strong>crown</strong> is a cap that covers a weakened tooth. A <strong>bridge</strong> fills a gap with a
       false tooth held by the teeth, or implants, on either side.</p>
   - label: benefits
-    heading: "Why plan the whole mouth together?"
+    heading: "Why we recommend planning the whole mouth"
     body: |
       <ul>
         <li>Your bite is balanced as a whole, so chewing feels comfortable and even.</li>
@@ -39,13 +39,13 @@ sections:
         <li>Treatment follows one clear order, with costs set out in advance.</li>
       </ul>
   - label: who is it for?
-    heading: "Who needs full-mouth rehabilitation?"
+    heading: "Am I a candidate for full-mouth rehabilitation?"
     body: |
       <p>It is usually considered when several of these apply: teeth worn down by grinding or acid, many large or old
       fillings, broken or cracked teeth, several missing teeth, or a bite that has collapsed so the face looks shorter.
       For one damaged tooth, a single crown is often enough, and we will tell you so.</p>
   - label: process
-    heading: "How long does full-mouth rehabilitation take?"
+    heading: "Explaining full-mouth rehabilitation"
     body: |
       <p>Most cases take several visits over weeks to months, depending on how many teeth are involved and whether
       implants are part of the plan. [[TBC: Arha's typical timeline]]</p>
@@ -56,7 +56,7 @@ sections:
         <li><strong>Final restorations.</strong> Crowns, bridges or implant teeth are made and fitted in stages.</li>
       </ol>
   - label: aftercare
-    heading: "Caring for crowns and bridges"
+    heading: "Caring for your crowns and bridges"
     body: |
       <p>Brush twice a day, and clean under bridges and between crowns with floss threaders or interdental brushes. If
       you grind your teeth, a night guard protects the new work. Regular check-ups let us spot small problems early.</p>
@@ -67,7 +67,7 @@ sections:
       or bridges. If you are deciding between them, see <a href="/treatments/missing-teeth/">implant, bridge or
       denture</a>.</p>
   - label: faqs
-    heading: "Questions we are often asked about full-mouth rehabilitation"
+    heading: "Find answers to popular questions about crowns and full-mouth rehabilitation"
     faqs:
       - q: "Is full-mouth rehabilitation the same as a smile makeover?"
         a: "Not quite. A smile makeover mainly changes how the front teeth look. Full-mouth rehabilitation restores how all the teeth work together, and their appearance is planned as part of it."

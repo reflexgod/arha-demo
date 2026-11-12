@@ -8,7 +8,7 @@ answer: >-
   Clear aligners are thin, removable plastic trays that move your teeth a little at a time. You change to a new set
   every week or two, and wear them for most of the day. They suit many adults and teenagers with crowded or gapped teeth.
 hero: hero-aligners
-statement_h2: "Straighter teeth with trays that are hard to see and easy to take out."
+statement_h2: "Clear aligner treatment in South Mumbai, planned after a full examination."
 statement_p: >-
   Aligners are planned on a 3D model of your teeth, so you can see the planned movement before treatment starts. Because
   they come out to eat and to clean your teeth, there are no food restrictions, but they only work if you wear them as
@@ -21,13 +21,13 @@ procedure:
   followup: "Review visits during treatment, then retainers to hold the teeth in place."
 sections:
   - label: about
-    heading: "How do clear aligners work?"
+    heading: "What are clear aligners?"
     body: |
       <p>Each set of aligners is shaped slightly differently from the last. Worn for most of the day, a set applies
       gentle pressure that moves the teeth towards the next stage. Small tooth-coloured bumps, called attachments, may be
       added to some teeth to help the aligners grip.</p>
   - label: benefits
-    heading: "Why choose aligners?"
+    heading: "Why we recommend clear aligners"
     body: |
       <ul>
         <li>They are clear, so most people won't notice them.</li>
@@ -35,13 +35,13 @@ sections:
         <li>There are no brackets or wires to rub the cheeks.</li>
       </ul>
   - label: who is it for?
-    heading: "Are aligners right for me?"
+    heading: "Am I a candidate for clear aligners?"
     body: |
       <p>Aligners can treat many cases of crowding, spacing and some bite problems in adults and teenagers. Very complex
       bites may need fixed braces or a combination of treatments. Your gums need to be healthy before starting, and you
       need to wear the aligners for the hours prescribed, usually most of the day and night.</p>
   - label: process
-    heading: "How long does aligner treatment take?"
+    heading: "Explaining aligner treatment"
     body: |
       <p>Treatment time depends on how far the teeth need to move: a few months for minor changes, longer for more
       complex cases. [[TBC: typical treatment times at Arha]]</p>
@@ -52,7 +52,7 @@ sections:
         <li><strong>Retainers.</strong> Worn afterwards to stop the teeth moving back.</li>
       </ol>
   - label: aftercare
-    heading: "Looking after your aligners"
+    heading: "Caring for your aligners"
     body: |
       <p>Take the aligners out to eat and to drink anything other than water. Brush your teeth before putting them back,
       and rinse the aligners. After treatment, wear your retainers as advised: teeth tend to move back without them.</p>
@@ -62,7 +62,7 @@ sections:
       <p>Straightening teeth first often makes whitening or bonding simpler. Read about
       <a href="/treatments/smile-design/">smile design</a> and <a href="/treatments/teeth-whitening/">teeth whitening</a>.</p>
   - label: faqs
-    heading: "Questions we are often asked about aligners"
+    heading: "Find answers to popular aligner questions below"
     faqs:
       - q: "Do aligners hurt?"
         a: "Most people feel pressure or mild soreness for a day or two when they start a new set. This is a sign the aligners are working and usually settles quickly."
@@ -70,6 +70,8 @@ sections:
         a: "Usually most of the day and night, taking them out only to eat, drink and clean your teeth. Your plan sets the exact time."
       - q: "Do I need a retainer afterwards?"
         a: "Yes. Teeth tend to move back after any straightening treatment, so retainers are needed to keep the result."
+      - q: "How many hours a day do I wear aligners?"
+        a: "Most aligner treatment asks you to wear the trays for most of the day and night, taking them out only to eat, to drink anything other than water, and to clean your teeth. Your dentist tells you the wearing time for your plan."
 glance:
   time: "A few months to longer [[TBC: confirm]]"
   fee: "[[TBC: from-price, or \"on consultation\"]]"

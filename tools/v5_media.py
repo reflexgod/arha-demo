@@ -71,6 +71,10 @@ def do_image(spec):
     im = ImageOps.exif_transpose(Image.open(ROOT / spec["src"])).convert("RGB")
     if spec.get("flip"):
         im = ImageOps.mirror(im)
+    if spec.get("box"):
+        # pre-crop to a region of the source, as fractions [left, top, right, bottom]
+        l, t, r, b = spec["box"]
+        im = im.crop((round(l * im.width), round(t * im.height), round(r * im.width), round(b * im.height)))
     if spec.get("extend_right"):
         # widen a plain studio background so the subject can sit clear of a text card
         edge = np.asarray(im.crop((im.width - 8, 0, im.width, im.height))).reshape(-1, 3).mean(axis=0)
@@ -80,9 +84,23 @@ def do_image(spec):
     im = crop_to(im, spec["ratio"], spec.get("focus", [0.5, 0.5]), spec.get("zoom", 1.0))
     if spec["kind"] == "stock":
         im = stock_grade(im)
+    if spec.get("grade"):
+        im = ffmpeg_grade(im, spec["grade"])
     widths = save_set(im, spec["name"], spec["widths"])
     rw, rh = spec["ratio"]
     return {"kind": spec["kind"], "alt": spec["alt"], "widths": widths, "ratio": [rw, rh], "src": spec["src"]}
+
+
+def ffmpeg_grade(im, filters):
+    """Apply an ffmpeg filter chain (the same grade strings the videos use) to a still."""
+    a, b = IMG / "_grade-in.png", IMG / "_grade-out.png"
+    IMG.mkdir(parents=True, exist_ok=True)
+    im.save(a)
+    ffmpeg("-i", str(a), "-vf", filters, str(b))
+    out = Image.open(b).convert("RGB")
+    out.load()
+    a.unlink(); b.unlink()
+    return out
 
 
 def ffmpeg(*args):
@@ -112,14 +130,18 @@ def do_video(spec):
     y = min(max(0, round(fy * H - ch / 2)), H - ch)
     VID.mkdir(parents=True, exist_ok=True)
     trim = ["-ss", str(spec["start"]), "-t", str(spec["duration"]), "-i", str(src)]
+    crf = str(spec.get("crf", 27))
+    # audio: true keeps the soundtrack (click-to-play embeds); background loops are always silent
+    a264 = ["-c:a", "aac", "-b:a", "96k"] if spec.get("audio") else ["-an"]
     sizes = []
     for w, h in spec["sizes"]:
         vf = f"crop={cw}:{ch}:{x}:{y}{grade},scale={w}:{h}:flags=lanczos,fps=30,format=yuv420p"
         base = VID / f"{spec['name']}-{w}"
-        ffmpeg(*trim, "-an", "-vf", vf, "-c:v", "libx264", "-preset", "slow", "-crf", "27", "-profile:v", "high",
+        ffmpeg(*trim, *a264, "-vf", vf, "-c:v", "libx264", "-preset", "slow", "-crf", crf, "-profile:v", "high",
                "-movflags", "+faststart", f"{base}.mp4")
-        ffmpeg(*trim, "-an", "-vf", vf, "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", "38", "-row-mt", "1",
-               "-deadline", "good", "-cpu-used", "2", f"{base}.webm")
+        if not spec.get("audio"):  # embeds play the mp4 (AAC works everywhere); loops also get a smaller WebM
+            ffmpeg(*trim, "-an", "-vf", vf, "-c:v", "libvpx-vp9", "-b:v", "0", "-crf", str(int(crf) + 11), "-row-mt", "1",
+                   "-deadline", "good", "-cpu-used", "2", f"{base}.webm")
         sizes.append([w, h])
     # Poster = the first frame of the cut, so the video starts without a jump.
     tmp = VID / f"_{spec['name']}-poster.png"
@@ -128,7 +150,8 @@ def do_video(spec):
     poster = Image.open(tmp).convert("RGB")
     tmp.unlink()
     pw = save_set(poster, f"{spec['name']}-poster", spec["poster_widths"])
-    return {"kind": spec["kind"], "sizes": sizes, "poster_widths": pw, "ratio": list(spec["crop"]), "src": spec["src"]}
+    return {"kind": spec["kind"], "sizes": sizes, "poster_widths": pw, "ratio": list(spec["crop"]), "src": spec["src"],
+            "audio": bool(spec.get("audio")), "alt": spec.get("alt", "")}
 
 
 def main():

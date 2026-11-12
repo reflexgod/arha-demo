@@ -43,23 +43,40 @@
     else if (a.hasAttribute("data-event") || href.indexOf("#book") > -1) track("booking_click", where);
   });
 
-  /* ---------------------------------------------------------- cookie banner */
-  var banner = $("#cookie"), reopen = $("[data-cookie-reopen]");
-  var choice = store.get("arha-consent");
-  if (choice === "granted") loadGA();
+  /* ---------------------------------------------------------- cookie banner + preferences (GA4 only when Analytics is on) */
+  var CATS = ["marketing", "personalisation", "analytics"];
+  function readConsent() {
+    var raw = store.get("arha-consent");
+    if (!raw) return null;
+    if (raw === "granted" || raw === "denied") { var all = raw === "granted", o = {}; CATS.forEach(function (c) { o[c] = all; }); return o; }
+    try { return JSON.parse(raw); } catch (e) { return null; }
+  }
+  function applyConsent(c) {
+    if (c.analytics) loadGA();
+    if (gaLoaded) gtag("consent", "update", { analytics_storage: c.analytics ? "granted" : "denied",
+      ad_storage: c.marketing ? "granted" : "denied", ad_user_data: c.marketing ? "granted" : "denied", ad_personalization: c.personalisation ? "granted" : "denied" });
+  }
+  var banner = $("#cookie"), reopen = $("[data-cookie-reopen]"), consent = readConsent();
+  if (consent) applyConsent(consent);
   if (banner) {
-    if (!choice) banner.hidden = false; else if (reopen) reopen.hidden = false;
+    var prefs = $("#cookie-prefs", banner), prefBtn = $("[data-cookie-prefs]", banner), saveBtn = $("[data-consent=save]", banner);
+    var showPrefs = function (on) {
+      prefs.hidden = !on; saveBtn.hidden = !on; prefBtn.hidden = on; prefBtn.setAttribute("aria-expanded", on ? "true" : "false");
+      if (on) { var c = readConsent() || {}; $$("[data-pref]", prefs).forEach(function (x) { x.checked = !!c[x.getAttribute("data-pref")]; }); $("[data-pref]", prefs).focus(); }
+    };
+    if (!consent) banner.hidden = false; else if (reopen) reopen.hidden = false;
+    prefBtn.addEventListener("click", function () { showPrefs(true); });
     $$("[data-consent]", banner).forEach(function (b) {
       b.addEventListener("click", function () {
-        var v = b.getAttribute("data-consent");
-        store.set("arha-consent", v);
-        banner.hidden = true;
+        var v = b.getAttribute("data-consent"), c = {};
+        CATS.forEach(function (k) { c[k] = v === "all" ? true : v === "none" ? false : !!$('[data-pref="' + k + '"]', prefs).checked; });
+        store.set("arha-consent", JSON.stringify(c));
+        banner.hidden = true; showPrefs(false);
         if (reopen) reopen.hidden = false;
-        if (v === "granted") loadGA();
-        else if (gaLoaded) gtag("consent", "update", { analytics_storage: "denied" });
+        applyConsent(c);
       });
     });
-    var openBanner = function () { banner.hidden = false; if (reopen) reopen.hidden = true; };
+    var openBanner = function () { banner.hidden = false; if (reopen) reopen.hidden = true; showPrefs(true); };
     if (reopen) reopen.addEventListener("click", openBanner);
     $$("[data-cookie-open]").forEach(function (b) { b.addEventListener("click", openBanner); });
   }
@@ -100,21 +117,42 @@
   }
   tick(); setInterval(tick, 30000);
 
-  /* ---------------------------------------------------------- dropdowns (desktop) */
+  /* ---------------------------------------------------------- dropdowns + Discover mega menu (desktop): hover or click, fade/slide in */
+  var reduceMotion = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function megaVideo(li, on) {
+    var box = $("[data-video-manual]", li);
+    if (!box || reduceMotion) return;
+    if (on) startVideo(box); else { var v = $("video", box); if (v && !v.paused) v.pause(); }
+  }
+  function setOpen(li, open) {
+    li.classList.toggle("is-open", open);
+    $("[data-dd]", li).setAttribute("aria-expanded", open ? "true" : "false");
+    megaVideo(li, open);
+  }
   function closeDD(except) {
-    $$(".navstrip li.is-open").forEach(function (li) { if (li !== except) { li.classList.remove("is-open"); $("[data-dd]", li).setAttribute("aria-expanded", "false"); } });
+    $$(".navstrip li.is-open").forEach(function (li) { if (li !== except) setOpen(li, false); });
   }
   $$("[data-dd]").forEach(function (b) {
+    var li = b.parentNode, timer;
     b.addEventListener("click", function (e) {
       e.stopPropagation();
-      var li = b.parentNode, open = !li.classList.contains("is-open");
-      closeDD(li);
-      li.classList.toggle("is-open", open);
-      b.setAttribute("aria-expanded", open ? "true" : "false");
+      var open = !li.classList.contains("is-open");
+      closeDD(li); setOpen(li, open);
     });
+    li.addEventListener("click", function (e) { e.stopPropagation(); });
+    if (window.matchMedia && matchMedia("(hover: hover)").matches) {
+      li.addEventListener("mouseenter", function () { clearTimeout(timer); closeDD(li); setOpen(li, true); });
+      li.addEventListener("mouseleave", function () { timer = setTimeout(function () { setOpen(li, false); }, 150); });
+    }
+    li.addEventListener("focusout", function (e) { if (!li.contains(e.relatedTarget)) setOpen(li, false); });
   });
   document.addEventListener("click", function () { closeDD(); });
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeDD(); closeDrawer(); } });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Escape") return;
+    var open = $(".navstrip li.is-open");
+    closeDD(); closeDrawer();
+    if (open) $("[data-dd]", open).focus();
+  });
 
   /* ---------------------------------------------------------- drawer (phones, tablets) */
   var drawer = $("#drawer"), burger = $("[data-drawer-open]");
@@ -145,6 +183,20 @@
   var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
   var saveData = navigator.connection && navigator.connection.saveData;
   var vids = $$("[data-video]");
+  /* click-to-play film with sound: nothing is downloaded until the visitor presses play */
+  $$("[data-embed]").forEach(function (box) {
+    var btn = $(".embed__play", box);
+    btn.addEventListener("click", function () {
+      var v = document.createElement("video");
+      v.src = box.getAttribute("data-embed"); v.controls = true; v.playsInline = true; v.autoplay = true;
+      v.setAttribute("aria-label", btn.getAttribute("aria-label").replace("Play video: ", ""));
+      box.appendChild(v); btn.remove();
+      var pic = $(".vid__poster", box); if (pic) pic.remove();
+      var p = v.play(); if (p && p.catch) p.catch(function () {});
+      v.focus();
+      track("video_play", { video: "clinic_tour", page_path: location.pathname });
+    });
+  });
   function startVideo(box) {
     var v = $("video", box);
     if (!v.dataset.ready) {
@@ -169,6 +221,43 @@
     if (document.readyState === "complete") setTimeout(watch, 300); else addEventListener("load", function () { setTimeout(watch, 300); });
   }
 
+  /* ---------------------------------------------------------- scroll-in reveals: soft fade-up, 30px, 0.7s, small stagger */
+  var rv = $$("[data-reveal]");
+  if (rv.length && !reduceMotion && "IntersectionObserver" in window) {
+    var rio = new IntersectionObserver(function (entries) {
+      var n = 0;
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.style.setProperty("--rv-d", (n++ * 0.08) + "s");
+        en.target.classList.add("is-in"); rio.unobserve(en.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    rv.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < innerHeight && r.bottom > 0) return; // already on screen at load: never hide it
+      el.classList.add("rv"); rio.observe(el);
+    });
+  }
+
+  /* ---------------------------------------------------------- team bio pop-ups (native <dialog>) */
+  $$("[data-dialog]").forEach(function (b) {
+    var d = document.getElementById(b.getAttribute("data-dialog"));
+    if (!d || !d.showModal) return;
+    b.addEventListener("click", function () { d.showModal(); });
+    $("[data-dialog-close]", d).addEventListener("click", function () { d.close(); });
+    d.addEventListener("click", function (e) { if (e.target === d) d.close(); });
+    d.addEventListener("close", function () { b.focus(); });
+  });
+
+  /* ---------------------------------------------------------- blog topic filter */
+  $$("[data-filter]").forEach(function (b, _, all) {
+    b.addEventListener("click", function () {
+      var cat = b.getAttribute("data-filter");
+      all.forEach(function (x) { var on = x === b; x.classList.toggle("is-on", on); x.setAttribute("aria-pressed", on ? "true" : "false"); });
+      $$(".postcard[data-cat]").forEach(function (c) { c.hidden = !!cat && c.getAttribute("data-cat") !== cat; });
+    });
+  });
+
   /* ---------------------------------------------------------- map: load the embed when it comes near the screen */
   var map = $("[data-map]");
   if (map) {
@@ -188,7 +277,7 @@
   /* ---------------------------------------------------------- phone call bar: hidden over the first section and the footer */
   var callbar = $("[data-callbar]");
   if (callbar) {
-    var first = $("#main > section"), foot = $(".ftr"), seen = {};
+    var first = $("[data-callbar-first]") || $("#main > section"), foot = $(".ftr"), seen = {};
     if (!("IntersectionObserver" in window) || !first) callbar.classList.add("is-shown");
     else {
       var cio = new IntersectionObserver(function (entries) {
@@ -234,6 +323,7 @@
       if (phone.replace(/\D/g, "").length < 8) { say("Please enter a phone or WhatsApp number we can reach you on."); f.elements.phone.focus(); return; }
       if (f.elements.email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.elements.email.value)) { say("Please check your email address."); f.elements.email.focus(); return; }
       var kind = f.getAttribute("data-form"), files = [];
+      if (f.elements.concern && !f.elements.concern.value) { say("Please choose what your query is about."); f.elements.concern.focus(); return; }
       if (kind === "referral") {
         var need = [["practice", "Please add the practice name."], ["email", "Please add your email address."], ["patient_name", "Please add the patient's name."],
           ["patient_dob", "Please add the patient's date of birth."], ["patient_phone", "Please add the patient's phone number."],
@@ -269,7 +359,7 @@
         // Preview without a forms backend: hand the request over to WhatsApp instead of losing it.
         var t = f.elements.treatment && f.elements.treatment.value ? f.elements.treatment.options ? f.elements.treatment.options[f.elements.treatment.selectedIndex].text : f.elements.treatment.value : "";
         var msg = "Hello Arha Dental Care, I'd like to " + (f.getAttribute("data-form") === "booking" ? "request an appointment" : "ask a question") +
-          ".\nName: " + name + "\nPhone: " + phone + (t ? "\nAbout: " + t : "") + (f.elements.when && f.elements.when.value ? "\nPreferred time: " + f.elements.when.value : "") +
+          ".\nName: " + name + "\nPhone: " + phone + (f.elements.concern && f.elements.concern.value ? "\nQuery: " + f.elements.concern.value : "") + (t ? "\nAbout: " + t : "") + (f.elements.when && f.elements.when.value ? "\nPreferred time: " + f.elements.when.value : "") +
           (f.elements.message.value.trim() ? "\n" + f.elements.message.value.trim() : "");
         track("form_submit", { form: f.getAttribute("data-form"), method: "whatsapp_fallback" });
         say("Opening WhatsApp with your message. If it doesn't open, please call us on " + cfg.phone + ".", true);

@@ -39,6 +39,8 @@ def load(name):
 
 SITE = load("site.yaml")
 NAV = load("nav.yaml")
+for _t in NAV["treatments"]:  # a treatment can live outside /treatments/ (the emergency page has its own URL)
+    _t.setdefault("href", f"/treatments/{_t['slug']}/")
 MEDIA = json.loads((STATIC / "media.json").read_text(encoding="utf-8"))
 # Google reviews, copied character for character (only shown when site.yaml show_reviews is true)
 REVIEWS = load("reviews.yaml") if (CONTENT / "reviews.yaml").exists() else []
@@ -78,29 +80,42 @@ def picture(name, sizes, cls="", eager=False, alt=None, pos=None):
         f'width="{big}" height="{h}" alt="{alt_text}"{style} {load_attr}></picture>')
 
 
-def video(name, cls="", eager_poster=False, label=""):
+def video(name, cls="", eager_poster=False, label="", manual=False, sizes="(min-width: 900px) 50vw, 100vw"):
+    """Muted looping video: poster first, sources attached by site.js when on screen (or when its menu opens: manual)."""
     v = MEDIA["videos"][name]
     small, large = v["sizes"][0], v["sizes"][-1]
-    pw = v["poster_widths"]
     srcs = []
-    for w, h in (large, small):
-        media = "(min-width: 900px)" if (w, h) == tuple(large) else "(max-width: 899px)"
-        srcs.append(f'<source data-src="/static/video/{name}-{w}.webm" type="video/webm" data-media="{media}">')
-        srcs.append(f'<source data-src="/static/video/{name}-{w}.mp4" type="video/mp4" data-media="{media}">')
+    for w, h in ([large] if small == large else [large, small]):
+        media = "" if small == large else ("(min-width: 900px)" if [w, h] == list(large) else "(max-width: 899px)")
+        mq = f' data-media="{media}"' if media else ""
+        if not v.get("audio"):
+            srcs.append(f'<source data-src="/static/video/{name}-{w}.webm" type="video/webm"{mq}>')
+        srcs.append(f'<source data-src="/static/video/{name}-{w}.mp4" type="video/mp4"{mq}>')
     rw, rh = v["ratio"]
-    pic = picture_poster(name, eager_poster)
+    pic = picture_poster(name, eager_poster, sizes)
+    attr = "data-video-manual" if manual else "data-video"
     return Markup(
-        f'<div class="vid {cls}" data-video>{pic}'
+        f'<div class="vid {cls}" {attr}>{pic}'
         f'<video muted loop playsinline preload="none" width="{rw}" height="{rh}" aria-label="{html.escape(label, quote=True)}" '
         f'>{"".join(srcs)}</video></div>')
 
 
-def picture_poster(name, eager):
+def embed(name, title, sizes="(min-width: 768px) 45vw, 100vw"):
+    """Click-to-play film with sound (the reference's embedded-video card). Nothing loads until the visitor presses play."""
+    v = MEDIA["videos"][name]
+    w = v["sizes"][-1][0]
+    return Markup(
+        f'<div class="embed" data-embed="/static/video/{name}-{w}.mp4">{picture_poster(name, False, sizes)}'
+        f'<button class="embed__play" type="button" aria-label="Play video: {html.escape(title, quote=True)}">'
+        f'<svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="31" fill="rgba(15,27,39,.55)" stroke="#FDFDFD" stroke-width="1.5"/>'
+        f'<path d="M26 21v22l17-11z" fill="#FDFDFD"/></svg><span>{html.escape(title)}</span></button></div>')
+
+
+def picture_poster(name, eager, sizes="(min-width: 900px) 50vw, 100vw"):
     v = MEDIA["videos"][name]
     ws = v["poster_widths"]
     rw, rh = v["ratio"]
     ss = lambda ext: ", ".join(f"/static/img/{name}-poster-{w}.{ext} {w}w" for w in ws)
-    sizes = "(min-width: 900px) 50vw, 100vw"
     load_attr = 'fetchpriority="high"' if eager else 'loading="lazy"'
     return (f'<picture class="vid__poster"><source type="image/avif" srcset="{ss("avif")}" sizes="{sizes}">'
             f'<source type="image/webp" srcset="{ss("webp")}" sizes="{sizes}">'
@@ -176,7 +191,7 @@ def org_node():
     if SITE.get("email"):
         node["email"] = SITE["email"]
     if SITE.get("same_as"):
-        node["sameAs"] = SITE["same_as"]
+        node["sameAs"] = [x["url"] for x in SITE["same_as"]]
     return node
 
 
@@ -206,8 +221,9 @@ def treatment_pages():
     pages = []
     for f in sorted((CONTENT / "treatments").glob("*.yaml")):
         t = yaml.safe_load(f.read_text(encoding="utf-8"))
-        path = f"/treatments/{t['slug']}/"
-        crumbs = [("Home", "/"), ("Treatments", "/treatments/"), (t["nav_label"], path)]
+        path = t.get("path") or f"/treatments/{t['slug']}/"
+        crumbs = ([("Home", "/"), (t["nav_label"], path)] if t.get("path") else
+                  [("Home", "/"), ("Treatments", "/treatments/"), (t["nav_label"], path)])
         faqs = [qa for s in t["sections"] for qa in s.get("faqs", [])]
         proc = {"@type": "MedicalProcedure", "name": strip_tbc(t["h1"]), "url": SITE["domain"] + path,
                 "description": strip_tbc(t["answer"]), "procedureType": "https://schema.org/" + t["procedure"]["type"],
@@ -215,7 +231,7 @@ def treatment_pages():
                 "preparation": t["procedure"]["preparation"], "followup": t["procedure"]["followup"],
                 "provider": {"@id": SITE["domain"] + "/#clinic"}}
         faq = faq_node(faqs)
-        pages.append({"path": path, "template": "treatment.html", "title": t["title"], "description": t["description"],
+        pages.append({"path": path, "template": t.get("template", "treatment.html"), "title": t["title"], "description": t["description"],
                       "crumbs": crumbs, "t": t, "schema": [org_node(), breadcrumb_node(crumbs), proc, faq],
                       "og_image": f"/static/img/{t['hero']}-1080.jpg", "noindex": t.get("noindex", False)})
     return pages
@@ -225,10 +241,10 @@ def static_pages():
     return [
         {"path": "/", "template": "home.html", "title": "Dentist on Peddar Road, South Mumbai | Arha Dental Care",
          "description": "Arha Dental Care, 107 Doctor House, Peddar Road: implants, crowns, root canal treatment and children's dentistry, led by prosthodontist Dr. Nikhil V. Jain.",
-         "crumbs": None, "schema": [org_node(), *person_nodes()], "og_image": "/static/img/home-hero-tour-poster-1152.jpg"},
+         "crumbs": None, "schema": [org_node(), *person_nodes()], "og_image": "/static/img/home-hero-1080.jpg"},
         {"path": "/the-practice/", "template": "practice.html", "title": "About Arha Dental Care | Our Story and Team",
          "description": "Meet Dr. Nikhil V. Jain, prosthodontist and ITI Scholar (London), and Dr. Vasant P. Jain at Arha Dental Care, 107 Doctor House, Peddar Road, Mumbai.",
-         "crumbs": [("Home", "/"), ("The practice", "/the-practice/")], "og_image": "/static/img/practice-hero-800.jpg",
+         "crumbs": [("Home", "/"), ("The practice", "/the-practice/")], "og_image": "/static/img/practice-hero-800.jpg", "fp": load("for-patients.yaml"),
          "schema_fn": lambda p: [org_node(), *person_nodes(), breadcrumb_node(p["crumbs"])]},
         {"path": "/contact/", "template": "contact.html", "title": "Book an Appointment | Arha Dental Care, Peddar Road",
          "description": "Book an appointment or send an enquiry to Arha Dental Care, 107 Doctor House, Peddar Road. Easy to reach from Kemps Corner, Breach Candy and Malabar Hill.",
@@ -279,6 +295,31 @@ def more_pages():
     return pages
 
 
+def blog_pages():
+    """Blog index + posts (content/blog/*.yaml). Article schema; the clinical reviewer stays [[TBC]] until a doctor signs off."""
+    idx = load("blog.yaml")
+    posts = []
+    for f in sorted((CONTENT / "blog").glob("*.yaml")):
+        b = yaml.safe_load(f.read_text(encoding="utf-8"))
+        b["path"] = f"/blog/{b['slug']}/"
+        posts.append(b)
+    posts.sort(key=lambda b: (str(b["date"]), b["slug"]), reverse=True)
+    pages = [{"path": "/blog/", "template": "blog.html", "title": idx["title"], "description": idx["description"],
+              "crumbs": [("Home", "/"), ("Blog", "/blog/")], "blog": idx, "posts": posts,
+              "og_image": f"/static/img/{posts[0]['image']}-1080.jpg",
+              "schema_fn": lambda p: [org_node(), breadcrumb_node(p["crumbs"])]}]
+    for b in posts:
+        crumbs = [("Home", "/"), ("Blog", "/blog/"), (b["nav_label"], b["path"])]
+        art = {"@type": "Article", "headline": b["h1"], "description": b["description"], "datePublished": str(b["date"]),
+               "dateModified": str(b.get("updated", b["date"])), "image": SITE["domain"] + f"/static/img/{b['image']}-1080.jpg",
+               "author": {"@type": "Organization", "name": SITE["name"], "@id": SITE["domain"] + "/#clinic"},
+               "publisher": {"@id": SITE["domain"] + "/#clinic"}, "mainEntityOfPage": SITE["domain"] + b["path"]}
+        pages.append({"path": b["path"], "template": "post.html", "title": b["title"], "description": b["description"],
+                      "crumbs": crumbs, "post": b, "posts": posts, "og_image": f"/static/img/{b['image']}-1080.jpg",
+                      "schema": [org_node(), breadcrumb_node(crumbs), art, faq_node(b.get("faqs", []))]})
+    return pages
+
+
 # ------------------------------------------------------------------------------------------------ checks
 def check(pages, rendered):
     errors = []
@@ -316,22 +357,23 @@ def main():
 
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=True, undefined=StrictUndefined,
                       trim_blocks=True, lstrip_blocks=True)
-    env.globals.update(site=SITE, nav=NAV, reviews=REVIEWS or [], picture=picture, video=video, tel=tel, wa=wa, maps_dir=maps_dir,
+    env.globals.update(site=SITE, nav=NAV, reviews=REVIEWS or [], picture=picture, video=video, embed=embed, tel=tel, wa=wa, maps_dir=maps_dir,
                        maps_embed=maps_embed, address_one_line=address_one_line, hours_rows=hours_rows,
                        client_config=client_config, css_v=asset_version("css/site.css"), js_v=asset_version("js/site.js"),
                        year=TODAY.year, updated=TODAY.strftime("%-d %B %Y") if sys.platform != "win32" else TODAY.strftime("%#d %B %Y"))
     env.filters["tbc"] = tbc
     env.filters["strip_tbc"] = strip_tbc
+    env.filters["nicedate"] = lambda d: f"{d.day} {d.strftime('%B %Y')}"
 
     treatments = {t["t"]["slug"]: t["t"] for t in treatment_pages()}
     env.globals["built_treatments"] = treatments
 
-    pages = static_pages() + treatment_pages() + more_pages()
+    pages = static_pages() + treatment_pages() + more_pages() + blog_pages()
     rendered = {}
     for p in pages:
         schema = p["schema_fn"](p) if "schema_fn" in p else p.get("schema", [])
         ctx = {"page": p, "schema": jsonld(*schema) if schema else "", "canonical": SITE["domain"] + (p["path"] if p["path"] != "/404.html" else "/"),
-               **{k: p[k] for k in ("t", "h", "fp", "pol") if k in p}}
+               **{k: p[k] for k in ("t", "h", "fp", "pol", "blog", "post", "posts") if k in p}}
         out = env.get_template(p["template"]).render(**ctx)
         rendered[p["path"]] = out
         target = DIST / (p["path"].lstrip("/") or "index.html")
@@ -343,6 +385,11 @@ def main():
     errors = check(pages, rendered)
 
     # sitemap, robots, headers, redirects
+    built = {p["path"] for p in pages}
+    for p in pages:  # internal links must point at a page this build made
+        for href in set(re.findall(r'href="(/[^"#?]*)', rendered[p["path"]])):
+            if not href.startswith("/static/") and href not in built:
+                errors.append(f"{p['path']}: dead link {href}")
     urls = [p for p in pages if not p.get("noindex") and p["path"] != "/404.html"]
     sm = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     sm += [f"  <url><loc>{SITE['domain']}{p['path']}</loc><lastmod>{TODAY.isoformat()}</lastmod></url>" for p in urls]

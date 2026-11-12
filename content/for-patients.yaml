@@ -1,4 +1,5 @@
-# /for-patients/: new patients, care plans, payment options, fee guide, technology.
+# /for-patients/: feel at home (first visit), care plans + payment options, fee guide, treatment cards.
+# technology: shown on /the-practice/#technology.
 # Never invent a fee: every price is a [[TBC]] until the clinic sends its fee list (or says "on consultation").
 title: "Patient Information, Fees and Payment | Arha Dental Care"
 description: "New to Arha Dental Care? Your first visit, what to bring, payment options and our fee guide, plus the equipment we use at our Peddar Road practice."
@@ -9,7 +10,7 @@ answer: >-
 hero: hero-for-patients
 
 new_patients:
-  heading: "Your first visit to Arha Dental Care"
+  heading: "Feel at home at Arha Dental Care"
   lead: >-
     A first visit is a conversation as much as an examination. You meet the dentist, tell us what you'd like to
     change or what's been bothering you, and leave with a clear idea of your options.
@@ -52,18 +53,26 @@ fees:
       rows: ["New patient consultation", "Check-up (existing patients)", "Emergency appointment", "Intraoral X-ray", "Panoramic X-ray"]
     - heading: "Cleaning and gum care"
       rows: ["Scale and polish", "Deep cleaning (per quadrant)"]
-    - heading: "Fillings and root canal treatment"
-      rows: ["Tooth-coloured filling", "Root canal treatment, front tooth", "Root canal treatment, back tooth"]
-    - heading: "Crowns and bridges"
-      rows: ["Metal-ceramic crown", "All-ceramic crown", "Bridge (per unit)"]
+    - heading: "Fillings"
+      rows: ["Tooth-coloured filling, small", "Tooth-coloured filling, large"]
+    - heading: "Root canal treatment"
+      rows: ["Front tooth", "Back tooth", "Re-treatment of a root-filled tooth"]
+    - heading: "Crowns"
+      rows: ["Metal-ceramic crown", "All-ceramic crown", "Crown on an implant"]
+    - heading: "Bridges"
+      rows: ["Bridge (per unit)", "Adhesive bridge"]
+    - heading: "Teeth whitening"
+      rows: ["In-clinic whitening", "Home whitening trays"]
+    - heading: "Clear aligners"
+      rows: ["Aligner consultation and records", "Aligner treatment"]
+    - heading: "Extractions"
+      rows: ["Simple extraction", "Surgical extraction"]
     - heading: "Dentures"
       rows: ["Complete denture (per jaw)", "Partial denture", "Implant-retained denture"]
     - heading: "Implants"
       rows: ["Implant consultation and planning", "Single implant with crown", "Bone grafting, if needed"]
-    - heading: "Cosmetic"
-      rows: ["Teeth whitening", "Composite bonding (per tooth)", "Porcelain veneer (per tooth)"]
-    - heading: "Children"
-      rows: ["Child check-up", "Fissure sealants (per tooth)", "Fluoride application"]
+    - heading: "Miscellaneous"
+      rows: ["Night guard", "Sports mouthguard", "Fluoride application (children)", "Fissure sealant (per tooth)"]
   ctas:
     - {image: cta-implants, heading: "Thinking about implants?", text: "Book a consultation to see if they suit you.", href: "/treatments/dental-implants/"}
     - {image: cta-kids, heading: "Bringing your child?", text: "Gentle first visits for children.", href: "/treatments/kids-dentistry/"}

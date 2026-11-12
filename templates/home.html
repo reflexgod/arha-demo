@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% from "_macros.html" import icon, book_href %}
-{% block preload %}<link rel="preload" as="image" href="/static/img/home-hero-tour-poster-768.avif" type="image/avif" imagesrcset="/static/img/home-hero-tour-poster-768.avif 768w, /static/img/home-hero-tour-poster-1152.avif 1152w" imagesizes="(min-width: 768px) 50vw, 100vw">{% endblock %}
+{% block preload %}<link rel="preload" as="image" href="/static/img/home-hero-720.avif" type="image/avif" fetchpriority="high" imagesrcset="/static/img/home-hero-480.avif 480w, /static/img/home-hero-720.avif 720w, /static/img/home-hero-1080.avif 1080w, /static/img/home-hero-1440.avif 1440w" imagesizes="(min-width: 1200px) 720px, (min-width: 768px) 50vw, 100vw">{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block main %}
 <section class="hero">
-  <div class="hero__media">{{ video("home-hero-tour", eager_poster=True, label="A walk through the reception and treatment rooms at Arha Dental Care") }}</div>
+  <div class="hero__media">{{ picture("home-hero", "(min-width: 1200px) 720px, (min-width: 768px) 50vw, 100vw", eager=True) }}</div>
   <div class="hero__text">
     <h1>Your Peddar Road dental practice, led by a prosthodontist.</h1>
     <p class="hero__lead">Dr. Nikhil V. Jain and Dr. Vasant P. Jain look after families from across South Mumbai, from a first check-up to implants and full-mouth rehabilitation. We explain every option clearly, so you can decide at your own pace.</p>
@@ -18,7 +18,7 @@
 <section class="intro" aria-labelledby="intro-h">
   <div class="wrap">
     <div class="intro__mark"><img src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt=""><hr></div>
-    <div class="intro__grid">
+    <div class="intro__grid" data-reveal>
       <h2 id="intro-h">Thoughtful dentistry on Peddar Road, South Mumbai.</h2>
       <div>
         <h3>At Arha Dental Care, we plan every treatment around how your teeth work, not only how they look.</h3>
@@ -30,36 +30,36 @@
 
 <section class="band" aria-labelledby="band-h">
   <div class="wrap">
-    <h2 id="band-h">Dental treatments for every smile in South Mumbai.</h2>
-    <p class="band__lead">From a child's first visit to replacing missing teeth, most of your care happens under one roof, with one team that knows your history.</p>
+    <h2 id="band-h" data-reveal>Dental treatments for every smile in South Mumbai.</h2>
+    <p class="band__lead" data-reveal>From a child's first visit to replacing missing teeth, most of your care happens under one roof, with one team that knows your history.</p>
     <a class="btn" href="/treatments/">Explore treatments {{ icon("right") }}</a>
   </div>
 </section>
 
 <section class="cards" aria-label="Headline treatments">
   <div class="wrap cards__grid">
-    <article class="card">
-      <div class="card__media card__media--video">{{ video("home-card-walkthrough", label="Inside a treatment room at Arha Dental Care") }}</div>
+    <article class="card" data-reveal>
+      <div class="card__media card__media--video">{{ embed("home-tour", "A walk through Arha Dental Care") }}</div>
       <h3>Dental implants on Peddar Road</h3>
       <p>Dr. Nikhil V. Jain is an MDS prosthodontist and an ITI Scholar (London). He plans the final tooth first and places the implant to suit it, so the result looks and works like your own teeth.</p>
       <p>Whether you are missing one tooth or several, we explain the options, the timeline and the care involved before anything begins.</p>
       <a class="btn" href="/treatments/dental-implants/">Learn more<span class="sr-only"> about dental implants</span> {{ icon("right") }}</a>
     </article>
-    <article class="card">
+    <article class="card" data-reveal>
       <div class="card__media">{{ picture("home-card-fmr", "(min-width: 768px) 45vw, 100vw") }}</div>
       <h3>Crowns, bridges and full-mouth rehabilitation</h3>
       <p>When several teeth are worn, broken or missing, repairing them one by one rarely lasts. Full-mouth rehabilitation restores your bite as a whole.</p>
       <p>We plan it in stages, with trial teeth where needed, so you can see and feel the result before it is final.</p>
       <a class="btn" href="/treatments/crowns-bridges-full-mouth-rehabilitation/">Learn more<span class="sr-only"> about crowns, bridges and full-mouth rehabilitation</span> {{ icon("right") }}</a>
     </article>
-    <article class="card">
+    <article class="card" data-reveal>
       <div class="card__media">{{ picture("home-card-rct", "(min-width: 768px) 45vw, 100vw") }}</div>
       <h3>Root canal treatment</h3>
       <p>Root canal treatment removes infection from inside a tooth so you can keep it.</p>
       <p>We use local anaesthetic and take the time each step needs. Afterwards, we protect the tooth, usually with a crown.</p>
       <a class="btn" href="/treatments/root-canal-treatment/">Learn more<span class="sr-only"> about root canal treatment</span> {{ icon("right") }}</a>
     </article>
-    <article class="card">
+    <article class="card" data-reveal>
       <div class="card__media">{{ picture("home-card-kids", "(min-width: 768px) 45vw, 100vw") }}</div>
       <h3>Children's dentistry</h3>
       <p>Good habits start early. Bring your child for a first visit when the first tooth appears, or by their first birthday.</p>
@@ -72,8 +72,8 @@
 <section class="commit" aria-labelledby="commit-h">
   <div class="wrap"><h2 id="commit-h">The Arha commitment to care{% if site.established %}, est. {{ site.established }}{% endif %}.</h2></div>
   <div class="commit__grid">
-    <div class="commit__media">{{ picture("home-commitment", "(min-width: 768px) 50vw, 100vw") }}</div>
-    <div class="commit__text">
+    <div class="commit__media" data-reveal>{{ picture("home-commitment", "(min-width: 768px) 50vw, 100vw") }}</div>
+    <div class="commit__text" data-reveal>
       <p class="commit__lead">Our focus is simple: careful dentistry, explained honestly, in a calm and spotless clinic.</p>
       <p>Arha is led by Dr. Nikhil V. Jain, a prosthodontist, with Dr. Vasant P. Jain, a dental surgeon. Every room is cleaned and every instrument sterilised between patients. {{ "[[TBC: sterilisation room and process, as the clinic describes it]]" | tbc }}</p>
       <p class="h4">{{ "[[TBC: care plan offer, e.g. a yearly check-up plan]]" | tbc }}</p>
@@ -86,10 +86,10 @@
 <section class="team" aria-labelledby="team-h">
   <div class="wrap">
     <img class="team__mark" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="">
-    <h2 id="team-h">Meet the dentists who will look after you.</h2>
+    <h2 id="team-h" data-reveal>Meet the dentists who will look after you.</h2>
     <div class="team__grid">
       {% for d in site.doctors %}
-      <article class="member">
+      <article class="member" data-reveal>
         <div class="member__photo"><img class="member__ph" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="Portrait of {{ d.name }} to follow"></div>
         <h3>{{ d.name }}</h3>
         <p class="pill">{{ d.role }}</p>

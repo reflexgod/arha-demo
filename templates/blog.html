@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon %}
+{% block body_class %}page-blog{% endblock %}
+{% block main %}
+<section class="bloghead">
+  <div class="wrap">
+    <h1>{{ blog.h1 }}</h1>
+    <p>{{ blog.intro }}</p>
+  </div>
+</section>
+<section class="blogidx" aria-label="Articles">
+  <div class="wrap blogidx__grid">
+    <div class="blogidx__filter" role="group" aria-label="Filter articles by topic">
+      <p class="label">Filter by topic</p>
+      <ul>
+        <li><button class="pill is-on" type="button" aria-pressed="true" data-filter="">All articles</button></li>
+        {% for c in blog.categories %}<li><button class="pill" type="button" aria-pressed="false" data-filter="{{ c }}">{{ c }}</button></li>{% endfor %}
+      </ul>
+    </div>
+    <div class="blogidx__cards">
+      {% for b in posts %}
+      <article class="postcard" data-cat="{{ b.category }}" data-reveal>
+        <a class="postcard__img" href="{{ b.path }}" tabindex="-1" aria-hidden="true">{{ picture(b.image, "(min-width: 992px) 420px, 100vw", alt="") }}</a>
+        <p class="label">{{ b.category }}</p>
+        <h2 class="h3"><a href="{{ b.path }}">{{ b.h1 }}</a></h2>
+        <p>{{ b.excerpt }}</p>
+        <a class="tlink" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span> {{ icon("right") }}</a>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% include "_visit.html" %}
+{% endblock %}

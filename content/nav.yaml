@@ -10,7 +10,7 @@ treatments:
   - {slug: smile-design, label: "Smile design"}
   - {slug: gum-care, label: "Gum care"}
   - {slug: aligners, label: "Clear aligners"}
-  - {slug: emergency-dentistry, label: "Emergency dentistry"}
+  - {slug: emergency-dentistry, label: "Emergency dentistry", href: /emergency-dentist-south-mumbai/}
 
 practice:
   - {href: "/the-practice/#why-choose-us", label: "Why choose us"}
