@@ -230,7 +230,7 @@ def org_node():
         "hasMap": "https://www.google.com/maps?q=" + quote(SITE["maps_query"]),
         "openingHoursSpecification": spec,
         "areaServed": ["Peddar Road", "Kemps Corner", "Breach Candy", "Malabar Hill", "Cumballa Hill", "Tardeo", "South Mumbai"],
-        "employee": [{"@id": person_id(d)} for d in SITE["doctors"]],
+        "employee": [{"@type": "Person", "@id": person_id(d), "name": d["name"], "url": SITE["domain"] + doctor_path(d)} for d in SITE["doctors"]],
         "priceRange": "₹₹",
     }
     if SITE.get("email"):
@@ -288,8 +288,7 @@ def treatment_pages():
         proc = {"@type": "MedicalProcedure", "name": strip_tbc(t["h1"]), "url": SITE["domain"] + path,
                 "description": strip_tbc(t["answer"]), "procedureType": "https://schema.org/" + t["procedure"]["type"],
                 "bodyLocation": t["procedure"]["body_location"], "howPerformed": t["procedure"]["how_performed"],
-                "preparation": t["procedure"]["preparation"], "followup": t["procedure"]["followup"],
-                "provider": {"@id": SITE["domain"] + "/#clinic"}}
+                "preparation": t["procedure"]["preparation"], "followup": t["procedure"]["followup"]}
         faq = faq_node(faqs)
         pages.append({"path": path, "template": t.get("template", "treatment.html"), "title": t["title"], "description": t["description"],
                       "crumbs": crumbs, "t": t, "schema": [org_node(), breadcrumb_node(crumbs), proc, faq],
