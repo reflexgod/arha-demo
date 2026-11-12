@@ -1,0 +1,82 @@
+slug: kids-dentistry
+nav_label: Kids' dentistry
+title: "Kids Dentist in South Mumbai | Arha Dental Care"
+description: "Children's dentistry on Peddar Road, Mumbai: first visits, check-ups, cleaning and protecting young teeth, with calm, unhurried appointments."
+h1: "Children's dentistry on Peddar Road"
+answer: >-
+  Children should see a dentist when their first tooth appears, or by their first birthday. At Arha, children's visits
+  are short and calm: we check the teeth, keep them clean and show you how to protect them at home.
+hero: hero-kids
+statement_h2: "Gentle dental care that helps children feel at ease, from their first tooth to their teenage years."
+statement_p: >-
+  Milk teeth matter: they help children eat and speak, and they hold space for the adult teeth that follow. Tooth decay
+  in young children is common, and early visits are the easiest way to prevent it. We keep appointments unhurried,
+  explain each step in words a child understands, and involve parents throughout. As your child grows, we keep an eye
+  on how the adult teeth are coming in, and tell you if anything needs attention.
+  [[TBC: who sees children at Arha, and which treatments are offered]]
+procedure:
+  type: TherapeuticProcedure
+  body_location: Teeth
+  how_performed: "Age-appropriate check-ups, cleaning, fluoride and fissure sealants, with advice for parents."
+  preparation: "None; parents are asked about the child's medical history."
+  followup: "Check-ups at intervals suited to the child."
+sections:
+  - label: about
+    heading: "What happens at a child's dental visit?"
+    body: |
+      <p>We look at your child's teeth and gums, count the teeth that have come through and check for early signs of
+      decay. Depending on age, we may clean the teeth, apply fluoride and take an X-ray if one is needed. Most of all, a
+      first visit helps your child get used to the chair, the light and the sounds of a dental clinic.</p>
+  - label: benefits
+    heading: "Why start early?"
+    body: |
+      <ul>
+        <li>Problems found early are smaller, simpler and easier for a child to cope with.</li>
+        <li>Children who visit regularly tend to feel calmer about the dentist as they grow up.</li>
+        <li>You get practical advice on brushing, toothpaste, diet and habits such as thumb-sucking.</li>
+      </ul>
+  - label: who is it for?
+    heading: "When should my child first see a dentist?"
+    body: |
+      <p>Bring your child when the first tooth appears, or by their first birthday, and then for regular check-ups.
+      Come sooner if you see white or brown spots on the teeth, if your child complains of toothache, or after a fall
+      that damages a tooth. [[TBC: clinic's recommended check-up interval]]</p>
+  - label: process
+    heading: "How we keep visits calm"
+    body: |
+      <ul>
+        <li>Short appointments at a pace your child is comfortable with.</li>
+        <li>We show and explain before we do anything.</li>
+        <li>Parents are welcome to stay with their child. [[TBC: confirm]]</li>
+      </ul>
+  - label: aftercare
+    heading: "Looking after children's teeth at home"
+    body: |
+      <p>Brush twice a day with a fluoride toothpaste, using a smear for under-threes and a pea-sized amount after that,
+      and help your child brush until they can do it well on their own. Keep sweet foods and drinks to mealtimes, and
+      avoid sending a child to bed with a bottle of milk or juice.</p>
+  - label: related treatments
+    heading: "Protecting young teeth"
+    body: |
+      <p>Fissure sealants protect the grooves of the back teeth, and fluoride varnish helps strengthen the enamel.
+      [[TBC: which of these Arha offers]] As the adult teeth come in, we can advise whether your child may need
+      orthodontic treatment later.</p>
+  - label: faqs
+    heading: "Questions parents often ask"
+    faqs:
+      - q: "Do milk teeth need treatment if they will fall out anyway?"
+        a: "Often yes. Decayed milk teeth can hurt, become infected and affect the adult teeth underneath. Some stay in the mouth until age 11 or 12."
+      - q: "How can I prepare my child for their first visit?"
+        a: "Talk about it simply and positively, read a picture book about visiting the dentist, and choose a time of day when your child is usually rested."
+      - q: "Is fluoride safe for children?"
+        a: "Used in the right amounts, fluoride helps prevent tooth decay. We advise on the right toothpaste and amount for your child's age."
+glance:
+  time: "A check-up visit is short [[TBC: typical length]]"
+  fee: "[[TBC: check-up fee, or \"on consultation\"]]"
+  payment: "UPI, debit and credit cards [[TBC: payment methods]]"
+cta:
+  image: cta-kids
+  heading: "A calm first visit sets up a lifetime of healthy smiles."
+  text: "Book your child's check-up."
+form_heading: "Ask us about your child's teeth."
+related: [gum-care, root-canal-treatment, emergency-dentistry]

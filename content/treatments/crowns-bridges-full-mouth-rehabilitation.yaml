@@ -1,0 +1,89 @@
+slug: crowns-bridges-full-mouth-rehabilitation
+nav_label: Crowns, bridges & full-mouth rehabilitation
+title: "Full Mouth Rehabilitation in Mumbai | Arha Dental Care"
+description: "Crowns, bridges and full-mouth rehabilitation on Peddar Road, planned by a prosthodontist. How worn, broken or missing teeth are restored as one plan."
+h1: "Crowns, bridges and full-mouth rehabilitation in Mumbai"
+answer: >-
+  Full-mouth rehabilitation restores worn, broken or missing teeth as one plan, so your bite works in balance again. It
+  combines crowns, bridges, implants and fillings, and at Arha it is planned by a prosthodontist.
+hero: hero-fmr
+statement_h2: "When many teeth need care, one plan for the whole mouth lasts longer than repairing them one at a time."
+statement_p: >-
+  Teeth that are worn down, cracked, heavily filled or missing change the way the jaws meet. Repairing them one by one
+  can leave the bite uneven, so new work chips or fails. Full-mouth rehabilitation looks at every tooth and at how your
+  teeth come together, then restores them in a planned order. Restoring and replacing teeth is the specialty of a
+  prosthodontist, and at Arha Dr. Nikhil V. Jain plans each case himself, from the first records to the final crowns.
+  A single crown or a small bridge follows the same careful approach.
+procedure:
+  type: TherapeuticProcedure
+  body_location: Teeth and jaws
+  how_performed: "Teeth are restored in planned stages with crowns, bridges, implants and fillings, often with trial (provisional) teeth before the final restorations."
+  preparation: "Examination, X-rays, photographs, models or scans, and a bite assessment."
+  followup: "Bite checks, reviews and regular cleaning."
+sections:
+  - label: about
+    heading: "What is full-mouth rehabilitation?"
+    body: |
+      <p>Full-mouth rehabilitation, sometimes called full-mouth reconstruction, is a planned course of treatment that
+      restores most or all of the teeth in both jaws. It can include crowns to protect weakened teeth, bridges or
+      implants to replace missing ones, and fillings or root canal treatment where they are needed.</p>
+      <p>A <strong>crown</strong> is a cap that covers a weakened tooth. A <strong>bridge</strong> fills a gap with a
+      false tooth held by the teeth, or implants, on either side.</p>
+  - label: benefits
+    heading: "Why plan the whole mouth together?"
+    body: |
+      <ul>
+        <li>Your bite is balanced as a whole, so chewing feels comfortable and even.</li>
+        <li>New crowns and bridges are less likely to chip when the bite is right.</li>
+        <li>The colour, shape and length of the teeth are planned together, so the result looks natural.</li>
+        <li>Treatment follows one clear order, with costs set out in advance.</li>
+      </ul>
+  - label: who is it for?
+    heading: "Who needs full-mouth rehabilitation?"
+    body: |
+      <p>It is usually considered when several of these apply: teeth worn down by grinding or acid, many large or old
+      fillings, broken or cracked teeth, several missing teeth, or a bite that has collapsed so the face looks shorter.
+      For one damaged tooth, a single crown is often enough, and we will tell you so.</p>
+  - label: process
+    heading: "How long does full-mouth rehabilitation take?"
+    body: |
+      <p>Most cases take several visits over weeks to months, depending on how many teeth are involved and whether
+      implants are part of the plan. [[TBC: Arha's typical timeline]]</p>
+      <ol>
+        <li><strong>Records.</strong> Examination, X-rays, photographs, models or scans, and a bite check.</li>
+        <li><strong>Plan.</strong> A written plan with the order of treatment, the options and the costs.</li>
+        <li><strong>Trial teeth.</strong> Where needed, provisional teeth let you try the new shape and bite first.</li>
+        <li><strong>Final restorations.</strong> Crowns, bridges or implant teeth are made and fitted in stages.</li>
+      </ol>
+  - label: aftercare
+    heading: "Caring for crowns and bridges"
+    body: |
+      <p>Brush twice a day, and clean under bridges and between crowns with floss threaders or interdental brushes. If
+      you grind your teeth, a night guard protects the new work. Regular check-ups let us spot small problems early.</p>
+  - label: related treatments
+    heading: "Crowns, bridges and implants"
+    body: |
+      <p>Missing teeth within the plan may be replaced with <a href="/treatments/dental-implants/">dental implants</a>
+      or bridges. If you are deciding between them, see <a href="/treatments/missing-teeth/">implant, bridge or
+      denture</a>.</p>
+  - label: faqs
+    heading: "Questions we are often asked about full-mouth rehabilitation"
+    faqs:
+      - q: "Is full-mouth rehabilitation the same as a smile makeover?"
+        a: "Not quite. A smile makeover mainly changes how the front teeth look. Full-mouth rehabilitation restores how all the teeth work together, and their appearance is planned as part of it."
+      - q: "How long do crowns last?"
+        a: "Crowns are designed to last many years. How long depends on the tooth underneath, your bite, grinding and how well the area is cleaned."
+      - q: "What does full-mouth rehabilitation cost?"
+        a: "Every plan is different, so the cost depends on how many teeth are treated and what each needs. You receive a written estimate after your consultation."
+      - q: "Will I be without teeth during treatment?"
+        a: "We plan the stages so that you have provisional teeth whenever they are needed. Ask us about your case at the consultation."
+glance:
+  time: "Several visits over weeks to months [[TBC: typical timeline]]"
+  fee: "[[TBC: from-price, or \"on consultation\"]]"
+  payment: "UPI, debit and credit cards [[TBC: payment methods]]"
+cta:
+  image: cta-fmr
+  heading: "Restore comfort, function and confidence in your smile."
+  text: "Book a consultation with Dr. Nikhil V. Jain."
+form_heading: "Ask us about crowns, bridges and full-mouth rehabilitation."
+related: [dental-implants, root-canal-treatment, missing-teeth]

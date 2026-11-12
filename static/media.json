@@ -1,0 +1,260 @@
+{
+ "images": {
+  "home-card-fmr": {
+   "kind": "stock",
+   "alt": "Older man smiling",
+   "widths": [
+    480,
+    800,
+    1248
+   ],
+   "ratio": [
+    624,
+    400
+   ],
+   "src": "src-assets/stock/people/older-man-smiling.jpg"
+  },
+  "home-card-rct": {
+   "kind": "stock",
+   "alt": "Young man smiling",
+   "widths": [
+    480,
+    800,
+    1248
+   ],
+   "ratio": [
+    624,
+    400
+   ],
+   "src": "src-assets/stock/man-smile.jpg"
+  },
+  "home-card-kids": {
+   "kind": "stock",
+   "alt": "Mother and daughter laughing together",
+   "widths": [
+    480,
+    800,
+    1248
+   ],
+   "ratio": [
+    624,
+    400
+   ],
+   "src": "src-assets/stock/people/mother-daughter-laughing.jpg"
+  },
+  "home-commitment": {
+   "kind": "real",
+   "alt": "Reception and waiting area at Arha Dental Care, Peddar Road",
+   "widths": [
+    480,
+    800,
+    1440
+   ],
+   "ratio": [
+    720,
+    600
+   ],
+   "src": "assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1920.jpg"
+  },
+  "hero-implants": {
+   "kind": "stock",
+   "alt": "Close-up of a natural smile",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/people/smile-side.jpg"
+  },
+  "hero-fmr": {
+   "kind": "stock",
+   "alt": "Grandmother smiling at a baby",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/people/grandmother-baby.jpg"
+  },
+  "hero-rct": {
+   "kind": "stock",
+   "alt": "Young man laughing",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/portrait-1.jpg"
+  },
+  "hero-kids": {
+   "kind": "stock",
+   "alt": "Young girl smiling",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/people/girl-smiling.jpg"
+  },
+  "cta-implants": {
+   "kind": "stock",
+   "alt": "Grandparents smiling with their grandchild",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/grandparents-grandchild.jpg"
+  },
+  "cta-fmr": {
+   "kind": "stock",
+   "alt": "Older man smiling",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/grandfather-grandson.jpg"
+  },
+  "cta-rct": {
+   "kind": "stock",
+   "alt": "Young woman smiling",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/young-woman-smiling.jpg"
+  },
+  "cta-kids": {
+   "kind": "stock",
+   "alt": "Mother and daughter smiling",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    3,
+    5
+   ],
+   "src": "src-assets/stock/people/mother-daughter-portrait.jpg"
+  },
+  "practice-hero": {
+   "kind": "real",
+   "alt": "The Arha Dental Care logo on the marble wall behind reception",
+   "widths": [
+    480,
+    800,
+    1440
+   ],
+   "ratio": [
+    720,
+    740
+   ],
+   "src": "assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-1920.jpg"
+  },
+  "practice-story": {
+   "kind": "real",
+   "alt": "Arha Dental Care sign at 107 Doctor House, with the names of Dr. Vasant P. Jain and Dr. Nikhil V. Jain",
+   "widths": [
+    480,
+    800,
+    1232
+   ],
+   "ratio": [
+    616,
+    659
+   ],
+   "src": "assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1920.jpg"
+  },
+  "contact-photo": {
+   "kind": "real",
+   "alt": "Consultation desk in a treatment room at Arha Dental Care",
+   "widths": [
+    480,
+    800,
+    1232
+   ],
+   "ratio": [
+    616,
+    552
+   ],
+   "src": "src-assets/dental-operatory-arha-dental-care-peddar-road-04.jpeg"
+  }
+ },
+ "videos": {
+  "home-hero-tour": {
+   "kind": "real",
+   "sizes": [
+    [
+     768,
+     720
+    ],
+    [
+     1152,
+     1080
+    ]
+   ],
+   "poster_widths": [
+    768,
+    1152
+   ],
+   "ratio": [
+    1152,
+    1080
+   ],
+   "src": "src-assets/hero-land-master.mp4"
+  },
+  "home-card-walkthrough": {
+   "kind": "real",
+   "sizes": [
+    [
+     640,
+     360
+    ],
+    [
+     1080,
+     608
+    ]
+   ],
+   "poster_widths": [
+    640,
+    1080
+   ],
+   "ratio": [
+    1080,
+    608
+   ],
+   "src": "src-assets/IMG_2303.MOV"
+  }
+ }
+}

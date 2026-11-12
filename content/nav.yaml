@@ -1,0 +1,37 @@
+# Menus. Treatments are listed in menu order; the first four are the headline treatments (home grid, footer).
+treatments:
+  - {slug: dental-implants, label: "Dental implants"}
+  - {slug: crowns-bridges-full-mouth-rehabilitation, label: "Crowns, bridges & full-mouth rehabilitation", short: "Crowns, bridges & FMR"}
+  - {slug: root-canal-treatment, label: "Root canal treatment"}
+  - {slug: kids-dentistry, label: "Kids' dentistry"}
+  - {slug: dentures, label: "Dentures"}
+  - {slug: missing-teeth, label: "Missing teeth"}
+  - {slug: teeth-whitening, label: "Teeth whitening"}
+  - {slug: smile-design, label: "Smile design"}
+  - {slug: gum-care, label: "Gum care"}
+  - {slug: aligners, label: "Clear aligners"}
+  - {slug: emergency-dentistry, label: "Emergency dentistry"}
+
+practice:
+  - {href: "/the-practice/#why-choose-us", label: "Why choose us"}
+  - {href: "/the-practice/#our-story", label: "Our story"}
+  - {href: "/the-practice/#meet-the-team", label: "Meet the team"}
+
+patients:
+  - {href: "/for-patients/#new-patients", label: "New patients"}
+  - {href: "/for-patients/#fee-guide", label: "Fee guide"}
+  - {href: "/for-patients/#payment-options", label: "Payment options"}
+  - {href: "/for-patients/#care-plans", label: "Care plans"}
+
+explore:
+  - {href: "/the-practice/", label: "About the practice"}
+  - {href: "/for-patients/", label: "Patient info & fees"}
+  - {href: "/blog/", label: "Blog"}
+  - {href: "/referrals/", label: "Dental referrals"}
+
+legal:
+  - {href: "/policies/complaints/", label: "Complaints policy"}
+  - {href: "/policies/privacy/", label: "Privacy policy"}
+  - {href: "/policies/terms/", label: "Terms of use"}
+  - {href: "/policies/cookies/", label: "Cookie policy"}
+  - {href: "/policies/accessibility/", label: "Accessibility"}

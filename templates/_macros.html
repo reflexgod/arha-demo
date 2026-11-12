@@ -1,0 +1,84 @@
+{% macro icon(name, cls="") %}<svg class="ico {{ cls }}" aria-hidden="true" focusable="false"><use href="#i-{{ name }}"></use></svg>{% endmacro %}
+
+{% macro book_href(treatment="") %}/contact/{% if treatment %}?treatment={{ treatment }}{% endif %}#book{% endmacro %}
+
+{% macro logo(cls="logo", href="/") %}
+<a class="{{ cls }}" href="{{ href }}">
+  <img class="logo__word" src="/static/brand/logo-wordmark-light.svg" width="1791" height="586" alt="{{ site.name }}">
+  <img class="logo__seal" src="/static/brand/logo-seal-bronze.svg" width="200" height="200" alt="">
+</a>
+{% endmacro %}
+
+{% macro crumbs(items) %}
+{% if items %}
+<nav class="crumbs wrap" aria-label="Breadcrumb">
+  <ol>
+    {% for name, href in items %}
+    <li>{% if loop.last %}<span aria-current="page">{{ name }}</span>{% else %}<a href="{{ href }}">{{ name }}</a>{% endif %}</li>
+    {% endfor %}
+  </ol>
+</nav>
+{% endif %}
+{% endmacro %}
+
+{#
+  Enquiry / booking form. Posts to the forms endpoint in content/site.yaml (Google Apps Script -> Sheet + email).
+  kind: "enquiry" (short, sidebar) or "booking" (contact page: treatment + preferred time).
+#}
+{% macro form(id, kind="enquiry", treatment="", heading="") %}
+<form class="form" id="{{ id }}" data-form="{{ kind }}" novalidate>
+  {% if heading %}<h3>{{ heading }}</h3>{% endif %}
+  <input type="hidden" name="form" value="{{ kind }}">
+  <input type="hidden" name="page" value="">
+  <div class="hp" aria-hidden="true"><label for="{{ id }}-company">Company</label><input type="text" id="{{ id }}-company" name="company" tabindex="-1" autocomplete="off"></div>
+  <div>
+    <label for="{{ id }}-name">Full name *</label>
+    <input type="text" id="{{ id }}-name" name="name" autocomplete="name" required>
+  </div>
+  <div>
+    <label for="{{ id }}-phone">Phone or WhatsApp number *</label>
+    <input type="tel" id="{{ id }}-phone" name="phone" autocomplete="tel" inputmode="tel" required>
+  </div>
+  <div>
+    <label for="{{ id }}-email">Email (optional)</label>
+    <input type="email" id="{{ id }}-email" name="email" autocomplete="email">
+  </div>
+  {% if kind == "booking" %}
+  <div>
+    <label for="{{ id }}-patient">Have you visited us before?</label>
+    <select id="{{ id }}-patient" name="patient">
+      <option value="new">No, I'm a new patient</option>
+      <option value="existing">Yes, I'm an existing patient</option>
+    </select>
+  </div>
+  <div>
+    <label for="{{ id }}-treatment">What would you like to see us about?</label>
+    <select id="{{ id }}-treatment" name="treatment">
+      <option value="">A check-up, or I'm not sure</option>
+      {% for t in nav.treatments %}<option value="{{ t.slug }}"{% if t.slug == treatment %} selected{% endif %}>{{ t.label }}</option>{% endfor %}
+    </select>
+  </div>
+  <div>
+    <label for="{{ id }}-when">Preferred day and time</label>
+    <select id="{{ id }}-when" name="when">
+      <option value="">Any time</option>
+      <option>Weekday morning</option>
+      <option>Weekday afternoon</option>
+      <option>Saturday</option>
+    </select>
+  </div>
+  {% else %}
+  <input type="hidden" name="treatment" value="{{ treatment }}">
+  {% endif %}
+  <div>
+    <label for="{{ id }}-msg">{% if kind == "booking" %}Anything we should know?{% else %}Your question{% endif %}</label>
+    <textarea id="{{ id }}-msg" name="message" rows="4"></textarea>
+  </div>
+  <p class="form__note">Please don't include detailed medical information. In a dental emergency, call us on <a href="{{ tel(site.phone) }}">{{ site.phone_display }}</a>.</p>
+  <label class="check"><input type="checkbox" name="consent" value="yes" required> <span>I agree that Arha Dental Care may contact me about this request by phone, WhatsApp or email, as set out in the <a href="/policies/privacy/">privacy policy</a>.</span></label>
+  <div class="cf-turnstile" data-sitekey="{{ site.turnstile_site_key }}"></div>
+  <button class="btn btn--solid" type="submit">{% if kind == "booking" %}Request appointment{% else %}Send enquiry{% endif %} {{ icon("arrow") }}</button>
+  <p class="form__status" role="status" aria-live="polite"></p>
+  {% if kind == "booking" %}<p class="form__note">This is a request, not a confirmed booking. We'll call or WhatsApp you to agree a time.</p>{% endif %}
+</form>
+{% endmacro %}

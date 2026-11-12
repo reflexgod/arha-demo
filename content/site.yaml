@@ -1,0 +1,62 @@
+# Arha Dental Care: the one place for contact details, hours and switches.
+# Every page, the footer, the JSON-LD and the open/closed widget read from this file.
+# Values marked TBC are still to be confirmed by the clinic (see notes/parity-checklist.md).
+
+name: Arha Dental Care
+legal_name: Arha Dental Care
+domain: https://arhadentalcare.com          # canonical host at launch
+preview: true                               # true = noindex on every page + robots.txt disallow (until "launch")
+
+phone: "+91 99755 07714"                    # TBC: confirm it is the reception line
+phone_display: "99755 07714"
+whatsapp: "+91 99755 07714"                 # TBC: clinic WhatsApp number (reception number until confirmed)
+whatsapp_text: "Hello Arha Dental Care, I would like to ask about an appointment."
+email: ""                                   # TBC: clinic email. Empty = "Email" links go to the enquiry form instead.
+
+address:
+  line1: "107, Doctor House"
+  line2: "14 Peddar Road"
+  locality: "Mumbai"
+  region: "Maharashtra"
+  postcode: "400026"
+  country: "IN"
+  landmark: "Opposite Jaslok Hospital"      # as on the clinic's current website
+geo: {lat: 18.9647, lng: 72.8089}           # TBC: check against the Google Business Profile pin
+maps_query: "Arha Dental Care, Doctor House, 14 Peddar Road, Mumbai 400026"
+
+time_zone: Asia/Kolkata
+# 0 = Sunday ... 6 = Saturday. null = closed. TBC: 9:00 or 9:30 opening; lunch break.
+hours:
+  - null
+  - ["09:30", "18:30"]
+  - ["09:30", "18:30"]
+  - ["09:30", "18:30"]
+  - ["09:30", "18:30"]
+  - ["09:30", "18:30"]
+  - ["09:30", "18:30"]
+
+doctors:
+  - id: dr-nikhil-jain
+    name: "Dr. Nikhil V. Jain"
+    role: "Prosthodontist & Implantologist"
+    credentials: "B.D.S., M.D.S. (Prosthodontics), ITI Scholar (London)"
+    registration: ""                        # TBC: State Dental Council registration number
+  - id: dr-vasant-jain
+    name: "Dr. Vasant P. Jain"
+    role: "Dental Surgeon"
+    credentials: "B.D.S."
+    registration: ""                        # TBC
+
+same_as: []                                 # TBC: Google Business Profile, Instagram, Facebook
+google_reviews_url: "https://share.google/PzhwgJ9QJMErZnk9R"
+
+# Switches
+show_reviews: false                         # OFF until the clinic agrees in writing; text only from notes/google-reviews.txt
+established: ""                             # TBC: year Arha opened. Empty = no year shown.
+
+# Forms: Google Apps Script web app (tools/forms/arha-forms.gs). Empty = forms show the call / WhatsApp fallback.
+forms_endpoint: ""
+turnstile_site_key: "1x00000000000000000000AA"   # Cloudflare's public TEST key (always passes). Real key before launch.
+
+# Analytics: GA4 loads only after the visitor accepts cookies. Empty = no GA4 at all.
+ga4_id: ""

@@ -1,0 +1,4 @@
+Fonts used on this site, self-hosted, all under the SIL Open Font License 1.1 (https://openfontlicense.org):
+- Inter (variable, latin subset): Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
+- Barlow Condensed 500 (latin subset): Copyright 2017 The Barlow Project Authors (https://github.com/jpt/barlow)
+- Libre Caslon Display (latin subset): Copyright 2012 The Libre Caslon Project Authors (https://github.com/impallari/Libre-Caslon)

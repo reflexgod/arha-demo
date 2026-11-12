@@ -1,0 +1,22 @@
+{#
+  Google reviews carousel. OFF until the clinic agrees in writing (site.yaml: show_reviews).
+  Text comes only from content/reviews.yaml, copied character for character from the reviews the owner pasted.
+#}
+{% from "_macros.html" import icon %}
+{% if site.show_reviews and reviews %}
+<section class="reviews" aria-labelledby="reviews-h">
+  <div class="wrap">
+    <img class="reviews__mark" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="">
+    <h2 id="reviews-h">What our patients say on Google</h2>
+    <div class="reviews__track" data-carousel>
+      {% for r in reviews %}
+      <figure class="review{% if loop.first %} is-active{% endif %}">
+        <blockquote>{{ r.text }}</blockquote>
+        <figcaption><cite>{{ r.name }}</cite><span class="pill">Google review{% if r.date %}, {{ r.date }}{% endif %}</span></figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+    <a class="btn reviews__link" href="{{ site.google_reviews_url }}" target="_blank" rel="noopener">Read all reviews on Google {{ icon("arrow") }}</a>
+  </div>
+</section>
+{% endif %}

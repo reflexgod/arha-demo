@@ -1,0 +1,25 @@
+# Cloudflare Pages redirects (copied to dist/_redirects by tools/build.py). Old URL  New URL  status
+/index.html                    /                                                   301
+/home                          /                                                   301
+# Earlier demo pages (never on the clinic domain, all noindex): send to their v5 equivalents
+/book                          /contact/#book                                      301
+/book/                         /contact/#book                                      301
+/doctors/                      /the-practice/#meet-the-team                        301
+/founder/                      /the-practice/#our-story                            301
+/technology/                   /for-patients/#technology                           301
+/emergency/                    /treatments/emergency-dentistry/                    301
+/gallery/                      /the-practice/                                      301
+/before-after/                 /treatments/                                        301
+/problems/*                    /treatments/                                        301
+/dental-implants/              /treatments/dental-implants/                        301
+/crowns-bridges/               /treatments/crowns-bridges-full-mouth-rehabilitation/   301
+/full-mouth-rehabilitation/    /treatments/crowns-bridges-full-mouth-rehabilitation/   301
+/root-canal-treatment/         /treatments/root-canal-treatment/                   301
+/kids-dentistry/               /treatments/kids-dentistry/                         301
+/smile-design/                 /treatments/smile-design/                           301
+/cosmetic-dentistry/           /treatments/smile-design/                           301
+/invisalign/                   /treatments/aligners/                               301
+/orthodontics/                 /treatments/aligners/                               301
+/general-dentistry/            /treatments/                                        301
+/maxillofacial-prosthetics/    /treatments/                                        301
+/dental-tourism/               /                                                   301
