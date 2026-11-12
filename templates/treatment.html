@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% from "_macros.html" import icon, book_href, form %}
+{% block preload %}<link rel="preload" as="image" href="/static/img/{{ t.hero }}-1440.avif" type="image/avif" imagesrcset="/static/img/{{ t.hero }}-640.avif 640w, /static/img/{{ t.hero }}-1080.avif 1080w, /static/img/{{ t.hero }}-1440.avif 1440w, /static/img/{{ t.hero }}-1920.avif 1920w" imagesizes="100vw">{% endblock %}
+{% block body_class %}page-treatment{% endblock %}
+{% block crumbs %}{% endblock %}
+{% block main %}
+<section class="thero">
+  <div class="thero__img">{{ picture(t.hero, "100vw", eager=True) }}</div>
+  <div class="thero__card">
+    <h1>{{ t.h1 }}</h1>
+    <p>{{ t.answer | tbc }}</p>
+    <div class="btns">
+      <a class="btn btn--solid" href="{{ book_href(t.slug) }}" data-event="booking_click">Book a consultation {{ icon("right") }}</a>
+      <a class="btn" href="{{ tel(site.phone) }}">Call us now {{ icon("right") }}</a>
+    </div>
+  </div>
+</section>
+{% from "_macros.html" import crumbs %}{{ crumbs(page.crumbs) }}
+
+<section class="tstate">
+  <div class="wrap">
+    <h2>{{ t.statement_h2 }}</h2>
+    <p>{{ t.statement_p | tbc }}</p>
+  </div>
+</section>
+
+<section class="tbody">
+  <div class="wrap tbody__grid">
+    <div>
+      <div class="tcard">
+        {% for s in t.sections %}
+        <details class="acc tacc"{% if loop.first %} open{% endif %}>
+          <summary><span class="label">{{ s.label }}</span><h3>{{ s.heading }}</h3><span class="acc__ico" aria-hidden="true"></span></summary>
+          <div class="acc__body">
+            {% if s.get("faqs") %}
+              {% for qa in s.faqs %}<h4>{{ qa.q }}</h4><p>{{ qa.a | tbc }}</p>{% endfor %}
+            {% else %}
+              {{ s.body | tbc }}
+            {% endif %}
+          </div>
+        </details>
+        {% endfor %}
+      </div>
+      {% if t.related %}
+      <div class="related">
+        <h2>Related treatments</h2>
+        <ul>
+          {% for slug in t.related %}{% for n in nav.treatments if n.slug == slug %}<li><a class="btn" href="/treatments/{{ slug }}/">{{ n.label }} {{ icon("right") }}</a></li>{% endfor %}{% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    <aside class="tside" aria-label="At a glance and enquiries">
+      <div class="glance">
+        <p class="label">At a glance</p>
+        <h3>{{ t.nav_label }}</h3>
+        <dl>
+          <dt>Time</dt><dd>{{ t.glance.time | tbc }}</dd>
+          <dt>Fee</dt><dd>{{ t.glance.fee | tbc }}</dd>
+          <dt>Payment</dt><dd>{{ t.glance.payment | tbc }}</dd>
+        </dl>
+        <a class="btn" href="/for-patients/#fee-guide">See the fee guide {{ icon("right") }}</a>
+      </div>
+      <div class="ctacard">
+        {{ picture(t.cta.image, "(min-width: 992px) 389px, 480px", alt="") }}
+        <div class="ctacard__in">
+          <h3>{{ t.cta.heading }}</h3>
+          <p>{{ t.cta.text }}</p>
+          <a class="btn" href="{{ book_href(t.slug) }}" data-event="booking_click">Book a consultation {{ icon("right") }}</a>
+        </div>
+      </div>
+      <div class="tform" id="enquiry">
+        {{ form("f-" ~ t.slug, "enquiry", t.slug, t.form_heading) }}
+      </div>
+    </aside>
+  </div>
+</section>
+
+{% include "_visit.html" %}
+{% endblock %}
