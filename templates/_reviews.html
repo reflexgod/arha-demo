@@ -2,6 +2,8 @@
   Google reviews band (the reference's "community" band). Homepage only (see _visit.html), switched by site.yaml
   show_reviews. Data: content/google-reviews.json, copied word for word from the clinic's Google Business Profile:
   never edit, shorten or invent. Long reviews get a "Read more" toggle (CSS line clamp), never a cut.
+  The "when" field ("4 months ago", copied 13 Nov 2026) is kept in the JSON for our records only: it goes stale, so it is
+  not shown.
   No AggregateRating / Review schema: self-serving review markup is ignored for local businesses and can draw a
   manual action. Plain HTML only.
 #}
@@ -18,7 +20,7 @@
         <button class="review__more" type="button" aria-expanded="false" aria-controls="review-{{ loop.index }}" hidden>Read more</button>
         <div class="review__by">
           <cite>{{ r.name }}</cite>
-          <span class="review__meta"><span class="review__stars" aria-hidden="true">{{ "★" * r.stars }}</span><span class="sr-only">{{ r.stars }} out of 5 stars. </span>Google review · {{ r.when }}</span>
+          <span class="review__meta"><span class="review__stars" aria-hidden="true">{{ "★" * r.stars }}</span><span class="sr-only">{{ r.stars }} out of 5 stars. </span>Google review</span>
         </div>
       </div>
       {% endfor %}
