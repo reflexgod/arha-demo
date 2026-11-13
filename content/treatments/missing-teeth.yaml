@@ -72,7 +72,8 @@ sections:
     body: |
       <p>See <a href="/treatments/dental-implants/">dental implants</a>,
       <a href="/treatments/crowns-bridges-full-mouth-rehabilitation/">crowns and bridges</a> and
-      <a href="/treatments/dentures/">dentures</a>.</p>
+      <a href="/treatments/dentures/">dentures</a>. If you are choosing between the two fixed options, our guide to
+      <a href="/blog/dental-implant-vs-bridge/">dental implant vs bridge</a> sets out the pros and cons of each.</p>
   - label: faqs
     heading: "Find answers to popular questions about missing teeth"
     faqs:
