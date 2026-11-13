@@ -295,13 +295,33 @@
   /* ---------------------------------------------------------- reviews carousel (only rendered when switched on) */
   $$("[data-carousel]").forEach(function (track) {
     var items = $$(".review", track), i = 0, box = track.parentNode;
+    function clampCheck(item) {   /* clamp only when the full text is taller than 5 lines; never cut the words */
+      var txt = $(".review__text", item), btn = $(".review__more", item);
+      if (!txt || !btn || item.classList.contains("is-open")) return;
+      item.classList.add("is-clamped");
+      var over = txt.scrollHeight > txt.clientHeight + 2;
+      if (!over) item.classList.remove("is-clamped");
+      btn.hidden = !over;
+    }
+    function collapse(item) { var b = $(".review__more", item); item.classList.remove("is-open"); if (b) { b.setAttribute("aria-expanded", "false"); b.textContent = "Read more"; } }
+    items.forEach(function (item) {
+      var btn = $(".review__more", item);
+      if (btn) btn.addEventListener("click", function () {
+        var open = !item.classList.contains("is-open");
+        item.classList.toggle("is-open", open); btn.setAttribute("aria-expanded", open ? "true" : "false");
+        btn.textContent = open ? "Read less" : "Read more";
+        if (open && typeof setPaused === "function") setPaused(true);
+      });
+    });
+    if (items[0]) clampCheck(items[0]);
+    window.addEventListener("resize", function () { clampCheck(items[i]); });
     if (items.length < 2) return;
     var still = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
     var pauseBtn = $("[data-carousel-pause]", box), paused = still, hover = false;
     function show(n) {
-      items[i].classList.remove("is-active"); items[i].hidden = true;
+      items[i].classList.remove("is-active"); items[i].hidden = true; collapse(items[i]);
       i = (n + items.length) % items.length;
-      items[i].hidden = false; items[i].classList.add("is-active");
+      items[i].hidden = false; items[i].classList.add("is-active"); clampCheck(items[i]);
     }
     function setPaused(p) { paused = p; if (pauseBtn) { pauseBtn.setAttribute("aria-pressed", p ? "true" : "false"); pauseBtn.textContent = p ? "Play" : "Pause"; } }
     setPaused(paused);

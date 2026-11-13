@@ -13,7 +13,8 @@ noindexed).
   - Four seed posts from the keyword map, 1,037–1,120 words each: implant timeline, root canal pain, a child's first
     visit, implant cost (no prices).
   - Doctor profile pages: ProfilePage + full Person schema, logo placeholder portrait.
-  - Reviews band built to the reference design and still OFF.
+  - Reviews band ON (13 Nov, Viraaj approved), homepage only: 8 featured Google reviews word for word from
+    content/google-reviews.json, header "5.0 on Google · 33 reviews", Read more toggle, no review schema.
   - Parity checklist finished (notes/parity-checklist.md).
   - JSON-LD validator: `tools/qa/jsonld_check.py`.
 - **"Medically reviewed by" line:** each post has `reviewed: ""`. The line and the MedicalWebPage reviewedBy schema only
@@ -55,7 +56,6 @@ noindexed).
   - Dr. Vasant's treatments and bio;
   - Dr. Nikhil's sign-off on all 7 posts;
   - parking/lift, payment methods/EMI, same-day emergency policy;
-  - written consent for Google reviews, then the reviews copied character for character into content/reviews.yaml.
 
 ## 4. Launch checklist (only after "ship")
 - GoDaddy: delegate access for the domain. Never touch MX/email records.

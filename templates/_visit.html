@@ -1,5 +1,5 @@
 {% from "_macros.html" import icon, book_href, landmark %}
-{% include "_reviews.html" %}
+{% if page.path == "/" %}{% include "_reviews.html" %}{% endif %}
 <section class="visit" id="visit" aria-labelledby="visit-h">
   <div class="visit__panel" data-reveal>
     <h3 id="visit-h">Visit our Peddar Road dental practice</h3>

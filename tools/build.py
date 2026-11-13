@@ -43,8 +43,9 @@ NAV = load("nav.yaml")
 for _t in NAV["treatments"]:  # a treatment can live outside /treatments/ (the emergency page has its own URL)
     _t.setdefault("href", f"/treatments/{_t['slug']}/")
 MEDIA = json.loads((STATIC / "media.json").read_text(encoding="utf-8"))
-# Google reviews, copied character for character (only shown when site.yaml show_reviews is true)
-REVIEWS = load("reviews.yaml") if (CONTENT / "reviews.yaml").exists() else []
+# Google reviews: content/google-reviews.json, copied word for word from the Google profile (rating, count, maps_cid_url,
+# featured[]). Shown on the homepage only, when site.yaml show_reviews is true. No review schema.
+REVIEWS = json.loads((CONTENT / "google-reviews.json").read_text(encoding="utf-8")) if (CONTENT / "google-reviews.json").exists() else {}
 
 
 # ------------------------------------------------------------------------------------------------ helpers
@@ -470,7 +471,7 @@ def main():
 
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=True, undefined=StrictUndefined,
                       trim_blocks=True, lstrip_blocks=True)
-    env.globals.update(review_build=REVIEW_BUILD, site=SITE, nav=NAV, reviews=REVIEWS or [], picture=picture, video=video, embed=embed, tel=tel, wa=wa, maps_dir=maps_dir,
+    env.globals.update(review_build=REVIEW_BUILD, site=SITE, nav=NAV, reviews=REVIEWS, picture=picture, video=video, embed=embed, tel=tel, wa=wa, maps_dir=maps_dir,
                        maps_embed=maps_embed, address_one_line=address_one_line, address_full=address_full, hours_rows=hours_rows,
                        client_config=client_config, css_v=asset_version("css/site.css"), js_v=asset_version("js/site.js"), planner_v=asset_version("js/planner.js"),
                        year=TODAY.year, updated=TODAY.strftime("%-d %B %Y") if sys.platform != "win32" else TODAY.strftime("%#d %B %Y"))

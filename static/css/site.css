@@ -1156,6 +1156,13 @@ body.no-scroll { overflow: hidden; }
 .reviews h2 em { font: italic 400 1.05em/1 var(--serif); color: var(--gold-text); }
 .reviews__track { min-height: 9rem; }
 .review blockquote { max-width: 980px; margin: 0 auto; }
+.review__text { margin: 0; white-space: pre-line; }   /* the reviewer's own line breaks, exactly as on Google */
+.review.is-clamped:not(.is-open) .review__text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 5; line-clamp: 5; overflow: hidden; }
+.review__more { margin-top: 12px; padding: 10px 4px; min-height: 44px; border: 0; background: none; color: var(--sea-dark); cursor: pointer;
+  font: 500 var(--lab)/1 var(--label); letter-spacing: 1.5px; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px; }
+.review__more:hover { color: var(--ink); }
+.review__meta { display: block; margin-top: 8px; font: 400 .95rem/1.4 var(--sans); color: var(--ink); }
+.review__stars { margin-right: .5em; font-size: 1em; letter-spacing: .1em; color: var(--gold-text); }
 .reviews__ctrl { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 28px; }
 .reviews__btn { min-width: 44px; height: 44px; padding: 0 12px; border: 1px solid var(--sand); border-radius: var(--radius); background: none; color: var(--ink); cursor: pointer; font: 500 var(--lab)/1 var(--label); letter-spacing: 1.5px; text-transform: uppercase; }
 .reviews__btn svg { width: 14px; height: 14px; transform: rotate(90deg); }

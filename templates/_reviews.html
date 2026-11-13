@@ -1,30 +1,36 @@
 {#
-  Google reviews band (the reference's "community" band, on every page that includes the visit block).
-  OFF until the clinic agrees in writing (site.yaml: show_reviews). Text only from content/reviews.yaml, copied
-  character for character from the clinic's Google Business Profile. No rating or review schema: nothing self-serving.
+  Google reviews band (the reference's "community" band). Homepage only (see _visit.html), switched by site.yaml
+  show_reviews. Data: content/google-reviews.json, copied word for word from the clinic's Google Business Profile:
+  never edit, shorten or invent. Long reviews get a "Read more" toggle (CSS line clamp), never a cut.
+  No AggregateRating / Review schema: self-serving review markup is ignored for local businesses and can draw a
+  manual action. Plain HTML only.
 #}
 {% from "_macros.html" import icon %}
-{% if site.show_reviews and reviews %}
+{% if site.show_reviews and reviews and reviews.featured %}
 <section class="reviews" aria-labelledby="reviews-h" aria-roledescription="carousel">
   <div class="wrap">
     <img class="reviews__mark" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="">
-    <h2 id="reviews-h">Kind words, <em>on Google</em></h2>
+    <h2 id="reviews-h"><em>{{ "%.1f" | format(reviews.rating) }}</em> on Google · {{ reviews.count }}&nbsp;reviews</h2>
     <div class="reviews__track" data-carousel aria-live="polite">
-      {% for r in reviews %}
-      <figure class="review{% if loop.first %} is-active{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}"{% if not loop.first %} hidden{% endif %}>
-        <blockquote>{{ r.text }}</blockquote>
-        <figcaption><cite>{{ r.name }}</cite><span class="pill">{{ r.treatment or "Google review" }}{% if r.date %}, {{ r.date }}{% endif %}</span></figcaption>
-      </figure>
+      {% for r in reviews.featured %}
+      <div class="review{% if loop.first %} is-active{% endif %}" role="group" aria-roledescription="slide" aria-label="{{ loop.index }} of {{ loop.length }}"{% if not loop.first %} hidden{% endif %}>
+        <blockquote><p class="review__text" id="review-{{ loop.index }}">{{ r.text }}</p></blockquote>
+        <button class="review__more" type="button" aria-expanded="false" aria-controls="review-{{ loop.index }}" hidden>Read more</button>
+        <div class="review__by">
+          <cite>{{ r.name }}</cite>
+          <span class="review__meta"><span class="review__stars" aria-hidden="true">{{ "★" * r.stars }}</span><span class="sr-only">{{ r.stars }} out of 5 stars. </span>Google review · {{ r.when }}</span>
+        </div>
+      </div>
       {% endfor %}
     </div>
-    {% if reviews | length > 1 %}
+    {% if reviews.featured | length > 1 %}
     <div class="reviews__ctrl">
       <button class="reviews__btn" type="button" data-carousel-prev aria-label="Previous review"><svg aria-hidden="true"><use href="#i-chev"></use></svg></button>
       <button class="reviews__btn reviews__pause" type="button" data-carousel-pause aria-pressed="false">Pause</button>
       <button class="reviews__btn reviews__next" type="button" data-carousel-next aria-label="Next review"><svg aria-hidden="true"><use href="#i-chev"></use></svg></button>
     </div>
     {% endif %}
-    <a class="btn reviews__link" href="{{ site.google_reviews_url }}" target="_blank" rel="noopener">Read all reviews on Google {{ icon("arrow") }}</a>
+    <a class="btn reviews__link" href="{{ reviews.maps_cid_url }}" target="_blank" rel="noopener">Read all reviews on Google<span class="sr-only"> (opens in a new tab)</span> {{ icon("arrow") }}</a>
   </div>
 </section>
 {% endif %}

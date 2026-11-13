@@ -85,7 +85,7 @@ same_as: []                                 # TBC: [{label: Instagram, url: "htt
 google_reviews_url: "https://share.google/PzhwgJ9QJMErZnk9R"
 
 # Switches
-show_reviews: false                         # OFF until the clinic agrees in writing; text only from notes/google-reviews.txt
+show_reviews: true                          # ON 13 Nov 2026 (Viraaj approved): homepage reviews band from content/google-reviews.json
 established: ""                             # TBC: year Arha opened. Empty = no year shown.
 
 # Forms: Google Apps Script web app (tools/forms/arha-forms.gs). Empty = forms show the call / WhatsApp fallback.
