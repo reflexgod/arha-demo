@@ -300,7 +300,7 @@ def static_pages():
     return [
         {"path": "/", "template": "home.html", "title": "Dentist on Peddar Road, South Mumbai | Arha Dental Care",
          "description": "Arha Dental Care, 107 Doctor House, Peddar Road: implants, crowns, root canal treatment and children's dentistry, led by prosthodontist Dr. Nikhil V. Jain.",
-         "crumbs": None, "schema": [org_node(), *person_nodes()], "og_image": "/static/img/home-hero-1080.jpg"},
+         "crumbs": None, "schema": [org_node(), *person_nodes()], "og_image": "/static/img/home-hero-918.jpg"},
         {"path": "/the-practice/", "template": "practice.html", "title": "About Arha Dental Care | Our Story and Team",
          "description": "Meet Dr. Nikhil V. Jain, prosthodontist and ITI Scholar (London), and Dr. Vasant P. Jain at Arha Dental Care, 107 Doctor House, Peddar Road, Mumbai.",
          "crumbs": [("Home", "/"), ("The practice", "/the-practice/")], "og_image": "/static/img/practice-hero-800.jpg", "fp": load("for-patients.yaml"),

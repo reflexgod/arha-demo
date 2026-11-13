@@ -48,16 +48,18 @@ def crop_to(im, ratio, focus, zoom=1.0, place=(0.5, 0.5)):
     return im.crop((left, top, left + w, top + h))
 
 
-def save_set(im, name, widths, out=IMG):
+def save_set(im, name, widths, out=IMG, sharpen=None):
     out.mkdir(parents=True, exist_ok=True)
     done = []
     for w in widths:
-        if w > im.width:
+        if w > im.width:  # never upscale
             print(f"  ! {name}: source only {im.width}px wide, skipping {w}")
             continue
         h = round(im.height * w / im.width)
         r = im.resize((w, h), Image.LANCZOS)
-        if w < im.width:
+        if sharpen:
+            r = r.filter(ImageFilter.UnsharpMask(radius=sharpen[0], percent=sharpen[1], threshold=sharpen[2]))
+        elif w < im.width:
             r = r.filter(ImageFilter.UnsharpMask(radius=0.7, percent=30, threshold=2))
         base = out / f"{name}-{w}"
         r.save(f"{base}.avif", "AVIF", quality=58, speed=4)
@@ -86,7 +88,7 @@ def do_image(spec):
         im = stock_grade(im)
     if spec.get("grade"):
         im = ffmpeg_grade(im, spec["grade"])
-    widths = save_set(im, spec["name"], spec["widths"])
+    widths = save_set(im, spec["name"], spec["widths"], sharpen=spec.get("sharpen"))
     rw, rh = spec["ratio"]
     return {"kind": spec["kind"], "alt": spec["alt"], "widths": widths, "ratio": [rw, rh], "src": spec["src"]}
 

@@ -183,17 +183,16 @@
   },
   "practice-story": {
    "kind": "real",
-   "alt": "Arha Dental Care sign at 107 Doctor House, with the names of Dr. Vasant P. Jain and Dr. Nikhil V. Jain",
+   "alt": "The Arha Dental Care sign in gold and black on the marble wall at reception",
    "widths": [
     480,
-    800,
-    1232
+    715
    ],
    "ratio": [
     616,
     659
    ],
-   "src": "assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1920.jpg"
+   "src": "src-assets/arha-dental-care-reception-sign-retouched.png"
   },
   "contact-photo": {
    "kind": "real",
@@ -576,19 +575,17 @@
   },
   "home-hero": {
    "kind": "real",
-   "alt": "The Arha Dental Care logo on the marble wall at reception, 107 Doctor House, Peddar Road",
+   "alt": "The Arha Dental Care sign in gold and black on the marble wall at reception",
    "widths": [
     480,
     720,
-    960,
-    1080,
-    1440
+    918
    ],
    "ratio": [
-    1092,
+    1200,
     1000
    ],
-   "src": "src-assets/arha-dental-care-reception-south-mumbai-dental-clinic-01.jpg"
+   "src": "src-assets/arha-dental-care-reception-sign-retouched.png"
   },
   "gallery-reception": {
    "kind": "real",

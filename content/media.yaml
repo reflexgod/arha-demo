@@ -20,7 +20,10 @@ images:
   - {name: cta-kids, kind: stock, src: src-assets/stock/v5/cta-kids.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.7, 0.5], alt: "A girl in a dental chair giving a thumbs-up beside her dentist"}
   # ---- The practice
   - {name: practice-hero, kind: real, src: assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-1920.jpg, ratio: [720, 740], focus: [0.62, 0.5], widths: [480, 800, 1440], alt: "The Arha Dental Care logo on the marble wall behind reception"}
-  - {name: practice-story, kind: real, src: assets/img/arha-dental-care-exterior-dental-clinic-peddar-road-1920.jpg, ratio: [616, 659], focus: [0.5, 0.5], widths: [480, 800, 1232], alt: "Arha Dental Care sign at 107 Doctor House, with the names of Dr. Vasant P. Jain and Dr. Nikhil V. Jain"}
+  # "Our story" arch (13 Nov 2026): the retouched sign photo, full-height 715x765 crop centred on the wordmark (x 215-887 of
+  # 1024), so the emblem and every letter sit inside the arch with ~21 source px either side; tighter than the home hero
+  # (no bulb, less plant). Native max width, gentle sharpening.
+  - {name: practice-story, kind: real, src: src-assets/arha-dental-care-reception-sign-retouched.png, ratio: [616, 659], focus: [0.538, 0.5], widths: [480, 715], sharpen: [0.8, 35, 3], alt: "The Arha Dental Care sign in gold and black on the marble wall at reception"}
   # ---- Contact
   - {name: contact-photo, kind: real, src: src-assets/dental-operatory-arha-dental-care-peddar-road-04.jpeg, ratio: [616, 552], focus: [0.42, 0.55], widths: [480, 800, 1232], alt: "Consultation desk in a treatment room at Arha Dental Care"}
 
@@ -59,7 +62,9 @@ images:
   - {name: blog-child-first-visit, kind: stock, src: src-assets/stock/v5/blog-child-first-visit.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.55], alt: "Pastel toothbrushes on a pale blue table"}
   - {name: blog-implant-cost, kind: stock, src: src-assets/stock/v5/blog-implant-cost.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.6], alt: "A dental model showing an implant and crown between two natural teeth"}
   # ---- Home hero still (reference layout: photo left, text right), graded like the old hero film
-  - {name: home-hero, kind: real, src: src-assets/arha-dental-care-reception-south-mumbai-dental-clinic-01.jpg, box: [0.6954, 0.088, 1.0, 0.46], ratio: [1092, 1000], widths: [480, 720, 960, 1080, 1440], focus: [0.5, 0.5], grade: "eq=contrast=1.05:saturation=1.04:gamma=0.97", alt: "The Arha Dental Care logo on the marble wall at reception, 107 Doctor House, Peddar Road"}
+  # Retouched sign photo (13 Nov 2026): source 1024x765, crop 918x765 from the left edge keeps the bulb, the full sign and
+  # the plant; widths stop at the native crop (no upscaled files); gentle sharpening at every size, including native.
+  - {name: home-hero, kind: real, src: src-assets/arha-dental-care-reception-sign-retouched.png, ratio: [1200, 1000], widths: [480, 720, 918], focus: [0.0, 0.5], sharpen: [0.8, 35, 3], alt: "The Arha Dental Care sign in gold and black on the marble wall at reception"}
 
   # Practice page gallery (Inside the practice): Arha's own photos, none used elsewhere on the site.
   - {name: gallery-reception, kind: real, src: assets/img/arha-dental-care-reception-wide-1080.jpg, ratio: [1, 1], focus: [0.5, 0.5], widths: [400, 800], alt: "Reception at Arha Dental Care, with the Arha logo on the marble wall"}
