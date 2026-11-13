@@ -83,8 +83,6 @@ sections:
         a: "It depends on the option and on how the area heals. Sometimes a temporary tooth can be fitted straight away; implants usually wait for some healing. We plan the timing with you."
       - q: "What if I leave the gap?"
         a: "Some gaps, especially at the very back, cause few problems. Others let teeth tip and drift, which can affect your bite. We explain what is likely in your case."
-      - q: "How soon after an extraction can a tooth be replaced?"
-        a: "It depends on the option you choose and how the area heals. A temporary replacement can often be made in the meantime. We explain the timing at your consultation."
 glance:
   time: "Depends on the option chosen [[TBC: typical timelines]]"
   fee: "[[TBC: from-prices, or \"on consultation\" || Written estimate after your consultation]]"
