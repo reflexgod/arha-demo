@@ -8,7 +8,7 @@
   <div class="wrap">
     <div class="post__img" data-callbar-first>{{ picture(post.image, "(min-width: 1440px) 1312px, 100vw", eager=True) }}</div>
     <div class="post__in">
-      <p class="label post__meta"><span>{{ post.category }}</span> · <time datetime="{{ post.date }}">{{ post.date | nicedate }}</time> · <span>{{ post.minutes }} min read</span></p>
+      <p class="meta post__meta"><span>{{ post.category }}</span> <time class="meta__time" datetime="{{ post.date }}">{{ post.date | nicedate }}</time> <span class="meta__time">{{ post.minutes }} min read</span></p>
       <h1>{{ post.h1 }}</h1>
       <p class="post__lead">{{ post.lead }}</p>
       <div class="byline">
@@ -81,9 +81,9 @@
       {% for b in (same + other)[:3] %}
       <article class="postcard" data-reveal>
         <a class="postcard__img" href="{{ b.path }}" tabindex="-1" aria-hidden="true">{{ picture(b.image, "(min-width: 992px) 400px, 100vw", alt="") }}</a>
-        <p class="label">{{ b.category }} · {{ b.minutes }} min read</p>
-        <h3><a href="{{ b.path }}">{{ b.h1 }}</a></h3>
-        <a class="tlink" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span> {{ icon("right") }}</a>
+        <p class="meta"><span>{{ b.category }}</span> <span class="meta__time">{{ b.minutes }} min read</span></p>
+        <h3 class="postcard__h"><a href="{{ b.path }}">{{ b.h1 }}</a></h3>
+        <a class="btn btn--sm" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span></a>
       </article>
       {% endfor %}
     </div>

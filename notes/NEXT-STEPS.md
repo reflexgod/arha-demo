@@ -4,6 +4,20 @@ Updated 13 Nov 2026 (after Step 4) so a fresh session can continue with no chat 
 Preview: https://arha-v5.pages.dev (Cloudflare Pages builds `python tools/build.py` -> `dist/` on every push to `v5`;
 noindexed).
 
+## 0. 16 Nov 2026: owner fixes (alignment, images, polish), pushed to v5
+- **Cards:** every card grid has one 4:3 media box (object-fit: cover); home cards, blog cards and "more from the blog" use
+  CSS subgrid, so headings, body text and buttons start on the same line across a row (flex fallback without subgrid).
+  The home film is re-cut at 4:3. Related-treatment and team cards push their button to the bottom.
+- **Blog listing:** topic chips in one centred row above an even 3/2/1-column grid; quiet meta line (small sans,
+  category + minutes), sentence-case chips, small outlined "Read more" button. The same meta line is on the posts.
+- **Images:** all Western studio stock is gone. Stock is now Indian patients and families (Unsplash only) in one warm grade
+  (stock_grade in tools/v5_media.py); real clinic photos on the root-canal home card and the general-dentistry hub.
+  Full list with source URLs and licences: notes/IMAGE-SOURCES.md (the v4 list is in IMAGE-SOURCES-v4-archive.md).
+  New Unsplash originals are src-assets/stock/v5/in-*.jpg; the people library is src-assets/stock/people/ (provenance
+  in `git show c45ca34:tools/people.json`).
+- **QA:** a card-row alignment audit (media heights, heading tops, button tops per row) is clean on all 30 pages at
+  1440/1280/768/390, with no horizontal overflow.
+
 ## 1. Current state (done)
 - **Pages (35):** home, the practice (gallery + walk-through), treatments hub + 12 treatment pages, emergency page,
   for-patients, contact, referrals, International & NRI hub (noindex, not linked yet), blog index + 7 posts,

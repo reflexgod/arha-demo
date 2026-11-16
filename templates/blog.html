@@ -9,22 +9,22 @@
   </div>
 </section>
 <section class="blogidx" aria-label="Articles">
-  <div class="wrap blogidx__grid">
+  <div class="wrap blogidx__in">
     <div class="blogidx__filter" role="group" aria-label="Filter articles by topic">
-      <p class="label">Filter by topic</p>
+      <p class="blogidx__filterlab">Filter by topic</p>
       <ul>
-        <li><button class="pill is-on" type="button" aria-pressed="true" data-filter="">All articles</button></li>
-        {% for c in blog.categories %}<li><button class="pill" type="button" aria-pressed="false" data-filter="{{ c }}">{{ c }}</button></li>{% endfor %}
+        <li><button class="chip is-on" type="button" aria-pressed="true" data-filter="">All articles</button></li>
+        {% for c in blog.categories %}<li><button class="chip" type="button" aria-pressed="false" data-filter="{{ c }}">{{ c }}</button></li>{% endfor %}
       </ul>
     </div>
     <div class="blogidx__cards">
       {% for b in posts %}
       <article class="postcard" data-cat="{{ b.category }}" data-reveal>
-        <a class="postcard__img" href="{{ b.path }}" tabindex="-1" aria-hidden="true">{{ picture(b.image, "(min-width: 992px) 420px, 100vw", alt="") }}</a>
-        <p class="label">{{ b.category }} · {{ b.minutes }} min read</p>
-        <h2 class="h3"><a href="{{ b.path }}">{{ b.h1 }}</a></h2>
-        <p>{{ b.excerpt }}</p>
-        <a class="tlink" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span> {{ icon("right") }}</a>
+        <a class="postcard__img" href="{{ b.path }}" tabindex="-1" aria-hidden="true">{{ picture(b.image, "(min-width: 1200px) 400px, (min-width: 768px) 45vw, 100vw", alt="") }}</a>
+        <p class="meta"><span>{{ b.category }}</span> <span class="meta__time">{{ b.minutes }} min read</span></p>
+        <h2 class="postcard__h"><a href="{{ b.path }}">{{ b.h1 }}</a></h2>
+        <p class="postcard__ex">{{ b.excerpt }}</p>
+        <a class="btn btn--sm" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span></a>
       </article>
       {% endfor %}
     </div>

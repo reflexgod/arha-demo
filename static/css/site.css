@@ -1168,3 +1168,70 @@ body.no-scroll { overflow: hidden; }
 .reviews__btn svg { width: 14px; height: 14px; transform: rotate(90deg); }
 .reviews__next svg { transform: rotate(-90deg); }
 .reviews__btn:hover { border-color: var(--ink); }
+
+/* ================================================================ 16 Nov 2026: card alignment + calmer blog labels
+   Every card grid shares one rule: a 4:3 media box (object-fit: cover), cards top-aligned, and where a card has a fixed
+   structure the rows are a subgrid, so headings, body text and buttons start on the same line across each row. */
+.card__media, .card__media--video { height: auto; aspect-ratio: 4 / 3; }
+.card__media .embed, .card__media .embed picture { height: 100%; }
+.card { display: flex; flex-direction: column; align-items: flex-start; }
+.card > * { width: 100%; }
+.card > .btn { width: auto; margin-top: auto; }
+.card p:last-of-type { margin-bottom: 24px; }
+@supports (grid-template-rows: subgrid) {
+  /* the parent's row gap would also open up inside each card, so cards are spaced with padding instead */
+  .cards__grid { align-items: stretch; row-gap: 0; }
+  .card { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; align-content: start; padding-bottom: var(--vpad); }
+  .card:nth-last-child(-n + 2) { padding-bottom: 0; }
+  .card > .btn { justify-self: start; align-self: start; margin-top: 24px; }
+  .card p:last-of-type { margin-bottom: 0; }
+}
+
+/* blog listing: topic chips in one row above a centred, even grid */
+.blogidx__in { max-width: 1440px; }
+.blogidx__filter { position: static; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px 16px; margin-bottom: 48px; }
+.blogidx__filterlab { font: 400 .9rem/1.2 var(--sans); color: var(--slate); }
+.blogidx__filter ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.blogidx__filter li + li { margin: 0; }
+.chip { padding: 8px 16px; border: 1px solid var(--sand); border-radius: 500px; background: none; color: var(--ink); cursor: pointer;
+        font: 400 .9rem/1.2 var(--sans); transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease); }
+.chip:hover { border-color: var(--ink); }
+.chip.is-on { background: var(--ink); border-color: var(--ink); color: #FDFDFD; }
+.blogidx__cards { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 64px 40px; }
+.postcard__img, .relt__img { aspect-ratio: 4 / 3; }
+.postcard { display: flex; flex-direction: column; align-items: flex-start; }
+.postcard > * { width: 100%; }
+.postcard > .btn { width: auto; margin-top: auto; }
+.postcard .postcard__ex { margin: 12px 0 24px; }
+.postcard .postcard__h { margin-top: 10px; font: 300 1.5rem/1.25 var(--sans); color: var(--ink); letter-spacing: -.005em; }
+.postcard .postcard__h a { text-decoration: none; }
+.postcard .postcard__h a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.morepost .postcard .postcard__h { margin-bottom: 24px; }
+@supports (grid-template-rows: subgrid) {
+  .blogidx__cards, .morepost__grid { row-gap: 0; }
+  .blogidx__cards .postcard:not([hidden]) { display: grid; grid-row: span 5; grid-template-rows: subgrid; row-gap: 0; padding-bottom: 64px; }
+  .morepost__grid .postcard { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; padding-bottom: 40px; }
+  .postcard > .btn { justify-self: start; align-self: end; margin-top: 0; }
+}
+/* small, quiet meta line (category · minutes) instead of the bold condensed label */
+.meta { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 4px 0; font: 400 .75rem/1.4 var(--sans); letter-spacing: .08em;
+        text-transform: uppercase; color: #5F6B74; }
+.meta__time::before { content: "·"; margin: 0 .6em; }
+.post__meta.meta { justify-content: inherit; margin-top: 40px; }
+@media (max-width: 767px) { .post__meta.meta { margin-top: 28px; } }
+.btn--sm { padding: 10px 16px; font: 400 .8rem/1 var(--sans); letter-spacing: .08em; gap: 6px; }
+.relt__card { display: flex; flex-direction: column; }
+.relt__card > .tlink { margin-top: auto; padding-top: 12px; }
+.member { display: flex; flex-direction: column; align-items: center; }
+.member > .btn { margin-top: auto; }
+.member > .member__reg, .member > .member__cred:last-of-type { margin-bottom: 24px; }
+@media (max-width: 1199px) { .blogidx__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 767px) {
+  .blogidx__cards { grid-template-columns: 1fr; gap: 48px; }
+  .blogidx__filter { justify-content: flex-start; margin-bottom: 32px; }
+  .blogidx__filter ul { justify-content: flex-start; }
+  .postcard .postcard__h { font-size: 1.35rem; }
+}
+@media (max-width: 767px) {
+  @supports (grid-template-rows: subgrid) { .card:nth-last-child(2) { padding-bottom: 64px; } }
+}

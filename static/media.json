@@ -2,45 +2,45 @@
  "images": {
   "home-card-fmr": {
    "kind": "stock",
-   "alt": "Woman with long grey hair laughing against a white background",
+   "alt": "An older woman in a shawl smiling as she talks with a friend",
    "widths": [
     480,
     800,
-    1248
+    1200
    ],
    "ratio": [
-    624,
-    400
+    4,
+    3
    ],
-   "src": "src-assets/stock/v5/home-card-fmr.jpg"
+   "src": "src-assets/stock/v5/in-card-fmr.jpg"
   },
   "home-card-rct": {
-   "kind": "stock",
-   "alt": "A dentist talking with a patient in the dental chair",
+   "kind": "real",
+   "alt": "The consultation desk in a treatment room at Arha Dental Care",
    "widths": [
     480,
     800,
-    1248
+    1080
    ],
    "ratio": [
-    624,
-    400
+    4,
+    3
    ],
-   "src": "src-assets/stock/v5/home-card-rct.jpg"
+   "src": "assets/img/arha-dental-care-consultation-desk-1080.jpg"
   },
   "home-card-kids": {
    "kind": "stock",
-   "alt": "A dentist checking a young child's teeth in a dental chair",
+   "alt": "A boy pointing to the gap where a milk tooth has come out",
    "widths": [
     480,
     800,
-    1248
+    1200
    ],
    "ratio": [
-    624,
-    400
+    4,
+    3
    ],
-   "src": "src-assets/stock/v5/home-card-kids.jpg"
+   "src": "src-assets/stock/v5/in-kids-card.jpg"
   },
   "home-commitment": {
    "kind": "real",
@@ -58,7 +58,7 @@
   },
   "hero-implants": {
    "kind": "stock",
-   "alt": "Smiling older man against a grey background",
+   "alt": "An older woman with white hair smiling at home",
    "widths": [
     640,
     1080,
@@ -69,11 +69,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-implants.jpg"
+   "src": "src-assets/stock/v5/in-hero-implants.jpg"
   },
   "hero-fmr": {
    "kind": "stock",
-   "alt": "Smiling woman against a white background",
+   "alt": "An older couple relaxing together on a sofa at home",
    "widths": [
     640,
     1080,
@@ -84,11 +84,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-fmr.jpg"
+   "src": "src-assets/stock/v5/in-hero-fmr.jpg"
   },
   "hero-rct": {
    "kind": "stock",
-   "alt": "A dentist pointing to an X-ray on a screen while a patient sits in the chair",
+   "alt": "A dentist adjusting the chair light before a check-up",
    "widths": [
     640,
     1080,
@@ -99,11 +99,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-rct.jpg"
+   "src": "src-assets/stock/v5/in-hero-rct.jpg"
   },
   "hero-kids": {
    "kind": "stock",
-   "alt": "A dentist examining a child in a dental chair",
+   "alt": "A mother holding her young daughter, both smiling",
    "widths": [
     640,
     1080,
@@ -114,11 +114,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-kids.jpg"
+   "src": "src-assets/stock/v5/in-hero-kids.jpg"
   },
   "cta-implants": {
    "kind": "stock",
-   "alt": "Older man with glasses laughing",
+   "alt": "An older man with a moustache in a white shirt, smiling",
    "widths": [
     400,
     780
@@ -127,23 +127,24 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-implants.jpg"
+   "src": "src-assets/stock/v5/in-cta-implants.jpg"
   },
   "cta-fmr": {
    "kind": "stock",
-   "alt": "Smiling man against a light grey background",
+   "alt": "An older woman smiling warmly",
    "widths": [
-    400
+    400,
+    780
    ],
    "ratio": [
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-fmr.jpg"
+   "src": "src-assets/stock/people/older-woman-smiling.jpg"
   },
   "cta-rct": {
    "kind": "stock",
-   "alt": "A dentist showing a patient a scan on a screen",
+   "alt": "A young man in glasses, smiling",
    "widths": [
     400,
     780
@@ -152,11 +153,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-rct.jpg"
+   "src": "src-assets/stock/people/young-man-glasses.jpg"
   },
   "cta-kids": {
    "kind": "stock",
-   "alt": "A girl in a dental chair giving a thumbs-up beside her dentist",
+   "alt": "A girl smiling, looking down",
    "widths": [
     400,
     780
@@ -165,7 +166,7 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-kids.jpg"
+   "src": "src-assets/stock/people/girl-smiling.jpg"
   },
   "practice-hero": {
    "kind": "real",
@@ -210,7 +211,7 @@
   },
   "hero-dentures": {
    "kind": "stock",
-   "alt": "Older man laughing",
+   "alt": "An older woman in a sari smiling, hands together in greeting",
    "widths": [
     640,
     1080,
@@ -221,11 +222,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-dentures.jpg"
+   "src": "src-assets/stock/v5/in-hero-dentures.jpg"
   },
   "hero-missing-teeth": {
    "kind": "stock",
-   "alt": "A dentist talking with a relaxed patient in a treatment room",
+   "alt": "An older man smiling",
    "widths": [
     640,
     1080,
@@ -236,11 +237,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-missing-teeth.jpg"
+   "src": "src-assets/stock/people/older-man-smiling.jpg"
   },
   "hero-teeth-whitening": {
    "kind": "stock",
-   "alt": "Close-up of a natural, bright smile",
+   "alt": "A woman with a natural, bright smile",
    "widths": [
     640,
     1080,
@@ -251,11 +252,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-teeth-whitening.jpg"
+   "src": "src-assets/stock/v5/in-hero-whitening.jpg"
   },
   "hero-smile-design": {
    "kind": "stock",
-   "alt": "Close-up of a smile",
+   "alt": "A young woman smiling at a table",
    "widths": [
     640,
     1080,
@@ -266,11 +267,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-smile-design.jpg"
+   "src": "src-assets/stock/people/young-woman-at-table.jpg"
   },
   "hero-gum-care": {
    "kind": "stock",
-   "alt": "A dental hygienist checking a smiling patient's teeth",
+   "alt": "A dental hygienist at work in a treatment room",
    "widths": [
     640,
     1080,
@@ -281,7 +282,7 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-gum-care.jpg"
+   "src": "src-assets/stock/v5/in-hero-gum.jpg"
   },
   "hero-aligners": {
    "kind": "stock",
@@ -315,7 +316,7 @@
   },
   "cta-dentures": {
    "kind": "stock",
-   "alt": "Smiling older man in a red jumper",
+   "alt": "A man in a turban, relaxed and smiling",
    "widths": [
     400,
     780
@@ -324,24 +325,23 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-dentures.jpg"
+   "src": "src-assets/stock/people/man-relaxed-smiling.jpg"
   },
   "cta-missing-teeth": {
    "kind": "stock",
-   "alt": "Smiling older man with a grey beard against a light background",
+   "alt": "A young man in a jacket, smiling",
    "widths": [
-    400,
-    780
+    400
    ],
    "ratio": [
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-missing-teeth.jpg"
+   "src": "src-assets/stock/people/young-man-suit.jpg"
   },
   "cta-teeth-whitening": {
    "kind": "stock",
-   "alt": "Close-up of a woman's natural smile",
+   "alt": "A smiling woman wearing a nose ring",
    "widths": [
     400,
     780
@@ -350,11 +350,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-teeth-whitening.jpg"
+   "src": "src-assets/stock/people/woman-smile-nath.jpg"
   },
   "cta-smile-design": {
    "kind": "stock",
-   "alt": "Woman smiling and looking down",
+   "alt": "A young woman smiling outdoors",
    "widths": [
     400,
     780
@@ -363,11 +363,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-smile-design.jpg"
+   "src": "src-assets/stock/people/young-woman-smiling.jpg"
   },
   "cta-gum-care": {
    "kind": "stock",
-   "alt": "Close-up of a healthy smile",
+   "alt": "A young woman in glasses laughing",
    "widths": [
     400,
     780
@@ -376,7 +376,7 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-gum-care.jpg"
+   "src": "src-assets/stock/people/woman-glasses-laughing.jpg"
   },
   "cta-aligners": {
    "kind": "stock",
@@ -393,7 +393,7 @@
   },
   "cta-emergency": {
    "kind": "stock",
-   "alt": "Smiling man against a grey background",
+   "alt": "A young man in a scarf, smiling",
    "widths": [
     400,
     780
@@ -402,11 +402,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-emergency.jpg"
+   "src": "src-assets/stock/people/young-man-scarf.jpg"
   },
   "hub-implants": {
    "kind": "stock",
-   "alt": "Smiling older woman with short dark hair",
+   "alt": "Two older men talking and laughing together",
    "widths": [
     640,
     1080,
@@ -416,11 +416,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/hub-implants.jpg"
+   "src": "src-assets/stock/v5/in-hero-missing.jpg"
   },
   "hub-restorative": {
    "kind": "stock",
-   "alt": "Couple smiling against a light wall",
+   "alt": "A couple laughing together outdoors",
    "widths": [
     640,
     1080,
@@ -430,11 +430,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/hub-restorative.jpg"
+   "src": "src-assets/stock/people/couple-laughing-outdoors.jpg"
   },
   "hub-cosmetic": {
    "kind": "stock",
-   "alt": "Close-up of a bright smile",
+   "alt": "A woman smiling, in an orange top",
    "widths": [
     640,
     1080,
@@ -444,11 +444,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/hub-cosmetic.jpg"
+   "src": "src-assets/stock/people/woman-smiling-orange.jpg"
   },
   "hub-children": {
    "kind": "stock",
-   "alt": "A dentist showing a dental mirror to a smiling girl in a dental chair",
+   "alt": "Parents and their baby smiling together outdoors",
    "widths": [
     640,
     1080,
@@ -458,21 +458,20 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/hub-children.jpg"
+   "src": "src-assets/stock/v5/in-hub-children.jpg"
   },
   "hub-general": {
-   "kind": "stock",
-   "alt": "A dentist with a patient in a bright treatment room",
+   "kind": "real",
+   "alt": "A dental chair and unit in a treatment room at Arha Dental Care",
    "widths": [
     640,
-    1080,
-    1312
+    1080
    ],
    "ratio": [
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/hub-general.jpg"
+   "src": "assets/img/arha-dental-care-operatory-chair-1080.jpg"
   },
   "hero-for-patients": {
    "kind": "real",
@@ -491,7 +490,7 @@
   },
   "hero-childrens-orthodontics": {
    "kind": "stock",
-   "alt": "A smiling boy in a dental chair",
+   "alt": "A smiling boy outdoors",
    "widths": [
     640,
     1080,
@@ -502,7 +501,7 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-childrens-orthodontics.jpg"
+   "src": "src-assets/stock/people/boy-smiling.jpg"
   },
   "cta-childrens-orthodontics": {
    "kind": "stock",
@@ -519,7 +518,7 @@
   },
   "blog-implant-timeline": {
    "kind": "stock",
-   "alt": "Models of a dental implant with its crown, in the bone and in the jaw",
+   "alt": "A boy and his grandfather smiling together",
    "widths": [
     640,
     1080,
@@ -529,11 +528,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/blog-implant-timeline.jpg"
+   "src": "src-assets/stock/people/grandfather-grandson.jpg"
   },
   "blog-implant-vs-bridge": {
    "kind": "stock",
-   "alt": "Smiling man against a light grey background",
+   "alt": "A couple talking things over",
    "widths": [
     640,
     1080,
@@ -543,11 +542,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/blog-implant-vs-bridge.jpg"
+   "src": "src-assets/stock/people/couple-talking.jpg"
   },
   "blog-implant-aftercare": {
    "kind": "stock",
-   "alt": "A toothbrush in a glass",
+   "alt": "A woman smiling at her phone at a café table",
    "widths": [
     640,
     1080,
@@ -557,11 +556,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/blog-implant-aftercare.jpg"
+   "src": "src-assets/stock/people/woman-relaxed-cafe.jpg"
   },
   "blog-implants-right-for-me": {
    "kind": "stock",
-   "alt": "Older couple smiling together",
+   "alt": "Grandparents with their grandchild",
    "widths": [
     640,
     1080,
@@ -571,7 +570,7 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/blog-implants-right-for-me.jpg"
+   "src": "src-assets/stock/people/grandparents-grandchild.jpg"
   },
   "home-hero": {
    "kind": "real",
@@ -732,7 +731,7 @@
   },
   "blog-root-canal": {
    "kind": "stock",
-   "alt": "A tooth cut in half, showing the pulp and the root canals inside",
+   "alt": "A young man with a calm smile",
    "widths": [
     640,
     1080,
@@ -742,11 +741,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/blog-root-canal.jpg"
+   "src": "src-assets/stock/people/young-man-smile-closeup.jpg"
   },
   "blog-child-first-visit": {
    "kind": "stock",
-   "alt": "Pastel toothbrushes on a pale blue table",
+   "alt": "A mother and her young daughter laughing together",
    "widths": [
     640,
     1080,
@@ -756,11 +755,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/blog-child-first-visit.jpg"
+   "src": "src-assets/stock/people/mother-daughter-laughing.jpg"
   },
   "blog-implant-cost": {
    "kind": "stock",
-   "alt": "A dental model showing an implant and crown between two natural teeth",
+   "alt": "A couple laughing at home over a book",
    "widths": [
     640,
     1080,
@@ -770,7 +769,7 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/blog-implant-cost.jpg"
+   "src": "src-assets/stock/people/couple-reading.jpg"
   }
  },
  "videos": {
@@ -779,7 +778,7 @@
    "sizes": [
     [
      1080,
-     608
+     810
     ]
    ],
    "poster_widths": [
@@ -789,7 +788,7 @@
    ],
    "ratio": [
     1080,
-    608
+    810
    ],
    "src": "src-assets/IMG_2303.MOV",
    "audio": false,

@@ -83,9 +83,9 @@
       {% for b in doc_posts[:3] %}
       <article class="postcard" data-reveal>
         <a class="postcard__img" href="{{ b.path }}" tabindex="-1" aria-hidden="true">{{ picture(b.image, "(min-width: 992px) 400px, 100vw", alt="") }}</a>
-        <p class="label">{{ b.category }} · {{ b.minutes }} min read</p>
-        <h3><a href="{{ b.path }}">{{ b.h1 }}</a></h3>
-        <a class="tlink" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span> {{ icon("right") }}</a>
+        <p class="meta"><span>{{ b.category }}</span> <span class="meta__time">{{ b.minutes }} min read</span></p>
+        <h3 class="postcard__h"><a href="{{ b.path }}">{{ b.h1 }}</a></h3>
+        <a class="btn btn--sm" href="{{ b.path }}">Read more<span class="sr-only">: {{ b.h1 }}</span></a>
       </article>
       {% endfor %}
     </div>
