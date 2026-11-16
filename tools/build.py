@@ -103,6 +103,7 @@ def picture(name, sizes, cls="", eager=False, alt=None, pos=None):
     srcset = lambda ext: ", ".join(f"/static/img/{name}-{w}.{ext} {w}w" for w in ws)
     big = ws[-1]
     h = round(big * rh / rw)
+    pos = pos or m.get("pos")  # media.yaml pos: the focal point when the box crops the file
     style = f' style="object-position:{pos}"' if pos else ""
     load_attr = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
     alt_text = html.escape(alt if alt is not None else m["alt"], quote=True)
@@ -333,7 +334,7 @@ def international_page():
     crumbs = [("Home", "/"), ("International patients", "/international-patients/")]
     return [{"path": "/international-patients/", "template": "international.html", "title": i["title"],
              "description": i["description"], "crumbs": crumbs, "noindex": True, "i": i, "plans": plans,
-             "plan_json": plan_json, "og_image": "/static/img/practice-story-800.jpg",
+             "plan_json": plan_json, "og_image": "/static/img/practice-story-715.jpg",
              "schema": [org_node(), breadcrumb_node(crumbs), faq_node(i["faqs"])]}]
 
 
@@ -463,6 +464,52 @@ def check(pages, rendered):
 
 
 # ------------------------------------------------------------------------------------------------ main
+ASSET_RE = re.compile(r'/static/([A-Za-z0-9_./-]+?\.(?:avif|webp|jpe?g|png|svg|gif|mp4|webm|css|js|woff2|ico))(?:\?v=[0-9a-f]+)?')
+
+
+def hash_assets(dist):
+    """Cache busting (16 Nov 2026): every file under dist/static is renamed to name.<hash8>.ext from its content, and
+    every reference in the built HTML, sitemap, CSS and JS is rewritten (src, srcset, preloads, og:image, JSON-LD, font
+    URLs inside the CSS). A changed image therefore always gets a new URL, so /static/* can be cached forever and no
+    browser keeps an old photo. Leaves first, then CSS/JS (their contents point at fonts and images), then pages."""
+    static = dist / "static"
+    mapping = {}
+
+    def digest(path):
+        return hashlib.sha256(path.read_bytes()).hexdigest()[:8]
+
+    def rename(f):
+        rel = f.relative_to(static).as_posix()
+        stem, ext = rel.rsplit(".", 1)
+        new = f"{stem}.{digest(f)}.{ext}"
+        f.rename(static / new)
+        mapping[rel] = new
+
+    def rewrite(text):
+        def sub(m):
+            new = mapping.get(m.group(1))
+            if new is None:
+                raise SystemExit(f"hash_assets: reference to a missing file /static/{m.group(1)}")
+            return "/static/" + new
+        return ASSET_RE.sub(sub, text)
+
+    files = [f for f in static.rglob("*") if f.is_file()]
+    for f in files:
+        if f.suffix not in (".css", ".js"):
+            rename(f)
+    for f in files:
+        if f.suffix in (".css", ".js"):
+            f.write_text(rewrite(f.read_text(encoding="utf-8")), encoding="utf-8")
+            rename(f)
+    for f in dist.rglob("*"):
+        if f.is_file() and static not in f.parents and f.suffix in (".html", ".xml", ".txt", ".webmanifest", ".json"):
+            t = f.read_text(encoding="utf-8")
+            n = rewrite(t)
+            if n != t:
+                f.write_text(n, encoding="utf-8")
+    return mapping
+
+
 def main():
     if DIST.exists():
         shutil.rmtree(DIST)
@@ -482,6 +529,9 @@ def main():
     treatments = {t["t"]["slug"]: t["t"] for t in treatment_pages()}
     env.globals["built_treatments"] = treatments
     env.globals["doctor_path"] = doctor_path
+    # Doctor photos: a slot doctor-<id>-card / doctor-<id>-portrait in content/media.yaml switches the logo placeholder
+    # for the photo everywhere (home team cards, the practice page, the profile hero, "Also at Arha"). See NEXT-STEPS.md.
+    env.globals["has_image"] = lambda name: name in MEDIA["images"]
 
     blog = blog_pages()
     pages = (static_pages() + treatment_pages() + more_pages() + blog
@@ -518,15 +568,13 @@ def main():
                "  Permissions-Policy: camera=(), microphone=(), geolocation=()"]
     if SITE["preview"]:
         headers.append("  X-Robots-Tag: noindex, nofollow")
-    headers += ["", "/static/css/*", "  Cache-Control: public, max-age=31536000, immutable",
-                "/static/js/*", "  Cache-Control: public, max-age=31536000, immutable",
-                "/static/fonts/*", "  Cache-Control: public, max-age=31536000, immutable",
-                "/static/img/*", "  Cache-Control: public, max-age=2592000",
-                "/static/video/*", "  Cache-Control: public, max-age=2592000", ""]
+    # every /static file name carries its content hash (hash_assets), so all of it can be cached for a year
+    headers += ["", "/static/*", "  Cache-Control: public, max-age=31536000, immutable", ""]
     (DIST / "_headers").write_text("\n".join(headers), encoding="utf-8")
     (DIST / "_redirects").write_text((CONTENT / "redirects.txt").read_text(encoding="utf-8"), encoding="utf-8")
 
-    print(f"built {len(pages)} pages -> {DIST}")
+    hashed = hash_assets(DIST)
+    print(f"built {len(pages)} pages -> {DIST} ({len(hashed)} static files hashed)")
     if errors:
         print("\n".join("  ERROR " + e for e in errors))
         sys.exit(1)

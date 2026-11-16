@@ -91,7 +91,10 @@ def do_image(spec):
         im = ffmpeg_grade(im, spec["grade"])
     widths = save_set(im, spec["name"], spec["widths"], sharpen=spec.get("sharpen"))
     rw, rh = spec["ratio"]
-    return {"kind": spec["kind"], "alt": spec["alt"], "widths": widths, "ratio": [rw, rh], "src": spec["src"]}
+    out = {"kind": spec["kind"], "alt": spec["alt"], "widths": widths, "ratio": [rw, rh], "src": spec["src"]}
+    if spec.get("pos"):  # object-position for boxes whose shape differs from the file (e.g. phone heroes)
+        out["pos"] = spec["pos"]
+    return out
 
 
 def ffmpeg_grade(im, filters):
@@ -164,6 +167,11 @@ def main():
     only = set(sys.argv[2:])
     spec = yaml.safe_load((ROOT / "content" / "media.yaml").read_text(encoding="utf-8"))
     man = json.loads(MANIFEST.read_text(encoding="utf-8")) if MANIFEST.exists() else {"images": {}, "videos": {}}
+    for kind in ("images", "videos"):  # a slot deleted from media.yaml leaves the site too (e.g. a doctor photo taken back out)
+        keep = {s["name"] for s in spec.get(kind, [])}
+        for gone in [n for n in man[kind] if n not in keep]:
+            print("dropped", kind, gone)
+            del man[kind][gone]
     if what in ("images", "all"):
         for s in spec["images"]:
             if only and s["name"] not in only:

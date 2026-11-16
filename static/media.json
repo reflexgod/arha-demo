@@ -2,7 +2,7 @@
  "images": {
   "home-card-fmr": {
    "kind": "stock",
-   "alt": "An older woman in a shawl smiling as she talks with a friend",
+   "alt": "An older woman with white hair smiling at home",
    "widths": [
     480,
     800,
@@ -12,7 +12,7 @@
     4,
     3
    ],
-   "src": "src-assets/stock/v5/in-card-fmr.jpg"
+   "src": "src-assets/stock/v5/in-hero-implants.jpg"
   },
   "home-card-rct": {
    "kind": "real",
@@ -30,7 +30,7 @@
   },
   "home-card-kids": {
    "kind": "stock",
-   "alt": "A boy pointing to the gap where a milk tooth has come out",
+   "alt": "A smiling girl in a pink top outdoors",
    "widths": [
     480,
     800,
@@ -40,7 +40,7 @@
     4,
     3
    ],
-   "src": "src-assets/stock/v5/in-kids-card.jpg"
+   "src": "src-assets/stock/v5/in-kids-card-2.jpg"
   },
   "home-commitment": {
    "kind": "real",
@@ -58,7 +58,7 @@
   },
   "hero-implants": {
    "kind": "stock",
-   "alt": "An older woman with white hair smiling at home",
+   "alt": "An older woman in a shawl smiling as she talks with a friend",
    "widths": [
     640,
     1080,
@@ -69,7 +69,8 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-implants.jpg"
+   "src": "src-assets/stock/v5/in-card-fmr.jpg",
+   "pos": "22% 20%"
   },
   "hero-fmr": {
    "kind": "stock",
@@ -99,7 +100,8 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-rct.jpg"
+   "src": "src-assets/stock/v5/in-hero-rct.jpg",
+   "pos": "35% 20%"
   },
   "hero-kids": {
    "kind": "stock",
@@ -114,7 +116,8 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-kids.jpg"
+   "src": "src-assets/stock/v5/in-hero-kids.jpg",
+   "pos": "0% 20%"
   },
   "cta-implants": {
    "kind": "stock",
@@ -222,11 +225,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-dentures.jpg"
+   "src": "src-assets/stock/v5/in-hero-dentures.jpg",
+   "pos": "35% 20%"
   },
   "hero-missing-teeth": {
    "kind": "stock",
-   "alt": "An older man smiling",
+   "alt": "An older woman in a lilac headscarf, smiling",
    "widths": [
     640,
     1080,
@@ -237,11 +241,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/older-man-smiling.jpg"
+   "src": "src-assets/stock/v5/in-hub-implants.jpg",
+   "pos": "30% 20%"
   },
   "hero-teeth-whitening": {
    "kind": "stock",
-   "alt": "A woman with a natural, bright smile",
+   "alt": "A woman smiling by a window, holding a straw hat",
    "widths": [
     640,
     1080,
@@ -252,11 +257,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-whitening.jpg"
+   "src": "src-assets/stock/v5/in-hero-whitening-3.jpg",
+   "pos": "30% 25%"
   },
   "hero-smile-design": {
    "kind": "stock",
-   "alt": "A young woman smiling at a table",
+   "alt": "A young woman smiling outdoors",
    "widths": [
     640,
     1080,
@@ -267,11 +273,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/young-woman-at-table.jpg"
+   "src": "src-assets/stock/v5/in-hero-smile.jpg",
+   "pos": "35% 30%"
   },
   "hero-gum-care": {
    "kind": "stock",
-   "alt": "A dental hygienist at work in a treatment room",
+   "alt": "A woman brushing her teeth in front of the bathroom mirror",
    "widths": [
     640,
     1080,
@@ -282,7 +289,8 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-gum.jpg"
+   "src": "src-assets/stock/v5/in-hero-gum-2.jpg",
+   "pos": "30% 25%"
   },
   "hero-aligners": {
    "kind": "stock",
@@ -316,7 +324,7 @@
   },
   "cta-dentures": {
    "kind": "stock",
-   "alt": "A man in a turban, relaxed and smiling",
+   "alt": "An older man in a white shirt, smiling",
    "widths": [
     400,
     780
@@ -325,7 +333,7 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/man-relaxed-smiling.jpg"
+   "src": "src-assets/stock/v5/in-cta-dentures.jpg"
   },
   "cta-missing-teeth": {
    "kind": "stock",
@@ -406,7 +414,7 @@
   },
   "hub-implants": {
    "kind": "stock",
-   "alt": "Two older men talking and laughing together",
+   "alt": "A grandfather and his family talking together at home",
    "widths": [
     640,
     1080,
@@ -416,7 +424,7 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/in-hero-missing.jpg"
+   "src": "src-assets/stock/v5/in-hub-implants-2.jpg"
   },
   "hub-restorative": {
    "kind": "stock",
@@ -434,7 +442,7 @@
   },
   "hub-cosmetic": {
    "kind": "stock",
-   "alt": "A woman smiling, in an orange top",
+   "alt": "Two friends smiling outdoors",
    "widths": [
     640,
     1080,
@@ -444,7 +452,7 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/people/woman-smiling-orange.jpg"
+   "src": "src-assets/stock/people/friends-two-women.jpg"
   },
   "hub-children": {
    "kind": "stock",
@@ -731,7 +739,7 @@
   },
   "blog-root-canal": {
    "kind": "stock",
-   "alt": "A young man with a calm smile",
+   "alt": "A man relaxing in a wooden chair at home",
    "widths": [
     640,
     1080,
@@ -741,7 +749,7 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/people/young-man-smile-closeup.jpg"
+   "src": "src-assets/stock/v5/in-blog-rct.jpg"
   },
   "blog-child-first-visit": {
    "kind": "stock",

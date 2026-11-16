@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon, book_href, landmark %}
+{% from "_macros.html" import icon, book_href, landmark, member_photo %}
 {% block preload %}<link rel="preload" as="image" href="/static/img/practice-hero-800.avif" type="image/avif" imagesrcset="/static/img/practice-hero-480.avif 480w, /static/img/practice-hero-800.avif 800w, /static/img/practice-hero-1440.avif 1440w" imagesizes="(min-width: 992px) 50vw, 100vw">{% endblock %}
 {% block body_class %}page-practice{% endblock %}
 {% block crumbs %}{% endblock %}
@@ -92,7 +92,7 @@
     <div class="team__grid">
       {% for d in site.doctors + site.team_tbc %}
       <article class="member" id="{{ d.id }}"{% if d.get("hidden") %} hidden{% endif %} data-reveal>
-        <div class="member__photo"><img class="member__ph" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="Portrait of {{ d.name | strip_tbc or 'a team member' }} to follow"></div>
+        {{ member_photo(d) }}
         <h3>{{ d.name | tbc }}</h3>
         <h4 class="pill">{{ d.role | tbc }}</h4>
         {% if d.get("credentials") %}<p class="member__cred">{{ d.credentials }}</p>{% endif %}

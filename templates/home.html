@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon, book_href %}
+{% from "_macros.html" import icon, book_href, member_photo %}
 {% block preload %}<link rel="preload" as="image" href="/static/img/home-hero-720.avif" type="image/avif" fetchpriority="high" imagesrcset="/static/img/home-hero-480.avif 480w, /static/img/home-hero-720.avif 720w, /static/img/home-hero-918.avif 918w" imagesizes="(min-width: 992px) 50vw, 100vw">{% endblock %}
 {% block body_class %}page-home{% endblock %}
 {% block main %}
@@ -90,7 +90,7 @@
     <div class="team__grid">
       {% for d in site.doctors %}
       <article class="member" data-reveal>
-        <div class="member__photo"><img class="member__ph" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="Portrait of {{ d.name }} to follow"></div>
+        {{ member_photo(d) }}
         <h3>{{ d.name }}</h3>
         <p class="pill">{{ d.role }}</p>
         <p class="member__cred">{{ d.credentials }}</p>

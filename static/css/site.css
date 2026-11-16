@@ -420,7 +420,7 @@ body.no-scroll { overflow: hidden; }
 /* ---------------------------------------------------------------- treatment page */
 .thero { position: relative; padding: 72px 0; overflow: hidden; }
 .thero__img { position: absolute; inset: 0; }
-.thero__img img { width: 100%; height: 100%; object-fit: cover; }
+.thero__img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; }  /* keep heads in frame when the box is wider or narrower than the file */
 .thero__card { position: relative; margin: 0 96px 0 calc(50% + 24px); padding: 48px; background: var(--paper); }
 @media (min-width: 1920px) { .thero { padding: 96px 0; } .thero__card { margin-right: 120px; padding: 80px; } }
 .thero__card h1 { font-size: var(--h1); }

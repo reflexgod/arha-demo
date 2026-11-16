@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import icon, book_href %}
+{% from "_macros.html" import icon, book_href, member_photo, doctor_portrait %}
 {% block body_class %}page-doctor{% endblock %}
 {% block crumbs %}{% endblock %}
 {% block main %}
@@ -17,9 +17,7 @@
       </div>
     </div>
   </div>
-  <div class="phero__media dhero__ph">
-    <img src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="Portrait of {{ d.name }} to follow">
-  </div>
+  {{ doctor_portrait(d) }}
 </section>
 {% from "_macros.html" import crumbs %}{{ crumbs(page.crumbs) }}
 
@@ -100,7 +98,7 @@
     <div class="team__grid team__grid--one">
       {% for o in site.doctors if o.id != d.id %}
       <article class="member" data-reveal>
-        <div class="member__photo"><img class="member__ph" src="/static/brand/logo-icon-gold.svg" width="919" height="902" alt="Portrait of {{ o.name }} to follow"></div>
+        {{ member_photo(o) }}
         <h3>{{ o.name }}</h3>
         <p class="pill">{{ o.role }}</p>
         <p class="member__cred">{{ o.credentials }}</p>
