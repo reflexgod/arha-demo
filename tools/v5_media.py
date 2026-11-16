@@ -22,14 +22,19 @@ MANIFEST = ROOT / "static" / "media.json"
 
 
 def stock_grade(im):
-    """One grade for all stock (16 Nov 2026: warm natural light, to sit with the clinic's own photos): saturation
-    -12%, a gentle warm shift, soft contrast, lifted blacks and held-back highlights."""
+    """One grade for all stock (17 Nov 2026, editorial pass: calm, daylight, soft and warm). First a half-strength
+    grey-world white balance, so sources shot under very different light (teal walls, magenta saris, tungsten) land on
+    one palette; then saturation -20%, a warm shift, soft contrast, lifted blacks, held-back highlights and a
+    gentle midtone lift (gamma 0.9)."""
     x = np.asarray(im.convert("RGB")).astype(np.float32) / 255
+    mean = x.reshape(-1, 3).mean(0)
+    x = x * (1 + 0.5 * (mean.mean() / np.maximum(mean, 1e-3) - 1))
     lum = (x @ np.array([0.2126, 0.7152, 0.0722], np.float32))[..., None]
-    x = lum + (x - lum) * 0.88
-    x = x * np.array([1.025, 1.0, 0.955], np.float32)
-    x = 0.5 + (x - 0.5) * 0.95
-    x = 0.03 + x * (0.97 - 0.03)
+    x = lum + (x - lum) * 0.80
+    x = x * np.array([1.035, 1.0, 0.94], np.float32)
+    x = 0.5 + (x - 0.5) * 0.92
+    x = 0.04 + x * (0.96 - 0.04)
+    x = np.clip(x, 0, 1) ** 0.9  # high-key midtone lift: airy daylight, as on the style reference
     return Image.fromarray(np.clip(x * 255, 0, 255).astype(np.uint8))
 
 

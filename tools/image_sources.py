@@ -1,12 +1,12 @@
 """Write notes/IMAGE-SOURCES.md: every image and video slot on the v5 site, once, with its photographer, source page and
 licence (stock) or origin (Arha's own). Run after any image change:
 
-    .venv/Scripts/python -I tools/image_sources.py [BASE_REF]
+    .venv/Scripts/python -I tools/image_sources.py [BASE_REF] ["label for this round"]
 
 Sources: content/media.yaml (slots), src-assets/stock/v5/credits.json (v5 picks, keyed by file stem) and the people
 library's provenance (`git show c45ca34:tools/people.json`). With BASE_REF (default 4d4cb13, the round-1 owner-fix push),
-a "Replaced on 16 Nov 2026 (round 2)" table lists every slot whose source file changed since that commit. Everything in
-the existing file from the line starting HISTORY onwards is kept as is (hand-written history).
+a "Replaced on <today> (<label>)" table lists every slot whose source file changed since that commit. Every earlier
+"Replaced on" / "Removed on" section of the existing file is kept below it as history.
 """
 import json
 import subprocess
@@ -18,8 +18,8 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "notes" / "IMAGE-SOURCES.md"
-HISTORY = "## Removed on 16 Nov 2026 (owner feedback on the preview)"
 BASE = sys.argv[1] if len(sys.argv) > 1 else "4d4cb13"
+LABEL = sys.argv[2] if len(sys.argv) > 2 else "owner follow-up"
 
 
 def git(*args):
@@ -85,8 +85,9 @@ def main():
     tail = ""
     if OUT.exists():
         text = OUT.read_text(encoding="utf-8")
-        if HISTORY in text:
-            tail = text[text.index(HISTORY):]
+        starts = [i for i in (text.find("\n## Replaced on "), text.find("\n## Removed on ")) if i >= 0]
+        if starts:
+            tail = text[min(starts) + 1:]
 
     today = date.today()
     lines = [
@@ -95,6 +96,10 @@ def main():
         f"Generated {today.day} {today:%b %Y} by `tools/image_sources.py` from `content/media.yaml`, "
         "`src-assets/stock/v5/credits.json` and the people library's provenance",
         "(`git show c45ca34:tools/people.json`). Every image on the v5 site is listed once. Rerun it after any image change.",
+        "",
+        "**Style (17 Nov 2026):** calm, editorial, natural daylight, one soft warm grade. Real clinic photos first; stock only where",
+        "the clinic has no photo, and then interiors and close details (light on a chair, hands, instruments) before people.",
+        "People are Indian patients and families caught mid-moment, never posed studio smiles, and no person appears twice.",
         "",
         "**Licence:** every stock photo is from Unsplash under the **Unsplash License** (https://unsplash.com/license): free for",
         "commercial and non-commercial use, no permission or attribution needed. Unsplash+ (paid) results were filtered out of every",
@@ -121,13 +126,13 @@ def main():
         "|---|---|---|---|",
         *[f"| `{s['name']}` | `{s['src']}` | Arha Dental Care's own photo/video (owner-supplied) | Owned by the clinic |" for s in real],
         "",
-        f"## Replaced on 16 Nov 2026 (round 2, owner follow-up; compared with {BASE})",
+        f"## Replaced on {today.day} {today:%b %Y} ({LABEL}; compared with {BASE})",
         "",
         "| Slot | Before | Now | Alt text now |",
         "|---|---|---|---|",
         *changed,
         "",
-        "Same photo, re-framed for headroom or to keep a face in frame: " + ", ".join(f"`{n}`" for n in framed) + ".",
+        ("Same photo, re-framed for headroom or to keep a face in frame: " + ", ".join(f"`{n}`" for n in framed) + ".") if framed else "No slot kept its photo with a new crop; every stock image was regraded with the 17 Nov grade.",
         "",
     ]
     OUT.write_text("\n".join(lines) + ("\n" + tail if tail else ""), encoding="utf-8")

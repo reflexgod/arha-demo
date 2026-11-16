@@ -5,19 +5,19 @@
 
 images:
   # ---- Home
-  - {name: home-card-fmr, kind: stock, src: src-assets/stock/v5/in-hero-implants.jpg, ratio: [4, 3], widths: [480, 800, 1200], focus: [0.55, 0.5], alt: "An older woman with white hair smiling at home"}
+  - {name: home-card-fmr, kind: stock, src: src-assets/stock/v5/ed-card-fmr-2.jpg, ratio: [4, 3], widths: [480, 800, 1200], focus: [0.6, 0.45], alt: "A woman applying a tilak to an older man at a family celebration"}
   - {name: home-card-rct, kind: real, src: assets/img/arha-dental-care-consultation-desk-1080.jpg, ratio: [4, 3], widths: [480, 800, 1080], focus: [0.5, 0.5], alt: "The consultation desk in a treatment room at Arha Dental Care"}
-  - {name: home-card-kids, kind: stock, src: src-assets/stock/v5/in-kids-card-2.jpg, ratio: [4, 3], widths: [480, 800, 1200], focus: [0.5, 0.4], alt: "A smiling girl in a pink top outdoors"}
+  - {name: home-card-kids, kind: stock, src: src-assets/stock/v5/ed-card-kids.jpg, ratio: [4, 3], widths: [480, 800, 1200], focus: [0.6, 0.45], alt: "A little girl laughing in a garden"}
   - {name: home-commitment, kind: real, src: assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1920.jpg, ratio: [720, 600], focus: [0.5, 0.5], widths: [480, 800, 1440], alt: "Reception and waiting area at Arha Dental Care, Peddar Road"}
   # ---- Treatment heroes (full width) and sidebar cards
   - {name: hero-implants, kind: stock, src: src-assets/stock/v5/in-card-fmr.jpg, zoom: 1.0, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.3, 0.0], place: [0.3, 0.0], pos: "22% 20%", alt: "An older woman in a shawl smiling as she talks with a friend"}
-  - {name: hero-fmr, kind: stock, src: src-assets/stock/v5/in-hero-fmr.jpg, zoom: 1.0, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.45, 0.45], place: [0.4, 0.45], alt: "An older couple relaxing together on a sofa at home"}
-  - {name: hero-rct, kind: stock, src: src-assets/stock/v5/in-hero-rct.jpg, flip: true, zoom: 1.1, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.4, 0.0], place: [0.3, 0.0], pos: "35% 20%", alt: "A dentist adjusting the chair light before a check-up"}
-  - {name: hero-kids, kind: stock, src: src-assets/stock/v5/in-hero-kids.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.45, 0.0], place: [0.3, 0.0], pos: "0% 20%", alt: "A mother holding her young daughter, both smiling"}
-  - {name: cta-implants, kind: stock, src: src-assets/stock/v5/in-cta-implants.jpg, zoom: 1.0, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.4], alt: "An older man with a moustache in a white shirt, smiling"}
-  - {name: cta-fmr, kind: stock, src: src-assets/stock/people/older-woman-smiling.jpg, zoom: 1.0, ratio: [3, 5], widths: [400, 780], focus: [0.4, 0.4], alt: "An older woman smiling warmly"}
-  - {name: cta-rct, kind: stock, src: src-assets/stock/people/young-man-glasses.jpg, zoom: 1.0, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.4], alt: "A young man in glasses, smiling"}
-  - {name: cta-kids, kind: stock, src: src-assets/stock/people/girl-smiling.jpg, zoom: 1.0, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.4], alt: "A girl smiling, looking down"}
+  - {name: hero-fmr, kind: stock, src: src-assets/stock/v5/ed-hero-fmr.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.5, 0.4], place: [0.35, 0.42], alt: "An older couple sharing a laugh in a garden"}
+  - {name: hero-rct, kind: stock, src: src-assets/stock/v5/ed-hero-rct.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.42, 0.45], place: [0.35, 0.45], alt: "A dental chair under a soft treatment light"}
+  - {name: hero-kids, kind: stock, src: src-assets/stock/v5/ed-cta-kids.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.45, 0.3], place: [0.35, 0.55], pos: "5% 25%", alt: "A mother hugging her young daughter outdoors"}
+  - {name: cta-implants, kind: real, src: src-assets/dental-implant-equipment-arha-dental-care-mumbai.jpeg, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.45], alt: "The panoramic X-ray unit at Arha Dental Care"}
+  - {name: cta-fmr, kind: real, src: assets/img/arha-dental-care-reception-desk-1080.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.5], alt: "The reception desk at Arha Dental Care, Peddar Road"}
+  - {name: cta-rct, kind: real, src: assets/img/arha-dental-care-operatory-laptop-1080.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.6, 0.5], alt: "A treatment room at Arha Dental Care"}
+  - {name: cta-kids, kind: stock, src: src-assets/stock/v5/ed-hub-children.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.55, 0.5], alt: "A mother holding her son in the sunshine"}
   # ---- The practice
   - {name: practice-hero, kind: real, src: assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-01-1920.jpg, ratio: [720, 740], focus: [0.62, 0.5], widths: [480, 800, 1440], alt: "The Arha Dental Care logo on the marble wall behind reception"}
   # "Our story" arch (13 Nov 2026): the retouched sign photo, full-height 715x765 crop centred on the wordmark (x 215-887 of
@@ -28,39 +28,39 @@ images:
   - {name: contact-photo, kind: real, src: src-assets/dental-operatory-arha-dental-care-peddar-road-04.jpeg, ratio: [616, 552], focus: [0.42, 0.55], widths: [480, 800, 1232], alt: "Consultation desk in a treatment room at Arha Dental Care"}
 
   # ---- Step 3: treatment heroes (subject left of the text card) and sidebar cards
-  - {name: hero-dentures, kind: stock, src: src-assets/stock/v5/in-hero-dentures.jpg, zoom: 1.05, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.6, 0.0], place: [0.35, 0.0], pos: "35% 20%", alt: "An older woman in a sari smiling, hands together in greeting"}
-  - {name: hero-missing-teeth, kind: stock, src: src-assets/stock/v5/in-hub-implants.jpg, zoom: 1.15, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.52, 0.0], place: [0.3, 0.0], pos: "30% 20%", alt: "An older woman in a lilac headscarf, smiling"}
-  - {name: hero-teeth-whitening, kind: stock, src: src-assets/stock/v5/in-hero-whitening-3.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.55, 0.0], place: [0.3, 0.0], pos: "30% 25%", alt: "A woman smiling by a window, holding a straw hat"}
-  - {name: hero-smile-design, kind: stock, src: src-assets/stock/v5/in-hero-smile.jpg, zoom: 1.0, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.38, 0.45], place: [0.3, 0.45], pos: "35% 30%", alt: "A young woman smiling outdoors"}
+  - {name: hero-dentures, kind: stock, src: src-assets/stock/v5/ed-hero-dentures.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.42, 0.0], place: [0.35, 0.0], pos: "35% 20%", alt: "An older woman reading the morning paper at home"}
+  - {name: hero-missing-teeth, kind: stock, src: src-assets/stock/v5/in-hub-children.jpg, zoom: 1.1, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.45, 0.3], place: [0.35, 0.45], pos: "35% 25%", alt: "Parents and their baby smiling together outdoors"}
+  - {name: hero-teeth-whitening, kind: stock, src: src-assets/stock/v5/ed-hero-whitening.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.47, 0.5], place: [0.35, 0.5], pos: "28% 40%", alt: "A woman reading in a sunlit archway"}
+  - {name: hero-smile-design, kind: stock, src: src-assets/stock/v5/in-hero-whitening-3.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.55, 0.0], place: [0.3, 0.0], pos: "30% 25%", alt: "A woman smiling by a window, holding a straw hat"}
   - {name: hero-gum-care, kind: stock, src: src-assets/stock/v5/in-hero-gum-2.jpg, flip: true, zoom: 1.0, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.3, 0.42], place: [0.3, 0.42], pos: "30% 25%", alt: "A woman brushing her teeth in front of the bathroom mirror"}
-  - {name: hero-aligners, kind: stock, src: src-assets/stock/v5/hero-aligners.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [1.0, 0.5], alt: "Woman fitting a clear aligner"}
+  - {name: hero-aligners, kind: stock, src: src-assets/stock/v5/ed-hero-aligners.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.62, 0.55], place: [0.38, 0.5], alt: "Hands opening a clear aligner case"}
   - {name: hero-emergency, kind: real, src: src-assets/dental-operatory-arha-dental-care-peddar-road-02.jpeg, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.5, 0.5], alt: "A treatment room at Arha Dental Care, ready for patients"}
-  - {name: cta-dentures, kind: stock, src: src-assets/stock/v5/in-cta-dentures.jpg, zoom: 1.0, ratio: [3, 5], widths: [400, 780], focus: [0.72, 0.4], alt: "An older man in a white shirt, smiling"}
-  - {name: cta-missing-teeth, kind: stock, src: src-assets/stock/people/young-man-suit.jpg, zoom: 1.6, ratio: [3, 5], widths: [400, 780], focus: [0.6, 0.5], alt: "A young man in a jacket, smiling"}
-  - {name: cta-teeth-whitening, kind: stock, src: src-assets/stock/people/woman-smile-nath.jpg, zoom: 1.0, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.4], alt: "A smiling woman wearing a nose ring"}
-  - {name: cta-smile-design, kind: stock, src: src-assets/stock/people/young-woman-smiling.jpg, zoom: 1.0, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.4], alt: "A young woman smiling outdoors"}
-  - {name: cta-gum-care, kind: stock, src: src-assets/stock/people/woman-glasses-laughing.jpg, zoom: 1.0, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.4], alt: "A young woman in glasses laughing"}
+  - {name: cta-dentures, kind: stock, src: src-assets/stock/v5/ed-cta-dentures.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.55], alt: "Daylight through blinds on a treatment couch"}
+  - {name: cta-missing-teeth, kind: stock, src: src-assets/stock/v5/ed-cta-missing.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.45, 0.6], alt: "Instruments laid out on a tray by the window"}
+  - {name: cta-teeth-whitening, kind: stock, src: src-assets/stock/v5/ed-cta-whitening.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.45, 0.42], alt: "A woman reading in soft window light"}
+  - {name: cta-smile-design, kind: stock, src: src-assets/stock/v5/ed-cta-smile.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.45, 0.45], alt: "A woman working at a desk by an open window"}
+  - {name: cta-gum-care, kind: stock, src: src-assets/stock/v5/ed-cta-gum.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.72, 0.5], alt: "Morning light through a bathroom window"}
   - {name: cta-aligners, kind: stock, src: src-assets/stock/v5/cta-aligners.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.55, 0.5], alt: "A clear aligner held in an open hand"}
-  - {name: cta-emergency, kind: stock, src: src-assets/stock/people/young-man-scarf.jpg, zoom: 1.0, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.4], alt: "A young man in a scarf, smiling"}
+  - {name: cta-emergency, kind: real, src: assets/img/arha-dental-care-planning-room-1080.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.5], alt: "The consultation room at Arha Dental Care"}
   # ---- Treatments hub: one image per category
   - {name: hub-implants, kind: stock, src: src-assets/stock/v5/in-hub-implants-2.jpg, ratio: [1312, 600], widths: [640, 1080, 1312], focus: [0.5, 0.45], alt: "A grandfather and his family talking together at home"}
-  - {name: hub-restorative, kind: stock, src: src-assets/stock/people/couple-laughing-outdoors.jpg, ratio: [1312, 600], widths: [640, 1080, 1312], focus: [0.5, 0.1], alt: "A couple laughing together outdoors"}
-  - {name: hub-cosmetic, kind: stock, src: src-assets/stock/people/friends-two-women.jpg, ratio: [1312, 600], widths: [640, 1080, 1312], focus: [0.4, 0.55], alt: "Two friends smiling outdoors"}
-  - {name: hub-children, kind: stock, src: src-assets/stock/v5/in-hub-children.jpg, ratio: [1312, 600], widths: [640, 1080, 1312], focus: [0.5, 0.35], alt: "Parents and their baby smiling together outdoors"}
+  - {name: hub-restorative, kind: stock, src: src-assets/stock/v5/ed-hub-restorative.jpg, ratio: [1312, 600], widths: [640, 1080, 1312], focus: [0.5, 0.35], place: [0.5, 0.35], alt: "A father lifting his toddler at home"}
+  - {name: hub-cosmetic, kind: stock, src: src-assets/stock/v5/ed-hub-cosmetic-2.jpg, ratio: [1312, 600], widths: [640, 1080, 1312], focus: [0.4, 0.4], alt: "A young woman pausing at a table by the window"}
+  - {name: hub-children, kind: stock, src: src-assets/stock/v5/ed-hub-children-2.jpg, ratio: [1312, 600], widths: [640, 1080, 1312], focus: [0.5, 0.4], alt: "A mother and her daughter sharing a quiet moment"}
   - {name: hub-general, kind: real, src: assets/img/arha-dental-care-operatory-chair-1080.jpg, ratio: [1312, 600], widths: [640, 1080], focus: [0.5, 0.55], alt: "A dental chair and unit in a treatment room at Arha Dental Care"}
   # ---- For patients (Arha's own treatment room)
   - {name: hero-for-patients, kind: real, src: src-assets/dental-operatory-arha-dental-care-peddar-road-01.jpeg, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.5, 0.5], alt: "A treatment room at Arha Dental Care, Peddar Road"}
 
   # ---- Phase 2 parity pass: children's orthodontics page (noindex) and blog posts
-  - {name: hero-childrens-orthodontics, kind: stock, src: src-assets/stock/people/boy-smiling.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.47, 0.35], place: [0.3, 0.4], alt: "A smiling boy outdoors"}
+  - {name: hero-childrens-orthodontics, kind: stock, src: src-assets/stock/v5/in-kids-card-2.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.5, 0.0], place: [0.32, 0.0], pos: "30% 20%", alt: "A smiling girl in a pink top outdoors"}
   - {name: cta-childrens-orthodontics, kind: stock, src: src-assets/stock/v5/cta-childrens-orthodontics.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.5], alt: "Close-up of a smile with braces"}
-  - {name: blog-implant-timeline, kind: stock, src: src-assets/stock/people/grandfather-grandson.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.4], alt: "A boy and his grandfather smiling together"}
-  - {name: blog-implant-vs-bridge, kind: stock, src: src-assets/stock/people/couple-talking.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.2], alt: "A couple talking things over"}
-  - {name: blog-implant-aftercare, kind: stock, src: src-assets/stock/people/woman-relaxed-cafe.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.45], alt: "A woman smiling at her phone at a café table"}
-  - {name: blog-implants-right-for-me, kind: stock, src: src-assets/stock/people/grandparents-grandchild.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.3], alt: "Grandparents with their grandchild"}
+  - {name: blog-implant-timeline, kind: stock, src: src-assets/stock/v5/ed-blog-timeline.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.4], alt: "Two friends laughing on a veranda"}
+  - {name: blog-implant-vs-bridge, kind: stock, src: src-assets/stock/v5/ed-blog-bridge.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.25], alt: "A couple laughing over a book on the sofa"}
+  - {name: blog-implant-aftercare, kind: stock, src: src-assets/stock/v5/ed-blog-aftercare.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.5], alt: "A quiet, sunlit living room in the afternoon"}
+  - {name: blog-implants-right-for-me, kind: stock, src: src-assets/stock/v5/ed-blog-right-2.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.45], alt: "An older couple talking on their doorstep"}
   - {name: blog-root-canal, kind: stock, src: src-assets/stock/v5/in-blog-rct.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.55, 0.42], alt: "A man relaxing in a wooden chair at home"}
-  - {name: blog-child-first-visit, kind: stock, src: src-assets/stock/people/mother-daughter-laughing.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.45], alt: "A mother and her young daughter laughing together"}
-  - {name: blog-implant-cost, kind: stock, src: src-assets/stock/people/couple-reading.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.28], alt: "A couple laughing at home over a book"}
+  - {name: blog-child-first-visit, kind: stock, src: src-assets/stock/v5/ed-blog-child.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.55, 0.35], alt: "A father drawing with his daughter on the sofa"}
+  - {name: blog-implant-cost, kind: stock, src: src-assets/stock/v5/ed-blog-cost.jpg, ratio: [1312, 656], widths: [640, 1080, 1312], focus: [0.5, 0.42], alt: "A father and his little daughter at home"}
   # ---- Home hero still (reference layout: photo left, text right), graded like the old hero film
   # Retouched sign photo (13 Nov 2026): source 1024x765, crop 918x765 from the left edge keeps the bulb, the full sign and
   # the plant; widths stop at the native crop (no upscaled files); gentle sharpening at every size, including native.

@@ -29,6 +29,23 @@ noindexed).
   `tools/qa/shots.py` (full-page shots + card-row audit), `tools/qa/ba.py` (before/after element shots).
 - **v5_media.py** now drops manifest entries for slots deleted from media.yaml.
 
+### 17 Nov, later: editorial image pass (owner: "stock still doesn't feel premium")
+- Style reference studied (a UK practice site; never name or link it in the repo): soft daylight, cream/greige
+  backgrounds, low saturation, lifted shadows, lots of interiors and close details. Its people photos are mostly posed
+  beauty stock, which the owner ruled out, so Arha keeps the treatment and uses candid moments instead.
+- Order of choice per slot: Arha's own photo (3 side cards now show real interiors: X-ray unit, reception, treatment
+  room; the cta-emergency slot also has the consultation room but no page renders it yet) -> interior or detail stock (chair under a lamp, hands with an aligner case, instruments by a
+  window, window light on a treatment couch, bathroom morning light) -> candid Indian people mid-moment.
+- One grade for all stock (`stock_grade`, 17 Nov): half-strength grey-world white balance, saturation -20%, warm shift,
+  soft contrast, lifted blacks, gamma 0.9 lift. Real clinic photos are not graded.
+- Rules held: no person twice (the generator fails on a reused file; people checked by eye), every head in frame at
+  1440/768/390 (`tools/qa/crops.py` sheets + hero shots), portrait sources never in 1440x770 heroes (they crop to a band
+  across the head). Unsplash only this round (Pexels/Pixabay allowed by the brief, not needed).
+- Rejected on review: a grandfather whose head touches the source's top edge, a studio-grey backdrop, a crying toddler,
+  crystals mistaken for an aligner, a non-Indian subject. Downloaded but unused files stay in src-assets (git-ignored).
+- Style board for the owner: review/editorial-17nov/style-board-side-by-side.jpg (local only: it contains the
+  reference site's photos, so it is never published or committed).
+
 ### Doctor photos: how to swap them in (one file)
 The placeholders (gold logo on stone) stay until the photos arrive. To swap in a doctor's photo, add up to two lines to
 `content/media.yaml` (`images:` list), then run `.venv/Scripts/python -I tools/v5_media.py images <slot names>` and build:

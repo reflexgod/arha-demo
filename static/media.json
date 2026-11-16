@@ -2,7 +2,7 @@
  "images": {
   "home-card-fmr": {
    "kind": "stock",
-   "alt": "An older woman with white hair smiling at home",
+   "alt": "A woman applying a tilak to an older man at a family celebration",
    "widths": [
     480,
     800,
@@ -12,7 +12,7 @@
     4,
     3
    ],
-   "src": "src-assets/stock/v5/in-hero-implants.jpg"
+   "src": "src-assets/stock/v5/ed-card-fmr-2.jpg"
   },
   "home-card-rct": {
    "kind": "real",
@@ -30,7 +30,7 @@
   },
   "home-card-kids": {
    "kind": "stock",
-   "alt": "A smiling girl in a pink top outdoors",
+   "alt": "A little girl laughing in a garden",
    "widths": [
     480,
     800,
@@ -40,7 +40,7 @@
     4,
     3
    ],
-   "src": "src-assets/stock/v5/in-kids-card-2.jpg"
+   "src": "src-assets/stock/v5/ed-card-kids.jpg"
   },
   "home-commitment": {
    "kind": "real",
@@ -74,7 +74,7 @@
   },
   "hero-fmr": {
    "kind": "stock",
-   "alt": "An older couple relaxing together on a sofa at home",
+   "alt": "An older couple sharing a laugh in a garden",
    "widths": [
     640,
     1080,
@@ -85,11 +85,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-fmr.jpg"
+   "src": "src-assets/stock/v5/ed-hero-fmr.jpg"
   },
   "hero-rct": {
    "kind": "stock",
-   "alt": "A dentist adjusting the chair light before a check-up",
+   "alt": "A dental chair under a soft treatment light",
    "widths": [
     640,
     1080,
@@ -100,12 +100,11 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-rct.jpg",
-   "pos": "35% 20%"
+   "src": "src-assets/stock/v5/ed-hero-rct.jpg"
   },
   "hero-kids": {
    "kind": "stock",
-   "alt": "A mother holding her young daughter, both smiling",
+   "alt": "A mother hugging her young daughter outdoors",
    "widths": [
     640,
     1080,
@@ -116,12 +115,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-kids.jpg",
-   "pos": "0% 20%"
+   "src": "src-assets/stock/v5/ed-cta-kids.jpg",
+   "pos": "5% 25%"
   },
   "cta-implants": {
-   "kind": "stock",
-   "alt": "An older man with a moustache in a white shirt, smiling",
+   "kind": "real",
+   "alt": "The panoramic X-ray unit at Arha Dental Care",
    "widths": [
     400,
     780
@@ -130,11 +129,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/in-cta-implants.jpg"
+   "src": "src-assets/dental-implant-equipment-arha-dental-care-mumbai.jpeg"
   },
   "cta-fmr": {
-   "kind": "stock",
-   "alt": "An older woman smiling warmly",
+   "kind": "real",
+   "alt": "The reception desk at Arha Dental Care, Peddar Road",
    "widths": [
     400,
     780
@@ -143,11 +142,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/older-woman-smiling.jpg"
+   "src": "assets/img/arha-dental-care-reception-desk-1080.jpg"
   },
   "cta-rct": {
-   "kind": "stock",
-   "alt": "A young man in glasses, smiling",
+   "kind": "real",
+   "alt": "A treatment room at Arha Dental Care",
    "widths": [
     400,
     780
@@ -156,11 +155,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/young-man-glasses.jpg"
+   "src": "assets/img/arha-dental-care-operatory-laptop-1080.jpg"
   },
   "cta-kids": {
    "kind": "stock",
-   "alt": "A girl smiling, looking down",
+   "alt": "A mother holding her son in the sunshine",
    "widths": [
     400,
     780
@@ -169,7 +168,7 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/girl-smiling.jpg"
+   "src": "src-assets/stock/v5/ed-hub-children.jpg"
   },
   "practice-hero": {
    "kind": "real",
@@ -214,7 +213,7 @@
   },
   "hero-dentures": {
    "kind": "stock",
-   "alt": "An older woman in a sari smiling, hands together in greeting",
+   "alt": "An older woman reading the morning paper at home",
    "widths": [
     640,
     1080,
@@ -225,12 +224,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-dentures.jpg",
+   "src": "src-assets/stock/v5/ed-hero-dentures.jpg",
    "pos": "35% 20%"
   },
   "hero-missing-teeth": {
    "kind": "stock",
-   "alt": "An older woman in a lilac headscarf, smiling",
+   "alt": "Parents and their baby smiling together outdoors",
    "widths": [
     640,
     1080,
@@ -241,10 +240,26 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hub-implants.jpg",
-   "pos": "30% 20%"
+   "src": "src-assets/stock/v5/in-hub-children.jpg",
+   "pos": "35% 25%"
   },
   "hero-teeth-whitening": {
+   "kind": "stock",
+   "alt": "A woman reading in a sunlit archway",
+   "widths": [
+    640,
+    1080,
+    1440,
+    1920
+   ],
+   "ratio": [
+    1440,
+    770
+   ],
+   "src": "src-assets/stock/v5/ed-hero-whitening.jpg",
+   "pos": "28% 40%"
+  },
+  "hero-smile-design": {
    "kind": "stock",
    "alt": "A woman smiling by a window, holding a straw hat",
    "widths": [
@@ -259,22 +274,6 @@
    ],
    "src": "src-assets/stock/v5/in-hero-whitening-3.jpg",
    "pos": "30% 25%"
-  },
-  "hero-smile-design": {
-   "kind": "stock",
-   "alt": "A young woman smiling outdoors",
-   "widths": [
-    640,
-    1080,
-    1440,
-    1920
-   ],
-   "ratio": [
-    1440,
-    770
-   ],
-   "src": "src-assets/stock/v5/in-hero-smile.jpg",
-   "pos": "35% 30%"
   },
   "hero-gum-care": {
    "kind": "stock",
@@ -294,7 +293,7 @@
   },
   "hero-aligners": {
    "kind": "stock",
-   "alt": "Woman fitting a clear aligner",
+   "alt": "Hands opening a clear aligner case",
    "widths": [
     640,
     1080,
@@ -305,7 +304,7 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/hero-aligners.jpg"
+   "src": "src-assets/stock/v5/ed-hero-aligners.jpg"
   },
   "hero-emergency": {
    "kind": "real",
@@ -324,7 +323,7 @@
   },
   "cta-dentures": {
    "kind": "stock",
-   "alt": "An older man in a white shirt, smiling",
+   "alt": "Daylight through blinds on a treatment couch",
    "widths": [
     400,
     780
@@ -333,23 +332,24 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/in-cta-dentures.jpg"
+   "src": "src-assets/stock/v5/ed-cta-dentures.jpg"
   },
   "cta-missing-teeth": {
    "kind": "stock",
-   "alt": "A young man in a jacket, smiling",
+   "alt": "Instruments laid out on a tray by the window",
    "widths": [
-    400
+    400,
+    780
    ],
    "ratio": [
     3,
     5
    ],
-   "src": "src-assets/stock/people/young-man-suit.jpg"
+   "src": "src-assets/stock/v5/ed-cta-missing.jpg"
   },
   "cta-teeth-whitening": {
    "kind": "stock",
-   "alt": "A smiling woman wearing a nose ring",
+   "alt": "A woman reading in soft window light",
    "widths": [
     400,
     780
@@ -358,11 +358,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/woman-smile-nath.jpg"
+   "src": "src-assets/stock/v5/ed-cta-whitening.jpg"
   },
   "cta-smile-design": {
    "kind": "stock",
-   "alt": "A young woman smiling outdoors",
+   "alt": "A woman working at a desk by an open window",
    "widths": [
     400,
     780
@@ -371,11 +371,11 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/young-woman-smiling.jpg"
+   "src": "src-assets/stock/v5/ed-cta-smile.jpg"
   },
   "cta-gum-care": {
    "kind": "stock",
-   "alt": "A young woman in glasses laughing",
+   "alt": "Morning light through a bathroom window",
    "widths": [
     400,
     780
@@ -384,7 +384,7 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/woman-glasses-laughing.jpg"
+   "src": "src-assets/stock/v5/ed-cta-gum.jpg"
   },
   "cta-aligners": {
    "kind": "stock",
@@ -400,8 +400,8 @@
    "src": "src-assets/stock/v5/cta-aligners.jpg"
   },
   "cta-emergency": {
-   "kind": "stock",
-   "alt": "A young man in a scarf, smiling",
+   "kind": "real",
+   "alt": "The consultation room at Arha Dental Care",
    "widths": [
     400,
     780
@@ -410,7 +410,7 @@
     3,
     5
    ],
-   "src": "src-assets/stock/people/young-man-scarf.jpg"
+   "src": "assets/img/arha-dental-care-planning-room-1080.jpg"
   },
   "hub-implants": {
    "kind": "stock",
@@ -428,7 +428,7 @@
   },
   "hub-restorative": {
    "kind": "stock",
-   "alt": "A couple laughing together outdoors",
+   "alt": "A father lifting his toddler at home",
    "widths": [
     640,
     1080,
@@ -438,11 +438,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/people/couple-laughing-outdoors.jpg"
+   "src": "src-assets/stock/v5/ed-hub-restorative.jpg"
   },
   "hub-cosmetic": {
    "kind": "stock",
-   "alt": "Two friends smiling outdoors",
+   "alt": "A young woman pausing at a table by the window",
    "widths": [
     640,
     1080,
@@ -452,11 +452,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/people/friends-two-women.jpg"
+   "src": "src-assets/stock/v5/ed-hub-cosmetic-2.jpg"
   },
   "hub-children": {
    "kind": "stock",
-   "alt": "Parents and their baby smiling together outdoors",
+   "alt": "A mother and her daughter sharing a quiet moment",
    "widths": [
     640,
     1080,
@@ -466,7 +466,7 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/in-hub-children.jpg"
+   "src": "src-assets/stock/v5/ed-hub-children-2.jpg"
   },
   "hub-general": {
    "kind": "real",
@@ -498,7 +498,7 @@
   },
   "hero-childrens-orthodontics": {
    "kind": "stock",
-   "alt": "A smiling boy outdoors",
+   "alt": "A smiling girl in a pink top outdoors",
    "widths": [
     640,
     1080,
@@ -509,7 +509,8 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/people/boy-smiling.jpg"
+   "src": "src-assets/stock/v5/in-kids-card-2.jpg",
+   "pos": "30% 20%"
   },
   "cta-childrens-orthodontics": {
    "kind": "stock",
@@ -526,7 +527,7 @@
   },
   "blog-implant-timeline": {
    "kind": "stock",
-   "alt": "A boy and his grandfather smiling together",
+   "alt": "Two friends laughing on a veranda",
    "widths": [
     640,
     1080,
@@ -536,11 +537,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/people/grandfather-grandson.jpg"
+   "src": "src-assets/stock/v5/ed-blog-timeline.jpg"
   },
   "blog-implant-vs-bridge": {
    "kind": "stock",
-   "alt": "A couple talking things over",
+   "alt": "A couple laughing over a book on the sofa",
    "widths": [
     640,
     1080,
@@ -550,11 +551,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/people/couple-talking.jpg"
+   "src": "src-assets/stock/v5/ed-blog-bridge.jpg"
   },
   "blog-implant-aftercare": {
    "kind": "stock",
-   "alt": "A woman smiling at her phone at a café table",
+   "alt": "A quiet, sunlit living room in the afternoon",
    "widths": [
     640,
     1080,
@@ -564,11 +565,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/people/woman-relaxed-cafe.jpg"
+   "src": "src-assets/stock/v5/ed-blog-aftercare.jpg"
   },
   "blog-implants-right-for-me": {
    "kind": "stock",
-   "alt": "Grandparents with their grandchild",
+   "alt": "An older couple talking on their doorstep",
    "widths": [
     640,
     1080,
@@ -578,7 +579,7 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/people/grandparents-grandchild.jpg"
+   "src": "src-assets/stock/v5/ed-blog-right-2.jpg"
   },
   "home-hero": {
    "kind": "real",
@@ -753,7 +754,7 @@
   },
   "blog-child-first-visit": {
    "kind": "stock",
-   "alt": "A mother and her young daughter laughing together",
+   "alt": "A father drawing with his daughter on the sofa",
    "widths": [
     640,
     1080,
@@ -763,11 +764,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/people/mother-daughter-laughing.jpg"
+   "src": "src-assets/stock/v5/ed-blog-child.jpg"
   },
   "blog-implant-cost": {
    "kind": "stock",
-   "alt": "A couple laughing at home over a book",
+   "alt": "A father and his little daughter at home",
    "widths": [
     640,
     1080,
@@ -777,7 +778,7 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/people/couple-reading.jpg"
+   "src": "src-assets/stock/v5/ed-blog-cost.jpg"
   }
  },
  "videos": {
