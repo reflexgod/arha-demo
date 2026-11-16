@@ -75,8 +75,8 @@ fees:
       rows: ["Night guard", "Sports mouthguard", "Fluoride application (children)", "Fissure sealant (per tooth)"]
   ctas:
     - {image: cta-implants, heading: "Thinking about implants?", text: "Book a consultation to see if they suit you.", href: "/treatments/dental-implants/"}
-    - {image: cta-kids, heading: "Bringing your child?", text: "Gentle first visits for children.", href: "/treatments/kids-dentistry/"}
-    - {image: cta-smile-design, heading: "Changing your smile?", text: "Options planned around your face.", href: "/treatments/smile-design/"}
+    - {image: fp-kids, heading: "Bringing your child?", text: "Gentle first visits for children.", href: "/treatments/kids-dentistry/"}
+    - {image: fp-smile, heading: "Changing your smile?", text: "Options planned around your face.", href: "/treatments/smile-design/"}
 
 technology:
   heading: "The rooms and equipment behind your treatment"

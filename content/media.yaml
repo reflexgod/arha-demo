@@ -10,7 +10,7 @@ images:
   - {name: home-card-kids, kind: stock, src: src-assets/stock/v5/ed-card-kids.jpg, ratio: [4, 3], widths: [480, 800, 1200], focus: [0.6, 0.45], alt: "A little girl laughing in a garden"}
   - {name: home-commitment, kind: real, src: assets/img/arha-dental-care-reception-south-mumbai-dental-clinic-02-1920.jpg, ratio: [720, 600], focus: [0.5, 0.5], widths: [480, 800, 1440], alt: "Reception and waiting area at Arha Dental Care, Peddar Road"}
   # ---- Treatment heroes (full width) and sidebar cards
-  - {name: hero-implants, kind: stock, src: src-assets/stock/v5/in-card-fmr.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.4, 0.0], place: [0.22, 0.0], pos: "0% 20%", alt: "An older woman in a shawl smiling as she talks with a friend"}
+  - {name: hero-implants, kind: stock, src: src-assets/stock/v5/ed-hero-implants-3.jpg, flip: true, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.0, 0.0], place: [0.0, 0.0], pos: "0% 30%", alt: "An older woman in a sari sitting quietly at home, eyes lowered"}
   - {name: hero-fmr, kind: stock, src: src-assets/stock/v5/ed-hero-fmr.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.5, 0.4], place: [0.35, 0.42], alt: "An older couple sharing a laugh in a garden"}
   - {name: hero-rct, kind: stock, src: src-assets/stock/v5/ed-hero-rct.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.42, 0.45], place: [0.35, 0.45], alt: "A dental chair under a soft treatment light"}
   - {name: hero-kids, kind: stock, src: src-assets/stock/v5/ed-cta-kids.jpg, zoom: 1.25, ratio: [1440, 770], widths: [640, 1080, 1440, 1920], focus: [0.45, 0.3], place: [0.35, 0.55], pos: "5% 25%", alt: "A mother hugging her young daughter outdoors"}
@@ -42,6 +42,8 @@ images:
   - {name: cta-gum-care, kind: stock, src: src-assets/stock/v5/ed-cta-gum.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.72, 0.5], alt: "Morning light through a bathroom window"}
   - {name: cta-aligners, kind: stock, src: src-assets/stock/v5/cta-aligners.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.55, 0.5], alt: "A clear aligner held in an open hand"}
   - {name: cta-emergency, kind: real, src: assets/img/arha-dental-care-planning-room-1080.jpg, ratio: [3, 5], widths: [400, 780], focus: [0.5, 0.5], alt: "The consultation room at Arha Dental Care"}
+  - {name: fp-kids, kind: stock, src: src-assets/stock/v5/ed-fp-kids.jpg, ratio: [4, 5], widths: [400, 780], focus: [0.45, 0.4], alt: "A hand holding a toothbrush with a dab of toothpaste"}
+  - {name: fp-smile, kind: real, src: assets/img/arha-dental-care-planning-room-1080.jpg, ratio: [4, 5], widths: [400, 780], focus: [0.5, 0.5], alt: "The consultation room at Arha Dental Care"}
   # ---- Treatments hub: one image per category
   - {name: hub-implants, kind: stock, src: src-assets/stock/v5/in-hub-implants-2.jpg, ratio: [1312, 600], widths: [640, 1080, 1312], focus: [0.5, 0.45], alt: "A grandfather and his family talking together at home"}
   - {name: hub-restorative, kind: stock, src: src-assets/stock/v5/ed-hub-restorative.jpg, ratio: [1312, 600], widths: [640, 1080, 1312], focus: [0.5, 0.35], place: [0.5, 0.35], alt: "A father lifting his toddler at home"}

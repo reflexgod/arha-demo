@@ -21,6 +21,7 @@ SECTIONS = [
     ("post-related", "Blog post: related treatments", "/blog/dental-implant-timeline/", "section.relt"),
     ("post-more", "Blog post: more from the blog", "/blog/dental-implant-timeline/", "section.morepost"),
     ("doctor-articles", "Dr. Nikhil's profile: articles", "/doctors/dr-nikhil-v-jain/", "section.morepost"),
+    ("fp-ctas", "For patients: treatment cards", "/for-patients/", "section.fpctas"),
     ("hub-implants", "Treatments hub: implants and rehabilitation", T, "section.hubcat:nth-of-type(1)"),
 ] + [(f"hero-{s}", f"Treatment page hero: {s.replace('-', ' ')}", f"{T}{s}/", "main > section:first-of-type") for s in
      "dental-implants crowns-bridges-full-mouth-rehabilitation root-canal-treatment kids-dentistry dentures missing-teeth "

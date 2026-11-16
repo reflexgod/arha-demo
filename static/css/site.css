@@ -477,7 +477,7 @@ body.no-scroll { overflow: hidden; }
 @media (max-width: 991px) {
   .tbody__grid { grid-template-columns: 1fr; gap: 48px; }
   .tside { position: static; }
-  .ctacard { aspect-ratio: 4 / 5; max-width: 480px; }
+  .ctacard { aspect-ratio: 4 / 5; max-width: 480px; width: 100%; justify-self: center; }  /* centred under full-width blocks, as on for-patients */
 }
 @media (max-width: 767px) { .tcard { padding: 8px 24px 32px; } .tstate { padding: 56px 0 40px; } }
 .related { margin-top: 48px; }

@@ -45,6 +45,34 @@ noindexed).
   crystals mistaken for an aligner, a non-Indian subject. Downloaded but unused files stay in src-assets (git-ignored).
 - Style board for the owner: review/editorial-17nov/style-board-side-by-side.jpg (local only: it contains the
   reference site's photos, so it is never published or committed).
+- Implants hero (17 Nov, night): a new single-subject photo replaced the two-friends photo, whose friend's head was cut
+  at 768. The source is flipped so the woman sits left. Zoom is 1.25, the maximum before the 1920 file drops out, and the
+  crop is anchored left so the soft-focus shelf at 62%+ of the source stays out of the 768x500 tablet box and sits behind
+  the text card at 1440.
+
+### `cta-emergency` (real consultation-room photo) is built but not shown: recommendation
+- Not placed, because no page has room for it without a design change. The emergency page is single-column on purpose
+  (hero, full-bleed operatory photo, one centred accordion card, then the dark "We're here when you need us" call band).
+  The side card belongs to the two-column treatment layout (`.tbody__grid`). The for-patients "Popular treatments" row is a
+  fixed 3-up grid, so a 4th card would leave an orphan.
+- Recommended, if the owner wants it: turn the emergency call band (`.ecta`) into a split band, with the photo on the left
+  (4:5 at 1440, stacked above the text at 768/390) and the existing heading, text and two buttons on the right. That is
+  one template block plus about 10 lines of CSS. The slot already exists (`cta-emergency` in content/media.yaml, the
+  planning-room photo, ratio 3:5; change it to [4, 5] at the same time).
+- Until then the slot is harmless: it builds two small image sets that no page references.
+- The photo itself IS on the site now: the for-patients "Changing your smile?" card uses it (`fp-smile`, 4:5).
+
+### 17 Nov, night: full-site visual QA (30 pages x 1440/768/390)
+- Fixed: for-patients cards no longer repeat the kids and smile-design side-card photos (`fp-kids` = toothbrush detail,
+  `fp-smile` = the real consultation room); treatment side card centred at 768 (it sat left at 480px under full-width
+  blocks); `tools/image_sources.py` keeps one section per round (re-runs used to stack copies) and lists new slots.
+- Checked and left as is: trip-planner Next bar, the map band and one blank side card were full-page-capture artifacts
+  (sticky bar, lazy Google embed, decode timing), fine in a real viewport. The emergency H1 is italic on purpose
+  (`.ehero h1`). Long "Related treatments" pills wrap to two lines at 390 (cosmetic). Country chips scroll sideways at
+  390 by design. The missing-teeth hero hides a third person behind the text card at 1440, with no visible face cut.
+- Still repeated by design: a blog/treatment page's image also appears on cards that link to it (blog listing, "More
+  from the blog", related cards on posts, doctor articles). If the owner reads "no person twice" strictly, give each
+  link card its own detail image.
 
 ### Doctor photos: how to swap them in (one file)
 The placeholders (gold logo on stone) stay until the photos arrive. To swap in a doctor's photo, add up to two lines to

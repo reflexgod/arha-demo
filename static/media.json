@@ -58,7 +58,7 @@
   },
   "hero-implants": {
    "kind": "stock",
-   "alt": "An older woman in a shawl smiling as she talks with a friend",
+   "alt": "An older woman in a sari sitting quietly at home, eyes lowered",
    "widths": [
     640,
     1080,
@@ -69,8 +69,8 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-card-fmr.jpg",
-   "pos": "0% 20%"
+   "src": "src-assets/stock/v5/ed-hero-implants-3.jpg",
+   "pos": "0% 30%"
   },
   "hero-fmr": {
    "kind": "stock",
@@ -779,6 +779,32 @@
     656
    ],
    "src": "src-assets/stock/v5/ed-blog-cost.jpg"
+  },
+  "fp-kids": {
+   "kind": "stock",
+   "alt": "A hand holding a toothbrush with a dab of toothpaste",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    4,
+    5
+   ],
+   "src": "src-assets/stock/v5/ed-fp-kids.jpg"
+  },
+  "fp-smile": {
+   "kind": "real",
+   "alt": "The consultation room at Arha Dental Care",
+   "widths": [
+    400,
+    780
+   ],
+   "ratio": [
+    4,
+    5
+   ],
+   "src": "assets/img/arha-dental-care-planning-room-1080.jpg"
   }
  },
  "videos": {

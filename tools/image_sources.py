@@ -79,6 +79,7 @@ def main():
         o = old.get(s["name"])
         if o and o["src"] != s["src"]:
             changed.append(f"| `{s['name']}` | {describe(o['src'], v5, people)} | {describe(s['src'], v5, people)} | {s.get('alt', '')} |")
+    added = [f"`{s['name']}` ({describe(s['src'], v5, people)})" for s in slots if s["name"] not in old]
     framed = [s["name"] for s in slots if s["name"] in old and old[s["name"]]["src"] == s["src"]
               and any(old[s["name"]].get(k) != s.get(k) for k in ("focus", "place", "zoom", "pos", "flip"))]
 
@@ -90,6 +91,15 @@ def main():
             tail = text[min(starts) + 1:]
 
     today = date.today()
+    header = f"## Replaced on {today.day} {today:%b %Y} ({LABEL}; compared with {BASE})"
+    if tail:  # one section per round: a re-run of the same round replaces its section instead of stacking a copy
+        seen, kept = {header}, []
+        for sec in ("\n" + tail).split("\n## ")[1:]:
+            head = "## " + sec.split("\n", 1)[0]
+            if head not in seen:
+                seen.add(head)
+                kept.append("## " + sec.rstrip("\n"))
+        tail = "\n\n".join(kept) + "\n" if kept else ""
     lines = [
         "# Image sources (Arha v5)",
         "",
@@ -126,13 +136,15 @@ def main():
         "|---|---|---|---|",
         *[f"| `{s['name']}` | `{s['src']}` | Arha Dental Care's own photo/video (owner-supplied) | Owned by the clinic |" for s in real],
         "",
-        f"## Replaced on {today.day} {today:%b %Y} ({LABEL}; compared with {BASE})",
+        header,
         "",
         "| Slot | Before | Now | Alt text now |",
         "|---|---|---|---|",
         *changed,
         "",
-        ("Same photo, re-framed for headroom or to keep a face in frame: " + ", ".join(f"`{n}`" for n in framed) + ".") if framed else "No slot kept its photo with a new crop; every stock image was regraded with the 17 Nov grade.",
+        ("New slots: " + "; ".join(added) + "." if added else "No new slots."),
+        "",
+        ("Same photo, re-framed for headroom or to keep a face in frame: " + ", ".join(f"`{n}`" for n in framed) + ".") if framed else "No slot kept its photo with a new crop.",
         "",
     ]
     OUT.write_text("\n".join(lines) + ("\n" + tail if tail else ""), encoding="utf-8")
