@@ -2,7 +2,7 @@
  "images": {
   "home-card-fmr": {
    "kind": "stock",
-   "alt": "Close portrait of a smiling older woman in round black glasses",
+   "alt": "A smiling man with curly hair, a beard and round glasses",
    "widths": [
     480,
     800,
@@ -12,7 +12,7 @@
     4,
     3
    ],
-   "src": "src-assets/stock/euro/p-5335405.jpg"
+   "src": "src-assets/stock/euro/u-DItYlc26zVI.jpg"
   },
   "home-card-rct": {
    "kind": "real",
@@ -30,7 +30,7 @@
   },
   "home-card-kids": {
    "kind": "stock",
-   "alt": "A young girl with a gap-toothed smile",
+   "alt": "A young girl grinning with her hands on her head",
    "widths": [
     480,
     800,
@@ -40,7 +40,7 @@
     4,
     3
    ],
-   "src": "src-assets/stock/euro/p-6182764.jpg"
+   "src": "src-assets/stock/euro/p-40706578.jpg"
   },
   "home-commitment": {
    "kind": "real",
@@ -73,7 +73,7 @@
   },
   "hero-fmr": {
    "kind": "stock",
-   "alt": "A smiling older woman with white hair and round black glasses",
+   "alt": "A smiling older woman with short grey hair in a teal top",
    "widths": [
     640,
     1080,
@@ -84,7 +84,7 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/euro/p-5335305.jpg",
+   "src": "src-assets/stock/euro/p-12644998.jpg",
    "pos": "0% 25%"
   },
   "hero-rct": {
@@ -230,17 +230,18 @@
   },
   "hero-missing-teeth": {
    "kind": "stock",
-   "alt": "An older woman in round glasses smiling, fingertips resting on her jaw",
+   "alt": "A smiling man with a short beard in a denim shirt",
    "widths": [
     640,
     1080,
-    1440
+    1440,
+    1920
    ],
    "ratio": [
     1440,
     770
    ],
-   "src": "src-assets/stock/euro/p-5330483.jpg",
+   "src": "src-assets/stock/euro/u-uHwT183HKSw.jpg",
    "pos": "0% 25%"
   },
   "hero-teeth-whitening": {
@@ -324,7 +325,7 @@
   },
   "cta-dentures": {
    "kind": "stock",
-   "alt": "A smiling woman in her sixties in a navy dress",
+   "alt": "A smiling older woman with white hair and an amber necklace",
    "widths": [
     400,
     780
@@ -333,12 +334,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/euro/p-6625720.jpg",
+   "src": "src-assets/stock/euro/p-36883554.jpg",
    "pos": "50% 28%"
   },
   "cta-missing-teeth": {
    "kind": "stock",
-   "alt": "An older woman in glasses and a lilac jacket, smiling",
+   "alt": "A woman with her hair tied back, laughing, in a black T-shirt",
    "widths": [
     400,
     780
@@ -347,12 +348,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/euro/p-5335398.jpg",
+   "src": "src-assets/stock/euro/p-4928703.jpg",
    "pos": "50% 28%"
   },
   "cta-teeth-whitening": {
    "kind": "stock",
-   "alt": "A young woman with long dark hair smiling broadly",
+   "alt": "A smiling bearded man in a white T-shirt",
    "widths": [
     400,
     780
@@ -361,12 +362,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/euro/p-35696285.jpg",
+   "src": "src-assets/stock/euro/u-S4CXgCbs9BE.jpg",
    "pos": "50% 28%"
   },
   "cta-smile-design": {
    "kind": "stock",
-   "alt": "A young woman in a white T-shirt laughing, hand in her hair",
+   "alt": "A young man with fair hair smiling broadly",
    "widths": [
     400,
     780
@@ -375,12 +376,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/euro/p-35696289.jpg",
+   "src": "src-assets/stock/euro/u-QuwQYDBI6sI.jpg",
    "pos": "50% 28%"
   },
   "cta-gum-care": {
    "kind": "stock",
-   "alt": "A young woman brushing her teeth, smiling",
+   "alt": "A young woman with fair hair holding a toothbrush, smiling",
    "widths": [
     400,
     780
@@ -389,7 +390,7 @@
     3,
     5
    ],
-   "src": "src-assets/stock/euro/p-9788574.jpg",
+   "src": "src-assets/stock/euro/u-u7qidb2tNDA.jpg",
    "pos": "50% 38%"
   },
   "cta-aligners": {
@@ -421,7 +422,7 @@
   },
   "hub-implants": {
    "kind": "stock",
-   "alt": "A smiling woman in her sixties against a pale studio wall",
+   "alt": "A smiling man in a dark short-sleeved shirt against a white wall",
    "widths": [
     640,
     1080,
@@ -431,7 +432,7 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/euro/p-6625737.jpg"
+   "src": "src-assets/stock/euro/u-sNuQ3EhnfYQ.jpg"
   },
   "hub-restorative": {
    "kind": "stock",
@@ -463,7 +464,7 @@
   },
   "hub-children": {
    "kind": "stock",
-   "alt": "A young boy with fair hair smiling",
+   "alt": "A young boy in a blue shirt grinning",
    "widths": [
     640,
     1080,
@@ -473,7 +474,7 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/euro/p-3905795.jpg"
+   "src": "src-assets/stock/euro/p-20759603.jpg"
   },
   "hub-general": {
    "kind": "real",
@@ -535,7 +536,7 @@
   },
   "blog-implant-timeline": {
    "kind": "stock",
-   "alt": "An older woman in round glasses with a relaxed smile",
+   "alt": "A woman with a dark bob haircut and a wide smile",
    "widths": [
     640,
     1080,
@@ -545,11 +546,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/euro/p-5335290.jpg"
+   "src": "src-assets/stock/euro/u-pTHEQXiz0Ks.jpg"
   },
   "blog-implant-vs-bridge": {
    "kind": "stock",
-   "alt": "A smiling woman with grey hair and dark cat-eye glasses",
+   "alt": "A smiling woman in her sixties with auburn hair and round glasses",
    "widths": [
     640,
     1080,
@@ -559,11 +560,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/euro/p-8317653.jpg"
+   "src": "src-assets/stock/euro/p-8558897.jpg"
   },
   "blog-implant-aftercare": {
    "kind": "stock",
-   "alt": "An older woman in glasses and a lilac jacket, smiling",
+   "alt": "A smiling woman with sleek dark hair on a grey studio backdrop",
    "widths": [
     640,
     1080,
@@ -573,7 +574,7 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/euro/p-5335401.jpg"
+   "src": "src-assets/stock/euro/u-0ZyDJJyzH14.jpg"
   },
   "blog-implants-right-for-me": {
    "kind": "stock",
