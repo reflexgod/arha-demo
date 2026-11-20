@@ -1,3 +1,4 @@
-# Demo build: keep the whole site out of search engines until launch.
 User-agent: *
 Disallow: /
+
+Sitemap: https://arhadentalcare.com/sitemap.xml
