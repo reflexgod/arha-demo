@@ -325,7 +325,7 @@
   },
   "cta-dentures": {
    "kind": "stock",
-   "alt": "A smiling older woman with white hair and an amber necklace",
+   "alt": "A smiling man in a dark short-sleeved shirt against a white wall",
    "widths": [
     400,
     780
@@ -334,7 +334,7 @@
     3,
     5
    ],
-   "src": "src-assets/stock/euro/p-36883554.jpg",
+   "src": "src-assets/stock/euro/u-sNuQ3EhnfYQ.jpg",
    "pos": "50% 28%"
   },
   "cta-missing-teeth": {
@@ -422,7 +422,7 @@
   },
   "hub-implants": {
    "kind": "stock",
-   "alt": "A smiling man in a dark short-sleeved shirt against a white wall",
+   "alt": "A smiling man with a short beard in a white T-shirt",
    "widths": [
     640,
     1080,
@@ -432,7 +432,7 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/euro/u-sNuQ3EhnfYQ.jpg"
+   "src": "src-assets/stock/euro/u-jhIAP6Le4OY.jpg"
   },
   "hub-restorative": {
    "kind": "stock",
