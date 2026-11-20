@@ -34,6 +34,12 @@ def credits():
 
 def credit_for(src, v5, people):
     stem = Path(src).stem
+    for folder in ("studio", "euro"):  # 20 Nov 2026: free studio portraits (euro = the Chess House lookalike set)
+        f = ROOT / f"src-assets/stock/{folder}/credits.json"
+        st = json.loads(f.read_text(encoding="utf-8")) if f.exists() else {}
+        if f"/stock/{folder}/" in src and stem in st:
+            c = st[stem]
+            return c["author"], c["page"], c.get("licence", "Pexels License")
     if "/stock/v5/" in src and stem in v5:
         c = v5[stem]
         return c["author"], c["page"], c.get("licence", "Unsplash License")
@@ -107,9 +113,10 @@ def main():
         "`src-assets/stock/v5/credits.json` and the people library's provenance",
         "(`git show c45ca34:tools/people.json`). Every image on the v5 site is listed once. Rerun it after any image change.",
         "",
-        "**Style (17 Nov 2026):** calm, editorial, natural daylight, one soft warm grade. Real clinic photos first; stock only where",
-        "the clinic has no photo, and then interiors and close details (light on a chair, hands, instruments) before people.",
-        "People are Indian patients and families caught mid-moment, never posed studio smiles, and no person appears twice.",
+        "**Style (20 Nov 2026):** stock people are free studio portraits (Pexels/Unsplash) chosen to look like the stock on",
+        "chesshousedental.com: European models on a plain light-grey or white backdrop, soft light, light clothing, full smiles,",
+        "one person per photo, one soft bright grade. Each photo is used once (some models appear in more than one frame).",
+        "Real clinic photos and the doctors' photos are unchanged. Stock people are never presented as Arha patients.",
         "",
         "**Licence:** every stock photo is from Unsplash under the **Unsplash License** (https://unsplash.com/license): free for",
         "commercial and non-commercial use, no permission or attribution needed. Unsplash+ (paid) results were filtered out of every",

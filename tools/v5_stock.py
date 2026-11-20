@@ -24,7 +24,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from stock import api, fetch  # noqa: E402  (same API client and CDN fetch as the earlier stock tool)
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "src-assets" / "stock" / "v5"
+OUT = ROOT / "src-assets" / "stock" / ("smile" if __import__("os").environ.get("STOCK_SMILE") else "v5")
 CREDITS = OUT / "credits.json"
 
 

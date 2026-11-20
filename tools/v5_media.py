@@ -22,19 +22,19 @@ MANIFEST = ROOT / "static" / "media.json"
 
 
 def stock_grade(im):
-    """One grade for all stock (17 Nov 2026, editorial pass: calm, daylight, soft and warm). First a half-strength
-    grey-world white balance, so sources shot under very different light (teal walls, magenta saris, tungsten) land on
-    one palette; then saturation -20%, a warm shift, soft contrast, lifted blacks, held-back highlights and a
-    gentle midtone lift (gamma 0.9)."""
+    """One grade for all stock (20 Nov 2026, smile pass: a premium cosmetic-dentistry studio look). Soft, bright and
+    slightly desaturated: a light grey-world white balance so every source lands on the same neutral palette, then
+    saturation -15%, a whisper of warmth, soft contrast, lifted blacks, held-back highlights (the studio backdrop stays
+    off-white, never clipped) and a gentle midtone lift. Teeth are never retouched or whitened."""
     x = np.asarray(im.convert("RGB")).astype(np.float32) / 255
     mean = x.reshape(-1, 3).mean(0)
-    x = x * (1 + 0.5 * (mean.mean() / np.maximum(mean, 1e-3) - 1))
+    x = x * (1 + 0.35 * (mean.mean() / np.maximum(mean, 1e-3) - 1))
     lum = (x @ np.array([0.2126, 0.7152, 0.0722], np.float32))[..., None]
-    x = lum + (x - lum) * 0.80
-    x = x * np.array([1.035, 1.0, 0.94], np.float32)
-    x = 0.5 + (x - 0.5) * 0.92
-    x = 0.04 + x * (0.96 - 0.04)
-    x = np.clip(x, 0, 1) ** 0.9  # high-key midtone lift: airy daylight, as on the style reference
+    x = lum + (x - lum) * 0.85
+    x = x * np.array([1.01, 1.0, 0.985], np.float32)
+    x = 0.5 + (x - 0.5) * 0.94
+    x = 0.045 + x * (0.975 - 0.045)
+    x = np.clip(x, 0, 1) ** 0.93
     return Image.fromarray(np.clip(x * 255, 0, 255).astype(np.uint8))
 
 
@@ -84,11 +84,59 @@ def do_image(spec):
         l, t, r, b = spec["box"]
         im = im.crop((round(l * im.width), round(t * im.height), round(r * im.width), round(b * im.height)))
     if spec.get("extend_right"):
-        # widen a plain studio background so the subject can sit clear of a text card
-        edge = np.asarray(im.crop((im.width - 8, 0, im.width, im.height))).reshape(-1, 3).mean(axis=0)
-        wide = Image.new("RGB", (round(im.width * (1 + spec["extend_right"])), im.height), tuple(int(c) for c in edge))
-        wide.paste(im, (0, 0))
-        im = wide
+        # widen a plain studio backdrop so the subject can sit clear of a text card (the added strip lies under the card):
+        # each row's backdrop colour at the right edge, smoothed down the column, blended into the photo over a band of
+        # columns that are still all backdrop, so no seam shows. The photo itself is never altered past that band.
+        e = round(im.width * spec["extend_right"])
+        img = np.asarray(im).astype(np.float32)
+        col = img[:, -12:].mean(axis=1)  # (H, 3) right-edge colour per row
+        ref = np.median(col[: max(2, im.height // 7)], axis=0)  # the backdrop, from the top rows
+        ok = np.abs(col - ref).sum(1) <= 30  # rows where the edge is backdrop (not hair, shoulder or clothing)
+        ys = np.arange(im.height)
+        if ok.sum() >= 2:
+            col = np.stack([np.interp(ys, ys[ok], col[ok, c]) for c in range(3)], 1)
+        else:
+            col = np.repeat(ref[None], im.height, 0)
+        sig = im.height / 25
+        k = np.exp(-0.5 * (np.arange(-3 * sig, 3 * sig + 1) / sig) ** 2); k /= k.sum()
+        col = np.stack([np.convolve(np.pad(col[:, c], len(k) // 2, mode="edge"), k, mode="valid")[:im.height] for c in range(3)], 1)
+        # fade the last columns into that backdrop colour: invisible over backdrop, a soft falloff over a shoulder or
+        # hair that runs off the edge (the plan keeps this band clear of the face)
+        bl = max(1, round(im.width * spec.get("extend_fade", 0.12)))
+        x = np.linspace(0, 1, bl)
+        w = (1 - x * x * (3 - 2 * x))[None, :, None]
+        img[:, -bl:] = img[:, -bl:] * w + col[:, None, :] * (1 - w)
+        strip = np.repeat(col[:, None, :], e, axis=1)
+        im = Image.fromarray(np.clip(np.concatenate([img, strip], 1), 0, 255).astype(np.uint8))
+        spec = {**spec, "focus": [spec.get("focus", [0.5, 0.5])[0] * (im.width - e) / im.width, spec.get("focus", [0.5, 0.5])[1]]}
+    if spec.get("extend_top"):
+        # headroom for tightly framed sources on a plain or blurred backdrop (never above a head that touches the top:
+        # slots.py checks): the top row's backdrop colour, interpolated past anything that is not backdrop and blurred
+        # along the row, then blended into the photo over a tall band so no seam shows
+        t = round(im.height * spec["extend_top"])
+        top = np.asarray(im.crop((0, 0, im.width, 12))).astype(np.float32).mean(axis=0)  # (W, 3)
+        med = np.median(top, axis=0)
+        ok = np.abs(top - med).sum(1) <= 30  # backdrop columns; hair or a frame at the top edge is not copied upward
+        xs = np.arange(im.width)
+        if ok.sum() >= 2:
+            top = np.stack([np.interp(xs, xs[ok], top[ok, c]) for c in range(3)], 1)
+        else:
+            top = np.repeat(med[None], im.width, 0)
+        sig = im.width / 20  # very soft along the row: a wall, no columns
+        k = np.exp(-0.5 * (np.arange(-3 * sig, 3 * sig + 1) / sig) ** 2); k /= k.sum()
+        top = np.stack([np.convolve(np.pad(top[:, c], len(k) // 2, mode="edge"), k, mode="valid")[:im.width] for c in range(3)], 1)
+        strip = np.repeat(top[None], t, axis=0)
+        img = np.asarray(im).astype(np.float32)
+        bl = min(img.shape[0] // 8, max(40, t // 2))  # blend the seam over a tall band so it never shows as a line
+        dev = (np.abs(img - med).sum(2) > 45).any(1)  # ...but only through rows that are still all backdrop (never into hair)
+        clear = int(np.argmax(dev)) if dev.any() else img.shape[0]
+        bl = max(1, min(bl, clear - 4))
+        w = (np.linspace(0, 1, bl) ** 1.5)[:, None, None]
+        img[:bl] = img[:bl] * w + np.repeat(top[None], bl, 0) * (1 - w)
+        tall = Image.fromarray(np.clip(np.concatenate([strip, img], 0), 0, 255).astype(np.uint8))
+        focus = spec.get("focus", [0.5, 0.5])
+        spec = {**spec, "focus": [focus[0], (focus[1] * im.height + t) / tall.height]}  # focus stays in source fractions
+        im = tall
     im = crop_to(im, spec["ratio"], spec.get("focus", [0.5, 0.5]), spec.get("zoom", 1.0), spec.get("place", [0.5, 0.5]))
     if spec["kind"] == "stock":
         im = stock_grade(im)

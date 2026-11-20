@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from "_macros.html" import icon, book_href %}
-{% block preload %}<link rel="preload" as="image" href="/static/img/{{ post.image }}-1312.avif" type="image/avif" imagesrcset="/static/img/{{ post.image }}-640.avif 640w, /static/img/{{ post.image }}-1080.avif 1080w, /static/img/{{ post.image }}-1312.avif 1312w" imagesizes="(min-width: 1440px) 1312px, 100vw">{% endblock %}
+{% block preload %}{{ preload(post.image, "(min-width: 1440px) 1312px, 100vw", 1312) }}{% endblock %}
 {% block body_class %}page-post{% endblock %}
 {% block main %}
 {% set a = post.author %}

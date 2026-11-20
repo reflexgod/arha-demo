@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% from "_macros.html" import icon, book_href %}
-{% block preload %}<link rel="preload" as="image" href="/static/img/{{ t.hero }}-1440.avif" type="image/avif" imagesrcset="/static/img/{{ t.hero }}-640.avif 640w, /static/img/{{ t.hero }}-1080.avif 1080w, /static/img/{{ t.hero }}-1440.avif 1440w, /static/img/{{ t.hero }}-1920.avif 1920w" imagesizes="100vw">{% endblock %}
+{% block preload %}{{ preload(t.hero) }}{% endblock %}
 {% block body_class %}page-emergency{% endblock %}
 {% block crumbs %}{% endblock %}
 {% block main %}

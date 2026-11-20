@@ -12,25 +12,23 @@ import pw  # noqa: E402
 Image.MAX_IMAGE_PIXELS = None
 BEFORE, AFTER = "http://localhost:8091", "http://localhost:8090"
 T = "/treatments/"
-SECTIONS = [
+POSTS = ("when-should-a-child-first-see-a-dentist is-root-canal-treatment-painful dental-implant-timeline dental-implant-vs-bridge "
+         "dental-implant-aftercare are-dental-implants-right-for-me dental-implant-cost-in-mumbai").split()
+HEROES = ("dental-implants crowns-bridges-full-mouth-rehabilitation root-canal-treatment kids-dentistry dentures missing-teeth "
+          "teeth-whitening smile-design gum-care aligners childrens-orthodontics").split()
+CTAS = "kids-dentistry dentures missing-teeth teeth-whitening smile-design gum-care aligners childrens-orthodontics".split()
+SECTIONS = [  # 20 Nov 2026 smile pass: every section whose stock photo changed
     ("home-cards", "Home: treatment cards", "/", "section.cards"),
-    ("home-team", "Home: dentist cards", "/", "section.team"),
     ("blog-listing", "Blog: listing, filter and cards", "/blog/", "section.blogidx"),
-    ("post-top", "Blog post: hero image and meta line", "/blog/when-should-a-child-first-see-a-dentist/", "main > section:first-of-type"),
-    ("post-rct", "Blog post: root canal, hero image", "/blog/is-root-canal-treatment-painful/", "main > section:first-of-type"),
-    ("post-related", "Blog post: related treatments", "/blog/dental-implant-timeline/", "section.relt"),
     ("post-more", "Blog post: more from the blog", "/blog/dental-implant-timeline/", "section.morepost"),
     ("doctor-articles", "Dr. Nikhil's profile: articles", "/doctors/dr-nikhil-v-jain/", "section.morepost"),
     ("fp-ctas", "For patients: treatment cards", "/for-patients/", "section.fpctas"),
     ("hub-implants", "Treatments hub: implants and rehabilitation", T, "section.hubcat:nth-of-type(1)"),
-] + [(f"hero-{s}", f"Treatment page hero: {s.replace('-', ' ')}", f"{T}{s}/", "main > section:first-of-type") for s in
-     "dental-implants crowns-bridges-full-mouth-rehabilitation root-canal-treatment kids-dentistry dentures missing-teeth "
-     "teeth-whitening smile-design gum-care aligners childrens-orthodontics".split()] + [
-    (f"cta-{s}", f"Treatment page side card: {s.replace('-', ' ')}", f"{T}{s}/", ".ctacard") for s in
-    "dental-implants crowns-bridges-full-mouth-rehabilitation root-canal-treatment kids-dentistry dentures missing-teeth "
-    "teeth-whitening smile-design gum-care emergency-dentistry".split()]
+] + [(f"post-{s}", f"Blog post hero: {s.replace('-', ' ')}", f"/blog/{s}/", ".post__img") for s in POSTS] + [
+    (f"hero-{s}", f"Treatment page hero: {s.replace('-', ' ')}", f"{T}{s}/", "main > section:first-of-type") for s in HEROES] + [
+    (f"cta-{s}", f"Treatment page side card: {s.replace('-', ' ')}", f"{T}{s}/", ".ctacard") for s in CTAS]
 # hub sections are siblings of other sections, so pick them by index among .hubcat
-HUB = [("hub-" + k, f"Treatments hub: {k}", T, i) for i, k in enumerate(["implants", "restorative", "cosmetic", "children", "general"])]
+HUB = [("hub-" + k, f"Treatments hub: {k}", T, i) for i, k in enumerate(["implants", "restorative", "cosmetic", "children"])]
 
 PREP = """async () => {
   document.querySelectorAll('img[loading=lazy]').forEach((i) => { i.loading = 'eager'; });

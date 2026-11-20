@@ -2,7 +2,7 @@
  "images": {
   "home-card-fmr": {
    "kind": "stock",
-   "alt": "A woman applying a tilak to an older man at a family celebration",
+   "alt": "Close portrait of a smiling older woman in round black glasses",
    "widths": [
     480,
     800,
@@ -12,7 +12,7 @@
     4,
     3
    ],
-   "src": "src-assets/stock/v5/ed-card-fmr-2.jpg"
+   "src": "src-assets/stock/euro/p-5335405.jpg"
   },
   "home-card-rct": {
    "kind": "real",
@@ -30,7 +30,7 @@
   },
   "home-card-kids": {
    "kind": "stock",
-   "alt": "A little girl laughing in a garden",
+   "alt": "A young girl with a gap-toothed smile",
    "widths": [
     480,
     800,
@@ -40,7 +40,7 @@
     4,
     3
    ],
-   "src": "src-assets/stock/v5/ed-card-kids.jpg"
+   "src": "src-assets/stock/euro/p-6182764.jpg"
   },
   "home-commitment": {
    "kind": "real",
@@ -58,23 +58,22 @@
   },
   "hero-implants": {
    "kind": "stock",
-   "alt": "An older woman in a sari sitting quietly at home, eyes lowered",
+   "alt": "A smiling older woman with white hair against a light grey studio backdrop",
    "widths": [
     640,
     1080,
-    1440,
-    1920
+    1440
    ],
    "ratio": [
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/ed-hero-implants-3.jpg",
-   "pos": "0% 30%"
+   "src": "src-assets/stock/euro/p-5335295.jpg",
+   "pos": "0% 25%"
   },
   "hero-fmr": {
    "kind": "stock",
-   "alt": "An older couple sharing a laugh in a garden",
+   "alt": "A smiling older woman with white hair and round black glasses",
    "widths": [
     640,
     1080,
@@ -85,11 +84,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/ed-hero-fmr.jpg"
+   "src": "src-assets/stock/euro/p-5335305.jpg",
+   "pos": "0% 25%"
   },
   "hero-rct": {
    "kind": "stock",
-   "alt": "A dental chair under a soft treatment light",
+   "alt": "A relaxed, smiling woman with long dark hair",
    "widths": [
     640,
     1080,
@@ -100,11 +100,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/ed-hero-rct.jpg"
+   "src": "src-assets/stock/euro/p-31863054.jpg",
+   "pos": "0% 25%"
   },
   "hero-kids": {
    "kind": "stock",
-   "alt": "A mother hugging her young daughter outdoors",
+   "alt": "A young girl with a bob haircut and a gap-toothed smile",
    "widths": [
     640,
     1080,
@@ -115,8 +116,8 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/ed-cta-kids.jpg",
-   "pos": "5% 25%"
+   "src": "src-assets/stock/euro/p-6182755.jpg",
+   "pos": "0% 25%"
   },
   "cta-implants": {
    "kind": "real",
@@ -159,7 +160,7 @@
   },
   "cta-kids": {
    "kind": "stock",
-   "alt": "A mother holding her son in the sunshine",
+   "alt": "A young boy with fair hair grinning",
    "widths": [
     400,
     780
@@ -168,7 +169,8 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/ed-hub-children.jpg"
+   "src": "src-assets/stock/euro/p-3905793.jpg",
+   "pos": "50% 42%"
   },
   "practice-hero": {
    "kind": "real",
@@ -213,39 +215,37 @@
   },
   "hero-dentures": {
    "kind": "stock",
-   "alt": "An older woman reading the morning paper at home",
+   "alt": "A smiling woman in her sixties with fair wavy hair, on a pale backdrop",
    "widths": [
     640,
     1080,
-    1440,
-    1920
+    1440
    ],
    "ratio": [
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/ed-hero-dentures.jpg",
-   "pos": "35% 20%"
+   "src": "src-assets/stock/euro/p-6625732.jpg",
+   "pos": "0% 25%"
   },
   "hero-missing-teeth": {
    "kind": "stock",
-   "alt": "Parents and their baby smiling together outdoors",
+   "alt": "An older woman in round glasses smiling, fingertips resting on her jaw",
    "widths": [
     640,
     1080,
-    1440,
-    1920
+    1440
    ],
    "ratio": [
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hub-children.jpg",
-   "pos": "35% 25%"
+   "src": "src-assets/stock/euro/p-5330483.jpg",
+   "pos": "0% 25%"
   },
   "hero-teeth-whitening": {
    "kind": "stock",
-   "alt": "A woman reading in a sunlit archway",
+   "alt": "A young woman with long dark hair and a bright smile",
    "widths": [
     640,
     1080,
@@ -256,12 +256,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/ed-hero-whitening.jpg",
-   "pos": "28% 40%"
+   "src": "src-assets/stock/euro/p-35696288.jpg",
+   "pos": "0% 25%"
   },
   "hero-smile-design": {
    "kind": "stock",
-   "alt": "A woman smiling by a window, holding a straw hat",
+   "alt": "A young woman with long fair hair smiling",
    "widths": [
     640,
     1080,
@@ -272,12 +272,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-whitening-3.jpg",
-   "pos": "30% 25%"
+   "src": "src-assets/stock/euro/p-8069910.jpg",
+   "pos": "0% 25%"
   },
   "hero-gum-care": {
    "kind": "stock",
-   "alt": "A woman brushing her teeth in front of the bathroom mirror",
+   "alt": "A young woman brushing her teeth",
    "widths": [
     640,
     1080,
@@ -288,12 +288,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-hero-gum-2.jpg",
-   "pos": "30% 25%"
+   "src": "src-assets/stock/euro/p-9788575.jpg",
+   "pos": "0% 25%"
   },
   "hero-aligners": {
    "kind": "stock",
-   "alt": "Hands opening a clear aligner case",
+   "alt": "A young adult with a wide, open smile",
    "widths": [
     640,
     1080,
@@ -304,7 +304,8 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/ed-hero-aligners.jpg"
+   "src": "src-assets/stock/euro/u-y3kC_7Qhmjk.jpg",
+   "pos": "0% 25%"
   },
   "hero-emergency": {
    "kind": "real",
@@ -323,7 +324,7 @@
   },
   "cta-dentures": {
    "kind": "stock",
-   "alt": "Daylight through blinds on a treatment couch",
+   "alt": "A smiling woman in her sixties in a navy dress",
    "widths": [
     400,
     780
@@ -332,11 +333,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/ed-cta-dentures.jpg"
+   "src": "src-assets/stock/euro/p-6625720.jpg",
+   "pos": "50% 28%"
   },
   "cta-missing-teeth": {
    "kind": "stock",
-   "alt": "Instruments laid out on a tray by the window",
+   "alt": "An older woman in glasses and a lilac jacket, smiling",
    "widths": [
     400,
     780
@@ -345,11 +347,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/ed-cta-missing.jpg"
+   "src": "src-assets/stock/euro/p-5335398.jpg",
+   "pos": "50% 28%"
   },
   "cta-teeth-whitening": {
    "kind": "stock",
-   "alt": "A woman reading in soft window light",
+   "alt": "A young woman with long dark hair smiling broadly",
    "widths": [
     400,
     780
@@ -358,11 +361,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/ed-cta-whitening.jpg"
+   "src": "src-assets/stock/euro/p-35696285.jpg",
+   "pos": "50% 28%"
   },
   "cta-smile-design": {
    "kind": "stock",
-   "alt": "A woman working at a desk by an open window",
+   "alt": "A young woman in a white T-shirt laughing, hand in her hair",
    "widths": [
     400,
     780
@@ -371,11 +375,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/ed-cta-smile.jpg"
+   "src": "src-assets/stock/euro/p-35696289.jpg",
+   "pos": "50% 28%"
   },
   "cta-gum-care": {
    "kind": "stock",
-   "alt": "Morning light through a bathroom window",
+   "alt": "A young woman brushing her teeth, smiling",
    "widths": [
     400,
     780
@@ -384,11 +389,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/ed-cta-gum.jpg"
+   "src": "src-assets/stock/euro/p-9788574.jpg",
+   "pos": "50% 38%"
   },
   "cta-aligners": {
    "kind": "stock",
-   "alt": "A clear aligner held in an open hand",
+   "alt": "A young man in a pink polo shirt smiling",
    "widths": [
     400,
     780
@@ -397,7 +403,8 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-aligners.jpg"
+   "src": "src-assets/stock/euro/u-CEwGm-PCgOM.jpg",
+   "pos": "50% 62%"
   },
   "cta-emergency": {
    "kind": "real",
@@ -414,7 +421,7 @@
   },
   "hub-implants": {
    "kind": "stock",
-   "alt": "A grandfather and his family talking together at home",
+   "alt": "A smiling woman in her sixties against a pale studio wall",
    "widths": [
     640,
     1080,
@@ -424,11 +431,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/in-hub-implants-2.jpg"
+   "src": "src-assets/stock/euro/p-6625737.jpg"
   },
   "hub-restorative": {
    "kind": "stock",
-   "alt": "A father lifting his toddler at home",
+   "alt": "A smiling woman with curly dark hair and thin-framed glasses",
    "widths": [
     640,
     1080,
@@ -438,11 +445,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/ed-hub-restorative.jpg"
+   "src": "src-assets/stock/euro/p-8107620.jpg"
   },
   "hub-cosmetic": {
    "kind": "stock",
-   "alt": "A young woman pausing at a table by the window",
+   "alt": "A smiling young woman resting her chin on her hand",
    "widths": [
     640,
     1080,
@@ -452,11 +459,11 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/ed-hub-cosmetic-2.jpg"
+   "src": "src-assets/stock/euro/u-mXFcQsECFWw.jpg"
   },
   "hub-children": {
    "kind": "stock",
-   "alt": "A mother and her daughter sharing a quiet moment",
+   "alt": "A young boy with fair hair smiling",
    "widths": [
     640,
     1080,
@@ -466,7 +473,7 @@
     1312,
     600
    ],
-   "src": "src-assets/stock/v5/ed-hub-children-2.jpg"
+   "src": "src-assets/stock/euro/p-3905795.jpg"
   },
   "hub-general": {
    "kind": "real",
@@ -498,7 +505,7 @@
   },
   "hero-childrens-orthodontics": {
    "kind": "stock",
-   "alt": "A smiling girl in a pink top outdoors",
+   "alt": "A girl of about ten with long brown hair smiling",
    "widths": [
     640,
     1080,
@@ -509,12 +516,12 @@
     1440,
     770
    ],
-   "src": "src-assets/stock/v5/in-kids-card-2.jpg",
-   "pos": "30% 20%"
+   "src": "src-assets/stock/euro/p-12743818.jpg",
+   "pos": "0% 25%"
   },
   "cta-childrens-orthodontics": {
    "kind": "stock",
-   "alt": "Close-up of a smile with braces",
+   "alt": "A girl with long dark hair laughing",
    "widths": [
     400,
     780
@@ -523,11 +530,12 @@
     3,
     5
    ],
-   "src": "src-assets/stock/v5/cta-childrens-orthodontics.jpg"
+   "src": "src-assets/stock/euro/p-7330622.jpg",
+   "pos": "50% 28%"
   },
   "blog-implant-timeline": {
    "kind": "stock",
-   "alt": "Two friends laughing on a veranda",
+   "alt": "An older woman in round glasses with a relaxed smile",
    "widths": [
     640,
     1080,
@@ -537,11 +545,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/ed-blog-timeline.jpg"
+   "src": "src-assets/stock/euro/p-5335290.jpg"
   },
   "blog-implant-vs-bridge": {
    "kind": "stock",
-   "alt": "A couple laughing over a book on the sofa",
+   "alt": "A smiling woman with grey hair and dark cat-eye glasses",
    "widths": [
     640,
     1080,
@@ -551,11 +559,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/ed-blog-bridge.jpg"
+   "src": "src-assets/stock/euro/p-8317653.jpg"
   },
   "blog-implant-aftercare": {
    "kind": "stock",
-   "alt": "A quiet, sunlit living room in the afternoon",
+   "alt": "An older woman in glasses and a lilac jacket, smiling",
    "widths": [
     640,
     1080,
@@ -565,11 +573,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/ed-blog-aftercare.jpg"
+   "src": "src-assets/stock/euro/p-5335401.jpg"
   },
   "blog-implants-right-for-me": {
    "kind": "stock",
-   "alt": "An older couple talking on their doorstep",
+   "alt": "Close portrait of a smiling older woman with short fair hair",
    "widths": [
     640,
     1080,
@@ -579,7 +587,7 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/ed-blog-right-2.jpg"
+   "src": "src-assets/stock/euro/p-8727477.jpg"
   },
   "home-hero": {
    "kind": "real",
@@ -740,7 +748,7 @@
   },
   "blog-root-canal": {
    "kind": "stock",
-   "alt": "A man relaxing in a wooden chair at home",
+   "alt": "A smiling woman with dark hair pulled back, on a light grey backdrop",
    "widths": [
     640,
     1080,
@@ -750,11 +758,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/in-blog-rct.jpg"
+   "src": "src-assets/stock/euro/p-23285900.jpg"
   },
   "blog-child-first-visit": {
    "kind": "stock",
-   "alt": "A father drawing with his daughter on the sofa",
+   "alt": "A young girl laughing, showing a gap where a baby tooth was",
    "widths": [
     640,
     1080,
@@ -764,11 +772,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/ed-blog-child.jpg"
+   "src": "src-assets/stock/euro/p-4709845.jpg"
   },
   "blog-implant-cost": {
    "kind": "stock",
-   "alt": "A father and his little daughter at home",
+   "alt": "A smiling older woman in a cream roll-neck jumper, in soft window light",
    "widths": [
     640,
     1080,
@@ -778,11 +786,11 @@
     1312,
     656
    ],
-   "src": "src-assets/stock/v5/ed-blog-cost.jpg"
+   "src": "src-assets/stock/euro/p-7225159.jpg"
   },
   "fp-kids": {
    "kind": "stock",
-   "alt": "A hand holding a toothbrush with a dab of toothpaste",
+   "alt": "A little girl in a blue T-shirt smiling",
    "widths": [
     400,
     780
@@ -791,7 +799,7 @@
     4,
     5
    ],
-   "src": "src-assets/stock/v5/ed-fp-kids.jpg"
+   "src": "src-assets/stock/euro/p-5067133.jpg"
   },
   "fp-smile": {
    "kind": "real",

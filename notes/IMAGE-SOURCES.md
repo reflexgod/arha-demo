@@ -1,15 +1,16 @@
 # Image sources (Arha v5)
 
-Generated 17 Nov 2026 by `tools/image_sources.py` from `content/media.yaml`, `src-assets/stock/v5/credits.json` and the people library's provenance
+Generated 20 Nov 2026 by `tools/image_sources.py` from `content/media.yaml`, `src-assets/stock/v5/credits.json` and the people library's provenance
 (`git show c45ca34:tools/people.json`). Every image on the v5 site is listed once. Rerun it after any image change.
 
-**Style (17 Nov 2026):** calm, editorial, natural daylight, one soft warm grade. Real clinic photos first; stock only where
-the clinic has no photo, and then interiors and close details (light on a chair, hands, instruments) before people.
-People are Indian patients and families caught mid-moment, never posed studio smiles, and no person appears twice.
+**Style (20 Nov 2026):** stock people are free studio portraits (Pexels/Unsplash) chosen to look like the stock on
+chesshousedental.com: European models on a plain light-grey or white backdrop, soft light, light clothing, full smiles,
+one person per photo, one soft bright grade. Each photo is used once (some models appear in more than one frame).
+Real clinic photos and the doctors' photos are unchanged. Stock people are never presented as Arha patients.
 
 **Licence:** every stock photo is from Unsplash under the **Unsplash License** (https://unsplash.com/license): free for
 commercial and non-commercial use, no permission or attribution needed. Unsplash+ (paid) results were filtered out of every
-search, and each download was tracked through the official API as its guidelines require. No Pexels or Pixabay images are in use at the moment. Stock people are never presented as Arha's patients, doctors or staff (alt text describes the photo only).
+search, and each download was tracked through the official API as its guidelines require. Some photos are from Pexels under the Pexels License (https://www.pexels.com/license/), same terms. Stock people are never presented as Arha's patients, doctors or staff (alt text describes the photo only).
 
 **Grade:** one warm, natural grade for all stock (`tools/v5_media.py stock_grade`). The clinic's own photos are
 not graded. Files: AVIF + WebP + JPEG at each listed width, served with content-hashed names; below-the-fold images lazy-load.
@@ -21,39 +22,39 @@ at 1440, 768 and 390 px (`tools/qa/crops.py` contact sheets, by eye).
 
 | Slot | Photographer | Source | Licence | Alt text |
 |---|---|---|---|---|
-| `home-card-fmr` | kabita Darlami | https://unsplash.com/photos/man-in-black-hat-kissing-woman-in-orange-tank-top-qy4jFZ-k-c0 | Unsplash License | A woman applying a tilak to an older man at a family celebration |
-| `home-card-kids` | gang coo | https://unsplash.com/photos/girl-playing-with-man-boaX2uniuK8 | Unsplash License | A little girl laughing in a garden |
-| `hero-implants` | Nikhil Pillai | https://unsplash.com/photos/a-woman-sitting-in-a-room-with-her-eyes-closed-qydn--loUZs | Unsplash License | An older woman in a sari sitting quietly at home, eyes lowered |
-| `hero-fmr` | Dev Benjamin | https://unsplash.com/photos/a-couple-embracing-in-a-lush-green-garden-setting-OGEWjSR-4OQ | Unsplash License | An older couple sharing a laugh in a garden |
-| `hero-rct` | Ozkan Guner | https://unsplash.com/photos/a-dental-room-with-a-chair-and-a-monitor-p7eQ6uf2KSE | Unsplash License | A dental chair under a soft treatment light |
-| `hero-kids` | Abhi Sathvik | https://unsplash.com/photos/a-mother-and-daughter-share-a-loving-embrace-rHbqGCFvzEY | Unsplash License | A mother hugging her young daughter outdoors |
-| `cta-kids` | v3dont | https://unsplash.com/photos/a-woman-holding-a-small-child-in-her-arms-XdBmpEcGy38 | Unsplash License | A mother holding her son in the sunshine |
-| `hero-dentures` | Manoj Kulkarni | https://unsplash.com/photos/a-woman-reading-a-newspaper-while-sitting-on-a-couch-WFGSa_dIJzE | Unsplash License | An older woman reading the morning paper at home |
-| `hero-missing-teeth` | Nilanka Kariyawasam | https://unsplash.com/photos/a-family-posing-for-a-picture-AKk37Avu6o8 | Unsplash License | Parents and their baby smiling together outdoors |
-| `hero-teeth-whitening` | Dhruv vishwakarma | https://unsplash.com/photos/young-woman-sitting-and-sketching-outdoors-rv4x3H1TnMM | Unsplash License | A woman reading in a sunlit archway |
-| `hero-smile-design` | Zulfugar Karimov | https://unsplash.com/photos/a-woman-sits-by-a-window-holding-a-straw-hat-bz7tACuFbWk | Unsplash License | A woman smiling by a window, holding a straw hat |
-| `hero-gum-care` | nacer eddine | https://unsplash.com/photos/a-woman-brushing-her-teeth-in-front-of-a-mirror-dnyTnpvYkm0 | Unsplash License | A woman brushing her teeth in front of the bathroom mirror |
-| `hero-aligners` | CNordic Nordic | https://unsplash.com/photos/a-person-holding-a-remote-control-in-their-hand-YwfKjBx7AJY | Unsplash License | Hands opening a clear aligner case |
-| `cta-dentures` | charlesdeluvio | https://unsplash.com/photos/a-hospital-room-with-a-bed-and-a-window-S5meg_j_W1U | Unsplash License | Daylight through blinds on a treatment couch |
-| `cta-missing-teeth` | Jon Tyson | https://unsplash.com/photos/white-plastic-tray-kpLEaeScdHY | Unsplash License | Instruments laid out on a tray by the window |
-| `cta-teeth-whitening` | Dollar Gill | https://unsplash.com/photos/woman-in-gray-blazer-sitting-on-chair-Ff-B_2_5W7k | Unsplash License | A woman reading in soft window light |
-| `cta-smile-design` | bovin wook | https://unsplash.com/photos/woman-in-gray-long-sleeve-shirt-sitting-by-the-table-rchrOE87Hvs | Unsplash License | A woman working at a desk by an open window |
-| `cta-gum-care` | sunny | https://unsplash.com/photos/sunlight-streams-through-a-window-onto-tiled-wall-Q6KZShplUY4 | Unsplash License | Morning light through a bathroom window |
-| `cta-aligners` | Matthew Tkocz | https://unsplash.com/photos/person-holding-bubbles-q697-Akhwkc | Unsplash License | A clear aligner held in an open hand |
-| `fp-kids` | Roman Marchenko | https://unsplash.com/photos/a-close-up-of-a-person-holding-a-toothbrush-JlGiW2aDbxo | Unsplash License | A hand holding a toothbrush with a dab of toothpaste |
-| `hub-implants` | WorldSikhOrg | https://unsplash.com/photos/a-group-of-people-sitting-on-a-couch-gNRPalzjEhY | Unsplash License | A grandfather and his family talking together at home |
-| `hub-restorative` | Yogendra Singh | https://unsplash.com/photos/man-in-black-jacket-hugging-woman-in-blue-and-white-plaid-dress-shirt-Uh14pWkgsyg | Unsplash License | A father lifting his toddler at home |
-| `hub-cosmetic` | Amrit Das | https://unsplash.com/photos/a-young-woman-looks-up-by-windows-with-greenery-RQEhdtjgP04 | Unsplash License | A young woman pausing at a table by the window |
-| `hub-children` | Napendra Singh | https://unsplash.com/photos/woman-carrying-baby-aSzsf-OBneE | Unsplash License | A mother and her daughter sharing a quiet moment |
-| `hero-childrens-orthodontics` | Rajesh Rajput | https://unsplash.com/photos/girl-in-pink-crew-neck-t-shirt-smiling-ZbK45T1LjRg | Unsplash License | A smiling girl in a pink top outdoors |
-| `cta-childrens-orthodontics` | Ozkan Guner | https://unsplash.com/photos/close-up-of-a-persons-mouth-YKqYvUYzw0w | Unsplash License | Close-up of a smile with braces |
-| `blog-implant-timeline` | Kanishk Agarwal | https://unsplash.com/photos/a-couple-of-women-standing-next-to-each-other-XdfxVAmE9ZE | Unsplash License | Two friends laughing on a veranda |
-| `blog-implant-vs-bridge` | Abrar Mohd | https://unsplash.com/photos/couple-reading-a-book-together-on-a-couch-6UUIsN2hIGA | Unsplash License | A couple laughing over a book on the sofa |
-| `blog-implant-aftercare` | Odile | https://unsplash.com/photos/people-relax-in-a-cozy-living-room-setting-LcFozmjuHa4 | Unsplash License | A quiet, sunlit living room in the afternoon |
-| `blog-implants-right-for-me` | Sushanta Rokka | https://unsplash.com/photos/elderly-couple-talking-while-sitting-on-steps--97-s9ePuJI | Unsplash License | An older couple talking on their doorstep |
-| `blog-root-canal` | Bruno Dias | https://unsplash.com/photos/a-man-with-a-beard-sits-in-a-wooden-chair-1aGepbUTPLM | Unsplash License | A man relaxing in a wooden chair at home |
-| `blog-child-first-visit` | Aron Weerakoon | https://unsplash.com/photos/a-man-writes-while-a-young-girl-watches-him-intently-88jCpuCJAlw | Unsplash License | A father drawing with his daughter on the sofa |
-| `blog-implant-cost` | Oosman Exptal. | https://unsplash.com/photos/a-person-holding-a-baby-2_lHgY_ZvQo | Unsplash License | A father and his little daughter at home |
+| `home-card-fmr` | Moe Magners | https://www.pexels.com/photo/5335405/ | Pexels License | Close portrait of a smiling older woman in round black glasses |
+| `home-card-kids` | RDNE Stock project | https://www.pexels.com/photo/6182764/ | Pexels License | A young girl with a gap-toothed smile |
+| `hero-implants` | Moe Magners | https://www.pexels.com/photo/5335295/ | Pexels License | A smiling older woman with white hair against a light grey studio backdrop |
+| `hero-fmr` | Moe Magners | https://www.pexels.com/photo/5335305/ | Pexels License | A smiling older woman with white hair and round black glasses |
+| `hero-rct` | Dennis Kemmerling | https://www.pexels.com/photo/31863054/ | Pexels License | A relaxed, smiling woman with long dark hair |
+| `hero-kids` | RDNE Stock project | https://www.pexels.com/photo/6182755/ | Pexels License | A young girl with a bob haircut and a gap-toothed smile |
+| `cta-kids` | Anna Shvets | https://www.pexels.com/photo/3905793/ | Pexels License | A young boy with fair hair grinning |
+| `hero-dentures` | Alex Green | https://www.pexels.com/photo/6625732/ | Pexels License | A smiling woman in her sixties with fair wavy hair, on a pale backdrop |
+| `hero-missing-teeth` | Moe Magners | https://www.pexels.com/photo/5330483/ | Pexels License | An older woman in round glasses smiling, fingertips resting on her jaw |
+| `hero-teeth-whitening` | bishenova | https://www.pexels.com/photo/35696288/ | Pexels License | A young woman with long dark hair and a bright smile |
+| `hero-smile-design` | Jean-Paul Wright | https://www.pexels.com/photo/8069910/ | Pexels License | A young woman with long fair hair smiling |
+| `hero-gum-care` | Marcus Aurelius | https://www.pexels.com/photo/9788575/ | Pexels License | A young woman brushing her teeth |
+| `hero-aligners` | nrd | https://unsplash.com/photos/person-laughing-in-blue-shirt-y3kC_7Qhmjk | Unsplash License | A young adult with a wide, open smile |
+| `cta-dentures` | Alex Green | https://www.pexels.com/photo/6625720/ | Pexels License | A smiling woman in her sixties in a navy dress |
+| `cta-missing-teeth` | Moe Magners | https://www.pexels.com/photo/5335398/ | Pexels License | An older woman in glasses and a lilac jacket, smiling |
+| `cta-teeth-whitening` | bishenova | https://www.pexels.com/photo/35696285/ | Pexels License | A young woman with long dark hair smiling broadly |
+| `cta-smile-design` | bishenova | https://www.pexels.com/photo/35696289/ | Pexels License | A young woman in a white T-shirt laughing, hand in her hair |
+| `cta-gum-care` | Marcus Aurelius | https://www.pexels.com/photo/9788574/ | Pexels License | A young woman brushing her teeth, smiling |
+| `cta-aligners` | Elena Golubeva | https://unsplash.com/photos/young-man-in-a-peach-polo-shirt-smiling-CEwGm-PCgOM | Unsplash License | A young man in a pink polo shirt smiling |
+| `fp-kids` | Andrea Piacquadio | https://www.pexels.com/photo/5067133/ | Pexels License | A little girl in a blue T-shirt smiling |
+| `hub-implants` | Alex Green | https://www.pexels.com/photo/6625737/ | Pexels License | A smiling woman in her sixties against a pale studio wall |
+| `hub-restorative` | Kaboompics.com | https://www.pexels.com/photo/8107620/ | Pexels License | A smiling woman with curly dark hair and thin-framed glasses |
+| `hub-cosmetic` | Ionela Mat | https://unsplash.com/photos/a-woman-posing-for-a-picture-in-a-white-shirt-mXFcQsECFWw | Unsplash License | A smiling young woman resting her chin on her hand |
+| `hub-children` | Anna Shvets | https://www.pexels.com/photo/3905795/ | Pexels License | A young boy with fair hair smiling |
+| `hero-childrens-orthodontics` | Bruno Curly | https://www.pexels.com/photo/12743818/ | Pexels License | A girl of about ten with long brown hair smiling |
+| `cta-childrens-orthodontics` | KoolShooters | https://www.pexels.com/photo/7330622/ | Pexels License | A girl with long dark hair laughing |
+| `blog-implant-timeline` | Moe Magners | https://www.pexels.com/photo/5335290/ | Pexels License | An older woman in round glasses with a relaxed smile |
+| `blog-implant-vs-bridge` | Mikhail Nilov | https://www.pexels.com/photo/8317653/ | Pexels License | A smiling woman with grey hair and dark cat-eye glasses |
+| `blog-implant-aftercare` | Moe Magners | https://www.pexels.com/photo/5335401/ | Pexels License | An older woman in glasses and a lilac jacket, smiling |
+| `blog-implants-right-for-me` | Tima Miroshnichenko | https://www.pexels.com/photo/8727477/ | Pexels License | Close portrait of a smiling older woman with short fair hair |
+| `blog-root-canal` | Maxwell Araujo | https://www.pexels.com/photo/23285900/ | Pexels License | A smiling woman with dark hair pulled back, on a light grey backdrop |
+| `blog-child-first-visit` | cottonbro studio | https://www.pexels.com/photo/4709845/ | Pexels License | A young girl laughing, showing a gap where a baby tooth was |
+| `blog-implant-cost` | cottonbro studio | https://www.pexels.com/photo/7225159/ | Pexels License | A smiling older woman in a cream roll-neck jumper, in soft window light |
 
 ## Arha's own photos and video (27)
 
@@ -86,6 +87,51 @@ at 1440, 768 and 390 px (`tools/qa/crops.py` contact sheets, by eye).
 | `visit-door` | `assets/img/arha-dental-care-entrance-door-1080.jpg` | Arha Dental Care's own photo/video (owner-supplied) | Owned by the clinic |
 | `home-film` | `src-assets/IMG_2303.MOV` | Arha Dental Care's own photo/video (owner-supplied) | Owned by the clinic |
 | `practice-tour` | `src-assets/IMG_2303.MOV` | Arha Dental Care's own photo/video (owner-supplied) | Owned by the clinic |
+
+## Replaced on 20 Nov 2026 (owner follow-up; compared with 4d4cb13)
+
+| Slot | Before | Now | Alt text now |
+|---|---|---|---|
+| `home-card-fmr` | Leo_Visions, https://unsplash.com/photos/a-woman-in-a-shawl-is-talking-to-another-woman-uPxjncijudM | Moe Magners, https://www.pexels.com/photo/5335405/ | Close portrait of a smiling older woman in round black glasses |
+| `home-card-kids` | setengah limasore, https://unsplash.com/photos/a-boy-shows-off-his-missing-tooth-DNKGiUUoVkc | RDNE Stock project, https://www.pexels.com/photo/6182764/ | A young girl with a gap-toothed smile |
+| `hero-implants` | Ashwini Chaudhary(Monty), https://unsplash.com/photos/smiling-woman-in-white-button-up-shirt-FKKh90ufXfo | Moe Magners, https://www.pexels.com/photo/5335295/ | A smiling older woman with white hair against a light grey studio backdrop |
+| `hero-fmr` | The Unmistakables, https://unsplash.com/photos/a-man-and-a-woman-sitting-on-a-couch-KT-msulBvtg | Moe Magners, https://www.pexels.com/photo/5335305/ | A smiling older woman with white hair and round black glasses |
+| `hero-rct` | SoyBreno, https://unsplash.com/photos/a-woman-getting-her-teeth-checked-by-a-dentist-z8BIWPwV3zo | Dennis Kemmerling, https://www.pexels.com/photo/31863054/ | A relaxed, smiling woman with long dark hair |
+| `hero-kids` | Yogendra Singh, https://unsplash.com/photos/woman-in-blue-long-sleeve-shirt-carrying-girl-in-blue-denim-jacket--ByDh99Sfww | RDNE Stock project, https://www.pexels.com/photo/6182755/ | A young girl with a bob haircut and a gap-toothed smile |
+| `cta-implants` | Faraz Ghori, https://unsplash.com/photos/a-man-with-a-mustache-and-a-white-shirt-ZrdfMqs9tJ4 | `src-assets/dental-implant-equipment-arha-dental-care-mumbai.jpeg` | The panoramic X-ray unit at Arha Dental Care |
+| `cta-fmr` | Massimo Zanardi Landi, https://unsplash.com/photos/a-man-smiling-for-the-camera-UB3W9g-bJLM | `assets/img/arha-dental-care-reception-desk-1080.jpg` | The reception desk at Arha Dental Care, Peddar Road |
+| `cta-rct` | Mahir Velani, https://unsplash.com/photos/a-man-wearing-glasses-and-a-plaid-shirt-cZxNs7ZS1O0 | `assets/img/arha-dental-care-operatory-laptop-1080.jpg` | A treatment room at Arha Dental Care |
+| `cta-kids` | LJ, https://unsplash.com/photos/smiling-girl-standing-near-wall-jhu22nvxxCw | Anna Shvets, https://www.pexels.com/photo/3905793/ | A young boy with fair hair grinning |
+| `hero-dentures` | Anil Sharma, https://unsplash.com/photos/a-woman-in-a-yellow-shirt-and-a-pink-and-white-checkered-sari-tmyF9jQ6Ff0 | Alex Green, https://www.pexels.com/photo/6625732/ | A smiling woman in her sixties with fair wavy hair, on a pale backdrop |
+| `hero-missing-teeth` | Wilfred Sequeira, https://unsplash.com/photos/close-up-photo-of-man-in-white-shirt-smiling-while-taking-photo-tXNjCm4bN8Y | Moe Magners, https://www.pexels.com/photo/5330483/ | An older woman in round glasses smiling, fingertips resting on her jaw |
+| `hero-teeth-whitening` | Othman El Marzak, https://unsplash.com/photos/a-close-up-of-a-person-with-a-smile-on-their-face-P4VXFXKyOQM | bishenova, https://www.pexels.com/photo/35696288/ | A young woman with long dark hair and a bright smile |
+| `hero-smile-design` | Arnab De, https://unsplash.com/photos/a-smiling-woman-sitting-at-a-table-with-a-laptop-s7PbPYb5w7k | Jean-Paul Wright, https://www.pexels.com/photo/8069910/ | A young woman with long fair hair smiling |
+| `hero-gum-care` | SoyBreno, https://unsplash.com/photos/a-woman-getting-her-teeth-brushed-by-a-dentist-7n50uixCBV8 | Marcus Aurelius, https://www.pexels.com/photo/9788575/ | A young woman brushing her teeth |
+| `hero-aligners` | Harold Hisona, https://unsplash.com/photos/woman-adjusting-clear-dental-aligners-on-teeth-uTUsnv_UCSQ | nrd, https://unsplash.com/photos/person-laughing-in-blue-shirt-y3kC_7Qhmjk | A young adult with a wide, open smile |
+| `cta-dentures` | Ajay Thakur, https://unsplash.com/photos/a-man-with-a-red-turban-is-posing-for-a-picture-eoMCmOmW0SI | Alex Green, https://www.pexels.com/photo/6625720/ | A smiling woman in her sixties in a navy dress |
+| `cta-missing-teeth` | Yogendra Singh, https://unsplash.com/photos/man-in-black-suit-jacket-smiling-HrpYHchKb5Y | Moe Magners, https://www.pexels.com/photo/5335398/ | An older woman in glasses and a lilac jacket, smiling |
+| `cta-teeth-whitening` | manish_ jadhav_photography05, https://unsplash.com/photos/woman-wearing-traditional-nose-ring-VHTZ4x8TmKE | bishenova, https://www.pexels.com/photo/35696285/ | A young woman with long dark hair smiling broadly |
+| `cta-smile-design` | Pargat Dhillon, https://unsplash.com/photos/woman-in-black-leather-jacket-smiling-DmGzwwuLPG8 | bishenova, https://www.pexels.com/photo/35696289/ | A young woman in a white T-shirt laughing, hand in her hair |
+| `cta-gum-care` | Athul Krishna, https://unsplash.com/photos/a-woman-wearing-glasses-is-smiling-and-holding-a-cell-phone-WWa5JkR6HaU | Marcus Aurelius, https://www.pexels.com/photo/9788574/ | A young woman brushing her teeth, smiling |
+| `cta-aligners` | Matthew Tkocz, https://unsplash.com/photos/person-holding-bubbles-q697-Akhwkc | Elena Golubeva, https://unsplash.com/photos/young-man-in-a-peach-polo-shirt-smiling-CEwGm-PCgOM | A young man in a pink polo shirt smiling |
+| `cta-emergency` | Naim Ahmed, https://unsplash.com/photos/man-wearing-blue-and-yellow-floral-scarf-tD6fOGWessk | `assets/img/arha-dental-care-planning-room-1080.jpg` | The consultation room at Arha Dental Care |
+| `hub-implants` | Kashish Jain, https://unsplash.com/photos/a-person-pointing-at-another-man--sxso1V_8-o | Alex Green, https://www.pexels.com/photo/6625737/ | A smiling woman in her sixties against a pale studio wall |
+| `hub-restorative` | Ranjana Rajput, https://unsplash.com/photos/a-man-and-a-woman-sitting-next-to-each-other-EMKM2qkIzRg | Kaboompics.com, https://www.pexels.com/photo/8107620/ | A smiling woman with curly dark hair and thin-framed glasses |
+| `hub-cosmetic` | Pranav Kumar Jain, https://unsplash.com/photos/selective-focus-photography-of-smiling-woman-wearing-red-shirt-afve0fsW7Fw | Ionela Mat, https://unsplash.com/photos/a-woman-posing-for-a-picture-in-a-white-shirt-mXFcQsECFWw | A smiling young woman resting her chin on her hand |
+| `hub-children` | Nilanka Kariyawasam, https://unsplash.com/photos/a-family-posing-for-a-picture-AKk37Avu6o8 | Anna Shvets, https://www.pexels.com/photo/3905795/ | A young boy with fair hair smiling |
+| `hero-childrens-orthodontics` | Nehal Patel, https://unsplash.com/photos/boy-in-black-and-white-striped-shirt-aho7nVdauuc | Bruno Curly, https://www.pexels.com/photo/12743818/ | A girl of about ten with long brown hair smiling |
+| `cta-childrens-orthodontics` | Ozkan Guner, https://unsplash.com/photos/close-up-of-a-persons-mouth-YKqYvUYzw0w | KoolShooters, https://www.pexels.com/photo/7330622/ | A girl with long dark hair laughing |
+| `blog-implant-timeline` | Sai Nigham, https://unsplash.com/photos/a-boy-and-man-smile-together-for-a-photo-Wpjdzp6IYRk | Moe Magners, https://www.pexels.com/photo/5335290/ | An older woman in round glasses with a relaxed smile |
+| `blog-implant-vs-bridge` | Calvin christian, https://unsplash.com/photos/man-with-hand-on-womens-shoulder-Xcg9mkJRwpU | Mikhail Nilov, https://www.pexels.com/photo/8317653/ | A smiling woman with grey hair and dark cat-eye glasses |
+| `blog-implant-aftercare` | Rupinder Singh, https://unsplash.com/photos/a-woman-sitting-at-a-table-looking-at-her-cell-phone-Wkp0U_iHF5g | Moe Magners, https://www.pexels.com/photo/5335401/ | An older woman in glasses and a lilac jacket, smiling |
+| `blog-implants-right-for-me` | rajat sarki, https://unsplash.com/photos/man-in-blue-dress-shirt-and-woman-in-yellow-and-green-sari-dress-77ooeCGz8J4 | Tima Miroshnichenko, https://www.pexels.com/photo/8727477/ | Close portrait of a smiling older woman with short fair hair |
+| `blog-root-canal` | Pratik Mohapatra, https://unsplash.com/photos/a-person-smiling-for-the-camera-0OIdQOWiFww | Maxwell Araujo, https://www.pexels.com/photo/23285900/ | A smiling woman with dark hair pulled back, on a light grey backdrop |
+| `blog-child-first-visit` | Vivek Kumar, https://unsplash.com/photos/woman-and-child-laughing-on-sofa-a-_1PPjnbUg | cottonbro studio, https://www.pexels.com/photo/4709845/ | A young girl laughing, showing a gap where a baby tooth was |
+| `blog-implant-cost` | Abrar Mohd, https://unsplash.com/photos/couple-reading-a-book-together-on-a-couch-6UUIsN2hIGA | cottonbro studio, https://www.pexels.com/photo/7225159/ | A smiling older woman in a cream roll-neck jumper, in soft window light |
+
+New slots: `fp-kids` (Andrea Piacquadio, https://www.pexels.com/photo/5067133/); `fp-smile` (`assets/img/arha-dental-care-planning-room-1080.jpg`).
+
+No slot kept its photo with a new crop.
 
 ## Replaced on 17 Nov 2026 (night pass: implants hero with one person, for-patients cards without repeated people; compared with 2f9f377)
 

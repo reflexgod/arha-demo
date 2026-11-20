@@ -115,6 +115,16 @@ def picture(name, sizes, cls="", eager=False, alt=None, pos=None):
         f'width="{big}" height="{h}" alt="{alt_text}"{style} {load_attr}></picture>')
 
 
+def preload(name, sizes="100vw", default=1440):
+    """<link rel=preload> for a hero image, built from the widths the image really has (a tight crop may stop short of
+    1920, so a hard-coded srcset would point at a missing file)."""
+    ws = MEDIA["images"][name]["widths"]
+    href = min(ws, key=lambda w: abs(w - default))
+    ss = ", ".join(f"/static/img/{name}-{w}.avif {w}w" for w in ws)
+    return Markup(f'<link rel="preload" as="image" href="/static/img/{name}-{href}.avif" type="image/avif" '
+                  f'imagesrcset="{ss}" imagesizes="{sizes}">')
+
+
 def video(name, cls="", eager_poster=False, label="", manual=False, sizes="(min-width: 900px) 50vw, 100vw"):
     """Muted looping video: poster first, sources attached by site.js when on screen (or when its menu opens: manual)."""
     v = MEDIA["videos"][name]
@@ -518,7 +528,7 @@ def main():
 
     env = Environment(loader=FileSystemLoader(ROOT / "templates"), autoescape=True, undefined=StrictUndefined,
                       trim_blocks=True, lstrip_blocks=True)
-    env.globals.update(review_build=REVIEW_BUILD, site=SITE, nav=NAV, reviews=REVIEWS, picture=picture, video=video, embed=embed, tel=tel, wa=wa, maps_dir=maps_dir,
+    env.globals.update(review_build=REVIEW_BUILD, site=SITE, nav=NAV, reviews=REVIEWS, picture=picture, preload=preload, video=video, embed=embed, tel=tel, wa=wa, maps_dir=maps_dir,
                        maps_embed=maps_embed, address_one_line=address_one_line, address_full=address_full, hours_rows=hours_rows,
                        client_config=client_config, css_v=asset_version("css/site.css"), js_v=asset_version("js/site.js"), planner_v=asset_version("js/planner.js"),
                        year=TODAY.year, updated=TODAY.strftime("%-d %B %Y") if sys.platform != "win32" else TODAY.strftime("%#d %B %Y"))
